@@ -62,12 +62,13 @@ export function renderPath(){
  const g=P.guide(),C=P.corso();
  const sat=ui.s&&P.satById(ui.s),pl=ui.p&&P.pianeti().find(p=>p.id===ui.p);
  if(ui.lvl==='satellite'&&!sat)ui.lvl='sistema';if(ui.lvl==='pianeta'&&!pl)ui.lvl='sistema';
- const crumbs=[['universo','Universo'],['sistema',C.nome]];
+ const crumbs=ui.lvl==='universo'?[['universo','Universo']]:[['universo','Universo'],['sistema',C.nome]];
  const curP=ui.lvl==='satellite'?P.planetOf(sat):pl;
  if(ui.lvl==='pianeta'||ui.lvl==='satellite')crumbs.push(['pianeta',curP.nome,curP.id]);
  if(ui.lvl==='satellite')crumbs.push(['satellite',sat.nome,sat.id]);
  const bc=`<div class="crumbs" role="navigation" aria-label="Dove sei">${crumbs.map(([l,n,id],i)=>i===crumbs.length-1?`<span aria-current="page">${esc(n)}</span>`:`<button class="lnk" data-p="lvl" data-lvl="${l}"${id?` data-id="${esc(id)}"`:''}>${esc(n)}</button><span aria-hidden="true"> › </span>`).join('')}</div>`;
- const tog=`<div class="chips seg" role="group" aria-label="Vista"><button class="chip${ui.mode==='mappa'?' on':''}" data-p="mode" data-v="mappa" aria-pressed="${ui.mode==='mappa'}"><span aria-hidden="true">🪐</span><span class="tl"> Mappa</span></button><button class="chip${ui.mode==='elenco'?' on':''}" data-p="mode" data-v="elenco" aria-pressed="${ui.mode==='elenco'}"><span aria-hidden="true">☰</span><span class="tl"> Elenco</span></button></div>`;
+ const IC={mappa:'<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><ellipse cx="12" cy="12" rx="10" ry="4.2" fill="none" transform="rotate(-20 12 12)"/></svg>',elenco:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16" fill="none"/></svg>'};
+ const tog=`<div class="seg2" role="group" aria-label="Vista">${[['mappa','Mappa'],['elenco','Elenco']].map(([v,n])=>`<button data-p="mode" data-v="${v}" aria-pressed="${ui.mode===v}" title="${n}">${IC[v]}<span class="sr">${n}</span></button>`).join('')}</div>`;
  // nel satellite la mappa mostra il suo pianeta con il satellite evidenziato (sul telefono è nascosta: contano i passi)
  const mapBody=ui.mode==='elenco'?`<div class="lcard">${listHtml(g)}</div>`:ui.lvl==='universo'?universeSvg():ui.lvl==='sistema'?systemSvg(g):planetSvg(curP,g,ui.lvl==='satellite'?sat:null);
  const side=ui.lvl==='satellite'?satHtml(sat,g):infoHtml(g,curP);
@@ -77,10 +78,10 @@ export function renderPath(){
 function topHtml(g){
  const day=S.day&&S.day.d===P.today()?S.day:{xp:0},goal=P.goal(),pct=Math.min(1,(day.xp||0)/goal);
  const ring=`<div class="ring" role="img" aria-label="Obiettivo del giorno: ${day.xp||0} XP su ${goal}"><svg viewBox="0 0 36 36" aria-hidden="true"><circle cx="18" cy="18" r="15" class="rb"/><circle cx="18" cy="18" r="15" class="rf" stroke-dasharray="${(pct*94.2).toFixed(1)} 94.2"/></svg><span>${day.xp||0}/${goal}</span></div>`;
- const opts=P.R().obiettivo.scelte.map(v=>`<option value="${v}"${v===goal?' selected':''}>${v} XP${v===30?' (leggero)':v===60?' (normale)':' (intenso)'}</option>`).join('');
- return `<div class="card today"><button class="cont" data-p="cont"><span class="ci" aria-hidden="true">★</span><span class="ct"><span class="cs">Continua</span><b>${esc(g.sat.nome)} · passo ${g.ps.n}</b><small>${esc(g.ps.nome)}</small></span><span class="cg" aria-hidden="true">›</span></button>
+ const opts=P.R().obiettivo.scelte.map(v=>`<option value="${v}"${v===goal?' selected':''}>${v} XP · ${v===30?'leggero':v===60?'normale':'intenso'}</option>`).join('');
+ return `<div class="today"><button class="cont" data-p="cont"><span class="ci" aria-hidden="true">★</span><span class="ct"><span class="cs">Continua</span><b>${esc(g.sat.nome)} · passo ${g.ps.n}</b><small>${esc(g.ps.nome)}</small></span><span class="cg" aria-hidden="true">›</span></button>
   <div class="dayrow">${ring}<span class="dst"><b>Oggi</b><span>🔥 ${giorni(S.streak)}${S.shields?` · 🛡 ${S.shields}`:''}</span></span>
-  <label class="goal">Obiettivo <select data-p="goal">${opts}</select></label></div></div>`;
+  <label class="goal"><span>Obiettivo del giorno</span><select data-p="goal">${opts}</select></label></div></div>`;
 }
 const legend=()=>`<ul class="legend" aria-label="Legenda">${Object.entries(P.STATI).map(([k,v])=>`<li>${symIcon(k)}${esc(v)}</li>`).join('')}<li><span class="star" aria-hidden="true">★</span>Consigliato</li></ul>`;
 const pbar=(n,t)=>`<div class="pbar" role="img" aria-label="${n} su ${t}"><i style="width:${t?Math.round(100*n/t):0}%"></i></div>`;
@@ -93,35 +94,45 @@ function infoHtml(g,pl){
    ${pbar(pl_lit,L.length)}<p class="pn">${pl_lit} accesi su ${L.length}</p>
    <ul class="sl">${L.map(s=>srow(s,g)).join('')}</ul>${legend()}</div>`;
  }
- if(ui.lvl==='universo')return `<div class="card info"><div class="kick">Universo</div><h2>I corsi</h2>
-  <p class="mut">Ogni corso è un sistema solare: i pianeti sono le regioni del corpo, i satelliti le zone da studiare. Per ora c'è ${esc(C.nome)}; gli altri arriveranno dopo.</p>
-  ${pbar(lit,all.length)}<p class="pn">${lit} satelliti accesi su ${all.length}</p></div>`;
- return `<div class="card info"><div class="kick">Sistema</div><h2>${esc(C.nome)}</h2>
+ if(ui.lvl==='universo')return `<div class="card info"><div class="kick">Universo</div><h2>Cosa studi?</h2>
+  <p class="mut">Ogni percorso è lo stesso universo visto con lenti diverse: i progressi valgono in tutti. Ogni corso è un sistema solare: i pianeti sono le regioni del corpo, i satelliti le zone da studiare.</p>
+  <label class="psel"><span class="kick">Percorso</span><select data-p="percorso">${PERCORSI.map(([id,n])=>`<option value="${id}"${id===(app.PERCORSO.id||'base')?' selected':id!=='base'?' disabled':''}>${esc(n)}${id!=='base'?' (in arrivo)':''}</option>`).join('')}</select></label>
+  ${pbar(lit,all.length)}<p class="pn">${esc(C.nome)}: ${lit} satelliti accesi su ${all.length}</p></div>`;
+ return `<div class="card info"><div class="kick">Sistema · ${esc((PERCORSI.find(x=>x[0]===(app.PERCORSO.id||'base'))||PERCORSI[0])[1])}</div><h2>${esc(C.nome)}</h2>
   <p class="mut">${P.pianeti().length} pianeti e ${all.length} satelliti, tutti aperti: parti dalla regione che stai studiando a lezione. Tocca un pianeta per vedere i suoi satelliti.</p>
   ${pbar(lit,all.length)}<p class="pn">${lit} satelliti accesi su ${all.length}</p>${legend()}</div>`;
 }
+// piccole lune intorno a un pianeta: una per satellite, nel colore del suo stato
+function moons(x,y,ss,rr=29){
+ return ss.map((s,k)=>{const a=(-90+k*360/ss.length)*Math.PI/180,mx=x+rr*Math.cos(a),my=y+rr*Math.sin(a),st=P.satState(s);
+  return st==='acceso'?`<circle cx="${mx.toFixed(1)}" cy="${my.toFixed(1)}" r="4.5" fill="url(#glit)"/>`:st==='orbita'?`<circle cx="${mx.toFixed(1)}" cy="${my.toFixed(1)}" r="3.5" class="sy orb" stroke-width="2.2"/>`:`<circle cx="${mx.toFixed(1)}" cy="${my.toFixed(1)}" r="4" class="moon"/>`;}).join('');
+}
+// percorsi della specifica (fase 6): stesso universo visto con lenti diverse; per ora c'è solo il percorso completo
+const PERCORSI=[['base','Percorso completo'],['fisioterapia','Fisioterapia'],['medicina','Medicina'],['mcb','MCB']];
 function universeSvg(){
- const C=P.corso(),lit=P.satelliti().filter(s=>P.satState(s)==='acceso').length,n=P.satelliti().length;
- // gli altri corsi della specifica (fase 6), spenti e non toccabili
- const altri=[['Neuroanatomia','#a78bfa',270,90],['Cuore e vasi','#f87171',90,250],['Respiratorio','#60a5fa',270,250]];
- return `${svgOpen(340,'Universo dei corsi')}<g class="enter">
-  <a href="#" data-p="lvl" data-lvl="sistema" role="button" aria-label="${esc(C.nome)}: ${lit} satelliti accesi su ${n}">
-  <circle cx="90" cy="90" r="56" class="hit"/>${sun(90,90,34)}${svgText(90,150,C.nome,'lab',20)}<text x="90" y="${150+14*lines(C.nome,20).length}" text-anchor="middle" class="wd">${lit}/${n} accesi</text></a>
-  ${altri.map(([t,c,x,y])=>`<g class="off" aria-hidden="true"><circle cx="${x}" cy="${y}" r="30" fill="${c}" opacity=".22"/><circle cx="${x}" cy="${y}" r="22" fill="${c}" opacity=".55"/>${svgText(x,y+46,t,'lab dim',16)}<text x="${x}" y="${y+60}" text-anchor="middle" class="wd">in arrivo</text></g>`).join('')}
-  </g><text x="12" y="330" class="wd">Tocca un corso</text></svg>`;
+ const C=P.corso(),pl=P.pianeti(),lit=P.satelliti().filter(s=>P.satState(s)==='acceso').length,n=P.satelliti().length;
+ // ogni corso è un piccolo sistema: il sole e i suoi pianeti (con le lune dei satelliti); gli altri corsi (fase 6) spenti
+ const mini=(x,y,k,col)=>[...Array(k)].map((_,i)=>{const r=30+i*9,a=(-60+i*97)*Math.PI/180;return `<circle cx="${x}" cy="${y}" r="${r}" class="orbit"/><circle cx="${(x+r*Math.cos(a)).toFixed(1)}" cy="${(y+r*Math.sin(a)).toFixed(1)}" r="4.5" fill="${col?col[i%col.length]:'#7d86ad'}"/>`;}).join('');
+ const altri=[['Neuroanatomia','#a78bfa',268,98],['Cuore e vasi','#f87171',92,272],['Respiratorio','#60a5fa',268,272]];
+ return `${svgOpen(390,'Universo dei corsi')}<g class="enter">
+  <a href="#" data-p="lvl" data-lvl="sistema" role="button" aria-label="${esc(C.nome)}: ${pl.length} pianeti, ${n} satelliti, ${lit} accesi">
+  <circle cx="92" cy="98" r="66" class="hit"/>${pl.map((p,i)=>{const r=34+i*10,a=(-110+i*95)*Math.PI/180,x=92+r*Math.cos(a),y=98+r*Math.sin(a);return `<circle cx="92" cy="98" r="${r}" class="orbit"/><circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="6" fill="url(#gp${i%4})"/>`;}).join('')}
+  ${sun(92,98,20)}${svgText(92,180,C.nome,'lab',20)}<text x="92" y="${180+14*lines(C.nome,20).length}" text-anchor="middle" class="wd">${pl.length} pianeti · ${n} satelliti</text></a>
+  ${altri.map(([t,c,x,y])=>`<g class="off" aria-hidden="true">${mini(x,y,3)}<circle cx="${x}" cy="${y}" r="17" fill="${c}" opacity=".5"/>${svgText(x,y+70,t,'lab dim',16)}<text x="${x}" y="${y+84}" text-anchor="middle" class="wd">in arrivo</text></g>`).join('')}
+  </g><text x="12" y="382" class="wd">Tocca un corso</text></svg>`;
 }
 function systemSvg(g){
- // posizioni fisse: le etichette dei pianeti nella metà alta stanno sopra il pianeta, così non coprono il sole
- const L=P.pianeti(),cx=180,cy=200,R=[80,115,150,175],ang=[-90,160,35,-130],gp=P.planetOf(g.sat);
+ // posizioni fisse; ogni pianeta ha intorno le lune dei suoi satelliti. Etichette sopra i pianeti della metà alta, sotto gli altri
+ const L=P.pianeti(),cx=180,cy=228,R=[78,116,150,172],ang=[-90,160,35,-128],gp=P.planetOf(g.sat);
  const orbits=L.map((p,i)=>`<circle cx="${cx}" cy="${cy}" r="${R[i%4]}" class="orbit"/>`).join('');
  const bodies=L.map((p,i)=>{const r=R[i%4],a=ang[i%4]*Math.PI/180,x=cx+r*Math.cos(a),y=cy+r*Math.sin(a),up=y<cy;
   const ss=P.satelliti(p),lit=ss.filter(s=>P.satState(s)==='acceso').length,orb=ss.filter(s=>P.satState(s)!=='nuovo').length,nl=lines(p.nome,14).length;
-  const wd=`${lit}/${ss.length} accesi${orb>lit?` · ${orb-lit} in orbita`:''}`;
-  const ty=up?y-32-14*nl:y+34,wy=up?y-28:y+34+14*nl;
-  return `<a href="#" data-p="planet" data-id="${esc(p.id)}" role="button" aria-label="${esc(p.nome)}: ${lit} satelliti accesi su ${ss.length}${p===gp?', consigliato':''}">
-   <circle cx="${x}" cy="${y}" r="28" class="hit"/>${halo(x,y,26,PC[i%4][1])}<circle cx="${x}" cy="${y}" r="18" fill="url(#gp${i%4})"/>${p===gp?`<text x="${x+15}" y="${y-13}" class="star" aria-hidden="true">★</text>`:''}
+  const wd=`${ss.length} satelliti · ${lit} accesi${orb>lit?` · ${orb-lit} in orbita`:''}`;
+  const ty=up?y-46-14*nl:y+48,wy=up?y-44:y+48+14*nl;
+  return `<a href="#" data-p="planet" data-id="${esc(p.id)}" role="button" aria-label="${esc(p.nome)}: ${ss.length} satelliti, ${lit} accesi${p===gp?', consigliato':''}">
+   <circle cx="${x}" cy="${y}" r="38" class="hit"/>${halo(x,y,22,PC[i%4][1])}<circle cx="${x}" cy="${y}" r="16" fill="url(#gp${i%4})"/>${moons(x,y,ss)}${p===gp?`<text x="${x+10}" y="${y-8}" class="star" aria-hidden="true">★</text>`:''}
    ${svgText(x,ty,p.nome,'lab',14)}<text x="${x}" y="${wy}" text-anchor="middle" class="wd">${wd}</text></a>`;}).join('');
- return `${svgOpen(400,'Sistema: '+P.corso().nome)}<g class="enter">${orbits}${sun(cx,cy,24)}${bodies}</g><text x="12" y="390" class="wd">Tocca un pianeta</text></svg>`;
+ return `${svgOpen(440,'Sistema: '+P.corso().nome)}<g class="enter">${orbits}${sun(cx,cy,22)}${bodies}</g><text x="12" y="432" class="wd">Tocca un pianeta</text></svg>`;
 }
 // satelliti dello stesso pianeta che condividono strutture (linee sulla mappa)
 function shared(a,b){const set=x=>new Set(P.passi(x).flatMap(ps=>Array.isArray(ps.strutture)?ps.strutture:[]));const A=set(a);for(const id of set(b))if(A.has(id))return true;return false;}

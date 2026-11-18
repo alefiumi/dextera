@@ -383,6 +383,9 @@ descrizioni; quelle con fonte Z-Anatomy dicono da quale vaso nasce o dove sbocca
   e `.pside` (Continua con obiettivo e serie, riquadro del livello con avanzamento e legenda, oppure i passi del satellite). Telefono: una
   sotto l'altra e la mappa alta al massimo lo schermo meno intestazione e barre, così si vede intera; nel satellite la mappa è nascosta.
   Computer in orizzontale: mappa a sinistra ferma e riquadri a destra (media query in fondo alla parte del Percorso di `style.css`).
+  Nel sistema ogni pianeta ha intorno le lune dei suoi satelliti (colore dello stato, `moons()`); nell'universo ogni corso è un piccolo
+  sistema, gli altri tre corsi «in arrivo». Riquadro dell'universo «Cosa studi?» con la scelta del percorso (`PERCORSI` in `path.js`: solo
+  «Percorso completo» attivo, Fisioterapia, Medicina e MCB «in arrivo», fase 6). Intestazione: livello e titolo su due righe.
 - Sincronizzazione in `syncPercorso()` di `account.js`; senza tabelle i dati restano in coda (avviso nel profilo).
 
 ## Mappa del percorso (`content/mappa.json`)

@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Dextera – Revisione dei testi</title>
+<meta name="theme-color" content="#312e81">
+<link rel="icon" href="../icons/icon-192.png" type="image/png">
+<script>try{const t=localStorage.getItem("dextera-theme");if(t)document.documentElement.dataset.theme=t;}catch(e){}</script>
+<style>
+/* Stessi colori dell'app (css/style.css) */
+:root{--bg:#f6f4ef;--card:#fff;--ink:#1f2a30;--mut:#6b7780;--acc:#0f766e;--ok:#16a34a;--bad:#dc2626;--warn:#b45309;--line:#e3ded2;--chip:#efece4}
+@media(prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#12181b;--card:#1b2428;--ink:#e8eef0;--mut:#93a1a8;--acc:#2dd4bf;--ok:#4ade80;--bad:#f87171;--warn:#fbbf24;--line:#2a363b;--chip:#243034;color-scheme:dark}}
+:root[data-theme=dark]{--bg:#12181b;--card:#1b2428;--ink:#e8eef0;--mut:#93a1a8;--acc:#2dd4bf;--ok:#4ade80;--bad:#f87171;--warn:#fbbf24;--line:#2a363b;--chip:#243034;color-scheme:dark}
+*{box-sizing:border-box}
+body{margin:0;font:15px/1.45 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--ink);
+ padding:max(12px,env(safe-area-inset-top)) max(16px,env(safe-area-inset-right)) 40px max(16px,env(safe-area-inset-left))}
+main{max-width:52rem;margin:0 auto;display:flex;flex-direction:column;gap:14px}
+h1{font-size:1.45rem;margin:0;text-wrap:balance}
+h2{font-size:1.15rem;margin:18px 0 0}
+h3{font-size:1.02rem;margin:0}
+p{margin:0}.mut{color:var(--mut)}.small{font-size:.85rem}
+a{color:var(--acc)}
+button,select,input,textarea{font:inherit;color:inherit}
+button{cursor:pointer}
+:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+.box{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 14px;display:flex;flex-direction:column;gap:10px}
+.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.btn{border:1px solid var(--line);background:var(--card);border-radius:9px;padding:7px 12px;font-weight:600}
+.btn.acc{background:var(--acc);border-color:var(--acc);color:#fff}
+label.f{display:flex;flex-direction:column;gap:3px;font-size:.8rem;color:var(--mut);flex:1 1 9rem;min-width:0}
+label.f select,label.f input{padding:7px 8px;border:1px solid var(--line);border-radius:8px;background:var(--bg);width:100%}
+label.ck{display:flex;gap:6px;align-items:center;font-size:.9rem}
+/* avanzamento per satellite */
+.prog{display:grid;grid-template-columns:repeat(auto-fill,minmax(14rem,1fr));gap:6px 16px}
+.prog button{display:grid;grid-template-columns:1fr auto;gap:2px 8px;text-align:left;border:0;background:none;padding:4px 0}
+.prog .bar{grid-column:1/3;height:6px;border-radius:6px;background:var(--line);overflow:hidden;display:flex}
+.prog .bar i{display:block;height:100%}
+.prog .on{font-weight:700;color:var(--acc)}
+.num{font-variant-numeric:tabular-nums;color:var(--mut);font-size:.85rem}
+.i-ok{background:var(--ok)}.i-no{background:var(--bad)}
+/* voci e dati */
+.voce{background:var(--card);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.voce>header{display:flex;flex-wrap:wrap;gap:4px 10px;align-items:baseline;justify-content:space-between;padding:10px 14px;border-bottom:1px solid var(--line)}
+.voce code{font-size:.75rem;color:var(--mut);word-break:break-all}
+.dato{display:grid;grid-template-columns:8.5rem 1fr;gap:4px 12px;padding:9px 14px;border-top:1px solid var(--line)}
+.dato:first-of-type{border-top:0}
+.dato .k{font-size:.82rem;color:var(--mut);padding-top:2px}
+.dato .v{min-width:0;display:flex;flex-direction:column;gap:6px}
+.dato .t{white-space:pre-wrap;overflow-wrap:anywhere}
+.tags{display:flex;flex-wrap:wrap;gap:4px;align-items:center}
+.tag{font-size:.72rem;padding:1px 7px;border-radius:9px;background:var(--chip);color:var(--mut)}
+.tag.s-verificato{color:var(--ok)}.tag.s-corretto{color:var(--acc)}.tag.s-segnalato{color:var(--bad)}
+.esito{display:flex;gap:6px;margin-left:auto}
+.esito button{border:1px solid var(--line);background:var(--bg);border-radius:8px;padding:3px 10px;font-size:.85rem}
+.esito button[aria-pressed=true].ok{background:var(--ok);border-color:var(--ok);color:#fff}
+.esito button[aria-pressed=true].no{background:var(--bad);border-color:var(--bad);color:#fff}
+.dato.ok{box-shadow:inset 3px 0 var(--ok)}.dato.no{box-shadow:inset 3px 0 var(--bad)}
+.corr{display:flex;flex-direction:column;gap:6px}
+.corr textarea{width:100%;min-height:3.2em;padding:6px 8px;border:1px solid var(--line);border-radius:8px;background:var(--bg);resize:vertical}
+.more{align-self:center}
+@media(max-width:560px){.dato{grid-template-columns:1fr}.dato .k{padding:0}}
+@media print{
+ body{background:#fff;color:#000;padding:0;font-size:11pt}
+ .noprint,.esito,.corr:empty,.more{display:none!important}
+ .voce,.box{border-color:#bbb;break-inside:avoid}
+ .dato{break-inside:avoid}
+ a{color:#000;text-decoration:none}
+ .print-box{display:inline-block!important;width:1em;height:1em;border:1px solid #000;margin-right:4px}
+}
+.print-box{display:none}
+</style>
+</head>
+<body>
+<main>
+ <div class="row" style="justify-content:space-between">
+  <h1>Revisione dei testi di Dextera</h1>
+  <a class="noprint small" href="../">Apri l'app</a>
+ </div>
+ <p>Qui ci sono tutti i dati anatomici dell'app, divisi per satellite del percorso. Molti testi li ha scritti un'intelligenza
+  artificiale a memoria: per ogni dato segna <b>Giusto</b> o <b>Sbagliato</b> e, se serve, scrivi la correzione.
+  Non serve un account: le risposte restano salvate in questo browser finché non le esporti in un file CSV da mandare all'autore.</p>
+ <div class="box noprint">
+  <div class="row">
+   <label class="f" style="flex:2 1 14rem">Il tuo nome (facoltativo: compare nel file solo se lo scrivi)
+    <input id="nome" autocomplete="name" placeholder="Nome e cognome"></label>
+  </div>
+  <div class="row">
+   <button class="btn acc" id="esporta">Esporta le risposte (CSV)</button>
+   <button class="btn" id="esporta-tutto">Esporta l'elenco filtrato (CSV)</button>
+   <button class="btn" id="stampa">Stampa</button>
+   <span class="num" id="conta"></span>
+  </div>
+ </div>
+ <div class="box noprint">
+  <div class="row">
+   <label class="f" style="flex:2 1 14rem">Satellite<select id="f-sat"></select></label>
+   <label class="f">Stato<select id="f-stato"></select></label>
+   <label class="f">Fonte<select id="f-fonte"></select></label>
+  </div>
+  <div class="row">
+   <label class="f" style="flex:2 1 14rem">Cerca<input id="f-q" type="search" placeholder="Nome, testo o id"></label>
+   <label class="ck"><input type="checkbox" id="f-todo"> Solo quelli ancora da segnare</label>
+  </div>
+ </div>
+ <details class="box noprint" id="prog-box"><summary><b>Avanzamento per satellite</b> <span class="num" id="prog-tot"></span></summary><div class="prog" id="prog"></div></details>
+ <div id="lista"><p class="mut">Caricamento dei dati…</p></div>
+</main>
+<script type="module" src="revisione.js"></script>
+</body>
+</html>

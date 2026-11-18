@@ -32,6 +32,26 @@ def val(voce, campo, default=None):
     return d['valore'] if d else default
 def per_ref(tipo):
     return {v['ref']: v for v in carica(tipo)}
+def scrivi_file(tipo, obj):
+    """riscrive testi/<tipo>.json nel formato del repository: una voce per riga di intestazione, un dato per riga"""
+    L = ['{']
+    for k, v in obj.items():
+        if k != 'voci': L.append(' %s: %s,' % (json.dumps(k), json.dumps(v, ensure_ascii=False)))
+    L.append(' "voci": [')
+    for i, vo in enumerate(obj['voci']):
+        fine = ',' if i < len(obj['voci']) - 1 else ''
+        if 'dati' not in vo: L.append('  ' + json.dumps(vo, ensure_ascii=False) + fine); continue
+        head = {k: v for k, v in vo.items() if k != 'dati'}
+        L.append('  ' + json.dumps(head, ensure_ascii=False)[:-1] + ', "dati": {')
+        items = list(vo['dati'].items())
+        for j, (c, d) in enumerate(items):
+            L.append('   %s: %s%s' % (json.dumps(c), json.dumps(d, ensure_ascii=False), ',' if j < len(items) - 1 else ''))
+        L.append('  }}' + fine)
+    L += [' ]', '}']
+    open(os.path.join(TESTI, tipo + '.json'), 'w').write('\n'.join(L) + '\n')
+    _cache.pop(tipo, None)
+def file_intero(tipo):
+    carica(tipo); return _cache[tipo]
 def correzioni(tipo=None):
     return [c for c in carica('correzioni') if tipo is None or c['tipo'] == tipo]
 

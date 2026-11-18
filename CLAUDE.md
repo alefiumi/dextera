@@ -43,7 +43,7 @@ Codice di BodyMania con nome, chiavi e schede di Dextera. Diviso in:
 - `js/`: moduli ES. `main.js` avvia, `content.js` carica i JSON, `shapes.js` trasforma le forme in SVG,
   `state.js` (stato condiviso `app`, salvataggio), `figure.js` (figura, zoom, pan), `explore.js`,
   `game.js`, `puzzle.js`, `progress.js`, `ui.js` (cambio di modulo e tab, clic),
-  `gate.js` (schermata di avvio), `account.js`, `badges.js`, `social.js` (scheda Flotta), `path.js` (scheda Percorso, per ora un segnaposto), `install.js` (pannello "Installa e usa offline": istruzioni per browser, stato della copia offline).
+  `gate.js` (schermata di avvio), `account.js`, `badges.js`, `social.js` (scheda Flotta), `path.js` (scheda Percorso, per ora un segnaposto con pianeti e satelliti di `content/mappa.json`), `install.js` (pannello "Installa e usa offline": istruzioni per browser, stato della copia offline).
 - Barra in basso a 4 schede (`setTab` in `js/ui.js`): **Percorso** (`path`, segnaposto fino alla fase 1),
   **Palestra** (`play`, l'ex Gioca: tutti i giochi 2D e 3D), **Atlante** (`atlas`: l'ex Esplora in 2D e l'atlante 3D,
   scelti con i pulsanti `#asw` in alto; scelta in `dextera-atlante`), **Flotta** (`soc`, l'ex Amici). Il **Profilo**
@@ -206,7 +206,8 @@ con chiave `3d:<serie>:<nome>`), `end` (bonus) e `menu`. XP e salvataggio restan
 Si chiede solo ciò che si vede da fuori ruotando il modello: `seenFrom()` disegna la scena da 26 direzioni con un colore
 per candidato e conta i pixel (ossa e muscoli ≥ 4 su 200×400, reperi come pallini di 5 mm ≥ 4 su 300×600). Restano 131 ossa
 (esclusi denti, ossicini, cellule etmoidali, seni, cartilagini di naso e laringe), 131 muscoli (esclusi i profondi, es.
-sovraspinato) e 470 reperi. Le domande si scelgono prima per famiglia (`famOf`: coste, falangi, vertebre…).
+sovraspinato) e 470 reperi (numeri di BodyMania; ricontati il 18/11/2026 con `node atlante/build/visibili.mjs`, che salva gli elenchi
+in `atlante/build/visibili.json`: 131 ossa, 150 muscoli, 496 reperi, 204 domande di origine e inserzione). Le domande si scelgono prima per famiglia (`famOf`: coste, falangi, vertebre…).
 Fatto anche: **Origine e inserzione** (serie `oi`): si chiede l'origine o l'inserzione di un muscolo e si tocca l'osso; la
 risposta è giusta se il punto toccato dista al massimo 1,2 cm (`OI_TOL`) da un'area di quel tipo della fonte (distanza dai
 triangoli, `distToArea`). Se sbagliata, il pannello dice se lì c'è l'area di un altro muscolo. Dopo la risposta si vedono
@@ -252,6 +253,27 @@ dell'atlante, descrizioni dei gruppi della fonte `gruppo.fonte.*` usate quando u
 - I nomi di vasi, nervi, legamenti e visceri non sono in `testi/`: vengono da TA2 (con i refusi corretti).
 - I testi sono stati portati in `testi/` dai file generati del 18/11/2026: l'uscita rigenerata è uguale, salvo i nomi italiani di
   19 strutture del cervello ora anche nel 3D, le descrizioni di ipofisi ed epifisi nel 3D e i gruppi e strati passati da `atlante.js` a `dati.json`.
+
+## Mappa del percorso (`content/mappa.json`)
+Corso → 4 pianeti → 17 satelliti (con `ordine` della specifica) → 6 passi (`ossa`, `reperi`, `muscoli`, `connessioni`, `funzione`,
+`progetto`). Ogni passo ha `strutture` (id di `content/corpo.json`: `o.<osso>` e muscoli; reperi `r.<slug del nome inglese>`), `aspetto`,
+`domande`, `giochi`; `non_3d`/`solo_2d`/`solo_3d` dicono cosa manca in un'atlante; `salta: true` per i passi vuoti (Cranio: passi 3–5).
+È un file di dati scritto una volta e poi corretto a mano (non lo genera `testi.py`, che però controlla che ogni id esista e che ogni
+osso e muscolo del 2D stia in almeno un satellite). Reperi: solo quelli visibili da fuori (`visibili.json`); sulle ossa condivise tra più
+satelliti la divisione per posizione è una proposta (`divisione_reperi`, stato «da confermare», con il motivo di ogni repere).
+L'app la carica in `app.MAPPA` (elencata in `files` di `content/index.json`); la scheda Percorso per ora elenca pianeti e satelliti.
+
+## Pagina di revisione (`revisione/`)
+`revisione/index.html` e `revisione.js`: pagina a sé, senza account, per i docenti. Legge `testi/*.json` e `content/mappa.json` dalla
+rete (non è nella cache offline) e mostra ogni dato con fonte e stato, diviso per satellite (più encefalo e nervi, altri dati e
+correzioni alla fonte). Filtri per satellite, stato, fonte, testo e «solo da segnare»; avanzamento per satellite; Stampa; «Vedi
+nell'atlante» apre `atlante/index.html?vedi=<ref>` (muscolo, repere o osso; per il resto la ricerca). Il docente segna Giusto/Sbagliato
+e scrive correzione e nota: tutto resta nel browser (`dextera-revisione`) finché non esporta il CSV (punto e virgola, con BOM per Excel;
+colonne id, tipo, voce, campo, valore, fonte, stato, esito, correzione, nota, revisore, data; gli elenchi con ` | `).
+`python3 atlante/build/importa_revisione.py risposte.csv` mostra le differenze; con `--applica` scrive `testi/` (giusto → verificato,
+correzione → fonte docente e stato corretto, valore di prima in `verifica.prima`; sbagliato senza correzione → segnalato), aumenta la
+`version` dei file toccati e rilancia `testi.py`. Salta le righe il cui valore è cambiato dopo l'esportazione. `--senza-nomi` non salva
+il nome del docente. I file di `testi/` si riscrivono sempre con `testi.scrivi_file()` (una riga per dato).
 
 ## Storia (da BodyMania)
 Ereditato da BodyMania e già fatto: contenuti JSON versionati e moduli JS, PWA con controllo delle versioni, schema

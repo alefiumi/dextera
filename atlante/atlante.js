@@ -941,6 +941,11 @@ try{await loadFile('ossa');}catch(e){$('msg').textContent='Non riesco a caricare
 controls.minDistance=height*0.04;controls.maxDistance=height*3.2;
 setView('front',false);$('msg').remove();refresh();
 toApp({type:'ready'}); // l'app può mandare la richiesta di una partita
+// ?vedi=<nome nella fonte> (dalla pagina revisione/): apre il muscolo, il repere o l'osso; per il resto cerca il nome
+{const ref=new URLSearchParams(location.search).get('vedi');
+ if(ref){const ossa=[...byName.keys()].filter(k=>k===ref||k.replace(/\.[rl]$/,'')===ref),l=LMS.find(l=>l.b===ref);
+  if(DATA.mus[ref])showMuscle(ref,'r');else if(l)showLandmark(l);else if(ossa.length)selectPart(byName.get(ossa.find(k=>/\.r$/.test(k))||ossa[0]),true);
+  else{S.list='search';S.q=(DATA.names[ref]||[ref])[0];refresh();}}}
 let frames=0,last=performance.now();
 renderer.setAnimationLoop(now=>{
  if(!view.clientHeight)return; // scheda dell'app nascosta: niente disegno, si risparmia batteria

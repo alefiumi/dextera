@@ -1,9 +1,10 @@
 {
- "version": 1,
- "nota": "Mappa delle competenze di Dextera (sezione 2 della specifica). Id delle strutture: ossa e muscoli come in content/corpo.json, reperi 'r.' + nome inglese di atlante/dati.json (lm) in minuscolo con i trattini. I reperi sono quelli visibili da fuori nel 3D (atlante/build/visibili.json); sulle ossa condivise tra più satelliti la divisione per posizione è una proposta da confermare dall'autore (divisione_reperi).",
+ "version": 2,
+ "nota": "Mappa delle competenze di Dextera (sezione 2 della specifica). Id delle strutture: ossa e muscoli come in content/corpo.json, reperi 'r.' + nome inglese di atlante/dati.json (lm) in minuscolo con i trattini. I reperi sono quelli visibili da fuori nel 3D (atlante/build/visibili.json); sulle ossa condivise tra più satelliti la divisione per posizione è in divisione_reperi, confermata dall'autore.",
  "divisione_reperi": {
-  "stato": "da confermare",
+  "stato": "confermato",
   "proposta_il": "2026-11-18",
+  "confermato": "dall'autore",
   "criterio": "Per le ossa in più satelliti: posizione lungo l'osso (terzo prossimale, diafisi, estremità distale) e muscoli che vi si attaccano. Elenco completo con il motivo di ogni scelta nella pagina di revisione e in content/mappa.json (satelliti → passo 2).",
   "reperi": {
    "r.foramen-magnum": {"satellite": "cranio", "perche": "resto del cranio", "altri": ["faccia", "visceri-testa"]},

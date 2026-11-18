@@ -375,7 +375,7 @@ Corso → 4 pianeti → 17 satelliti (con `ordine` della specifica) → 6 passi 
 `domande`, `giochi`; `non_3d`/`solo_2d`/`solo_3d` dicono cosa manca in un'atlante; `salta: true` per i passi vuoti (Cranio: passi 3–5).
 È un file di dati scritto una volta e poi corretto a mano (non lo genera `testi.py`, che però controlla che ogni id esista e che ogni
 osso e muscolo del 2D stia in almeno un satellite). Reperi: solo quelli visibili da fuori (`visibili.json`); sulle ossa condivise tra più
-satelliti la divisione per posizione è una proposta (`divisione_reperi`, stato «da confermare», con il motivo di ogni repere).
+satelliti la divisione per posizione sta in `divisione_reperi` (confermata dall'autore, con il motivo di ogni repere).
 L'app la carica in `app.MAPPA` (elencata in `files` di `content/index.json`); la scheda Percorso per ora elenca pianeti e satelliti.
 
 ## Pagina di revisione (`revisione/`)

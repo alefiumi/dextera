@@ -69,9 +69,9 @@ wireSocial($('panel'));addAccountListener(socialAccountChanged);
 boot();
 try{
  const c=await loadContent();
- app.MODS=c.MODS;app.NC=c.NC;app.MAPPA=c.MAPPA;
+ app.MODS=c.MODS;app.NC=c.NC;app.MAPPA=c.MAPPA;app.LEZ=c.LEZ;app.REGOLE=c.REGOLE;app.PERCORSO=c.PERCORSO;
  useMod('corpo');head();
 }catch(e){
  console.error(e);
- $('panel').innerHTML='<div class="h">Contenuti non disponibili</div><p class="mut">Non riesco a caricare i file in content/. Se hai aperto index.html con doppio clic, avvia un server locale (per esempio <code>npx serve .</code>) e apri l\'indirizzo che ti indica. Al primo avvio serve la connessione.</p>';
+ $('panel').innerHTML='<div class="h">Contenuti non disponibili</div><p class="mut">Non riesco a caricare i file in content/. Se hai aperto index.html con doppio clic, avvia un server locale (per esempio <code>python3 -m http.server</code>) e apri l\'indirizzo che ti indica. Al primo avvio serve la connessione.</p>';
 }

@@ -8,7 +8,9 @@ Uso:  python3 atlante/build/testi.py
       1. applica testi e correzioni ad atlante/dati.json (nomi, descrizioni, schede dei muscoli, aree di origine e
          inserzione, gruppi di muscoli e strati dell'encefalo, parti da specchiare). Non serve Blender: si parte dal
          dati.json esistente e tutto è idempotente (si può rifare quante volte si vuole);
-      2. scrive content/nervi-cranici.json e content/neuro-strutture.json;
+      2. scrive content/nervi-cranici.json, content/neuro-strutture.json e content/lezioni.json (dati del percorso:
+         reperi con nome, descrizione e osso del 2D; per ogni struttura della mappa l'id della sua voce in testi/;
+         stato dei dati già verificati, corretti o segnalati);
       3. rifà i moduli 2D (node proietta_2d.mjs, poi contenuti_2d.py) e aumenta le versioni dei file cambiati
          e quella di content/index.json.
 Gli altri script (za_dati.py, contenuti_2d.py) importano questo modulo per leggere i testi.
@@ -214,6 +216,64 @@ def contenuti_piccoli():
     b = scrivi_versionato(os.path.join(ROOT, 'content/neuro-strutture.json'), {'items': gruppi_encefalo()}, indent=1)
     return a or b
 
+def lezioni():
+    """content/lezioni.json: ciò che le lezioni del percorso leggono oltre a content/corpo.json (sezioni 3 e 12)"""
+    p = os.path.join(ROOT, 'content/mappa.json')
+    if not os.path.exists(p): return False
+    M = json.load(open(p)); C = json.load(open(os.path.join(ROOT, 'content/corpo.json')))
+    ossa2d = {s['id'] for s in C['structures']}
+    usati = set()
+    for pl in M['corsi'][0]['pianeti']:
+        for s in pl['satelliti']:
+            for ps in s['passi']:
+                if isinstance(ps['strutture'], list): usati |= set(ps['strutture'])
+    voci = {}
+    rep = {v['id']: v for v in carica('reperi')}
+    oss = {v['id']: v for v in carica('ossa')}; enc = {v['id']: v for v in carica('encefalo')}
+    reperi = {}
+    for i in sorted(usati):
+        if i.startswith('r.'):
+            v = rep.get('repere.' + i[2:])
+            if not v: continue
+            src = v
+            if v.get('vedi'): src = oss.get(v['vedi']) or enc.get(v['vedi']) or v
+            ref = re.sub(r'\.[rl]$', '', v.get('osso') or '')
+            o = 'o.teeth' if 'tooth' in ref.lower() else 'o.' + slug(ref)
+            nome = val(src, 'nome') or v['ref']
+            reperi[i] = {'n': nome, 'l': val(src, 'latino') or '', 'd': val(src, 'descrizione') or '', 'o': o if o in ossa2d else None}
+            voci[i] = src['id']
+        elif i.startswith('o.'): voci[i] = 'osso.' + i[2:]
+        else: voci[i] = 'muscolo.' + i
+    stati = {}
+    for t in TIPI:
+        for v in carica(t):
+            for c, d in v.get('dati', {}).items():
+                if d['stato'] != 'da verificare':
+                    q = (d.get('verifica') or {}).get('quando')
+                    stati[v['id'] + '.' + c] = [d['stato'], q] if q else [d['stato']]
+    return scrivi_versionato(os.path.join(ROOT, 'content/lezioni.json'), {'voci': voci, 'reperi': reperi, 'stati': stati})
+
+def controlla_percorsi():
+    """ogni nodo di content/percorsi/*.json esiste nella mappa, i passi sono del satellite, il caso esiste"""
+    d = os.path.join(ROOT, 'content/percorsi')
+    if not os.path.isdir(d): return
+    M = json.load(open(os.path.join(ROOT, 'content/mappa.json'))); C = json.load(open(os.path.join(ROOT, 'content/corpo.json')))
+    casi = {c['id'] for c in C['cases']}; err = []
+    for co in M['corsi']:
+        nodi = {co['id']: 'corso'}
+        for pl in co['pianeti']:
+            nodi[pl['id']] = 'pianeta'
+            for s in pl['satelliti']: nodi[s['id']] = {ps['id'] for ps in s['passi']}
+    for f in sorted(os.listdir(d)):
+        P = json.load(open(os.path.join(d, f)))
+        for n in P['nodi']:
+            if n['id'] not in nodi: err.append(f"{f}: nodo {n['id']}"); continue
+            if n['tipo'] == 'satellite':
+                err += [f"{f}: passo {x}" for x in n.get('passi', []) if x not in nodi[n['id']]]
+                if n.get('caso') and n['caso'] not in casi: err.append(f"{f}: caso {n['caso']}")
+    if err: raise SystemExit('content/percorsi non valido:\n  ' + '\n  '.join(err[:30]))
+    print('content/percorsi: nodi validi')
+
 def controlla():
     """id unici, stati e fonti ammessi"""
     seen = set(); err = []
@@ -264,12 +324,14 @@ def main():
         sys.argv = [sys.argv[0], p]
         import contenuti_2d
         changed = contenuti_2d.main(p) or changed
+    changed = lezioni() or changed
     idx = os.path.join(ROOT, 'content/index.json')
     if changed:
         I = json.load(open(idx)); I['version'] += 1; json.dump(I, open(idx, 'w'), ensure_ascii=False, indent=1); open(idx, 'a').write('\n')
         print('contenuti cambiati: content/index.json alla versione', I['version'])
     else: print('contenuti invariati')
     controlla_mappa()
+    controlla_percorsi()
 
 if __name__ == '__main__':
     sys.path.insert(0, HERE)

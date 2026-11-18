@@ -1,0 +1,12 @@
+{
+ "version": 1,
+ "nota": "Numeri del percorso (sezioni 3, 4 e 6 della specifica): stanno qui e non nel codice. Dalla fase 3 arriveranno dalla tabella rules del gestionale, con gli stessi nomi.",
+ "lezione": {"domande": 8, "cuori": 3, "non_scelta_min": 3, "ripasso_passi_fatti": 2, "dopo_presentazione_min": 4, "opzioni": 4},
+ "stelle": {"tre": 0.95, "due": 0.8},
+ "maestria": {"max": 3, "scelta_max": 1, "tocco_max": 2, "nome_max": 3, "errore": -1, "passo_fatto": 2},
+ "xp": {"giusta": 10, "giusta_gia_3": 2, "lezione_con_cuori": 20, "obiettivo": 10, "livello_nuovo": 5, "passo_fatto": 30, "satellite_acceso": 100},
+ "prova": {"soglia": 0.9, "max_domande": 20, "al_giorno": 1},
+ "progetto": {"quiz_domande": 10, "quiz_soglia": 0.8, "cuori": 3},
+ "obiettivo": {"scelte": [30, 60, 120], "predefinito": 60},
+ "serie": {"xp_giorno": 30, "scudo_ogni": 7, "scudi_max": 2}
+}

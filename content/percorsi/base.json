@@ -1,0 +1,301 @@
+{
+ "version": 1,
+ "formato": 1,
+ "nota": "Percorso pubblicato (sezione 8 della specifica): quali nodi di content/mappa.json include, in che ordine consigliato e con quale caso clinico. È nel formato che produrrà il gestionale della fase 3 (una versione di releases con i nodi): fino ad allora si scrive a mano. caso null = il passo 6 è un quiz finale finché l'autore non abbina un caso al satellite.",
+ "id": "base",
+ "nome": "Percorso base",
+ "corso": "muscolo-scheletrico",
+ "mappa": {
+  "file": "mappa.json",
+  "version": 2
+ },
+ "rilascio": {
+  "numero": 1,
+  "pubblicato_il": "2026-11-21",
+  "da": "a mano (fase 1)"
+ },
+ "nodi": [
+  {
+   "id": "muscolo-scheletrico",
+   "tipo": "corso",
+   "genitore": null,
+   "ordine": 1
+  },
+  {
+   "id": "arto-inferiore",
+   "tipo": "pianeta",
+   "genitore": "muscolo-scheletrico",
+   "ordine": 1
+  },
+  {
+   "id": "colonna-tronco",
+   "tipo": "pianeta",
+   "genitore": "muscolo-scheletrico",
+   "ordine": 2
+  },
+  {
+   "id": "arto-superiore",
+   "tipo": "pianeta",
+   "genitore": "muscolo-scheletrico",
+   "ordine": 3
+  },
+  {
+   "id": "testa-collo",
+   "tipo": "pianeta",
+   "genitore": "muscolo-scheletrico",
+   "ordine": 4
+  },
+  {
+   "id": "piede",
+   "tipo": "satellite",
+   "genitore": "arto-inferiore",
+   "ordine": 1,
+   "passi": [
+    "piede.1",
+    "piede.2",
+    "piede.3",
+    "piede.4",
+    "piede.5",
+    "piede.6"
+   ],
+   "caso": null
+  },
+  {
+   "id": "gamba",
+   "tipo": "satellite",
+   "genitore": "arto-inferiore",
+   "ordine": 2,
+   "passi": [
+    "gamba.1",
+    "gamba.2",
+    "gamba.3",
+    "gamba.4",
+    "gamba.5",
+    "gamba.6"
+   ],
+   "caso": null
+  },
+  {
+   "id": "ginocchio",
+   "tipo": "satellite",
+   "genitore": "arto-inferiore",
+   "ordine": 3,
+   "passi": [
+    "ginocchio.1",
+    "ginocchio.2",
+    "ginocchio.3",
+    "ginocchio.4",
+    "ginocchio.5",
+    "ginocchio.6"
+   ],
+   "caso": null
+  },
+  {
+   "id": "coscia",
+   "tipo": "satellite",
+   "genitore": "arto-inferiore",
+   "ordine": 4,
+   "passi": [
+    "coscia.1",
+    "coscia.2",
+    "coscia.3",
+    "coscia.4",
+    "coscia.5",
+    "coscia.6"
+   ],
+   "caso": null
+  },
+  {
+   "id": "anca",
+   "tipo": "satellite",
+   "genitore": "arto-inferiore",
+   "ordine": 5,
+   "passi": [
+    "anca.1",
+    "anca.2",
+    "anca.3",
+    "anca.4",
+    "anca.5",
+    "anca.6"
+   ],
+   "caso": null
+  },
+  {
+   "id": "schiena",
+   "tipo": "satellite",
+   "genitore": "colonna-tronco",
+   "ordine": 6,
+   "passi": [
+    "schiena.1",
+    "schiena.2",
+    "schiena.3",
+    "schiena.4",
+    "schiena.5",
+    "schiena.6"
+   ],
+   "caso": null
+  },
+  {
+   "id": "colonna",
+   "tipo": "satellite",
+   "genitore": "colonna-tronco",
+   "ordine": 7,
+   "passi": [
+    "colonna.1",
+    "colonna.2",
+    "colonna.3",
+    "colonna.4",
+    "colonna.5",
+    "colonna.6"
+   ],
+   "caso": null
+  },
+  {
+   "id": "torace",
+   "tipo": "satellite",
+   "genitore": "colonna-tronco",
+   "ordine": 9,
+   "passi": [
+    "torace.1",
+    "torace.2",
+    "torace.3",
+    "torace.4",
+    "torace.5",
+    "torace.6"
+   ],
+   "caso": null
+  },
+  {
+   "id": "addome",
+   "tipo": "satellite",
+   "genitore": "colonna-tronco",
+   "ordine": 10,
+   "passi": [
+    "addome.1",
+    "addome.2",
+    "addome.3",
+    "addome.4",
+    "addome.5",
+    "addome.6"
+   ],
+   "caso": null
+  },
+  {
+   "id": "spalla",
+   "tipo": "satellite",
+   "genitore": "arto-superiore",
+   "ordine": 8,
+   "passi": [
+    "spalla.1",
+    "spalla.2",
+    "spalla.3",
+    "spalla.4",
+    "spalla.5",
+    "spalla.6"
+   ],
+   "caso": null
+  },
+  {
+   "id": "braccio",
+   "tipo": "satellite",
+   "genitore": "arto-superiore",
+   "ordine": 11,
+   "passi": [
+    "braccio.1",
+    "braccio.2",
+    "braccio.3",
+    "braccio.4",
+    "braccio.5",
+    "braccio.6"
+   ],
+   "caso": null
+  },
+  {
+   "id": "avambraccio",
+   "tipo": "satellite",
+   "genitore": "arto-superiore",
+   "ordine": 12,
+   "passi": [
+    "avambraccio.1",
+    "avambraccio.2",
+    "avambraccio.3",
+    "avambraccio.4",
+    "avambraccio.5",
+    "avambraccio.6"
+   ],
+   "caso": null
+  },
+  {
+   "id": "mano",
+   "tipo": "satellite",
+   "genitore": "arto-superiore",
+   "ordine": 13,
+   "passi": [
+    "mano.1",
+    "mano.2",
+    "mano.3",
+    "mano.4",
+    "mano.5",
+    "mano.6"
+   ],
+   "caso": null
+  },
+  {
+   "id": "collo",
+   "tipo": "satellite",
+   "genitore": "testa-collo",
+   "ordine": 14,
+   "passi": [
+    "collo.1",
+    "collo.2",
+    "collo.3",
+    "collo.4",
+    "collo.5",
+    "collo.6"
+   ],
+   "caso": null
+  },
+  {
+   "id": "cranio",
+   "tipo": "satellite",
+   "genitore": "testa-collo",
+   "ordine": 15,
+   "passi": [
+    "cranio.1",
+    "cranio.2",
+    "cranio.6"
+   ],
+   "caso": null
+  },
+  {
+   "id": "faccia",
+   "tipo": "satellite",
+   "genitore": "testa-collo",
+   "ordine": 16,
+   "passi": [
+    "faccia.1",
+    "faccia.2",
+    "faccia.3",
+    "faccia.4",
+    "faccia.5",
+    "faccia.6"
+   ],
+   "caso": null
+  },
+  {
+   "id": "visceri-testa",
+   "tipo": "satellite",
+   "genitore": "testa-collo",
+   "ordine": 17,
+   "passi": [
+    "visceri-testa.1",
+    "visceri-testa.2",
+    "visceri-testa.3",
+    "visceri-testa.4",
+    "visceri-testa.5",
+    "visceri-testa.6"
+   ],
+   "caso": null
+  }
+ ]
+}

@@ -9,8 +9,10 @@ export async function loadContent(){
  const idx=await getRaw('index.json');
  // ?v= dice al service worker di servire tutti i file della stessa versione dell'indice.
  const get=f=>getRaw(f+'?v='+encodeURIComponent(idx.version));
- const hasMap=(idx.files||[]).includes('mappa.json');
- const [mods,nc,mappa]=await Promise.all([Promise.all(idx.modules.map(id=>get(id+'.json'))),get(idx.nc),hasMap?get('mappa.json'):null]);
+ // file del percorso (fase 1): mappa delle competenze, dati delle lezioni, regole e percorso pubblicato (content/percorsi/)
+ const has=f=>(idx.files||[]).includes(f),opt=f=>has(f)?get(f).catch(e=>{console.warn(e);return null;}):null;
+ const [mods,nc,mappa,lez,regole,perc]=await Promise.all([Promise.all(idx.modules.map(id=>get(id+'.json'))),get(idx.nc),
+  opt('mappa.json'),opt('lezioni.json'),opt('regole.json'),opt('percorsi/base.json')]);
  const MODS={};
  for(const m of mods){
   const GR=m.groups.map(g=>({...g,group:true}));
@@ -23,5 +25,5 @@ export async function loadContent(){
   const byId=Object.fromEntries([...B,...GR].map(x=>[x.id,x]));
   MODS[m.id]={id:m.id,label:m.label,B,GR,byId,M:m.muscles||[],CASES:m.cases,W:m.W,H:m.H,views:m.views||['a'],vnames:m.vnames||{},zviews:m.zviews||{},grpn:m.grpn,expl:m.expl,thin:m.thin||[]};
  }
- return {version:idx.version,MODS,NC:nc.items,MAPPA:mappa};
+ return {version:idx.version,MODS,NC:nc.items,MAPPA:mappa,LEZ:lez,REGOLE:regole,PERCORSO:perc};
 }

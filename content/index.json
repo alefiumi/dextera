@@ -1,5 +1,5 @@
 {
- "version": 13,
+ "version": 14,
  "modules": [
   "corpo",
   "cervello",
@@ -9,6 +9,9 @@
  "nc": "nervi-cranici.json",
  "files": [
   "neuro-strutture.json",
-  "mappa.json"
+  "mappa.json",
+  "lezioni.json",
+  "regole.json",
+  "percorsi/base.json"
  ]
 }

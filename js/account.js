@@ -3,6 +3,7 @@
    partono dalla coda locale (state.queue) quando c'è rete. La libreria si carica solo se serve.
    L'accesso si fa nella schermata di avvio (gate.js); qui ci sono le funzioni e il riquadro Account del profilo. */
 import {S,save,head,onSave,queue,resetLocal} from './state.js';
+import {reports,setFlagged,flaggedAge} from './segnala.js';
 import {SUPABASE_URL,SUPABASE_KEY} from './config.js';
 
 export const configured=!!(SUPABASE_URL&&SUPABASE_KEY);
@@ -158,14 +159,16 @@ export const linkGoogle=()=>run(async()=>{
 // Tutti i dati che l'app ha su questa persona: quelli del dispositivo e, con l'account, quelli del server
 // (le regole del database fanno leggere solo i propri).
 export async function myData(){
- const out={app:'Dextera',creato_il:new Date().toISOString(),dispositivo:{progressi:S,partite_da_inviare:queue.all()}};
+ const out={app:'Dextera',creato_il:new Date().toISOString(),dispositivo:{progressi:S,partite_da_inviare:queue.all(),segnalazioni_da_inviare:reports.all()}};
  if(A.user&&A.sb&&online()){
   const sb=A.sb,uid=A.user.id;
-  const [p,g,m,b,f]=await Promise.all([ownProfile(sb,uid),sb.from('game_results').select('*').eq('user_id',uid).order('played_at'),
+  const [p,g,m,b,f,pp,ds,er]=await Promise.all([ownProfile(sb,uid),sb.from('game_results').select('*').eq('user_id',uid).order('played_at'),
    sb.from('mastery').select('item_id,level,updated_at'),sb.from('badge_assertions').select('badge_id,issued_at').eq('user_id',uid),
-   sb.from('friendships').select('user_id,friend_id,status,created_at')]);
+   sb.from('friendships').select('user_id,friend_id,status,created_at'),
+   sb.from('path_progress').select('node_id,stato,stelle,fatto_il,aggiornato_il').eq('user_id',uid),
+   sb.from('dextera_settings').select('*').eq('user_id',uid),sb.from('error_reports').select('id,data_id,nota,valore,stato,creato_il').eq('user_id',uid)]);
   out.account={email:A.user.email,registrato_il:A.user.created_at,ultimo_accesso:A.user.last_sign_in_at,consenso_privacy:A.user.user_metadata||{},
-   profilo:p.data,partite:g.data,maestria:m.data,badge:b.data,amicizie:f.data};
+   profilo:p.data,partite:g.data,maestria:m.data,badge:b.data,amicizie:f.data,percorso:pp.data,impostazioni:ds.data,segnalazioni:er.data};
  }else if(A.user)out.account={email:A.user.email,nota:'Senza connessione: qui ci sono solo i dati del dispositivo.'};
  return out;
 }
@@ -237,7 +240,7 @@ export async function sync(full){
    if(e1)throw e1;if(e2)throw e2;
    A.profile=p;
    // unione: si tiene il valore più alto (o il giorno più recente per la serie)
-   S.xp=Math.max(S.xp,p.xp);S.ok=Math.max(S.ok,p.ok);S.ko=Math.max(S.ko,p.ko);
+   S.xp=Math.max(S.xp,p.xp);S.lastXp=S.xp;S.ok=Math.max(S.ok,p.ok);S.ko=Math.max(S.ko,p.ko); // lastXp: gli XP del server non contano per l'obiettivo di oggi
    const srv=ymdIso(p.last_day),loc=ymdIso(S.last);
    if(srv&&(!loc||srv>loc)){S.last=ymdApp(p.last_day);S.streak=p.streak;}else if(srv===loc)S.streak=Math.max(S.streak,p.streak);
    for(const m of ms||[])S.mastery[m.item_id]=Math.max(S.mastery[m.item_id]||0,m.level);
@@ -272,9 +275,60 @@ export async function sync(full){
    if(e6)A.warn='I badge restano solo su questo dispositivo: sul server manca l\'elenco (file supabase/migrations/20261117120000_profilo_badge.sql).';
    else nb.forEach(([id])=>sentBadges.add(id));
   }
+  // percorso, impostazioni e segnalazioni (fase 1): se sul server mancano le tabelle restano in coda qui, senza bloccare il resto
+  try{await syncPercorso(sb,uid,full);}catch(e){A.warn=/path_progress|dextera_settings|error_report|schema cache|does not exist|PGRST205|42P01/i.test((e.message||'')+(e.code||''))
+   ?'Percorso e segnalazioni restano su questo telefono finché sul server non c\'è il file supabase/migrations/20261121090000_dextera_percorso.sql.':'Percorso non sincronizzato: riprovo più tardi.';}
   A.lastSync=new Date();A.err='';markDirty(false);
  }catch(e){A.err='Sincronizzazione non riuscita: riprovo più tardi. ('+(e.message||e)+')';}
  A.syncing=false;onChange();
+}
+
+// Percorso (fase 1): stato dei nodi in path_progress, obiettivo e scudi in dextera_settings, segnalazioni in error_reports,
+// dati segnalati da almeno due persone da error_report_flags (al massimo una volta all'ora). All'accesso vale il valore più avanzato.
+const RANK={'':0,iniziato:1,fatto:2,acceso:3};
+async function syncPercorso(sb,uid,full){
+ const P=S.path||(S.path={nodes:{},last:'',prova:{},prio:{}});
+ if(full){
+  const [{data:pp,error:a},{data:ds,error:b}]=await Promise.all([sb.from('path_progress').select('node_id,stato,stelle,fatto_il').eq('user_id',uid),
+   sb.from('dextera_settings').select('obiettivo,scudi,aggiornato_il').eq('user_id',uid).maybeSingle()]);
+  if(a)throw a;if(b)throw b;
+  for(const r of pp||[]){
+   const n=P.nodes[r.node_id]||{stato:'',stelle:0,fatto_il:null};
+   const out={stato:RANK[r.stato]>RANK[n.stato||'']?r.stato:n.stato,stelle:Math.max(n.stelle||0,r.stelle||0),fatto_il:[n.fatto_il,r.fatto_il].filter(Boolean).sort()[0]||null};
+   // da reinviare solo se qui c'è qualcosa di più avanzato del server
+   if(RANK[out.stato]>RANK[r.stato]||out.stelle>r.stelle||(out.fatto_il&&out.fatto_il!==r.fatto_il))out.u=1;
+   P.nodes[r.node_id]=out;
+  }
+  const st=ds?Date.parse(ds.aggiornato_il):0;
+  if(ds&&st>((S.set&&S.set.t)||0)){S.set={obiettivo:ds.obiettivo,t:st};S.shields=ds.scudi;}
+  else if(S.set&&S.set.t)S.set.u=1;
+  try{localStorage.setItem('dextera-v1',JSON.stringify(S));}catch(e){}
+ }
+ const sent=Object.entries(P.nodes).filter(([,n])=>n.u);
+ if(sent.length){
+  const {error}=await sb.from('path_progress').upsert(sent.map(([node_id,n])=>({user_id:uid,node_id,stato:n.stato||'iniziato',stelle:n.stelle||0,fatto_il:n.fatto_il||null})),{onConflict:'user_id,node_id'});
+  if(error)throw error;
+  for(const [id,n] of sent)if(P.nodes[id]===n)delete n.u; // cambiato nel frattempo: resta da inviare
+ }
+ const set=S.set;
+ if(set&&set.u){
+  const {error}=await sb.from('dextera_settings').upsert({user_id:uid,obiettivo:set.obiettivo||60,scudi:S.shields||0,aggiornato_il:new Date(set.t||Date.now()).toISOString()},{onConflict:'user_id'});
+  if(error)throw error;
+  if(S.set===set)delete set.u;
+ }
+ if(sent.length||(set&&!set.u))try{localStorage.setItem('dextera-v1',JSON.stringify(S));}catch(e){}
+ // id del dato nel formato di testi/ (lo stesso controllo del database): una voce sbagliata non blocca le altre
+ const rq=reports.all().filter(r=>/^[a-z]+(\.[a-z0-9_-]+){2,4}$/.test(r.data_id||'')&&r.data_id.length<=120);
+ if(rq.length){
+  const {error}=await sb.from('error_reports').upsert(rq.map(r=>({id:r.id,user_id:uid,data_id:r.data_id,nota:r.nota||'',valore:r.valore||''})),{onConflict:'id',ignoreDuplicates:true});
+  if(error)throw error;
+  const ids=new Set(rq.map(r=>r.id));reports.set(reports.all().filter(r=>!ids.has(r.id)&&/^[a-z]+(\.[a-z0-9_-]+){2,4}$/.test(r.data_id||'')));
+ }
+ if(full||flaggedAge()>36e5){
+  const {data,error}=await sb.from('error_report_flags').select('data_id,ultima').gte('persone',2).limit(5000);
+  if(error)throw error;
+  setFlagged(Object.fromEntries((data||[]).map(r=>[r.data_id,r.ultima])));
+ }
 }
 
 /* ---------- riquadro Account nel profilo ---------- */

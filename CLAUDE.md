@@ -379,6 +379,10 @@ descrizioni; quelle con fonte Z-Anatomy dicono da quale vaso nasce o dove sbocca
 - Solo 2D: muscoli e reperi non si toccano nel 2D (muscoli: scelta e nome; reperi: tocco sull'osso). Tocco 3D: da fare.
 - SQL: `supabase/migrations/20261121090000_dextera_percorso.sql` (path_progress, dextera_settings, error_reports, error_report_flags,
   vista admin.segnalazioni), provato con PGlite (36 prove RLS). Applicato dall'autore il 18/11/2026 (tabelle, RLS e trigger controllati; Security Advisor senza avvisi nuovi).
+- Aspetto (18/11/2026, sul modello del prototipo): due zone, `.pmain` (briciole, Mappa/Elenco e mappa su cielo stellato con pianeti sfumati)
+  e `.pside` (Continua con obiettivo e serie, riquadro del livello con avanzamento e legenda, oppure i passi del satellite). Telefono: una
+  sotto l'altra e la mappa alta al massimo lo schermo meno intestazione e barre, così si vede intera; nel satellite la mappa è nascosta.
+  Computer in orizzontale: mappa a sinistra ferma e riquadri a destra (media query in fondo alla parte del Percorso di `style.css`).
 - Sincronizzazione in `syncPercorso()` di `account.js`; senza tabelle i dati restano in coda (avviso nel profilo).
 
 ## Mappa del percorso (`content/mappa.json`)

@@ -36,7 +36,25 @@ const symIcon=st=>`<svg class="si" viewBox="-11 -11 22 22" width="22" height="22
 function lines(t,max=16){const w=String(t).split(' '),out=[''];for(const x of w){if((out.at(-1)+' '+x).trim().length>max&&out.at(-1))out.push(x);else out[out.length-1]=(out.at(-1)+' '+x).trim();}return out;}
 const svgText=(x,y,t,cls,max)=>lines(t,max).map((l,i)=>`<text x="${x}" y="${y+i*14}" text-anchor="middle" class="${cls}">${esc(l)}</text>`).join('');
 
-/* ---------- disegno ---------- */
+/* ---------- disegno ----------
+   Due zone: .pmain (briciole e mappa, o l'elenco) e .pside (Continua, giorno, riquadro del livello o i passi del satellite).
+   Telefono: una sotto l'altra, la mappa intera nello schermo. Computer in orizzontale: mappa a sinistra, riquadro a destra. */
+// stelle del fondo: sempre le stesse (generatore pseudo-casuale con seme fisso), niente movimento; anche fuori dal viewBox,
+// così sul computer (riquadro più largo del disegno) il cielo riempie tutto il riquadro
+function stars(w,h,n,seed=7){let x=seed,o='';const r=()=>(x=(x*16807)%2147483647)/2147483647;
+ for(let i=0;i<n;i++)o+=`<circle cx="${(r()*w*3-w).toFixed(1)}" cy="${(r()*h*1.6-h*.3).toFixed(1)}" r="${(r()*1.1+.3).toFixed(2)}" opacity="${(r()*.6+.25).toFixed(2)}"/>`;
+ return `<g class="stars" aria-hidden="true">${o}</g>`;}
+// sfumature dei corpi celesti (luce dall'alto a sinistra) e alone
+const PC=[['#93c5fd','#2563eb'],['#f9a8d4','#db2777'],['#6ee7b7','#059669'],['#fdba74','#ea580c']];
+const DEFS=`<defs><radialGradient id="gsun" cx=".38" cy=".35" r=".7"><stop offset="0" stop-color="#fff3c4"/><stop offset=".55" stop-color="#f6b93b"/><stop offset="1" stop-color="#e07b12"/></radialGradient>
+ <radialGradient id="ghalo"><stop offset=".55" stop-color="#f6b93b" stop-opacity=".35"/><stop offset="1" stop-color="#f6b93b" stop-opacity="0"/></radialGradient>
+ <radialGradient id="glit" cx=".38" cy=".35" r=".7"><stop offset="0" stop-color="#fff3c4"/><stop offset="1" stop-color="#f0b429"/></radialGradient>
+ <radialGradient id="goff" cx=".38" cy=".35" r=".7"><stop offset="0" stop-color="#6b7499"/><stop offset="1" stop-color="#363d5e"/></radialGradient>
+ ${PC.map(([a,b],i)=>`<radialGradient id="gp${i}" cx=".38" cy=".35" r=".7"><stop offset="0" stop-color="${a}"/><stop offset="1" stop-color="${b}"/></radialGradient>`).join('')}</defs>`;
+const svgOpen=(h,label)=>`<svg class="map" viewBox="0 0 360 ${h}" role="group" aria-label="${esc(label)}">${DEFS}${stars(360,h,260)}`;
+const halo=(x,y,r,c)=>`<circle cx="${x}" cy="${y}" r="${r}" fill="${c}" opacity=".18"/>`;
+const sun=(x,y,r)=>`<circle cx="${x}" cy="${y}" r="${r*1.9}" fill="url(#ghalo)"/><circle cx="${x}" cy="${y}" r="${r}" fill="url(#gsun)"/>`;
+
 export function renderPath(){
  if(!P.ready()){$('panel').innerHTML=`<div class="path"><div class="h">Il tuo percorso</div><p class="mut">I contenuti del percorso non sono ancora su questo telefono: apri l'app una volta con la connessione.</p></div>`;return;}
  if(app.L){if(app.MOD.id!=='corpo'){hooks.useMod('corpo');return;}renderLesson();return;}
@@ -49,27 +67,48 @@ export function renderPath(){
  if(ui.lvl==='pianeta'||ui.lvl==='satellite')crumbs.push(['pianeta',curP.nome,curP.id]);
  if(ui.lvl==='satellite')crumbs.push(['satellite',sat.nome,sat.id]);
  const bc=`<div class="crumbs" role="navigation" aria-label="Dove sei">${crumbs.map(([l,n,id],i)=>i===crumbs.length-1?`<span aria-current="page">${esc(n)}</span>`:`<button class="lnk" data-p="lvl" data-lvl="${l}"${id?` data-id="${esc(id)}"`:''}>${esc(n)}</button><span aria-hidden="true"> › </span>`).join('')}</div>`;
- const tog=ui.lvl==='satellite'?'':`<div class="chips seg" role="group" aria-label="Vista"><button class="chip${ui.mode==='mappa'?' on':''}" data-p="mode" data-v="mappa" aria-pressed="${ui.mode==='mappa'}">🪐 Mappa</button><button class="chip${ui.mode==='elenco'?' on':''}" data-p="mode" data-v="elenco" aria-pressed="${ui.mode==='elenco'}">☰ Elenco</button></div>`;
- let body;
- if(ui.lvl==='satellite')body=satHtml(sat,g);
- else if(ui.mode==='elenco')body=listHtml(g);
- else body=ui.lvl==='universo'?universeSvg():ui.lvl==='pianeta'?planetSvg(pl,g):systemSvg(g);
- $('panel').innerHTML=`<div class="path">${topHtml(g)}${bc}${tog}${body}${glossary()}</div>`;
+ const tog=`<div class="chips seg" role="group" aria-label="Vista"><button class="chip${ui.mode==='mappa'?' on':''}" data-p="mode" data-v="mappa" aria-pressed="${ui.mode==='mappa'}"><span aria-hidden="true">🪐</span><span class="tl"> Mappa</span></button><button class="chip${ui.mode==='elenco'?' on':''}" data-p="mode" data-v="elenco" aria-pressed="${ui.mode==='elenco'}"><span aria-hidden="true">☰</span><span class="tl"> Elenco</span></button></div>`;
+ // nel satellite la mappa mostra il suo pianeta con il satellite evidenziato (sul telefono è nascosta: contano i passi)
+ const mapBody=ui.mode==='elenco'?`<div class="lcard">${listHtml(g)}</div>`:ui.lvl==='universo'?universeSvg():ui.lvl==='sistema'?systemSvg(g):planetSvg(curP,g,ui.lvl==='satellite'?sat:null);
+ const side=ui.lvl==='satellite'?satHtml(sat,g):infoHtml(g,curP);
+ $('panel').innerHTML=`<div class="path pv-${ui.lvl}"><section class="pmain" aria-label="Mappa del percorso"><div class="phead">${bc}${tog}</div>${mapBody}</section>
+  <div class="pside">${ui.lvl==='satellite'?side+topHtml(g):topHtml(g)+side}${glossary()}</div></div>`;
 }
 function topHtml(g){
  const day=S.day&&S.day.d===P.today()?S.day:{xp:0},goal=P.goal(),pct=Math.min(1,(day.xp||0)/goal);
  const ring=`<div class="ring" role="img" aria-label="Obiettivo del giorno: ${day.xp||0} XP su ${goal}"><svg viewBox="0 0 36 36" aria-hidden="true"><circle cx="18" cy="18" r="15" class="rb"/><circle cx="18" cy="18" r="15" class="rf" stroke-dasharray="${(pct*94.2).toFixed(1)} 94.2"/></svg><span>${day.xp||0}/${goal}</span></div>`;
  const opts=P.R().obiettivo.scelte.map(v=>`<option value="${v}"${v===goal?' selected':''}>${v} XP${v===30?' (leggero)':v===60?' (normale)':' (intenso)'}</option>`).join('');
- return `<button class="cont" data-p="cont"><span class="cs">★ Continua</span><b>${esc(g.sat.nome)}, passo ${g.ps.n}</b><small>${esc(g.ps.nome)}</small></button>
-  <div class="dayrow">${ring}<span>🔥 ${giorni(S.streak)}${S.shields?` · 🛡 ${S.shields}`:''}</span>
-  <label class="goal">Obiettivo <select data-p="goal">${opts}</select></label></div>`;
+ return `<div class="card today"><button class="cont" data-p="cont"><span class="ci" aria-hidden="true">★</span><span class="ct"><span class="cs">Continua</span><b>${esc(g.sat.nome)} · passo ${g.ps.n}</b><small>${esc(g.ps.nome)}</small></span><span class="cg" aria-hidden="true">›</span></button>
+  <div class="dayrow">${ring}<span class="dst"><b>Oggi</b><span>🔥 ${giorni(S.streak)}${S.shields?` · 🛡 ${S.shields}`:''}</span></span>
+  <label class="goal">Obiettivo <select data-p="goal">${opts}</select></label></div></div>`;
+}
+const legend=()=>`<ul class="legend" aria-label="Legenda">${Object.entries(P.STATI).map(([k,v])=>`<li>${symIcon(k)}${esc(v)}</li>`).join('')}<li><span class="star" aria-hidden="true">★</span>Consigliato</li></ul>`;
+const pbar=(n,t)=>`<div class="pbar" role="img" aria-label="${n} su ${t}"><i style="width:${t?Math.round(100*n/t):0}%"></i></div>`;
+function infoHtml(g,pl){
+ const C=P.corso(),all=P.satelliti(),lit=all.filter(s=>P.satState(s)==='acceso').length;
+ if(ui.lvl==='pianeta'){
+  const L=P.satelliti(pl),pl_lit=L.filter(s=>P.satState(s)==='acceso').length;
+  return `<div class="card info"><div class="kick">Pianeta</div><h2>${esc(pl.nome)}</h2>
+   <p class="mut">${L.length} satelliti. Le linee uniscono quelli che hanno strutture in comune: impararle in uno fa avanzare anche l'altro.</p>
+   ${pbar(pl_lit,L.length)}<p class="pn">${pl_lit} accesi su ${L.length}</p>
+   <ul class="sl">${L.map(s=>srow(s,g)).join('')}</ul>${legend()}</div>`;
+ }
+ if(ui.lvl==='universo')return `<div class="card info"><div class="kick">Universo</div><h2>I corsi</h2>
+  <p class="mut">Ogni corso è un sistema solare: i pianeti sono le regioni del corpo, i satelliti le zone da studiare. Per ora c'è ${esc(C.nome)}; gli altri arriveranno dopo.</p>
+  ${pbar(lit,all.length)}<p class="pn">${lit} satelliti accesi su ${all.length}</p></div>`;
+ return `<div class="card info"><div class="kick">Sistema</div><h2>${esc(C.nome)}</h2>
+  <p class="mut">${P.pianeti().length} pianeti e ${all.length} satelliti, tutti aperti: parti dalla regione che stai studiando a lezione. Tocca un pianeta per vedere i suoi satelliti.</p>
+  ${pbar(lit,all.length)}<p class="pn">${lit} satelliti accesi su ${all.length}</p>${legend()}</div>`;
 }
 function universeSvg(){
  const C=P.corso(),lit=P.satelliti().filter(s=>P.satState(s)==='acceso').length,n=P.satelliti().length;
- return `<svg class="map" viewBox="0 0 360 260" role="group" aria-label="Universo dei corsi">
-  <g class="enter"><a href="#" data-p="lvl" data-lvl="sistema" role="button" aria-label="${esc(C.nome)}: ${lit} satelliti accesi su ${n}">
-  <circle cx="180" cy="110" r="60" class="hit"/><circle cx="180" cy="110" r="44" class="sun"/>${svgText(180,190,C.nome,'lab',22)}<text x="180" y="224" text-anchor="middle" class="wd">${lit}/${n} satelliti accesi</text></a></g>
-  <text x="180" y="250" text-anchor="middle" class="wd">Gli altri corsi arriveranno dopo.</text></svg>`;
+ // gli altri corsi della specifica (fase 6), spenti e non toccabili
+ const altri=[['Neuroanatomia','#a78bfa',270,90],['Cuore e vasi','#f87171',90,250],['Respiratorio','#60a5fa',270,250]];
+ return `${svgOpen(340,'Universo dei corsi')}<g class="enter">
+  <a href="#" data-p="lvl" data-lvl="sistema" role="button" aria-label="${esc(C.nome)}: ${lit} satelliti accesi su ${n}">
+  <circle cx="90" cy="90" r="56" class="hit"/>${sun(90,90,34)}${svgText(90,150,C.nome,'lab',20)}<text x="90" y="${150+14*lines(C.nome,20).length}" text-anchor="middle" class="wd">${lit}/${n} accesi</text></a>
+  ${altri.map(([t,c,x,y])=>`<g class="off" aria-hidden="true"><circle cx="${x}" cy="${y}" r="30" fill="${c}" opacity=".22"/><circle cx="${x}" cy="${y}" r="22" fill="${c}" opacity=".55"/>${svgText(x,y+46,t,'lab dim',16)}<text x="${x}" y="${y+60}" text-anchor="middle" class="wd">in arrivo</text></g>`).join('')}
+  </g><text x="12" y="330" class="wd">Tocca un corso</text></svg>`;
 }
 function systemSvg(g){
  // posizioni fisse: le etichette dei pianeti nella metà alta stanno sopra il pianeta, così non coprono il sole
@@ -78,33 +117,39 @@ function systemSvg(g){
  const bodies=L.map((p,i)=>{const r=R[i%4],a=ang[i%4]*Math.PI/180,x=cx+r*Math.cos(a),y=cy+r*Math.sin(a),up=y<cy;
   const ss=P.satelliti(p),lit=ss.filter(s=>P.satState(s)==='acceso').length,orb=ss.filter(s=>P.satState(s)!=='nuovo').length,nl=lines(p.nome,14).length;
   const wd=`${lit}/${ss.length} accesi${orb>lit?` · ${orb-lit} in orbita`:''}`;
-  const ty=up?y-30-14*nl:y+32,wy=up?y-26:y+32+14*nl;
+  const ty=up?y-32-14*nl:y+34,wy=up?y-28:y+34+14*nl;
   return `<a href="#" data-p="planet" data-id="${esc(p.id)}" role="button" aria-label="${esc(p.nome)}: ${lit} satelliti accesi su ${ss.length}${p===gp?', consigliato':''}">
-   <circle cx="${x}" cy="${y}" r="26" class="hit"/><circle cx="${x}" cy="${y}" r="17" class="pl pl${i}"/>${p===gp?`<text x="${x+16}" y="${y-12}" class="star" aria-hidden="true">★</text>`:''}
+   <circle cx="${x}" cy="${y}" r="28" class="hit"/>${halo(x,y,26,PC[i%4][1])}<circle cx="${x}" cy="${y}" r="18" fill="url(#gp${i%4})"/>${p===gp?`<text x="${x+15}" y="${y-13}" class="star" aria-hidden="true">★</text>`:''}
    ${svgText(x,ty,p.nome,'lab',14)}<text x="${x}" y="${wy}" text-anchor="middle" class="wd">${wd}</text></a>`;}).join('');
- return `<svg class="map" viewBox="0 0 360 400" role="group" aria-label="Sistema: ${esc(P.corso().nome)}"><g class="enter">${orbits}<circle cx="${cx}" cy="${cy}" r="22" class="sun"/>${bodies}</g></svg>
-  <p class="mut">Tocca un pianeta per vedere i suoi satelliti. ★ è la stella guida: il passo consigliato.</p>`;
+ return `${svgOpen(400,'Sistema: '+P.corso().nome)}<g class="enter">${orbits}${sun(cx,cy,24)}${bodies}</g><text x="12" y="390" class="wd">Tocca un pianeta</text></svg>`;
 }
 // satelliti dello stesso pianeta che condividono strutture (linee sulla mappa)
 function shared(a,b){const set=x=>new Set(P.passi(x).flatMap(ps=>Array.isArray(ps.strutture)?ps.strutture:[]));const A=set(a);for(const id of set(b))if(A.has(id))return true;return false;}
-function planetSvg(pl,g){
- const L=P.satelliti(pl),n=L.length,cx=180,cy=190,r=n>4?125:115;
+// satellite: acceso = pieno dorato, in orbita = anello verde acqua, da iniziare = pieno grigio con bordo (forma diversa oltre al colore)
+function satBody(st,x,y,r,sel){
+ const ring=sel?`<circle cx="${x}" cy="${y}" r="${r+7}" class="selr"/>`:'';
+ if(st==='acceso')return `${ring}<circle cx="${x}" cy="${y}" r="${r+8}" fill="url(#ghalo)"/><circle cx="${x}" cy="${y}" r="${r}" fill="url(#glit)"/>`;
+ if(st==='orbita')return `${ring}<circle cx="${x}" cy="${y}" r="${r}" fill="#121833"/><circle cx="${x}" cy="${y}" r="${r-2}" class="sy orb" stroke-width="4"/>`;
+ return `${ring}<circle cx="${x}" cy="${y}" r="${r-2}" fill="url(#goff)" stroke="#9aa5cf" stroke-width="1.5"/>`;
+}
+function planetSvg(pl,g,selSat){
+ const L=P.satelliti(pl),n=L.length,cx=180,cy=190,r=n>4?125:115,pi=P.pianeti().indexOf(pl);
  const pos=L.map((s,i)=>{const a=(-90+i*360/n)*Math.PI/180;return [cx+r*Math.cos(a),cy+r*Math.sin(a)];});
  const links=[];for(let i=0;i<n;i++)for(let j=i+1;j<n;j++)if(shared(L[i],L[j]))links.push(`<line x1="${pos[i][0]}" y1="${pos[i][1]}" x2="${pos[j][0]}" y2="${pos[j][1]}" class="link"/>`);
  const bodies=L.map((s,i)=>{const [x,y]=pos[i],st=P.satState(s),done=P.passi(s).filter(P.stepDone).length,tot=P.passi(s).length;
-  return `<a href="#" data-p="sat" data-id="${esc(s.id)}" role="button" aria-label="${esc(s.nome)}: ${P.STATI[st]}, ${done} passi fatti su ${tot}${s===g.sat?', consigliato':''}">
-   <circle cx="${x}" cy="${y}" r="26" class="hit"/><g transform="translate(${x} ${y})">${sym(st,15)}</g>${s===g.sat?`<text x="${x+16}" y="${y-12}" class="star" aria-hidden="true">★</text>`:''}
-   ${svgText(x,y+30,s.nome,'lab',15)}<text x="${x}" y="${y+30+14*lines(s.nome,15).length}" text-anchor="middle" class="wd">${P.STATI[st]} · ${done}/${tot}</text></a>`;}).join('');
- return `<svg class="map" viewBox="0 0 360 400" role="group" aria-label="Pianeta ${esc(pl.nome)}"><g class="enter"><circle cx="${cx}" cy="${cy}" r="${r}" class="orbit"/>${links.join('')}
-  <circle cx="${cx}" cy="${cy}" r="30" class="pl pl${P.pianeti().indexOf(pl)}"/>${svgText(cx,cy+4,pl.nome,'lab in',12)}${bodies}</g></svg>
-  <p class="mut">Le linee uniscono i satelliti che hanno strutture in comune: impararle in uno fa avanzare anche l'altro.</p>`;
+  return `<a href="#" data-p="sat" data-id="${esc(s.id)}" role="button"${s===selSat?' aria-current="true"':''} aria-label="${esc(s.nome)}: ${P.STATI[st]}, ${done} passi fatti su ${tot}${s===g.sat?', consigliato':''}">
+   <circle cx="${x}" cy="${y}" r="28" class="hit"/>${satBody(st,x,y,15,s===selSat)}${s===g.sat?`<text x="${x+14}" y="${y-13}" class="star" aria-hidden="true">★</text>`:''}
+   ${svgText(x,y+32,s.nome,'lab',15)}<text x="${x}" y="${y+32+14*lines(s.nome,15).length}" text-anchor="middle" class="wd">${P.STATI[st]} · ${done}/${tot}</text></a>`;}).join('');
+ return `${svgOpen(400,'Pianeta '+pl.nome)}<g class="enter"><circle cx="${cx}" cy="${cy}" r="${r}" class="orbit"/>${links.join('')}
+  ${halo(cx,cy,44,PC[pi%4][1])}<circle cx="${cx}" cy="${cy}" r="34" fill="url(#gp${pi%4})"/>${svgText(cx,cy+4-7*(lines(pl.nome,12).length-1),pl.nome,'lab in',12)}${bodies}</g><text x="12" y="390" class="wd">Tocca un satellite</text></svg>`;
 }
+const srow=(s,g)=>{const st=P.satState(s),done=P.passi(s).filter(P.stepDone).length,tot=P.passi(s).length;
+ return `<li><button class="srow" data-p="sat" data-id="${esc(s.id)}">${symIcon(st)}<span class="sn">${esc(s.nome)}${s===g.sat?' <span class="star" aria-label="consigliato">★</span>':''}</span><small>${P.STATI[st]} · ${done}/${tot} passi</small></button></li>`;};
 function listHtml(g){
- return P.pianeti().map(p=>`<h3 class="lp">🪐 ${esc(p.nome)}</h3><ul class="sl">`+P.satelliti(p).map(s=>{const st=P.satState(s),done=P.passi(s).filter(P.stepDone).length,tot=P.passi(s).length;
-  return `<li><button class="srow" data-p="sat" data-id="${esc(s.id)}">${symIcon(st)}<span class="sn">${esc(s.nome)}${s===g.sat?' <span class="star" aria-label="consigliato">★</span>':''}</span><small>${P.STATI[st]} · ${done}/${tot} passi</small></button></li>`;}).join('')+'</ul>').join('');
+ return P.pianeti().map(p=>`<h3 class="lp">🪐 ${esc(p.nome)}</h3><ul class="sl">`+P.satelliti(p).map(s=>srow(s,g)).join('')+'</ul>').join('');
 }
 function satHtml(sat,g){
- const st=P.satState(sat),L=P.passi(sat),caso=P.casoOf(sat);
+ const st=P.satState(sat),L=P.passi(sat),caso=P.casoOf(sat),pl=P.planetOf(sat);
  const steps=L.map((ps,i)=>{
   const open=P.stepOpen(sat,ps),done=P.stepDone(ps),nd=P.node(ps.id),use=P.usable(ps),stars=nd?.stelle||0,isG=ps===g.ps&&sat===g.sat;
   const prev=L.slice(0,i).filter(p=>!P.stepDone(p)).pop();
@@ -118,13 +163,14 @@ function satHtml(sat,g){
     (done?'':`<button class="btn alt" data-p="go" data-id="${esc(ps.id)}" data-k="prova"${pv?' disabled':''}>Lo so già: mettimi alla prova</button>${pv?'<small class="mut">Prova già fatta oggi: riprova domani.</small>':''}`);
   }
   const pct=ps.tipo==='progetto'?'':` · ${Math.round(P.stepPct(ps)*use.length)}/${use.length} a maestria 2`;
-  return `<li class="step ${i%2?'zr':'zl'}${done?' done':''}${open?'':' lock'}"><div class="sc" aria-hidden="true">${done?'✓':open?ps.n:'🔒'}</div>
+  return `<li class="step ${i%2?'zr':'zl'}${done?' done':''}${open?' open':' lock'}${isG?' guide':''}"><div class="sc" aria-hidden="true">${done?'✓':open?ps.n:'🔒'}</div>
    <div class="sb"><b>${ps.n}. ${esc(ps.nome)}${isG?' <span class="star" aria-label="consigliato">★</span>':''}</b><small>${PROB[ps.tipo]||''}</small>
    <small class="mut">${state}${pct}${stars?` · <span aria-label="${stars} stelle su 3">${'⭐'.repeat(stars)}</span>`:''}</small>${act}</div></li>`;
  }).join('');
- const skip=sat.passi.filter(p=>p.salta).map(p=>p.nome).join(', ');
- return `<div class="sath">${symIcon(st)}<div><div class="h">${esc(sat.nome)}</div><div class="mut">${P.STATI[st]} · ${L.filter(P.stepDone).length}/${L.length} passi fatti</div></div></div>
-  ${skip?`<p class="mut">Passi saltati in questo satellite (non ci sono strutture): ${esc(skip)}.</p>`:''}<ol class="steps">${steps}</ol>`;
+ const skip=sat.passi.filter(p=>p.salta).map(p=>p.nome).join(', '),nd=L.filter(P.stepDone).length;
+ return `<div class="card info sat"><div class="kick">${esc(pl.nome)} · satellite</div><div class="sath"><h2>${esc(sat.nome)}</h2><span class="badge s-${st}">${symIcon(st)}${P.STATI[st]} · ${nd}/${L.length}</span></div>
+  ${pbar(nd,L.length)}
+  ${skip?`<p class="mut">Passi saltati in questo satellite (non ci sono strutture): ${esc(skip)}.</p>`:''}<ol class="steps">${steps}</ol></div>`;
 }
 function glossary(){
  const G=[['Pianeta','una regione del corpo (arto inferiore, colonna e tronco…)'],['Satellite','una zona da studiare in 6 passi, come un piccolo progetto'],

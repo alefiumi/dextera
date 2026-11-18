@@ -9,7 +9,7 @@
      stanno in una cache a parte (MODEL_CACHE), che non si riscarica a ogni nuova versione dell'app: all'installazione
      si salva la base (motore e scheletro), ogni altro strato la prima volta che viene richiesto con la rete.
      Quando cambi un file in atlante/vendor/ o un .glb, aumenta MODEL_VERSION. */
-const APP_VERSION = '65';
+const APP_VERSION = '66';
 const APP_CACHE = 'dextera-app-' + APP_VERSION;
 const CONTENT_PREFIX = 'dextera-content-';
 const MODEL_VERSION = '1';

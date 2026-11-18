@@ -251,7 +251,7 @@ dell'atlante, descrizioni dei gruppi della fonte `gruppo.fonte.*` usate quando u
   `content/` e `atlante/dati.json` sono generati: mai correggerli a mano.
 - I nomi di vasi, nervi, legamenti e visceri non sono in `testi/`: vengono da TA2 (con i refusi corretti).
 - I testi sono stati portati in `testi/` dai file generati del 18/11/2026: l'uscita rigenerata è uguale, salvo i nomi italiani di
-  10 strutture del cervello ora anche nel 3D, le descrizioni di ipofisi ed epifisi nel 3D e i gruppi e strati passati da `atlante.js` a `dati.json`.
+  19 strutture del cervello ora anche nel 3D, le descrizioni di ipofisi ed epifisi nel 3D e i gruppi e strati passati da `atlante.js` a `dati.json`.
 
 ## Storia (da BodyMania)
 Ereditato da BodyMania e già fatto: contenuti JSON versionati e moduli JS, PWA con controllo delle versioni, schema

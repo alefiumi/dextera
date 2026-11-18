@@ -90,7 +90,7 @@ export function installHint(){
  b.innerHTML='<button class="ib-go">📲 Installa l\'app sul telefono</button><button class="ib-x" aria-label="Chiudi">✕</button>';
  b.querySelector('.ib-go').onclick=()=>installNow();
  b.querySelector('.ib-x').onclick=()=>{try{localStorage.setItem(HINT,'1');}catch(e){}hideBar();};
- document.body.insertBefore(b,document.querySelector('nav')); // sopra la barra in basso, senza coprire niente
+ document.body.insertBefore(b,document.querySelector('body>nav')); // sopra la barra in basso, senza coprire niente
 }
 
 export async function promptInstall(){

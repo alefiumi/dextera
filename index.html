@@ -23,13 +23,14 @@
 <header><button id="me" aria-label="Apri il profilo" title="Profilo"></button><span id="lv"></span><div class="bar"><i id="xpb"></i></div><span id="st"></span><button id="theme" title="Sfondo scuro">🌙</button><button id="off" hidden></button></header>
 <div id="asw" class="chips seg" hidden><button class="chip on" data-av="2d">Atlante 2D</button><button class="chip" data-av="3d">Atlante 3D</button></div>
 <div id="fig"></div>
-<div id="pw"><button id="fold" aria-label="Abbassa la scheda" title="Abbassa la scheda"></button><div id="panel"><p class="mut">Caricamento…</p></div></div>
+<div id="pw" role="tabpanel" aria-labelledby="tab-path"><button id="fold" aria-label="Abbassa la scheda" title="Abbassa la scheda"></button><div id="panel"><p class="mut">Caricamento…</p></div></div>
 <div id="atlas" hidden></div>
-<nav>
-<button data-t="path" class="on"><i>🪐</i>Percorso</button>
-<button data-t="play"><i>🏋️</i>Palestra</button>
-<button data-t="atlas"><i>🦴</i>Atlante</button>
-<button data-t="soc"><i>🚀</i>Flotta</button>
+<div id="live" class="sr" aria-live="polite" aria-atomic="true"></div>
+<nav role="tablist" aria-label="Schede">
+<button data-t="path" class="on" role="tab" id="tab-path" aria-controls="pw" aria-selected="true"><i aria-hidden="true">🪐</i>Percorso</button>
+<button data-t="play" role="tab" id="tab-play" aria-controls="pw" aria-selected="false"><i aria-hidden="true">🏋️</i>Palestra</button>
+<button data-t="atlas" role="tab" id="tab-atlas" aria-controls="pw" aria-selected="false"><i aria-hidden="true">🦴</i>Atlante</button>
+<button data-t="soc" role="tab" id="tab-soc" aria-controls="pw" aria-selected="false"><i aria-hidden="true">🚀</i>Flotta</button>
 </nav>
 </body>
 </html>

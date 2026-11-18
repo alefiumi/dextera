@@ -7,7 +7,8 @@ import {renderMenu,clearGhosts,startGame,nextQ,answerFind,answerMusc,answerBridg
 import {placeAttempt,freeDrop} from './puzzle.js';
 import {renderProg} from './progress.js';
 import {renderSocial,loadSocial,setSocialOpen} from './social.js';
-import {renderPath} from './path.js';
+import {renderPath,initPath,pathClick,pathChange,pathSubmit} from './path.js';
+import {lessonTap} from './lezione.js';
 import {showInstall,promptInstall,installNow} from './install.js';
 
 export function useMod(id){
@@ -45,8 +46,9 @@ window.addEventListener('message',e=>{
 /* Schede: Percorso (path), Palestra (play, l'ex Gioca), Atlante (atlas: 2D o 3D), Flotta (soc, l'ex Amici).
    Il Profilo (prog) non ha una scheda: si apre toccando la foto in alto (#me). */
 export function setTab(t){
- app.tab=t;document.body.classList.toggle('pg',t==='prog'||t==='soc'||t==='path'); // percorso, profilo e flotta: tutto lo schermo, senza figura
- document.querySelectorAll('nav button').forEach(b=>b.classList.toggle('on',b.dataset.t===t));
+ app.tab=t;document.body.classList.toggle('pg',t==='prog'||t==='soc'||(t==='path'&&!app.L)); // percorso (fuori dalla lezione), profilo e flotta: tutto lo schermo, senza figura
+ document.querySelectorAll('body>nav button').forEach(b=>{b.classList.toggle('on',b.dataset.t===t);b.setAttribute('aria-selected',b.dataset.t===t);});
+ if(t!=='prog')$('pw').setAttribute('aria-labelledby','tab-'+t);
  $('me').classList.toggle('on',t==='prog');
  $('asw').hidden=t!=='atlas';$('asw').querySelectorAll('[data-av]').forEach(b=>b.classList.toggle('on',b.dataset.av===app.av));
  const a3=t==='atlas'&&app.av==='3d';showAtlas(a3);if(a3)return;
@@ -61,7 +63,7 @@ function setFold(f){$('pw').classList.toggle('fold',f);const t=f?'Rialza la sche
 try{setFold(!!localStorage.getItem(FOLD));}catch(e){setFold(false);}
 $('fold').addEventListener('click',()=>setFold(!$('pw').classList.contains('fold')));
 document.addEventListener('click',e=>{if(!e.target.closest('#vmenu,[data-mm]'))closeViewMenu();});
-document.querySelector('nav').addEventListener('click',e=>{const b=e.target.closest('button');if(b)setTab(b.dataset.t);});
+document.querySelector('body>nav').addEventListener('click',e=>{const b=e.target.closest('button');if(b)setTab(b.dataset.t);});
 $('fig').addEventListener('click',e=>{
  const zb=e.target.closest('.zc button');
  if(zb){const k=zb.dataset.z,VB=app.VB;if(k==='reset')resetZoom(true);else zoomAt(k==='in'?1.5:1/1.5,VB.x+VB.w/2,VB.y+VB.h/2);return;}
@@ -92,7 +94,8 @@ function tapAt(x,y){
  // sid: struttura singola toccata; con i gruppi la voce è il suo gruppo
  if(app.tab==='play'&&app.G&&app.G.mode==='build'){if(app.G.sel)freeDrop(x,y);return;} // Componi: si mette il pezzo scelto dove si tocca
  const G=app.G,g=app.tab==='play'&&G&&G.mode==='puzzle'&&G.sel?slotAt(x,y,G.sel):boneAt(x,y);if(!g)return;const sid=g.dataset.id;
- if(app.tab==='atlas')selectBone(itemOf(sid));
+ if(app.tab==='path'&&app.L)lessonTap(sid); // lezione del percorso: sempre la struttura singola
+ else if(app.tab==='atlas')selectBone(itemOf(sid));
  else if(app.tab==='play'&&G){
   if(G.mode==='puzzle')placeAttempt(itemOf(sid));
   else if(G.cur&&G.cur.t==='find')answerFind(sid);
@@ -100,6 +103,7 @@ function tapAt(x,y){
  }
 }
 $('panel').addEventListener('click',e=>{
+ if(app.tab==='path'){pathClick(e);return;} // scheda Percorso e lezioni: path.js e lezione.js
  const t=e.target.closest('button,.row');if(!t)return;
  const G=app.G;
  if(t.classList.contains('mc')&&t.dataset.sb){selectBone(t.dataset.sb);focusItem(t.dataset.sb,20);}
@@ -118,3 +122,9 @@ $('panel').addEventListener('click',e=>{
  else if(t.classList.contains('row')){app.av='2d';if(t.dataset.mod&&t.dataset.mod!==app.MOD.id){app.tab='atlas';useMod(t.dataset.mod);}setTab('atlas');selectBone(t.dataset.id);}
  else if(t.dataset.go){if(t.dataset.go==='atlas')app.av='2d';setTab(t.dataset.go);}
 });
+// scheda Percorso: scelta dell'obiettivo del giorno e risposte scritte delle lezioni
+$('panel').addEventListener('change',e=>{if(app.tab==='path')pathChange(e);});
+// mappa del percorso: i corpi celesti (link SVG con role=button) si aprono anche con Invio e Spazio
+$('panel').addEventListener('keydown',e=>{const a=(e.key==='Enter'||e.key===' ')&&e.target.closest?.('svg a[role=button]');if(a){e.preventDefault();a.dispatchEvent(new MouseEvent('click',{bubbles:true}));}});
+$('panel').addEventListener('submit',e=>{if(app.tab==='path')pathSubmit(e);});
+initPath({useMod,setTab});

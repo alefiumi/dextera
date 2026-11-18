@@ -14,7 +14,7 @@ export const setSocialOpen=f=>{isOpen=f;};
 const redraw=()=>{if(isOpen())renderSocial();navDot();};
 
 // pallino sulla scheda quando ci sono richieste di amicizia in attesa
-function navDot(){const b=document.querySelector('nav button[data-t="soc"]');if(b)b.classList.toggle('dot',!!(A.user&&SO.uid===A.user.id&&SO.rel.inc.length));}
+function navDot(){const b=document.querySelector('body>nav button[data-t="soc"]');if(b)b.classList.toggle('dot',!!(A.user&&SO.uid===A.user.id&&SO.rel.inc.length));}
 
 // la propria riga usa gli XP del dispositivo (il server li riceve qualche secondo dopo)
 function mine(rows){

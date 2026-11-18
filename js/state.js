@@ -33,11 +33,12 @@ try{Object.assign(S,JSON.parse(localStorage.getItem(KEY)||'{}'));}catch(e){}
 // riparte da zero sul dispositivo (si entra con un altro account e si sceglie di usare i suoi progressi); niente invio
 export function resetLocal(){
  for(const k of Object.keys(S))delete S[k];Object.assign(S,blank());
- try{localStorage.setItem(KEY,JSON.stringify(S));localStorage.removeItem(QKEY);}catch(e){}
+ try{localStorage.setItem(KEY,JSON.stringify(S));localStorage.removeItem(QKEY);localStorage.removeItem('dextera-segnalazioni');}catch(e){}
 }
 // dopo ogni salvataggio l'account (se c'è) invia i progressi: account.js registra la funzione, qui niente import circolari
-const afterSave=[];export const onSave=f=>{afterSave.push(f);};
-export const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(S));}catch(e){}afterSave.forEach(f=>f());};
+// prima di ogni salvataggio: conti del giorno (XP, obiettivo, serie) in percorso.js
+const afterSave=[],beforeSave=[];export const onSave=f=>{afterSave.push(f);};export const onBeforeSave=f=>{beforeSave.push(f);};
+export const save=()=>{beforeSave.forEach(f=>f());try{localStorage.setItem(KEY,JSON.stringify(S));}catch(e){}afterSave.forEach(f=>f());};
 // partite finite in attesa di invio al server (solo con un account; senza account restano qui e non vanno da nessuna parte)
 const QKEY='dextera-queue';
 export const queue={
@@ -50,8 +51,10 @@ function recordGame(r){
  const s=S.stats;s.games=(s.games||0)+1;if(r.total>0&&r.score===r.total)s.perfect=(s.perfect||0)+1;
  const k=r.module==='3d'?'3d:'+r.mode:r.mode;(s.modes||(s.modes={}))[k]=(s.modes[k]||0)+1;(s.mods||(s.mods={}))[r.module]=1;
 }
-const ymd=d=>d.getFullYear()+'-'+(d.getMonth()+1)+'-'+d.getDate();
-export function touchStreak(){const t=ymd(new Date());if(S.last===t)return;S.streak=(S.last===ymd(new Date(Date.now()-864e5)))?S.streak+1:1;S.last=t;}
+export const ymd=d=>d.getFullYear()+'-'+(d.getMonth()+1)+'-'+d.getDate();
+// La serie si calcola prima di ogni salvataggio (dayTick in percorso.js): un giorno vale con almeno 30 XP (sezione 6).
+// Resta per i giochi che la chiamavano a ogni risposta.
+export function touchStreak(){}
 const TITLES=['Matricola','Tirocinante','Studente di fisio','Terapista junior','Terapista esperto','Maestro di anatomia'];
 export const level=()=>{const L=Math.floor(Math.sqrt(S.xp/30))+1;return {L,title:TITLES[Math.min(TITLES.length-1,L-1)]};};
 // foto (o iniziale) in alto a sinistra: apre il Profilo

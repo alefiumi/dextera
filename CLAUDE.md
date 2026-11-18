@@ -36,7 +36,7 @@ Dove questo file e la specifica differiscono, vale la specifica.
 - **Fase 0 – Fondazione e contenuti verificabili** (in corso, niente SQL): nome, icone e manifest; chiavi e cache
   `dextera-`; barra a 4 schede; testi in `testi/`; `content/mappa.json`; pagina `revisione/`.
 - Fase 1 – Percorso minimo (SQL: path_progress, dextera_settings, error_reports). Fasi 2–7: vedi la specifica.
-- GitHub Pages si attiva (ramo `main`, cartella radice) solo quando chiavi e cache sono separate e verificate.
+- GitHub Pages attivo (ramo `main`, cartella radice): online su `alefiumi.github.io/dextera`.
 
 ## Situazione al 20/11/2026
 - **Online** su `alefiumi.github.io/bodymania`: GitHub Pages pubblica dal branch `pwa`. App `APP_VERSION` 63, contenuti
@@ -51,7 +51,7 @@ Dove questo file e la specifica differiscono, vale la specifica.
   dalle password trapelate (solo piani a pagamento). Query Performance azzerato il 20/11: le query dell'app stavano a 2–4 ms.
 - **Accesso**: email e password (conferma dell'email attiva, minimo 8 caratteri anche sul server) e Google (client OAuth su
   Google Cloud, progetto "BodyMania", app pubblicata; Site URL e redirect `https://alefiumi.github.io/bodymania/`;
-  per Dextera l'autore deve aggiungere `https://alefiumi.github.io/dextera/` nei Redirect URLs di Supabase).
+  per Dextera `https://alefiumi.github.io/dextera/` è nei Redirect URLs di Supabase; accesso con Google provato dall'autore).
   L'account dell'autore è `alessandro.fiumicelli@gmail.com` (Google più password); il vecchio `alefiumi42` è stato cancellato.
 - **Ambiente cloud**: l'ambiente "bodymania" raggiunge solo l'host del progetto Supabase (prove dell'API con la chiave pubblica,
   nessuna chiave salvata). Nel container c'è PostgreSQL 16 per provare le migrazioni con un finto schema `auth`.

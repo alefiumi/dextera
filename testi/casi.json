@@ -1,5 +1,5 @@
 {
- "version": 1,
+ "version": 2,
  "tipo": "casi",
  "nota": "Casi clinici dei moduli 2D e dei giochi 3D. muscolo / struttura: la risposta giusta sulla figura.",
  "campi": {"indizio_1": "Indizio 1", "indizio_2": "Indizio 2", "indizio_3": "Indizio 3", "risposta": "Risposta giusta", "opzioni": "Opzioni", "spiegazione": "Spiegazione"},
@@ -291,6 +291,78 @@
    "risposta": {"valore": "Corpo calloso", "fonte": "AI", "stato": "da verificare", "verifica": null},
    "opzioni": {"valore": ["Corpo calloso", "Talamo", "Ponte", "Epifisi (ghiandola pineale)"], "fonte": "AI", "stato": "da verificare", "verifica": null},
    "spiegazione": {"valore": "Dopo callosotomia i due emisferi si scambiano meno informazioni.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "caso.cuore.t1", "modulo": "cuore", "caso": "t1", "struttura": "c.anterior-interventricular-artery", "dati": {
+   "indizio_1": {"valore": "Uomo di 58 anni, fumatore: dolore al petto oppressivo da 40 minuti, irradiato al braccio sinistro.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "indizio_2": {"valore": "L'ECG mostra il sopraslivellamento del tratto ST nelle derivazioni anteriori (V1-V4).", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "indizio_3": {"valore": "È occluso il ramo che scende nel solco interventricolare anteriore.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "risposta": {"valore": "Ramo interventricolare anteriore", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "opzioni": {"valore": ["Ramo interventricolare anteriore", "Arteria coronaria destra", "Ramo circonflesso", "Seno coronario"], "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "spiegazione": {"valore": "È l'infarto anteriore: il ramo interventricolare anteriore (discendente anteriore) irrora la parete anteriore del ventricolo sinistro e i due terzi anteriori del setto.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "caso.cuore.t4", "modulo": "cuore", "caso": "t4", "struttura": "arterie-polmonari", "dati": {
+   "indizio_1": {"valore": "Donna di 45 anni dopo un lungo viaggio in aereo: dispnea improvvisa, dolore toracico e tachicardia.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "indizio_2": {"valore": "Ha un polpaccio gonfio e dolente da qualche giorno.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "indizio_3": {"valore": "Un trombo è arrivato nei vasi che portano il sangue dal cuore destro ai polmoni.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "risposta": {"valore": "Arterie polmonari", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "opzioni": {"valore": ["Arterie polmonari", "Vene polmonari", "Arterie coronarie", "Aorta e suoi rami"], "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "spiegazione": {"valore": "È un'embolia polmonare: il trombo parte dalle vene profonde della gamba, attraversa il cuore destro e si ferma nelle arterie polmonari.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "caso.cuore.t5", "modulo": "cuore", "caso": "t5", "struttura": "c.left-atrium", "dati": {
+   "indizio_1": {"valore": "Uomo di 66 anni con fibrillazione atriale non trattata: improvvisa paralisi del braccio destro e difficoltà a parlare.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "indizio_2": {"valore": "Nella fibrillazione la contrazione di una camera è inefficace e il sangue ristagna.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "indizio_3": {"valore": "Il trombo si è formato nell'auricola della camera che riceve le vene polmonari.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "risposta": {"valore": "Atrio sinistro", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "opzioni": {"valore": ["Atrio sinistro", "Atrio destro", "Ventricolo destro", "Ventricolo sinistro"], "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "spiegazione": {"valore": "Il trombo dell'auricola sinistra passa nel ventricolo sinistro e nell'aorta e può raggiungere le arterie del cervello (ictus cardioembolico).", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "caso.cuore.t6", "modulo": "cuore", "caso": "t6", "struttura": "aorta", "dati": {
+   "indizio_1": {"valore": "Uomo di 50 anni con dolore toracico lacerante, irradiato tra le scapole.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "indizio_2": {"valore": "La pressione è diversa tra il braccio destro e il sinistro.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "indizio_3": {"valore": "Si è lacerata la parete del grande vaso che esce dal ventricolo sinistro.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "risposta": {"valore": "Aorta e suoi rami", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "opzioni": {"valore": ["Aorta e suoi rami", "Arterie polmonari", "Vene cave e azygos", "Arterie coronarie"], "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "spiegazione": {"valore": "È una dissezione aortica: il sangue entra nella parete dell'aorta e può chiudere l'origine dei suoi rami (per questo cambia la pressione tra le braccia).", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "caso.cuore.t7", "modulo": "cuore", "caso": "t7", "struttura": "c.right-ventricle", "dati": {
+   "indizio_1": {"valore": "Donna di 72 anni con caviglie gonfie, fegato ingrossato e vene del collo turgide.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "indizio_2": {"valore": "Ha una lunga storia di bronchite cronica ostruttiva (BPCO).", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "indizio_3": {"valore": "Si è sfiancato il ventricolo che pompa contro la resistenza dei polmoni.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "risposta": {"valore": "Ventricolo destro", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "opzioni": {"valore": ["Ventricolo destro", "Ventricolo sinistro", "Atrio sinistro", "Aorta ascendente"], "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "spiegazione": {"valore": "È il cuore polmonare: la malattia dei polmoni alza la pressione nelle arterie polmonari e il ventricolo destro si scompensa.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "caso.polmoni.t2", "modulo": "polmoni", "caso": "t2", "struttura": "p.right-main-bronchus", "dati": {
+   "indizio_1": {"valore": "Bambino di 3 anni: tosse improvvisa mentre mangiava arachidi, poi respiro sibilante.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "indizio_2": {"valore": "Alla radiografia un polmone è iperespanso per un effetto valvola.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "indizio_3": {"valore": "Il corpo estraneo è finito nel bronco più corto, largo e verticale.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "risposta": {"valore": "Bronco principale destro", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "opzioni": {"valore": ["Bronco principale destro", "Bronco principale sinistro", "Trachea", "Bronco lobare superiore sinistro"], "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "spiegazione": {"valore": "Il bronco principale destro è più verticale e largo del sinistro: i corpi estranei inalati ci finiscono più spesso.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "caso.polmoni.t3", "modulo": "polmoni", "caso": "t3", "struttura": "p.middle-lobe-of-right-lung", "dati": {
+   "indizio_1": {"valore": "Donna di 70 anni con febbre e tosse: all'auscultazione crepitii davanti, sotto la quarta costa a destra.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "indizio_2": {"valore": "La radiografia di lato mostra un'opacità tra la scissura orizzontale e quella obliqua.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "indizio_3": {"valore": "È colpito il lobo che c'è solo a destra.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "risposta": {"valore": "Lobo medio del polmone destro", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "opzioni": {"valore": ["Lobo medio del polmone destro", "Lobo superiore del polmone destro", "Lobo inferiore del polmone sinistro", "Lobo superiore del polmone sinistro"], "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "spiegazione": {"valore": "Il lobo medio sta tra scissura orizzontale e obliqua, davanti: si ausculta sulla parete anteriore destra.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "caso.polmoni.t8", "modulo": "polmoni", "caso": "t8", "struttura": "p.superior-lobe-of-right-lung", "dati": {
+   "indizio_1": {"valore": "Uomo di 62 anni, forte fumatore: dolore alla spalla e al braccio destro, lungo il lato ulnare.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "indizio_2": {"valore": "Ha la palpebra destra abbassata e la pupilla destra piccola (sindrome di Horner).", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "indizio_3": {"valore": "Il tumore sta all'apice di un polmone, sopra la clavicola, vicino al plesso brachiale e alla catena simpatica.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "risposta": {"valore": "Lobo superiore del polmone destro", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "opzioni": {"valore": ["Lobo superiore del polmone destro", "Lobo medio del polmone destro", "Lobo inferiore del polmone destro", "Lobo inferiore del polmone sinistro"], "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "spiegazione": {"valore": "È un tumore di Pancoast: all'apice del lobo superiore infiltra il plesso brachiale (C8-T1) e il ganglio stellato del simpatico.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "caso.polmoni.t9", "modulo": "polmoni", "caso": "t9", "struttura": "p.superior-segmental-bronchus-of-right-lung-bvi", "dati": {
+   "indizio_1": {"valore": "Anziano allettato dopo un ictus, nutrito con difficoltà: febbre e tosse.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "indizio_2": {"valore": "Ha inalato del cibo stando sdraiato sulla schiena.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "indizio_3": {"valore": "Da supini il primo segmento in basso e dietro è quello in cima al lobo inferiore destro.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "risposta": {"valore": "Bronco segmentario superiore del polmone destro (BVI)", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "opzioni": {"valore": ["Bronco segmentario superiore del polmone destro (BVI)", "Bronco lobare medio", "Bronco segmentario apicale del polmone destro (BI)", "Bronco principale sinistro"], "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "spiegazione": {"valore": "Da supini il materiale inalato scende nel bronco segmentario superiore del lobo inferiore (BVI), il più posteriore: polmonite ab ingestis. Da seduti va invece nei segmenti basali.", "fonte": "AI", "stato": "da verificare", "verifica": null}
   }}
  ]
 }

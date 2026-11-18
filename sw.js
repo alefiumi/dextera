@@ -9,18 +9,18 @@
      stanno in una cache a parte (MODEL_CACHE), che non si riscarica a ogni nuova versione dell'app: all'installazione
      si salva la base (motore e scheletro), ogni altro strato la prima volta che viene richiesto con la rete.
      Quando cambi un file in atlante/vendor/ o un .glb, aumenta MODEL_VERSION. */
-const APP_VERSION = '38';
+const APP_VERSION = '64';
 const APP_CACHE = 'dextera-app-' + APP_VERSION;
 const CONTENT_PREFIX = 'dextera-content-';
 const MODEL_VERSION = '1';
 const MODEL_CACHE = 'dextera-3d-' + MODEL_VERSION;
 const APP_FILES = [
-  './', 'index.html', 'manifest.webmanifest', 'css/style.css',
+  './', 'index.html', 'privacy.html', 'termini.html', 'manifest.webmanifest', 'css/style.css', 'js/tema.js',
   'js/main.js', 'js/util.js', 'js/state.js', 'js/content.js', 'js/shapes.js', 'js/figure.js',
   'js/explore.js', 'js/game.js', 'js/puzzle.js', 'js/progress.js', 'js/ui.js', 'js/install.js',
   'js/config.js', 'js/account.js', 'js/gate.js', 'js/badges.js', 'js/social.js', 'js/path.js', 'vendor/supabase.js',
   'icons/icon-192.png', 'icons/icon-512.png', 'icons/apple-touch-icon.png',
-  'atlante/index.html', 'atlante/atlante.js', 'atlante/dati.json'
+  'atlante/index.html', 'atlante/pagina.js', 'atlante/atlante.js', 'atlante/dati.json'
 ];
 const MODEL_BASE = [
   'atlante/vendor/three.module.js', 'atlante/vendor/three.core.js',

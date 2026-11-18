@@ -1,5 +1,5 @@
 {
- "version": 1,
+ "version": 2,
  "tipo": "encefalo",
  "nota": "Strutture dell'encefalo, del midollo e delle meningi (3D e 2D). Nomi da TA2 o, dove TA2 non basta, scritti dall'AI; descrizioni dell'AI. Senza descrizione propria vale quella del gruppo della fonte (gruppi.json, gruppo.fonte.*).",
  "campi": {"nome": "Nome italiano", "latino": "Nome latino", "descrizione": "Descrizione"},
@@ -591,12 +591,13 @@
    "descrizione": {"valore": "Flocculo: lobo flocculonodulare, equilibrio e movimenti oculari (vestibolocerebello).", "fonte": "AI", "stato": "da verificare", "verifica": null}
   }},
   {"id": "encefalo.declive", "ref": "Declive", "dati": {
-   "nome": {"valore": "Declive", "fonte": "TA2", "stato": "da verificare", "verifica": null},
-   "latino": {"valore": "Declive", "fonte": "TA2", "stato": "da verificare", "verifica": null}
+   "nome": {"valore": "Declive del verme", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Declive", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Declive del verme: lobulo del lobo posteriore del cervelletto, subito dietro la fessura prima; con il folium partecipa al controllo dei movimenti oculari.", "fonte": "AI", "stato": "da verificare", "verifica": null}
   }},
   {"id": "encefalo.culmen", "ref": "Culmen", "dati": {
-   "nome": {"valore": "Culmen", "fonte": "TA2", "stato": "da verificare", "verifica": null},
-   "latino": {"valore": "Culmen", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "nome": {"valore": "Culmine del verme", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Culmen", "fonte": "AI", "stato": "da verificare", "verifica": null},
    "descrizione": {"valore": "Culmine del verme: lobo anteriore, tono e postura del tronco (spinocerebello).", "fonte": "AI", "stato": "da verificare", "verifica": null}
   }},
   {"id": "encefalo.central-lobule", "ref": "Central lobule", "dati": {

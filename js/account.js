@@ -2,7 +2,7 @@
    Con l'account i progressi locali si uniscono a quelli del server (si tiene il valore più alto) e le partite finite
    partono dalla coda locale (state.queue) quando c'è rete. La libreria si carica solo se serve.
    L'accesso si fa nella schermata di avvio (gate.js); qui ci sono le funzioni e il riquadro Account del profilo. */
-import {S,save,head,onSave,queue} from './state.js';
+import {S,save,head,onSave,queue,resetLocal} from './state.js';
 import {SUPABASE_URL,SUPABASE_KEY} from './config.js';
 
 export const configured=!!(SUPABASE_URL&&SUPABASE_KEY);
@@ -35,10 +35,12 @@ async function client(){
  await loadLib();
  A.sb=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY,{auth:{storageKey:AUTH_KEY,persistSession:true,autoRefreshToken:true,detectSessionInUrl:true,flowType:'pkce'}});
  A.sb.auth.onAuthStateChange((ev,session)=>{
-  if(ev==='PASSWORD_RECOVERY'){A.view='pw';A.msg='Scegli la nuova password.';}
-  const u=session?session.user:null,changed=(u&&u.id)!==(A.user&&A.user.id);A.user=u;
+  // link "Password dimenticata": schermata a tutto schermo per la nuova password (gate.js), non il profilo
+  if(ev==='PASSWORD_RECOVERY'){A.recovery=true;A.view='';A.msg='';}
+  const u=session?session.user:null,changed=(u&&u.id)!==(A.user&&A.user.id);A.user=u;if(changed)A.profile=null;
   if(!u){A.profile=null;onChange();return;}
-  if(changed){const l=lastAccount();setLast({uid:u.id,email:u.email||'',dirty:!!(l&&l.dirty)});setTimeout(()=>sync(true),0);} // fuori dalla callback, come chiede supabase-js
+  // "dirty" vale per l'account a cui si riferisce: entrando con un altro account non si porta dietro
+  if(changed){const l=lastAccount(),same=l&&l.uid===u.id;A.prevDirty=!!(l&&!same&&l.dirty);setLast({uid:u.id,email:u.email||'',dirty:!!(same&&l.dirty)});setTimeout(()=>sync(true),0);} // fuori dalla callback, come chiede supabase-js
  });
  return A.sb;
 }
@@ -47,15 +49,28 @@ let started=false;
 /* Avvio (chiamato dalla schermata di avvio). Restituisce:
    'ok' sessione valida e progressi sincronizzati · 'offline' sessione salvata ma niente rete (si gioca in locale)
    'expired' c'era un account ma la sessione non vale più · 'none' nessun account su questo dispositivo */
+/* Rete. online() a volte dice "senza rete" anche quando c'è (Mac con VPN o schede di rete virtuali, alcuni Chrome):
+   quando lo dice si prova davvero a raggiungere Supabase, e se risponde si considera la rete presente. */
+let netOk=false;
+export const online=()=>navigator.onLine||netOk;
+export async function checkNet(){
+ if(navigator.onLine){netOk=false;return true;}
+ if(!configured)return false;
+ try{const c=new AbortController(),t=setTimeout(()=>c.abort(),4000);await fetch(SUPABASE_URL+'/auth/v1/health',{mode:'no-cors',cache:'no-store',signal:c.signal});clearTimeout(t);netOk=true;}
+ catch(e){netOk=false;}
+ return netOk;
+}
+addEventListener('offline',()=>checkNet().then(()=>onChange()));
+addEventListener('online',()=>{netOk=false;onChange();});
 export async function startAccount(){
  if(!configured)return 'none';
  if(!started){started=true;onSave(()=>{if(lastAccount())markDirty(true);syncSoon();});addEventListener('online',()=>syncSoon(0));}
  if(!hasSession()&&!backFromOAuth())return lastAccount()?'expired':'none';
  try{const sb=await client();const {data}=await sb.auth.getSession();A.user=data.session?data.session.user:null;}
- catch(e){return navigator.onLine?'expired':'offline';}
+ catch(e){return online()?'expired':'offline';}
  if(backFromOAuth())history.replaceState(null,'',location.pathname); // toglie dall'indirizzo il codice del ritorno da Google
  if(!A.user)return lastAccount()?'expired':'none';
- if(!navigator.onLine){onChange();return 'offline';}
+ if(!online()){onChange();return 'offline';}
  // la sessione salvata può essere stata revocata (password cambiata, utente tolto): lo dice solo il server
  const {error}=await A.sb.auth.getUser();
  if(error&&(error.status===401||error.status===403||/session|jwt|not found/i.test(error.message||''))){
@@ -66,24 +81,103 @@ export async function startAccount(){
 }
 
 /* ---------- accesso ---------- */
-const ERR={'Invalid login credentials':'Email o password sbagliate.','Email not confirmed':'Conferma prima l\'email: ti abbiamo mandato un link.',
+export const CONTATTO='alessandro.fiumicelli@gmail.com';
+const ERR={'Invalid login credentials':'Email o password sbagliate.','User is banned':'Questo account è in cancellazione. Entro 30 giorni dalla richiesta puoi chiederne il ripristino scrivendo a '+CONTATTO+'.','Email not confirmed':'Conferma prima l\'email: ti abbiamo mandato un link.',
  'User already registered':'Questa email è già registrata: accedi.','Password should be at least 6 characters.':'La password deve avere almeno 6 caratteri.'};
-const it=e=>ERR[e&&e.message]||(!navigator.onLine?'Serve la connessione.':/fetch|network|load failed/i.test(e&&e.message||'')?'Server non raggiungibile: riprova tra poco.':(e&&e.message)||'Errore');
+const it=e=>ERR[e&&e.message]||(!online()?'Serve la connessione.':/fetch|network|load failed/i.test(e&&e.message||'')?'Server non raggiungibile: riprova tra poco.':(e&&e.message)||'Errore');
 async function run(f){A.busy=true;A.err='';A.msg='';onChange();try{await f();}catch(e){A.err=it(e);}A.busy=false;onChange();}
 export const signIn=(email,pw)=>run(async()=>{const {error}=await (await client()).auth.signInWithPassword({email,password:pw});if(error)throw error;A.view='';});
+// versione dell'informativa sulla privacy accettata alla registrazione (resta nei metadati dell'utente su Supabase)
+export const PRIVACY_V='2026-11-19',TERMS_V='2026-11-19'; // versioni di informativa e termini accettati
 export const signUp=(email,pw)=>run(async()=>{
- const {data,error}=await (await client()).auth.signUp({email,password:pw,options:{emailRedirectTo:location.origin+location.pathname}});if(error)throw error;
+ const {data,error}=await (await client()).auth.signUp({email,password:pw,options:{emailRedirectTo:location.origin+location.pathname,
+  data:{privacy_v:PRIVACY_V,terms_v:TERMS_V,privacy_at:new Date().toISOString()}}});if(error)throw error;
  if(!data.session)A.msg='Ti abbiamo mandato un\'email: tocca il link per confermare, poi accedi qui.';A.view=data.session?'':'login';
 });
-export const google=()=>run(async()=>{const {error}=await (await client()).auth.signInWithOAuth({provider:'google',options:{redirectTo:location.origin+location.pathname}});if(error)throw error;});
+// prompt=select_account: Google mostra sempre l'elenco degli account invece di rientrare da solo nell'ultimo usato
+export const google=()=>run(async()=>{const {error}=await (await client()).auth.signInWithOAuth({provider:'google',options:{redirectTo:location.origin+location.pathname,queryParams:{prompt:'select_account'}}});if(error)throw error;});
 export const resetPw=email=>run(async()=>{const {error}=await (await client()).auth.resetPasswordForEmail(email,{redirectTo:location.origin+location.pathname});if(error)throw error;A.msg='Se l\'email è registrata, ti arriva un link per scegliere una nuova password.';A.view='login';});
 // uscendo i progressi restano sul dispositivo; si dimentica l'account, così all'avvio non si chiede più di accedere
 export const signOut=()=>run(async()=>{
- if(lastAccount()?.dirty&&navigator.onLine)await sync(false);
- await (await client()).auth.signOut({scope:'local'});setLast(null);A.user=null;A.profile=null;A.view='';A.msg='Sei uscito: i progressi restano su questo dispositivo.';
+ // prima di uscire si inviano i progressi, ma solo se sono di questo account (con la domanda "altri progressi" aperta no)
+ const mine=!A.conflict&&!(S.owner&&A.user&&S.owner.uid!==A.user.id);
+ if(mine&&lastAccount()?.dirty&&online())await sync(false);
+ await (await client()).auth.signOut({scope:'local'});setLast(null);A.user=null;A.profile=null;A.view='';A.conflict=null;A.choice=null;A.msg='Sei uscito: i progressi restano su questo dispositivo.';
 });
-export const setNewPassword=pw=>run(async()=>{const {error}=await A.sb.auth.updateUser({password:pw});if(error)throw error;A.msg='Password cambiata.';A.view='';});
+// Password: nuova dal link di recupero (recover), cambio dal profilo (serve quella attuale, verificata con un client a parte che
+// non tocca la sessione) o aggiunta per chi è entrato con Google. Dopo il cambio si chiudono le sessioni sugli altri dispositivi.
+const PWERR={'New password should be different from the old password.':'La nuova password deve essere diversa da quella di prima.'};
+async function closeOthers(){try{await A.sb.auth.signOut({scope:'others'});}catch(e){}}
+export const recoverPassword=pw=>run(async()=>{
+ const {data,error}=await A.sb.auth.updateUser({password:pw});if(error)throw new Error(PWERR[error.message]||error.message);
+ if(data&&data.user)A.user=data.user;await closeOthers();A.recovery=false;A.msg='Password cambiata. Le sessioni aperte su altri dispositivi sono state chiuse.';
+});
+export const setNewPassword=(pw,cur)=>run(async()=>{const had=hasPassword();
+ if(had){
+  if(!cur)throw new Error('Scrivi la password attuale.');
+  const tmp=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY,{auth:{persistSession:false,autoRefreshToken:false,detectSessionInUrl:false,storageKey:'dextera-verifica'}});
+  const {error:e1}=await tmp.auth.signInWithPassword({email:A.user.email,password:cur});
+  if(e1)throw new Error(/invalid/i.test(e1.message||'')?'La password attuale non è giusta.':e1.message);
+  try{await tmp.auth.signOut({scope:'local'});}catch(e){}
+ }
+ const {data,error}=await A.sb.auth.updateUser({password:pw});if(error)throw new Error(PWERR[error.message]||error.message);if(data&&data.user)A.user=data.user;
+ if(had)await closeOthers();
+ A.msg=had?'Password cambiata. Le sessioni aperte su altri dispositivi sono state chiuse.':'Password aggiunta: ora puoi entrare anche con '+(A.user.email||'la tua email')+' e questa password.';A.view='';});
 export const setView=v=>{A.view=v;A.err='';A.msg='';onChange();};
+// scelta per i progressi di un altro account sul dispositivo (vedi sync)
+export function resolveOwner(choice){A.choice=choice;A.conflict=null;sync(true);}
+// l'account in uso ha già l'accesso con email e password?
+export const hasPassword=()=>!!(A.user&&(A.user.identities||[]).some(i=>i.provider==='email'));
+// Importa nell'account in uso i progressi del telefono (di un altro account). pw: password da aggiungere, così si entra sia con
+// Google sia con email e password. oldPw: se c'è, elimina anche il vecchio account (in cancellazione per 30 giorni): si entra
+// in quell'account con un client a parte, senza toccare la sessione in uso, e lo si cancella come farebbe lui dal profilo.
+export async function importDevice({pw,oldEmail,oldPw}){
+ const c=A.conflict;A.busy=true;A.err='';onChange();
+ try{
+  if(pw&&!hasPassword()){const {data,error}=await A.sb.auth.updateUser({password:pw});if(error)throw error;if(data&&data.user)A.user=data.user;}
+  if(oldPw){
+   const tmp=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY,{auth:{persistSession:false,autoRefreshToken:false,detectSessionInUrl:false,storageKey:'dextera-vecchio'}});
+   const {error:e1}=await tmp.auth.signInWithPassword({email:oldEmail,password:oldPw});
+   if(e1)throw new Error(/invalid/i.test(e1.message||'')?'La password del vecchio account non è giusta.':e1.message);
+   const {error:e2}=await tmp.rpc('delete_my_account');if(e2)throw e2;
+   try{await tmp.auth.signOut({scope:'local'});}catch(e){}
+  }
+  try{const {data}=await A.sb.auth.getUser();if(data&&data.user)A.user=data.user;}catch(e){}
+  A.busy=false;resolveOwner('merge');
+ }catch(e){A.busy=false;A.err=it(e);A.conflict=c;onChange();}
+}
+// collega Google all'account in uso: poi si entra con Google nello stesso account (serve "manual linking" su Supabase)
+export const hasGoogle=()=>!!(A.user&&(A.user.identities||[]).some(i=>i.provider==='google'));
+export const linkGoogle=()=>run(async()=>{
+ const {error}=await A.sb.auth.linkIdentity({provider:'google',options:{redirectTo:location.origin+location.pathname}});
+ if(error)throw new Error(/manual linking/i.test(error.message||'')?'Su Supabase va attivato il collegamento manuale degli accessi (Authentication → Sign In / Providers → "Allow manual linking").'
+  :/already/i.test(error.message||'')?'Questo account Google è già usato da un altro account Dextera: va prima cancellato quello.':error.message);
+});
+
+/* ---------- privacy: copia dei propri dati e cancellazione (GDPR, articoli 15, 17 e 20) ---------- */
+// Tutti i dati che l'app ha su questa persona: quelli del dispositivo e, con l'account, quelli del server
+// (le regole del database fanno leggere solo i propri).
+export async function myData(){
+ const out={app:'Dextera',creato_il:new Date().toISOString(),dispositivo:{progressi:S,partite_da_inviare:queue.all()}};
+ if(A.user&&A.sb&&online()){
+  const sb=A.sb,uid=A.user.id;
+  const [p,g,m,b,f]=await Promise.all([ownProfile(sb,uid),sb.from('game_results').select('*').eq('user_id',uid).order('played_at'),
+   sb.from('mastery').select('item_id,level,updated_at'),sb.from('badge_assertions').select('badge_id,issued_at').eq('user_id',uid),
+   sb.from('friendships').select('user_id,friend_id,status,created_at')]);
+  out.account={email:A.user.email,registrato_il:A.user.created_at,ultimo_accesso:A.user.last_sign_in_at,consenso_privacy:A.user.user_metadata||{},
+   profilo:p.data,partite:g.data,maestria:m.data,badge:b.data,amicizie:f.data};
+ }else if(A.user)out.account={email:A.user.email,nota:'Senza connessione: qui ci sono solo i dati del dispositivo.'};
+ return out;
+}
+// cancella l'account sul server: subito bloccato e tolto da classifiche e amicizie, cancellato per sempre dopo 30 giorni
+// (entro allora l'amministratore può ripristinarlo su richiesta), poi esce
+export const deleteAccount=()=>run(async()=>{
+ if(!online())throw new Error('Per cancellare l\'account serve la connessione.');
+ const {error}=await A.sb.rpc('delete_my_account');
+ if(error)throw new Error(/function|schema cache|does not exist/i.test(error.message||'')?'Sul server manca la funzione di cancellazione: va applicato il file supabase/migrations/20261119100000_privacy_sicurezza.sql.':error.message);
+ try{await A.sb.auth.signOut({scope:'local'});}catch(e){}
+ setLast(null);A.user=null;A.profile=null;A.deleted=true;
+});
 
 /* ---------- profilo (nome, ruolo, presentazione, foto) ---------- */
 export const NAME_RE=/^[A-Za-z0-9_.]{3,20}$/;
@@ -92,7 +186,7 @@ export const NAME_RULE='Da 3 a 20 caratteri: lettere, numeri, punto e trattino b
 export const saveProfile=f=>run(async()=>{
  if(A.user&&!NAME_RE.test(f.name||''))throw new Error(NAME_RULE);
  if(A.user&&f.name!==(A.profile&&A.profile.username)){
-  if(!navigator.onLine)throw new Error('Per cambiare il nome serve la connessione (deve essere libero).');
+  if(!online())throw new Error('Per cambiare il nome serve la connessione (deve essere libero).');
   const {error}=await A.sb.from('profiles').update({username:f.name}).eq('id',A.user.id);
   if(error)throw new Error(error.code==='23505'?'Questo nome è già preso.':error.message);
   A.profile.username=f.name;
@@ -102,7 +196,7 @@ export const saveProfile=f=>run(async()=>{
  A.msg='Profilo salvato.';
 });
 async function pushProfile(){
- if(!A.user||!navigator.onLine)return;
+ if(!A.user||!online())return;
  const p=S.prof,row={role:p.role||null,bio:p.bio||null,avatar:p.avatar||null,profile_at:new Date(p.t||Date.now()).toISOString()};
  const {error}=await A.sb.from('profiles').update(row).eq('id',A.user.id);
  if(error){A.warn='Foto, ruolo e presentazione restano solo su questo dispositivo: sul server manca l\'aggiornamento del database (file supabase/migrations/20261117120000_profilo_badge.sql).';return;}
@@ -110,6 +204,13 @@ async function pushProfile(){
 }
 
 /* ---------- sincronizzazione ---------- */
+// Il proprio profilo completo: con la funzione my_profile() (degli altri profili si leggono solo alcune colonne, file
+// 20261120090000_viste_senza_definer.sql); se sul server non c'è ancora, come prima dalla tabella.
+async function ownProfile(sb,uid){
+ const r=await sb.rpc('my_profile').maybeSingle();
+ if(r.error&&/my_profile|function|schema cache/i.test(r.error.message||''))return sb.from('profiles').select('*').eq('id',uid).single();
+ return r;
+}
 let timer=null;
 export function syncSoon(ms=3000){if(!A.user)return;clearTimeout(timer);timer=setTimeout(()=>sync(false),ms);}
 const ymdIso=s=>{if(!s)return null;const [y,m,d]=s.split('-').map(Number);return `${y}-${String(m).padStart(2,'0')}-${String(d).padStart(2,'0')}`;};
@@ -117,12 +218,21 @@ const ymdApp=s=>{if(!s)return '';const [y,m,d]=s.split('-').map(Number);return `
 const sentBadges=new Set();
 // full: all'accesso legge anche il server e unisce; poi basta inviare
 export async function sync(full){
- if(!A.user||A.syncing||!navigator.onLine)return;
+ if(!A.user||A.syncing)return;
+ if(!navigator.onLine&&!await checkNet()){onChange();return;}
  A.syncing=true;onChange();
  try{
   const sb=A.sb,uid=A.user.id;
   if(full||!A.profile){
-   const [{data:p,error:e1},{data:ms,error:e2},{data:bs}]=await Promise.all([sb.from('profiles').select('*').eq('id',uid).single(),
+   // Progressi di un altro account su questo dispositivo: non si uniscono da soli, si chiede (schermata in gate.js).
+   // fresh = questo account parte dai suoi dati sul server; merge = si uniscono i progressi del dispositivo.
+   const own=S.owner;
+   if(own&&own.uid&&own.uid!==uid){
+    if(A.choice!=='merge'&&A.choice!=='fresh'){const l=lastAccount();A.conflict={email:own.email||'un altro account',me:A.user.email||'',dirty:!!(A.prevDirty||(l&&l.uid===own.uid&&l.dirty)||queue.all().length)};A.syncing=false;onChange();return;}
+    if(A.choice==='fresh')resetLocal();
+   }
+   A.choice=null;A.conflict=null;A.prevDirty=false;
+   const [{data:p,error:e1},{data:ms,error:e2},{data:bs}]=await Promise.all([ownProfile(sb,uid),
     sb.from('mastery').select('item_id,level'),sb.from('badge_assertions').select('badge_id,issued_at').eq('user_id',uid)]);
    if(e1)throw e1;if(e2)throw e2;
    A.profile=p;
@@ -140,6 +250,7 @@ export async function sync(full){
     const {error}=await sb.from('profiles').update({username:S.prof.name}).eq('id',uid);
     if(!error)p.username=S.prof.name;
    }
+   S.owner={uid,email:A.user.email||''};
    try{localStorage.setItem('dextera-v1',JSON.stringify(S));}catch(e){} // senza save(): non deve ripartire un invio
    head();
    if((S.prof.t||0)>pt)await pushProfile();
@@ -167,7 +278,7 @@ export async function sync(full){
 }
 
 /* ---------- riquadro Account nel profilo ---------- */
-export const esc=t=>String(t??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+export const esc=t=>String(t??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const hm=d=>d.toLocaleTimeString('it',{hour:'2-digit',minute:'2-digit'});
 export function accountHtml(){
  if(!configured)return '';
@@ -175,15 +286,18 @@ export function accountHtml(){
  const last=lastAccount();
  if(A.user){
   const pend=queue.all().length,dirty=last&&last.dirty;
-  const state=A.syncing?'⏳ Sincronizzo…':!navigator.onLine?'📴 Senza connessione: i progressi si salvano qui e partono appena torna la rete.'
+  const state=A.syncing?'⏳ Sincronizzo…':!online()?'📴 Senza connessione: i progressi si salvano qui e partono appena torna la rete.'
    :dirty||pend?'⚠️ Ci sono progressi non ancora salvati online.':A.lastSync?'✅ Tutto salvato online alle '+hm(A.lastSync)+'.':'';
   return `<div class="acc"><div class="sub">Account</div><p class="mut">${esc(A.user.email||'')}</p><p class="mut">${state}${pend?' Partite in attesa: '+pend+'.':''}</p>${note}
-   ${A.view==='pw'?`<form data-acc="newpw"><input name="p" type="password" placeholder="Nuova password" autocomplete="new-password" minlength="6" required><button class="btn"${A.busy?' disabled':''}>Cambia</button></form>`:''}
-   <div class="chips"><button class="chip on" data-acc="sync"${A.syncing?' disabled':''}>🔄 Sincronizza ora</button><button class="chip" data-acc="pw">Cambia password</button><button class="chip" data-acc="out">Esci</button></div></div>`;
+   ${A.view==='pw'?`<form data-acc="newpw">${hasPassword()?'<input name="cur" type="password" placeholder="Password attuale" autocomplete="current-password" required>':`<p class="mut">Con una password entri anche con ${esc(A.user.email||'la tua email')}, oltre che con Google.</p>`}
+    <input name="p" type="password" placeholder="Nuova password (almeno 8 caratteri)" autocomplete="new-password" minlength="8" required>
+    <input name="p2" type="password" placeholder="Ripeti la nuova password" autocomplete="new-password" minlength="8" required>
+    <button class="btn"${A.busy?' disabled':''}>${hasPassword()?'Cambia password':'Aggiungi password'}</button></form>`:''}
+   <div class="chips"><button class="chip on" data-acc="sync"${A.syncing?' disabled':''}>🔄 Sincronizza ora</button><button class="chip" data-acc="pw">${hasPassword()?'Cambia password':'Aggiungi password'}</button>${hasGoogle()?'<span class="chip">✅ Google collegato</span>':'<button class="chip" data-acc="google">Collega Google</button>'}<button class="chip" data-acc="out">Esci</button></div></div>`;
  }
  if(last)return `<div class="acc"><div class="sub">Account</div><p><b>${esc(last.email)}</b></p>
-  <p class="mut">${last.dirty?'⚠️ Hai progressi salvati solo su questo dispositivo. ':''}${navigator.onLine?'Accedi di nuovo per sincronizzarli.':'Senza connessione: si salva tutto qui, sincronizzi quando torna la rete.'}</p>${note}
-  <div class="chips"><button class="chip on" data-acc="login"${navigator.onLine?'':' disabled'}>🔄 Accedi e sincronizza</button></div></div>`;
+  <p class="mut">${last.dirty?'⚠️ Hai progressi salvati solo su questo dispositivo. ':''}${online()?'Accedi di nuovo per sincronizzarli.':'Senza connessione: si salva tutto qui, sincronizzi quando torna la rete.'}</p>${note}
+  <div class="chips"><button class="chip on" data-acc="login"${online()?'':' disabled'}>🔄 Accedi e sincronizza</button></div></div>`;
  return `<div class="acc"><div class="sub">Account</div>
   <p class="mut">Stai giocando senza account: i progressi restano su questo dispositivo. Con un account li ritrovi su altri dispositivi e potrai entrare nelle classifiche con gli amici.</p>${note}
   <div class="chips"><button class="chip on" data-acc="login">Accedi o registrati</button></div></div>`;
@@ -195,11 +309,12 @@ export function wireAccount(panel,openLogin){
   A.err='';A.msg='';
   if(k==='login')openLogin();
   else if(k==='out')signOut();
+  else if(k==='google')linkGoogle();
   else if(k==='sync')sync(true);
   else{A.view=A.view==='pw'&&k==='pw'?'':k;onChange();}
  });
  panel.addEventListener('submit',e=>{
   const f=e.target.closest('form[data-acc]');if(!f)return;e.preventDefault();
-  if(f.dataset.acc==='newpw')setNewPassword(f.elements.p.value);
+  if(f.dataset.acc==='newpw'){if(f.elements.p.value!==f.elements.p2.value){A.err='Le due password nuove non coincidono.';onChange();return;}setNewPassword(f.elements.p.value,f.elements.cur?f.elements.cur.value:'');}
  });
 }

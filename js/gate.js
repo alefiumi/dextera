@@ -3,11 +3,12 @@
    Con un account la cui sessione non vale più (per esempio dopo aver giocato offline a lungo) chiede di accedere di nuovo;
    chi preferisce può continuare senza account e sincronizzare dopo dal profilo. */
 import {$,toast} from './util.js';
+import {installHint} from './install.js';
 import {S} from './state.js';
-import {account as A,configured,startAccount,addAccountListener,lastAccount,signIn,signUp,google,resetPw,setView,saveProfile,NAME_RE,NAME_RULE,esc} from './account.js';
+import {account as A,configured,startAccount,addAccountListener,lastAccount,signIn,signUp,google,resetPw,setView,saveProfile,NAME_RE,NAME_RULE,esc,resolveOwner,signOut,hasPassword,importDevice,recoverPassword,online,checkNet} from './account.js';
 
 const GUEST='dextera-guest'; // "Continua senza account" scelto: agli avvii successivi non si chiede più
-let mode='boot',reason='',fromApp=false;
+let mode='boot',reason='',fromApp=false,ownImp=false,delOld=false;
 const box=()=>$('gbody');
 const status=t=>{if(mode==='boot')box().innerHTML=`<div class="spin"></div><p class="gst">${t}</p>`;};
 const wait=ms=>new Promise(r=>setTimeout(r,ms));
@@ -15,6 +16,7 @@ const timeout=(p,ms,v)=>Promise.race([p,wait(ms).then(()=>v)]);
 
 export function closeGate(){
  mode='closed';A.err='';A.msg='';const g=$('gate');g.classList.add('out');setTimeout(()=>{if(mode==='closed')g.hidden=true;},250);
+ setTimeout(installHint,1500); // nel browser: striscia "Installa l'app sul telefono"
 }
 function show(){const g=$('gate');g.hidden=false;g.classList.remove('out');}
 
@@ -38,7 +40,8 @@ export async function boot(){
  // contenuti nuovi scaricati dal service worker mentre si è ancora qui: si ricarica subito per usarli
  navigator.serviceWorker?.addEventListener('message',e=>{if(e.data&&e.data.type==='content-updated'&&mode==='boot'){try{sessionStorage.setItem('dextera-upd',Date.now());}catch(x){}location.reload();}});
  const t0=Date.now(),settle=()=>wait(Math.max(0,500-(Date.now()-t0)));
- if(!navigator.onLine){
+ await checkNet();
+ if(!online()){
   status('Senza connessione: i progressi si salvano su questo dispositivo.');
   await timeout(startAccount(),3000,'offline');await wait(700);closeGate();return;
  }
@@ -47,7 +50,9 @@ export async function boot(){
  status(lastAccount()?'Sincronizzo i progressi…':'Quasi pronto…');
  const r=await timeout(startAccount(),15000,'offline');
  await settle();
- if(r==='ok'){if(needName()){A.err='';showName();}else closeGate();}
+ if(A.recovery)showRecovery();
+ else if(A.conflict)showOwner();
+ else if(r==='ok'){if(needName()){A.err='';showName();}else closeGate();}
  else if(r==='offline'){closeGate();if(lastAccount())toast('Server non raggiungibile: si gioca in locale, sincronizzo appena possibile.');}
  else if(r==='expired')openLogin(lastAccount()?.dirty?'dirty':'expired');
  else{let g=false;try{g=!!localStorage.getItem(GUEST);}catch(e){}if(g||!configured)closeGate();else openLogin('');}
@@ -70,13 +75,52 @@ function renderLogin(){
  const title=v==='signup'?'Crea un account':v==='reset'?'Password dimenticata':'Accedi';
  box().innerHTML=`<div class="gform"><div class="h">${title}</div>${why}${note}
   <form data-g="${v}"><input name="e" type="email" placeholder="Email" autocomplete="email" value="${esc(last&&v!=='signup'?last.email:'')}" required>
-  ${v!=='reset'?`<input name="p" type="password" placeholder="Password${v==='signup'?' (almeno 6 caratteri)':''}" autocomplete="${v==='signup'?'new-password':'current-password'}" minlength="6" required>`:''}
+  ${v!=='reset'?`<input name="p" type="password" placeholder="Password${v==='signup'?' (almeno 8 caratteri)':''}" autocomplete="${v==='signup'?'new-password':'current-password'}" minlength="${v==='signup'?8:6}" required>`:''}
+  ${v==='signup'?'<label class="cons"><input type="checkbox" name="ok" required><span>Accetto i <a href="termini.html" target="_blank" rel="noopener">termini di servizio</a>, ho letto l\'<a href="privacy.html" target="_blank" rel="noopener">informativa sulla privacy</a> e ho almeno 14 anni.</span></label>':''}
   <button class="btn"${dis}>${A.busy?'Attendi…':v==='signup'?'Crea account':v==='login'?'Accedi':'Mandami il link'}</button></form>
   ${v==='login'?'<button class="lnk" data-g="reset">Password dimenticata?</button>':''}
-  ${v!=='reset'?`<div class="or"><span>oppure</span></div><button class="btn alt wide" data-g="google"${dis}>Accedi con Google</button>`:''}
+  ${v!=='reset'?`<div class="or"><span>oppure</span></div><button class="btn alt wide" data-g="google"${dis}>Accedi con Google</button><p class="note">Continuando con Google accetti i <a href="termini.html" target="_blank" rel="noopener">termini di servizio</a>, dichiari di aver letto l'<a href="privacy.html" target="_blank" rel="noopener">informativa sulla privacy</a> e di avere almeno 14 anni.</p>`:''}
   <p class="gsw">${v==='signup'?'Hai già un account? <button class="lnk" data-g="login">Accedi</button>':v==='login'?'Non hai un account? <button class="lnk" data-g="signup">Registrati</button>':'<button class="lnk" data-g="login">Torna all\'accesso</button>'}</p>
   <button class="btn alt wide" data-g="guest">${fromApp?'Torna all\'app':'Continua senza account'}</button>
   <p class="note">${reason?'Continuando senza accedere i progressi restano su questo dispositivo: potrai sincronizzarli dal Profilo (la tua foto in alto).':'Senza account si gioca lo stesso e i progressi restano su questo dispositivo. Con l\'account li ritrovi ovunque e quelli già fatti qui si uniscono.'}</p></div>`;
+}
+
+/* ---------- nuova password dal link "Password dimenticata" ---------- */
+// Il link fa entrare nell'account: finché non si sceglie la password nuova (o si esce) l'app resta qui, a tutto schermo.
+function showRecovery(){
+ mode='recovery';show();const err=A.err?`<p class="err">${esc(A.err)}</p>`:'';
+ box().innerHTML=`<div class="gform"><div class="h">Scegli una nuova password</div>${err}
+  <p class="mut">Per <b>${esc(A.user&&A.user.email||'')}</b>. Dopo il cambio si chiudono le sessioni aperte su altri dispositivi.</p>
+  <form data-g="recover"><input name="p" type="password" placeholder="Nuova password (almeno 8 caratteri)" autocomplete="new-password" minlength="8" required>
+  <input name="p2" type="password" placeholder="Ripeti la nuova password" autocomplete="new-password" minlength="8" required>
+  <button class="btn"${A.busy?' disabled':''}>${A.busy?'Salvo…':'Salva la nuova password'}</button></form>
+  <button class="lnk" data-g="rec-out">Annulla ed esci</button></div>`;
+}
+
+/* ---------- progressi di un altro account su questo dispositivo ---------- */
+function showOwner(imp){
+ mode='owner';ownImp=!!imp;show();const c=A.conflict,dis=A.busy?' disabled':'';
+ const err=A.err?`<p class="err">${esc(A.err)}</p>`:'';
+ if(imp){ // importazione: password da aggiungere (se manca) e, facoltativo, cancellazione del vecchio account
+  box().innerHTML=`<div class="gform"><div class="h">Importa i dati del telefono</div>${err}
+   <p class="mut">XP, maestria, badge e profilo di <b>${esc(c.email)}</b> passano a <b>${esc(c.me)}</b>.</p>
+   <form data-g="own-import">
+   ${hasPassword()?'':`<p class="mut">Scegli una password: potrai entrare sia con Google sia con <b>${esc(c.me)}</b> e questa password.</p>
+    <input name="np" type="password" placeholder="Nuova password (almeno 8 caratteri)" autocomplete="new-password" minlength="8" required>`}
+   <label class="cons"><input type="checkbox" name="del"${delOld?' checked':''}><span>Elimina il vecchio account <b>${esc(c.email)}</b>: i suoi dati sono già qui. Serve la sua password.</span></label>
+   <input name="op" type="password" placeholder="Password di ${esc(c.email)}" autocomplete="current-password"${delOld?' required':' hidden'}>
+   <button class="btn"${dis}>${A.busy?'Attendi…':'Importa'}</button></form>
+   <button class="lnk" data-g="own-back">Indietro</button></div>`;
+  return;
+ }
+ box().innerHTML=`<div class="gform"><div class="h">Su questo telefono ci sono altri progressi</div>${err}
+  <p>Ci sono i progressi di <b>${esc(c.email)}</b>. Stai entrando come <b>${esc(c.me)}</b>.</p>
+  <button class="btn wide" data-g="own-imp">Importa i dati del telefono in questo account</button>
+  <p class="note">Se sono tuoi. ${hasPassword()?'':'Potrai entrare con Google e anche con email e password. '}Puoi anche eliminare il vecchio account.</p>
+  <button class="btn alt wide" data-g="own-fresh">Inizia da zero con ${esc(c.me)}</button>
+  <p class="note">Se sono di un'altra persona o vuoi tenere separati i due account. I progressi di ${esc(c.email)} restano salvati nel suo account${c.dirty?'; <b>attenzione</b>: alcuni non sono ancora stati inviati e da questo telefono andranno persi':''}.</p>
+  <button class="btn alt wide" data-g="own-google">Entra con un altro account Google</button>
+  <button class="lnk" data-g="own-out">Esci (per entrare con email e password)</button></div>`;
 }
 
 /* ---------- nome utente dopo la prima registrazione ---------- */
@@ -88,6 +132,10 @@ function showName(){
 }
 
 addAccountListener(()=>{
+ if(A.recovery){if(mode==='recovery')keep(showRecovery);else if(mode!=='boot')showRecovery();return;}
+ if(mode==='recovery'){const m=A.msg;closeGate();if(m)toast('✅ '+m);return;}
+ if(A.conflict&&mode!=='owner'&&mode!=='boot'){showOwner();return;}
+ if(mode==='owner'){if(A.conflict){keep(()=>showOwner(ownImp));return;}if(!A.user){openLogin('');return;}if(A.profile&&!A.syncing){if(needName()){A.err='';showName();}else{closeGate();toast('✅ Accesso fatto.');}}return;}
  if(mode==='login'){
   if(A.user&&A.profile&&!A.syncing){try{localStorage.removeItem(GUEST);}catch(e){}if(needName()){A.err='';showName();}else{closeGate();toast('✅ Accesso fatto: progressi sincronizzati.');}}
   else keep(renderLogin);
@@ -96,9 +144,18 @@ addAccountListener(()=>{
  }
 });
 export function wireGate(){
+ // spunta "elimina il vecchio account": mostra il campo della sua password
+ $('gate').addEventListener('change',e=>{if(e.target.name!=='del')return;delOld=e.target.checked;const op=e.target.form.elements.op;op.hidden=!delOld;op.required=delOld;if(delOld)op.focus();});
  $('gate').addEventListener('click',e=>{
   const b=e.target.closest('button[data-g]');if(!b||b.closest('form'))return;const k=b.dataset.g;
   if(k==='google')google();
+  else if(k==='own-fresh'){box().innerHTML='<div class="spin"></div><p class="gst">Sincronizzo…</p>';resolveOwner('fresh');}
+  else if(k==='own-imp'){A.err='';showOwner(true);}
+  else if(k==='rec-out'){A.recovery=false;mode='login';signOut().then(()=>{A.msg='';openLogin('');});}
+  else if(k==='own-back'){A.err='';showOwner();}
+  else if(k==='own-out'){A.conflict=null;mode='login';signOut().then(()=>{A.msg='';openLogin('');});}
+  // esce e apre subito la scelta dell'account Google (la pagina va su Google e torna qui già dentro)
+  else if(k==='own-google'){A.conflict=null;mode='login';box().innerHTML='<div class="spin"></div><p class="gst">Apro Google…</p>';signOut().then(()=>{A.msg='';google();});}
   else if(k==='guest'){if(!reason){try{localStorage.setItem(GUEST,'1');}catch(x){}}closeGate();}
   else if(k==='later')closeGate();
   else setView(k);
@@ -109,5 +166,9 @@ export function wireGate(){
   else if(k==='signup')signUp(v('e'),f.elements.p.value);
   else if(k==='reset')resetPw(v('e'));
   else if(k==='name')saveProfile({...S.prof,name:v('u')});
+  else if(k==='recover'){if(f.elements.p.value!==f.elements.p2.value){A.err='Le due password non coincidono.';showRecovery();return;}A.err='';recoverPassword(f.elements.p.value);}
+  else if(k==='own-import'){const del=f.elements.del&&f.elements.del.checked,op=f.elements.op.value;
+   if(del&&!op){A.err='Scrivi la password del vecchio account, o togli la spunta.';showOwner(true);return;}
+   const c=A.conflict;importDevice({pw:f.elements.np?f.elements.np.value:'',oldEmail:c.email,oldPw:del?op:''});}
  });
 }

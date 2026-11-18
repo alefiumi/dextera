@@ -1,0 +1,1369 @@
+{
+ "version": 1,
+ "tipo": "torace",
+ "nota": "Cuore e vasi, vie aeree e polmoni (nome inglese di Z-Anatomy in ref, organo come in torace.organo). Nomi italiani: solo dove la traduzione di TA2 è sbagliata. Descrizioni scritte dall'AI; quelle con fonte Z-Anatomy dicono da quale vaso nasce o dove sbocca un vaso secondo la gerarchia della fonte. solo2d: testo usato solo nel modulo 2D.",
+ "campi": {"nome": "Nome italiano", "descrizione": "Descrizione"},
+ "voci": [
+  {"id": "torace.anteromedial-basal-segmental-bronchus-of-left-lung", "ref": "(Anteromedial basal segmental bronchus of left lung)", "organo": "vie", "dati": {
+   "nome": {"valore": "Bronco segmentario basale anteromediale del polmone sinistro (BVII+BVIII)", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Bronco segmentario che ventila il segmento basale anteromediale del polmone sinistro. I segmenti broncopolmonari hanno ognuno il proprio bronco e la propria arteria: si possono asportare uno per uno.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.deep-branch-of-transverse-cervical-artery", "ref": "(Deep branch of transverse cervical artery)", "organo": "arterie", "dati": {
+   "descrizione": {"valore": "Arteria, ramo di: arteria trasversa del collo. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.superficial-branch-of-transverse-cervical-artery", "ref": "(Superficial branch of transverse cervical artery)", "organo": "arterie", "dati": {
+   "descrizione": {"valore": "Arteria, ramo di: arteria trasversa del collo. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.ulnar-recurrent-artery", "ref": "(Ulnar recurrent artery)", "organo": "arterie", "dati": {
+   "descrizione": {"valore": "Arteria, ramo di: arteria ulnare. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.abdominal-aorta", "ref": "Abdominal aorta", "organo": "arterie", "dati": {
+   "descrizione": {"valore": "Continua l'aorta toracica dallo iato aortico del diaframma (T12) fino alla biforcazione in arterie iliache comuni (L4, all'altezza dell'ombelico). Rami: tripode celiaco, mesenteriche superiore e inferiore, renali, gonadiche, lombari, frenica inferiore.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.accessory-branch-of-middle-meningeal-artery", "ref": "Accessory branch of middle meningeal artery", "organo": "arterie", "dati": {
+   "descrizione": {"valore": "Arteria, ramo di: arteria meningea media. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.accessory-hemi-azygos-vein", "ref": "Accessory hemi-azygos vein", "organo": "vene", "dati": {
+   "descrizione": {"valore": "Vena, affluente di: vena azygos. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.angular-artery", "ref": "Angular artery", "organo": "arterie", "dati": {
+   "descrizione": {"valore": "Arteria, ramo di: arteria facciale. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.angular-vein", "ref": "Angular vein", "organo": "vene", "dati": {
+   "descrizione": {"valore": "Vena, affluente di: vena facciale. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.anterior-basal-segmental-artery-of-left-lung", "ref": "Anterior basal segmental artery of left lung", "organo": "vpolm", "dati": {
+   "descrizione": {"valore": "Ramo dell'arteria polmonare che porta il sangue venoso al segmento basale anteriore del polmone sinistro, accanto al suo bronco segmentario.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.anterior-basal-segmental-artery-of-right-lung", "ref": "Anterior basal segmental artery of right lung", "organo": "vpolm", "dati": {
+   "descrizione": {"valore": "Ramo dell'arteria polmonare che porta il sangue venoso al segmento basale anteriore del polmone destro, accanto al suo bronco segmentario.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.anterior-basal-segmental-bronchus-of-left-lung-bviii", "ref": "Anterior basal segmental bronchus of left lung (BVIII)", "organo": "vie", "dati": {
+   "descrizione": {"valore": "Bronco segmentario che ventila il segmento basale anteriore del polmone sinistro (BVIII). I segmenti broncopolmonari hanno ognuno il proprio bronco e la propria arteria: si possono asportare uno per uno.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.anterior-basal-segmental-bronchus-of-right-lung-bviii", "ref": "Anterior basal segmental bronchus of right lung (BVIII)", "organo": "vie", "dati": {
+   "descrizione": {"valore": "Bronco segmentario che ventila il segmento basale anteriore del polmone destro (BVIII). I segmenti broncopolmonari hanno ognuno il proprio bronco e la propria arteria: si possono asportare uno per uno.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.anterior-branch-of-renal-artery", "ref": "Anterior branch of renal artery", "organo": "arterie", "dati": {
+   "descrizione": {"valore": "Arteria, ramo di: arteria renale destra. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.anterior-cerebral-artery", "ref": "Anterior cerebral artery", "organo": "arterie", "dati": {
+   "descrizione": {"valore": "Arteria, ramo di: arteria carotide interna. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.anterior-circumflex-humeral-artery", "ref": "Anterior circumflex humeral artery", "organo": "arterie", "dati": {
+   "descrizione": {"valore": "Arteria, ramo di: arteria ascellare. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.anterior-circumflex-humeral-vein", "ref": "Anterior circumflex humeral vein", "organo": "vene", "dati": {
+   "descrizione": {"valore": "Vena, affluente di: vena ascellare. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.anterior-communicating-artery", "ref": "Anterior communicating artery", "organo": "arterie", "solo2d": true, "dati": {
+   "descrizione": {"valore": "Breve arteria che unisce le due cerebrali anteriori davanti al chiasma ottico, chiudendo in avanti il poligono di Willis. È la sede più frequente degli aneurismi cerebrali.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.anterior-deep-temporal-artery", "ref": "Anterior deep temporal artery", "organo": "arterie", "dati": {
+   "descrizione": {"valore": "Arteria, ramo di: arteria mascellare. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.anterior-division-of-internal-iliac-artery", "ref": "Anterior division of internal iliac artery", "organo": "arterie", "dati": {
+   "descrizione": {"valore": "Arteria, ramo di: arteria iliaca interna. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.anterior-division-of-retromandibular-vein", "ref": "Anterior division of retromandibular vein", "organo": "vene", "dati": {
+   "descrizione": {"valore": "Vena, affluente di: vena facciale comune. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.anterior-ethmoidal-artery", "ref": "Anterior ethmoidal artery", "organo": "arterie", "dati": {
+   "descrizione": {"valore": "Arteria, ramo di: arteria oftalmica. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.anterior-inferior-cerebellar-artery", "ref": "Anterior inferior cerebellar artery", "organo": "arterie", "dati": {
+   "descrizione": {"valore": "Arteria, ramo di: arteria basilare. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.anterior-inferior-pancreaticoduodenal-artery", "ref": "Anterior inferior pancreaticoduodenal artery", "organo": "arterie", "dati": {
+   "descrizione": {"valore": "Arteria, ramo di: arteria pancreaticoduodenale inferiore. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.anterior-intercavernous-sinus", "ref": "Anterior intercavernous sinus", "organo": "vene", "solo2d": true, "dati": {
+   "descrizione": {"valore": "Seno che unisce davanti all'ipofisi i due seni cavernosi.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.anterior-interventricular-artery", "ref": "Anterior interventricular artery", "organo": "coronarie", "dati": {
+   "descrizione": {"valore": "Ramo interventricolare anteriore (discendente anteriore) della coronaria sinistra: scende nel solco interventricolare anteriore verso l'apice. Irrora la parete anteriore del ventricolo sinistro e i due terzi anteriori del setto: la sua occlusione dà l'infarto anteriore.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.anterior-jugular-vein", "ref": "Anterior jugular vein", "organo": "vene", "dati": {
+   "descrizione": {"valore": "Vena, affluente di: vena giugulare esterna. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.anterior-papillary-muscle-of-right-ventricle", "ref": "Anterior papillary muscle of right ventricle", "organo": "valvole", "dati": {
+   "descrizione": {"valore": "Il muscolo papillare più grande del ventricolo destro: con le corde tendinee tiene i lembi anteriore e posteriore della tricuspide, che in sistole non si ribaltano nell'atrio. Vi arriva la banda moderatrice, con la branca destra del fascio di His.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.anterior-segmental-artery-of-left-lung", "ref": "Anterior segmental artery of left lung", "organo": "vpolm", "dati": {
+   "descrizione": {"valore": "Ramo dell'arteria polmonare che porta il sangue venoso al segmento anteriore del polmone sinistro, accanto al suo bronco segmentario.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.anterior-segmental-artery-of-right-lung", "ref": "Anterior segmental artery of right lung", "organo": "vpolm", "dati": {
+   "descrizione": {"valore": "Ramo dell'arteria polmonare che porta il sangue venoso al segmento anteriore del polmone destro, accanto al suo bronco segmentario.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.anterior-segmental-bronchus-of-left-lung-biii", "ref": "Anterior segmental bronchus of left lung (BIII)", "organo": "vie", "dati": {
+   "descrizione": {"valore": "Bronco segmentario che ventila il segmento anteriore del polmone sinistro (BIII). I segmenti broncopolmonari hanno ognuno il proprio bronco e la propria arteria: si possono asportare uno per uno.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.anterior-segmental-bronchus-of-right-lung-biii", "ref": "Anterior segmental bronchus of right lung (BIII)", "organo": "vie", "dati": {
+   "descrizione": {"valore": "Bronco segmentario che ventila il segmento anteriore del polmone destro (BIII). I segmenti broncopolmonari hanno ognuno il proprio bronco e la propria arteria: si possono asportare uno per uno.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.anterior-semilunar-leaflet-of-pulmonary-valve", "ref": "Anterior semilunar leaflet of pulmonary valve", "organo": "valvole", "dati": {
+   "descrizione": {"valore": "Una delle tre cuspidi semilunari della valvola polmonare, tra ventricolo destro e tronco polmonare. La valvola polmonare si ausculta al secondo spazio intercostale sinistro, vicino allo sterno.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.anterior-septal-branches-of-anterior-ethmoidal-artery", "ref": "Anterior septal branches of anterior ethmoidal artery", "organo": "arterie", "dati": {
+   "descrizione": {"valore": "Arteria, ramo di: arteria etmoidale anteriore. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.anterior-spinal-artery", "ref": "Anterior spinal artery", "organo": "arterie", "dati": {
+   "descrizione": {"valore": "Arteria, ramo di: arterie del midollo spinale. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.anterior-temporal-branch", "ref": "Anterior temporal branch", "organo": "arterie", "dati": {
+   "descrizione": {"valore": "Arteria, ramo di: rami insulari dell'arteria cerebrale media. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.anterior-tibial-artery", "ref": "Anterior tibial artery", "organo": "arterie", "dati": {
+   "descrizione": {"valore": "Passa sopra la membrana interossea nella loggia anteriore della gamba con il nervo peroneo profondo e alla caviglia continua come arteria dorsale del piede.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.anterior-tibial-veins", "ref": "Anterior tibial veins", "organo": "vene", "dati": {
+   "descrizione": {"valore": "Vena, affluente di: vena poplitea. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.anterior-vein-of-left-lung", "ref": "Anterior vein of left lung", "organo": "vpolm", "dati": {
+   "descrizione": {"valore": "Vena del polmone sinistro: raccoglie il sangue ossigenato e lo porta a una vena polmonare. Le vene corrono tra i segmenti, non accanto ai bronchi come le arterie.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.anterior-vein-of-right-lung", "ref": "Anterior vein of right lung", "organo": "vpolm", "dati": {
+   "descrizione": {"valore": "Vena del polmone destro: raccoglie il sangue ossigenato e lo porta a una vena polmonare. Le vene corrono tra i segmenti, non accanto ai bronchi come le arterie.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.aortic-arch", "ref": "Aortic arch", "organo": "grandi", "dati": {
+   "descrizione": {"valore": "Arco dell'aorta, dietro il manubrio dello sterno, sopra il bronco principale sinistro e la biforcazione del tronco polmonare. Dà il tronco brachiocefalico, la carotide comune sinistra e la succlavia sinistra; sotto di esso passa il nervo laringeo ricorrente sinistro.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.apical-segmental-artery-of-left-lung", "ref": "Apical segmental artery of left lung", "organo": "vpolm", "dati": {
+   "descrizione": {"valore": "Ramo dell'arteria polmonare che porta il sangue venoso al segmento apicale del polmone sinistro, accanto al suo bronco segmentario.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.apical-segmental-artery-of-right-lung", "ref": "Apical segmental artery of right lung", "organo": "vpolm", "dati": {
+   "descrizione": {"valore": "Ramo dell'arteria polmonare che porta il sangue venoso al segmento apicale del polmone destro, accanto al suo bronco segmentario.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.apical-segmental-bronchus-of-right-lung-bi", "ref": "Apical segmental bronchus of right lung (BI)", "organo": "vie", "dati": {
+   "descrizione": {"valore": "Bronco segmentario che ventila il segmento apicale del polmone destro (BI). I segmenti broncopolmonari hanno ognuno il proprio bronco e la propria arteria: si possono asportare uno per uno.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.apical-vein-of-right-lung", "ref": "Apical vein of right lung", "organo": "vpolm", "dati": {
+   "descrizione": {"valore": "Vena del polmone destro: raccoglie il sangue ossigenato e lo porta a una vena polmonare. Le vene corrono tra i segmenti, non accanto ai bronchi come le arterie.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.apicoposterior-segmental-bronchus-of-left-lung-bi-bii", "ref": "Apicoposterior segmental bronchus of left lung (BI+BII)", "organo": "vie", "dati": {
+   "descrizione": {"valore": "Bronco segmentario che ventila il segmento apicoposteriore del polmone sinistro (BI+BII). I segmenti broncopolmonari hanno ognuno il proprio bronco e la propria arteria: si possono asportare uno per uno.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.apicoposterior-vein-of-left-lung", "ref": "Apicoposterior vein of left lung", "organo": "vpolm", "dati": {
+   "nome": {"valore": "Vena apicoposteriore del polmone sinistro", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Vena del polmone sinistro: raccoglie il sangue ossigenato e lo porta a una vena polmonare. Le vene corrono tra i segmenti, non accanto ai bronchi come le arterie.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.appendicular-artery", "ref": "Appendicular artery", "organo": "arterie", "dati": {
+   "descrizione": {"valore": "Arteria, ramo di: arteria ileocolica. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.arcuate-artery", "ref": "Arcuate artery", "organo": "arterie", "dati": {
+   "descrizione": {"valore": "Arteria, ramo di: arteria dorsale del piede. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.artery-of-central-sulcus", "ref": "Artery of central sulcus", "organo": "arterie", "dati": {
+   "descrizione": {"valore": "Arteria, ramo di: arteria cerebrale media (Segmento M3). Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.artery-of-precentral-sulcus", "ref": "Artery of precentral sulcus", "organo": "arterie", "dati": {
+   "descrizione": {"valore": "Arteria, ramo di: rami insulari dell'arteria cerebrale media. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.artery-of-pterygoid-canal", "ref": "Artery of pterygoid canal", "organo": "arterie", "dati": {
+   "descrizione": {"valore": "Arteria, ramo di: arteria mascellare. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.ascending-aorta", "ref": "Ascending aorta", "organo": "grandi", "dati": {
+   "descrizione": {"valore": "Primo tratto dell'aorta, dalla valvola aortica fino all'arco, dentro il pericardio. Dai seni aortici alla sua base nascono le due arterie coronarie.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.ascending-branch-of-left-colic-artery", "ref": "Ascending branch of left colic artery", "organo": "arterie", "dati": {
+   "descrizione": {"valore": "Arteria, ramo di: arteria colica sinistra. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.ascending-pharyngeal-artery", "ref": "Ascending pharyngeal artery", "organo": "arterie", "dati": {
+   "descrizione": {"valore": "Arteria, ramo di: arteria carotide esterna. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.axillary-artery", "ref": "Axillary artery", "organo": "arterie", "dati": {
+   "descrizione": {"valore": "Continua la succlavia dal margine esterno della prima costa al margine inferiore del grande rotondo, dove diventa brachiale. Il piccolo pettorale la divide in tre parti.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.axillary-vein", "ref": "Axillary vein", "organo": "vene", "dati": {
+   "descrizione": {"valore": "Vena, affluente di: vena succlavia destra. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.azygos-vein", "ref": "Azygos vein", "organo": "grandi", "dati": {
+   "descrizione": {"valore": "Sale a destra dei corpi vertebrali toracici raccogliendo le vene intercostali posteriori e, a livello di T4, si getta nella vena cava superiore passando sopra il bronco principale destro. Collega i sistemi delle due vene cave.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.basilar-artery", "ref": "Basilar artery", "organo": "arterie", "dati": {
+   "descrizione": {"valore": "Nasce dall'unione delle due vertebrali sul davanti del ponte; dà le cerebellari e le arterie del ponte e si divide nelle due cerebrali posteriori. Partecipa al poligono di Willis.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.basilar-venous-plexus", "ref": "Basilar venous plexus", "organo": "vene", "dati": {
+   "descrizione": {"valore": "Vena, affluente di: seno petroso inferiore. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.basilic-vein", "ref": "Basilic vein", "organo": "vene", "dati": {
+   "descrizione": {"valore": "Vena superficiale del lato mediale dell'arto superiore: a metà braccio diventa profonda e con le vene brachiali forma la vena ascellare.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.bifurcation-of-pulmonary-trunk", "ref": "Bifurcation of pulmonary trunk", "organo": "pgrandi", "dati": {
+   "descrizione": {"valore": "Divisione del tronco polmonare in arteria polmonare destra e sinistra, sotto l'arco aortico, davanti al bronco principale sinistro.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.brachial-artery", "ref": "Brachial artery", "organo": "arterie", "dati": {
+   "descrizione": {"valore": "Continua l'ascellare nel braccio, lungo il margine mediale del bicipite con il nervo mediano; nella fossa cubitale si divide in radiale e ulnare. Qui si misura la pressione arteriosa.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.brachial-veins", "ref": "Brachial veins", "organo": "vene", "dati": {
+   "descrizione": {"valore": "Vena, affluente di: vena ascellare. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.brachiocephalic-trunk", "ref": "Brachiocephalic trunk", "organo": "grandi", "dati": {
+   "descrizione": {"valore": "Primo ramo dell'arco aortico: sale a destra della trachea e dietro l'articolazione sternoclavicolare destra si divide in carotide comune destra e succlavia destra.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.branch-to-angular-gyrus", "ref": "Branch to angular gyrus", "organo": "arterie", "solo2d": true, "dati": {
+   "descrizione": {"valore": "Ramo terminale della cerebrale media per il giro angolare del lobo parietale (lettura e scrittura nell'emisfero dominante).", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.buccal-artery", "ref": "Buccal artery", "organo": "arterie", "dati": {
+   "descrizione": {"valore": "Arteria, ramo di: arteria mascellare. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.calcaneal-branches-of-fibular-artery", "ref": "Calcaneal branches of fibular artery", "organo": "arterie", "dati": {
+   "descrizione": {"valore": "Arteria, ramo di: arteria peroneale. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.calcaneal-branches-of-posterior-tibial-artery", "ref": "Calcaneal branches of posterior tibial artery", "organo": "arterie", "dati": {
+   "descrizione": {"valore": "Arteria, ramo di: arteria tibiale posteriore. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.callosomarginal-artery", "ref": "Callosomarginal artery", "organo": "arterie", "dati": {
+   "descrizione": {"valore": "Arteria, ramo di: arteria cerebrale anteriore. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.cavernous-sinus", "ref": "Cavernous sinus", "organo": "vene", "dati": {
+   "descrizione": {"valore": "Seno venoso della dura madre, sbocca in: seno petroso inferiore. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.central-retinal-artery", "ref": "Central retinal artery", "organo": "arterie", "dati": {
+   "descrizione": {"valore": "Arteria, ramo di: arteria oftalmica. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.cephalic-vein", "ref": "Cephalic vein", "organo": "vene", "dati": {
+   "descrizione": {"valore": "Vena superficiale del lato laterale dell'arto superiore: sale nel solco deltoideo-pettorale e sbocca nella vena ascellare.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.circumflex-artery-of-heart", "ref": "Circumflex artery of heart", "organo": "coronarie", "dati": {
+   "descrizione": {"valore": "Ramo circonflesso della coronaria sinistra: gira a sinistra nel solco coronario verso la faccia posteriore. Irrora atrio sinistro e parete laterale del ventricolo sinistro (rami marginali).", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.circumflex-scapular-artery", "ref": "Circumflex scapular artery", "organo": "arterie", "dati": {
+   "descrizione": {"valore": "Arteria, ramo di: arteria sottoscapolare. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.circumflex-scapular-vein", "ref": "Circumflex scapular vein", "organo": "vene", "dati": {
+   "descrizione": {"valore": "Vena, affluente di: vena sottoscapolare. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.coeliac-trunk", "ref": "Coeliac trunk", "organo": "arterie", "dati": {
+   "descrizione": {"valore": "Tripode celiaco: primo ramo anteriore dell'aorta addominale (T12). Si divide in arteria gastrica sinistra, splenica ed epatica comune: irrora stomaco, fegato, milza, pancreas e duodeno prossimale.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.colic-branch-of-ileocolic-artery", "ref": "Colic branch of ileocolic artery", "organo": "arterie", "dati": {
+   "descrizione": {"valore": "Arteria, ramo di: arteria ileocolica. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.common-facial-vein", "ref": "Common facial vein", "organo": "vene", "dati": {
+   "descrizione": {"valore": "Vena, affluente di: vena giugulare interna. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.common-hepatic-artery", "ref": "Common hepatic artery", "organo": "arterie", "dati": {
+   "descrizione": {"valore": "Arteria, ramo di: tronco celiaco. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.common-iliac-artery", "ref": "Common iliac artery", "organo": "arterie", "dati": {
+   "descrizione": {"valore": "Nasce dalla biforcazione dell'aorta (L4) e davanti all'articolazione sacroiliaca si divide in iliaca esterna e interna.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.common-iliac-vein", "ref": "Common iliac vein", "organo": "vene", "dati": {
+   "descrizione": {"valore": "Unione delle vene iliache esterna e interna; le due iliache comuni formano la vena cava inferiore a L5. La sinistra passa sotto l'arteria iliaca comune destra.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.common-interosseous-artery", "ref": "Common interosseous artery", "organo": "arterie", "dati": {
+   "descrizione": {"valore": "Arteria, ramo di: arteria ulnare. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.common-palmar-digital-arteries", "ref": "Common palmar digital arteries", "organo": "arterie", "dati": {
+   "descrizione": {"valore": "Arteria, ramo di: arcata palmare superficiale. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.common-plantar-digital-arteries", "ref": "Common plantar digital arteries", "organo": "arterie", "dati": {
+   "descrizione": {"valore": "Arteria, ramo di: arterie metatarsali plantari. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.coronary-sinus", "ref": "Coronary sinus", "organo": "coronarie", "dati": {
+   "descrizione": {"valore": "Grande vena nel solco coronario posteriore che raccoglie quasi tutto il sangue venoso del cuore e si apre nell'atrio destro, vicino alla valvola tricuspide.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.costocervical-trunk", "ref": "Costocervical trunk", "organo": "arterie", "dati": {
+   "descrizione": {"valore": "Arteria, ramo di: arteria succlavia sinistra. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.deep-artery-of-penis", "ref": "Deep artery of penis", "organo": "arterie", "dati": {
+   "descrizione": {"valore": "Arteria, ramo di: arteria pudenda interna. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.deep-brachial-artery", "ref": "Deep brachial artery", "organo": "arterie", "dati": {
+   "descrizione": {"valore": "Arteria, ramo di: arteria brachiale. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.deep-cervical-artery", "ref": "Deep cervical artery", "organo": "arterie", "dati": {
+   "descrizione": {"valore": "Arteria, ramo di: tronco costocervicale. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.deep-dorsal-vein-of-penis", "ref": "Deep dorsal vein of penis", "organo": "vene", "dati": {
+   "descrizione": {"valore": "Vena, affluente di: vena iliaca interna. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.deep-external-pudendal-artery", "ref": "Deep external pudendal artery", "organo": "arterie", "dati": {
+   "descrizione": {"valore": "Arteria, ramo di: arteria femorale. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.deep-femoral-artery", "ref": "Deep femoral artery", "organo": "arterie", "dati": {
+   "descrizione": {"valore": "Il ramo principale della femorale per la coscia: dà le circonflesse femorali mediale e laterale (vascolarizzazione della testa del femore) e le perforanti.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.deep-femoral-vein", "ref": "Deep femoral vein", "organo": "vene", "dati": {
+   "descrizione": {"valore": "Vena, affluente di: vena femorale. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.deep-palmar-arch", "ref": "Deep palmar arch", "organo": "arterie", "dati": {
+   "descrizione": {"valore": "Arteria, ramo di: arteria radiale. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.deep-plantar-artery", "ref": "Deep plantar artery", "organo": "arterie", "dati": {
+   "descrizione": {"valore": "Arteria, ramo di: arteria dorsale del piede. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.deep-venous-palmar-arch", "ref": "Deep venous palmar arch", "organo": "vene", "dati": {
+   "descrizione": {"valore": "Vena, affluente di: vene radiali. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.descending-branch-of-lateral-circumflex-femoral-artery", "ref": "Descending branch of lateral circumflex femoral artery", "organo": "arterie", "dati": {
+   "descrizione": {"valore": "Arteria, ramo di: arteria circonflessa laterale del femore. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.descending-branch-of-left-colic-artery", "ref": "Descending branch of left colic artery", "organo": "arterie", "dati": {
+   "descrizione": {"valore": "Arteria, ramo di: arteria colica sinistra. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.descending-palatine-artery", "ref": "Descending palatine artery", "organo": "arterie", "dati": {
+   "descrizione": {"valore": "Arteria, ramo di: arteria mascellare. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.distal-lateral-striate-branches", "ref": "Distal lateral striate branches", "organo": "arterie", "dati": {
+   "descrizione": {"valore": "Arteria, ramo di: arteria cerebrale media. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.dorsal-artery-of-penis", "ref": "Dorsal artery of penis", "organo": "arterie", "dati": {
+   "descrizione": {"valore": "Arteria, ramo di: arteria pudenda interna. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.dorsal-carpal-anastomosis", "ref": "Dorsal carpal anastomosis", "organo": "arterie", "dati": {
+   "descrizione": {"valore": "Arteria, ramo di: arteria radiale. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.dorsal-carpal-branch-of-ulnar-artery", "ref": "Dorsal carpal branch of ulnar artery", "organo": "arterie", "dati": {
+   "descrizione": {"valore": "Arteria, ramo di: arteria ulnare. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.dorsal-digital-arteries-of-foot", "ref": "Dorsal digital arteries of foot", "organo": "arterie", "dati": {
+   "descrizione": {"valore": "Arteria, ramo di: arterie metatarsali dorsali. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.dorsal-digital-arteries-of-hand", "ref": "Dorsal digital arteries of hand", "organo": "arterie", "dati": {
+   "descrizione": {"valore": "Arteria, ramo di: arterie metacarpali dorsali. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.dorsal-digital-veins-of-foot", "ref": "Dorsal digital veins of foot", "organo": "vene", "dati": {
+   "descrizione": {"valore": "Vena, affluente di: vene metatarsali dorsali. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.dorsal-digital-veins-of-hand", "ref": "Dorsal digital veins of hand", "organo": "vene", "dati": {
+   "descrizione": {"valore": "Vena, affluente di: rete venosa dorsale della mano. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.dorsal-metacarpal-arteries", "ref": "Dorsal metacarpal arteries", "organo": "arterie", "dati": {
+   "descrizione": {"valore": "Arteria, ramo di: rete dorsale del carpo. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.dorsal-metatarsal-arteries", "ref": "Dorsal metatarsal arteries", "organo": "arterie", "dati": {
+   "descrizione": {"valore": "Arteria, ramo di: arteria arcuata. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.dorsal-metatarsal-veins", "ref": "Dorsal metatarsal veins", "organo": "vene", "dati": {
+   "descrizione": {"valore": "Vena, affluente di: arco venoso dorsale del piede. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.dorsal-venous-arch-of-foot", "ref": "Dorsal venous arch of foot", "organo": "vene", "dati": {
+   "descrizione": {"valore": "Vena, affluente di: vena piccola safena. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.dorsal-venous-network-of-hand", "ref": "Dorsal venous network of hand", "organo": "vene", "dati": {
+   "descrizione": {"valore": "Vena, affluente di: vena cefalica. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.dorsalis-pedis-artery", "ref": "Dorsalis pedis artery", "organo": "arterie", "dati": {
+   "descrizione": {"valore": "Continua la tibiale anteriore sul dorso del piede, lateralmente al tendine dell'estensore lungo dell'alluce, dove si palpa il polso pedidio.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.external-carotid-artery", "ref": "External carotid artery", "organo": "arterie", "dati": {
+   "descrizione": {"valore": "Dalla biforcazione carotidea irrora collo, faccia e cuoio capelluto: tiroidea superiore, linguale, faciale, occipitale, auricolare posteriore, faringea ascendente, mascellare e temporale superficiale.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.external-iliac-artery", "ref": "External iliac artery", "organo": "arterie", "dati": {
+   "descrizione": {"valore": "Continua l'iliaca comune lungo il margine del grande psoas e passa sotto il legamento inguinale diventando arteria femorale.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.external-iliac-vein", "ref": "External iliac vein", "organo": "vene", "dati": {
+   "descrizione": {"valore": "Vena, affluente di: vena iliaca comune. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.external-jugular-vein", "ref": "External jugular vein", "organo": "vene", "dati": {
+   "descrizione": {"valore": "Vena superficiale del collo che scende sopra lo sternocleidomastoideo e sbocca nella succlavia; si vede turgida nello scompenso destro.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.external-pudendal-veins", "ref": "External pudendal veins", "organo": "vene", "dati": {
+   "descrizione": {"valore": "Vena, affluente di: vena grande safena. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.facial-artery", "ref": "Facial artery", "organo": "arterie", "dati": {
+   "descrizione": {"valore": "Arteria, ramo di: arteria carotide esterna. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.facial-vein", "ref": "Facial vein", "organo": "vene", "dati": {
+   "descrizione": {"valore": "Vena, affluente di: vena facciale comune. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.femoral-artery", "ref": "Femoral artery", "organo": "arterie", "dati": {
+   "descrizione": {"valore": "Continua l'iliaca esterna sotto il legamento inguinale, a metà tra spina iliaca anteriore superiore e sinfisi pubica (polso femorale), nel triangolo femorale con la vena (mediale) e il nervo (laterale). Passa nel canale degli adduttori e diventa poplitea.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.femoral-vein", "ref": "Femoral vein", "organo": "vene", "dati": {
+   "descrizione": {"valore": "Accompagna l'arteria femorale (le sta medialmente nel triangolo femorale) e sotto il legamento inguinale diventa iliaca esterna. Sede frequente di trombosi venosa profonda.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.fibular-artery", "ref": "Fibular artery", "organo": "arterie", "dati": {
+   "descrizione": {"valore": "Ramo della tibiale posteriore che scende vicino alla fibula, nella loggia posteriore profonda; irrora i muscoli peronieri e la fibula.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.fibular-veins", "ref": "Fibular veins", "organo": "vene", "dati": {
+   "descrizione": {"valore": "Vena, affluente di: vene tibiali posteriori. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.first-posterior-intercostal-artery", "ref": "First posterior intercostal artery", "organo": "arterie", "dati": {
+   "descrizione": {"valore": "Arteria, ramo di: arteria intercostale suprema. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.frontal-branch-of-superficial-temporal-artery", "ref": "Frontal branch of superficial temporal artery", "organo": "arterie", "dati": {
+   "descrizione": {"valore": "Arteria, ramo di: arteria temporale superficiale. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.frontal-branches-of-callosomarginal-artery", "ref": "Frontal branches of callosomarginal artery", "organo": "arterie", "dati": {
+   "descrizione": {"valore": "Arteria, ramo di: arteria callosomarginale. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.gastroduodenal-artery", "ref": "Gastroduodenal artery", "organo": "arterie", "dati": {
+   "descrizione": {"valore": "Arteria, ramo di: arteria epatica comune. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.genicular-veins", "ref": "Genicular veins", "organo": "vene", "dati": {
+   "descrizione": {"valore": "Vena, affluente di: vena poplitea. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.great-cardiac-vein", "ref": "Great cardiac vein", "organo": "coronarie", "dati": {
+   "descrizione": {"valore": "Sale nel solco interventricolare anteriore accanto al ramo interventricolare anteriore, gira a sinistra nel solco coronario e continua nel seno coronario.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.great-saphenous-vein", "ref": "Great saphenous vein", "organo": "vene", "dati": {
+   "descrizione": {"valore": "La vena più lunga del corpo: dal davanti del malleolo mediale sale lungo il lato mediale di gamba e coscia e sbocca nella femorale (crosse safeno-femorale) sotto il legamento inguinale. Si usa per i bypass coronarici; le sue valvole insufficienti danno le varici.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.greater-palatine-artery", "ref": "Greater palatine artery", "organo": "arterie", "dati": {
+   "descrizione": {"valore": "Arteria, ramo di: arteria palatina discendente. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.hemi-azygos-vein", "ref": "Hemi-azygos vein", "organo": "vene", "dati": {
+   "descrizione": {"valore": "Vena, affluente di: vena azygos. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.hepatic-portal-vein", "ref": "Hepatic portal vein", "organo": "vene", "dati": {
+   "descrizione": {"valore": "Nasce dietro il collo del pancreas dall'unione della mesenterica superiore e della splenica e porta al fegato il sangue di intestino, stomaco, milza e pancreas. Nella cirrosi la sua pressione sale (ipertensione portale, varici esofagee).", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.hepatic-veins", "ref": "Hepatic veins", "organo": "vene", "dati": {
+   "descrizione": {"valore": "Vena, affluente di: vena cava inferiore (parte toracica). Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.ileal-branch-of-ileocolic-artery", "ref": "Ileal branch of ileocolic artery", "organo": "arterie", "dati": {
+   "descrizione": {"valore": "Arteria, ramo di: arteria ileocolica. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.ileocolic-artery", "ref": "Ileocolic artery", "organo": "arterie", "dati": {
+   "descrizione": {"valore": "Arteria, ramo di: arteria mesenterica superiore. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.iliacus-branch-of-iliolumbar-artery", "ref": "Iliacus branch of iliolumbar artery", "organo": "arterie", "dati": {
+   "descrizione": {"valore": "Arteria, ramo di: arteria ileolombare. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.iliolumbar-artery", "ref": "Iliolumbar artery", "organo": "arterie", "dati": {
+   "descrizione": {"valore": "Arteria, ramo di: divisione posteriore dell'arteria iliaca interna. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.iliolumbar-vein", "ref": "Iliolumbar vein", "organo": "vene", "dati": {
+   "descrizione": {"valore": "Vena, affluente di: vena iliaca comune. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.inferior-alveolar-artery", "ref": "Inferior alveolar artery", "organo": "arterie", "dati": {
+   "descrizione": {"valore": "Arteria, ramo di: arteria mascellare. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.inferior-basal-vein-of-left-lung", "ref": "Inferior basal vein of left lung", "organo": "vpolm", "dati": {
+   "descrizione": {"valore": "Vena del polmone sinistro: raccoglie il sangue ossigenato e lo porta a una vena polmonare. Le vene corrono tra i segmenti, non accanto ai bronchi come le arterie.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.inferior-basal-vein-of-right-lung", "ref": "Inferior basal vein of right lung", "organo": "vpolm", "dati": {
+   "descrizione": {"valore": "Vena del polmone destro: raccoglie il sangue ossigenato e lo porta a una vena polmonare. Le vene corrono tra i segmenti, non accanto ai bronchi come le arterie.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.inferior-epigastric-artery", "ref": "Inferior epigastric artery", "organo": "arterie", "dati": {
+   "descrizione": {"valore": "Arteria, ramo di: arteria iliaca esterna. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.inferior-epigastric-vein", "ref": "Inferior epigastric vein", "organo": "vene", "dati": {
+   "descrizione": {"valore": "Vena, affluente di: vena iliaca esterna. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.inferior-gluteal-artery", "ref": "Inferior gluteal artery", "organo": "arterie", "dati": {
+   "descrizione": {"valore": "Arteria, ramo di: divisione anteriore dell'arteria iliaca interna. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.inferior-gluteal-veins", "ref": "Inferior gluteal veins", "organo": "vene", "dati": {
+   "descrizione": {"valore": "Vena, affluente di: vena iliaca interna. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.inferior-labial-artery", "ref": "Inferior labial artery", "organo": "arterie", "dati": {
+   "descrizione": {"valore": "Arteria, ramo di: arteria facciale. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.inferior-labial-veins", "ref": "Inferior labial veins", "organo": "vene", "dati": {
+   "descrizione": {"valore": "Vena, affluente di: vena facciale. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.inferior-lateral-genicular-artery", "ref": "Inferior lateral genicular artery", "organo": "arterie", "dati": {
+   "descrizione": {"valore": "Arteria, ramo di: arteria poplitea. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.inferior-leaflet-of-right-atrioventricular-valve", "ref": "Inferior leaflet of right atrioventricular valve", "organo": "valvole", "dati": {
+   "nome": {"valore": "Lembo inferiore (posteriore) della valvola tricuspide", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Lembo inferiore (posteriore) della valvola tricuspide, tenuto dalle corde tendinee dei muscoli papillari inferiore e settale.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.inferior-lingular-artery-of-left-lung", "ref": "Inferior lingular artery of left lung", "organo": "vpolm", "dati": {
+   "nome": {"valore": "Arteria lingulare inferiore del polmone sinistro", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Ramo dell'arteria polmonare che porta il sangue venoso al segmento lingulare inferiore del polmone sinistro, accanto al suo bronco segmentario.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.inferior-lingular-segmental-bronchus-of-left-lung-bv", "ref": "Inferior lingular segmental bronchus of left lung (BV)", "organo": "vie", "dati": {
+   "descrizione": {"valore": "Bronco segmentario che ventila il segmento lingulare inferiore del polmone sinistro (BV). I segmenti broncopolmonari hanno ognuno il proprio bronco e la propria arteria: si possono asportare uno per uno.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.inferior-lingular-vein-of-left-lung", "ref": "Inferior lingular vein of left lung", "organo": "vpolm", "dati": {
+   "descrizione": {"valore": "Vena del polmone sinistro: raccoglie il sangue ossigenato e lo porta a una vena polmonare. Le vene corrono tra i segmenti, non accanto ai bronchi come le arterie.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.inferior-lobar-artery-of-right-lung", "ref": "Inferior lobar artery of right lung", "organo": "vpolm", "dati": {
+   "descrizione": {"valore": "Ramo dell'arteria polmonare che porta il sangue venoso al segmento inferior lobar del polmone destro, accanto al suo bronco segmentario.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.inferior-lobe-of-left-lung", "ref": "Inferior lobe of left lung", "organo": "polmoni", "dati": {
+   "descrizione": {"valore": "Lobo inferiore del polmone sinistro, sotto la scissura obliqua: parte posteriore e base. Segmenti: superiore e basali (anteromediale, laterale, posteriore).", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.inferior-lobe-of-right-lung", "ref": "Inferior lobe of right lung", "organo": "polmoni", "dati": {
+   "descrizione": {"valore": "Lobo inferiore del polmone destro, sotto la scissura obliqua: occupa la parte posteriore e la base appoggiata sul diaframma. Segmenti: superiore e quattro basali (mediale, anteriore, laterale, posteriore). Si ausculta soprattutto da dietro.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.inferior-medial-genicular-artery", "ref": "Inferior medial genicular artery", "organo": "arterie", "dati": {
+   "descrizione": {"valore": "Arteria, ramo di: arteria poplitea. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.inferior-mesenteric-artery", "ref": "Inferior mesenteric artery", "organo": "arterie", "dati": {
+   "descrizione": {"valore": "Nasce dall'aorta addominale (L3) e irrora l'ultimo terzo del colon trasverso, il discendente, il sigma e il retto superiore.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.inferior-mesenteric-vein", "ref": "Inferior mesenteric vein", "organo": "vene", "dati": {
+   "descrizione": {"valore": "Vena, affluente di: vena splenica. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.inferior-ophthalmic-vein", "ref": "Inferior ophthalmic vein", "organo": "vene", "solo2d": true, "dati": {
+   "descrizione": {"valore": "Vena del pavimento dell'orbita: sbocca nella vena oftalmica superiore o nel seno cavernoso e comunica con il plesso pterigoideo.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.inferior-pancreaticoduodenal-artery", "ref": "Inferior pancreaticoduodenal artery", "organo": "arterie", "dati": {
+   "descrizione": {"valore": "Arteria, ramo di: arteria mesenterica superiore. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.inferior-papillary-muscle-of-left-ventricle", "ref": "Inferior papillary muscle of left ventricle", "organo": "valvole", "dati": {
+   "descrizione": {"valore": "Muscolo papillare posteromediale del ventricolo sinistro: tiene con le corde tendinee i lembi della mitrale. Ha spesso una sola arteria (dalla coronaria destra o dalla circonflessa): nell'infarto inferiore può rompersi e dare un'insufficienza mitralica acuta.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.inferior-papillary-muscle-of-right-ventricle", "ref": "Inferior papillary muscle of right ventricle", "organo": "valvole", "dati": {
+   "descrizione": {"valore": "Muscolo papillare inferiore (posteriore) del ventricolo destro: le sue corde tendinee vanno ai lembi inferiore e settale della tricuspide.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.inferior-petrosal-sinus", "ref": "Inferior petrosal sinus", "organo": "vene", "solo2d": true, "dati": {
+   "descrizione": {"valore": "Seno venoso della dura madre lungo la sutura tra rocca petrosa e osso occipitale: porta il sangue del seno cavernoso alla vena giugulare interna.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.inferior-phrenic-artery", "ref": "Inferior phrenic artery", "organo": "arterie", "dati": {
+   "descrizione": {"valore": "Arteria, ramo di: aorta addominale. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.inferior-sagittal-sinus", "ref": "Inferior sagittal sinus", "organo": "vene", "dati": {
+   "descrizione": {"valore": "Seno venoso della dura madre, sbocca in: confluente dei seni. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.inferior-suprarenal-artery", "ref": "Inferior suprarenal artery", "organo": "arterie", "dati": {
+   "descrizione": {"valore": "Arteria, ramo di: arteria renale sinistra. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.inferior-thyroid-artery", "ref": "Inferior thyroid artery", "organo": "arterie", "dati": {
+   "descrizione": {"valore": "Arteria, ramo di: tronco tireocervicale. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.inferior-ulnar-collateral-artery", "ref": "Inferior ulnar collateral artery", "organo": "arterie", "dati": {
+   "descrizione": {"valore": "Arteria, ramo di: arteria brachiale. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.inferior-vein-of-left-ventricle", "ref": "Inferior vein of left ventricle", "organo": "coronarie", "dati": {
+   "nome": {"valore": "Vena posteriore del ventricolo sinistro", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Vena posteriore del ventricolo sinistro: drena la faccia diaframmatica del ventricolo sinistro nel seno coronario.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.inferior-vein-of-left-ventricle-posterior", "ref": "Inferior vein of left ventricle (//Posterior '')", "organo": "coronarie", "dati": {
+   "nome": {"valore": "Vena posteriore del ventricolo sinistro", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Vena posteriore del ventricolo sinistro: drena la faccia diaframmatica del ventricolo sinistro nel seno coronario.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.inferior-vena-cava-abdominal-part", "ref": "Inferior vena cava (abdominal part)", "organo": "vene", "dati": {
+   "descrizione": {"valore": "Nasce dall'unione delle iliache comuni (L5) e sale a destra dell'aorta raccogliendo vene lombari, renali, gonadica destra ed epatiche, fino al diaframma.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.inferior-vena-cava-thoracic-part", "ref": "Inferior vena cava (thoracic part)", "organo": "grandi", "dati": {
+   "descrizione": {"valore": "Breve tratto toracico della vena cava inferiore: attraversa il diaframma (forame della vena cava, T8) e sbocca subito nell'atrio destro. Porta il sangue di addome, pelvi e arti inferiori.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.infra-orbital-artery", "ref": "Infra-orbital artery", "organo": "arterie", "dati": {
+   "descrizione": {"valore": "Arteria, ramo di: arteria mascellare. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.insular-branches-of-middle-cerebral-artery-m2", "ref": "Insular branches of middle cerebral artery (M2)", "organo": "arterie", "dati": {
+   "descrizione": {"valore": "Arteria, ramo di: arteria cerebrale media. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.insular-branches-of-middle-cerebral-artery-m2-segment", "ref": "Insular branches of middle cerebral artery (M2-segment)", "organo": "arterie", "dati": {
+   "descrizione": {"valore": "Arteria, ramo di: arteria cerebrale media. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.intercapitular-veins-of-foot", "ref": "Intercapitular veins of foot", "organo": "vene", "dati": {
+   "descrizione": {"valore": "Vena, affluente di: arco venoso dorsale del piede. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.intermediate-bronchus", "ref": "Intermediate bronchus", "organo": "vie", "dati": {
+   "descrizione": {"valore": "Tratto del bronco principale destro tra l'origine del bronco lobare superiore e quella dei bronchi lobari medio e inferiore.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.internal-carotid-artery", "ref": "Internal carotid artery", "organo": "arterie", "dati": {
+   "descrizione": {"valore": "Dalla biforcazione carotidea sale senza rami nel collo ed entra nel cranio dal canale carotideo: dà l'arteria oftalmica, la cerebrale anteriore e la media. Il bulbo carotideo, all'origine, contiene i barocettori.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.internal-iliac-artery", "ref": "Internal iliac artery", "organo": "arterie", "dati": {
+   "descrizione": {"valore": "Scende nella pelvi e irrora visceri pelvici, perineo, glutei (arterie glutee superiore e inferiore) e la regione mediale della coscia (otturatoria).", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.internal-iliac-vein", "ref": "Internal iliac vein", "organo": "vene", "dati": {
+   "descrizione": {"valore": "Vena, affluente di: vena iliaca comune. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.internal-jugular-vein", "ref": "Internal jugular vein", "organo": "vene", "dati": {
+   "descrizione": {"valore": "Raccoglie il sangue dell'encefalo (continua il seno sigmoideo al forame giugulare) e di faccia e collo; scende nella guaina carotidea e si unisce alla succlavia nella vena brachiocefalica. Si usa per i cateteri venosi centrali.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.internal-pudendal-artery", "ref": "Internal pudendal artery", "organo": "arterie", "dati": {
+   "descrizione": {"valore": "Arteria, ramo di: divisione anteriore dell'arteria iliaca interna. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.internal-pudendal-vein", "ref": "Internal pudendal vein", "organo": "vene", "dati": {
+   "descrizione": {"valore": "Vena, affluente di: vena iliaca interna. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.internal-thoracic-artery", "ref": "Internal thoracic artery", "organo": "arterie", "dati": {
+   "descrizione": {"valore": "Arteria, ramo di: arteria succlavia sinistra. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.internal-thoracic-veins", "ref": "Internal thoracic veins", "organo": "vene", "dati": {
+   "descrizione": {"valore": "Vena, affluente di: vena brachiocefalica sinistra. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.lacrimal-artery", "ref": "Lacrimal artery", "organo": "arterie", "dati": {
+   "descrizione": {"valore": "Arteria, ramo di: arteria oftalmica. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.lateral-basal-segmental-artery-of-left-lung", "ref": "Lateral basal segmental artery of left lung", "organo": "vpolm", "dati": {
+   "descrizione": {"valore": "Ramo dell'arteria polmonare che porta il sangue venoso al segmento basale laterale del polmone sinistro, accanto al suo bronco segmentario.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.lateral-basal-segmental-artery-of-right-lung", "ref": "Lateral basal segmental artery of right lung", "organo": "vpolm", "dati": {
+   "descrizione": {"valore": "Ramo dell'arteria polmonare che porta il sangue venoso al segmento basale laterale del polmone destro, accanto al suo bronco segmentario.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.lateral-basal-segmental-bronchus-of-left-lung-bix", "ref": "Lateral basal segmental bronchus of left lung (BIX)", "organo": "vie", "dati": {
+   "descrizione": {"valore": "Bronco segmentario che ventila il segmento basale laterale del polmone sinistro (BIX). I segmenti broncopolmonari hanno ognuno il proprio bronco e la propria arteria: si possono asportare uno per uno.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.lateral-basal-segmental-bronchus-of-right-lung-bix", "ref": "Lateral basal segmental bronchus of right lung (BIX)", "organo": "vie", "dati": {
+   "descrizione": {"valore": "Bronco segmentario che ventila il segmento basale laterale del polmone destro (BIX). I segmenti broncopolmonari hanno ognuno il proprio bronco e la propria arteria: si possono asportare uno per uno.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.lateral-circumflex-femoral-artery", "ref": "Lateral circumflex femoral artery", "organo": "arterie", "dati": {
+   "descrizione": {"valore": "Arteria, ramo di: arteria femorale profonda. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.lateral-circumflex-femoral-veins", "ref": "Lateral circumflex femoral veins", "organo": "vene", "dati": {
+   "descrizione": {"valore": "Vena, affluente di: vena femorale. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.lateral-frontobasal-artery", "ref": "Lateral frontobasal artery", "organo": "arterie", "dati": {
+   "descrizione": {"valore": "Arteria, ramo di: prefrontal artery. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.lateral-occipital-artery", "ref": "Lateral occipital artery", "organo": "arterie", "dati": {
+   "descrizione": {"valore": "Arteria, ramo di: arteria occipitale mediale. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.lateral-plantar-artery", "ref": "Lateral plantar artery", "organo": "arterie", "dati": {
+   "descrizione": {"valore": "Arteria, ramo di: arteria tibiale posteriore. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.lateral-plantar-veins", "ref": "Lateral plantar veins", "organo": "vene", "dati": {
+   "descrizione": {"valore": "Vena, affluente di: vene tibiali posteriori. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.lateral-pontine-branches-of-basilar-artery", "ref": "Lateral pontine branches of basilar artery", "organo": "arterie", "dati": {
+   "descrizione": {"valore": "Arteria, ramo di: arteria basilare. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.lateral-sacral-veins", "ref": "Lateral sacral veins", "organo": "vene", "dati": {
+   "descrizione": {"valore": "Vena, affluente di: vena iliaca interna. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.lateral-segmental-artery-of-right-lung", "ref": "Lateral segmental artery of right lung", "organo": "vpolm", "dati": {
+   "descrizione": {"valore": "Ramo dell'arteria polmonare che porta il sangue venoso al segmento laterale del polmone destro, accanto al suo bronco segmentario.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.lateral-segmental-bronchus-of-right-lung-biv", "ref": "Lateral segmental bronchus of right lung (BIV)", "organo": "vie", "dati": {
+   "descrizione": {"valore": "Bronco segmentario che ventila il segmento laterale del polmone destro (BIV). I segmenti broncopolmonari hanno ognuno il proprio bronco e la propria arteria: si possono asportare uno per uno.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.lateral-tarsal-artery", "ref": "Lateral tarsal artery", "organo": "arterie", "dati": {
+   "descrizione": {"valore": "Arteria, ramo di: arteria dorsale del piede. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.lateral-thoracic-artery", "ref": "Lateral thoracic artery", "organo": "arterie", "dati": {
+   "descrizione": {"valore": "Arteria, ramo di: arteria ascellare. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.lateral-thoracic-vein", "ref": "Lateral thoracic vein", "organo": "vene", "dati": {
+   "descrizione": {"valore": "Vena, affluente di: vena ascellare. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.lateral-vein-of-right-lung", "ref": "Lateral vein of right lung", "organo": "vpolm", "dati": {
+   "descrizione": {"valore": "Vena del polmone destro: raccoglie il sangue ossigenato e lo porta a una vena polmonare. Le vene corrono tra i segmenti, non accanto ai bronchi come le arterie.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.left-ascending-lumbar-vein", "ref": "Left ascending lumbar vein", "organo": "vene", "dati": {
+   "descrizione": {"valore": "Vena, affluente di: vena emiazygos. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.left-atrium", "ref": "Left atrium", "organo": "cuore", "dati": {
+   "descrizione": {"valore": "La camera più posteriore del cuore, davanti all'esofago (un atrio sinistro dilatato può comprimerlo). Riceve il sangue ossigenato dalle quattro vene polmonari e lo passa al ventricolo sinistro attraverso la valvola mitrale. L'auricola sinistra è la sede tipica dei trombi nella fibrillazione atriale.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.left-brachiocephalic-vein", "ref": "Left brachiocephalic vein", "organo": "grandi", "dati": {
+   "descrizione": {"valore": "Unione della giugulare interna e della succlavia sinistre: attraversa obliquamente il mediastino superiore davanti all'arco aortico e si unisce alla destra nella vena cava superiore. Vi sbocca il dotto toracico.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.left-colic-artery", "ref": "Left colic artery", "organo": "arterie", "dati": {
+   "descrizione": {"valore": "Arteria, ramo di: arteria mesenterica inferiore. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.left-common-carotid-artery", "ref": "Left common carotid artery", "organo": "grandi", "dati": {
+   "descrizione": {"valore": "Secondo ramo dell'arco aortico: sale nel collo a sinistra della trachea fino al margine superiore della cartilagine tiroidea, dove si divide in carotide interna ed esterna.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.left-coronary-artery", "ref": "Left coronary artery", "organo": "coronarie", "dati": {
+   "descrizione": {"valore": "Nasce dal seno aortico sinistro e dopo un breve tronco comune si divide in ramo interventricolare anteriore e ramo circonflesso. Irrora la maggior parte del ventricolo sinistro e i due terzi anteriori del setto.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.left-coronary-leaflet", "ref": "Left coronary leaflet", "organo": "valvole", "dati": {
+   "nome": {"valore": "Cuspide coronarica sinistra della valvola aortica", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Una delle tre cuspidi semilunari della valvola aortica: dal seno aortico sopra di essa nasce l'arteria coronaria sinistra. La valvola aortica si ausculta al secondo spazio intercostale destro, vicino allo sterno.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.left-gastric-artery", "ref": "Left gastric artery", "organo": "arterie", "dati": {
+   "descrizione": {"valore": "Arteria, ramo di: tronco celiaco. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.left-gastro-omental-vein", "ref": "Left gastro-omental vein", "organo": "vene", "dati": {
+   "descrizione": {"valore": "Vena, affluente di: vena splenica. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.left-inferior-lobar-bronchus", "ref": "Left inferior lobar bronchus", "organo": "vie", "dati": {
+   "descrizione": {"valore": "Va al lobo inferiore sinistro: dà il bronco segmentario superiore e i basali.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.left-inferior-pulmonary-vein", "ref": "Left inferior pulmonary vein", "organo": "pgrandi", "dati": {
+   "descrizione": {"valore": "Porta il sangue ossigenato del lobo inferiore del polmone sinistro all'atrio sinistro.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.left-main-bronchus", "ref": "Left main bronchus", "organo": "vie", "dati": {
+   "descrizione": {"valore": "Più lungo e più orizzontale del destro: passa sotto l'arco aortico e davanti all'esofago prima di dividersi nei bronchi lobari superiore e inferiore.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.left-pulmonary-artery", "ref": "Left pulmonary artery", "organo": "pgrandi", "dati": {
+   "descrizione": {"valore": "Più corta della destra: va all'ilo del polmone sinistro passando sopra il bronco principale sinistro e si divide nelle arterie lobari superiore e inferiore.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.left-renal-artery", "ref": "Left renal artery", "organo": "arterie", "dati": {
+   "descrizione": {"valore": "Nasce dall'aorta all'altezza di L1-L2 e raggiunge l'ilo del rene sinistro; è più corta della destra.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.left-renal-vein", "ref": "Left renal vein", "organo": "vene", "dati": {
+   "descrizione": {"valore": "Vena, affluente di: vena cava inferiore (parte abdominale). Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.left-semilunar-leaflet-of-pulmonary-valve", "ref": "Left semilunar leaflet of pulmonary valve", "organo": "valvole", "dati": {
+   "descrizione": {"valore": "Cuspide semilunare sinistra della valvola polmonare: in diastole si chiude e impedisce il ritorno del sangue nel ventricolo destro.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.left-subclavian-artery", "ref": "Left subclavian artery", "organo": "grandi", "dati": {
+   "descrizione": {"valore": "Terzo ramo dell'arco aortico: passa sopra la prima costa tra gli scaleni anteriore e medio e diventa arteria ascellare. Dà l'arteria vertebrale e la toracica interna.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.left-subclavian-vein", "ref": "Left subclavian vein", "organo": "vene", "dati": {
+   "descrizione": {"valore": "Continua la vena ascellare sopra la prima costa, davanti allo scaleno anteriore; alla confluenza con la giugulare interna sinistra sbocca il dotto toracico.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.left-subcostal-vein", "ref": "Left subcostal vein", "organo": "vene", "dati": {
+   "descrizione": {"valore": "Vena, affluente di: vena emiazygos. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.left-superior-intercostal-vein", "ref": "Left superior intercostal vein", "organo": "vene", "dati": {
+   "descrizione": {"valore": "Vena, affluente di: vena brachiocefalica sinistra. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.left-superior-lobar-bronchus", "ref": "Left superior lobar bronchus", "organo": "vie", "dati": {
+   "descrizione": {"valore": "Va al lobo superiore sinistro: si divide in un tronco superiore (apicoposteriore e anteriore) e in un tronco lingulare (lingulare superiore e inferiore).", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.left-superior-pulmonary-vein", "ref": "Left superior pulmonary vein", "organo": "pgrandi", "dati": {
+   "descrizione": {"valore": "Porta il sangue ossigenato del lobo superiore del polmone sinistro (lingula compresa) all'atrio sinistro.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.left-testicular-artery", "ref": "Left testicular artery", "organo": "arterie", "dati": {
+   "descrizione": {"valore": "Arteria, ramo di: aorta addominale. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.left-testicular-vein", "ref": "Left testicular vein", "organo": "vene", "dati": {
+   "descrizione": {"valore": "Vena, affluente di: vena renale sinistra. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.left-ventricle", "ref": "Left ventricle", "organo": "cuore", "dati": {
+   "descrizione": {"valore": "Forma l'apice del cuore e gran parte della faccia sinistra e diaframmatica. Pompa il sangue nell'aorta attraverso la valvola aortica, ad alta pressione: la parete è circa tre volte più spessa di quella del ventricolo destro. L'itto della punta si palpa al quinto spazio intercostale sinistro sulla linea emiclaveare.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.lingual-vein", "ref": "Lingual vein", "organo": "vene", "dati": {
+   "descrizione": {"valore": "Vena, affluente di: vena giugulare interna. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.lingular-vein-of-left-lung", "ref": "Lingular vein of left lung", "organo": "vpolm", "dati": {
+   "descrizione": {"valore": "Vena del polmone sinistro: raccoglie il sangue ossigenato e lo porta a una vena polmonare. Le vene corrono tra i segmenti, non accanto ai bronchi come le arterie.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.long-posterior-ciliary-arteries", "ref": "Long posterior ciliary arteries", "organo": "arterie", "dati": {
+   "descrizione": {"valore": "Arteria, ramo di: arteria oftalmica. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.lumbar-arteries", "ref": "Lumbar arteries", "organo": "arterie", "dati": {
+   "descrizione": {"valore": "Arteria, ramo di: aorta addominale. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.lumbar-branch-of-iliolumbar-artery", "ref": "Lumbar branch of iliolumbar artery", "organo": "arterie", "dati": {
+   "descrizione": {"valore": "Arteria, ramo di: arteria ileolombare. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.lumbar-veins", "ref": "Lumbar veins", "organo": "vene", "dati": {
+   "descrizione": {"valore": "Vena, affluente di: vena cava inferiore (parte abdominale). Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.marginal-artery", "ref": "Marginal artery", "organo": "arterie", "dati": {
+   "descrizione": {"valore": "Arteria, ramo di: arteria mesenterica superiore. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.maxillary-artery", "ref": "Maxillary artery", "organo": "arterie", "dati": {
+   "descrizione": {"valore": "Arteria, ramo di: arteria carotide esterna. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.maxillary-veins", "ref": "Maxillary veins", "organo": "vene", "dati": {
+   "descrizione": {"valore": "Vena, affluente di: vena retromandibolare. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.medial-basal-segmental-artery-of-left-lung", "ref": "Medial basal segmental artery of left lung", "organo": "vpolm", "dati": {
+   "descrizione": {"valore": "Ramo dell'arteria polmonare che porta il sangue venoso al segmento basale mediale del polmone sinistro, accanto al suo bronco segmentario.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.medial-basal-segmental-artery-of-right-lung", "ref": "Medial basal segmental artery of right lung", "organo": "vpolm", "dati": {
+   "descrizione": {"valore": "Ramo dell'arteria polmonare che porta il sangue venoso al segmento basale mediale del polmone destro, accanto al suo bronco segmentario.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.medial-basal-segmental-bronchus-of-left-lung-bvii", "ref": "Medial basal segmental bronchus of left lung (BVII)", "organo": "vie", "dati": {
+   "descrizione": {"valore": "Bronco segmentario che ventila il segmento basale mediale del polmone sinistro (BVII). I segmenti broncopolmonari hanno ognuno il proprio bronco e la propria arteria: si possono asportare uno per uno.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.medial-basal-segmental-bronchus-of-right-lung-bvii", "ref": "Medial basal segmental bronchus of right lung (BVII)", "organo": "vie", "dati": {
+   "descrizione": {"valore": "Bronco segmentario che ventila il segmento basale mediale del polmone destro (BVII). I segmenti broncopolmonari hanno ognuno il proprio bronco e la propria arteria: si possono asportare uno per uno.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.medial-circumflex-femoral-artery", "ref": "Medial circumflex femoral artery", "organo": "arterie", "dati": {
+   "descrizione": {"valore": "Arteria, ramo di: arteria femorale profonda. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.medial-circumflex-femoral-veins", "ref": "Medial circumflex femoral veins", "organo": "vene", "dati": {
+   "descrizione": {"valore": "Vena, affluente di: vena femorale. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.medial-occipital-artery", "ref": "Medial occipital artery", "organo": "arterie", "dati": {
+   "descrizione": {"valore": "Arteria, ramo di: arteria cerebrale posteriore. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.medial-plantar-artery", "ref": "Medial plantar artery", "organo": "arterie", "dati": {
+   "descrizione": {"valore": "Arteria, ramo di: arteria tibiale posteriore. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.medial-plantar-veins", "ref": "Medial plantar veins", "organo": "vene", "dati": {
+   "descrizione": {"valore": "Vena, affluente di: vene tibiali posteriori. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.medial-pontine-branches-of-basilar-artery", "ref": "Medial pontine branches of basilar artery", "organo": "arterie", "dati": {
+   "descrizione": {"valore": "Arteria, ramo di: arteria basilare. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.medial-segmental-artery-of-right-lung", "ref": "Medial segmental artery of right lung", "organo": "vpolm", "dati": {
+   "descrizione": {"valore": "Ramo dell'arteria polmonare che porta il sangue venoso al segmento mediale del polmone destro, accanto al suo bronco segmentario.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.medial-segmental-bronchus-of-right-lung-bv", "ref": "Medial segmental bronchus of right lung (BV)", "organo": "vie", "dati": {
+   "descrizione": {"valore": "Bronco segmentario che ventila il segmento mediale del polmone destro (BV). I segmenti broncopolmonari hanno ognuno il proprio bronco e la propria arteria: si possono asportare uno per uno.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.medial-vein-of-right-lung", "ref": "Medial vein of right lung", "organo": "vpolm", "dati": {
+   "descrizione": {"valore": "Vena del polmone destro: raccoglie il sangue ossigenato e lo porta a una vena polmonare. Le vene corrono tra i segmenti, non accanto ai bronchi come le arterie.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.median-antebrachial-vein", "ref": "Median antebrachial vein", "organo": "vene", "dati": {
+   "descrizione": {"valore": "Vena, affluente di: vena mediana del gomito. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.median-cubital-vein", "ref": "Median cubital vein", "organo": "vene", "dati": {
+   "descrizione": {"valore": "Collega cefalica e basilica davanti al gomito: è la vena più usata per i prelievi.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.median-sacral-artery", "ref": "Median sacral artery", "organo": "arterie", "solo2d": true, "dati": {
+   "descrizione": {"valore": "Piccola arteria impari che nasce dalla biforcazione dell'aorta e scende sulla faccia anteriore del sacro e del coccige.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.mental-branch-of-inferior-alveolar-artery", "ref": "Mental branch of inferior alveolar artery", "organo": "arterie", "dati": {
+   "descrizione": {"valore": "Arteria, ramo di: arteria alveolare inferiore. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.middle-cardiac-vein", "ref": "Middle cardiac vein", "organo": "coronarie", "dati": {
+   "descrizione": {"valore": "Sale nel solco interventricolare posteriore, accanto al ramo interventricolare posteriore, e sbocca nel seno coronario.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.middle-cerebral-artery-m1-segment", "ref": "Middle cerebral artery (M1-segment)", "organo": "arterie", "dati": {
+   "descrizione": {"valore": "Arteria, ramo di: arteria carotide interna. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.middle-cerebral-artery-m3-segment", "ref": "Middle cerebral artery (M3 segment)", "organo": "arterie", "dati": {
+   "descrizione": {"valore": "Arteria, ramo di: insular branches of middle cerebral artery (M2-segment). Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.middle-cerebral-artery-m3-segment-2", "ref": "Middle cerebral artery (M3-segment)", "organo": "arterie", "dati": {
+   "descrizione": {"valore": "Arteria, ramo di: rami insulari dell'arteria cerebrale media. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.middle-colic-artery", "ref": "Middle colic artery", "organo": "arterie", "dati": {
+   "descrizione": {"valore": "Arteria, ramo di: arteria mesenterica superiore. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.middle-colic-vein", "ref": "Middle colic vein", "organo": "vene", "dati": {
+   "descrizione": {"valore": "Vena, affluente di: vena mesenterica superiore. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.middle-collateral-artery", "ref": "Middle collateral artery", "organo": "arterie", "dati": {
+   "descrizione": {"valore": "Arteria, ramo di: arteria brachiale profonda. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.middle-genicular-artery", "ref": "Middle genicular artery", "organo": "arterie", "dati": {
+   "descrizione": {"valore": "Arteria, ramo di: arteria poplitea. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.middle-lobar-artery-of-right-lung", "ref": "Middle lobar artery of right lung", "organo": "vpolm", "dati": {
+   "descrizione": {"valore": "Ramo dell'arteria polmonare che porta il sangue venoso al segmento middle lobar del polmone destro, accanto al suo bronco segmentario.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.middle-lobar-bronchus", "ref": "Middle lobar bronchus", "organo": "vie", "dati": {
+   "descrizione": {"valore": "Nasce dal bronco intermedio e va al lobo medio, dove si divide nei bronchi segmentari laterale e mediale.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.middle-lobe-of-right-lung", "ref": "Middle lobe of right lung", "organo": "polmoni", "dati": {
+   "descrizione": {"valore": "Lobo medio del polmone destro, tra la scissura orizzontale e la scissura obliqua, nella parte anteriore e bassa. Segmenti: laterale e mediale. Si ausculta davanti, sotto la quarta costa sulla destra.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.middle-meningeal-artery", "ref": "Middle meningeal artery", "organo": "arterie", "dati": {
+   "descrizione": {"valore": "Arteria, ramo di: arteria mascellare. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.musculophrenic-artery", "ref": "Musculophrenic artery", "organo": "arterie", "dati": {
+   "descrizione": {"valore": "Arteria, ramo di: arteria toracica interna. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.musculophrenic-veins", "ref": "Musculophrenic veins", "organo": "vene", "dati": {
+   "descrizione": {"valore": "Vena, affluente di: vene toraciche interne. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.mylohyoid-branch-of-inferior-alveolar-artery", "ref": "Mylohyoid branch of inferior alveolar artery", "organo": "arterie", "dati": {
+   "descrizione": {"valore": "Arteria, ramo di: arteria alveolare inferiore. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.non-coronary-leaflet", "ref": "Non-coronary leaflet", "organo": "valvole", "dati": {
+   "nome": {"valore": "Cuspide non coronarica della valvola aortica", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Cuspide semilunare posteriore della valvola aortica: il suo seno non dà origine a coronarie.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.obturator-artery", "ref": "Obturator artery", "organo": "arterie", "dati": {
+   "descrizione": {"valore": "Arteria, ramo di: divisione anteriore dell'arteria iliaca interna. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.occipital-artery", "ref": "Occipital artery", "organo": "arterie", "dati": {
+   "descrizione": {"valore": "Arteria, ramo di: arteria carotide esterna. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.occipital-sinus", "ref": "Occipital sinus", "organo": "vene", "dati": {
+   "descrizione": {"valore": "Seno venoso della dura madre, sbocca in: confluente dei seni. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.occipital-vein", "ref": "Occipital vein", "organo": "vene", "dati": {
+   "descrizione": {"valore": "Vena, affluente di: vena vertebrale. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.ophthalmic-artery", "ref": "Ophthalmic artery", "organo": "arterie", "dati": {
+   "descrizione": {"valore": "Arteria, ramo di: arteria carotide interna. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.orbitofrontal-branches-of-anterior-cerebral-artery", "ref": "Orbitofrontal branches of anterior cerebral artery", "organo": "arterie", "dati": {
+   "descrizione": {"valore": "Arteria, ramo di: arteria cerebrale anteriore. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.palmar-carpal-branch-of-radial-artery", "ref": "Palmar carpal branch of radial artery", "organo": "arterie", "dati": {
+   "descrizione": {"valore": "Arteria, ramo di: arteria radiale. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.palmar-digital-veins", "ref": "Palmar digital veins", "organo": "vene", "dati": {
+   "descrizione": {"valore": "Vena, affluente di: arcata venosa palmare superficiale. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.palmar-metacarpal-arteries", "ref": "Palmar metacarpal arteries", "organo": "arterie", "dati": {
+   "descrizione": {"valore": "Arteria, ramo di: arcata palmare profonda. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.parietal-branches-of-middle-cerebral-artery", "ref": "Parietal branches of middle cerebral artery", "organo": "arterie", "dati": {
+   "descrizione": {"valore": "Arteria, ramo di: arteria cerebrale media (Segmento M3). Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.parieto-occipital-artery", "ref": "Parieto-occipital artery", "organo": "arterie", "dati": {
+   "descrizione": {"valore": "Arteria, ramo di: arteria cerebrale posteriore. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.patellar-anastomosis", "ref": "Patellar anastomosis", "organo": "arterie", "dati": {
+   "descrizione": {"valore": "Arteria, ramo di: arteria poplitea. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.pectoral-branches-of-thoraco-acromial-artery", "ref": "Pectoral branches of thoraco-acromial artery", "organo": "arterie", "dati": {
+   "descrizione": {"valore": "Arteria, ramo di: arteria toracoacromiale. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.perforating-branches-of-plantar-metatarsal-arteries", "ref": "Perforating branches of plantar metatarsal arteries", "organo": "arterie", "dati": {
+   "descrizione": {"valore": "Arteria, ramo di: arterie metatarsali plantari. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.perforating-femoral-arteries", "ref": "Perforating femoral arteries", "organo": "arterie", "dati": {
+   "descrizione": {"valore": "Arteria, ramo di: arteria femorale profonda. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.perforating-veins", "ref": "Perforating veins", "organo": "vene", "dati": {
+   "descrizione": {"valore": "Vena, affluente di: vena femorale profonda. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.pericallosal-artery", "ref": "Pericallosal artery", "organo": "arterie", "dati": {
+   "descrizione": {"valore": "Arteria, ramo di: arteria cerebrale anteriore. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.plantar-arch", "ref": "Plantar arch", "organo": "arterie", "dati": {
+   "descrizione": {"valore": "Arteria, ramo di: arteria plantare laterale. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.plantar-digital-veins", "ref": "Plantar digital veins", "organo": "vene", "dati": {
+   "descrizione": {"valore": "Vena, affluente di: vene metatarsali plantari. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.plantar-metatarsal-arteries", "ref": "Plantar metatarsal arteries", "organo": "arterie", "dati": {
+   "descrizione": {"valore": "Arteria, ramo di: arcata plantare profonda. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.plantar-metatarsal-veins", "ref": "Plantar metatarsal veins", "organo": "vene", "dati": {
+   "descrizione": {"valore": "Vena, affluente di: arco venoso plantare. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.plantar-venous-arch", "ref": "Plantar venous arch", "organo": "vene", "dati": {
+   "descrizione": {"valore": "Vena, affluente di: vene plantari laterali. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.pleura", "ref": "Pleura", "organo": "pleura", "dati": {
+   "descrizione": {"valore": "Sierosa che avvolge ciascun polmone: foglietto viscerale aderente al polmone e foglietto parietale sulla parete del torace, sul diaframma e sul mediastino, con in mezzo la cavità pleurica (un velo di liquido). Aria nella cavità: pneumotorace; liquido: versamento pleurico. I recessi costodiaframmatici scendono fino alla decima costa sulla linea ascellare media.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.popliteal-artery", "ref": "Popliteal artery", "organo": "arterie", "dati": {
+   "descrizione": {"valore": "Continua la femorale dallo iato degli adduttori nella fossa poplitea, l'elemento più profondo, appoggiata al femore e alla capsula del ginocchio; sotto il popliteo si divide in tibiale anteriore e posteriore.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.popliteal-vein", "ref": "Popliteal vein", "organo": "vene", "dati": {
+   "descrizione": {"valore": "Nella fossa poplitea, tra l'arteria (profonda) e il nervo tibiale (superficiale); riceve la piccola safena.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.postcentral-arterial-branch", "ref": "Postcentral arterial branch", "organo": "arterie", "dati": {
+   "descrizione": {"valore": "Arteria, ramo di: arteria cerebrale media (Segmento M3). Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.posterior-auricular-vein", "ref": "Posterior auricular vein", "organo": "vene", "dati": {
+   "descrizione": {"valore": "Vena, affluente di: vena giugulare esterna. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.posterior-basal-segmental-artery-of-left-lung", "ref": "Posterior basal segmental artery of left lung", "organo": "vpolm", "dati": {
+   "descrizione": {"valore": "Ramo dell'arteria polmonare che porta il sangue venoso al segmento basale posteriore del polmone sinistro, accanto al suo bronco segmentario.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.posterior-basal-segmental-artery-of-right-lung", "ref": "Posterior basal segmental artery of right lung", "organo": "vpolm", "dati": {
+   "descrizione": {"valore": "Ramo dell'arteria polmonare che porta il sangue venoso al segmento basale posteriore del polmone destro, accanto al suo bronco segmentario.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.posterior-basal-segmental-bronchus-of-left-lung-bx", "ref": "Posterior basal segmental bronchus of left lung (BX)", "organo": "vie", "dati": {
+   "descrizione": {"valore": "Bronco segmentario che ventila il segmento basale posteriore del polmone sinistro (BX). I segmenti broncopolmonari hanno ognuno il proprio bronco e la propria arteria: si possono asportare uno per uno.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.posterior-basal-segmental-bronchus-of-right-lung-bx", "ref": "Posterior basal segmental bronchus of right lung (BX)", "organo": "vie", "dati": {
+   "descrizione": {"valore": "Bronco segmentario che ventila il segmento basale posteriore del polmone destro (BX). I segmenti broncopolmonari hanno ognuno il proprio bronco e la propria arteria: si possono asportare uno per uno.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.posterior-branch-of-renal-artery", "ref": "Posterior branch of renal artery", "organo": "arterie", "dati": {
+   "descrizione": {"valore": "Arteria, ramo di: arteria renale destra. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.posterior-cerebral-artery", "ref": "Posterior cerebral artery", "organo": "arterie", "dati": {
+   "descrizione": {"valore": "Arteria, ramo di: arteria basilare. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.posterior-circumflex-humeral-artery", "ref": "Posterior circumflex humeral artery", "organo": "arterie", "dati": {
+   "descrizione": {"valore": "Arteria, ramo di: arteria ascellare. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.posterior-circumflex-humeral-vein", "ref": "Posterior circumflex humeral vein", "organo": "vene", "dati": {
+   "descrizione": {"valore": "Vena, affluente di: vena ascellare. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.posterior-deep-temporal-artery", "ref": "Posterior deep temporal artery", "organo": "arterie", "dati": {
+   "descrizione": {"valore": "Arteria, ramo di: arteria mascellare. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.posterior-division-of-internal-iliac-artery", "ref": "Posterior division of internal iliac artery", "organo": "arterie", "dati": {
+   "descrizione": {"valore": "Arteria, ramo di: arteria iliaca interna. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.posterior-division-of-retromandibular-vein", "ref": "Posterior division of retromandibular vein", "organo": "vene", "dati": {
+   "descrizione": {"valore": "Vena, affluente di: vena giugulare esterna. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.posterior-ethmoidal-artery", "ref": "Posterior ethmoidal artery", "organo": "arterie", "dati": {
+   "descrizione": {"valore": "Arteria, ramo di: arteria oftalmica. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.posterior-inferior-cerebellar-artery", "ref": "Posterior inferior cerebellar artery", "organo": "arterie", "dati": {
+   "descrizione": {"valore": "Arteria, ramo di: arteria vertebrale. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.posterior-intercavernous-sinus", "ref": "Posterior intercavernous sinus", "organo": "vene", "solo2d": true, "dati": {
+   "descrizione": {"valore": "Seno che unisce dietro l'ipofisi i due seni cavernosi.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.posterior-intercostal-arteries", "ref": "Posterior intercostal arteries", "organo": "arterie", "dati": {
+   "descrizione": {"valore": "Arteria, ramo di: aorta toracica. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.posterior-interosseous-artery", "ref": "Posterior interosseous artery", "organo": "arterie", "dati": {
+   "descrizione": {"valore": "Arteria, ramo di: arteria interossea comune. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.posterior-lateral-nasal-branches-of-sphenopalatine-artery", "ref": "Posterior lateral nasal branches of sphenopalatine artery.", "organo": "arterie", "dati": {
+   "descrizione": {"valore": "Arteria, ramo di: arteria mascellare. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.posterior-leaflet-of-left-atrioventricular-valve", "ref": "Posterior leaflet of left atrioventricular valve", "organo": "valvole", "dati": {
+   "nome": {"valore": "Lembo posteriore della valvola mitrale", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Lembo posteriore della valvola mitrale (bicuspide), tra atrio e ventricolo sinistro; il lembo anteriore non è nella fonte. È il lembo più spesso coinvolto nel prolasso mitralico. La mitrale si ausculta all'apice, quinto spazio intercostale sinistro sulla linea emiclaveare.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.posterior-parietal-artery", "ref": "Posterior parietal artery", "organo": "arterie", "dati": {
+   "descrizione": {"valore": "Arteria, ramo di: arteria cerebrale media (Segmento M3). Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.posterior-segmental-artery-of-left-lung", "ref": "Posterior segmental artery of left lung", "organo": "vpolm", "dati": {
+   "descrizione": {"valore": "Ramo dell'arteria polmonare che porta il sangue venoso al segmento posteriore del polmone sinistro, accanto al suo bronco segmentario.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.posterior-segmental-artery-of-right-lung", "ref": "Posterior segmental artery of right lung", "organo": "vpolm", "dati": {
+   "descrizione": {"valore": "Ramo dell'arteria polmonare che porta il sangue venoso al segmento posteriore del polmone destro, accanto al suo bronco segmentario.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.posterior-segmental-bronchus-of-right-lung-bii", "ref": "Posterior segmental bronchus of right lung (BII)", "organo": "vie", "dati": {
+   "descrizione": {"valore": "Bronco segmentario che ventila il segmento posteriore del polmone destro (BII). I segmenti broncopolmonari hanno ognuno il proprio bronco e la propria arteria: si possono asportare uno per uno.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.posterior-septal-branches-of-sphenopalatine-artery", "ref": "Posterior septal branches of sphenopalatine artery", "organo": "arterie", "dati": {
+   "descrizione": {"valore": "Arteria, ramo di: arteria mascellare. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.posterior-superior-alveolar-artery", "ref": "Posterior superior alveolar artery", "organo": "arterie", "dati": {
+   "descrizione": {"valore": "Arteria, ramo di: arteria mascellare. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.posterior-temporal-branch", "ref": "Posterior temporal branch", "organo": "arterie", "dati": {
+   "descrizione": {"valore": "Arteria, ramo di: arteria cerebrale media (Segmento M3). Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.posterior-tibial-artery", "ref": "Posterior tibial artery", "organo": "arterie", "dati": {
+   "descrizione": {"valore": "Scende nella loggia posteriore profonda della gamba; dietro il malleolo mediale (polso tibiale posteriore) entra nel tunnel tarsale e si divide nelle plantari mediale e laterale.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.posterior-tibial-veins", "ref": "Posterior tibial veins", "organo": "vene", "dati": {
+   "descrizione": {"valore": "Vena, affluente di: vena poplitea. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.posterior-vein-of-right-lung", "ref": "Posterior vein of right lung", "organo": "vpolm", "dati": {
+   "descrizione": {"valore": "Vena del polmone destro: raccoglie il sangue ossigenato e lo porta a una vena polmonare. Le vene corrono tra i segmenti, non accanto ai bronchi come le arterie.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.prefrontal-artery", "ref": "Prefrontal artery", "organo": "arterie", "dati": {
+   "descrizione": {"valore": "Arteria, ramo di: rami insulari dell'arteria cerebrale media. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.proper-hepatic-artery", "ref": "Proper hepatic artery", "organo": "arterie", "dati": {
+   "descrizione": {"valore": "Arteria, ramo di: arteria epatica comune. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.proper-palmar-digital-arteries", "ref": "Proper palmar digital arteries", "organo": "arterie", "dati": {
+   "descrizione": {"valore": "Arteria, ramo di: arterie digitali palmari comuni. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.proper-plantar-digital-arteries", "ref": "Proper plantar digital arteries", "organo": "arterie", "dati": {
+   "descrizione": {"valore": "Arteria, ramo di: arterie digitali plantari comuni. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.proximal-lateral-striate-branches", "ref": "Proximal lateral striate branches", "organo": "arterie", "dati": {
+   "descrizione": {"valore": "Arteria, ramo di: arteria cerebrale media. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.pulmonary-trunk", "ref": "Pulmonary trunk", "organo": "pgrandi", "dati": {
+   "descrizione": {"valore": "Esce dal ventricolo destro attraverso la valvola polmonare, davanti e a sinistra dell'aorta ascendente, e porta il sangue venoso ai polmoni. È unito all'arco aortico dal legamento arterioso (residuo del dotto arterioso di Botallo).", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.radial-artery", "ref": "Radial artery", "organo": "arterie", "dati": {
+   "descrizione": {"valore": "Scende nel lato laterale dell'avambraccio; al polso si palpa tra il tendine del flessore radiale del carpo e il radio (polso radiale). Passa nella tabacchiera anatomica e forma l'arcata palmare profonda.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.radial-collateral-artery", "ref": "Radial collateral artery", "organo": "arterie", "dati": {
+   "descrizione": {"valore": "Arteria, ramo di: arteria brachiale profonda. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.radial-veins", "ref": "Radial veins", "organo": "vene", "dati": {
+   "descrizione": {"valore": "Vena, affluente di: vene brachiali. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.recurrent-interosseous-artery", "ref": "Recurrent interosseous artery", "organo": "arterie", "dati": {
+   "descrizione": {"valore": "Arteria, ramo di: arteria interossea comune. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.retromandibular-vein", "ref": "Retromandibular vein", "organo": "vene", "dati": {
+   "descrizione": {"valore": "Vena, affluente di: divisione anteriore della vena retromandibolare. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.right-ascending-lumbar-vein", "ref": "Right ascending lumbar vein", "organo": "vene", "dati": {
+   "descrizione": {"valore": "Vena, affluente di: vena azygos. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.right-atrium", "ref": "Right atrium", "organo": "cuore", "dati": {
+   "descrizione": {"valore": "Riceve il sangue venoso dalla vena cava superiore, dalla vena cava inferiore e dal seno coronario. Contiene il nodo seno-atriale (pacemaker) e il nodo atrioventricolare; comunica con il ventricolo destro attraverso la valvola tricuspide. Sul setto interatriale c'è la fossa ovale, residuo del forame ovale fetale.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.right-brachiocephalic-vein", "ref": "Right brachiocephalic vein", "organo": "grandi", "dati": {
+   "descrizione": {"valore": "Unione della giugulare interna e della succlavia destre: breve e quasi verticale, forma con la sinistra la vena cava superiore.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.right-colic-artery", "ref": "Right colic artery", "organo": "arterie", "dati": {
+   "descrizione": {"valore": "Arteria, ramo di: arteria mesenterica superiore. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.right-colic-vein", "ref": "Right colic vein", "organo": "vene", "dati": {
+   "descrizione": {"valore": "Vena, affluente di: vena mesenterica superiore. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.right-common-carotid-artery", "ref": "Right common carotid artery", "organo": "arterie", "dati": {
+   "descrizione": {"valore": "Nasce dal tronco brachiocefalico e sale nel collo, nella guaina carotidea con la vena giugulare interna e il nervo vago, fino al margine superiore della cartilagine tiroidea (C4), dove si divide.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.right-coronary-artery", "ref": "Right coronary artery", "organo": "coronarie", "dati": {
+   "descrizione": {"valore": "Nasce dal seno aortico destro e corre nel solco coronario (atrioventricolare) destro. Irrora atrio e ventricolo destro e, nella maggior parte delle persone (dominanza destra), il nodo seno-atriale, il nodo atrioventricolare e la parete inferiore con il ramo interventricolare posteriore.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.right-coronary-leaflet", "ref": "Right coronary leaflet", "organo": "valvole", "dati": {
+   "nome": {"valore": "Cuspide coronarica destra della valvola aortica", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Cuspide semilunare della valvola aortica: dal seno aortico sopra di essa nasce l'arteria coronaria destra.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.right-gastro-omental-vein", "ref": "Right gastro-omental vein", "organo": "vene", "dati": {
+   "descrizione": {"valore": "Vena, affluente di: vena mesenterica superiore. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.right-inferior-lobar-bronchus", "ref": "Right inferior lobar bronchus", "organo": "vie", "dati": {
+   "descrizione": {"valore": "Continua il bronco intermedio nel lobo inferiore destro: dà il bronco segmentario superiore e i quattro basali.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.right-inferior-pulmonary-vein", "ref": "Right inferior pulmonary vein", "organo": "pgrandi", "dati": {
+   "descrizione": {"valore": "Porta il sangue ossigenato del lobo inferiore del polmone destro all'atrio sinistro.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.right-inferolateral-branch-of-right-coronary-artery", "ref": "Right inferolateral branch of right coronary artery", "organo": "coronarie", "dati": {
+   "nome": {"valore": "Ramo marginale destro dell'arteria coronaria destra", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Ramo marginale destro della coronaria destra: scende lungo il margine destro (acuto) del cuore e irrora il ventricolo destro.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.right-main-bronchus", "ref": "Right main bronchus", "organo": "vie", "dati": {
+   "descrizione": {"valore": "Più corto, più largo e più verticale del sinistro: per questo i corpi estranei inalati finiscono più spesso a destra. Dà subito il bronco lobare superiore e continua come bronco intermedio.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.right-pulmonary-artery", "ref": "Right pulmonary artery", "organo": "pgrandi", "dati": {
+   "descrizione": {"valore": "Passa orizzontale dietro l'aorta ascendente e la vena cava superiore fino all'ilo del polmone destro, dove si divide nelle arterie lobari superiore, media e inferiore.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.right-renal-artery", "ref": "Right renal artery", "organo": "arterie", "dati": {
+   "descrizione": {"valore": "Nasce dall'aorta all'altezza di L1-L2 e passa dietro la vena cava inferiore fino all'ilo del rene destro.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.right-renal-vein", "ref": "Right renal vein", "organo": "vene", "dati": {
+   "descrizione": {"valore": "Vena, affluente di: vena cava inferiore (parte abdominale). Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.right-semilunar-leaflet-of-pulmonary-valve", "ref": "Right semilunar leaflet of pulmonary valve", "organo": "valvole", "dati": {
+   "descrizione": {"valore": "Cuspide semilunare destra della valvola polmonare.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.right-subclavian-artery", "ref": "Right subclavian artery", "organo": "arterie", "dati": {
+   "descrizione": {"valore": "Nasce dal tronco brachiocefalico, passa sopra la prima costa tra scaleno anteriore e medio e al margine esterno della prima costa diventa ascellare. Dà vertebrale, toracica interna, tronco tireocervicale e costocervicale.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.right-subclavian-vein", "ref": "Right subclavian vein", "organo": "vene", "dati": {
+   "descrizione": {"valore": "Continua la vena ascellare sopra la prima costa, davanti allo scaleno anteriore, e si unisce alla giugulare interna nella vena brachiocefalica.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.right-subcostal-vein", "ref": "Right subcostal vein", "organo": "vene", "dati": {
+   "descrizione": {"valore": "Vena, affluente di: vena azygos. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.right-superior-intercostal-vein", "ref": "Right superior intercostal vein", "organo": "vene", "dati": {
+   "descrizione": {"valore": "Vena, affluente di: vena azygos. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.right-superior-lobar-bronchus", "ref": "Right superior lobar bronchus", "organo": "vie", "dati": {
+   "descrizione": {"valore": "Nasce dal bronco principale destro sopra l'arteria polmonare (bronco eparterioso) e si divide nei bronchi segmentari apicale, posteriore e anteriore.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.right-superior-phrenic-vein", "ref": "Right superior phrenic vein", "organo": "vene", "dati": {
+   "descrizione": {"valore": "Vena, affluente di: vena azygos. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.right-superior-pulmonary-vein", "ref": "Right superior pulmonary vein", "organo": "pgrandi", "dati": {
+   "nome": {"valore": "Vena polmonare superiore destra", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Porta il sangue ossigenato dei lobi superiore e medio del polmone destro all'atrio sinistro.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.right-testicular-artery", "ref": "Right testicular artery", "organo": "arterie", "dati": {
+   "descrizione": {"valore": "Arteria, ramo di: aorta addominale. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.right-testicular-vein", "ref": "Right testicular vein", "organo": "vene", "dati": {
+   "descrizione": {"valore": "Vena, affluente di: vena cava inferiore (parte abdominale). Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.right-ventricle", "ref": "Right ventricle", "organo": "cuore", "dati": {
+   "descrizione": {"valore": "Forma la maggior parte della faccia anteriore (sternocostale) del cuore. Spinge il sangue venoso nel tronco polmonare attraverso la valvola polmonare, a bassa pressione: la parete è più sottile del ventricolo sinistro. All'interno: trabecole carnee, muscoli papillari e banda moderatrice.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.second-posterior-intercostal-artery", "ref": "Second posterior intercostal artery", "organo": "arterie", "dati": {
+   "descrizione": {"valore": "Arteria, ramo di: arteria intercostale suprema. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.septal-branches-of-anterior-interventricular-artery", "ref": "Septal branches of anterior interventricular artery", "organo": "coronarie", "dati": {
+   "nome": {"valore": "Rami settali del ramo interventricolare anteriore", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Rami settali del ramo interventricolare anteriore: penetrano nel setto interventricolare e ne irrorano i due terzi anteriori, con il fascio di His e le sue branche.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.septal-branches-of-posterior-ethmoidal-artery", "ref": "Septal branches of posterior ethmoidal artery", "organo": "arterie", "dati": {
+   "descrizione": {"valore": "Arteria, ramo di: arteria etmoidale posteriore. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.septal-leaflet-of-right-atrioventricular-valve", "ref": "Septal leaflet of right atrioventricular valve", "organo": "valvole", "dati": {
+   "nome": {"valore": "Lembo settale della valvola tricuspide", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Lembo della valvola tricuspide (tra atrio e ventricolo destro) attaccato al setto interventricolare; le corde tendinee lo legano ai muscoli papillari. La tricuspide si ausculta al quarto-quinto spazio intercostale, al margine sinistro dello sterno.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.septal-papillary-muscle-of-right-ventricle", "ref": "Septal papillary muscle of right ventricle", "organo": "valvole", "dati": {
+   "nome": {"valore": "Muscolo papillare settale del ventricolo destro", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Piccolo muscolo papillare (a volte solo corde) che nasce dal setto interventricolare e va al lembo settale della tricuspide.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.short-posterior-ciliary-arteries", "ref": "Short posterior ciliary arteries", "organo": "arterie", "dati": {
+   "descrizione": {"valore": "Arteria, ramo di: arteria oftalmica. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.sigmoid-arteries", "ref": "Sigmoid arteries", "organo": "arterie", "dati": {
+   "descrizione": {"valore": "Arteria, ramo di: arteria mesenterica inferiore. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.sigmoid-sinus", "ref": "Sigmoid sinus", "organo": "vene", "solo2d": true, "dati": {
+   "descrizione": {"valore": "Seno venoso della dura madre a forma di S: continua il seno trasverso, scava un solco sulla rocca del temporale e al forame giugulare diventa vena giugulare interna.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.sigmoid-veins", "ref": "Sigmoid veins", "organo": "vene", "dati": {
+   "descrizione": {"valore": "Vena, affluente di: vena mesenterica inferiore. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.small-saphenous-vein", "ref": "Small saphenous vein", "organo": "vene", "dati": {
+   "descrizione": {"valore": "Dietro il malleolo laterale sale lungo il polpaccio e sbocca nella vena poplitea.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.spinal-branch-of-iliolumbar-artery", "ref": "Spinal branch of iliolumbar artery", "organo": "arterie", "dati": {
+   "descrizione": {"valore": "Arteria, ramo di: arteria ileolombare. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.splenic-artery", "ref": "Splenic artery", "organo": "arterie", "dati": {
+   "descrizione": {"valore": "Arteria, ramo di: tronco celiaco. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.splenic-vein", "ref": "Splenic vein", "organo": "vene", "solo2d": true, "dati": {
+   "descrizione": {"valore": "Esce dall'ilo della milza, corre dietro il pancreas e dietro il collo del pancreas si unisce alla mesenterica superiore formando la vena porta; riceve la mesenterica inferiore.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.straight-sinus", "ref": "Straight sinus", "organo": "vene", "dati": {
+   "descrizione": {"valore": "Seno venoso della dura madre, sbocca in: confluente dei seni. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.subcostal-artery", "ref": "Subcostal artery", "organo": "arterie", "dati": {
+   "descrizione": {"valore": "Arteria, ramo di: aorta toracica. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.submental-artery", "ref": "Submental artery", "organo": "arterie", "dati": {
+   "descrizione": {"valore": "Arteria, ramo di: arteria facciale. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.submental-vein", "ref": "Submental vein", "organo": "vene", "dati": {
+   "descrizione": {"valore": "Vena, affluente di: vena facciale. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.subscapular-artery", "ref": "Subscapular artery", "organo": "arterie", "dati": {
+   "descrizione": {"valore": "Arteria, ramo di: arteria ascellare. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.subscapular-vein", "ref": "Subscapular vein", "organo": "vene", "dati": {
+   "descrizione": {"valore": "Vena, affluente di: vena ascellare. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.superficial-branch-of-medial-plantar-artery", "ref": "Superficial branch of medial plantar artery", "organo": "arterie", "dati": {
+   "descrizione": {"valore": "Arteria, ramo di: arteria plantare mediale. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.superficial-dorsal-veins-of-penis", "ref": "Superficial dorsal veins of penis", "organo": "vene", "dati": {
+   "descrizione": {"valore": "Vena, affluente di: vene pudende esterne. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.superficial-epigastric-artery", "ref": "Superficial epigastric artery", "organo": "arterie", "dati": {
+   "descrizione": {"valore": "Arteria, ramo di: arteria femorale. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.superficial-epigastric-vein", "ref": "Superficial epigastric vein", "organo": "vene", "dati": {
+   "descrizione": {"valore": "Vena, affluente di: vena grande safena. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.superficial-external-pudendal-artery", "ref": "Superficial external pudendal artery", "organo": "arterie", "dati": {
+   "descrizione": {"valore": "Arteria, ramo di: arteria femorale. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.superficial-palmar-arch", "ref": "Superficial palmar arch", "organo": "arterie", "dati": {
+   "descrizione": {"valore": "Arteria, ramo di: arteria ulnare. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.superficial-temporal-artery", "ref": "Superficial temporal artery", "organo": "arterie", "dati": {
+   "descrizione": {"valore": "Arteria, ramo di: arteria carotide esterna. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.superficial-temporal-veins", "ref": "Superficial temporal veins", "organo": "vene", "dati": {
+   "descrizione": {"valore": "Vena, affluente di: vena retromandibolare. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.superficial-venous-palmar-arch", "ref": "Superficial venous palmar arch", "organo": "vene", "dati": {
+   "descrizione": {"valore": "Vena, affluente di: vene ulnari. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.superior-anorectal-artery", "ref": "Superior anorectal artery", "organo": "arterie", "dati": {
+   "descrizione": {"valore": "Arteria, ramo di: arteria mesenterica inferiore. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.superior-basal-vein-of-left-lung", "ref": "Superior basal vein of left lung", "organo": "vpolm", "dati": {
+   "descrizione": {"valore": "Vena del polmone sinistro: raccoglie il sangue ossigenato e lo porta a una vena polmonare. Le vene corrono tra i segmenti, non accanto ai bronchi come le arterie.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.superior-basal-vein-of-right-lung", "ref": "Superior basal vein of right lung", "organo": "vpolm", "dati": {
+   "nome": {"valore": "Vena basale superiore del polmone destro", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Vena del polmone destro: raccoglie il sangue ossigenato e lo porta a una vena polmonare. Le vene corrono tra i segmenti, non accanto ai bronchi come le arterie.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.superior-cerebellar-artery", "ref": "Superior cerebellar artery", "organo": "arterie", "dati": {
+   "descrizione": {"valore": "Arteria, ramo di: arteria basilare. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.superior-epigastric-artery", "ref": "Superior epigastric artery", "organo": "arterie", "dati": {
+   "descrizione": {"valore": "Arteria, ramo di: arteria toracica interna. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.superior-epigastric-veins", "ref": "Superior epigastric veins", "organo": "vene", "dati": {
+   "descrizione": {"valore": "Vena, affluente di: vene toraciche interne. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.superior-gluteal-artery", "ref": "Superior gluteal artery", "organo": "arterie", "dati": {
+   "descrizione": {"valore": "Arteria, ramo di: divisione posteriore dell'arteria iliaca interna. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.superior-gluteal-veins", "ref": "Superior gluteal veins", "organo": "vene", "dati": {
+   "descrizione": {"valore": "Vena, affluente di: vena iliaca interna. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.superior-labial-artery", "ref": "Superior labial artery", "organo": "arterie", "dati": {
+   "descrizione": {"valore": "Arteria, ramo di: arteria facciale. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.superior-labial-vein", "ref": "Superior labial vein", "organo": "vene", "dati": {
+   "descrizione": {"valore": "Vena, affluente di: vena facciale. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.superior-lateral-genicular-artery", "ref": "Superior lateral genicular artery", "organo": "arterie", "dati": {
+   "descrizione": {"valore": "Arteria, ramo di: arteria poplitea. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.superior-lingular-artery-of-left-lung", "ref": "Superior lingular artery of left lung", "organo": "vpolm", "dati": {
+   "nome": {"valore": "Arteria lingulare superiore del polmone sinistro", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Ramo dell'arteria polmonare che porta il sangue venoso al segmento lingulare superiore del polmone sinistro, accanto al suo bronco segmentario.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.superior-lingular-segmental-bronchus-of-left-lung-biv", "ref": "Superior lingular segmental bronchus of left lung (BIV)", "organo": "vie", "dati": {
+   "descrizione": {"valore": "Bronco segmentario che ventila il segmento lingulare superiore del polmone sinistro (BIV). I segmenti broncopolmonari hanno ognuno il proprio bronco e la propria arteria: si possono asportare uno per uno.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.superior-lingular-vein-of-left-lung", "ref": "Superior lingular vein of left lung", "organo": "vpolm", "dati": {
+   "descrizione": {"valore": "Vena del polmone sinistro: raccoglie il sangue ossigenato e lo porta a una vena polmonare. Le vene corrono tra i segmenti, non accanto ai bronchi come le arterie.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.superior-lobar-artery-of-right-lung", "ref": "Superior lobar artery of right lung", "organo": "vpolm", "dati": {
+   "descrizione": {"valore": "Ramo dell'arteria polmonare che porta il sangue venoso al segmento superior lobar del polmone destro, accanto al suo bronco segmentario.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.superior-lobe-of-left-lung", "ref": "Superior lobe of left lung", "organo": "polmoni", "dati": {
+   "descrizione": {"valore": "Lobo superiore del polmone sinistro, sopra la scissura obliqua. Ha davanti l'incisura cardiaca e, sotto, la lingula (corrispondente al lobo medio di destra). Segmenti: apicoposteriore, anteriore, lingulare superiore e inferiore.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.superior-lobe-of-right-lung", "ref": "Superior lobe of right lung", "organo": "polmoni", "dati": {
+   "descrizione": {"valore": "Lobo superiore del polmone destro, separato dal medio dalla scissura orizzontale (all'altezza della quarta cartilagine costale) e dall'inferiore dalla scissura obliqua. Segmenti: apicale, posteriore, anteriore. L'apice sale sopra la clavicola.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.superior-medial-genicular-artery", "ref": "Superior medial genicular artery", "organo": "arterie", "dati": {
+   "descrizione": {"valore": "Arteria, ramo di: arteria poplitea. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.superior-mesenteric-artery", "ref": "Superior mesenteric artery", "organo": "arterie", "dati": {
+   "descrizione": {"valore": "Nasce dall'aorta addominale sotto il tripode celiaco (L1) e irrora intestino tenue, colon ascendente e due terzi del trasverso. La sua occlusione dà l'ischemia mesenterica acuta.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.superior-mesenteric-vein", "ref": "Superior mesenteric vein", "organo": "vene", "solo2d": true, "dati": {
+   "descrizione": {"valore": "Raccoglie il sangue di intestino tenue, colon destro e trasverso; dietro il collo del pancreas si unisce alla vena splenica nella vena porta.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.superior-ophthalmic-vein", "ref": "Superior ophthalmic vein", "organo": "vene", "solo2d": true, "dati": {
+   "descrizione": {"valore": "Raccoglie il sangue dell'orbita e sbocca nel seno cavernoso attraverso la fessura orbitaria superiore; comunica con la vena angolare della faccia.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.superior-petrosal-sinus", "ref": "Superior petrosal sinus", "organo": "vene", "dati": {
+   "descrizione": {"valore": "Seno venoso della dura madre, sbocca in: seno trasverso. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.superior-phrenic-arteries", "ref": "Superior phrenic arteries", "organo": "arterie", "dati": {
+   "descrizione": {"valore": "Arteria, ramo di: aorta toracica. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.superior-sagittal-sinus", "ref": "Superior sagittal sinus", "organo": "vene", "dati": {
+   "descrizione": {"valore": "Seno venoso della dura madre, sbocca in: confluente dei seni. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.superior-segmental-artery-of-left-lung", "ref": "Superior segmental artery of left lung", "organo": "vpolm", "dati": {
+   "descrizione": {"valore": "Ramo dell'arteria polmonare che porta il sangue venoso al segmento superiore del polmone sinistro, accanto al suo bronco segmentario.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.superior-segmental-artery-of-right-lung", "ref": "Superior segmental artery of right lung", "organo": "vpolm", "dati": {
+   "descrizione": {"valore": "Ramo dell'arteria polmonare che porta il sangue venoso al segmento superiore del polmone destro, accanto al suo bronco segmentario.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.superior-segmental-bronchus-of-left-lung-bvi", "ref": "Superior segmental bronchus of left lung (BVI)", "organo": "vie", "dati": {
+   "descrizione": {"valore": "Bronco segmentario che ventila il segmento superiore del polmone sinistro (BVI). I segmenti broncopolmonari hanno ognuno il proprio bronco e la propria arteria: si possono asportare uno per uno.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.superior-segmental-bronchus-of-right-lung-bvi", "ref": "Superior segmental bronchus of right lung (BVI)", "organo": "vie", "dati": {
+   "descrizione": {"valore": "Bronco segmentario che ventila il segmento superiore del polmone destro (BVI). I segmenti broncopolmonari hanno ognuno il proprio bronco e la propria arteria: si possono asportare uno per uno.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.superior-thyroid-vein", "ref": "Superior thyroid vein", "organo": "vene", "dati": {
+   "descrizione": {"valore": "Vena, affluente di: vena giugulare interna. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.superior-ulnar-collateral-artery", "ref": "Superior ulnar collateral artery", "organo": "arterie", "dati": {
+   "descrizione": {"valore": "Arteria, ramo di: arteria brachiale. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.superior-vein-of-left-lung", "ref": "Superior vein of left lung", "organo": "vpolm", "dati": {
+   "descrizione": {"valore": "Vena del polmone sinistro: raccoglie il sangue ossigenato e lo porta a una vena polmonare. Le vene corrono tra i segmenti, non accanto ai bronchi come le arterie.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.superior-vein-of-right-lung", "ref": "Superior vein of right lung", "organo": "vpolm", "dati": {
+   "descrizione": {"valore": "Vena del polmone destro: raccoglie il sangue ossigenato e lo porta a una vena polmonare. Le vene corrono tra i segmenti, non accanto ai bronchi come le arterie.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.superior-vena-cava", "ref": "Superior vena cava", "organo": "grandi", "dati": {
+   "descrizione": {"valore": "Nasce dall'unione delle due vene brachiocefaliche dietro la prima cartilagine costale destra e scende nell'atrio destro. Raccoglie il sangue di testa, collo, arti superiori e (con la vena azygos) della parete del torace.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.supra-orbital-artery", "ref": "Supra-orbital artery", "organo": "arterie", "dati": {
+   "descrizione": {"valore": "Arteria, ramo di: arteria oftalmica. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.suprascapular-artery", "ref": "Suprascapular artery", "organo": "arterie", "dati": {
+   "descrizione": {"valore": "Arteria, ramo di: tronco tireocervicale. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.suprascapular-vein", "ref": "Suprascapular vein", "organo": "vene", "dati": {
+   "descrizione": {"valore": "Vena, affluente di: vena giugulare esterna. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.supratrochlear-artery", "ref": "Supratrochlear artery", "organo": "arterie", "dati": {
+   "descrizione": {"valore": "Arteria, ramo di: arteria oftalmica. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.supreme-intercostal-artery", "ref": "Supreme intercostal artery", "organo": "arterie", "dati": {
+   "descrizione": {"valore": "Arteria, ramo di: tronco costocervicale. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.temporal-branches-of-middle-cerebral-artery", "ref": "Temporal branches of middle cerebral artery", "organo": "arterie", "dati": {
+   "descrizione": {"valore": "Arteria, ramo di: arteria cerebrale media (Segmento M3). Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.temporo-occipital-branch", "ref": "Temporo-occipital branch", "organo": "arterie", "dati": {
+   "descrizione": {"valore": "Arteria, ramo di: arteria cerebrale media (Segmento M3). Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.thoracic-aorta", "ref": "Thoracic aorta", "organo": "grandi", "dati": {
+   "descrizione": {"valore": "Aorta discendente toracica: dal livello di T4 scende a sinistra della colonna fino allo iato aortico del diaframma (T12). Dà le arterie intercostali posteriori, bronchiali ed esofagee.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.thoraco-acromial-artery", "ref": "Thoraco-acromial artery", "organo": "arterie", "dati": {
+   "descrizione": {"valore": "Arteria, ramo di: arteria ascellare. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.thoracodorsal-artery", "ref": "Thoracodorsal artery", "organo": "arterie", "dati": {
+   "descrizione": {"valore": "Arteria, ramo di: arteria sottoscapolare. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.thoracodorsal-vein", "ref": "Thoracodorsal vein", "organo": "vene", "dati": {
+   "descrizione": {"valore": "Vena, affluente di: vena sottoscapolare. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.thyrocervical-trunk", "ref": "Thyrocervical trunk", "organo": "arterie", "dati": {
+   "descrizione": {"valore": "Arteria, ramo di: arteria succlavia destra. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.trachea", "ref": "Trachea", "organo": "vie", "dati": {
+   "descrizione": {"valore": "Tubo di 16-20 anelli cartilaginei a C, aperti dietro (parete membranosa con il muscolo tracheale, davanti all'esofago). Va dalla cartilagine cricoide (C6) alla carena, dove si divide nei due bronchi principali, all'altezza dell'angolo sternale (T4-T5).", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.transverse-cervical-artery", "ref": "Transverse cervical artery", "organo": "arterie", "dati": {
+   "descrizione": {"valore": "Arteria, ramo di: tronco tireocervicale. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.transverse-facial-artery", "ref": "Transverse facial artery", "organo": "arterie", "dati": {
+   "descrizione": {"valore": "Arteria, ramo di: arteria temporale superficiale. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.transverse-sinus", "ref": "Transverse sinus", "organo": "vene", "dati": {
+   "descrizione": {"valore": "Seno venoso della dura madre, sbocca in: seno sigmoideo. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.ulnar-artery", "ref": "Ulnar artery", "organo": "arterie", "dati": {
+   "descrizione": {"valore": "Scende nel lato mediale dell'avambraccio sotto i flessori e al polso passa nel canale di Guyon con il nervo ulnare; forma soprattutto l'arcata palmare superficiale (test di Allen).", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.ulnar-veins", "ref": "Ulnar veins", "organo": "vene", "dati": {
+   "descrizione": {"valore": "Vena, affluente di: vene brachiali. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.vertebral-artery", "ref": "Vertebral artery", "organo": "arterie", "dati": {
+   "descrizione": {"valore": "Primo ramo della succlavia: sale nei forami trasversari da C6 a C1, entra nel cranio dal forame magno e si unisce alla controlaterale nell'arteria basilare.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "torace.vertebral-vein", "ref": "Vertebral vein", "organo": "vene", "dati": {
+   "descrizione": {"valore": "Vena, affluente di: vena brachiocefalica destra. Dalla gerarchia dei vasi della fonte (Terminologia Anatomica).", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }}
+ ]
+}

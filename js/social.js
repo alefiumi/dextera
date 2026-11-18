@@ -3,7 +3,7 @@
    copia resta sul dispositivo (dextera-social), così senza rete si vede la classifica dell'ultima volta. */
 import {$,toast} from './util.js';
 import {S} from './state.js';
-import {account as A,configured,esc} from './account.js';
+import {account as A,configured,esc,online} from './account.js';
 
 const KEY='dextera-social';
 const SO={tab:'all',all:[],rank:null,friends:[],rel:{fr:[],inc:[],out:[]},at:0,loading:false,err:'',found:null,q:''};
@@ -22,7 +22,7 @@ function mine(rows){
  return rows.sort((a,b)=>b.xp-a.xp);
 }
 export async function loadSocial(){
- if(!A.user||!A.sb||!navigator.onLine||SO.loading)return;
+ if(!A.user||!A.sb||!online()||SO.loading)return;
  SO.loading=true;SO.err='';redraw();
  try{
   const sb=A.sb,uid=A.user.id,cols='id,username,xp,streak,avatar';
@@ -39,7 +39,7 @@ export async function loadSocial(){
   // nomi e foto di chi compare nelle richieste
   const other=f=>f.user_id===uid?f.friend_id:f.user_id;
   const ids=[...new Set(rel.data.map(other))];
-  let ps=[];if(ids.length){const r=await sb.from('profiles').select('id,username,avatar').in('id',ids);if(r.error)throw r.error;ps=r.data;}
+  let ps=[];if(ids.length){const r=await sb.from('public_profiles').select('id,username,avatar').in('id',ids);if(r.error)throw r.error;ps=r.data;}
   const who=Object.fromEntries(ps.map(p=>[p.id,p]));
   const person=f=>({id:other(f),username:who[other(f)]?.username||'(senza nome)',avatar:who[other(f)]?.avatar||''});
   Object.assign(SO,{uid,all:mine(all.data),rank,friends:mine(fr.data),at:Date.now(),
@@ -53,10 +53,18 @@ export async function loadSocial(){
 /* ---------- disegno ---------- */
 const av=(src,name)=>src?`<img class="sav" src="${esc(src)}" alt="">`:`<span class="sav">${esc((name||'?').charAt(0).toUpperCase())}</span>`;
 const MED=['🥇','🥈','🥉'];
+// Una riga della classifica: toccando il nome di un altro giocatore si apre sotto la riga la richiesta di amicizia.
 function row(r,i){
- const me=A.user&&r.id===A.user.id;
- return `<div class="lb${me?' me':''}"><span class="pos">${i<3?MED[i]:i+1}</span>${av(r.avatar,r.username)}<span class="nm">${esc(r.username)}${me?' <small>(tu)</small>':''}</span>`+
-  `<span class="sk">${r.streak?'🔥 '+r.streak:''}</span><b>⭐ ${r.xp}</b></div>`;
+ const me=A.user&&r.id===A.user.id,open=!me&&SO.pick===r.id;
+ return `<div class="lb${me?' me':''}${open?' open':''}"${me?'':` data-so="pick" data-id="${esc(r.id)}" role="button"`}><span class="pos">${i<3?MED[i]:i+1}</span>${av(r.avatar,r.username)}<span class="nm">${esc(r.username)}${me?' <small>(tu)</small>':''}</span>`+
+  `<span class="sk">${r.streak?'🔥 '+r.streak:''}</span><b>⭐ ${r.xp}</b></div>`+(open?`<div class="lbx">${relBtn(r.id)}</div>`:'');
+}
+// stato dell'amicizia con un giocatore e il pulsante per l'azione possibile
+function relBtn(id){
+ const R=SO.rel,has=l=>l.some(p=>p.id===id);
+ return has(R.fr)?'<span class="mut">✅ Siete già amici</span>':has(R.out)?'<span class="mut">Richiesta inviata, in attesa</span>'
+  :has(R.inc)?`<span class="mut">Ti ha chiesto l'amicizia</span><button class="chip on" data-so="acc" data-id="${esc(id)}">Accetta</button>`
+  :`<button class="chip on" data-so="ask" data-id="${esc(id)}">👋 Chiedi l'amicizia</button>`;
 }
 function person(p,btns){return `<div class="lb">${av(p.avatar,p.username)}<span class="nm">${esc(p.username)}</span><span class="pb">${btns}</span></div>`;}
 const hm=t=>new Date(t).toLocaleString('it',{day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'});
@@ -70,20 +78,20 @@ export function renderSocial(){
  }
  const fresh=SO.uid===A.user.id,name=A.profile&&A.profile.username;
  const tabs=`<div class="chips seg"><button class="chip${SO.tab==='all'?' on':''}" data-so="tab" data-v="all">🌍 Tutti</button><button class="chip${SO.tab==='friends'?' on':''}" data-so="tab" data-v="friends">👥 Amici${fresh&&SO.rel.inc.length?' <span class="cnt">'+SO.rel.inc.length+'</span>':''}</button></div>`;
- const state=SO.loading?'<p class="mut">⏳ Aggiorno…</p>':SO.err?`<p class="err">${esc(SO.err)}</p>`:!navigator.onLine?`<p class="mut">📴 Senza connessione${fresh&&SO.at?': classifica del '+hm(SO.at):''}.</p>`:'';
+ const state=SO.loading?'<p class="mut">⏳ Aggiorno…</p>':SO.err?`<p class="err">${esc(SO.err)}</p>`:!online()?`<p class="mut">📴 Senza connessione${fresh&&SO.at?': classifica del '+hm(SO.at):''}.</p>`:'';
  const noName=name?'':'<p class="note">⚠️ Non hai ancora un nome utente: sceglilo nel Profilo (tocca la tua foto in alto) per comparire in classifica e farti trovare dagli amici.</p>';
  let body='';
  if(!fresh){body=SO.loading?'':'<p class="mut">Classifica non ancora scaricata: serve la connessione.</p>';}
  else if(SO.tab==='all'){
-  body=`<div class="sub">Classifica generale · XP</div>`+(SO.all.length?SO.all.map(row).join(''):'<p class="mut">Nessuno in classifica per ora.</p>');
+  body=`<div class="sub">Classifica generale · XP</div><p class="mut">Tocca un nome per chiedere l'amicizia.</p>`+(SO.all.length?SO.all.map(row).join(''):'<p class="mut">Nessuno in classifica per ora.</p>');
   if(SO.rank&&name)body+=`<div class="gap">…</div>`+row({id:A.user.id,username:name,xp:S.xp,streak:S.streak,avatar:S.prof.avatar},SO.rank-1);
  }else{
   const R=SO.rel;
-  body=(R.inc.length?`<div class="sub">Richieste ricevute</div>`+R.inc.map(p=>person(p,`<button class="chip on" data-so="acc" data-id="${p.id}">Accetta</button><button class="chip" data-so="del" data-id="${p.id}">Rifiuta</button>`)).join(''):'')+
+  body=(R.inc.length?`<div class="sub">Richieste ricevute</div>`+R.inc.map(p=>person(p,`<button class="chip on" data-so="acc" data-id="${esc(p.id)}">Accetta</button><button class="chip" data-so="del" data-id="${esc(p.id)}">Rifiuta</button>`)).join(''):'')+
    `<div class="sub">Classifica tra amici · XP</div>`+(SO.friends.length>1?SO.friends.map(row).join(''):'<p class="mut">Ancora nessun amico: cercalo qui sotto per nome utente e mandagli una richiesta.</p>')+
-   `<div class="sub">Aggiungi un amico</div><input id="soq" class="soq" placeholder="Nome utente…" autocomplete="off" autocapitalize="none" value="${esc(SO.q)}"${navigator.onLine?'':' disabled'}><div id="sres">${resHtml()}</div>`+
-   (R.out.length?`<div class="sub">Richieste inviate</div>`+R.out.map(p=>person(p,`<span class="mut">in attesa</span><button class="chip" data-so="del" data-id="${p.id}">Annulla</button>`)).join(''):'')+
-   (R.fr.length?`<div class="sub">I tuoi amici (${R.fr.length})</div>`+R.fr.map(p=>person(p,`<button class="chip" data-so="rm" data-id="${p.id}" data-n="${esc(p.username)}">Togli</button>`)).join(''):'');
+   `<div class="sub">Aggiungi un amico</div><input id="soq" class="soq" placeholder="Nome utente…" autocomplete="off" autocapitalize="none" value="${esc(SO.q)}"${online()?'':' disabled'}><div id="sres">${resHtml()}</div>`+
+   (R.out.length?`<div class="sub">Richieste inviate</div>`+R.out.map(p=>person(p,`<span class="mut">in attesa</span><button class="chip" data-so="del" data-id="${esc(p.id)}">Annulla</button>`)).join(''):'')+
+   (R.fr.length?`<div class="sub">I tuoi amici (${R.fr.length})</div>`+R.fr.map(p=>person(p,`<button class="chip" data-so="rm" data-id="${esc(p.id)}" data-n="${esc(p.username)}">Togli</button>`)).join(''):'');
  }
  P.innerHTML=`<div class="h">🚀 Flotta: amici e classifiche</div>`+tabs+state+noName+body+
   `<p class="note">Punteggi calcolati sui dispositivi di chi gioca: valgono come sfida tra amici. La serie 🔥 conta solo se si è giocato ieri o oggi.</p>`;
@@ -91,9 +99,7 @@ export function renderSocial(){
 function resHtml(){
  if(!SO.found)return '';
  if(!SO.found.length)return '<p class="mut">Nessun utente con questo nome.</p>';
- const R=SO.rel,has=(l,id)=>l.some(p=>p.id===id);
- return SO.found.map(p=>person(p,has(R.fr,p.id)?'<span class="mut">già amici</span>':has(R.out,p.id)?'<span class="mut">richiesta inviata</span>'
-  :has(R.inc,p.id)?`<button class="chip on" data-so="acc" data-id="${p.id}">Accetta</button>`:`<button class="chip on" data-so="ask" data-id="${p.id}">Aggiungi</button>`)).join('');
+ return SO.found.map(p=>person(p,relBtn(p.id))).join('');
 }
 
 /* ---------- azioni ---------- */
@@ -102,22 +108,26 @@ async function search(q){
  SO.q=q;q=q.trim();
  if(q.length<2){SO.found=null;$('sres')&&($('sres').innerHTML='');return;}
  const like='%'+q.replace(/[\\%_]/g,'\\$&')+'%';
- const {data,error}=await A.sb.from('profiles').select('id,username,avatar').ilike('username',like).neq('id',A.user.id).order('username').limit(10);
+ const {data,error}=await A.sb.from('public_profiles').select('id,username,avatar').ilike('username',like).neq('id',A.user.id).order('username').limit(10);
  if(SO.q.trim()!==q)return; // nel frattempo si è scritto altro
  SO.found=error?[]:data.filter(p=>p.username);
  if($('sres'))$('sres').innerHTML=resHtml();
 }
 async function act(f,okMsg){
- if(!navigator.onLine){toast('Serve la connessione.');return;}
+ if(!online()){toast('Serve la connessione.');return;}
  try{const {error}=await f();if(error)throw error;if(okMsg)toast(okMsg);}
  catch(e){toast(e.code==='23505'?'Siete già amici o c\'è già una richiesta tra voi.':'Non riuscito: riprova tra poco.');}
  await loadSocial();if(SO.found&&$('sres'))$('sres').innerHTML=resHtml();
 }
+// gli id finiscono in un filtro di PostgREST: si accettano solo UUID, così un valore manomesso non cambia il filtro
+const UUID=/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 const pair=(a,b)=>`and(user_id.eq.${a},friend_id.eq.${b}),and(user_id.eq.${b},friend_id.eq.${a})`;
 export function wireSocial(panel){
  panel.addEventListener('click',e=>{
   const b=e.target.closest('[data-so]');if(!b||!A.user)return;const k=b.dataset.so,id=b.dataset.id,uid=A.user.id,sb=A.sb;
-  if(k==='tab'){SO.tab=b.dataset.v;keep();renderSocial();if(SO.tab==='friends')loadSocial();}
+  if(id!==undefined&&!UUID.test(id))return;
+  if(k==='tab'){SO.tab=b.dataset.v;SO.pick=null;keep();renderSocial();if(SO.tab==='friends')loadSocial();}
+  else if(k==='pick'){SO.pick=SO.pick===id?null:id;renderSocial();}
   else if(k==='ask')act(()=>sb.from('friendships').insert({user_id:uid,friend_id:id}),'Richiesta inviata.');
   else if(k==='acc')act(()=>sb.from('friendships').update({status:'accepted'}).eq('user_id',id).eq('friend_id',uid),'Ora siete amici.');
   else if(k==='del')act(()=>sb.from('friendships').delete().or(pair(uid,id)));

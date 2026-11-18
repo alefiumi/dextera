@@ -1,19 +1,21 @@
 /* Scheda Palestra (l'ex Gioca): menu, quiz, Tendine-ponte, Caso clinico, fine partita. */
 import {$,shuffle,pick} from './util.js';
 import {app,S,bone,save,touchStreak,head,bump,queue,items,members,itemOf,itemSet,bonesName} from './state.js';
-import {clearMarks,mark,refreshMastery,resetZoom,showMuscle,muscleHtml,visible,focusItem,itemBox} from './figure.js';
+import {clearMarks,mark,refreshMastery,resetZoom,showMuscle,muscleHtml,visible,visibleIn,focusItem,itemBox,setView,baseView,hasView} from './figure.js';
 import {startPuzzle} from './puzzle.js';
 
 export function renderMenu(){
- app.G=null;clearGhosts();const body=app.MOD.id==='corpo';
+ app.G=null;clearGhosts();baseView();const body=app.MOD.id==='corpo';
  const mb=(m,t,x)=>`<button class="mode" data-mode="${m}"><b>${t}</b><small>${x}</small></button>`;
- const what=app.grp?(body?'per <b>gruppi</b> di ossa':'per <b>lobi e aree</b>'):(body?'sulle <b>ossa singole</b>':'su <b>giri e solchi</b>');
- $('panel').innerHTML=`<div class="h">Palestra · scegli una sfida</div><p class="mut">3 cuori a round. Ogni risposta giusta dà XP e fa salire la maestria (da beige a oro). Ora giochi ${what}: cambia in alto${body?', dove scegli anche la vista anteriore o posteriore':''}.</p><div class="sub">Puzzle</div>`+
+ const brain=app.MOD.id==='cervello',M=app.MOD;
+ const what=M.grpn?(app.grp?'per <b>gruppi</b>':'sulle <b>strutture singole</b>'):app.grp?(body?'per <b>gruppi</b> di ossa':'per <b>lobi e aree</b>'):(body?'sulle <b>ossa singole</b>':'su <b>giri e solchi</b>');
+ $('panel').innerHTML=`<div class="h">Palestra · scegli una sfida</div><p class="mut">3 cuori a round. Ogni risposta giusta dà XP e fa salire la maestria (da beige a oro). Ora giochi ${what}: cambia in alto, dove scegli anche la vista.</p><div class="sub">Puzzle</div>`+
   mb('puzzle','🧩 Ricomponi','Rimetti al posto i pezzi mancanti (trascina o tocca)')+
+  mb('build','🧱 Componi','Puzzle vero su schermo vuoto: collega i pezzi tra loro, senza sagome')+
   (body?mb('bridge','🌉 Tendine-ponte',"Collega l'osso di origine a quello di inserzione"):'')+
-  mb('case','🩺 Caso clinico','Indizi progressivi: meno indizi usi, più XP')+
+  (M.CASES&&M.CASES.length?mb('case','🩺 Caso clinico','Indizi progressivi: meno indizi usi, più XP'):'')+
   '<div class="sub">Quiz</div>'+mb('find','🎯 Trova la struttura','Tocca quella giusta sulla figura')+
-  (body?mb('musc','💪 Origine e inserzione','Collega ogni muscolo al suo osso'):mb('func','🧠 Funzione → struttura','Quale struttura svolge questa funzione?')+mb('nc','🔢 Nervi cranici','Nome, numero e funzione dei 12 nervi'))+
+  (body?mb('musc','💪 Origine e inserzione','Collega ogni muscolo al suo osso'):mb('func',(brain?'🧠':'❤️')+' Funzione → struttura','Quale struttura svolge questa funzione?')+(brain?mb('nc','🔢 Nervi cranici','Nome, numero e funzione dei 12 nervi'):''))+
   mb('mix','🔀 Misto',"Un po' di tutto")+
   // giochi sul modello 3D: si giocano nella scheda Atlante, vista 3D (vedi play3d in ui.js)
   '<div class="sub">Sul modello 3D</div>'+mb('3d-ossa','🦴 Trova l\'osso','Tocca l\'osso giusto sul modello 3D')+
@@ -23,20 +25,23 @@ export function renderMenu(){
   mb('3d-ricomponi','🧩 Ricomponi','Rimetti al loro posto le ossa di una zona (mano, piede, cranio…)')+
   mb('3d-ponte','🌉 Tendine-ponte',"Tocca l'osso di origine e poi quello di inserzione")+
   mb('3d-caso','🩺 Caso clinico','Leggi gli indizi e tocca il muscolo coinvolto')+
-  mb('3d-nervi','🔢 Nervi cranici','Tocca il nervo giusto alla base dell\'encefalo');
+  mb('3d-nervi','🔢 Nervi cranici','Tocca il nervo giusto alla base dell\'encefalo')+
+  mb('3d-cuore','🫀 Cuore e grandi vasi','Tocca la camera, la coronaria o il grande vaso giusto')+
+  mb('3d-polmoni','🫁 Polmoni','Tocca il lobo o il bronco giusto');
 }
-export const clearGhosts=()=>document.querySelectorAll('.bone.ghost').forEach(g=>g.classList.remove('ghost'));
+export const clearGhosts=()=>{document.querySelectorAll('.bone.ghost,.bone.gone,.bone.placed').forEach(g=>g.classList.remove('ghost','gone','placed'));
+ document.querySelectorAll('#fig .view.bare').forEach(v=>{v.classList.remove('bare');v.removeAttribute('transform');});};
 export function startGame(mode){
- app.G={mode,q:0,total:mode==='case'?6:8,hearts:3,score:0,gain:0,last:null,cur:null,locked:false,used:[],att:0,left:[]};
- if(mode==='puzzle')return startPuzzle();
+ baseView();app.G={mode,q:0,total:mode==='case'?6:8,hearts:3,score:0,gain:0,last:null,cur:null,locked:false,used:[],att:0,left:[]};
+ if(mode==='puzzle'||mode==='build')return startPuzzle();
  nextQ();
 }
-export const gh=()=>{const G=app.G;return `<div class="gh"><span>${'❤️'.repeat(G.hearts)}${'🖤'.repeat(3-G.hearts)}</span><span>${Math.min(G.q+1,G.total)}/${G.total}</span></div>`;};
+export const gh=()=>{const G=app.G;return `<div class="gh"><span>${'❤️'.repeat(G.hearts)}${'🖤'.repeat((G.maxH||3)-G.hearts)}</span><span>${Math.min(G.q+1,G.total)}/${G.total}</span></div>`;};
 export function nextQ(){
  const G=app.G,{B,M,CASES,NC}=app;
- clearMarks();
+ clearMarks();baseView();
  if(G.hearts<=0||G.q>=G.total)return endGame();
- const t=G.mode==='mix'?pick(app.MOD.id==='corpo'?['find','musc','bridge']:['find','func','nc']):G.mode;G.locked=false;resetZoom(true);
+ const t=G.mode==='mix'?pick(app.MOD.id==='corpo'?['find','musc','bridge']:app.MOD.id==='cervello'?['find','func','nc']:['find','func','case']):G.mode;G.locked=false;resetZoom(true);
  if(t==='find'){
   const b=pickItem(G);G.cur={t,id:b.id};
   $('panel').innerHTML=gh()+`<div class="q">Tocca sulla figura:<br><b>${b.n}</b> <i>${b.l}</i></div>`+(G.zoomed?'<p class="mut">La figura è ingrandita sulla zona giusta: le strutture sono piccole.</p>':'');
@@ -63,17 +68,20 @@ export function nextQ(){
  }
 }
 // Voce da trovare: tra quelle visibili nella vista attuale; con le singole prima si sceglie il gruppo (così non escono
-// sempre falangi e vertebre) e, se la struttura è piccola, la figura si ingrandisce sulla sua zona.
+// sempre falangi e vertebre). Le ossa di mano e piede si chiedono nella vista di zona del loro gruppo (palmare, dall'alto…);
+// se la struttura è piccola, la figura si ingrandisce sulla sua zona.
 function pickItem(G){
  let b,n=0;
+ const zv=g=>!app.grp&&g.zv&&hasView(g.zv)?g.zv:app.view;
  do{
   if(app.grp)b=pick(app.GR.filter(x=>visible(x.id)));
-  else{const g=pick(app.GR.filter(x=>!x.area&&x.m.some(visible)));b=bone(pick(g.m.filter(visible)));}
+  else{const g=pick(app.GR.filter(x=>!x.area&&x.m.some(m=>visibleIn(m,zv(x)))));b=bone(pick(g.m.filter(m=>visibleIn(m,zv(g)))));}
  }while((b.id===G.last||(G.used.includes(b.id)&&n<30))&&++n<60);
- G.last=b.id;G.used.push(b.id);G.zoomed=false;
+ G.last=b.id;G.used.push(b.id);G.zoomed=false;G.focus=null;
+ const gz=!app.grp&&bone(b.g);if(gz&&zv(gz)!==app.view){setView(zv(gz),true);setTimeout(()=>focusItem(b.g,14,true),30);G.zoomed=true;G.focus=b.g;return b;}
  const p=itemBox(b.id);
  if(p.length){const xs=p.map(q=>q[0]),ys=p.map(q=>q[1]),size=Math.max(Math.max(...xs)-Math.min(...xs),Math.max(...ys)-Math.min(...ys));
-  if(size<app.MOD.W*0.06&&!app.grp){setTimeout(()=>focusItem(b.g,14,true),30);G.zoomed=true;}}
+  if(size<app.MOD.W*0.06&&!app.grp){setTimeout(()=>focusItem(b.g,14,true),30);G.zoomed=true;G.focus=b.g;}}
  return b;
 }
 // muscoli con origine e inserzione su ossa note
@@ -103,7 +111,7 @@ export function answerMusc(id){
 export function endGame(){
  const G=app.G;
  clearGhosts();clearMarks();
- const pz=G.mode==='puzzle',n=pz?G.att:G.q,done=G.hearts>0&&(pz?!G.left.length:G.q>=G.total),bonus=done?20:0;S.xp+=bonus;G.gain+=bonus;
+ const pz=G.mode==='puzzle'||G.mode==='build',n=pz?G.att:G.q,done=G.hearts>0&&(pz?!G.left.length:G.q>=G.total),bonus=done?20:0;S.xp+=bonus;G.gain+=bonus;
  queue.add({module:app.MOD.id,mode:G.mode,score:G.score,total:n,xp:G.gain});save();head();
  const acc=n?G.score/n:0,st=acc>=.9?3:acc>=.6?2:1;
  $('panel').innerHTML=`<div class="res"><div class="big">${'⭐'.repeat(st)}${'☆'.repeat(3-st)}</div><div class="h">${G.score}/${n} corrette</div><p>+${G.gain} XP${done?' (bonus round +20)':''}</p>${G.hearts<=0?'<p class="mut">Cuori finiti: ripassa nella sezione Esplora e riprova.</p>':''}<button class="btn again">Rigioca</button><button class="btn alt menu">Cambia sfida</button></div>`;

@@ -1,5 +1,5 @@
 {
- "version": 1,
+ "version": 2,
  "tipo": "gruppi",
  "nota": "Gruppi: ossa del modulo corpo (gruppo.ossa.*), lobi e aree del cervello 2D (gruppo.encefalo.*; col è il colore), gruppi di muscoli e strati dell'encefalo dell'atlante 3D, descrizioni dei gruppi della fonte usate quando una struttura non ha la sua (gruppo.fonte.*).",
  "campi": {"nome": "Nome", "latino": "Nome latino", "regione": "Regione", "in_breve": "In breve", "membri": "Muscoli del gruppo", "descrizione": "Descrizione", "clinica": "Nota clinica"},
@@ -550,6 +550,214 @@
   }},
   {"id": "gruppo.fonte.cranial-dura", "ref": "Cranial dura", "modulo": "atlante", "dati": {
    "descrizione": {"valore": "Dura madre cranica: la meninge più esterna e robusta.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "gruppo.cuore.cuore-destro", "ref": "cuore-destro", "modulo": "cuore", "col": "#9bbbeb", "dati": {
+   "nome": {"valore": "Cuore destro", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Cor dextrum", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "regione": {"valore": "Cuore", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "in_breve": {"valore": "Riceve il sangue venoso dal corpo e lo spinge verso i polmoni", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Atrio e ventricolo destro: ricevono il sangue venoso dalle vene cave e dal seno coronario e lo spingono nel tronco polmonare (piccola circolazione).", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "clinica": {"valore": "Lo scompenso destro dà turgore delle giugulari, fegato ingrossato ed edemi alle caviglie.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "gruppo.cuore.cuore-sinistro", "ref": "cuore-sinistro", "modulo": "cuore", "col": "#ec9f97", "dati": {
+   "nome": {"valore": "Cuore sinistro", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Cor sinistrum", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "regione": {"valore": "Cuore", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "in_breve": {"valore": "Riceve il sangue ossigenato dai polmoni e lo spinge nell'aorta", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Atrio e ventricolo sinistro: ricevono il sangue ossigenato dalle vene polmonari e lo spingono nell'aorta (grande circolazione), ad alta pressione.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "clinica": {"valore": "Lo scompenso sinistro fa ristagnare il sangue nei polmoni: dispnea, ortopnea, edema polmonare.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "gruppo.cuore.coronarie", "ref": "coronarie", "modulo": "cuore", "col": "#d9483b", "dati": {
+   "nome": {"valore": "Arterie coronarie", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Arteriae coronariae", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "regione": {"valore": "Cuore", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "in_breve": {"valore": "Portano sangue ossigenato al muscolo cardiaco", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Coronaria destra e sinistra (con ramo interventricolare anteriore e circonflesso): nascono dai seni aortici e irrorano il miocardio, soprattutto in diastole.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "clinica": {"valore": "L'occlusione di una coronaria provoca l'infarto del miocardio nel territorio che irrora.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "gruppo.cuore.vene-cuore", "ref": "vene-cuore", "modulo": "cuore", "col": "#4a7fd4", "dati": {
+   "nome": {"valore": "Vene del cuore", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Venae cordis", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "regione": {"valore": "Cuore", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "in_breve": {"valore": "Riportano all'atrio destro il sangue venoso del miocardio", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Vena cardiaca magna, media e posteriore del ventricolo sinistro confluiscono nel seno coronario, che sbocca nell'atrio destro.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "clinica": {"valore": "Il seno coronario si usa per far passare l'elettrocatetere del ventricolo sinistro nella resincronizzazione cardiaca.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "gruppo.cuore.aorta", "ref": "aorta", "modulo": "cuore", "col": "#d9483b", "dati": {
+   "nome": {"valore": "Aorta e suoi rami", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Aorta", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "regione": {"valore": "Grandi vasi", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "in_breve": {"valore": "Distribuisce il sangue ossigenato a tutto il corpo", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Aorta ascendente, arco (con tronco brachiocefalico, carotide comune sinistra e succlavia sinistra) e aorta toracica discendente.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "clinica": {"valore": "Aneurisma e dissezione dell'aorta toracica: dolore toracico lacerante irradiato al dorso.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "gruppo.cuore.vene-cave", "ref": "vene-cave", "modulo": "cuore", "col": "#4a7fd4", "dati": {
+   "nome": {"valore": "Vene cave e azygos", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Venae cavae", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "regione": {"valore": "Grandi vasi", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "in_breve": {"valore": "Riportano il sangue venoso del corpo all'atrio destro", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Vena cava superiore (dalle vene brachiocefaliche, con la vena azygos) e vena cava inferiore: portano all'atrio destro il sangue venoso di tutto il corpo.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "clinica": {"valore": "Un tumore del polmone o del mediastino può comprimere la cava superiore: gonfiore di viso e braccia, vene del collo turgide.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "gruppo.cuore.arterie-polmonari", "ref": "arterie-polmonari", "modulo": "cuore", "col": "#4a7fd4", "dati": {
+   "nome": {"valore": "Arterie polmonari", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Arteriae pulmonales", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "regione": {"valore": "Piccola circolazione", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "in_breve": {"valore": "Portano ai polmoni il sangue povero di ossigeno", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Tronco polmonare e arterie polmonari destra e sinistra: portano il sangue venoso del ventricolo destro ai polmoni (i loro rami sono nel modulo Polmoni).", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "clinica": {"valore": "L'embolia polmonare è l'ostruzione di queste arterie, di solito da un trombo partito dalle vene delle gambe.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "gruppo.cuore.vene-polmonari", "ref": "vene-polmonari", "modulo": "cuore", "col": "#d9483b", "dati": {
+   "nome": {"valore": "Vene polmonari", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Venae pulmonales", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "regione": {"valore": "Piccola circolazione", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "in_breve": {"valore": "Portano all'atrio sinistro il sangue ossigenato", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Quattro vene polmonari (due per lato) che raccolgono il sangue ossigenato dei polmoni e lo portano all'atrio sinistro.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "clinica": {"valore": "Lo sbocco delle vene polmonari nell'atrio sinistro è il punto da cui partono gli impulsi della fibrillazione atriale: lì si fa l'ablazione.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "gruppo.cuore.arterie-testa", "ref": "arterie-testa", "modulo": "cuore", "col": "#d9483b", "dati": {
+   "nome": {"valore": "Arterie della testa e del collo", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Arteriae capitis et colli", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "regione": {"valore": "Vasi del corpo", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "in_breve": {"valore": "Portano il sangue all'encefalo, alla faccia e al collo", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Carotidi comuni, interne ed esterne con i loro rami, arterie vertebrali e basilare, poligono di Willis e arterie cerebrali.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "clinica": {"valore": "Una stenosi della carotide interna può dare attacchi ischemici transitori e ictus.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "gruppo.cuore.arterie-arto-sup", "ref": "arterie-arto-sup", "modulo": "cuore", "col": "#d9483b", "dati": {
+   "nome": {"valore": "Arterie dell'arto superiore", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Arteriae membri superioris", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "regione": {"valore": "Vasi del corpo", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "in_breve": {"valore": "Portano il sangue al braccio e alla mano", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Succlavia, ascellare, brachiale, radiale e ulnare con le arcate palmari.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "clinica": {"valore": "Il polso radiale si palpa al polso, lateralmente; la pressione si misura sulla brachiale.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "gruppo.cuore.arterie-tronco", "ref": "arterie-tronco", "modulo": "cuore", "col": "#d9483b", "dati": {
+   "nome": {"valore": "Arterie del tronco", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Arteriae trunci", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "regione": {"valore": "Vasi del corpo", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "in_breve": {"valore": "Portano il sangue alla parete del tronco e agli organi di addome e pelvi", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Rami dell'aorta toracica e addominale: intercostali, tripode celiaco, mesenteriche, renali, iliache e loro rami.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "clinica": {"valore": "L'aneurisma dell'aorta addominale si palpa come una massa pulsante sopra l'ombelico.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "gruppo.cuore.arterie-arto-inf", "ref": "arterie-arto-inf", "modulo": "cuore", "col": "#d9483b", "dati": {
+   "nome": {"valore": "Arterie dell'arto inferiore", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Arteriae membri inferioris", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "regione": {"valore": "Vasi del corpo", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "in_breve": {"valore": "Portano il sangue alla coscia, alla gamba e al piede", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Femorale, femorale profonda, poplitea, tibiali anteriore e posteriore, peroniera, dorsale del piede e arcata plantare.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "clinica": {"valore": "Nell'arteriopatia periferica i polsi pedidio e tibiale posteriore si indeboliscono o scompaiono.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "gruppo.cuore.vene-testa", "ref": "vene-testa", "modulo": "cuore", "col": "#4a7fd4", "dati": {
+   "nome": {"valore": "Vene della testa e del collo", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Venae capitis et colli", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "regione": {"valore": "Vasi del corpo", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "in_breve": {"valore": "Riportano al cuore il sangue di encefalo, faccia e collo", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Seni venosi della dura madre, giugulari interna ed esterna, vene della faccia e del collo.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "clinica": {"valore": "Le vene della faccia comunicano con il seno cavernoso: un'infezione del naso può arrivarci.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "gruppo.cuore.vene-arto-sup", "ref": "vene-arto-sup", "modulo": "cuore", "col": "#4a7fd4", "dati": {
+   "nome": {"valore": "Vene dell'arto superiore", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Venae membri superioris", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "regione": {"valore": "Vasi del corpo", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "in_breve": {"valore": "Riportano al cuore il sangue di braccio e mano", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Vene profonde (radiali, ulnari, brachiali, ascellare, succlavia) e superficiali (cefalica, basilica, mediana del gomito).", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "clinica": {"valore": "La vena mediana del gomito è quella dei prelievi.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "gruppo.cuore.vene-tronco", "ref": "vene-tronco", "modulo": "cuore", "col": "#4a7fd4", "dati": {
+   "nome": {"valore": "Vene del tronco", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Venae trunci", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "regione": {"valore": "Vasi del corpo", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "in_breve": {"valore": "Riportano al cuore il sangue di tronco e visceri", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Vena cava inferiore con le sue affluenti, vena porta con mesenteriche e splenica, vene iliache, sistema azygos.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "clinica": {"valore": "Nella cirrosi il sangue della vena porta trova vie alternative: varici esofagee e caput medusae.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "gruppo.cuore.vene-arto-inf", "ref": "vene-arto-inf", "modulo": "cuore", "col": "#4a7fd4", "dati": {
+   "nome": {"valore": "Vene dell'arto inferiore", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Venae membri inferioris", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "regione": {"valore": "Vasi del corpo", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "in_breve": {"valore": "Riportano al cuore il sangue di coscia, gamba e piede", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Vene profonde (femorale, poplitea, tibiali) e superficiali (grande e piccola safena).", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "clinica": {"valore": "La trombosi venosa profonda colpisce queste vene; da qui partono gli emboli polmonari.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "gruppo.polmoni.polmone-destro", "ref": "polmone-destro", "modulo": "polmoni", "col": "#f4b6c2", "dati": {
+   "nome": {"valore": "Polmone destro", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Pulmo dexter", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "regione": {"valore": "Polmoni", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "in_breve": {"valore": "Organo degli scambi respiratori diviso in tre lobi", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Tre lobi (superiore, medio, inferiore) separati dalla scissura orizzontale e da quella obliqua; dieci segmenti broncopolmonari.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "clinica": {"valore": "La polmonite ab ingestis colpisce più spesso il polmone destro, per il bronco principale più verticale.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "gruppo.polmoni.polmone-sinistro", "ref": "polmone-sinistro", "modulo": "polmoni", "col": "#a9cdee", "dati": {
+   "nome": {"valore": "Polmone sinistro", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Pulmo sinister", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "regione": {"valore": "Polmoni", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "in_breve": {"valore": "Organo degli scambi respiratori diviso in due lobi, con la lingula", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Due lobi (superiore con la lingula, inferiore) separati dalla scissura obliqua; davanti c'è l'incisura cardiaca, dove poggia il cuore.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "clinica": {"valore": "Il polmone sinistro è più piccolo del destro perché il cuore occupa parte dello spazio a sinistra.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "gruppo.polmoni.vie-aeree", "ref": "vie-aeree", "modulo": "polmoni", "col": "#e9dfc4", "dati": {
+   "nome": {"valore": "Trachea e bronchi", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Arbor bronchialis", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "regione": {"valore": "Vie aeree", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "in_breve": {"valore": "Conducono l'aria dalla laringe fino agli alveoli", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Trachea, bronchi principali, lobari e segmentari: le vie aeree inferiori, con anelli di cartilagine e mucosa con ciglia che spingono il muco verso l'alto.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "clinica": {"valore": "Nell'asma i bronchi si restringono per la contrazione della muscolatura liscia e l'infiammazione della mucosa.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "gruppo.polmoni.rami-arterie-polmonari", "ref": "rami-arterie-polmonari", "modulo": "polmoni", "col": "#4a7fd4", "dati": {
+   "nome": {"valore": "Arterie polmonari e loro rami", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Arteriae pulmonales", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "regione": {"valore": "Vasi polmonari", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "in_breve": {"valore": "Seguono i bronchi e portano il sangue venoso ai segmenti", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Tronco e arterie polmonari con i rami lobari e segmentari: ogni segmento broncopolmonare ha la sua arteria, accanto al suo bronco.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "clinica": {"valore": "Nell'embolia polmonare il trombo si ferma in queste arterie: più è piccolo, più va lontano nei rami segmentari.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "gruppo.polmoni.rami-vene-polmonari", "ref": "rami-vene-polmonari", "modulo": "polmoni", "col": "#d9483b", "dati": {
+   "nome": {"valore": "Vene polmonari e loro rami", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Venae pulmonales", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "regione": {"valore": "Vasi polmonari", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "in_breve": {"valore": "Raccolgono il sangue ossigenato tra i segmenti", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Vene dei segmenti che corrono tra un segmento e l'altro e confluiscono nelle quattro vene polmonari verso l'atrio sinistro.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "clinica": {"valore": "Le vene intersegmentali sono la guida del chirurgo per separare un segmento dall'altro.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "gruppo.strato-cuore.arterie", "ref": "arterie", "sistema": "cuore", "dati": {
+   "nome": {"valore": "Arterie", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Le arterie del corpo, con aorta, tronco polmonare e arterie polmonari (portano il sangue lontano dal cuore).", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "gruppo.strato-cuore.vene", "ref": "vene", "sistema": "cuore", "dati": {
+   "nome": {"valore": "Vene", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Le vene del corpo con vene cave, vene polmonari e seni venosi della dura madre (riportano il sangue al cuore).", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "gruppo.strato-cuore.grandi", "ref": "grandi", "sistema": "cuore", "dati": {
+   "nome": {"valore": "Grandi vasi della base", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Aorta e suoi tre rami, vene cave, vene brachiocefaliche, azygos, tronco e arterie polmonari, vene polmonari.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "gruppo.strato-cuore.cuore", "ref": "cuore", "sistema": "cuore", "dati": {
+   "nome": {"valore": "Cuore", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Atri e ventricoli: il destro in blu (sangue venoso), il sinistro in rosso (sangue ossigenato).", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "gruppo.strato-cuore.coronarie", "ref": "coronarie", "sistema": "cuore", "dati": {
+   "nome": {"valore": "Coronarie e vene del cuore", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Arterie coronarie destra e sinistra con i loro rami; seno coronario e vene cardiache.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "gruppo.strato-cuore.valvole", "ref": "valvole", "sistema": "cuore", "dati": {
+   "nome": {"valore": "Valvole e muscoli papillari", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Cuspidi delle valvole aortica e polmonare, lembi di tricuspide e mitrale, muscoli papillari. Si vedono senza le camere o con una sezione.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "gruppo.strato-polmoni.pleura", "ref": "pleura", "sistema": "polmoni", "dati": {
+   "nome": {"valore": "Pleura", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Sierosa che avvolge i polmoni (foglietto viscerale e parietale): qui trasparente.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "gruppo.strato-polmoni.polmoni", "ref": "polmoni", "sistema": "polmoni", "dati": {
+   "nome": {"valore": "Lobi", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Tre lobi a destra (superiore, medio, inferiore), due a sinistra (superiore con la lingula, inferiore).", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "gruppo.strato-polmoni.vie", "ref": "vie", "sistema": "polmoni", "dati": {
+   "nome": {"valore": "Trachea e bronchi", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Trachea, bronchi principali, lobari e segmentari: l'albero bronchiale.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "gruppo.strato-polmoni.vasi", "ref": "vasi", "sistema": "polmoni", "dati": {
+   "nome": {"valore": "Vasi polmonari", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Tronco e arterie polmonari con i rami lobari e segmentari (blu, accanto ai bronchi) e vene polmonari (rosse, tra i segmenti).", "fonte": "AI", "stato": "da verificare", "verifica": null}
   }}
  ]
 }

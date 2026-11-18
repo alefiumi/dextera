@@ -24,6 +24,17 @@ $('theme').addEventListener('click',()=>{
 });
 sysDark.addEventListener('change',themeBtn);themeBtn();
 
+/* ---------- altezza della pagina su iPhone ---------- */
+// Nell'app installata sulla schermata Home, dopo la tastiera (accesso con email e password) o il ritorno da Google, Safari
+// può lasciare la pagina più bassa dello schermo o spostata in su (barra in basso a metà, fascia nera sotto). Si misura
+// l'altezza vera a ogni cambio e si riporta la pagina in cima.
+const fitH=()=>{root.style.setProperty('--app-h',innerHeight+'px');if(scrollX||scrollY)scrollTo(0,0);};
+const fitSoon=()=>{setTimeout(fitH,60);setTimeout(fitH,400);};
+for(const ev of ['resize','orientationchange','pageshow','focusout'])addEventListener(ev,fitSoon);
+window.visualViewport?.addEventListener('resize',fitSoon);
+document.addEventListener('visibilitychange',()=>{if(!document.hidden)fitSoon();});
+fitH();
+
 /* ---------- uso offline (PWA) ---------- */
 // Il service worker si registra subito, così la copia locale si prepara il prima possibile.
 if('serviceWorker' in navigator&&location.protocol!=='file:'){

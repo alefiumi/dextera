@@ -26,7 +26,7 @@ export const BADGES=[
  ['d3','🧍','In tre dimensioni','Finisci una partita sul modello 3D',()=>n3d()>=1],
  ['d3tutti','🌐','Esploratore 3D','Gioca quattro sfide diverse sul modello 3D',()=>n3d()>=4],
  ['casi5','🩺','Occhio clinico','Finisci 5 casi clinici',()=>(st().modes||{})['case']>=5],
- ['moduli','🗺️','Giramondo','Gioca in tutti i moduli: corpo, cervello laterale e sagittale, 3D',()=>['corpo','lat','sag','3d'].every(m=>(st().mods||{})[m])]
+ ['moduli','🗺️','Giramondo','Gioca in tutti i moduli: corpo, cervello e 3D',()=>{const m=st().mods||{};return m.corpo&&m['3d']&&(m.cervello||(m.lat&&m.sag));}]
 ].map(([id,icon,name,desc,test])=>({id,icon,name,desc,test}));
 
 // assegna i badge nuovi; restituisce quelli appena guadagnati

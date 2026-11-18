@@ -5,8 +5,9 @@
 :root[data-theme=light]{color-scheme:light}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html,body{height:100%;margin:0}
-body{font:15px/1.45 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--ink);display:flex;flex-direction:column;height:100vh;height:100svh;overflow:hidden}
-header{display:flex;align-items:center;gap:10px;padding:calc(8px + env(safe-area-inset-top)) calc(14px + env(safe-area-inset-right)) 8px calc(14px + env(safe-area-inset-left));background:var(--card);border-bottom:1px solid var(--line)}
+html{background:var(--bg)}
+body{font:15px/1.45 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--ink);display:flex;flex-direction:column;height:100vh;height:100svh;height:var(--app-h,100svh);overflow:hidden}
+header{display:flex;align-items:center;gap:8px;padding:calc(8px + env(safe-area-inset-top)) calc(14px + env(safe-area-inset-right)) 8px calc(14px + env(safe-area-inset-left));background:var(--card);border-bottom:1px solid var(--line)}
 /* foto del profilo in alto a sinistra: apre il Profilo (bersaglio di 36 px) */
 #me{flex:none;width:36px;height:36px;margin:-4px 0;border-radius:50%;border:2px solid var(--line);background:var(--acc);color:#fff;padding:0;overflow:hidden;font:700 16px/1 system-ui,sans-serif;display:flex;align-items:center;justify-content:center;cursor:pointer}
 #me img{width:100%;height:100%;object-fit:cover;display:block}
@@ -14,7 +15,7 @@ header{display:flex;align-items:center;gap:10px;padding:calc(8px + env(safe-area
 /* scheda Atlante: scelta tra atlante 2D e 3D */
 #asw{flex:none;margin:0;padding:6px 8px 2px;justify-content:center}
 #asw[hidden]{display:none}
-#lv{font-weight:700;font-size:13px;white-space:nowrap}
+#lv{font-weight:700;font-size:13px;white-space:nowrap;min-width:0;flex:0 1 auto;overflow:hidden;text-overflow:ellipsis}
 .bar{flex:1;height:8px;background:var(--line);border-radius:9px;overflow:hidden;min-width:30px}
 .bar i{display:block;height:100%;background:var(--acc);width:0;transition:width .4s}
 #st{font-size:13px;font-weight:600;white-space:nowrap}
@@ -24,7 +25,18 @@ header{display:flex;align-items:center;gap:10px;padding:calc(8px + env(safe-area
 #off[hidden]{display:none}
 #off.ok{background:var(--ok);color:#fff}
 #off.wait{background:var(--line);color:var(--mut)}
-#fig{flex:1 1 0;min-height:0;display:flex;flex-direction:column;padding:0 2px 2px}
+#fig{flex:1 1 0;min-height:0;display:flex;flex-direction:column;padding:0 2px 2px;position:relative}
+/* menu delle viste di un modulo (Corpo, Cervello), sotto il suo pulsante */
+.vmenu{position:absolute;z-index:6;background:var(--card);border:1px solid var(--line);border-radius:12px;box-shadow:0 8px 24px #0004;padding:4px;display:flex;flex-direction:column;min-width:180px}
+.vmenu[hidden]{display:none}
+.vmenu button{text-align:left;font-size:14px;padding:9px 12px;border:0;background:none;color:var(--ink);border-radius:8px}
+.vmenu button.on{background:var(--acc);color:#fff}
+.vsep{font-size:11px;color:var(--mut);padding:6px 12px 2px;text-transform:uppercase;letter-spacing:.04em}
+.mods.mm button{font-size:13px;padding:6px 10px}
+/* moduli: il pulsante aperto si accorcia con i puntini, gli altri su schermi stretti mostrano solo l'icona */
+.mods.mm{overflow:visible}.mods.mm button.on{flex:0 1 auto;min-width:0;overflow:hidden;text-overflow:ellipsis}
+@media (max-width:640px){.mods.mm .mn{display:none}}
+.mm .vn{font-weight:500}
 /* barra sopra la figura: moduli a sinistra, zoom a destra; non copre mai il disegno */
 .tbar{display:flex;align-items:center;justify-content:space-between;gap:6px;padding:4px 2px}
 .tbar.t2{padding-top:0}
@@ -58,6 +70,10 @@ nav button.on{color:var(--acc);box-shadow:inset 0 2px 0 var(--acc)}
 .bone.sel{--c:#7dd3fc}.bone.org{--c:#60a5fa}.bone.ins{--c:#fb923c}.bone.ok{--c:#4ade80}.bone.bad{--c:#f87171}
 .bone.sel .f,.bone.org .f,.bone.ins .f,.bone.ok .f,.bone.bad .f{stroke:#111;stroke-width:1.4}
 .bone.ghost{opacity:.3;--c:#9aa5aa}
+.bone.gone{display:none} /* Componi: il pezzo non c'è, nemmeno la sagoma */
+.view.bare .bone:not(.placed){display:none} /* Componi: schermo vuoto, restano solo i pezzi già messi */
+/* viste dei vasi di tutto il corpo: vasi sottili, il bordo ha il loro colore (grigio coprirebbe il rosso e il blu) */
+.view.thin .bone:not(.sel):not(.org):not(.ins):not(.ok):not(.bad):not(.hov) .f{stroke:var(--c)}
 .bone.ghost.bad{opacity:1;--c:#f87171}
 .hole{fill:var(--bg);pointer-events:none}
 .tray{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
@@ -155,6 +171,8 @@ nav button.dot:after{content:"";position:absolute;top:5px;left:calc(50% + 8px);w
 .cnt{display:inline-block;min-width:18px;padding:0 5px;border-radius:9px;background:var(--bad);color:#fff;font-size:11px;line-height:18px;text-align:center}
 .lb{display:flex;align-items:center;gap:8px;padding:7px 4px;border-bottom:1px solid var(--line)}
 .lb.me{background:var(--bg);border-radius:10px}
+.lb[data-so]{cursor:pointer}.lb.open{background:var(--bg);border-radius:10px 10px 0 0;border-bottom:0}
+.lbx{display:flex;gap:8px;align-items:center;justify-content:flex-end;padding:4px 8px 9px;background:var(--bg);border-radius:0 0 10px 10px;border-bottom:1px solid var(--line)}
 .lb .pos{flex:none;width:26px;text-align:center;font-weight:700;font-size:14px;color:var(--mut)}
 .sav{flex:none;width:32px;height:32px;border-radius:50%;object-fit:cover;background:var(--acc);color:#fff;display:inline-flex;align-items:center;justify-content:center;font-weight:700;font-size:14px}
 .lb .nm{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:600}
@@ -163,9 +181,34 @@ nav button.dot:after{content:"";position:absolute;top:5px;left:calc(50% + 8px);w
 .lb b{font-size:14px;white-space:nowrap}
 .lb .pb{display:flex;gap:6px;align-items:center}
 .gap{text-align:center;color:var(--mut);padding:2px}
-.soq{font:inherit;font-size:16px;padding:9px 12px;border:1px solid var(--line);border-radius:12px;background:var(--bg);color:var(--ink);width:100%;margin-bottom:4px}
+.soq{display:block;font:inherit;font-size:16px;padding:9px 12px;border:1px solid var(--line);border-radius:12px;background:var(--bg);color:var(--ink);width:100%;margin-bottom:4px}
 .err{color:var(--bad)}
 /* scheda Percorso (fase 0: segnaposto) */
 .path .pl{background:var(--bg);border:1px solid var(--line);border-radius:14px;padding:10px 12px;margin:8px 0}
 .path .pl b{display:block}
 .path .pl small{color:var(--mut)}
+/* privacy: consenso alla registrazione, pulsante di cancellazione dell'account */
+.cons{display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.35;text-align:left;margin:2px 0 6px;color:var(--mut)}
+.cons input{flex:none;width:18px;height:18px;margin:1px 0 0}
+.chip.bad{color:var(--bad);border-color:var(--bad)}
+/* installazione: guida a schermo intero (iPhone) e striscia sopra la barra in basso */
+#iguide{position:fixed;inset:0;z-index:40;background:#000a;display:flex;align-items:center;justify-content:center;padding:16px}
+.ig-card{background:var(--card);color:var(--ink);border-radius:16px;padding:16px 18px;max-width:420px;width:100%;box-shadow:0 10px 30px #0006}
+.ig-card ol{padding-left:22px;margin:8px 0}.ig-card li{margin:8px 0;line-height:1.4}
+.ig-i{display:inline-flex;vertical-align:middle;color:#0a84ff;background:var(--bg);border-radius:6px;padding:1px 3px}
+.ig-arrow{position:fixed;left:50%;transform:translateX(-50%);font-size:44px;color:#fff;animation:igb 1s ease-in-out infinite;text-shadow:0 2px 8px #000}
+.ig-arrow.bottom{bottom:calc(6px + env(safe-area-inset-bottom))}.ig-arrow.top{top:calc(6px + env(safe-area-inset-top));left:auto;right:18px;transform:none}
+@keyframes igb{50%{translate:0 8px}}.ig-arrow.top{animation-name:igt}@keyframes igt{50%{translate:0 -8px}}
+#ibar{flex:none;display:flex;align-items:center;gap:6px;padding:6px 10px;background:var(--acc);color:#fff}
+#ibar button{background:none;border:0;color:#fff;font-weight:700;font-size:14px;padding:6px 4px}
+#ibar .ib-go{flex:1;text-align:left}
+/* computer e tablet in orizzontale: figura a sinistra e scheda a destra (in colonna la figura restava schiacciata) */
+@media (min-width:900px) and (min-aspect-ratio:5/4){
+body{display:grid;grid-template-columns:minmax(0,1fr) clamp(340px,32vw,460px);grid-template-rows:auto auto minmax(0,1fr) auto auto;grid-template-areas:"h h" "s s" "f p" "i i" "n n"}
+header{grid-area:h}#asw{grid-area:s}#fig{grid-area:f}#pw{grid-area:p}#atlas{grid-area:f/f/p/p}#ibar{grid-area:i}nav{grid-area:n}
+#pw{max-height:none;border-top:0;border-left:1px solid var(--line)}
+#fold{display:none}
+#pw.fold #panel{max-height:none;-webkit-mask-image:none;mask-image:none}#pw.fold .gh{display:flex}
+.pg #pw{grid-area:f/f/p/p;border-left:0}
+#toast{bottom:80px}
+}

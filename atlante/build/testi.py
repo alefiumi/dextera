@@ -18,7 +18,7 @@ import json, re, os, sys, subprocess, tempfile
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.normpath(os.path.join(HERE, '..', '..'))
 TESTI = os.path.join(ROOT, 'testi')
-TIPI = ['muscoli', 'ossa', 'reperi', 'encefalo', 'nervi-cranici', 'gruppi', 'casi']
+TIPI = ['muscoli', 'ossa', 'reperi', 'encefalo', 'torace', 'nervi-cranici', 'gruppi', 'casi']
 STATI = ['da verificare', 'verificato', 'corretto', 'segnalato']
 FONTI = ['Z-Anatomy', 'TA2', 'AI', 'docente']
 
@@ -108,8 +108,8 @@ def schede_muscoli(mus):
         if c: m['card'] = c
 
 def nomi(D):
-    """nomi italiani e latini di ossa, reperi e strutture dell'encefalo; poi i refusi di TA2 su tutti i nomi"""
-    for tipo in ('ossa', 'reperi', 'encefalo'):
+    """nomi italiani e latini di ossa, reperi, strutture dell'encefalo e del torace; poi i refusi di TA2 su tutti i nomi"""
+    for tipo in ('ossa', 'reperi', 'encefalo', 'torace'):
         for v in carica(tipo):
             if v['ref'] in D['names'] and val(v, 'nome'):
                 D['names'][v['ref']][0] = val(v, 'nome')
@@ -118,19 +118,21 @@ def nomi(D):
     for m in D['mus'].values(): m['n'] = refuso(m['n'])
 
 def descrizioni(D):
-    """desc: testo breve per nome inglese senza lato (ossa, reperi, encefalo, midollo, meningi). Una struttura
+    """desc: testo breve per nome inglese senza lato (ossa, reperi, encefalo, midollo, meningi, cuore, vasi, polmoni). Una struttura
     dell'encefalo senza descrizione propria prende quella del suo gruppo nella fonte (gruppo.fonte.*)."""
     osso = {v['ref']: val(v, 'descrizione') for v in carica('ossa') if val(v, 'descrizione')}
     enc = {v['ref']: val(v, 'descrizione') for v in carica('encefalo') if val(v, 'descrizione')}
     rep = {v['ref']: val(v, 'descrizione') for v in carica('reperi') if val(v, 'descrizione')}
     fonte = {v['ref']: val(v, 'descrizione') for v in carica('gruppi') if v['id'].startswith('gruppo.fonte.')}
+    tor = {v['ref']: val(v, 'descrizione') for v in carica('torace') if val(v, 'descrizione') and not v.get('solo2d')}
     desc = {}
     for n, v in D['objs'].items():
         b = B(n)
         if b in desc: continue
         if v[0] == 'ossa': t = osso.get(b)
         elif v[0] in ('encefalo', 'midollo', 'meningi'): t = enc.get(b) or fonte.get(v[2])
-        else: t = enc.get(b)  # ghiandole dell'encefalo che nel modello stanno nei visceri (ipofisi, epifisi)
+        elif v[0] in ('vasi', 'visceri'): t = tor.get(b) or enc.get(b)  # cuore, vasi, polmoni; ipofisi ed epifisi stanno nei visceri
+        else: t = enc.get(b)
         if t: desc[b] = t
     for l in D['lm']:
         if l[0] in rep: desc[l[0]] = rep[l[0]]
@@ -144,6 +146,11 @@ def gruppi_atlante(D):
                   for v in G if v['id'].startswith('gruppo.muscoli.')}
     D['strati'] = [{'n': val(v, 'nome'), 't': val(v, 'descrizione')} for v in sorted((v for v in G if v['id'].startswith('gruppo.strato-encefalo.')), key=lambda v: v['ref'])]
     D['specchia'] = {c['parte']: c['da'] for c in correzioni('specchia')}
+    # strati dei due apparati nell'atlante (SYS in atlante.js): nome e testo di ogni strato
+    D['sistemi'] = {}
+    for v in G:
+        if v['id'].startswith('gruppo.strato-cuore.') or v['id'].startswith('gruppo.strato-polmoni.'):
+            D['sistemi'].setdefault(v['sistema'], {})[v['ref']] = {'n': val(v, 'nome'), 't': val(v, 'descrizione')}
 
 def applica(D):
     """tutti i testi e le correzioni su un dati.json (anche già generato: idempotente)"""
@@ -174,6 +181,20 @@ def casi(modulo):
         if v.get('struttura'): c['bid'] = v['struttura']
         c['r'] = val(v, 'spiegazione'); out.append(c)
     return out
+def gruppi_modulo(mod):
+    """gruppi di un modulo 2D di apparato (cuore, polmoni): id → testi come nel contenuto (n, l, r, col, q, f, k)"""
+    out = {}
+    for v in carica('gruppi'):
+        if v.get('modulo') != mod or not v['id'].startswith('gruppo.' + mod + '.'): continue
+        g = {'n': val(v, 'nome'), 'l': val(v, 'latino'), 'r': val(v, 'regione'), 'col': v['col']}
+        if val(v, 'in_breve'): g['q'] = val(v, 'in_breve')
+        g['f'] = val(v, 'descrizione')
+        if val(v, 'clinica'): g['k'] = val(v, 'clinica')
+        out[v['ref']] = g
+    return out
+def desc_torace(n):
+    v = per_ref('torace').get(n)
+    return val(v, 'descrizione') if v else None
 def nervi():
     return [{'n': v['numero'], 'nm': val(v, 'nome'), 't': val(v, 'tipo'), 'f': val(v, 'funzione')} for v in carica('nervi-cranici')]
 

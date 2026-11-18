@@ -2,13 +2,13 @@
    mostra ogni dato con fonte e stato, diviso per satellite; il docente segna Giusto/Sbagliato e scrive la correzione.
    Le risposte restano in questo browser (localStorage, chiave dextera-revisione) e si esportano in CSV per
    atlante/build/importa_revisione.py. Nessun account, nessun invio in rete. */
-const TIPI=['ossa','reperi','muscoli','encefalo','nervi-cranici','gruppi','casi','correzioni'];
+const TIPI=['ossa','reperi','muscoli','encefalo','nervi-cranici','torace','gruppi','casi','correzioni'];
 const STATI=['da verificare','verificato','corretto','segnalato'];
 const FONTI=['Z-Anatomy','TA2','AI','docente'];
 const SEP=' | ';           // valori che sono elenchi (opzioni dei casi, membri dei gruppi)
 const KEY='dextera-revisione';
 const PAG=40;              // voci mostrate per volta
-const FUORI={enc:'Encefalo, midollo e nervi cranici',altro:'Altri dati (fuori dai satelliti)',corr:'Correzioni alla fonte'};
+const FUORI={enc:'Encefalo, midollo e nervi cranici',tor:'Cuore, vasi e polmoni',altro:'Altri dati (fuori dai satelliti)',corr:'Correzioni alla fonte'};
 const TIPO_IT={'inverti_aree':'Origine e inserzione scambiate','aree_origine':'Aree segnate come origine','sposta_aree':'Area spostata','refuso':'Refuso di TA2','specchia':'Parte speculare'};
 
 const $=id=>document.getElementById(id);
@@ -44,8 +44,9 @@ async function carica(){
    if(tipo==='ossa'){sats=satOf(['o.'+v.id.slice(5)]);atl=v.ref;}
    else if(tipo==='reperi'){sats=satOf(['r.'+v.id.slice(7)]);if(!sats.length)sats=satOf(['o.'+slug(v.osso||'')]);atl=v.ref;}
    else if(tipo==='muscoli'){sats=satOf([slug(v.ref)]);atl=v.ref;}
-   else if(tipo==='casi'){sats=v.modulo==='corpo'&&v.muscolo?satOf([slug(v.muscolo)]):[];if(!sats.length&&v.modulo!=='corpo')sez='enc';nome='Caso clinico '+v.caso+(v.muscolo?' ('+v.muscolo+')':'');}
-   else if(tipo==='gruppi'){const [,k,r]=v.id.split('.');if(k==='ossa')sats=satOf(['g.'+r]);else if(k==='encefalo'||k==='strato-encefalo')sez='enc';}
+   else if(tipo==='casi'){sats=v.modulo==='corpo'&&v.muscolo?satOf([slug(v.muscolo)]):[];if(!sats.length&&v.modulo!=='corpo')sez=['cuore','polmoni'].includes(v.modulo)?'tor':'enc';nome='Caso clinico '+v.caso+(v.muscolo?' ('+v.muscolo+')':'');}
+   else if(tipo==='gruppi'){const [,k,r]=v.id.split('.');if(k==='ossa')sats=satOf(['g.'+r]);else if(k==='encefalo'||k==='strato-encefalo')sez='enc';else if(/^(strato-)?(cuore|polmoni)$/.test(k))sez='tor';}
+   else if(tipo==='torace'){sez='tor';atl=v.ref;}
    else if(tipo==='encefalo'||tipo==='nervi-cranici'){sez='enc';if(tipo==='encefalo')atl=v.ref;if(tipo==='nervi-cranici')nome='Nervo '+v.numero+' – '+nome;}
    else if(tipo==='correzioni'){sez='corr';nome=(TIPO_IT[v.tipo]||v.tipo)+(v.muscolo?': '+v.muscolo:v.cerca?': «'+v.cerca+'»':v.parte?': '+v.parte:'');
     if(v.muscolo){sats=satOf([slug(v.muscolo)]);atl=v.muscolo;}}

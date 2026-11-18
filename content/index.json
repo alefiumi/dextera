@@ -1,9 +1,10 @@
 {
- "version": 7,
+ "version": 12,
  "modules": [
   "corpo",
-  "lat",
-  "sag"
+  "cervello",
+  "cuore",
+  "polmoni"
  ],
  "nc": "nervi-cranici.json",
  "files": [

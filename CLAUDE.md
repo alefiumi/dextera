@@ -3,7 +3,8 @@
 App web per studiare anatomia muscolo-scheletrica (pubblico: fisioterapisti e studenti) con un percorso guidato
 stile Duolingo e il metodo bottom-up della 42: corso (sole) → pianeta (regione) → satellite (zona, è un progetto)
 → 6 passi (ossa, reperi, muscoli, connessioni, funzione, caso clinico). Nasce dal codice di BodyMania
-(repository `alefiumi/bodymania`, ramo `pwa`, commit e3e4b6f), che resta com'è per i suoi utenti.
+(repository `alefiumi/bodymania`, ramo `pwa`: prima il commit e3e4b6f, poi unito fino all'app 63, commit ebf728d), che resta com'è
+per i suoi utenti.
 
 Specifica (regole e numeri): documento «Dextera – Specifica per il codice»
 (https://claude.ai/artifact/1Zvq6SfQgEcVYbm3P7N5wC); motivazioni: https://claude.ai/artifact/8Jq6iojKUaU2JxDw6Hp57x.
@@ -37,6 +38,24 @@ Dove questo file e la specifica differiscono, vale la specifica.
 - Fase 1 – Percorso minimo (SQL: path_progress, dextera_settings, error_reports). Fasi 2–7: vedi la specifica.
 - GitHub Pages si attiva (ramo `main`, cartella radice) solo quando chiavi e cache sono separate e verificate.
 
+## Situazione al 20/11/2026
+- **Online** su `alefiumi.github.io/bodymania`: GitHub Pages pubblica dal branch `pwa`. App `APP_VERSION` 63, contenuti
+  `version` 10 (`corpo` 11, `cervello` 2, `cuore` 1, `polmoni` 1). Usata dall'autore e da circa 40 amici.
+- **Come si lavora**: le modifiche si fanno e si salvano sul branch di sviluppo della sessione (ultimo: `pwa-259gcu`); si
+  pubblica solo quando l'autore dice "pubblica", portando `pwa` avanti allo stesso commit (solo avanzamento, mai riscrivere).
+  Chiedere sempre prima di commit e push. A ogni file dell'app cambiato aumenta `APP_VERSION`; a ogni contenuto cambiato le `version`.
+- **Supabase** (progetto `zxtamxgmvtgvpgngecyz`, piano gratuito, regione UE Parigi): applicati dall'autore tutti i file di
+  `supabase/migrations/` fino a `20261120110000_trigger_privato.sql` (i due sui testi dei badge sono facoltativi: non verificato
+  se applicati). Quando un file cambia regole lette dall'app, si pubblica prima l'app (compatibile con prima e dopo) e poi si
+  applica il file. Security Advisor: restano solo gli avvisi voluti su `delete_my_account()` e `my_profile()` e la protezione
+  dalle password trapelate (solo piani a pagamento). Query Performance azzerato il 20/11: le query dell'app stavano a 2–4 ms.
+- **Accesso**: email e password (conferma dell'email attiva, minimo 8 caratteri anche sul server) e Google (client OAuth su
+  Google Cloud, progetto "BodyMania", app pubblicata; Site URL e redirect `https://alefiumi.github.io/bodymania/`;
+  per Dextera l'autore deve aggiungere `https://alefiumi.github.io/dextera/` nei Redirect URLs di Supabase).
+  L'account dell'autore è `alessandro.fiumicelli@gmail.com` (Google più password); il vecchio `alefiumi42` è stato cancellato.
+- **Ambiente cloud**: l'ambiente "bodymania" raggiunge solo l'host del progetto Supabase (prove dell'API con la chiave pubblica,
+  nessuna chiave salvata). Nel container c'è PostgreSQL 16 per provare le migrazioni con un finto schema `auth`.
+
 ## Stato attuale
 Codice di BodyMania con nome, chiavi e schede di Dextera. Diviso in:
 - `index.html` (solo struttura), `css/style.css`.
@@ -49,22 +68,60 @@ Codice di BodyMania con nome, chiavi e schede di Dextera. Diviso in:
   scelti con i pulsanti `#asw` in alto; scelta in `dextera-atlante`), **Flotta** (`soc`, l'ex Amici). Il **Profilo**
   (`prog`) non ha una scheda: si apre toccando la foto in alto a sinistra (`#me`, disegnata da `head()` in `state.js`).
   Percorso, Profilo e Flotta usano tutto lo schermo senza figura (classe `pg` su `body`).
+- Computer e tablet in orizzontale (almeno 900 px e più larghi che alti, `@media` in fondo a `css/style.css` e in
+  `atlante/index.html`): figura a sinistra e scheda a destra (griglia), senza la freccia `#fold`; in colonna la figura restava
+  alta 180 px e le risposte uscivano dallo schermo. Se la finestra cambia forma e la figura era intera, si riadatta (`atHome()`).
+  Segni di origine e inserzione (`ovDraw`/`drawOv()` in `figure.js`) in pixel dello schermo, ridisegnati a ogni zoom: prima
+  erano in unità del disegno e su un computer (o ingrandendo) i cerchi O e I coprivano mezza figura.
 - Figura: barra `.tbar` sopra il disegno (moduli a sinistra, zoom a destra), mai sovrapposta; l'svg occupa
   tutta la larghezza e mantiene le proporzioni (con lo zoom si vede anche ciò che sta ai lati).
   Zoom: pulsanti, rotella, pizzico a due dita con eventi touch (su iPhone gli eventi pointer a due dita
   vengono annullati dal sistema); un dito sposta la figura quando è ingrandita.
+  Doppio tocco (`doubleTapZoom()` in `figure.js`): ingrandisce 2,5 volte sul punto, molto ingrandita torna alla vista intera;
+  per distinguerlo il tocco singolo sulla figura vale dopo 260 ms (`DBL` in `ui.js`, `tapAt()`).
 - Puzzle: `slotAt(x,y,id)` in `figure.js` sceglie il posto vuoto più vicino entro `SLOT_PX` (28 px), anche se
   coperto da altre ossa, con precedenza al pezzo in mano; altrimenti l'osso sotto il dito (errore).
-  Il pezzo trascinato è disegnato alla scala della figura, con il centro 42 px sopra il dito.
+  Il pezzo trascinato è disegnato alla scala della figura, con il centro 42 px sopra il dito. I pezzi sono la sagoma intera
+  del lato principale della vista (`sf`, riquadro `sb`), anche delle parti coperte da altre ossa: una costa si vede intera.
+  Il pezzo in mano vince se il suo posto è entro 8 px dal posto più vicino.
+- Menu della figura: un pulsante per modulo ("🦴 Corpo · Anteriore ▾", "🧠 Cervello ▾") apre l'elenco delle viste del modulo
+  (`viewMenu()` in `figure.js`, `#vmenu`); la vista scelta per ogni modulo è in `app.bases`, salvata in `dextera-2d` con `grp`.
+  Con tre moduli, su schermi stretti i pulsanti dei moduli non aperti mostrano solo l'icona (`.mn`); un modulo può dare nel suo
+  JSON i nomi di "singole/gruppi" (`grpn`) e il testo di Esplora (`expl`).
+  Viste (`views` e nomi `vnames` nei contenuti): corpo `a` `p` `ld` `ls` `s` `i` (anteriore, posteriore, laterale destra e
+  sinistra, superiore, inferiore); cervello `ls` `ld` (facce laterali), `m` (mediale: faccia mediale del destro), `f` anteriore, `p`
+  posteriore, `s` superiore, `i` inferiore o basale. I nomi usano i termini dell'anatomia (`BODY_VIEWS`, `BRAIN_VIEWS`, `ZVIEWS` in
+  `contenuti_2d.py`: "Superiore (craniale)", "Inferiore (basale)", "Piede · plantare"…). In Esplora, se una struttura nella vista
+  si vede poco, la scheda dice in quali viste si vede bene (`seenIn()` in `explore.js`).
+  Tutte le viste di un modulo stanno nello stesso spazio 300×H (stessa scala, ognuna centrata); cambiando vista e con ⟲ la
+  figura si adatta al disegno della vista (`resetZoom`), il riquadro può essere più largo della figura (`maxW`, `clampT`).
+- Viste di zona (`zviews` in `corpo.json`): `mp`/`md` mano palmare e dorsale, `pd`/`pp` piede dorsale e plantare, solo il
+  lato destro. I gruppi `cranio` (vista `ld`), mano e piede hanno `zv` (vista preferita): Ricomponi li gioca lì e Trova chiede lì
+  le loro ossa, con `setView(v,true)` (temporanea, non cambia `app.bases`); nel menu compare anche la coppia della zona.
+  `baseView()` torna alla vista del menu a ogni domanda, al menu dei giochi e al cambio di scheda.
+- `vis[v]`: quota della sagoma visibile in quella vista. Giochi e puzzle usano solo strutture con almeno il 25% visibile
+  (`visibleIn`, `MIN_VIS`): niente pisiforme da dietro. Lo zoom sulla zona usa le proporzioni del riquadro sullo schermo.
+- Safari a volte non ridisegna l'svg quando cambia altezza (scheda abbassata) e mostra la figura due volte: un ResizeObserver
+  in `figure.js` lo costringe a ridisegnare. Non provato su Safari vero dall'AI.
+- Altezza su iPhone: `body` usa `--app-h` = `innerHeight`, aggiornata in `main.js` a ogni resize, focusout, pageshow e ritorno
+  in primo piano (con la pagina riportata in cima): nell'app installata, dopo la tastiera o il ritorno da Google, Safari lasciava
+  la barra in basso a metà schermo con una fascia nera sotto. Non provato su iPhone vero dall'AI.
 - Scheda sotto la figura dentro `#pw`: la freccia `#fold` sul bordo in alto a destra la abbassa (striscia di due righe
   scorrevole, in gioco resta la domanda) e la rialza; scelta in `dextera-fold`. Stessa freccia nell'atlante 3D (`dextera-fold3d`).
 - Spunta verde in alto a destra (`#off`) quando la copia offline è pronta; il pulsante "Installa l'app"
   nell'Atlante 2D compare solo fuori dall'app installata.
-- `content/`: `index.json` (versione globale, ordine dei moduli), `corpo.json`, `lat.json`, `sag.json`,
-  `neuro-strutture.json` (testi in comune tra `lat` e `sag`), `nervi-cranici.json`. Ogni file ha `version`.
+  Installazione (`installNow()` in `install.js`): su Android con la richiesta del browser (`beforeinstallprompt`) un tocco apre
+  la finestra di installazione; su iPhone (Apple non lascia installare i siti da soli) una guida a schermo intero (`#iguide`)
+  con i tre passi, le icone di Condividi e "Aggiungi alla schermata Home" e una freccia verso Condividi; nei browser dentro
+  altre app (Instagram, Facebook, Gmail…) dice di aprire in Safari o Chrome. Nel browser, dopo l'avvio, una striscia
+  "📲 Installa l'app sul telefono" sopra la barra in basso (`#ibar`, chiusa con ✕ non torna: `dextera-installhint`).
+- `content/`: `index.json` (versione globale, ordine dei moduli), `corpo.json`, `cervello.json`, `cuore.json`, `polmoni.json`,
+  `neuro-strutture.json` (testi dei gruppi del cervello), `nervi-cranici.json`, `mappa.json` (percorso, vedi sotto). Ogni file ha `version`.
   Le forme sono descrizioni come `{"poly":"M…"}`, `{"ln":[x1,y1,x2,y2,spessore]}`, `{"stack":[x,y,w,h,n]}`
   (tipi in `js/shapes.js`). Quando cambi un contenuto, aumenta la `version` del file e quella di `index.json`.
-- Serve un server locale (`npx serve .`): con il doppio clic su `index.html` (`file://`) moduli e JSON non si caricano.
+- Serve un server locale (`python3 -m http.server`): con il doppio clic su `index.html` (`file://`) moduli e JSON non si caricano.
+  Non usare `npx serve`: reindirizza `/atlante/index.html` → `/atlante` e il service worker rifiuta le risposte reindirizzate
+  (atlante vuoto, app che non si apre offline). GitHub Pages non reindirizza.
 - PWA: `manifest.webmanifest`, icone in `icons/` (pianeta con un satellite su fondo indaco; PNG generate da uno script
   Python senza pacchetti, lo script non è nel repo), `sw.js`. Cache: `dextera-app-<APP_VERSION>`, `dextera-content-<versione>`,
   `dextera-3d-<MODEL_VERSION>`.
@@ -84,27 +141,37 @@ Codice di BodyMania con nome, chiavi e schede di Dextera. Diviso in:
   Android con Chrome, Firefox, Samsung Internet, Edge. Provati dall'AI solo Chrome desktop ed emulazione mobile.
 
 Contenuto del gioco:
-- Moduli 2D: `corpo` (121 ossa singole in 26 gruppi, vista anteriore e posteriore; 208 muscoli), `lat` (emisfero
-  sinistro visto di lato, 57 strutture) e `sag` (faccia mediale dell'emisfero destro, 81 strutture), 12 nervi cranici.
-- Disegni 2D ricavati dal modello 3D (non più a mano): `node atlante/build/proietta_2d.mjs <tmp.json>` proietta ossa,
-  encefalo e aree di origine e inserzione (z-buffer in software, contorni dei pixel visibili → tracciati SVG; senza pacchetti
-  npm), poi `python3 atlante/build/contenuti_2d.py <tmp.json>` scrive `content/corpo.json`, `lat.json`, `sag.json` con nomi,
-  descrizioni (`desc` di `dati.json`), gruppi, muscoli e casi (tutti i testi da `testi/`, vedi sotto). Di solito li lancia
-  `python3 atlante/build/testi.py`, che rifà tutto. Ogni struttura ha `s.a`/`s.p` (forme per vista; per le ossa pari il
-  primo tracciato è il lato destro, usato per i pezzi del puzzle) e `g` (gruppo); i gruppi hanno `m` (membri). Nel cervello i
+- Moduli 2D: `corpo` (121 ossa singole in 26 gruppi, sei viste; 208 muscoli), `cuore` ("🫀 Cuore e vasi", apparato
+  cardiovascolare: 358 strutture in 16 gruppi, otto viste: cuore e grandi vasi da quattro lati, solo il cuore faccia anteriore e base,
+  arterie e vene di tutto il corpo (`thin`: bordo del colore del vaso); vasi del corpo raggruppati per regione, calcolata in
+  `proietta_2d.mjs` dalla posizione rispetto a sterno, omero e femore; 5 casi), `polmoni` ("🫁 Polmoni": 81 strutture in 5 gruppi,
+  sei viste: quattro lati, bronchi con vasi polmonari, albero bronchiale; 4 casi) e `cervello` (106 strutture in sette viste; fino al
+  18/11/2026 erano due moduli, `lat` e `sag`: gli id `b.*` e la maestria sono gli stessi), 12 nervi cranici.
+- Disegni 2D ricavati dal modello 3D (non più a mano): `node atlante/build/proietta_2d.mjs <tmp.json>` (gira anche nel cloud:
+  legge solo i `.glb` del repository, pochi secondi) proietta ossa, viste di zona di mano e piede (assi principali delle loro ossa),
+  sagome intere delle singole ossa, encefalo e aree di origine e inserzione (z-buffer in software, contorni dei pixel visibili → tracciati SVG; senza pacchetti
+  npm), poi `python3 atlante/build/contenuti_2d.py <tmp.json>` scrive `content/corpo.json`, `cervello.json`, `cuore.json` e `polmoni.json`
+  con nomi, descrizioni (`desc` di `dati.json`), gruppi, muscoli e casi (tutti i testi da `testi/`, vedi sotto). Di solito li lancia
+  `python3 atlante/build/testi.py`, che rifà tutto. Ogni struttura ha `s.<vista>` (forme per vista: ogni lato è
+  un tracciato a sé, il primo è il lato principale della vista: destro, sinistro guardando da sinistra; nel cervello il sinistro
+  nelle viste con i due emisferi), `c`, `sf`/`sb`/`vis` e `g` (gruppo); i gruppi hanno `m` (membri). Nel cervello i
   gruppi sono i lobi (partizione) più aree che si sovrappongono (`area: true`: Broca, Wernicke, giro precentrale, talamo…).
   Esclusi dal 2D: ossicini, cellule etmoidali, seni, cartilagini di naso e laringe, sesamoidi; denti e cartilagini costali
   sono una voce ciascuno; nel cervello i nuclei profondi (si vedrebbero attraverso gli spazi tra le superfici).
 - Muscoli 2D: ossa di origine e inserzione dall'osso più vicino alle aree della fonte; dove la fonte non ha l'area, dal testo
   della scheda (`src: 'testo'`, segnalato nel pannello). 154 muscoli hanno origine e inserzione (usati nei giochi).
   Aree segnate dalla parte sbagliata nella fonte: correzioni `sposta_aree` in `testi/correzioni.json` (es. capo breve del bicipite femorale).
-- Figura: barra con "Anteriore/Posteriore ⇄" (solo corpo) e "Ossa singole/Gruppi" ("Giri e solchi/Lobi e aree" nel cervello),
-  scelta salvata in `dextera-2d`. Le due viste sono nell'svg insieme (una nascosta), le marcature valgono in tutte e due.
+- Figura: menu Corpo/Cervello con le viste (vedi sopra) e "Ossa singole/Gruppi" ("Giri e solchi/Lobi e aree" nel cervello),
+  scelte salvate in `dextera-2d`. Le viste sono nell'svg insieme (una sola visibile), le marcature valgono in tutte.
   Con i gruppi tutti i giochi usano i gruppi (`items()`, `itemOf()` in `state.js`); la risposta è giusta se si tocca un membro.
   Trova: con le singole si sceglie prima il gruppo, e per le ossa piccole la figura si ingrandisce sulla zona. Ricomponi: con le
   singole i pezzi sono le ossa di un gruppo (zona ingrandita), con i gruppi sono gruppi interi. Maestria: chiavi diverse per
   singole (`o.femur`, `b.precentral-gyrus`) e gruppi (gli id dei vecchi 22 gruppi: `femore`, `carpo`… e dei lobi).
-- Modalità: Ricomponi (puzzle con trascinamento), Tendine-ponte, Caso clinico (indizi progressivi),
+- Modalità: Ricomponi (puzzle con trascinamento), Componi (`build`: puzzle vero su schermo vuoto, `.view.bare`: si vedono solo i pezzi
+  già messi; il primo si sistema da solo al suo posto, gli altri sono giusti se il centro cade entro max(22 px, 18% della diagonale)
+  dal loro posto, cioè nella posizione giusta rispetto ai pezzi già messi; `freeDrop()` in `puzzle.js`, posti misurati prima di
+  nasconderli in `G.box`; vicino ma fuori: "ci sei quasi" con la direzione; 5 cuori; nel corpo zone intere di più gruppi,
+  `BUILD_ZONES`: mano, piede, cranio e mandibola, colonna, gabbia toracica, arto superiore e inferiore), Tendine-ponte, Caso clinico (indizi progressivi),
   Trova la struttura, Origine e inserzione, Funzione → struttura, Nervi cranici, Misto.
 - Zoom e pan sulla figura (pulsanti, pizzico, rotella), XP, livelli, serie di giorni, maestria per struttura.
 - Salvataggio locale: `localStorage`, chiave `dextera-v1`. **L'account è facoltativo**: senza account si gioca e si
@@ -120,12 +187,29 @@ Contenuto del gioco:
   `dextera-acct` ricorda l'ultimo account usato e `dirty` (progressi salvati qui e non ancora inviati, es. giocando
   offline): se la sessione non vale più, all'avvio con rete si chiede di accedere di nuovo con un avviso; chi continua
   senza accedere trova nel profilo "Accedi e sincronizza". Uscendo con "Esci" l'account si dimentica.
+  I progressi del dispositivo ricordano l'account a cui appartengono (`S.owner` {uid, email}, dopo la prima sincronizzazione):
+  entrando con un account diverso non si uniscono da soli: la schermata "Su questo telefono ci sono altri progressi"
+  (`showOwner()` in `gate.js`, `A.conflict`) propone "Importa i dati del telefono in questo account" (`importDevice()`: se
+  l'account non ha una password ne chiede una, così si entra con Google e con email e password; facoltativo, elimina il vecchio
+  account con la sua password, usando un client Supabase a parte che non tocca la sessione) oppure "Inizia da zero"
+  (`resetLocal()` in `state.js`). I progressi da ospite (senza `owner`) si uniscono come prima. Nel riquadro Account
+  "Aggiungi password" per chi è entrato solo con Google. La cancellazione libera subito il nome utente
+  (`20261119130000_nome_libero.sql`: resta in `deleted_username`, il ripristino lo restituisce se è ancora libero). Nel riquadro Account "Collega Google" (`linkIdentity`, serve "manual
+  linking" attivo su Supabase) per entrare con Google nello stesso account invece di crearne un secondo.
+  Password: il link "Password dimenticata" (evento `PASSWORD_RECOVERY`, `A.recovery`) apre a tutto schermo "Scegli una nuova
+  password" (`showRecovery()` in `gate.js`, due campi; si esce solo salvando o con "Annulla ed esci"); "Cambia password" nel
+  profilo chiede quella attuale (verificata con un client a parte, `setNewPassword()`); dopo ogni cambio si chiudono le sessioni
+  sugli altri dispositivi (`signOut({scope:'others'})`).
+  Rete: `online()` in `account.js` (usato da account, avvio, profilo e amici) non si fida di `navigator.onLine` falso (su Mac con
+  VPN o schede di rete virtuali Chrome dice "senza rete" anche quando c'è e l'app non sincronizzava più): `checkNet()` prova a
+  raggiungere Supabase (`/auth/v1/health`, `no-cors`) e se risponde la rete c'è.
   All'accesso i progressi locali si uniscono al server tenendo il valore più alto (XP, risposte, maestria per voce;
   per la serie vale il giorno più recente; profilo: vince la modifica più recente, `profile_at`), poi dopo ogni `save()`
   parte un invio (3 s). Le partite finite vanno in `dextera-queue` e si inviano con upsert che ignora i doppioni.
 - Profilo (dalla foto in alto, `js/progress.js`, a tutto schermo senza figura): foto (ritagliata a 128×128 JPEG e salvata
   come testo `data:` in `profiles.avatar`, così si vede offline), nome (con account: unico, regola `NAME_RE`), ruolo,
-  presentazione; statistiche, badge, riquadro Account (sincronizza, cambia password, esci) e maestria del modulo.
+  presentazione; statistiche, badge, riquadro Account (sincronizza, cambia password, esci) e maestria, con la scelta tra corpo
+  e cervello (toccando una voce si apre nell'Atlante 2D nel suo modulo).
   Profilo locale in `S.prof`; funziona anche senza account.
 - Badge (`js/badges.js`): 20, calcolati sul dispositivo dopo ogni `save()` (avviso "Nuovo badge"); `S.badges` {id: data},
   statistiche delle partite in `S.stats` (aggiornate da `queue.add`). Con l'account vanno in `badge_assertions`.
@@ -177,6 +261,7 @@ Come si rigenera (serve Blender; i passaggi stanno in `atlante/build/`):
    `python3 atlante/build/testi.py` (vedi «Testi verificabili»).
 
 Funzioni dell'atlante (in `atlante.js`):
+- Pulsante ⟲ all'inizio della barra (`homeView()`): torna alla vista iniziale, tutto il corpo da davanti.
 - Muscolo: tre viste, "Forma e aree", "Punti e linee" (pallino blu al centro di ogni area di origine, arancione
   per l'inserzione, linea viola che li unisce, sempre in primo piano) ed "Entrambe"; reperi della fonte entro 2,5 cm dai punti.
 - Gruppi (`COMBO`, da `DATA.combo`): zampa d'oca, ischiocrurali, cuffia dei rotatori, tricipite della sura, quadricipite.
@@ -185,6 +270,30 @@ Funzioni dell'atlante (in `atlante.js`):
   durante il taglio il contorno è spento e le superfici sono a due facce) e scomposizione in 9 strati (`ST`, da `DATA.strati`), dalla
   dura madre ai ventricoli. Dura madre e aracnoide craniche non sono nella fonte: `makeShells()` le genera
   avvolgendo la corteccia, forma schematica dichiarata nel pannello.
+
+Cuore e vasi (🫀) e Polmoni (🫁), separati come voluto dall'autore (`SYS` e `openSys()` in `atlante.js`, pulsanti nella barra e
+nel pannello Strati): ogni apparato mostra solo le sue parti, con strati da accendere (cuore e vasi: arterie, vene, grandi vasi della
+base, cuore, coronarie e vene del cuore, valvole e muscoli papillari; polmoni: pleura trasparente, lobi, trachea e bronchi, vasi
+polmonari), viste pronte (fra cui "Solo il cuore", come l'encefalo) e le sezioni sul riquadro dell'organo (`S.cutOn`).
+I due apparati si accendono anche insieme (`S.on`, pulsante "Aggiungi …" nel pannello) e dal pannello Strati come strati
+(`toggleSys()`, senza aprire il loro pannello). Nei pannelli di encefalo e apparati
+"👁 Solo …" (`S.solo`) toglie tutto il resto (scheletro, muscoli, altri strati) e si rimette con lo stesso pulsante.
+Nel pannello iniziale dell'atlante: "Sezione del corpo intero" assiale, coronale e sagittale con cursore (`cutHtml('body')`).
+Con una sezione attiva il tocco scarta le intersezioni nella parte tagliata via (`kept()`): si seleziona ciò che si vede sul taglio.
+Disegno solo quando serve (`loop()`/`wake()` in fondo ad `atlante.js`): si ridisegna durante tocchi, movimenti della vista e per 1,5 s
+dopo ogni cambiamento (`refresh()`, caricamenti, messaggi dall'app); da fermo 0 fotogrammi, in secondo piano il ciclo si ferma
+(`visibilitychange`). Prima disegnava 60 volte al secondo anche fermo e il telefono si scaldava e rallentava anche le altre app.
+Memoria grafica: le parti nascoste (strati spenti) liberano subito la loro copia nella GPU (`m.userData.gpu`, `geometry.dispose()`:
+three.js la ricarica da sola dai dati in memoria quando tornano visibili); in secondo piano o con l'atlante non in uso da 20 s
+si libera tutta (`freeGPU()`).
+`organOf()` in `atlante.js`, `organo()` in `build/torace.py` e in `proietta_2d.mjs` usano le stesse regole: tenerle uguali.
+Colori: cuore destro blu e sinistro rosso; arterie polmonari blu e vene polmonari rosse (sangue venoso/ossigenato, come nei libri).
+Testi di cuore, vasi principali e polmoni in `testi/torace.json` (scritti dall'AI, da verificare) con i nomi italiani corretti
+(TA2 diceva "valvola canina" per la tricuspide…); gli altri vasi hanno un testo ricavato dalla gerarchia della fonte
+("Arteria, ramo di…", fonte Z-Anatomy). Nomi e testi degli strati dei due apparati (`SYS`) in `DATA.sistemi`, da `testi/gruppi.json`. Giochi 3D **Cuore e grandi vasi** e **Polmoni** (serie `cuore`, `polmoni`): solo parti visibili
+da fuori (dei bronchi solo trachea e bronchi principali). Nella fonte mancano il pericardio e il lembo anteriore della mitrale.
+Sistema linfatico: **non esportato**. È nella collezione 6 di `Startup.blend`, che `za_export.py` salta (`LAYERS`); per averlo
+serve rieseguire l'esportazione con Blender (non disponibile nel cloud) aggiungendo la collezione 6 come strato `linfatico`.
 
 Correzione all'esportazione: `Ciliary body-curve.l` in `sensi.glb` esce con una trasformazione sbagliata (anello di 2 m
 dietro lo scheletro); `atlante.js` lo sostituisce al caricamento con la copia speculare del destro (`MIRROR_FIX`, da `DATA.specchia`, cioè dalle correzioni `specchia` di `testi/correzioni.json`).
@@ -236,8 +345,10 @@ Tutti i dati anatomici scritti a parole stanno in `testi/`, un file per tipo: `m
 inserzione, azione, innervazione), `ossa.json` (159 del modello più denti e cartilagini costali del 2D, `solo2d`), `reperi.json`
 (606; le 19 voci con `vedi` hanno nome e descrizione nella voce di un osso o dell'encefalo che ha lo stesso nome nella fonte),
 `encefalo.json` (strutture di encefalo, midollo e meningi, 3D e 2D, area di Wernicke), `nervi-cranici.json`, `gruppi.json`
-(gruppi di ossa `gruppo.ossa.*`, lobi e aree del cervello `gruppo.encefalo.*`, gruppi di muscoli e strati dell'encefalo
-dell'atlante, descrizioni dei gruppi della fonte `gruppo.fonte.*` usate quando una struttura non ha la sua), `casi.json` (36 casi).
+(gruppi di ossa `gruppo.ossa.*`, lobi e aree del cervello `gruppo.encefalo.*`, gruppi dei moduli `gruppo.cuore.*` e `gruppo.polmoni.*`,
+gruppi di muscoli e strati dell'encefalo, del cuore e dei polmoni dell'atlante, descrizioni dei gruppi della fonte `gruppo.fonte.*` usate
+quando una struttura non ha la sua), `casi.json` (45 casi), `torace.json` (cuore, vasi, vie aeree e polmoni: nomi dove TA2 sbaglia e
+descrizioni; quelle con fonte Z-Anatomy dicono da quale vaso nasce o dove sbocca un vaso secondo la gerarchia della fonte; `solo2d` = solo nel 2D).
 - Formato: `{"version","tipo","nota","campi":{campo: etichetta},"voci":[{"id","ref",…,"dati":{campo:{"valore","fonte","stato","verifica"}}}]}`.
   L'id di un dato è `<id della voce>.<campo>` (es. `muscolo.semitendinosus.origine`). Gli id delle voci usano il nome inglese
   della fonte come gli id di `content/` (`o.femur` → `osso.femur`, muscolo `semitendinosus`, `b.precentral-gyrus` → `encefalo.precentral-gyrus`):
@@ -250,9 +361,13 @@ dell'atlante, descrizioni dei gruppi della fonte `gruppo.fonte.*` usate quando u
   `content/nervi-cranici.json` e `content/neuro-strutture.json`, rifà i moduli 2D e aumenta da sola le versioni dei file
   cambiati e di `content/index.json`. Poi va aumentato `APP_VERSION` in `sw.js` se è cambiato `atlante/dati.json`.
   `content/` e `atlante/dati.json` sono generati: mai correggerli a mano.
-- I nomi di vasi, nervi, legamenti e visceri non sono in `testi/`: vengono da TA2 (con i refusi corretti).
+- I nomi di vasi, nervi, legamenti e visceri non sono in `testi/` (salvo quelli corretti in `torace.json`): vengono da TA2 (con i refusi corretti).
+- `atlante/build/torace.py` tiene solo le regole per classificare cuore, vasi e polmoni (`organo()`, gruppi del 2D come regex).
 - I testi sono stati portati in `testi/` dai file generati del 18/11/2026: l'uscita rigenerata è uguale, salvo i nomi italiani di
   19 strutture del cervello ora anche nel 3D, le descrizioni di ipofisi ed epifisi nel 3D e i gruppi e strati passati da `atlante.js` a `dati.json`.
+- Dopo la fase 0 Dextera ha preso i 47 commit di BodyMania fino all'app 63 (cuore, polmoni, viste, Componi, privacy…): i testi di cuore,
+  vasi e polmoni che BodyMania tiene in `torace.py` e `atlante.js` (SYS) sono passati in `testi/`; l'uscita rigenerata è uguale a quella di
+  BodyMania 63, salvo i titoli «Atlante 2D · …» e i nomi e le descrizioni del cervello già detti sopra (più culmine e declive del verme).
 
 ## Mappa del percorso (`content/mappa.json`)
 Corso → 4 pianeti → 17 satelliti (con `ordine` della specifica) → 6 passi (`ossa`, `reperi`, `muscoli`, `connessioni`, `funzione`,
@@ -291,6 +406,37 @@ Idee rimandate da BodyMania: livello tendini e legamenti, puzzle a strati, sfida
 - `badge_classes` (id, nome, descrizione, criterio, immagine)
 - `badge_assertions` (id, user_id, badge_id, assegnato_il)
 - Viste: classifica globale e classifica amici.
+
+## Privacy (GDPR) e sicurezza (19/11/2026)
+- Database: righe dei profili visibili agli iscritti solo se attivi (o il proprio), colonne leggibili solo id, nome utente, foto,
+  XP, serie, `last_day`, `deleted_at` (grant per colonna, `20261120090000_viste_senza_definer.sql`); le viste `leaderboard`,
+  `leaderboard_friends`, `public_profiles` sono `security_invoker` (niente avviso critico del Security Advisor); il proprio
+  profilo completo si legge con `my_profile()` (`ownProfile()` in `account.js`, con ripiego sulla tabella). Email solo in `auth.users` (mai leggibile dall'app: la vedono gli amministratori
+  del progetto nel pannello di Supabase). Colonne modificabili del profilo elencate nel `grant update`; nelle amicizie si cambia
+  solo `status` (prima chi riceveva una richiesta poteva cambiare `user_id`); badge visibili solo a chi li ha; limiti su lunghezze,
+  XP e formato della foto (JPEG/PNG/WebP base64). Nessun ruolo di amministratore nelle tabelle.
+  Cancellazione in due tempi (`20261119120000_cancellazione_ripristino.sql`): `delete_my_account()` mette `profiles.deleted_at`,
+  blocca l'accesso (`auth.users.banned_until`), chiude le sessioni, toglie l'account da viste e amicizie; dopo 30 giorni
+  `admin.pulisci_cancellati()` (pg_cron ogni notte) cancella `auth.users` e a cascata tutto il resto. Schema `admin` (non esposto,
+  solo SQL Editor): vista `account_in_cancellazione`, `ripristina_account(email)`, `cancella_definitivamente(email)`.
+  Richieste di amicizia solo verso profili di `public_profiles` (attivi e con nome).
+  Nelle regole `(select auth.uid())` invece di `auth.uid()` (calcolato una volta per richiesta: avvisi del Performance Advisor,
+  `20261120100000_prestazioni_rls.sql`, con indici su `friendships.friend_id` e `badge_assertions.badge_id`).
+  Il trigger che crea il profilo alla registrazione usa `private.nuovo_profilo()` (schema non esposto,
+  `20261120110000_trigger_privato.sql`). Restano due avvisi voluti del Security Advisor: `delete_my_account()` e `my_profile()`
+  sono security definer chiamabili dagli iscritti (servono all'app e agiscono solo su chi le chiama).
+  Le regole sono state provate su PostgreSQL 16 con un finto schema `auth` (utenti A, B, C che provano a leggere e scrivere i dati
+  altrui): da rifare se si cambiano le policy.
+- App: l'app non scrive SQL (PostgREST passa i valori come parametri); gli id che finiscono in un filtro `.or()` passano da
+  `UUID` in `social.js`; tutto il testo degli utenti passa da `esc()`. Content-Security-Policy in `<meta>` di `index.html`,
+  `atlante/index.html`, `privacy.html` e `termini.html`: niente script in linea (tema in `js/tema.js`, pagina dell'atlante in `atlante/pagina.js`),
+  solo la mappa degli import dell'atlante con l'impronta sha256 (se la cambi, ricalcola l'impronta), rete solo verso Supabase.
+- Informativa: `privacy.html` (titolare Alessandro Fiumicelli, dati su Supabase in UE, Parigi). Termini di servizio: `termini.html`
+  (uso solo per studio, contenuti dell'AI da verificare, regole di comportamento, licenze, responsabilità); accettati con la
+  stessa spunta della registrazione (`terms_v` nei metadati) e con l'avviso sotto "Accedi con Google".
+  Registrazione con spunta obbligatoria (informativa letta, almeno 14 anni) e versione `PRIVACY_V` salvata nei metadati
+  dell'utente; per Google un avviso sotto il pulsante. Profilo → "Privacy e dati": scarica i miei dati (JSON con dispositivo e
+  server, `myData()`), cancella i dati da questo dispositivo, elimina l'account. Password di almeno 8 caratteri nell'app.
 
 ## Vincoli
 - Nel frontend va solo la chiave pubblica di Supabase. La chiave `service_role` non entra mai

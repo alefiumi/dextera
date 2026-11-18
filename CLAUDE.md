@@ -369,6 +369,18 @@ descrizioni; quelle con fonte Z-Anatomy dicono da quale vaso nasce o dove sbocca
   vasi e polmoni che BodyMania tiene in `torace.py` e `atlante.js` (SYS) sono passati in `testi/`; l'uscita rigenerata è uguale a quella di
   BodyMania 63, salvo i titoli «Atlante 2D · …» e i nomi e le descrizioni del cervello già detti sopra (più culmine e declive del verme).
 
+## Percorso (fase 1, in corso: non ancora committata né pubblicata)
+- File: `js/percorso.js` (regole e stato: chiavi di maestria per aspetto `o.`/`r.`/`m.`/`oi.`/`fn.`, passi fatti, stati dei satelliti,
+  stella guida, giorno/obiettivo/serie con scudi in `dayTick` prima di ogni `save()`), `js/lezione.js` (lezione da 8 domande, gradi per
+  maestria, prova «Lo so già», quiz finale, caso clinico con ipotesi), `js/path.js` (mappa SVG universo → sistema → pianeta → satellite,
+  Elenco, Continua, glossario), `js/segnala.js` (coda `dextera-segnalazioni`, dati segnalati `dextera-segnalati`).
+- Dati: `content/regole.json` (numeri), `content/percorsi/base.json` (formato dei nodi del gestionale; `caso: null` = quiz finale finché
+  l'autore non abbina i casi), `content/lezioni.json` (generato da `testi.py`: reperi, id delle voci, stati non «da verificare»).
+- Solo 2D: muscoli e reperi non si toccano nel 2D (muscoli: scelta e nome; reperi: tocco sull'osso). Tocco 3D: da fare.
+- SQL: `supabase/migrations/20261121090000_dextera_percorso.sql` (path_progress, dextera_settings, error_reports, error_report_flags,
+  vista admin.segnalazioni), provato con PGlite (36 prove RLS). Da applicare dall'autore DOPO aver pubblicato l'app.
+- Sincronizzazione in `syncPercorso()` di `account.js`; senza tabelle i dati restano in coda (avviso nel profilo).
+
 ## Mappa del percorso (`content/mappa.json`)
 Corso → 4 pianeti → 17 satelliti (con `ordine` della specifica) → 6 passi (`ossa`, `reperi`, `muscoli`, `connessioni`, `funzione`,
 `progetto`). Ogni passo ha `strutture` (id di `content/corpo.json`: `o.<osso>` e muscoli; reperi `r.<slug del nome inglese>`), `aspetto`,

@@ -9,7 +9,8 @@ export async function loadContent(){
  const idx=await getRaw('index.json');
  // ?v= dice al service worker di servire tutti i file della stessa versione dell'indice.
  const get=f=>getRaw(f+'?v='+encodeURIComponent(idx.version));
- const [mods,nc]=await Promise.all([Promise.all(idx.modules.map(id=>get(id+'.json'))),get(idx.nc)]);
+ const hasMap=(idx.files||[]).includes('mappa.json');
+ const [mods,nc,mappa]=await Promise.all([Promise.all(idx.modules.map(id=>get(id+'.json'))),get(idx.nc),hasMap?get('mappa.json'):null]);
  const MODS={};
  for(const m of mods){
   const GR=m.groups.map(g=>({...g,group:true}));
@@ -20,5 +21,5 @@ export async function loadContent(){
   const byId=Object.fromEntries([...B,...GR].map(x=>[x.id,x]));
   MODS[m.id]={id:m.id,label:m.label,B,GR,byId,M:m.muscles||[],CASES:m.cases,W:m.W,H:m.H,views:m.views||['a']};
  }
- return {version:idx.version,MODS,NC:nc.items};
+ return {version:idx.version,MODS,NC:nc.items,MAPPA:mappa};
 }

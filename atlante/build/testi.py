@@ -186,6 +186,28 @@ def controlla():
                 if d['fonte'] not in FONTI: err.append(f"{v['id']}: fonte '{d['fonte']}'")
     if err: raise SystemExit('testi/ non valido:\n  ' + '\n  '.join(err[:30]))
 
+def slug(s):
+    import unicodedata
+    s = unicodedata.normalize('NFKD', s).encode('ascii', 'ignore').decode().lower(); return re.sub(r'[^a-z0-9]+', '-', s).strip('-')
+
+def controlla_mappa():
+    """ogni id di content/mappa.json esiste nei contenuti; ossa e muscoli del 2D tutti in almeno un satellite"""
+    p = os.path.join(ROOT, 'content/mappa.json')
+    if not os.path.exists(p): return
+    M = json.load(open(p)); C = json.load(open(os.path.join(ROOT, 'content/corpo.json')))
+    D = json.load(open(os.path.join(ROOT, 'atlante/dati.json')))
+    ok = {s['id'] for s in C['structures']} | {m['id'] for m in C['muscles']} | {'r.' + slug(l[0]) for l in D['lm']}
+    gr = {g['id'] for g in C['groups']}; usati = set(); err = []
+    for pl in M['corsi'][0]['pianeti']:
+        for s in pl['satelliti']:
+            err += [f"{s['id']}: gruppo {g}" for g in s['ossa'] if g not in gr]
+            for ps in s['passi']:
+                ids = ps['strutture'] if isinstance(ps['strutture'], list) else []
+                usati |= set(ids); err += [f"{ps['id']}: {i}" for i in ids if i not in ok]
+    manca = sorted(({m['id'] for m in C['muscles']} | {i for g in C['groups'] for i in g['m']}) - usati)
+    if err or manca: raise SystemExit('content/mappa.json non valido:\n  ' + '\n  '.join((err + ['non in nessun satellite: ' + i for i in manca])[:30]))
+    print('content/mappa.json: id validi')
+
 def main():
     controlla()
     path = os.path.join(ROOT, 'atlante/dati.json')
@@ -206,6 +228,7 @@ def main():
         I = json.load(open(idx)); I['version'] += 1; json.dump(I, open(idx, 'w'), ensure_ascii=False, indent=1); open(idx, 'a').write('\n')
         print('contenuti cambiati: content/index.json alla versione', I['version'])
     else: print('contenuti invariati')
+    controlla_mappa()
 
 if __name__ == '__main__':
     sys.path.insert(0, HERE)

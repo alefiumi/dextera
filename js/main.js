@@ -58,7 +58,7 @@ wireSocial($('panel'));addAccountListener(socialAccountChanged);
 boot();
 try{
  const c=await loadContent();
- app.MODS=c.MODS;app.NC=c.NC;
+ app.MODS=c.MODS;app.NC=c.NC;app.MAPPA=c.MAPPA;
  useMod('corpo');head();
 }catch(e){
  console.error(e);

@@ -959,4 +959,4 @@ renderer.setAnimationLoop(now=>{
  frames++;
  if(now-last>=1000){$('fps').textContent=`${Math.round(frames*1000/(now-last))} fps · ${Math.round(renderer.info.render.triangles/1000)}k triangoli`;frames=0;last=now;}
 });
-window.__proto={DATA,S,V,LAYERS,meshes,byName,LMS,camera,controls,renderer,refresh,toggleLayer,showMuscle,showCombo,showLandmark,selectPart,findPart,pickPart,pickLandmark,setView,openBrain,setCut,setLevel,pts,startGame,gameTap,poolOf,boneHit,distToArea,get GAME(){return GAME;}};
+window.__proto={DATA,S,V,LAYERS,meshes,byName,LMS,poolOf,camera,controls,renderer,refresh,toggleLayer,showMuscle,showCombo,showLandmark,selectPart,findPart,pickPart,pickLandmark,setView,openBrain,setCut,setLevel,pts,startGame,gameTap,poolOf,boneHit,distToArea,get GAME(){return GAME;}};

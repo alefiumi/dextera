@@ -1,5 +1,5 @@
 {
- "version": 6,
+ "version": 7,
  "modules": [
   "corpo",
   "lat",
@@ -7,6 +7,7 @@
  ],
  "nc": "nervi-cranici.json",
  "files": [
-  "neuro-strutture.json"
+  "neuro-strutture.json",
+  "mappa.json"
  ]
 }

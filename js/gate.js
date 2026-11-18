@@ -6,7 +6,7 @@ import {$,toast} from './util.js';
 import {S} from './state.js';
 import {account as A,configured,startAccount,addAccountListener,lastAccount,signIn,signUp,google,resetPw,setView,saveProfile,NAME_RE,NAME_RULE,esc} from './account.js';
 
-const GUEST='bodymania-guest'; // "Continua senza account" scelto: agli avvii successivi non si chiede più
+const GUEST='dextera-guest'; // "Continua senza account" scelto: agli avvii successivi non si chiede più
 let mode='boot',reason='',fromApp=false;
 const box=()=>$('gbody');
 const status=t=>{if(mode==='boot')box().innerHTML=`<div class="spin"></div><p class="gst">${t}</p>`;};
@@ -23,20 +23,20 @@ function show(){const g=$('gate');g.hidden=false;g.classList.remove('out');}
 async function checkUpdate(){
  if(!('serviceWorker' in navigator)||!navigator.serviceWorker.controller)return false; // primo avvio: niente da aggiornare
  const reg=await navigator.serviceWorker.getRegistration();if(!reg)return false;
- try{if(sessionStorage.getItem('bm-upd')&&Date.now()-sessionStorage.getItem('bm-upd')<60000)return false;}catch(e){} // mai due volte di fila
+ try{if(sessionStorage.getItem('dextera-upd')&&Date.now()-sessionStorage.getItem('dextera-upd')<60000)return false;}catch(e){} // mai due volte di fila
  await timeout(reg.update().catch(()=>{}),8000);
  if(!reg.installing&&!reg.waiting)return false;
  status('Aggiornamento dell\'app in corso…');
  const changed=await timeout(new Promise(r=>navigator.serviceWorker.addEventListener('controllerchange',()=>r(true),{once:true})),30000,false);
  if(!changed)return false;
- try{sessionStorage.setItem('bm-upd',Date.now());}catch(e){}
+ try{sessionStorage.setItem('dextera-upd',Date.now());}catch(e){}
  status('App aggiornata: riavvio…');location.reload();return true;
 }
 
 /* ---------- avvio ---------- */
 export async function boot(){
  // contenuti nuovi scaricati dal service worker mentre si è ancora qui: si ricarica subito per usarli
- navigator.serviceWorker?.addEventListener('message',e=>{if(e.data&&e.data.type==='content-updated'&&mode==='boot'){try{sessionStorage.setItem('bm-upd',Date.now());}catch(x){}location.reload();}});
+ navigator.serviceWorker?.addEventListener('message',e=>{if(e.data&&e.data.type==='content-updated'&&mode==='boot'){try{sessionStorage.setItem('dextera-upd',Date.now());}catch(x){}location.reload();}});
  const t0=Date.now(),settle=()=>wait(Math.max(0,500-(Date.now()-t0)));
  if(!navigator.onLine){
   status('Senza connessione: i progressi si salvano su questo dispositivo.');
@@ -76,7 +76,7 @@ function renderLogin(){
   ${v!=='reset'?`<div class="or"><span>oppure</span></div><button class="btn alt wide" data-g="google"${dis}>Accedi con Google</button>`:''}
   <p class="gsw">${v==='signup'?'Hai già un account? <button class="lnk" data-g="login">Accedi</button>':v==='login'?'Non hai un account? <button class="lnk" data-g="signup">Registrati</button>':'<button class="lnk" data-g="login">Torna all\'accesso</button>'}</p>
   <button class="btn alt wide" data-g="guest">${fromApp?'Torna all\'app':'Continua senza account'}</button>
-  <p class="note">${reason?'Continuando senza accedere i progressi restano su questo dispositivo: potrai sincronizzarli dal profilo.':'Senza account si gioca lo stesso e i progressi restano su questo dispositivo. Con l\'account li ritrovi ovunque e quelli già fatti qui si uniscono.'}</p></div>`;
+  <p class="note">${reason?'Continuando senza accedere i progressi restano su questo dispositivo: potrai sincronizzarli dal Profilo (la tua foto in alto).':'Senza account si gioca lo stesso e i progressi restano su questo dispositivo. Con l\'account li ritrovi ovunque e quelli già fatti qui si uniscono.'}</p></div>`;
 }
 
 /* ---------- nome utente dopo la prima registrazione ---------- */

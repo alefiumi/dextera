@@ -12,7 +12,7 @@ import {wireSocial,socialAccountChanged} from './social.js';
 
 /* ---------- sfondo chiaro o scuro ---------- */
 // Senza scelta segue il sistema; il pulsante salva la scelta (anche l'atlante 3D la legge, vedi atlante.js).
-const THEME_KEY='bodymania-theme',root=document.documentElement,sysDark=matchMedia('(prefers-color-scheme: dark)');
+const THEME_KEY='dextera-theme',root=document.documentElement,sysDark=matchMedia('(prefers-color-scheme: dark)');
 const isDark=()=>root.dataset.theme?root.dataset.theme==='dark':sysDark.matches;
 function themeBtn(){const d=isDark();$('theme').textContent=d?'☀️':'🌙';$('theme').title=d?'Sfondo chiaro':'Sfondo scuro';}
 $('theme').addEventListener('click',()=>{
@@ -48,12 +48,12 @@ if('serviceWorker' in navigator&&location.protocol!=='file:'){
 
 /* ---------- badge ---------- */
 // dopo ogni salvataggio si controllano i traguardi; quelli guadagnati prima di questa versione si assegnano in silenzio
-checkBadges();try{localStorage.setItem('bodymania-v1',JSON.stringify(S));}catch(e){}
-onSave(()=>{const f=checkBadges();if(f.length){save();toast('🏅 Nuovo badge: '+f.map(b=>b.icon+' '+b.name).join(', '));if(app.tab==='prog')refreshProg();}});
+checkBadges();try{localStorage.setItem('dextera-v1',JSON.stringify(S));}catch(e){}
+onSave(()=>{head();const f=checkBadges();if(f.length){save();toast('🏅 Nuovo badge: '+f.map(b=>b.icon+' '+b.name).join(', '));if(app.tab==='prog')refreshProg();}});
 
 /* ---------- schermata di avvio, account e profilo ---------- */
 // l'app si prepara sotto la schermata di avvio, che intanto controlla aggiornamenti, sincronizzazione e accesso
-wireGate();wireAccount($('panel'),()=>openLogin('',true));wireProfile($('panel'));addAccountListener(refreshProg);
+wireGate();wireAccount($('panel'),()=>openLogin('',true));wireProfile($('panel'));addAccountListener(refreshProg);addAccountListener(head);
 wireSocial($('panel'));addAccountListener(socialAccountChanged);
 boot();
 try{

@@ -1,4 +1,6 @@
-/* Service worker di BodyMania.
+/* Service worker di Dextera.
+   - Stessa origine di BodyMania (alefiumi.github.io): tutte le cache hanno il prefisso 'dextera-' e qui si cancellano
+     solo cache con quel prefisso. Le cache di BodyMania ('bodymania-…') non si leggono né si toccano mai.
    - App (HTML, CSS, JS, icone): copiate in cache all'installazione e servite dalla cache.
      Quando cambi uno di questi file, aumenta APP_VERSION: il browser scarica di nuovo tutto l'elenco.
    - Contenuti (content/): serviti dalla cache. A ogni avvio, se c'è rete, si controlla content/index.json:
@@ -7,16 +9,16 @@
      stanno in una cache a parte (MODEL_CACHE), che non si riscarica a ogni nuova versione dell'app: all'installazione
      si salva la base (motore e scheletro), ogni altro strato la prima volta che viene richiesto con la rete.
      Quando cambi un file in atlante/vendor/ o un .glb, aumenta MODEL_VERSION. */
-const APP_VERSION = '34';
-const APP_CACHE = 'bodymania-app-' + APP_VERSION;
-const CONTENT_PREFIX = 'bodymania-content-';
+const APP_VERSION = '35';
+const APP_CACHE = 'dextera-app-' + APP_VERSION;
+const CONTENT_PREFIX = 'dextera-content-';
 const MODEL_VERSION = '1';
-const MODEL_CACHE = 'bodymania-3d-' + MODEL_VERSION;
+const MODEL_CACHE = 'dextera-3d-' + MODEL_VERSION;
 const APP_FILES = [
   './', 'index.html', 'manifest.webmanifest', 'css/style.css',
   'js/main.js', 'js/util.js', 'js/state.js', 'js/content.js', 'js/shapes.js', 'js/figure.js',
   'js/explore.js', 'js/game.js', 'js/puzzle.js', 'js/progress.js', 'js/ui.js', 'js/install.js',
-  'js/config.js', 'js/account.js', 'js/gate.js', 'js/badges.js', 'js/social.js', 'vendor/supabase.js',
+  'js/config.js', 'js/account.js', 'js/gate.js', 'js/badges.js', 'js/social.js', 'js/path.js', 'vendor/supabase.js',
   'icons/icon-192.png', 'icons/icon-512.png', 'icons/apple-touch-icon.png',
   'atlante/index.html', 'atlante/atlante.js', 'atlante/dati.json'
 ];
@@ -95,7 +97,7 @@ self.addEventListener('install', e => {
 self.addEventListener('activate', e => {
   e.waitUntil((async () => {
     for (const k of await caches.keys())
-      if ((k.startsWith('bodymania-app-') && k !== APP_CACHE) || (k.startsWith('bodymania-3d-') && k !== MODEL_CACHE)) await caches.delete(k);
+      if ((k.startsWith('dextera-app-') && k !== APP_CACHE) || (k.startsWith('dextera-3d-') && k !== MODEL_CACHE)) await caches.delete(k);
     await self.clients.claim();
   })());
 });

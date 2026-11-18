@@ -3,9 +3,9 @@ import {$} from './util.js';
 
 // Modulo e partita correnti. MODS e NC arrivano da content/ all'avvio.
 // B: strutture singole; GR: gruppi; view: vista della figura ('a' anteriore, 'p' posteriore); grp: si gioca per gruppi
-export const app={MODS:{},NC:[],MOD:null,B:[],GR:[],M:[],CASES:[],VB:{x:0,y:0,w:300,h:640},tab:'explore',sel:null,G:null,view:'a',grp:false};
-try{app.grp=!!JSON.parse(localStorage.getItem('bodymania-2d')||'{}').grp;}catch(e){}
-export const saveGrp=()=>{try{localStorage.setItem('bodymania-2d',JSON.stringify({grp:app.grp}));}catch(e){}};
+export const app={MODS:{},NC:[],MOD:null,B:[],GR:[],M:[],CASES:[],VB:{x:0,y:0,w:300,h:640},tab:'path',av:'2d',sel:null,G:null,view:'a',grp:false};
+try{app.grp=!!JSON.parse(localStorage.getItem('dextera-2d')||'{}').grp;}catch(e){}
+export const saveGrp=()=>{try{localStorage.setItem('dextera-2d',JSON.stringify({grp:app.grp}));}catch(e){}};
 export const bone=id=>app.MOD&&app.MOD.byId[id];
 // voci dei giochi e dell'elenco: le singole o i gruppi, secondo la modalità scelta
 export const items=()=>app.grp?app.GR:app.B;
@@ -23,7 +23,7 @@ export function bonesName(ids){
  return out.join(', ');
 }
 
-const KEY='bodymania-v1';
+const KEY='dextera-v1';
 // stats: partite finite (per i badge); badges: {id: data}; prof: profilo locale (nome, ruolo, bio, foto, t = ultima modifica)
 export const S={xp:0,streak:0,last:'',mastery:{},ok:0,ko:0,stats:{games:0,perfect:0,modes:{},mods:{}},badges:{},prof:{}};
 try{Object.assign(S,JSON.parse(localStorage.getItem(KEY)||'{}'));}catch(e){}
@@ -31,7 +31,7 @@ try{Object.assign(S,JSON.parse(localStorage.getItem(KEY)||'{}'));}catch(e){}
 const afterSave=[];export const onSave=f=>{afterSave.push(f);};
 export const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(S));}catch(e){}afterSave.forEach(f=>f());};
 // partite finite in attesa di invio al server (solo con un account; senza account restano qui e non vanno da nessuna parte)
-const QKEY='bodymania-queue';
+const QKEY='dextera-queue';
 export const queue={
  all(){try{return JSON.parse(localStorage.getItem(QKEY)||'[]');}catch(e){return [];}},
  set(a){try{localStorage.setItem(QKEY,JSON.stringify(a.slice(-500)));}catch(e){}},
@@ -46,7 +46,10 @@ const ymd=d=>d.getFullYear()+'-'+(d.getMonth()+1)+'-'+d.getDate();
 export function touchStreak(){const t=ymd(new Date());if(S.last===t)return;S.streak=(S.last===ymd(new Date(Date.now()-864e5)))?S.streak+1:1;S.last=t;}
 const TITLES=['Matricola','Tirocinante','Studente di fisio','Terapista junior','Terapista esperto','Maestro di anatomia'];
 export const level=()=>{const L=Math.floor(Math.sqrt(S.xp/30))+1;return {L,title:TITLES[Math.min(TITLES.length-1,L-1)]};};
-export function head(){const {L,title}=level(),a=30*(L-1)**2,b=30*L**2;
+// foto (o iniziale) in alto a sinistra: apre il Profilo
+function meBtn(){const b=$('me'),p=S.prof||{},src=p.avatar||'';if(b.dataset.src===src+'|'+(p.name||''))return;b.dataset.src=src+'|'+(p.name||'');
+ b.replaceChildren();if(src){const i=document.createElement('img');i.src=src;i.alt='';b.append(i);}else b.textContent=((p.name||'').trim().charAt(0)||'👤').toUpperCase();}
+export function head(){meBtn();const {L,title}=level(),a=30*(L-1)**2,b=30*L**2;
  $('lv').textContent='Liv. '+L+' · '+title;
  $('xpb').style.width=((S.xp-a)/(b-a)*100)+'%';$('st').textContent='🔥 '+S.streak+'  ⭐ '+S.xp;}
 export const bump=(id,d)=>{if(!id)return;S.mastery[id]=Math.max(0,Math.min(3,(S.mastery[id]||0)+d));};

@@ -1,5 +1,5 @@
 :root{--bg:#f6f4ef;--card:#fff;--ink:#1f2a30;--mut:#6b7780;--acc:#0f766e;--ok:#16a34a;--bad:#dc2626;--edge:#8a8272;--line:#e3ded2}
-/* tema: segue il sistema; il pulsante 🌙/☀️ lo forza (data-theme su <html>, salvato in localStorage 'bodymania-theme') */
+/* tema: segue il sistema; il pulsante 🌙/☀️ lo forza (data-theme su <html>, salvato in localStorage 'dextera-theme') */
 @media(prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#12181b;--card:#1b2428;--ink:#e8eef0;--mut:#93a1a8;--acc:#2dd4bf;--edge:#3b4a50;--line:#2a363b;color-scheme:dark}}
 :root[data-theme=dark]{--bg:#12181b;--card:#1b2428;--ink:#e8eef0;--mut:#93a1a8;--acc:#2dd4bf;--edge:#3b4a50;--line:#2a363b;color-scheme:dark}
 :root[data-theme=light]{color-scheme:light}
@@ -7,6 +7,13 @@
 html,body{height:100%;margin:0}
 body{font:15px/1.45 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--ink);display:flex;flex-direction:column;height:100vh;height:100svh;overflow:hidden}
 header{display:flex;align-items:center;gap:10px;padding:calc(8px + env(safe-area-inset-top)) calc(14px + env(safe-area-inset-right)) 8px calc(14px + env(safe-area-inset-left));background:var(--card);border-bottom:1px solid var(--line)}
+/* foto del profilo in alto a sinistra: apre il Profilo (bersaglio di 36 px) */
+#me{flex:none;width:36px;height:36px;margin:-4px 0;border-radius:50%;border:2px solid var(--line);background:var(--acc);color:#fff;padding:0;overflow:hidden;font:700 16px/1 system-ui,sans-serif;display:flex;align-items:center;justify-content:center;cursor:pointer}
+#me img{width:100%;height:100%;object-fit:cover;display:block}
+#me.on{border-color:var(--acc);box-shadow:0 0 0 2px var(--acc)}
+/* scheda Atlante: scelta tra atlante 2D e 3D */
+#asw{flex:none;margin:0;padding:6px 8px 2px;justify-content:center}
+#asw[hidden]{display:none}
 #lv{font-weight:700;font-size:13px;white-space:nowrap}
 .bar{flex:1;height:8px;background:var(--line);border-radius:9px;overflow:hidden;min-width:30px}
 .bar i{display:block;height:100%;background:var(--acc);width:0;transition:width .4s}
@@ -113,7 +120,7 @@ button.lnk{font:inherit;font-size:14px;background:none;border:0;padding:4px 0;co
 .gsw{font-size:14px;text-align:center;margin:10px 0 0}
 .gform .err,.pfe .err{color:var(--bad)}.gform .okm{color:var(--ok)}
 .note{color:var(--mut);font-size:12px}
-/* profilo: a tutto schermo, senza figura */
+/* percorso, profilo e flotta: a tutto schermo, senza figura */
 .pg #fig{display:none}.pg #pw{flex:1 1 0;max-height:none;border-top:0}.pg #fold{display:none}
 .pg #pw.fold #panel{max-height:none;overflow:auto;-webkit-mask-image:none;mask-image:none}
 .pg #panel>*{max-width:640px;margin-left:auto;margin-right:auto}
@@ -158,3 +165,7 @@ nav button.dot:after{content:"";position:absolute;top:5px;left:calc(50% + 8px);w
 .gap{text-align:center;color:var(--mut);padding:2px}
 .soq{font:inherit;font-size:16px;padding:9px 12px;border:1px solid var(--line);border-radius:12px;background:var(--bg);color:var(--ink);width:100%;margin-bottom:4px}
 .err{color:var(--bad)}
+/* scheda Percorso (fase 0: segnaposto) */
+.path .pl{background:var(--bg);border:1px solid var(--line);border-radius:14px;padding:10px 12px;margin:8px 0}
+.path .pl b{display:block}
+.path .pl small{color:var(--mut)}

@@ -1,4 +1,4 @@
-/* Tab Gioca: menu, quiz, Tendine-ponte, Caso clinico, fine partita. */
+/* Scheda Palestra (l'ex Gioca): menu, quiz, Tendine-ponte, Caso clinico, fine partita. */
 import {$,shuffle,pick} from './util.js';
 import {app,S,bone,save,touchStreak,head,bump,queue,items,members,itemOf,itemSet,bonesName} from './state.js';
 import {clearMarks,mark,refreshMastery,resetZoom,showMuscle,muscleHtml,visible,focusItem,itemBox} from './figure.js';
@@ -8,14 +8,14 @@ export function renderMenu(){
  app.G=null;clearGhosts();const body=app.MOD.id==='corpo';
  const mb=(m,t,x)=>`<button class="mode" data-mode="${m}"><b>${t}</b><small>${x}</small></button>`;
  const what=app.grp?(body?'per <b>gruppi</b> di ossa':'per <b>lobi e aree</b>'):(body?'sulle <b>ossa singole</b>':'su <b>giri e solchi</b>');
- $('panel').innerHTML=`<div class="h">Scegli una sfida</div><p class="mut">3 cuori a round. Ogni risposta giusta dà XP e fa salire la maestria (da beige a oro). Ora giochi ${what}: cambia in alto${body?', dove scegli anche la vista anteriore o posteriore':''}.</p><div class="sub">Puzzle</div>`+
+ $('panel').innerHTML=`<div class="h">Palestra · scegli una sfida</div><p class="mut">3 cuori a round. Ogni risposta giusta dà XP e fa salire la maestria (da beige a oro). Ora giochi ${what}: cambia in alto${body?', dove scegli anche la vista anteriore o posteriore':''}.</p><div class="sub">Puzzle</div>`+
   mb('puzzle','🧩 Ricomponi','Rimetti al posto i pezzi mancanti (trascina o tocca)')+
   (body?mb('bridge','🌉 Tendine-ponte',"Collega l'osso di origine a quello di inserzione"):'')+
   mb('case','🩺 Caso clinico','Indizi progressivi: meno indizi usi, più XP')+
   '<div class="sub">Quiz</div>'+mb('find','🎯 Trova la struttura','Tocca quella giusta sulla figura')+
   (body?mb('musc','💪 Origine e inserzione','Collega ogni muscolo al suo osso'):mb('func','🧠 Funzione → struttura','Quale struttura svolge questa funzione?')+mb('nc','🔢 Nervi cranici','Nome, numero e funzione dei 12 nervi'))+
   mb('mix','🔀 Misto',"Un po' di tutto")+
-  // giochi sul modello 3D: si giocano nella scheda Atlante 3D (vedi play3d in ui.js)
+  // giochi sul modello 3D: si giocano nella scheda Atlante, vista 3D (vedi play3d in ui.js)
   '<div class="sub">Sul modello 3D</div>'+mb('3d-ossa','🦴 Trova l\'osso','Tocca l\'osso giusto sul modello 3D')+
   mb('3d-muscoli','💪 Trova il muscolo','Tocca il muscolo giusto tra quelli visibili')+
   mb('3d-reperi','📍 Trova il repere','Tocca il repere osseo giusto (SIAS, epicondili…)')+

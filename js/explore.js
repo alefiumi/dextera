@@ -1,4 +1,4 @@
-/* Tab Esplora: scheda della struttura e nervi cranici. */
+/* Scheda Atlante, vista 2D (l'ex Esplora): scheda della struttura e nervi cranici. */
 import {$} from './util.js';
 import {app,bone,members,itemOf} from './state.js';
 import {clearMarks,mark,visible,focusItem} from './figure.js';
@@ -6,7 +6,7 @@ import {isStandalone} from './install.js';
 
 export function renderExplore(){
  app.sel=null;const body=app.MOD.id==='corpo';
- $('panel').innerHTML=`<div class="h">${body?'Esplora lo scheletro':'Esplora il cervello'}</div><p class="mut">${body?'Tocca un osso per vedere nome, funzione e muscoli collegati; tocca un muscolo per vedere origine (O) e inserzione (I). In alto scegli vista anteriore o posteriore e ossa singole o gruppi.':'Tocca una struttura per vedere nome e funzione. In alto scegli giri e solchi o lobi e aree.'} Usa ＋ − o pizzica per ingrandire.</p>`+
+ $('panel').innerHTML=`<div class="h">${body?'Atlante 2D · lo scheletro':'Atlante 2D · il cervello'}</div><p class="mut">${body?'Tocca un osso per vedere nome, funzione e muscoli collegati; tocca un muscolo per vedere origine (O) e inserzione (I). In alto scegli vista anteriore o posteriore e ossa singole o gruppi.':'Tocca una struttura per vedere nome e funzione. In alto scegli giri e solchi o lobi e aree.'} Usa ＋ − o pizzica per ingrandire.</p>`+
   '<p class="mut">Forme ricavate dal modello 3D Z-Anatomy (CC BY-SA 4.0); testi scritti dall\'AI, da verificare.</p>'+(body?'':'<button class="btn alt act" data-act="ncl">📖 Nervi cranici</button>')+`<div class="leg">Colori: beige/pastello = da studiare · verde = in corso · oro = padroneggiato</div>`+
   (isStandalone()?'':'<button class="btn alt act" data-act="inst">📲 Installa l\'app</button>');
 }

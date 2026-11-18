@@ -30,7 +30,7 @@ const HOW={
 export async function offlineReady(){
  if(!('serviceWorker' in navigator)||!window.caches||!navigator.serviceWorker.controller)return false;
  const k=await caches.keys();
- return k.some(x=>x.startsWith('bodymania-app-'))&&k.some(x=>x.startsWith('bodymania-content-'));
+ return k.some(x=>x.startsWith('dextera-app-'))&&k.some(x=>x.startsWith('dextera-content-'));
 }
 
 export async function showInstall(){

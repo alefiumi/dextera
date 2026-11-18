@@ -3,11 +3,11 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>BodyMania – atlante 3D</title>
-<script>try{const t=localStorage.getItem("bodymania-theme");if(t)document.documentElement.dataset.theme=t;}catch(e){}</script>
+<title>Dextera – atlante 3D</title>
+<script>try{const t=localStorage.getItem("dextera-theme");if(t)document.documentElement.dataset.theme=t;}catch(e){}</script>
 <style>
 :root{--bg:#f6f4ef;--card:#fff;--ink:#1f2a30;--mut:#6b7780;--acc:#0f766e;--line:#e3ded2}
-/* tema: segue il sistema; il pulsante 🌙/☀️ lo forza (data-theme su <html>, salvato in localStorage 'bodymania-theme') */
+/* tema: segue il sistema; il pulsante 🌙/☀️ lo forza (data-theme su <html>, salvato in localStorage 'dextera-theme') */
 @media(prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#12181b;--card:#1b2428;--ink:#e8eef0;--mut:#93a1a8;--acc:#2dd4bf;--line:#2a363b;color-scheme:dark}}
 :root[data-theme=dark]{--bg:#12181b;--card:#1b2428;--ink:#e8eef0;--mut:#93a1a8;--acc:#2dd4bf;--line:#2a363b;color-scheme:dark}
 :root[data-theme=light]{color-scheme:light}
@@ -45,7 +45,7 @@ button.chip.on small{color:#ffffffcc}
 #q{width:100%;font:inherit;font-size:16px;padding:9px 12px;margin:8px 0;border:1px solid var(--line);border-radius:12px;background:var(--bg);color:var(--ink)}
 .tg{display:inline-block;color:#fff;border-radius:6px;padding:1px 6px;font-size:11px;font-weight:700}
 .tg.o{background:#2563eb}.tg.i{background:#ea580c}
-/* dentro la scheda "Atlante 3D" dell'app: niente intestazione, la barra di navigazione dell'app sta sotto */
+/* dentro la scheda "Atlante" dell'app (vista 3D): niente intestazione, la barra di navigazione dell'app sta sotto */
 .emb header{display:none}.emb #theme{display:none} /* nell'app il pulsante sta nell'intestazione dell'app */
 /* durante una partita: niente strati ed encefalo, la vista resta quella del gioco */
 .game #layers,.game #brain{display:none}
@@ -67,8 +67,8 @@ button.chip.on small{color:#ffffffcc}
 <script>
 // freccia sul bordo della scheda: la abbassa (resta una striscia, il modello si allarga) e la rialza; scelta salvata
 (()=>{const w=document.getElementById('pw'),b=document.getElementById('fold');
- const set=f=>{w.classList.toggle('fold',f);b.title=f?'Rialza la scheda':'Abbassa la scheda';b.setAttribute('aria-label',b.title);try{localStorage.setItem('bodymania-fold3d',f?'1':'');}catch(e){}};
- try{set(!!localStorage.getItem('bodymania-fold3d'));}catch(e){}
+ const set=f=>{w.classList.toggle('fold',f);b.title=f?'Rialza la scheda':'Abbassa la scheda';b.setAttribute('aria-label',b.title);try{localStorage.setItem('dextera-fold3d',f?'1':'');}catch(e){}};
+ try{set(!!localStorage.getItem('dextera-fold3d'));}catch(e){}
  b.addEventListener('click',()=>set(!w.classList.contains('fold')));})();
 </script>
 <script type="module" src="atlante.js"></script>

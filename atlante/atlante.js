@@ -551,7 +551,7 @@ renderer.domElement.addEventListener('pointerup',e=>{
 });
 
 /* ---------- gioco: Trova la struttura nel 3D ---------- */
-// L'app (menu Gioca) manda {bm:'game',set}; qui si gioca e si rimandano all'app le risposte ({bm:'res'}) e la fine
+// L'app (scheda Palestra) manda {bm:'game',set}; qui si gioca e si rimandano all'app le risposte ({bm:'res'}) e la fine
 // ({bm:'end'}), così XP, serie e maestria restano nel salvataggio dell'app. Domande solo su nomi e forme della fonte,
 // e solo su strutture che si possono vedere dall'esterno ruotando il modello (vedi seenFrom).
 const M_OK=toon(0x22c55e),M_BAD=toon(0xef4444);
@@ -846,7 +846,7 @@ function gamePanel(){
   return `<div class="res"><div class="big">${'⭐'.repeat(st)}${'☆'.repeat(3-st)}</div><div class="h">${G.score}/${G.q} corrette</div><p>+${G.gain} XP${G.hearts>0&&G.q>=G.total?' (bonus round +20)':''}</p>
    ${G.hearts<=0?'<p class="mut">Cuori finiti: ripassa esplorando il modello e riprova.</p>':''}
    <div class="chips" style="justify-content:center"><button class="chip on" data-g="again">Rigioca</button><button class="chip" data-g="menu">Cambia sfida</button><button class="chip" data-g="quit">Esplora il modello</button></div></div>`;}
- if(G.empty)return `<p>${G.set==='nervi'||G.set==='caso'?'Questa sfida si apre dal menu Gioca dell\'app.':'Nessuna domanda disponibile.'}</p><div class="chips"><button class="chip" data-g="quit">Esci</button></div>`;
+ if(G.empty)return `<p>${G.set==='nervi'||G.set==='caso'?'Questa sfida si apre dalla Palestra dell\'app.':'Nessuna domanda disponibile.'}</p><div class="chips"><button class="chip" data-g="quit">Esci</button></div>`;
  if(G.set==='ricomponi'&&G.cur)return hearts.replace(/\d+\/\d+/,(G.total-G.left.length)+'/'+G.total)+`<div class="q">Zona: <b>${G.zone}</b></div><p class="mut">${G.msg||'Scegli un pezzo, poi tocca il suo posto sul modello (le ossa trasparenti). Ruota e ingrandisci come vuoi: vale tutti e due i lati.'}</p>`+
   `<div class="chips">${G.left.map(b=>`<button class="chip${G.sel===b?' on':''}" data-pc="${b}">${clean(itOf(b))}</button>`).join('')}</div><div class="chips"><button class="chip" data-g="quit">Esci</button></div>`;
  if(!G.cur)return `<p class="mut">${S.loading?(G.set==='muscoli'&&!FILES.muscoli?.loaded?'Carico i muscoli…':'Preparo le domande…'):''}</p>`;
@@ -868,8 +868,8 @@ window.addEventListener('message',e=>{
  else if(e.data.type==='theme')setTheme(e.data.theme,false);
 });
 
-/* ---------- sfondo chiaro o scuro (stessa scelta dell'app: localStorage 'bodymania-theme') ---------- */
-const THEME_KEY='bodymania-theme',sysDark=matchMedia('(prefers-color-scheme: dark)');
+/* ---------- sfondo chiaro o scuro (stessa scelta dell'app: localStorage 'dextera-theme') ---------- */
+const THEME_KEY='dextera-theme',sysDark=matchMedia('(prefers-color-scheme: dark)');
 const isDark=()=>document.documentElement.dataset.theme?document.documentElement.dataset.theme==='dark':sysDark.matches;
 function themeBtn(){const d=isDark();$('theme').textContent=d?'☀️ Chiaro':'🌙 Scuro';}
 function setTheme(t,store=true){

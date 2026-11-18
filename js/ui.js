@@ -7,6 +7,7 @@ import {renderMenu,clearGhosts,startGame,nextQ,answerFind,answerMusc,answerBridg
 import {placeAttempt} from './puzzle.js';
 import {renderProg} from './progress.js';
 import {renderSocial,loadSocial,setSocialOpen} from './social.js';
+import {renderPath} from './path.js';
 import {showInstall,promptInstall} from './install.js';
 
 export function useMod(id){
@@ -14,19 +15,24 @@ export function useMod(id){
  app.MOD=MOD;app.B=MOD.B;app.GR=MOD.GR;app.M=MOD.M;app.CASES=MOD.CASES;app.VB={x:0,y:0,w:MOD.W,h:MOD.H};app.G=null;app.sel=null;
  buildFig();setTab(app.tab);
 }
-// L'atlante 3D è una pagina a sé (atlante/index.html) in un iframe: si carica la prima volta che si apre la
-// scheda e resta in memoria, così passando da una scheda all'altra non si perde la vista.
+// Scheda Atlante: atlante 2D (figura e scheda, l'ex Esplora) o atlante 3D, scelti con i due pulsanti in alto (#asw).
+// L'atlante 3D è una pagina a sé (atlante/index.html) in un iframe: si carica la prima volta che si apre e resta in
+// memoria, così passando da una scheda all'altra non si perde la vista. La scelta 2D/3D resta salvata (dextera-atlante).
+const AV='dextera-atlante';
+try{app.av=localStorage.getItem(AV)==='3d'?'3d':'2d';}catch(e){app.av='2d';}
 function showAtlas(on){
  $('fig').hidden=$('pw').hidden=on;$('atlas').hidden=!on;
  if(on&&!$('atlas').firstChild)$('atlas').innerHTML='<iframe src="atlante/index.html" title="Atlante 3D" allow="fullscreen"></iframe>';
 }
+function setAv(v){app.av=v;try{localStorage.setItem(AV,v);}catch(e){}if(app.tab==='atlas')setTab('atlas');}
+$('asw').addEventListener('click',e=>{const b=e.target.closest('[data-av]');if(b&&b.dataset.av!==app.av)setAv(b.dataset.av);});
 // Giochi 3D: la partita si svolge nell'atlante, che rimanda qui ogni risposta per XP, serie e maestria.
 let atlasReady=false,pending3d=null;
 const atlasWin=()=>$('atlas').querySelector('iframe')?.contentWindow;
 // casi clinici e nervi cranici stanno nei contenuti dell'app: viaggiano con il messaggio
 const gameMsg=set=>({bm:1,type:'game',set,cases:(app.MODS.corpo&&app.MODS.corpo.CASES)||[],nc:app.NC});
 function play3d(set){
- setTab('atlas');
+ app.av='3d';setTab('atlas');
  if(atlasReady)atlasWin().postMessage(gameMsg(set),location.origin);else pending3d=set;
 }
 window.addEventListener('message',e=>{
@@ -36,16 +42,21 @@ window.addEventListener('message',e=>{
  else if(d.type==='end'){if(d.done)S.xp+=20;queue.add({module:'3d',mode:d.set,score:d.score|0,total:d.total|0,xp:d.gain|0});save();head();}
  else if(d.type==='menu')setTab('play');
 });
-function setTab(t){
- app.tab=t;document.body.classList.toggle('pg',t==='prog'||t==='soc'); // profilo e amici usano tutto lo schermo, senza figura
+/* Schede: Percorso (path), Palestra (play, l'ex Gioca), Atlante (atlas: 2D o 3D), Flotta (soc, l'ex Amici).
+   Il Profilo (prog) non ha una scheda: si apre toccando la foto in alto (#me). */
+export function setTab(t){
+ app.tab=t;document.body.classList.toggle('pg',t==='prog'||t==='soc'||t==='path'); // percorso, profilo e flotta: tutto lo schermo, senza figura
  document.querySelectorAll('nav button').forEach(b=>b.classList.toggle('on',b.dataset.t===t));
- showAtlas(t==='atlas');if(t==='atlas')return;
- clearGhosts();clearMarks();resetZoom(false);refreshMastery();({explore:renderExplore,play:renderMenu,prog:renderProg,soc:renderSocial})[t]();if(t==='soc')loadSocial();
+ $('me').classList.toggle('on',t==='prog');
+ $('asw').hidden=t!=='atlas';$('asw').querySelectorAll('[data-av]').forEach(b=>b.classList.toggle('on',b.dataset.av===app.av));
+ const a3=t==='atlas'&&app.av==='3d';showAtlas(a3);if(a3)return;
+ clearGhosts();clearMarks();resetZoom(false);refreshMastery();({path:renderPath,atlas:renderExplore,play:renderMenu,prog:renderProg,soc:renderSocial})[t]();if(t==='soc')loadSocial();
 }
+$('me').addEventListener('click',()=>setTab('prog'));
 setSocialOpen(()=>app.tab==='soc');
 /* Freccia sul bordo della scheda sotto la figura: la abbassa (resta una striscia con l'inizio del testo, la figura si allarga)
-   e la rialza. La scelta resta salvata (bodymania-fold). */
-const FOLD='bodymania-fold';
+   e la rialza. La scelta resta salvata (dextera-fold). */
+const FOLD='dextera-fold';
 function setFold(f){$('pw').classList.toggle('fold',f);const t=f?'Rialza la scheda':'Abbassa la scheda';$('fold').title=t;$('fold').setAttribute('aria-label',t);try{localStorage.setItem(FOLD,f?'1':'');}catch(e){}}
 try{setFold(!!localStorage.getItem(FOLD));}catch(e){setFold(false);}
 $('fold').addEventListener('click',()=>setFold(!$('pw').classList.contains('fold')));
@@ -53,7 +64,7 @@ document.querySelector('nav').addEventListener('click',e=>{const b=e.target.clos
 $('fig').addEventListener('click',e=>{
  const zb=e.target.closest('.zc button');
  if(zb){const k=zb.dataset.z,VB=app.VB;if(k==='reset')resetZoom(true);else zoomAt(k==='in'?1.5:1/1.5,VB.x+VB.w/2,VB.y+VB.h/2);return;}
- const fv=e.target.closest('[data-fv]');if(fv){setView(fv.dataset.fv);if(app.tab==='explore'&&app.sel)selectBone(app.sel);return;}
+ const fv=e.target.closest('[data-fv]');if(fv){setView(fv.dataset.fv);if(app.tab==='atlas'&&app.sel)selectBone(app.sel);return;}
  // singole o gruppi: cambia le voci dei giochi, quindi la partita in corso ricomincia dal menu
  if(e.target.closest('[data-fg]')){app.grp=!app.grp;saveGrp();const t=app.tab;buildFig();setTab(t);return;}
  const mb=e.target.closest('.mods button');
@@ -62,7 +73,7 @@ $('fig').addEventListener('click',e=>{
  if(takePan())return;
  // sid: struttura singola toccata; con i gruppi la voce è il suo gruppo
  const G=app.G,g=app.tab==='play'&&G&&G.mode==='puzzle'&&G.sel?slotAt(e.clientX,e.clientY,G.sel):boneAt(e.clientX,e.clientY);if(!g)return;const sid=g.dataset.id;
- if(app.tab==='explore')selectBone(itemOf(sid));
+ if(app.tab==='atlas')selectBone(itemOf(sid));
  else if(app.tab==='play'&&G){
   if(G.mode==='puzzle')placeAttempt(itemOf(sid));
   else if(G.cur&&G.cur.t==='find')answerFind(sid);
@@ -85,5 +96,6 @@ $('panel').addEventListener('click',e=>{
  else if(t.classList.contains('next'))nextQ();
  else if(t.classList.contains('again'))startGame(G.mode);
  else if(t.classList.contains('menu'))renderMenu();
- else if(t.classList.contains('row')){setTab('explore');selectBone(t.dataset.id);}
+ else if(t.classList.contains('row')){app.av='2d';setTab('atlas');selectBone(t.dataset.id);}
+ else if(t.dataset.go){if(t.dataset.go==='atlas')app.av='2d';setTab(t.dataset.go);}
 });

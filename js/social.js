@@ -1,11 +1,11 @@
 /* Scheda Amici: classifica di tutti gli iscritti e degli amici, richieste di amicizia, ricerca per nome utente.
    Serve l'account. I dati arrivano da Supabase (viste leaderboard e leaderboard_friends, tabella friendships) e l'ultima
-   copia resta sul dispositivo (bodymania-social), così senza rete si vede la classifica dell'ultima volta. */
+   copia resta sul dispositivo (dextera-social), così senza rete si vede la classifica dell'ultima volta. */
 import {$,toast} from './util.js';
 import {S} from './state.js';
 import {account as A,configured,esc} from './account.js';
 
-const KEY='bodymania-social';
+const KEY='dextera-social';
 const SO={tab:'all',all:[],rank:null,friends:[],rel:{fr:[],inc:[],out:[]},at:0,loading:false,err:'',found:null,q:''};
 try{Object.assign(SO,JSON.parse(localStorage.getItem(KEY)||'{}'),{loading:false,err:'',found:null,q:''});}catch(e){}
 const keep=()=>{try{const {tab,all,rank,friends,rel,at,uid}=SO;localStorage.setItem(KEY,JSON.stringify({tab,all,rank,friends,rel,at,uid}));}catch(e){}};
@@ -63,15 +63,15 @@ const hm=t=>new Date(t).toLocaleString('it',{day:'numeric',month:'short',hour:'2
 
 export function renderSocial(){
  const P=$('panel');
- if(!configured){P.innerHTML='<div class="h">Amici e classifiche</div><p class="mut">Il server non è configurato: questa copia dell\'app funziona solo in locale.</p>';return;}
+ if(!configured){P.innerHTML='<div class="h">🚀 Flotta: amici e classifiche</div><p class="mut">Il server non è configurato: questa copia dell\'app funziona solo in locale.</p>';return;}
  if(!A.user){
-  P.innerHTML=`<div class="h">🏆 Amici e classifiche</div><p class="mut">Per entrare in classifica e sfidare gli amici serve un account (gratuito). Senza account continui a giocare come sempre e i progressi restano su questo dispositivo.</p>
+  P.innerHTML=`<div class="h">🚀 Flotta: amici e classifiche</div><p class="mut">Per entrare in classifica e sfidare gli amici serve un account (gratuito). Senza account continui a giocare come sempre e i progressi restano su questo dispositivo.</p>
    <div class="chips"><button class="chip on" data-acc="login">Accedi o registrati</button></div>`;return;
  }
  const fresh=SO.uid===A.user.id,name=A.profile&&A.profile.username;
  const tabs=`<div class="chips seg"><button class="chip${SO.tab==='all'?' on':''}" data-so="tab" data-v="all">🌍 Tutti</button><button class="chip${SO.tab==='friends'?' on':''}" data-so="tab" data-v="friends">👥 Amici${fresh&&SO.rel.inc.length?' <span class="cnt">'+SO.rel.inc.length+'</span>':''}</button></div>`;
  const state=SO.loading?'<p class="mut">⏳ Aggiorno…</p>':SO.err?`<p class="err">${esc(SO.err)}</p>`:!navigator.onLine?`<p class="mut">📴 Senza connessione${fresh&&SO.at?': classifica del '+hm(SO.at):''}.</p>`:'';
- const noName=name?'':'<p class="note">⚠️ Non hai ancora un nome utente: sceglilo nel Profilo per comparire in classifica e farti trovare dagli amici.</p>';
+ const noName=name?'':'<p class="note">⚠️ Non hai ancora un nome utente: sceglilo nel Profilo (tocca la tua foto in alto) per comparire in classifica e farti trovare dagli amici.</p>';
  let body='';
  if(!fresh){body=SO.loading?'':'<p class="mut">Classifica non ancora scaricata: serve la connessione.</p>';}
  else if(SO.tab==='all'){
@@ -85,7 +85,7 @@ export function renderSocial(){
    (R.out.length?`<div class="sub">Richieste inviate</div>`+R.out.map(p=>person(p,`<span class="mut">in attesa</span><button class="chip" data-so="del" data-id="${p.id}">Annulla</button>`)).join(''):'')+
    (R.fr.length?`<div class="sub">I tuoi amici (${R.fr.length})</div>`+R.fr.map(p=>person(p,`<button class="chip" data-so="rm" data-id="${p.id}" data-n="${esc(p.username)}">Togli</button>`)).join(''):'');
  }
- P.innerHTML=`<div class="h">🏆 Amici e classifiche</div>`+tabs+state+noName+body+
+ P.innerHTML=`<div class="h">🚀 Flotta: amici e classifiche</div>`+tabs+state+noName+body+
   `<p class="note">Punteggi calcolati sui dispositivi di chi gioca: valgono come sfida tra amici. La serie 🔥 conta solo se si è giocato ieri o oggi.</p>`;
 }
 function resHtml(){

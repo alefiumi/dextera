@@ -12,14 +12,16 @@ const onChange=()=>listeners.forEach(f=>f());
 export const account=A;
 export const addAccountListener=f=>{listeners.push(f);};
 
-// la sessione salvata da supabase-js: se c'è (o si torna dal login con Google) si carica subito la libreria
-const ref=configured?new URL(SUPABASE_URL).hostname.split('.')[0]:'';
-const hasSession=()=>{try{return !!localStorage.getItem('sb-'+ref+'-auth-token');}catch(e){return false;}};
+// la sessione salvata da supabase-js: se c'è (o si torna dal login con Google) si carica subito la libreria.
+// Chiave propria (AUTH_KEY): BodyMania sta sulla stessa origine e usa la chiave predefinita sb-<progetto>-auth-token;
+// con una chiave diversa le due app non si leggono né si cancellano la sessione a vicenda (uscire da una non esce dall'altra).
+const AUTH_KEY='dextera-auth';
+const hasSession=()=>{try{return !!localStorage.getItem(AUTH_KEY);}catch(e){return false;}};
 export const backFromOAuth=()=>/[?&#](code|access_token|error_description)=/.test(location.search+location.hash);
 
 /* Ultimo account usato su questo dispositivo: {uid, email, dirty}. dirty = progressi salvati qui e non ancora inviati
    (per esempio giocando offline). Resta anche se la sessione scade: all'avvio con rete si chiede di accedere di nuovo. */
-const AKEY='bodymania-acct';
+const AKEY='dextera-acct';
 export const lastAccount=()=>{try{return JSON.parse(localStorage.getItem(AKEY)||'null');}catch(e){return null;}};
 const setLast=v=>{try{v?localStorage.setItem(AKEY,JSON.stringify(v)):localStorage.removeItem(AKEY);}catch(e){}};
 const markDirty=d=>{const a=lastAccount();if(a&&a.dirty!==d){a.dirty=d;setLast(a);}};
@@ -31,7 +33,7 @@ function loadLib(){
 async function client(){
  if(A.sb)return A.sb;
  await loadLib();
- A.sb=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true,flowType:'pkce'}});
+ A.sb=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY,{auth:{storageKey:AUTH_KEY,persistSession:true,autoRefreshToken:true,detectSessionInUrl:true,flowType:'pkce'}});
  A.sb.auth.onAuthStateChange((ev,session)=>{
   if(ev==='PASSWORD_RECOVERY'){A.view='pw';A.msg='Scegli la nuova password.';}
   const u=session?session.user:null,changed=(u&&u.id)!==(A.user&&A.user.id);A.user=u;
@@ -138,7 +140,7 @@ export async function sync(full){
     const {error}=await sb.from('profiles').update({username:S.prof.name}).eq('id',uid);
     if(!error)p.username=S.prof.name;
    }
-   try{localStorage.setItem('bodymania-v1',JSON.stringify(S));}catch(e){} // senza save(): non deve ripartire un invio
+   try{localStorage.setItem('dextera-v1',JSON.stringify(S));}catch(e){} // senza save(): non deve ripartire un invio
    head();
    if((S.prof.t||0)>pt)await pushProfile();
   }

@@ -1,0 +1,813 @@
+{
+ "version": 1,
+ "tipo": "ossa",
+ "nota": "Ossa dell'atlante (nome inglese di Z-Anatomy in ref). Nomi da TA2, descrizioni scritte dall'AI. solo2d: voce che esiste solo nel modulo 2D.",
+ "campi": {"nome": "Nome italiano", "latino": "Nome latino", "descrizione": "Descrizione"},
+ "voci": [
+  {"id": "osso.parietal-bone", "ref": "Parietal bone", "dati": {
+   "nome": {"valore": "Osso parietale", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Os parietale", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Osso pari che forma la volta e le pareti laterali del cranio. I due parietali si uniscono nella sutura sagittale.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "osso.sinus-of-frontal-bone", "ref": "Sinus of frontal bone", "dati": {
+   "nome": {"valore": "Seno dell'osso frontale", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Sinus ossis frontalis", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Seno frontale: cavità aerea dietro le arcate sopracciliari, drena nel meato medio.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "osso.frontal-bone", "ref": "Frontal bone", "dati": {
+   "nome": {"valore": "Osso frontale", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Os frontale", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Osso impari della fronte e del tetto delle orbite. Si articola con parietali, sfenoide, etmoide, nasali, zigomatici e mascellari. Contiene i seni frontali.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "osso.occipital-bone", "ref": "Occipital bone", "dati": {
+   "nome": {"valore": "Osso occipitale", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Os occipitale", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Osso impari della parte posteriore e della base del cranio. Ha il forame magno, attraverso cui il bulbo continua nel midollo, e i condili che si articolano con l'atlante.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "osso.sinus-of-sphenoid-bone", "ref": "Sinus of sphenoid bone", "dati": {
+   "nome": {"valore": "Seno dell'osso sfenoidale", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Sinus ossis sphenoidei", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Seno sfenoidale: cavità aerea nel corpo dello sfenoide, sotto la sella turcica.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "osso.sphenoid-bone", "ref": "Sphenoid bone", "dati": {
+   "nome": {"valore": "Sfenoide", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Os sphenoideum", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Osso impari a forma di farfalla al centro della base cranica. Corpo con la sella turcica (ipofisi), grandi e piccole ali, processi pterigoidei; vi passano molti nervi cranici.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "osso.temporal-bone", "ref": "Temporal bone", "dati": {
+   "nome": {"valore": "Osso temporale", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Os temporale", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Osso pari della parete laterale e della base del cranio. Contiene l'orecchio medio e interno (rocca petrosa), il meato acustico esterno, il processo mastoideo e la fossa mandibolare per l'ATM.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "osso.ethmoid-bone", "ref": "Ethmoid bone", "dati": {
+   "nome": {"valore": "Osso etmoide", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Os ethmoideum", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Osso impari leggero tra le orbite: lamina cribrosa (fibre olfattive), lamina perpendicolare del setto nasale, labirinti con le cellule etmoidali e i cornetti nasali superiore e medio.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "osso.inferior-nasal-concha-bone", "ref": "Inferior nasal concha bone", "dati": {
+   "nome": {"valore": "Conca nasale inferiore", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Concha nasalis inferior", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Cornetto nasale inferiore: osso indipendente sulla parete laterale della fossa nasale; sotto di esso sbocca il dotto naso-lacrimale.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "osso.lacrimal-bone", "ref": "Lacrimal bone", "dati": {
+   "nome": {"valore": "Osso lacrimale", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Os lacrimale", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Piccolo osso della parete mediale dell'orbita; con il mascellare forma la fossa del sacco lacrimale.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "osso.nasal-bone", "ref": "Nasal bone", "dati": {
+   "nome": {"valore": "Osso nasale", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Os nasale", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Piccolo osso pari che forma il dorso del naso.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "osso.maxilla", "ref": "Maxilla", "dati": {
+   "nome": {"valore": "Mascella", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Maxilla", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Osso pari della faccia: porta i denti superiori, forma gran parte del palato duro, il pavimento dell'orbita e la parete laterale delle fosse nasali. Contiene il seno mascellare.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "osso.palatine-bone", "ref": "Palatine bone", "dati": {
+   "nome": {"valore": "Osso palatino", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Os palatinum", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Osso pari a forma di L: parte posteriore del palato duro e parete laterale delle fosse nasali.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "osso.zygomatic-bone", "ref": "Zygomatic bone", "dati": {
+   "nome": {"valore": "Osso zigomatico", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Os zygomaticum", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Osso dello zigomo: forma la sporgenza della guancia e parte della parete laterale dell'orbita; con il temporale forma l'arcata zigomatica (origine del massetere).", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "osso.mandible", "ref": "Mandible", "dati": {
+   "nome": {"valore": "Mandibola", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Mandibula", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Unico osso mobile del cranio: corpo con i denti inferiori e due rami che terminano con il condilo (ATM) e il processo coronoideo (inserzione del temporale).", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "osso.hyoid-bone", "ref": "Hyoid bone", "dati": {
+   "nome": {"valore": "Osso ioide", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Os hyoideum", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Osso a ferro di cavallo nel collo, all'altezza di C3, senza articolazioni con altre ossa. Punto fisso per i muscoli sopraioidei e sottoioidei (deglutizione).", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "osso.malleus", "ref": "Malleus", "dati": {
+   "nome": {"valore": "Martello", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Malleus", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Martello: il primo ossicino dell'orecchio medio, attaccato alla membrana del timpano. Vi si inserisce il tensore del timpano.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "osso.incus", "ref": "Incus", "dati": {
+   "nome": {"valore": "Incudine", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Incus", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Incudine: ossicino intermedio dell'orecchio medio, tra martello e staffa.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "osso.stapes", "ref": "Stapes", "dati": {
+   "nome": {"valore": "Staffa", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Stapes", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Staffa: l'ossicino più piccolo del corpo; la sua base chiude la finestra ovale. Vi si inserisce il muscolo stapedio (nervo facciale).", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "osso.upper-medial-incisor", "ref": "Upper medial incisor", "dati": {
+   "nome": {"valore": "Incisivo mediale superiore", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Dens incisivus medialis superioris", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Dente permanente: incisivo centrale superiore. Corona, colletto e radice fissata nell'alveolo.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "osso.upper-lateral-incisor", "ref": "Upper lateral incisor", "dati": {
+   "nome": {"valore": "Incisivo laterale superiore", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Dens incisivus lateralis superioris", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Dente permanente: incisivo laterale superiore. Corona, colletto e radice fissata nell'alveolo.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "osso.upper-canine", "ref": "Upper canine", "dati": {
+   "nome": {"valore": "Canino superiore", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Dens caninus superioris", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Dente permanente: canino superiore. Corona, colletto e radice fissata nell'alveolo.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "osso.lower-medial-incisor", "ref": "Lower medial incisor", "dati": {
+   "nome": {"valore": "Incisivo mediale inferiore", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Dens incisivus medialis inferioris", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Dente permanente: incisivo centrale inferiore. Corona, colletto e radice fissata nell'alveolo.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "osso.lower-lateral-incisor", "ref": "Lower lateral incisor", "dati": {
+   "nome": {"valore": "Incisivo laterale inferiore", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Dens incisivus lateralis inferioris", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Dente permanente: incisivo laterale inferiore. Corona, colletto e radice fissata nell'alveolo.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "osso.lower-canine", "ref": "Lower canine", "dati": {
+   "nome": {"valore": "Canino inferiore", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Dens caninus inferioris", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Dente permanente: canino inferiore. Corona, colletto e radice fissata nell'alveolo.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "osso.upper-first-premolar", "ref": "Upper first premolar", "dati": {
+   "nome": {"valore": "Primo premolare superiore", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Dens premolaris primus superioris", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Dente permanente: primo premolare superiore. Corona, colletto e radice fissata nell'alveolo.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "osso.upper-second-premolar", "ref": "Upper second premolar", "dati": {
+   "nome": {"valore": "Secondo premolare superiore", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Dens premolaris secundus superioris", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Dente permanente: secondo premolare superiore. Corona, colletto e radice fissata nell'alveolo.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "osso.upper-first-molar-tooth", "ref": "Upper first molar tooth", "dati": {
+   "nome": {"valore": "Primo molare superiore", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Dens molaris primus suprioris", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Dente permanente: primo molare superiore. Corona, colletto e radice fissata nell'alveolo.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "osso.upper-second-molar-tooth", "ref": "Upper second molar tooth", "dati": {
+   "nome": {"valore": "Secondo molare superiore", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Dens molaris secundus superioris", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Dente permanente: secondo molare superiore. Corona, colletto e radice fissata nell'alveolo.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "osso.lower-first-premolar", "ref": "Lower first premolar", "dati": {
+   "nome": {"valore": "Primo premolare inferiore", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Dens premolaris primus inferioris", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Dente permanente: primo premolare inferiore. Corona, colletto e radice fissata nell'alveolo.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "osso.lower-second-premolar", "ref": "Lower second premolar", "dati": {
+   "nome": {"valore": "Secondo premolare inferiore", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Dens premolaris secundus inferioris", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Dente permanente: secondo premolare inferiore. Corona, colletto e radice fissata nell'alveolo.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "osso.lower-first-molar-tooth", "ref": "Lower first molar tooth", "dati": {
+   "nome": {"valore": "Primo molare inferiore", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Dens molaris primus inferioris", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Dente permanente: primo molare inferiore. Corona, colletto e radice fissata nell'alveolo.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "osso.lower-second-molar-tooth", "ref": "Lower second molar tooth", "dati": {
+   "nome": {"valore": "Secondo molare inferiore", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Dens molaris secundus inferioris", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Dente permanente: secondo molare inferiore. Corona, colletto e radice fissata nell'alveolo.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "osso.major-alar-cartilage", "ref": "Major alar cartilage", "dati": {
+   "nome": {"valore": "Cartilagine alare maggiore", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Cartilago alaris major", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Cartilagine alare maggiore: dà forma alla punta e alle narici.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "osso.lateral-process-of-nasal-septal-cartilage", "ref": "Lateral process of nasal septal cartilage", "dati": {
+   "nome": {"valore": "Processo laterale della cartilagine del setto nasale", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Processus lateralis cartilaginis septi nasi", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Parte laterale della cartilagine settale, che sostiene il dorso del naso.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "osso.nasal-septal-cartilage", "ref": "Nasal septal cartilage", "dati": {
+   "nome": {"valore": "Cartilagine del setto nasale", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Cartilago septi nasi", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Cartilagine del setto nasale, davanti al vomere e alla lamina perpendicolare dell'etmoide.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "osso.thyroid-cartilage", "ref": "Thyroid cartilage", "dati": {
+   "nome": {"valore": "Cartilagine tiroidea", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Cartilago thyreoidea", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "La cartilagine più grande della laringe; la prominenza laringea è il 'pomo d'Adamo'. Davanti vi si fissano le corde vocali.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "osso.cricoid-cartilage", "ref": "Cricoid cartilage", "dati": {
+   "nome": {"valore": "Cartilagine cricoidea", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Cartilago cricoidea", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Anello completo alla base della laringe, a livello di C6; sotto continua la trachea.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "osso.arytenoid-cartilage", "ref": "Arytenoid cartilage", "dati": {
+   "nome": {"valore": "Cartilagine aritenoidea", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Cartilago arytenoidea", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Piccole cartilagini pari sulla lamina cricoidea: dal processo vocale parte la corda vocale, sul processo muscolare agiscono i muscoli che la tendono e la aprono.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "osso.corniculate-cartilage", "ref": "Corniculate cartilage", "dati": {
+   "nome": {"valore": "Cartilagine corniculata", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Cartilago corniculata", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Piccola cartilagine all'apice dell'aritenoide, nella plica ariepiglottica.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "osso.atlas-c1", "ref": "Atlas (C1)", "dati": {
+   "nome": {"valore": "Atlante (C1)", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Atlas (C1)", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Prima vertebra cervicale: anello senza corpo e senza processo spinoso. Sostiene il cranio (articolazione atlanto-occipitale: flesso-estensione, il 'sì').", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "osso.vertebra-c6", "ref": "Vertebra C6", "dati": {
+   "nome": {"valore": "Vertebra C6", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Vertebra cervicalis VI", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "6ª vertebra cervicale. Ha il forame trasversario, in cui passa l'arteria vertebrale (C1-C6), e il processo spinoso bifido.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "osso.vertebra-c3", "ref": "Vertebra C3", "dati": {
+   "nome": {"valore": "Vertebra C3", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Vertebra cervicalis III", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "3ª vertebra cervicale. Ha il forame trasversario, in cui passa l'arteria vertebrale (C1-C6), e il processo spinoso bifido.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "osso.vertebra-c5", "ref": "Vertebra C5", "dati": {
+   "nome": {"valore": "Vertebra C5", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Vertebra cervicalis V", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "5ª vertebra cervicale. Ha il forame trasversario, in cui passa l'arteria vertebrale (C1-C6), e il processo spinoso bifido.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "osso.vertebra-c7", "ref": "Vertebra C7", "dati": {
+   "nome": {"valore": "Vertebra C7", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Vertebra cervicalis VII", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "7ª vertebra cervicale. Vertebra prominente: il processo spinoso lungo e non bifido si palpa alla base del collo.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "osso.vertebra-c4", "ref": "Vertebra C4", "dati": {
+   "nome": {"valore": "Vertebra C4", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Vertebra cervicalis IV", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "4ª vertebra cervicale. Ha il forame trasversario, in cui passa l'arteria vertebrale (C1-C6), e il processo spinoso bifido.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "osso.vertebra-t2", "ref": "Vertebra T2", "dati": {
+   "nome": {"valore": "Vertebra T2", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Vertebra thoracis II", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "2ª vertebra toracica. Ha le faccette per le coste sul corpo e sui processi trasversi; il processo spinoso è lungo e inclinato verso il basso.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "osso.vertebra-t3", "ref": "Vertebra T3", "dati": {
+   "nome": {"valore": "Vertebra T3", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Vertebra thoracis III", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "3ª vertebra toracica. Ha le faccette per le coste sul corpo e sui processi trasversi; il processo spinoso è lungo e inclinato verso il basso.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "osso.vertebra-t4", "ref": "Vertebra T4", "dati": {
+   "nome": {"valore": "Vertebra T4", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Vertebra thoracis IV", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "4ª vertebra toracica. Ha le faccette per le coste sul corpo e sui processi trasversi; il processo spinoso è lungo e inclinato verso il basso.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "osso.vertebra-t5", "ref": "Vertebra T5", "dati": {
+   "nome": {"valore": "Vertebra T5", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Vertebra thoracis V", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "5ª vertebra toracica. Ha le faccette per le coste sul corpo e sui processi trasversi; il processo spinoso è lungo e inclinato verso il basso.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "osso.vertebra-t6", "ref": "Vertebra T6", "dati": {
+   "nome": {"valore": "Vertebra T6", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Vertebra thoracis VI", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "6ª vertebra toracica. Ha le faccette per le coste sul corpo e sui processi trasversi; il processo spinoso è lungo e inclinato verso il basso.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "osso.vertebra-t7", "ref": "Vertebra T7", "dati": {
+   "nome": {"valore": "Vertebra T7", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Vertebra thoracis VII", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "7ª vertebra toracica. Ha le faccette per le coste sul corpo e sui processi trasversi; il processo spinoso è lungo e inclinato verso il basso.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "osso.vertebra-t9", "ref": "Vertebra T9", "dati": {
+   "nome": {"valore": "Vertebra T9", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Vertebra thoracis IX", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "9ª vertebra toracica. Ha le faccette per le coste sul corpo e sui processi trasversi; il processo spinoso è lungo e inclinato verso il basso.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "osso.vertebra-t10", "ref": "Vertebra T10", "dati": {
+   "nome": {"valore": "Vertebra T10", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Vertebra thoracis X", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "10ª vertebra toracica. Ha le faccette per le coste sul corpo e sui processi trasversi; il processo spinoso è lungo e inclinato verso il basso.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "osso.vertebra-t11", "ref": "Vertebra T11", "dati": {
+   "nome": {"valore": "Vertebra T11", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Vertebra thoracis XI", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "11ª vertebra toracica. Ha le faccette per le coste sul corpo e sui processi trasversi; il processo spinoso è lungo e inclinato verso il basso.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "osso.vertebra-t12", "ref": "Vertebra T12", "dati": {
+   "nome": {"valore": "Vertebra T12", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Vertebra thoracis XII", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "12ª vertebra toracica. Ha le faccette per le coste sul corpo e sui processi trasversi; il processo spinoso è lungo e inclinato verso il basso.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "osso.vertebra-t8", "ref": "Vertebra T8", "dati": {
+   "nome": {"valore": "Vertebra T8", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Vertebra thoracis VIII", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "8ª vertebra toracica. Ha le faccette per le coste sul corpo e sui processi trasversi; il processo spinoso è lungo e inclinato verso il basso.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "osso.vertebra-t1", "ref": "Vertebra T1", "dati": {
+   "nome": {"valore": "Vertebra T1", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Vertebra thoracis I", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "1ª vertebra toracica. Ha le faccette per le coste sul corpo e sui processi trasversi; il processo spinoso è lungo e inclinato verso il basso.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "osso.vertebra-l1", "ref": "Vertebra L1", "dati": {
+   "nome": {"valore": "Vertebra L1", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Vertebra lumborum I", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "1ª vertebra lombare. Corpo grande e reniforme, processi spinosi corti e orizzontali: porta il carico maggiore della colonna.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "osso.vertebra-l2", "ref": "Vertebra L2", "dati": {
+   "nome": {"valore": "Vertebra L2", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Vertebra lumborum II", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "2ª vertebra lombare. Corpo grande e reniforme, processi spinosi corti e orizzontali: porta il carico maggiore della colonna.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "osso.vertebra-l4", "ref": "Vertebra L4", "dati": {
+   "nome": {"valore": "Vertebra L4", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Vertebra lumborum IV", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "4ª vertebra lombare. Corpo grande e reniforme, processi spinosi corti e orizzontali: porta il carico maggiore della colonna.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "osso.vertebra-l5", "ref": "Vertebra L5", "dati": {
+   "nome": {"valore": "Vertebra L5", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Vertebra lumborum V", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "5ª vertebra lombare. Corpo grande e reniforme, processi spinosi corti e orizzontali: porta il carico maggiore della colonna.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "osso.vertebra-l3", "ref": "Vertebra L3", "dati": {
+   "nome": {"valore": "Vertebra L3", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Vertebra lumborum III", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "3ª vertebra lombare. Corpo grande e reniforme, processi spinosi corti e orizzontali: porta il carico maggiore della colonna.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "osso.coccyx", "ref": "Coccyx", "dati": {
+   "nome": {"valore": "Coccige", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Os coccygis", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Tre-cinque vertebre rudimentali fuse in fondo alla colonna. Inserzione di muscoli del pavimento pelvico e del legamento anococcigeo.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "osso.fifth-rib", "ref": "Fifth rib", "dati": {
+   "nome": {"valore": "Quinta costa", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Quinta costa", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "5ª costa, costa vera: si unisce allo sterno con la propria cartilagine. Si articola dietro con le vertebre toraciche (testa e tubercolo).", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "osso.first-rib", "ref": "First rib", "dati": {
+   "nome": {"valore": "Prima costa", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Costa prima", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "1ª costa, costa vera: si unisce allo sterno con la propria cartilagine. La più corta e curva; vi passano sopra l'arteria e la vena succlavia. Inserzione dello scaleno anteriore e medio.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "osso.fourth-rib", "ref": "Fourth rib", "dati": {
+   "nome": {"valore": "Quarta costa", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Quarta costa", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "4ª costa, costa vera: si unisce allo sterno con la propria cartilagine. Si articola dietro con le vertebre toraciche (testa e tubercolo).", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "osso.second-rib", "ref": "Second rib", "dati": {
+   "nome": {"valore": "Seconda costa", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Costa secunda", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "2ª costa, costa vera: si unisce allo sterno con la propria cartilagine. Inserzione dello scaleno posteriore e del dentato anteriore; si articola con l'angolo sternale.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "osso.seventh-rib", "ref": "Seventh rib", "dati": {
+   "nome": {"valore": "Settima costa", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Septima costa", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "7ª costa, costa vera: si unisce allo sterno con la propria cartilagine. Si articola dietro con le vertebre toraciche (testa e tubercolo).", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "osso.sixth-rib", "ref": "Sixth rib", "dati": {
+   "nome": {"valore": "Sesta costa", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Sexta costa", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "6ª costa, costa vera: si unisce allo sterno con la propria cartilagine. Si articola dietro con le vertebre toraciche (testa e tubercolo).", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "osso.third-rib", "ref": "Third rib", "dati": {
+   "nome": {"valore": "Terza costa", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Tertia costa", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "3ª costa, costa vera: si unisce allo sterno con la propria cartilagine. Si articola dietro con le vertebre toraciche (testa e tubercolo).", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "osso.eleventh-rib", "ref": "Eleventh rib", "dati": {
+   "nome": {"valore": "Undicesima costa", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Undecima costa", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "11ª costa, costa fluttuante. Costa fluttuante: non raggiunge lo sterno né l'arcata costale.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "osso.twelfth-rib", "ref": "Twelfth rib", "dati": {
+   "nome": {"valore": "Dodicesima costa", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Duodecima costa", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "12ª costa, costa fluttuante. Costa fluttuante, la più corta; inserzione del quadrato dei lombi.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "osso.eighth-rib", "ref": "Eighth rib", "dati": {
+   "nome": {"valore": "Ottava costa", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Octava costa", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "8ª costa, costa falsa: la cartilagine si unisce a quella della costa sopra (arcata costale). Si articola dietro con le vertebre toraciche (testa e tubercolo).", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "osso.ninth-rib", "ref": "Ninth rib", "dati": {
+   "nome": {"valore": "Nona costa", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Nona costa", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "9ª costa, costa falsa: la cartilagine si unisce a quella della costa sopra (arcata costale). Si articola dietro con le vertebre toraciche (testa e tubercolo).", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "osso.tenth-rib", "ref": "Tenth rib", "dati": {
+   "nome": {"valore": "Decima costa", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Decima costa", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "10ª costa, costa falsa: la cartilagine si unisce a quella della costa sopra (arcata costale). Si articola dietro con le vertebre toraciche (testa e tubercolo).", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "osso.manubrium-of-sternum", "ref": "Manubrium of sternum", "dati": {
+   "nome": {"valore": "Manubrio sternale", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Manubrium sterni", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Parte superiore dello sterno: si articola con le clavicole e con le prime coste; in alto ha l'incisura giugulare.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "osso.xiphoid-process", "ref": "Xiphoid process", "dati": {
+   "nome": {"valore": "Processo xifoideo", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Processus xiphoideus", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Punta inferiore cartilaginea dello sterno, che ossifica con l'età. Inserzione del diaframma e della linea alba.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "osso.body-of-sternum", "ref": "Body of sternum", "dati": {
+   "nome": {"valore": "Corpo dello sterno", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Corpus sterni", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Parte centrale dello sterno: si articola con le coste dalla 2ª alla 7ª. Con il manubrio forma l'angolo sternale (di Louis), a livello della 2ª costa.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "osso.costal-cartilage-of-first-rib", "ref": "Costal cartilage of first rib", "dati": {
+   "nome": {"valore": "Cartilagine costale della prima costa", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Cartilago costae primae costae", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Cartilagine costale della 1ª costa: rende elastica la gabbia toracica nella respirazione.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "osso.costal-cartilage-of-second-rib", "ref": "Costal cartilage of second rib", "dati": {
+   "nome": {"valore": "Cartilagine costale della seconda costa", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Cartilago costae secundae costae", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Cartilagine costale della 2ª costa: rende elastica la gabbia toracica nella respirazione.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "osso.costal-cartilage-of-third-rib", "ref": "Costal cartilage of third rib", "dati": {
+   "nome": {"valore": "Cartilagine costale della terza costa", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Cartilago costae tertiae costae", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Cartilagine costale della 3ª costa: rende elastica la gabbia toracica nella respirazione.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "osso.costal-cartilage-of-fourth-rib", "ref": "Costal cartilage of fourth rib", "dati": {
+   "nome": {"valore": "Cartilagine costale della quarta costa", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Cartilago costae quarti costae", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Cartilagine costale della 4ª costa: rende elastica la gabbia toracica nella respirazione.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "osso.costal-cartilage-of-fifth-rib", "ref": "Costal cartilage of fifth rib", "dati": {
+   "nome": {"valore": "Cartilagine costale della quinta costa", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Cartilago costae quinti costae", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Cartilagine costale della 5ª costa: rende elastica la gabbia toracica nella respirazione.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "osso.costal-cartilage-of-sixth-rib", "ref": "Costal cartilage of sixth rib", "dati": {
+   "nome": {"valore": "Cartilagine costale della sesta costa", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Cartilago costae sextae costae", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Cartilagine costale della 6ª costa: rende elastica la gabbia toracica nella respirazione.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "osso.costal-cartilage-of-seventh-rib", "ref": "Costal cartilage of seventh rib", "dati": {
+   "nome": {"valore": "Cartilagine costale della settima costa", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Cartilago costae septimi costae", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Cartilagine costale della 7ª costa: rende elastica la gabbia toracica nella respirazione.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "osso.costal-cartilage-of-eighth-rib", "ref": "Costal cartilage of eighth rib", "dati": {
+   "nome": {"valore": "Cartilagine costale dell'ottava costa", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Cartilago costae octavae costae", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Cartilagine costale della 8ª costa: rende elastica la gabbia toracica nella respirazione.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "osso.costal-cartilage-of-tenth-rib", "ref": "Costal cartilage of tenth rib", "dati": {
+   "nome": {"valore": "Cartilagine costale della decima costa", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Cartilago costae decimae costae", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Cartilagine costale della 10ª costa: rende elastica la gabbia toracica nella respirazione.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "osso.costal-cartilage-of-ninth-rib", "ref": "Costal cartilage of ninth rib", "dati": {
+   "nome": {"valore": "Cartilagine costale della nona costa", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Costa cartilago nonae costae", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Cartilagine costale della 9ª costa: rende elastica la gabbia toracica nella respirazione.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "osso.clavicle", "ref": "Clavicle", "dati": {
+   "nome": {"valore": "Clavicola", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Clavicula", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Osso a S che unisce lo sterno all'acromion: l'unico collegamento osseo tra arto superiore e tronco. Si frattura spesso al terzo medio.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "osso.humerus", "ref": "Humerus", "dati": {
+   "nome": {"valore": "Omero", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Humerus", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Osso del braccio: testa (gleno-omerale), tubercoli per la cuffia dei rotatori, diafisi con il solco del nervo radiale, estremità distale con troclea e capitello (gomito).", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "osso.patella", "ref": "Patella", "dati": {
+   "nome": {"valore": "Rotula", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Patella", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Rotula: il più grande osso sesamoide, nel tendine del quadricipite. Aumenta il braccio di leva dell'estensione del ginocchio.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "osso.talus", "ref": "Talus", "dati": {
+   "nome": {"valore": "Astragalo", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Os tali", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Astragalo: trasmette il peso dalla tibia al piede. Nessun muscolo vi si inserisce; la troclea si articola con tibia e fibula (tibio-tarsica).", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "osso.calcaneus", "ref": "Calcaneus", "dati": {
+   "nome": {"valore": "Calcagno", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Calcaneus", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Osso del tallone, il più grande del tarso. La tuberosità riceve il tendine d'Achille e appoggia a terra; il sustentaculum tali sostiene l'astragalo.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "osso.navicular-bone", "ref": "Navicular bone", "dati": {
+   "nome": {"valore": "Osso navicolare", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Os naviculare", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Scafoide tarsale: sul lato mediale del piede, tra astragalo e cuneiformi. La tuberosità riceve il tibiale posteriore.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "osso.cuboid-bone", "ref": "Cuboid bone", "dati": {
+   "nome": {"valore": "Osso cuboide", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Os cuboideum", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Osso laterale del tarso, tra calcagno e 4°-5° metatarso. Ha il solco per il tendine del peroneo lungo.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "osso.intermediate-cuneiform-bone", "ref": "Intermediate cuneiform bone", "dati": {
+   "nome": {"valore": "Osso cuneiforme intermedio", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Os cuneiforme intermedium", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Secondo cuneiforme, il più piccolo: si articola con il 2° metatarso.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "osso.lateral-cuneiform-bone", "ref": "Lateral cuneiform bone", "dati": {
+   "nome": {"valore": "Osso cuneiforme laterale", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Os cuneiforme laterale", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Terzo cuneiforme: si articola con il 3° metatarso e con il cuboide.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "osso.medial-cuneiform-bone", "ref": "Medial cuneiform bone", "dati": {
+   "nome": {"valore": "Osso cuneiforme mediale", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Os cuneiforme mediale", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Primo cuneiforme, il più grande: si articola con il 1° metatarso. Inserzione di tibiale anteriore e peroneo lungo.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "osso.first-metatarsal-bone", "ref": "First metatarsal bone", "dati": {
+   "nome": {"valore": "Primo osso metatarsale", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Os primum metatarsi", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "1° metatarso: base, corpo e testa. Il 1° (alluce) è il più robusto e porta molto carico.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "osso.fifth-metatarsal-bone", "ref": "Fifth metatarsal bone", "dati": {
+   "nome": {"valore": "Quinto osso metatarsale", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Os quintum metatarsi", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "5° metatarso: base, corpo e testa. La tuberosità alla base riceve il peroneo breve; si frattura per trazione.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "osso.second-metatarsal-bone", "ref": "Second metatarsal bone", "dati": {
+   "nome": {"valore": "Secondo osso metatarsale", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Os secundum metatarsi", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "2° metatarso: base, corpo e testa. Le teste appoggiano a terra nella fase di spinta.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "osso.third-metatarsal-bone", "ref": "Third metatarsal bone", "dati": {
+   "nome": {"valore": "Terzo osso metatarsale", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Os tertium metatarsi", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "3° metatarso: base, corpo e testa. Le teste appoggiano a terra nella fase di spinta.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "osso.fourth-metatarsal-bone", "ref": "Fourth metatarsal bone", "dati": {
+   "nome": {"valore": "Quarto osso metatarsale", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Os quatum metatarsi", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "4° metatarso: base, corpo e testa. Le teste appoggiano a terra nella fase di spinta.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "osso.distal-phalanx-of-fifth-finger-of-foot", "ref": "Distal phalanx of fifth finger of foot", "dati": {
+   "nome": {"valore": "Falange distale del quinto dito del piede", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Phalanx distalis quintum digitorum pedis", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Falange distale del 5° dito. Ogni dito lungo ha tre falangi: prossimale, media e distale.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "osso.distal-phalanx-of-first-finger-of-foot", "ref": "Distal phalanx of first finger of foot", "dati": {
+   "nome": {"valore": "Falange distale del primo dito del piede", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Phalanx distalis primum digitorum pedis", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Falange distale del alluce. Il pollice e l'alluce hanno solo due falangi.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "osso.distal-phalanx-of-fourth-finger-of-foot", "ref": "Distal phalanx of fourth finger of foot", "dati": {
+   "nome": {"valore": "Falange distale del quarto dito del piede", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Phalanx distalis quartum digitorum pedis", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Falange distale del 4° dito. Ogni dito lungo ha tre falangi: prossimale, media e distale.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "osso.distal-phalanx-of-second-finger-of-foot", "ref": "Distal phalanx of second finger of foot", "dati": {
+   "nome": {"valore": "Falange distale del secondo dito del piede", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Phalanx distalis secundum digitorum pedis", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Falange distale del 2° dito. Ogni dito lungo ha tre falangi: prossimale, media e distale.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "osso.distal-phalanx-of-third-finger-of-foot", "ref": "Distal phalanx of third finger of foot", "dati": {
+   "nome": {"valore": "Falange distale del terzo dito del piede", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Phalanx distalis tertium digitorum pedis", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Falange distale del 3° dito. Ogni dito lungo ha tre falangi: prossimale, media e distale.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "osso.middle-phalanx-of-second-finger-of-foot", "ref": "Middle phalanx of second finger of foot", "dati": {
+   "nome": {"valore": "Falange media del secondo dito del piede", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Phalanx media secundum digitorum pedis", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Falange media del 2° dito. Ogni dito lungo ha tre falangi: prossimale, media e distale.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "osso.middle-phalanx-of-third-finger-of-foot", "ref": "Middle phalanx of third finger of foot", "dati": {
+   "nome": {"valore": "Falange media del terzo dito del piede", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Phalanx media tertium digitorum pedis", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Falange media del 3° dito. Ogni dito lungo ha tre falangi: prossimale, media e distale.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "osso.middle-phalanx-of-fourth-finger-of-foot", "ref": "Middle phalanx of fourth finger of foot", "dati": {
+   "nome": {"valore": "Falange media del quarto dito del piede", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Phalanx media quartum digitorum pedis", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Falange media del 4° dito. Ogni dito lungo ha tre falangi: prossimale, media e distale.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "osso.middle-phalanx-of-fifth-finger-of-foot", "ref": "Middle phalanx of fifth finger of foot", "dati": {
+   "nome": {"valore": "Falange media del quinto dito del piede", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Phalanx media quintum digitorum pedis", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Falange media del 5° dito. Ogni dito lungo ha tre falangi: prossimale, media e distale.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "osso.proximal-phalanx-of-first-finger-of-foot", "ref": "Proximal phalanx of first finger of foot", "dati": {
+   "nome": {"valore": "Falange prossimale del primo dito del piede", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Phalanx proximalis primum digitorum pedis", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Falange prossimale del alluce. Il pollice e l'alluce hanno solo due falangi.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "osso.proximal-phalanx-of-second-finger-of-foot", "ref": "Proximal phalanx of second finger of foot", "dati": {
+   "nome": {"valore": "Falange prossimale del secondo dito del piede", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Phalanx proximalis secundum digitorum pedis", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Falange prossimale del 2° dito. Ogni dito lungo ha tre falangi: prossimale, media e distale.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "osso.proximal-phalanx-of-third-finger-of-foot", "ref": "Proximal phalanx of third finger of foot", "dati": {
+   "nome": {"valore": "Falange prossimale del terzo dito del piede", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Phalanx proximalis tertium digitorum pedis", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Falange prossimale del 3° dito. Ogni dito lungo ha tre falangi: prossimale, media e distale.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "osso.proximal-phalanx-of-fourth-finger-of-foot", "ref": "Proximal phalanx of fourth finger of foot", "dati": {
+   "nome": {"valore": "Falange prossimale del quarto dito del piede", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Phalanx proximalis quartum digitorum pedis", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Falange prossimale del 4° dito. Ogni dito lungo ha tre falangi: prossimale, media e distale.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "osso.proximal-phalanx-of-fifth-finger-of-foot", "ref": "Proximal phalanx of fifth finger of foot", "dati": {
+   "nome": {"valore": "Falange prossimale del quinto dito del piede", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Phalanx proximalis quintum digitorum pedis", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Falange prossimale del 5° dito. Ogni dito lungo ha tre falangi: prossimale, media e distale.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "osso.sesamoid-bones-of-foot", "ref": "Sesamoid bones of foot", "dati": {
+   "nome": {"valore": "Ossa sesamoidi del piede", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Ossa sesamoidea pedis", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Sesamoidi sotto la testa del 1° metatarso, nei tendini del flessore breve dell'alluce.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "osso.distal-phalanx-of-first-finger-of-hand", "ref": "Distal phalanx of first finger of hand", "dati": {
+   "nome": {"valore": "Falange distale del primo dito della mano", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Phalanx distalis primum digitorum manus", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Falange distale del pollice. Il pollice e l'alluce hanno solo due falangi.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "osso.distal-phalanx-of-second-finger-of-hand", "ref": "Distal phalanx of second finger of hand", "dati": {
+   "nome": {"valore": "Falange distale del secondo dito della mano", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Phalanx distalis secundum digitorum manus", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Falange distale del indice. Ogni dito lungo ha tre falangi: prossimale, media e distale.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "osso.distal-phalanx-of-third-finger-of-hand", "ref": "Distal phalanx of third finger of hand", "dati": {
+   "nome": {"valore": "Falange distale del terzo dito della mano", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Phalanx distalis tertium digitorum manus", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Falange distale del medio. Ogni dito lungo ha tre falangi: prossimale, media e distale.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "osso.distal-phalanx-of-fourth-finger-of-hand", "ref": "Distal phalanx of fourth finger of hand", "dati": {
+   "nome": {"valore": "Falange distale del quarto dito della mano", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Phalanx distalis quartum digitorum manus", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Falange distale del anulare. Ogni dito lungo ha tre falangi: prossimale, media e distale.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "osso.distal-phalanx-of-fifth-finger-of-hand", "ref": "Distal phalanx of fifth finger of hand", "dati": {
+   "nome": {"valore": "Falange distale del quinto dito della mano", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Phalanx distalis quintum digitorum manus", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Falange distale del mignolo. Ogni dito lungo ha tre falangi: prossimale, media e distale.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "osso.middle-phalanx-of-second-finger-of-hand", "ref": "Middle phalanx of second finger of hand", "dati": {
+   "nome": {"valore": "Falange media del secondo dito della mano", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Phalanx media scundum digitorum manus", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Falange media del indice. Ogni dito lungo ha tre falangi: prossimale, media e distale.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "osso.middle-phalanx-of-third-finger-of-hand", "ref": "Middle phalanx of third finger of hand", "dati": {
+   "nome": {"valore": "Falange media del terzo dito della mano", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Phalanx media tertium digitorum manus", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Falange media del medio. Ogni dito lungo ha tre falangi: prossimale, media e distale.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "osso.middle-phalanx-of-fourth-finger-of-hand", "ref": "Middle phalanx of fourth finger of hand", "dati": {
+   "nome": {"valore": "Falange media del quarto dito della mano", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Phalanx media quartum digitorum manus", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Falange media del anulare. Ogni dito lungo ha tre falangi: prossimale, media e distale.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "osso.middle-phalanx-of-fifth-finger-of-hand", "ref": "Middle phalanx of fifth finger of hand", "dati": {
+   "nome": {"valore": "Falange media del quinto dito della mano", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Phalanx media quintum digitorum manus", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Falange media del mignolo. Ogni dito lungo ha tre falangi: prossimale, media e distale.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "osso.proximal-phalanx-of-first-finger-of-hand", "ref": "Proximal phalanx of first finger of hand", "dati": {
+   "nome": {"valore": "Falange prossimale del primo dito della mano", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Phalanx proximalis primum digitorum manus", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Falange prossimale del pollice. Il pollice e l'alluce hanno solo due falangi.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "osso.proximal-phalanx-of-second-finger-of-hand", "ref": "Proximal phalanx of second finger of hand", "dati": {
+   "nome": {"valore": "Falange prossimale del secondo dito della mano", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Phalanx proximalis secundum digitorum manus", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Falange prossimale del indice. Ogni dito lungo ha tre falangi: prossimale, media e distale.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "osso.proximal-phalanx-of-third-finger-of-hand", "ref": "Proximal phalanx of third finger of hand", "dati": {
+   "nome": {"valore": "Falange prossimale del terzo dito della mano", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Phalanx proximalis tertium digitorum manus", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Falange prossimale del medio. Ogni dito lungo ha tre falangi: prossimale, media e distale.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "osso.proximal-phalanx-of-fourth-finger-of-hand", "ref": "Proximal phalanx of fourth finger of hand", "dati": {
+   "nome": {"valore": "Falange prossimale del quarto dito della mano", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Phalanx proximalis quartum digitorum manus", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Falange prossimale del anulare. Ogni dito lungo ha tre falangi: prossimale, media e distale.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "osso.proximal-phalanx-of-fifth-finger-of-hand", "ref": "Proximal phalanx of fifth finger of hand", "dati": {
+   "nome": {"valore": "Falange prossimale del quinto dito della mano", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Phalanx proximalis quintum digitorum manus", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Falange prossimale del mignolo. Ogni dito lungo ha tre falangi: prossimale, media e distale.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "osso.first-metacarpal-bone", "ref": "First metacarpal bone", "dati": {
+   "nome": {"valore": "Primo osso metacarpale", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Os primum metarcapi", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "1° metacarpo: base, corpo e testa. Il 1° (pollice) è il più corto e mobile.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "osso.second-metacarpal-bone", "ref": "Second metacarpal bone", "dati": {
+   "nome": {"valore": "Secondo osso metacarpale", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Os secundum metacarpi", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "2° metacarpo: base, corpo e testa. Le teste formano le nocche.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "osso.third-metacarpal-bone", "ref": "Third metacarpal bone", "dati": {
+   "nome": {"valore": "Terzo osso metacarpale", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Os tertium metacarpi", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "3° metacarpo: base, corpo e testa. Le teste formano le nocche.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "osso.fourth-metacarpal-bone", "ref": "Fourth metacarpal bone", "dati": {
+   "nome": {"valore": "Quarto osso metacarpale", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Os quartum metacarpi", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "4° metacarpo: base, corpo e testa. Le teste formano le nocche.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "osso.fifth-metacarpal-bone", "ref": "Fifth metacarpal bone", "dati": {
+   "nome": {"valore": "Quinto osso metacarpale", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Os quintum metacarpi", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "5° metacarpo: base, corpo e testa. Le teste formano le nocche.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "osso.capitate-bone", "ref": "Capitate bone", "dati": {
+   "nome": {"valore": "Osso capitato", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Os capitatum", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Osso più grande del carpo, al centro della fila distale; si articola con il 3° metacarpo.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "osso.hamate-bone", "ref": "Hamate bone", "dati": {
+   "nome": {"valore": "Osso uncinato", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Os hamatum", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Osso uncinato: fila distale del carpo, lato ulnare. L'uncino delimita il canale di Guyon (nervo ulnare).", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "osso.lunate-bone", "ref": "Lunate bone", "dati": {
+   "nome": {"valore": "Osso semilunare", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Os lunatum", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Osso della fila prossimale del carpo, al centro. È l'osso del carpo che si lussa più spesso.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "osso.pisiform-bone", "ref": "Pisiform bone", "dati": {
+   "nome": {"valore": "Osso pisiforme", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Os pisiforme", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Osso sesamoide nel tendine del flessore ulnare del carpo, sul piramidale. Palpabile alla base dell'eminenza ipotenar.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "osso.scaphoid-bone", "ref": "Scaphoid bone", "dati": {
+   "nome": {"valore": "Osso scafoide", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Os scaphoideum", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Osso della fila prossimale del carpo, lato radiale. Si palpa nella tabacchiera anatomica; è l'osso del carpo che si frattura più spesso, con rischio di necrosi.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "osso.trapezium-bone", "ref": "Trapezium bone", "dati": {
+   "nome": {"valore": "Osso trapezio", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Os trapezium", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Osso della fila distale del carpo: si articola a sella con il 1° metacarpo (articolazione trapezio-metacarpale del pollice).", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "osso.trapezoid-bone", "ref": "Trapezoid bone", "dati": {
+   "nome": {"valore": "Osso trapezoide", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Os trapezoideum", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Piccolo osso della fila distale del carpo, si articola con il 2° metacarpo.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "osso.triquetrum-bone", "ref": "Triquetrum bone", "dati": {
+   "nome": {"valore": "Osso piramidale", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Os triquetrum", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Osso piramidale: fila prossimale del carpo, lato ulnare; davanti porta il pisiforme.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "osso.axis-c2", "ref": "Axis (C2)", "dati": {
+   "nome": {"valore": "Epistrofeo (C2)", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Axis (C2)", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Seconda vertebra cervicale: il dente (processo odontoideo) fa da perno per l'atlante (articolazione atlanto-assiale: rotazione, il 'no').", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "osso.scapula", "ref": "Scapula", "dati": {
+   "nome": {"valore": "Scapola", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Scapula", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Osso piatto triangolare sulla faccia posteriore del torace (dalla 2ª alla 7ª costa). Si articola con omero (gleno-omerale) e clavicola (acromioclavicolare); vi si fissano 17 muscoli.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "osso.radius", "ref": "Radius", "dati": {
+   "nome": {"valore": "Radio", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Radius", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Osso laterale dell'avambraccio (lato del pollice). La testa ruota nella pronosupinazione; l'estremità distale forma la maggior parte dell'articolazione del polso.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "osso.ulna", "ref": "Ulna", "dati": {
+   "nome": {"valore": "Ulna", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Ulna", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Osso mediale dell'avambraccio. L'olecrano e l'incisura trocleare formano con la troclea omerale l'articolazione del gomito.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "osso.femur", "ref": "Femur", "dati": {
+   "nome": {"valore": "Femore", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Os femoris", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Osso della coscia, il più lungo del corpo. Testa nell'acetabolo (anca), collo, trocanteri, diafisi con la linea aspra, condili per il ginocchio.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "osso.hip-bone", "ref": "Hip bone", "dati": {
+   "nome": {"valore": "Osso dell'anca", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Os coxae", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Osso dell'anca (coxale): ileo, ischio e pube fusi nell'acetabolo. Si articola con il sacro e, davanti, con l'altro coxale nella sinfisi pubica.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "osso.tibia", "ref": "Tibia", "dati": {
+   "nome": {"valore": "Tibia", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Tibia", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Osso mediale e principale della gamba, porta il peso. Piatto tibiale per il ginocchio, faccia mediale sottocutanea, malleolo mediale alla caviglia.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "osso.fibula", "ref": "Fibula", "dati": {
+   "nome": {"valore": "Perone", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Fibula", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Perone: osso laterale e sottile della gamba, non porta carico rilevante. La testa è vicina al nervo peroneo comune; il malleolo laterale stabilizza la caviglia.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "osso.sacrum", "ref": "Sacrum", "dati": {
+   "nome": {"valore": "Osso sacro", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Os sacrum", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Cinque vertebre sacrali fuse. Si articola con le ossa dell'anca (sacroiliache) e con L5; chiude posteriormente il bacino.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "osso.vomer", "ref": "Vomer", "dati": {
+   "nome": {"valore": "Vomere", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Vomer", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Osso impari che forma la parte postero-inferiore del setto nasale.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "osso.posterior-cells-of-ethmoid-bone", "ref": "Posterior cells of ethmoid bone", "dati": {
+   "nome": {"valore": "Cellule posteriori dell'osso etmoide", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Cellulae posteriores ossis ethmoidei", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Cellule aeree posteriori del labirinto etmoidale; drenano nel meato superiore.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "osso.middle-cells-of-ethmoid-bone", "ref": "Middle cells of ethmoid bone", "dati": {
+   "nome": {"valore": "Cellule intermedie dell'osso etmoide", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Cellulae mediae ossis ethmoidei", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Cellule aeree medie del labirinto etmoidale; drenano nel meato medio.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "osso.anterior-cells-of-ethmoid-bone", "ref": "Anterior cells of ethmoid bone", "dati": {
+   "nome": {"valore": "Cellule anteriori dell'osso etmoide", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Cellulae anteriores ossis ethmoidei", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Cellule aeree anteriori del labirinto etmoidale (seni paranasali); drenano nel meato medio.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "osso.teeth", "ref": "Teeth", "solo2d": true, "dati": {
+   "nome": {"valore": "Denti", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Dentes", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "I denti delle due arcate (incisivi, canini, premolari e molari), infissi negli alveoli di mascellari e mandibola.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "osso.costal-cartilages", "ref": "Costal cartilages", "solo2d": true, "dati": {
+   "nome": {"valore": "Cartilagini costali", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Cartilagines costales", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Cartilagine ialina che unisce le prime dieci coste allo sterno (direttamente le prime sette, attraverso l'arcata costale le altre): dà elasticità alla gabbia toracica nella respirazione.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }}
+ ]
+}

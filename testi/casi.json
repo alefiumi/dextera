@@ -1,0 +1,296 @@
+{
+ "version": 1,
+ "tipo": "casi",
+ "nota": "Casi clinici dei moduli 2D e dei giochi 3D. muscolo / struttura: la risposta giusta sulla figura.",
+ "campi": {"indizio_1": "Indizio 1", "indizio_2": "Indizio 2", "indizio_3": "Indizio 3", "risposta": "Risposta giusta", "opzioni": "Opzioni", "spiegazione": "Spiegazione"},
+ "voci": [
+  {"id": "caso.corpo.c1", "modulo": "corpo", "caso": "c1", "muscolo": "gluteus medius", "dati": {
+   "indizio_1": {"valore": "Donna di 58 anni con zoppia: nell'appoggio su un solo piede il bacino si abbassa dal lato opposto.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "indizio_2": {"valore": "Il problema riguarda un muscolo che abduce l'anca e stabilizza il bacino.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "indizio_3": {"valore": "Origina dalla faccia esterna dell'ala iliaca e si inserisce sul grande trocantere.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "risposta": {"valore": "Gluteo medio", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "opzioni": {"valore": ["Gluteo medio", "Gluteo massimo", "Psoas maggiore", "Adduttore lungo"], "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "spiegazione": {"valore": "Il segno di Trendelenburg indica debolezza degli abduttori dell'anca, in primo luogo il gluteo medio.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "caso.corpo.c2", "modulo": "corpo", "caso": "c2", "muscolo": "supraspinatus", "dati": {
+   "indizio_1": {"valore": "Muratore di 52 anni: dolore alla spalla nell'alzare il braccio di lato, soprattutto tra circa 60° e 120°.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "indizio_2": {"valore": "Fatica ad avviare l'abduzione; il test del braccio che cade (drop arm) è positivo.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "indizio_3": {"valore": "Origina dalla fossa sovraspinata e si inserisce sul tubercolo maggiore dell'omero.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "risposta": {"valore": "Sovraspinato", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "opzioni": {"valore": ["Sovraspinato", "Sottoscapolare", "Grande pettorale", "Tricipite brachiale"], "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "spiegazione": {"valore": "L'arco doloroso e la difficoltà ad avviare l'abduzione orientano verso il sovraspinato (cuffia dei rotatori).", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "caso.corpo.c3", "modulo": "corpo", "caso": "c3", "muscolo": "gastrocnemius", "dati": {
+   "indizio_1": {"valore": "Runner di 40 anni con dolore e rigidità poco sopra il calcagno, peggiori al mattino.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "indizio_2": {"valore": "Il dolore aumenta alzandosi sulle punte dei piedi.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "indizio_3": {"valore": "Si inserisce sulla tuberosità calcaneare tramite un robusto tendine.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "risposta": {"valore": "Tricipite della sura", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "opzioni": {"valore": ["Tricipite della sura", "Tibiale anteriore", "Peroneo breve", "Bicipite femorale"], "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "spiegazione": {"valore": "Il tendine d'Achille è il tendine comune di gastrocnemio e soleo (tricipite della sura).", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "caso.corpo.c4", "modulo": "corpo", "caso": "c4", "muscolo": "tibialis anterior", "dati": {
+   "indizio_1": {"valore": "Dopo una lunga compressione sul lato esterno del ginocchio, un paziente inciampa: la punta del piede cade.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "indizio_2": {"valore": "Non riesce a sollevare il piede (dorsiflessione) e solleva molto il ginocchio camminando.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "indizio_3": {"valore": "Origina dalla tibia laterale e si inserisce sul cuneiforme mediale e sul 1° metatarso.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "risposta": {"valore": "Tibiale anteriore", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "opzioni": {"valore": ["Tibiale anteriore", "Tricipite della sura", "Peroneo breve", "Sartorio"], "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "spiegazione": {"valore": "Il piede cadente deriva dal deficit del tibiale anteriore, spesso per danno al nervo peroneo comune.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "caso.corpo.c5", "modulo": "corpo", "caso": "c5", "muscolo": "psoas major", "dati": {
+   "indizio_1": {"valore": "Ragazzo di 30 anni con dolore inguinale e difficoltà a sollevare la coscia salendo le scale.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "indizio_2": {"valore": "Nel test di Thomas l'anca non si estende completamente.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "indizio_3": {"valore": "Origina da T12–L5 e si inserisce sul piccolo trocantere del femore.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "risposta": {"valore": "Psoas maggiore", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "opzioni": {"valore": ["Psoas maggiore", "Gluteo massimo", "Gluteo medio", "Bicipite femorale"], "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "spiegazione": {"valore": "Il test di Thomas positivo indica accorciamento dei flessori dell'anca, tra cui lo psoas.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "caso.corpo.c6", "modulo": "corpo", "caso": "c6", "muscolo": "biceps femoris", "dati": {
+   "indizio_1": {"valore": "Velocista di 24 anni con dolore improvviso dietro la coscia durante lo scatto.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "indizio_2": {"valore": "Il dolore compare piegando il ginocchio contro resistenza.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "indizio_3": {"valore": "Origina dalla tuberosità ischiatica e uno dei capi si inserisce sulla testa della fibula.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "risposta": {"valore": "Bicipite femorale", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "opzioni": {"valore": ["Bicipite femorale", "Retto femorale", "Vasti del quadricipite", "Adduttore lungo"], "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "spiegazione": {"valore": "Gli ischiocrurali, tra cui il bicipite femorale, sono frequentemente colpiti negli strappi da scatto.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "caso.corpo.c7", "modulo": "corpo", "caso": "c7", "muscolo": "adductor longus", "dati": {
+   "indizio_1": {"valore": "Calciatore di 22 anni con dolore inguinale mediale nei cambi di direzione.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "indizio_2": {"valore": "Il dolore si riproduce con l'adduzione dell'anca contro resistenza.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "indizio_3": {"valore": "Origina dal corpo del pube e si inserisce sulla linea aspra del femore.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "risposta": {"valore": "Adduttore lungo", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "opzioni": {"valore": ["Adduttore lungo", "Gluteo medio", "Sartorio", "Psoas maggiore"], "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "spiegazione": {"valore": "Il dolore inguinale da adduttori è tipico degli sport con cambi di direzione.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "caso.corpo.c8", "modulo": "corpo", "caso": "c8", "struttura": "rotula", "dati": {
+   "indizio_1": {"valore": "Ciclista di 20 anni con dolore anteriore al ginocchio salendo le scale e dopo molto tempo seduto.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "indizio_2": {"valore": "Il dolore aumenta quando la rotula viene compressa nella troclea del femore.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "indizio_3": {"valore": "È l'osso sesamoide più grande del corpo, incluso nel tendine del quadricipite.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "risposta": {"valore": "Rotula", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "opzioni": {"valore": ["Rotula", "Tibia", "Fibula", "Femore"], "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "spiegazione": {"valore": "È il quadro tipico della sindrome femoro-rotulea.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "caso.corpo.c9", "modulo": "corpo", "caso": "c9", "struttura": "carpo", "dati": {
+   "indizio_1": {"valore": "Ragazza di 19 anni cade sul palmo aperto: dolore profondo alla base del pollice, nella tabacchiera anatomica.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "indizio_2": {"valore": "Il dolore aumenta comprimendo il pollice lungo il suo asse.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "indizio_3": {"valore": "Fa parte di un gruppo di otto ossa; la frattura può causare necrosi avascolare.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "risposta": {"valore": "Ossa del carpo", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "opzioni": {"valore": ["Ossa del carpo", "Radio", "Ulna", "Metacarpo e falangi (mano)"], "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "spiegazione": {"valore": "Il sospetto è una frattura dello scafoide, osso del carpo.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "caso.corpo.c10", "modulo": "corpo", "caso": "c10", "muscolo": "extensor carpi radialis brevis", "dati": {
+   "indizio_1": {"valore": "Uomo di 45 anni, tennista amatoriale: dolore sul lato esterno del gomito quando stringe la racchetta o solleva una borsa.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "indizio_2": {"valore": "Il dolore aumenta estendendo il polso contro resistenza.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "indizio_3": {"valore": "Il tendine coinvolto origina dall'epicondilo laterale dell'omero e il muscolo si inserisce alla base del III metacarpo.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "risposta": {"valore": "Estensore radiale breve del carpo", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "opzioni": {"valore": ["Estensore radiale breve del carpo", "Flessore radiale del carpo", "Brachioradiale", "Pronatore rotondo"], "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "spiegazione": {"valore": "L'epicondilite laterale (gomito del tennista) è una tendinopatia dell'origine comune degli estensori, in primo luogo dell'estensore radiale breve del carpo.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "caso.corpo.c11", "modulo": "corpo", "caso": "c11", "muscolo": "serratus anterior", "dati": {
+   "indizio_1": {"valore": "Donna di 50 anni operata al seno con svuotamento ascellare.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "indizio_2": {"valore": "Spingendo con le mani contro il muro, il margine mediale della scapola si solleva dal torace (scapola alata).", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "indizio_3": {"valore": "Il muscolo interessato è innervato dal nervo toracico lungo e si inserisce sul margine mediale della scapola.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "risposta": {"valore": "Dentato anteriore", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "opzioni": {"valore": ["Dentato anteriore", "Romboide maggiore", "Piccolo pettorale", "Trapezio"], "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "spiegazione": {"valore": "La lesione del nervo toracico lungo paralizza il dentato anteriore, che tiene la scapola aderente al torace: ne risulta la scapola alata mediale.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "caso.corpo.c12", "modulo": "corpo", "caso": "c12", "muscolo": "trapezius", "dati": {
+   "indizio_1": {"valore": "Uomo di 38 anni, dopo una biopsia di un linfonodo nel triangolo posteriore del collo.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "indizio_2": {"valore": "La spalla è più bassa dal lato operato e fa fatica ad alzare il braccio sopra la testa.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "indizio_3": {"valore": "Il nervo lesionato è l'accessorio (XI); il muscolo va dall'occipite e dalle spinose fino a clavicola, acromion e spina della scapola.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "risposta": {"valore": "Trapezio", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "opzioni": {"valore": ["Trapezio", "Elevatore della scapola", "Deltoide", "Sternocleidomastoideo"], "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "spiegazione": {"valore": "Il nervo accessorio nel triangolo posteriore è superficiale e a rischio negli interventi: la paralisi del trapezio abbassa la spalla e limita l'elevazione del braccio.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "caso.corpo.c13", "modulo": "corpo", "caso": "c13", "muscolo": "sternocleidomastoid", "dati": {
+   "indizio_1": {"valore": "Neonato di 3 settimane che tiene la testa sempre inclinata da un lato e ruotata dall'altro.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "indizio_2": {"valore": "Sul lato del collo si palpa un nodulo duro nel ventre di un muscolo.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "indizio_3": {"valore": "Il muscolo origina da manubrio dello sterno e clavicola e si inserisce sul processo mastoideo.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "risposta": {"valore": "Sternocleidomastoideo", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "opzioni": {"valore": ["Sternocleidomastoideo", "Scaleno anteriore", "Trapezio", "Splenio della testa"], "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "spiegazione": {"valore": "Nel torcicollo miogeno congenito l'accorciamento dello sternocleidomastoideo inclina la testa dal suo lato e ruota il viso dal lato opposto.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "caso.corpo.c14", "modulo": "corpo", "caso": "c14", "muscolo": "biceps brachii", "dati": {
+   "indizio_1": {"valore": "Uomo di 55 anni: sollevando un mobile ha sentito uno schiocco alla spalla.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "indizio_2": {"valore": "Flettendo il gomito il ventre del muscolo si raccoglie verso il basso formando una palla sul braccio (segno di Popeye).", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "indizio_3": {"valore": "Il tendine rotto è quello del capo lungo, che origina dal tubercolo sopraglenoideo della scapola.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "risposta": {"valore": "Bicipite brachiale", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "opzioni": {"valore": ["Bicipite brachiale", "Brachiale", "Coracobrachiale", "Tricipite brachiale"], "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "spiegazione": {"valore": "La rottura del tendine del capo lungo del bicipite brachiale fa scivolare in basso il ventre muscolare: è il segno di Popeye.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "caso.corpo.c15", "modulo": "corpo", "caso": "c15", "muscolo": "deltoid", "dati": {
+   "indizio_1": {"valore": "Ragazzo di 20 anni dopo una lussazione anteriore di spalla.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "indizio_2": {"valore": "Non riesce ad abdurre il braccio e ha la pelle insensibile sulla parte laterale alta del braccio.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "indizio_3": {"valore": "Il nervo lesionato è l'ascellare; il muscolo si inserisce sulla tuberosità deltoidea dell'omero.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "risposta": {"valore": "Deltoide", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "opzioni": {"valore": ["Deltoide", "Sovraspinato", "Grande rotondo", "Gran pettorale"], "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "spiegazione": {"valore": "Il nervo ascellare gira attorno al collo chirurgico dell'omero e si può lesionare nella lussazione: deficit del deltoide e ipoestesia nella regione del distintivo.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "caso.corpo.c16", "modulo": "corpo", "caso": "c16", "muscolo": "rectus femoris", "dati": {
+   "indizio_1": {"valore": "Calciatore di 23 anni: dolore improvviso nella parte anteriore della coscia calciando il pallone.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "indizio_2": {"valore": "Fanno male sia la flessione dell'anca sia l'estensione del ginocchio contro resistenza.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "indizio_3": {"valore": "È l'unico capo del quadricipite che supera due articolazioni: origina dalla spina iliaca anteriore inferiore.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "risposta": {"valore": "Retto femorale", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "opzioni": {"valore": ["Retto femorale", "Vasto mediale", "Sartorio", "Ileopsoas"], "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "spiegazione": {"valore": "Il retto femorale è biarticolare (anca e ginocchio) ed è il capo del quadricipite che si stira più spesso nel calcio e nello sprint.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "caso.corpo.c17", "modulo": "corpo", "caso": "c17", "muscolo": "gluteus maximus", "dati": {
+   "indizio_1": {"valore": "Donna di 70 anni con difficoltà ad alzarsi dalla sedia e a salire le scale, senza dolore.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "indizio_2": {"valore": "Il problema è nell'estensione dell'anca: camminando in piano compensa portando il tronco indietro.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "indizio_3": {"valore": "Il muscolo è innervato dal nervo gluteo inferiore ed è il più voluminoso della natica.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "risposta": {"valore": "Grande gluteo", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "opzioni": {"valore": ["Grande gluteo", "Gluteo medio", "Ischiocrurali", "Piriforme"], "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "spiegazione": {"valore": "Il grande gluteo è l'estensore principale dell'anca negli sforzi (alzarsi, salire le scale); la sua debolezza dà l'andatura con il tronco inclinato indietro.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "caso.corpo.c18", "modulo": "corpo", "caso": "c18", "muscolo": "fibularis brevis", "dati": {
+   "indizio_1": {"valore": "Pallavolista di 25 anni: atterrando ha messo il piede in inversione forzata.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "indizio_2": {"valore": "Dolore e gonfiore sul lato esterno del piede, alla base del V metatarso.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "indizio_3": {"valore": "La radiografia mostra un piccolo frammento staccato dove si inserisce il tendine di un muscolo eversore che passa dietro il malleolo laterale.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "risposta": {"valore": "Peroneo breve", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "opzioni": {"valore": ["Peroneo breve", "Tibiale posteriore", "Peroneo lungo", "Estensore lungo delle dita"], "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "spiegazione": {"valore": "Nella distorsione in inversione il peroneo breve può strappare un frammento della tuberosità del V metatarso, dove si inserisce (frattura da avulsione).", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "caso.corpo.c19", "modulo": "corpo", "caso": "c19", "muscolo": "orbicularis oculi", "dati": {
+   "indizio_1": {"valore": "Donna di 35 anni che al risveglio ha metà del viso immobile.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "indizio_2": {"valore": "Non riesce a chiudere completamente l'occhio da quel lato e non riesce a corrugare la fronte.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "indizio_3": {"valore": "Il nervo colpito è il facciale (VII); il muscolo che chiude le palpebre circonda l'orbita.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "risposta": {"valore": "Orbicolare dell'occhio", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "opzioni": {"valore": ["Orbicolare dell'occhio", "Elevatore della palpebra superiore", "Frontale", "Corrugatore del sopracciglio"], "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "spiegazione": {"valore": "Nella paralisi del facciale (di Bell) il deficit dell'orbicolare dell'occhio impedisce la chiusura delle palpebre: l'occhio va protetto.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "caso.corpo.c20", "modulo": "corpo", "caso": "c20", "muscolo": "masseter", "dati": {
+   "indizio_1": {"valore": "Studente di 24 anni sotto esami: dolore alla mandibola al mattino e denti consumati.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "indizio_2": {"valore": "Il dolore è all'angolo della mandibola e il muscolo si sente duro stringendo i denti.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "indizio_3": {"valore": "Il muscolo va dall'arcata zigomatica alla faccia esterna del ramo e dell'angolo della mandibola.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "risposta": {"valore": "Massetere", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "opzioni": {"valore": ["Massetere", "Temporale", "Pterigoideo laterale", "Buccinatore"], "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "spiegazione": {"valore": "Nel bruxismo il massetere, potente elevatore della mandibola, lavora troppo: dolore e ipertrofia all'angolo della mandibola.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "caso.corpo.c21", "modulo": "corpo", "caso": "c21", "muscolo": "tensor fasciae latae", "dati": {
+   "indizio_1": {"valore": "Podista di 30 anni che ha aumentato i chilometri: dolore sul lato esterno del ginocchio dopo 20 minuti di corsa.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "indizio_2": {"valore": "Il dolore viene dallo sfregamento della bandelletta ileotibiale sul condilo laterale del femore.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "indizio_3": {"valore": "Il muscolo che tende la fascia lata origina dalla spina iliaca anteriore superiore.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "risposta": {"valore": "Tensore della fascia lata", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "opzioni": {"valore": ["Tensore della fascia lata", "Sartorio", "Bicipite femorale", "Vasto laterale"], "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "spiegazione": {"valore": "Il tensore della fascia lata (con il grande gluteo) mette in tensione la bandelletta ileotibiale, coinvolta nella sindrome del corridore.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "caso.lat.l1", "modulo": "lat", "caso": "l1", "struttura": "broca", "dati": {
+   "indizio_1": {"valore": "Uomo di 65 anni dopo un ictus: capisce quello che gli si dice ma parla a fatica, con frasi brevi e spezzate.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "indizio_2": {"valore": "Il deficit riguarda la produzione del linguaggio, non la comprensione.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "indizio_3": {"valore": "La lesione è nel giro frontale inferiore dell'emisfero dominante (di solito il sinistro).", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "risposta": {"valore": "Area di Broca", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "opzioni": {"valore": ["Area di Broca", "Area di Wernicke", "Giro postcentrale", "Lobo occipitale"], "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "spiegazione": {"valore": "È un'afasia non fluente (di Broca).", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "caso.lat.l2", "modulo": "lat", "caso": "l2", "struttura": "wernicke", "dati": {
+   "indizio_1": {"valore": "Donna di 70 anni: parla in modo fluente ma con parole inventate e frasi senza senso, e non capisce le domande.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "indizio_2": {"valore": "Il deficit riguarda la comprensione, non la fluenza.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "indizio_3": {"valore": "La lesione è nella parte posteriore del giro temporale superiore dell'emisfero dominante.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "risposta": {"valore": "Area di Wernicke", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "opzioni": {"valore": ["Area di Wernicke", "Area di Broca", "Cerebello", "Giro precentrale"], "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "spiegazione": {"valore": "È un'afasia fluente (di Wernicke).", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "caso.lat.l3", "modulo": "lat", "caso": "l3", "struttura": "precentrale", "dati": {
+   "indizio_1": {"valore": "Dopo un ictus un paziente non muove più la mano destra, ma sente il tocco.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "indizio_2": {"valore": "Il deficit è motorio e controlaterale alla lesione; la sensibilità è conservata.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "indizio_3": {"valore": "Il giro si trova davanti al solco centrale.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "risposta": {"valore": "Giro precentrale", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "opzioni": {"valore": ["Giro precentrale", "Giro postcentrale", "Lobo occipitale", "Cerebello"], "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "spiegazione": {"valore": "Una lesione della corteccia motoria primaria causa paresi controlaterale.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "caso.lat.l4", "modulo": "lat", "caso": "l4", "struttura": "postcentrale", "dati": {
+   "indizio_1": {"valore": "Dopo un trauma un paziente non sente più il tatto e la posizione della mano sinistra, ma la muove.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "indizio_2": {"valore": "Il deficit è sensitivo e controlaterale.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "indizio_3": {"valore": "Il giro si trova dietro il solco centrale.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "risposta": {"valore": "Giro postcentrale", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "opzioni": {"valore": ["Giro postcentrale", "Giro precentrale", "Lobo occipitale", "Cerebello"], "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "spiegazione": {"valore": "Una lesione della corteccia somatosensitiva primaria causa deficit sensitivi controlaterali.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "caso.lat.l5", "modulo": "lat", "caso": "l5", "struttura": "occipitale", "dati": {
+   "indizio_1": {"valore": "Dopo un ictus un paziente non vede più la metà destra del campo visivo con entrambi gli occhi.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "indizio_2": {"valore": "Il deficit è visivo; movimento e sensibilità sono normali.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "indizio_3": {"valore": "La lesione è nel lobo più posteriore del cervello.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "risposta": {"valore": "Lobo occipitale", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "opzioni": {"valore": ["Lobo occipitale", "Lobo frontale", "Lobo temporale", "Cerebello"], "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "spiegazione": {"valore": "È un'emianopsia omonima, tipica delle lesioni occipitali.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "caso.lat.l6", "modulo": "lat", "caso": "l6", "struttura": "cerebello", "dati": {
+   "indizio_1": {"valore": "Paziente con cammino instabile a base larga, tremore nel raggiungere un oggetto e difficoltà nei movimenti alternati rapidi.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "indizio_2": {"valore": "Il deficit è di coordinazione, non di forza.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "indizio_3": {"valore": "La struttura è nella fossa cranica posteriore, dietro il tronco encefalico.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "risposta": {"valore": "Cerebello", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "opzioni": {"valore": ["Cerebello", "Lobo frontale", "Giro precentrale", "Lobo parietale"], "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "spiegazione": {"valore": "Atassia, dismetria e tremore intenzionale indicano un danno cerebellare.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "caso.lat.l7", "modulo": "lat", "caso": "l7", "struttura": "parietale", "dati": {
+   "indizio_1": {"valore": "Dopo un ictus emisferico destro un paziente ignora la metà sinistra dello spazio: mangia solo metà piatto.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "indizio_2": {"valore": "Non è cieco: è un deficit di attenzione spaziale (eminegligenza).", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "indizio_3": {"valore": "La lesione è nel lobo posteriore al solco centrale.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "risposta": {"valore": "Lobo parietale", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "opzioni": {"valore": ["Lobo parietale", "Lobo occipitale", "Lobo temporale", "Area di Broca"], "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "spiegazione": {"valore": "L'eminegligenza si associa tipicamente a lesioni parietali destre.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "caso.lat.l8", "modulo": "lat", "caso": "l8", "struttura": "frontale", "dati": {
+   "indizio_1": {"valore": "Un uomo dopo un trauma frontale diventa apatico, disinibito e non riesce a pianificare le attività quotidiane.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "indizio_2": {"valore": "I deficit riguardano funzioni esecutive e comportamento.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "indizio_3": {"valore": "La lesione è nella parte anteriore del cervello, davanti al solco centrale.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "risposta": {"valore": "Lobo frontale", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "opzioni": {"valore": ["Lobo frontale", "Lobo occipitale", "Cerebello", "Area di Wernicke"], "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "spiegazione": {"valore": "Apatia, disinibizione e disturbi esecutivi orientano verso il lobo frontale.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "caso.sag.s1", "modulo": "sag", "caso": "s1", "struttura": "neuro", "dati": {
+   "indizio_1": {"valore": "Paziente con poliuria (molti litri di urina diluita) e sete intensa dopo un trauma cranico.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "indizio_2": {"valore": "Le urine sono molto diluite: manca un ormone che fa riassorbire acqua ai reni.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "indizio_3": {"valore": "L'ormone è l'ADH, rilasciato da una parte dell'ipofisi.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "risposta": {"valore": "Neuroipofisi (ipofisi posteriore)", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "opzioni": {"valore": ["Neuroipofisi (ipofisi posteriore)", "Adenoipofisi (ipofisi anteriore)", "Epifisi (ghiandola pineale)", "Corpo calloso"], "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "spiegazione": {"valore": "Il deficit di ADH causa diabete insipido.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "caso.sag.s2", "modulo": "sag", "caso": "s2", "struttura": "adeno", "dati": {
+   "indizio_1": {"valore": "Paziente con mal di testa e perdita del campo visivo laterale in entrambi gli occhi (emianopsia bitemporale).", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "indizio_2": {"valore": "Una massa nella sella turcica comprime il chiasma ottico.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "indizio_3": {"valore": "La struttura produce GH, prolattina, ACTH, TSH, FSH e LH.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "risposta": {"valore": "Adenoipofisi (ipofisi anteriore)", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "opzioni": {"valore": ["Adenoipofisi (ipofisi anteriore)", "Neuroipofisi (ipofisi posteriore)", "Talamo", "Ipotalamo"], "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "spiegazione": {"valore": "Un adenoma ipofisario può comprimere il chiasma ottico.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "caso.sag.s3", "modulo": "sag", "caso": "s3", "struttura": "talamo", "dati": {
+   "indizio_1": {"valore": "Dopo un ictus profondo un paziente perde la sensibilità su metà corpo e sviluppa dolore intenso e persistente.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "indizio_2": {"valore": "Quasi tutte le vie sensitive passano da questa struttura prima di arrivare alla corteccia.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "indizio_3": {"valore": "È una massa ovale di sostanza grigia ai lati del terzo ventricolo.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "risposta": {"valore": "Talamo", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "opzioni": {"valore": ["Talamo", "Ipotalamo", "Corpo calloso", "Ponte"], "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "spiegazione": {"valore": "Il talamo smista le vie sensitive verso la corteccia.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "caso.sag.s4", "modulo": "sag", "caso": "s4", "struttura": "ipotalamo", "dati": {
+   "indizio_1": {"valore": "Paziente con alterazioni della temperatura corporea, fame e sete anomale e disturbi del ritmo sonno-veglia.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "indizio_2": {"valore": "La struttura regola l'omeostasi e controlla l'ipofisi.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "indizio_3": {"valore": "Si trova sotto il talamo e sopra l'ipofisi.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "risposta": {"valore": "Ipotalamo", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "opzioni": {"valore": ["Ipotalamo", "Talamo", "Epifisi (ghiandola pineale)", "Mesencefalo"], "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "spiegazione": {"valore": "L'ipotalamo regola omeostasi e sistema endocrino.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "caso.sag.s5", "modulo": "sag", "caso": "s5", "struttura": "mesencefalo", "dati": {
+   "indizio_1": {"valore": "Uomo di 70 anni con tremore a riposo, rigidità e lentezza dei movimenti.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "indizio_2": {"valore": "Nel morbo di Parkinson degenera la substantia nigra, che produce dopamina.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "indizio_3": {"valore": "La substantia nigra appartiene alla parte più alta del tronco encefalico.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "risposta": {"valore": "Mesencefalo", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "opzioni": {"valore": ["Mesencefalo", "Ponte", "Bulbo", "Cerebello"], "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "spiegazione": {"valore": "La substantia nigra si trova nel mesencefalo.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "caso.sag.s6", "modulo": "sag", "caso": "s6", "struttura": "bulbo", "dati": {
+   "indizio_1": {"valore": "Dopo un ictus del tronco un paziente ha difficoltà a deglutire, voce rauca e instabilità respiratoria.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "indizio_2": {"valore": "Sono coinvolti i nuclei dei nervi IX e X.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "indizio_3": {"valore": "È la parte più bassa del tronco, in continuità con il midollo spinale.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "risposta": {"valore": "Bulbo", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "opzioni": {"valore": ["Bulbo", "Mesencefalo", "Ponte", "Talamo"], "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "spiegazione": {"valore": "Il bulbo contiene i nuclei dei nervi IX e X e centri vitali.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "caso.sag.s7", "modulo": "sag", "caso": "s7", "struttura": "calloso", "dati": {
+   "indizio_1": {"valore": "Un paziente operato per epilessia grave ha difficoltà a coordinare le due mani e a nominare oggetti tenuti nella sinistra.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "indizio_2": {"valore": "I due emisferi comunicano poco tra loro.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "indizio_3": {"valore": "La struttura è un grande fascio di fibre.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "risposta": {"valore": "Corpo calloso", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "opzioni": {"valore": ["Corpo calloso", "Talamo", "Ponte", "Epifisi (ghiandola pineale)"], "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "spiegazione": {"valore": "Dopo callosotomia i due emisferi si scambiano meno informazioni.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }}
+ ]
+}

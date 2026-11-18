@@ -4,26 +4,28 @@ Uso: node atlante/build/proietta_2d.mjs /tmp/proiezioni.json
      python3 atlante/build/contenuti_2d.py /tmp/proiezioni.json
 
 Dalla fonte (Z-Anatomy, via proietta_2d.mjs): forme e posizioni, ossa su cui stanno le aree di origine e inserzione.
-Dai dati dell'atlante (atlante/dati.json): nomi italiani e latini (TA2), descrizioni e schede dei muscoli (scritte dall'AI).
-Da testi_2d.json: schede dei gruppi di ossa e casi clinici (scritti dall'AI). Gruppi del cervello: content/neuro-strutture.json.
+Dai dati dell'atlante (atlante/dati.json, generato da testi.py): nomi, descrizioni e schede dei muscoli.
+Da testi/ (via testi.py): gruppi di ossa e del cervello, casi clinici, voci che esistono solo nel 2D (denti, cartilagini
+costali, area di Wernicke) e nomi delle strutture del cervello. Di solito si lancia da testi.py, che fa tutto.
 Ogni struttura singola appartiene a un gruppo (g); i gruppi elencano i membri (m). I gruppi del cervello comprendono anche
 aree che si sovrappongono ai lobi (Broca, Wernicke, giro precentrale…): la risposta è giusta se si tocca un membro.
 """
 import json, re, sys, os, unicodedata
 
-ROOT = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..')
-P = json.load(open(sys.argv[1]))
-D = json.load(open(os.path.join(ROOT, 'atlante/dati.json')))
-T = json.load(open(os.path.join(ROOT, 'atlante/build/testi_2d.json')))
-NAMES, DESC, MUS = D['names'], D['desc'], D['mus']
+HERE = os.path.dirname(os.path.abspath(__file__))
+ROOT = os.path.join(HERE, '..', '..')
+sys.path.insert(0, HERE)
+import testi
+P = D = NAMES = DESC = MUS = None
+def load(p):
+    global P, D, NAMES, DESC, MUS
+    P = json.load(open(p)); D = json.load(open(os.path.join(ROOT, 'atlante/dati.json')))
+    NAMES, DESC, MUS = D['names'], D['desc'], D['mus']
 
 def slug(s):
     s = unicodedata.normalize('NFKD', s).encode('ascii', 'ignore').decode().lower()
     return re.sub(r'[^a-z0-9]+', '-', s).strip('-')
 
-def bump_version(path):
-    try: return json.load(open(path)).get('version', 0) + 1
-    except Exception: return 1
 
 def shape(d): return [{'poly': d}]
 
@@ -47,8 +49,8 @@ def center(c):
     return c[k][:2]
 
 # ---------------------------------------------------------------- corpo
-EXTRA = {'Teeth': ['Denti', 'Dentes', 'I denti delle due arcate (incisivi, canini, premolari e molari), infissi negli alveoli di mascellari e mandibola.'],
-         'Costal cartilages': ['Cartilagini costali', 'Cartilagines costales', 'Cartilagine ialina che unisce le prime dieci coste allo sterno (direttamente le prime sette, attraverso l\'arcata costale le altre): dà elasticità alla gabbia toracica nella respirazione.']}
+# voci che esistono solo nel 2D (denti e cartilagini costali come voce unica): testi/ossa.json, solo2d
+EXTRA = {v['ref']: v for v in testi.carica('ossa') if v.get('solo2d')}
 GROUPS_BODY = [  # (id, membri come regex sul nome inglese)
     ('cranio', r'^(Frontal|Parietal|Occipital|Temporal|Sphenoid|Ethmoid|Nasal|Lacrimal|Zygomatic|Palatine|Inferior nasal concha) bone$|^(Maxilla|Vomer)$'),
     ('mandibola', r'^Mandible$'), ('denti', r'^Teeth$'), ('ioide', r'^Hyoid bone$'),
@@ -60,14 +62,6 @@ GROUPS_BODY = [  # (id, membri come regex sul nome inglese)
     ('bacino', r'^Hip bone$'), ('femore', r'^Femur$'), ('rotula', r'^Patella$'), ('tibia', r'^Tibia$'), ('fibula', r'^Fibula$'),
     ('tarso', r'^(Talus|Calcaneus|Navicular bone|Cuboid bone|Medial cuneiform bone|Intermediate cuneiform bone|Lateral cuneiform bone)$'),
     ('metatarso', r'metatarsal bone$'), ('falangi-piede', r'phalanx of .* of foot$')]
-NEW_GROUPS = {
-    'denti': {'n': 'Denti', 'l': 'Dentes', 'r': 'Testa', 'f': '32 denti nell\'adulto (8 per emiarcata: 2 incisivi, 1 canino, 2 premolari, 3 molari). Nel modello mancano i terzi molari.', 'k': 'Il bruxismo e i disturbi dell\'occlusione sono collegati al dolore dell\'articolazione temporo-mandibolare e dei masticatori.'},
-    'ioide': {'n': 'Osso ioide', 'l': 'Os hyoideum', 'r': 'Collo', 'f': 'Osso a ferro di cavallo alla base della lingua, senza articolazioni con altre ossa: ancora i muscoli sopraioidei e sottoioidei.', 'k': 'Si sposta con la deglutizione; i muscoli ioidei sono coinvolti nei disturbi della deglutizione e nella postura del capo.'},
-    'falangi-mano': {'n': 'Falangi della mano', 'l': 'Phalanges manus', 'r': 'Mano', 'f': '14 falangi per mano: prossimale, media e distale per ogni dito, solo prossimale e distale per il pollice.', 'k': 'Le fratture della falange distale (dito a martello) e le lesioni dei legamenti collaterali sono frequenti nello sport.'},
-    'falangi-piede': {'n': 'Falangi del piede', 'l': 'Phalanges pedis', 'r': 'Piede', 'f': '14 falangi per piede: tre per dito, due per l\'alluce. Nel modello le falangi medie del quinto dito possono essere fuse con le distali.', 'k': 'L\'alluce valgo e le dita a martello cambiano l\'appoggio e possono dare metatarsalgia.'}}
-FIX_GROUPS = {'metacarpo': {'n': 'Ossa del metacarpo', 'l': 'Ossa metacarpi', 'f': 'Cinque ossa lunghe del palmo, tra carpo e falangi; il primo (del pollice) è il più corto e il più mobile.'},
-              'metatarso': {'n': 'Ossa del metatarso', 'l': 'Ossa metatarsi', 'f': 'Cinque ossa lunghe tra tarso e falangi; le teste dei metatarsi sono i punti d\'appoggio anteriori del piede.'}}
-
 def body():
     B = P['body']; V = B['views']; areas = B['areas']
     names = sorted(set(V['a']) | set(V['p']))
@@ -76,13 +70,12 @@ def body():
         for g, rx in GROUPS_BODY:
             if re.search(rx, n): gid[n] = g; break
         else: raise SystemExit('osso senza gruppo: ' + n)
-    groups = {g: dict(T['gruppi_corpo'].get(g) or NEW_GROUPS[g]) for g, _ in GROUPS_BODY}
-    for g, v in FIX_GROUPS.items(): groups[g].update(v)
+    groups = {g: testi.gruppo_ossa(g) for g, _ in GROUPS_BODY}
     sid = lambda n: 'o.' + slug(n)
     structures = []
     for n in names:
-        it, la = (EXTRA[n][:2] if n in EXTRA else NAMES.get(n) or [n, n])
-        f = EXTRA[n][2] if n in EXTRA else DESC.get(n, '')
+        it, la = ([testi.val(EXTRA[n], 'nome'), testi.val(EXTRA[n], 'latino')] if n in EXTRA else NAMES.get(n) or [n, n])
+        f = testi.val(EXTRA[n], 'descrizione') if n in EXTRA else DESC.get(n, '')
         s = {'id': sid(n), 'n': it[:1].upper() + it[1:], 'l': la, 'g': gid[n], 'f': f, 's': {}, 'c': {}}
         for v in ('a', 'p'):
             paired = (n + '.r') in D['objs'] or n == 'Costal cartilages' or n.endswith(' rib')
@@ -119,16 +112,17 @@ def body():
              'o': o[0] if o else None, 'oa': o[1:], 'i': i[0] if i else None, 'ia': i[1:], 'pts': pts}
         if src == 'testo': m['src'] = 'testo'
         muscles.append(m)
-    cases = T['casi']['corpo']
+    cases = testi.casi('corpo')
     for c in cases:
         if c.get('mid'): c['mid'] = slug(c['mid'])
     path = os.path.join(ROOT, 'content/corpo.json')
-    out = {'version': bump_version(path), 'id': 'corpo', 'label': '🦴 Corpo', 'W': B['W'], 'H': B['H'], 'views': ['a', 'p'],
+    out = {'id': 'corpo', 'label': '🦴 Corpo', 'W': B['W'], 'H': B['H'], 'views': ['a', 'p'],
            'fonte': 'Forme proiettate dal modello 3D Z-Anatomy (CC BY-SA 4.0), vedi atlante/CREDITI.md',
            'structures': structures, 'groups': out_groups, 'muscles': muscles, 'cases': cases}
-    json.dump(out, open(path, 'w'), ensure_ascii=False, separators=(',', ':'))
+    changed = testi.scrivi_versionato(path, out)
     both = sum(1 for m in muscles if m['o'] and m['i'])
-    print('corpo:', len(structures), 'ossa,', len(out_groups), 'gruppi,', len(muscles), 'muscoli (', both, 'con origine e inserzione;', nofonte, 'completati dal testo )')
+    print('corpo:', len(structures), 'ossa,', len(out_groups), 'gruppi,', len(muscles), 'muscoli (', both, 'con origine e inserzione;', nofonte, 'completati dal testo )', '' if changed else '(invariato)')
+    return changed
 
 # parole della scheda -> osso (solo quando la fonte non ha l'area). piede: il muscolo è del piede (per falangi e dita)
 TXT = [(r'clavicol', 'Clavicle'), (r'scapol|acromion|coracoid|glenoid|spina della scapola', 'Scapula'), (r'omer|epicondil|epitroclea|trochite|trochine|tubercolo (maggiore|minore)|tuberosit. deltoidea|solco intertubercolare', 'Humerus'),
@@ -198,39 +192,22 @@ AREAS = {'broca': r'^(Opercular|Triangular) part of inferior frontal gyrus', 'we
          'postcentrale': r'^Postcentral gyrus', 'solcocentrale': r'^Central sulcus', 'solcolaterale': r'^Lat_Fis', 'calloso': r'^Corpus callosum',
          'talamo': r'^Thalamus', 'ipotalamo': r'^Hypothalamus', 'epifisi': r'^Pineal', 'adeno': r'^Adenohypophysis', 'neuro': r'^Neurohypophysis',
          'mesencefalo': r'^(Midbrain|Base of peduncle|Interpeduncular|Superior colliculus|Inferior colliculus|Aqueduct)', 'ponte': r'^Pons', 'bulbo': r'^(Medulla|Pyramid of medulla|Olive)'}
-WERNICKE = ['Area di Wernicke', 'Area di Wernicke', 'Parte posteriore del giro temporale superiore dell\'emisfero dominante, legata alla comprensione del linguaggio. Il confine non è nella fonte: qui è il terzo posteriore del giro, un\'approssimazione.']
-# nomi che mancano in TA2 o che nella fonte si ripetono (giri e solchi dell'atlante di Destrieux divisi in parti)
-NOMI_ENC = {'Paracentral gyrus and sulcus*': ['Lobulo paracentrale', 'Lobulus paracentralis'],
-    'Cingulate gyrus and sulcus (Middle anterior part)': ['Giro del cingolo (parte medio-anteriore)', 'Gyrus cinguli'],
-    'Cingulate gyrus and sulcus (Middle posterior part)': ['Giro del cingolo (parte medio-posteriore)', 'Gyrus cinguli'],
-    'Cingulate gyrus and sulcus (Posterior dorsal part)': ['Giro del cingolo (parte dorsale posteriore)', 'Gyrus cinguli'],
-    'Cingulate gyrus (Posteroventral part*)': ['Istmo del giro del cingolo', 'Isthmus gyri cinguli'],
-    'Cingulate sulcus (Marginal part*)': ['Solco del cingolo (parte marginale)', 'Sulcus cinguli, pars marginalis'],
-    'Lateral occipital gyrus (Middle occipital gyrus*)': ['Giro occipitale medio', 'Gyrus occipitalis medius'],
-    'Inferior occipital gyrus and sulcus*': ['Giro occipitale inferiore', 'Gyrus occipitalis inferior'],
-    'Orbital part of  inferior frontal gyrus': ['Parte orbitale del giro frontale inferiore', 'Pars orbitalis gyri frontalis inferioris'],
-    'Lunate sulcus': ['Solco lunato', 'Sulcus lunatus'], 'Lat_Fis-ant-Vertical': ['Ramo ascendente della scissura laterale', 'Ramus ascendens sulci lateralis'],
-    'Lat_Fis-ant-Horizont': ['Ramo anteriore della scissura laterale', 'Ramus anterior sulci lateralis'], 'Lat_Fis-post': ['Ramo posteriore della scissura laterale', 'Ramus posterior sulci lateralis'],
-    'Posterior transverse collateral sulcus': ['Solco collaterale trasverso posteriore', 'Sulcus collateralis transversus posterior'],
-    'Precentral sulcus (Superior part)*': ['Solco precentrale (parte superiore)', 'Sulcus precentralis'], 'Precentral sulcus (inferior part)*': ['Solco precentrale (parte inferiore)', 'Sulcus precentralis'],
-    'Orbital gyri (Frontomarginal gyrus and sulcus*)': ['Giro frontomarginale', 'Gyrus frontomarginalis'], 'Orbital gyri': ['Giri orbitali', 'Gyri orbitales'],
-    'Orbital sulci (H-shaped orbital sulci*)': ['Solchi orbitali (a H)', 'Sulci orbitales'], 'Orbital sulci (Lateral Orbital sulcus*)': ['Solco orbitale laterale', 'Sulcus orbitalis lateralis']}
-DESC_ENC = {'Pineal gland': 'Epifisi: piccola ghiandola dell\'epitalamo, dietro il terzo ventricolo; produce melatonina e regola il ritmo sonno-veglia.',
-    'Adenohypophysis': 'Lobo anteriore dell\'ipofisi: produce GH, prolattina, TSH, ACTH, FSH e LH sotto il controllo dell\'ipotalamo.',
-    'Neurohypophysis': 'Lobo posteriore dell\'ipofisi: libera ossitocina e vasopressina (ADH) prodotte dai nuclei dell\'ipotalamo.',
-    'Posterior transverse collateral sulcus': 'Solco breve sulla faccia inferiore del lobo occipito-temporale, ramo trasverso del solco collaterale.'}
+# nomi e descrizioni delle strutture del cervello (anche quelle che mancano in TA2 o che nella fonte si ripetono,
+# e l'area di Wernicke, che esiste solo nel 2D): testi/encefalo.json
 BRAIN_TITLES = {'lat': '🧠 Laterale', 'sag': '🧠 Sagittale'}
 
 def brain(key):
-    S = P['brain'][key]['shapes']; cat = json.load(open(os.path.join(ROOT, 'content/neuro-strutture.json')))['items']
+    S = P['brain'][key]['shapes']; cat = testi.gruppi_encefalo(); ENC = testi.per_ref('encefalo')
     sid = lambda n: 'b.' + slug(n)
     structures, members = [], {}
     for n, v in S.items():
         g = next((g for g, rx in LOBES if re.search(rx, n)), None)
         if not g: raise SystemExit('struttura senza lobo: ' + n)
-        if n == 'Wernicke area': it, la, f = WERNICKE
+        tv = ENC.get(n) or ENC.get(n.strip())
+        if n == 'Wernicke area': it, la, f = testi.val(tv, 'nome'), testi.val(tv, 'latino'), testi.val(tv, 'descrizione')
         else:
-            it, la = NOMI_ENC.get(n) or NAMES.get(n) or NAMES.get(n.strip()) or [n, n]; f = DESC.get(n) or DESC.get(n.strip()) or DESC_ENC.get(n.strip(), '')
+            it, la = ([testi.val(tv, 'nome'), testi.val(tv, 'latino', '')] if tv and testi.val(tv, 'nome') else None) or NAMES.get(n) or NAMES.get(n.strip()) or [n, n]
+            f = DESC.get(n) or DESC.get(n.strip()) or (testi.val(tv, 'descrizione', '') if tv else '')
             if it == n: print('  nome non tradotto:', n)
             if not f: print('  senza descrizione:', n)
         structures.append({'id': sid(n), 'n': it[:1].upper() + it[1:], 'l': la, 'g': g, 'f': f, 'col': cat.get(g, {}).get('col'), 's': {'a': shape(v['d'])}, 'c': {'a': v['c'][:2] if v['c'] else None}})
@@ -242,10 +219,16 @@ def brain(key):
         if g not in cat: raise SystemExit('gruppo senza testo in neuro-strutture.json: ' + g)
         groups.append({'id': g, **{k: v for k, v in cat[g].items()}, 'm': m, 'area': g in AREAS})
     path = os.path.join(ROOT, f'content/{key}.json')
-    out = {'version': bump_version(path), 'id': key, 'label': BRAIN_TITLES[key], 'W': P['brain'][key]['W'], 'H': P['brain'][key]['H'], 'views': ['a'],
+    out = {'id': key, 'label': BRAIN_TITLES[key], 'W': P['brain'][key]['W'], 'H': P['brain'][key]['H'], 'views': ['a'],
            'fonte': 'Forme proiettate dal modello 3D Z-Anatomy (CC BY-SA 4.0), vedi atlante/CREDITI.md',
-           'structures': structures, 'groups': groups, 'cases': T['casi'][key]}
-    json.dump(out, open(path, 'w'), ensure_ascii=False, separators=(',', ':'))
-    print(key + ':', len(structures), 'strutture,', len(groups), 'gruppi')
+           'structures': structures, 'groups': groups, 'cases': testi.casi(key)}
+    changed = testi.scrivi_versionato(path, out)
+    print(key + ':', len(structures), 'strutture,', len(groups), 'gruppi', '' if changed else '(invariato)')
+    return changed
 
-body(); brain('lat'); brain('sag')
+def main(p):
+    load(p)
+    return any([body(), brain('lat'), brain('sag')])
+
+if __name__ == '__main__':
+    main(sys.argv[1])

@@ -81,7 +81,8 @@ function groupColor(u){
  let h=0;for(const ch of key)h=(h*31+ch.charCodeAt(0))>>>0;
  return new THREE.Color().setHSL((h%360)/360,0.55,0.74).getHex();
 }
-const MIRROR_FIX=['Ciliary body-curve.l'];
+// parti da sostituire con la copia speculare dell'altro lato (correzioni alla fonte: testi/correzioni.json, tipo specchia)
+const MIRROR_FIX=DATA.specchia||{};
 const loader=new GLTFLoader();loader.setMeshoptDecoder(MeshoptDecoder);
 function loadFile(file){
  if(!FILES[file])FILES[file]={promise:new Promise((ok,ko)=>loader.load(file+'.glb',g=>{
@@ -96,7 +97,7 @@ function loadFile(file){
   scene.add(g.scene);
   // parti esportate con una trasformazione sbagliata (il corpo ciliare sinistro diventava un anello di 2 m):
   // le rifaccio come copia speculare della parte destra, che è corretta
-  for(const n of MIRROR_FIX){const bad=byName.get(n),ok=byName.get(n.replace(/\.l$/,'.r'));if(!bad||!ok||bad.userData.fixed)continue;
+  for(const [n,twin] of Object.entries(MIRROR_FIX)){const bad=byName.get(n),ok=byName.get(twin);if(!bad||!ok||bad.userData.fixed)continue;
    ok.updateWorldMatrix(true,false);const src=ok.geometry.attributes.position,geo=new THREE.BufferGeometry(),f=new Float32Array(src.count*3);
    for(let i=0;i<src.count;i++){f[i*3]=src.getX(i);f[i*3+1]=src.getY(i);f[i*3+2]=src.getZ(i);} // le posizioni compresse (interi) non reggono le coordinate del mondo
    geo.setAttribute('position',new THREE.BufferAttribute(f,3));if(ok.geometry.index)geo.setIndex(Array.from(ok.geometry.index.array));
@@ -167,18 +168,8 @@ function drawPoints(roots,side){
 function lmNear(p,max=0.025){let best=null,bd=max;for(const l of LMS){const d=l.p.distanceTo(p);if(d<bd){bd=d;best=l;}}return best;}
 
 /* ---------- gruppi di muscoli e nomi comuni ---------- */
-const COMBO={
- zampa:{n:"Zampa d'oca",la:'Pes anserinus',mus:['sartorius','gracilis','semitendinosus'],fly:'e',
-  t:"Inserzione comune dei tendini di sartorio, gracile e semitendinoso sulla faccia mediale della tibia prossimale, sotto il condilo mediale e dietro la tuberosità tibiale. Tra i tendini e il legamento collaterale mediale c'è la borsa anserina (borsite anserina: dolore mediale del ginocchio). I tre muscoli flettono il ginocchio e lo ruotano internamente; rinforzano il lato mediale."},
- ischio:{n:'Muscoli ischiocrurali',la:'Musculi ischiocrurales',mus:['semitendinosus','semimembranosus','biceps femoris'],
-  t:"Semitendinoso, semimembranoso e capo lungo del bicipite femorale originano dalla tuberosità ischiatica: estendono l'anca e flettono il ginocchio. Il capo breve del bicipite origina dalla linea aspra e non agisce sull'anca. Innervazione: nervo sciatico (porzione tibiale; capo breve del bicipite: porzione peroneale)."},
- cuffia:{n:'Cuffia dei rotatori',la:'Cuff musculotendinea',mus:['supraspinatus','infraspinatus','teres minor','subscapularis'],
-  t:"Sovraspinato, infraspinato, piccolo rotondo (sul grande tubercolo) e sottoscapolare (sul piccolo tubercolo): tengono la testa dell'omero centrata nella glenoide. Il tendine del sovraspinato, sotto l'arco coraco-acromiale, è quello che si lesiona più spesso."},
- sura:{n:'Tricipite della sura',la:'Musculus triceps surae',mus:['gastrocnemius','soleus'],
-  t:"Gastrocnemio (due capi, dai condili femorali) e soleo (da tibia e fibula) si inseriscono con il tendine d'Achille sulla tuberosità del calcagno: flessione plantare della caviglia. Il gastrocnemio flette anche il ginocchio. Innervazione: nervo tibiale (S1-S2, riflesso achilleo)."},
- quadricipite:{n:'Quadricipite femorale',la:'Musculus quadriceps femoris',mus:['rectus femoris','vastus lateralis','vastus medialis','vastus intermedius'],
-  t:"Retto femorale (dalla SIAI e dal solco sopracetabolare) e tre vasti (dal femore) si uniscono nel tendine quadricipitale sulla rotula; il legamento rotuleo continua fino alla tuberosità tibiale. Estende il ginocchio; il retto flette anche l'anca. Innervazione: nervo femorale (L2-L4, riflesso rotuleo)."},
-};
+// gruppi di muscoli (nome, muscoli, vista dell'inserzione, testo): testi/gruppi.json (gruppo.muscoli.*), in dati.json
+const COMBO=DATA.combo;
 // abbreviazioni e nomi comuni -> nome inglese di un repere o di una parte, muscolo (mu:) o gruppo (#)
 const SYN={'sias':['Anterior superior iliac spine'],'asis':['Anterior superior iliac spine'],'siai':['Anterior inferior iliac spine'],'aiis':['Anterior inferior iliac spine'],
  'sips':['Posterior superior iliac spine'],'psis':['Posterior superior iliac spine'],'sipi':['Posterior inferior iliac spine'],'piis':['Posterior inferior iliac spine'],
@@ -195,16 +186,8 @@ const SYN={'sias':['Anterior superior iliac spine'],'asis':['Anterior superior i
 const norm=s=>s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/[’`´]/g,"'").trim();
 
 /* ---------- encefalo: strati dalla dura madre ai ventricoli ---------- */
-const ST=[
- {n:'Dura madre',t:"Meninge più esterna, spessa e fibrosa, aderente alle ossa del cranio. Forma la falce cerebrale e il tentorio e contiene i seni venosi. Tra dura e osso: spazio epidurale (ematoma epidurale, arterioso); sotto la dura: spazio subdurale (ematoma subdurale, venoso)."},
- {n:'Aracnoide',t:"Meninge intermedia, sottile e trasparente, che passa sopra i solchi. Sotto di essa lo spazio subaracnoideo contiene il liquido cefalorachidiano e le arterie del cervello (emorragia subaracnoidea da aneurisma). La pia madre, aderente alla corteccia, non è disegnata."},
- {n:'Corteccia cerebrale e cervelletto',t:"Sostanza grigia della superficie, divisa in lobi (frontale, parietale, temporale, occipitale, insula, limbico) da solchi e scissure. Dietro e sotto: il cervelletto."},
- {n:'Sostanza bianca e commissure',t:"Fibre mieliniche sotto la corteccia: associative (tra aree dello stesso emisfero), commissurali (corpo calloso e commissura anteriore, tra i due emisferi) e di proiezione (capsula interna, verso tronco e midollo). Il setto pellucido separa i ventricoli laterali. Con questo strato va via anche il nucleo lenticolare intero, per mostrare putamen e globo pallido."},
- {n:'Nuclei della base: caudato e putamen',t:"Striato: nucleo caudato (a C, lungo il ventricolo laterale) e putamen (laterale alla capsula interna; con il globo pallido forma il nucleo lenticolare). Controllo del movimento, malattie di Parkinson e Huntington."},
- {n:'Globo pallido e sistema limbico',t:"Globo pallido (uscita dei nuclei della base). Sistema limbico profondo: ippocampo (memoria), amigdala (emozioni, paura), nuclei del setto, fornice e stria terminale."},
- {n:'Diencefalo',t:"Talamo (smistamento delle vie sensitive e motorie), ipotalamo (omeostasi, ipofisi), corpi mammillari, corpi genicolati, abenula. Davanti: chiasma e tratti ottici. Nei ventricoli: plessi corioidei."},
- {n:'Tronco encefalico',t:"Mesencefalo, ponte e bulbo, con i nuclei dei nervi cranici dal III al XII, il nucleo rosso, i collicoli, le piramidi e le olive."},
- {n:'Ventricoli',t:"Cavità piene di liquido cefalorachidiano: due ventricoli laterali, terzo ventricolo, acquedotto di Silvio, quarto ventricolo."}];
+// strati dell'encefalo, dalla dura madre ai ventricoli (nome e testo): testi/gruppi.json (gruppo.strato-encefalo.*), in dati.json
+const ST=DATA.strati;
 const CORTEX=['Frontal lobe','Parietal lobe','Temporal lobe','Occipital lobe','Limbic lobe','Insula','Interlobar sulci','Inferior frontal sulcus','Cerebellum'];
 function stratumOf(u){
  if(u.layer==='meningi')return u.base==='Choroid plexus'?6:u.base==='Cranial arachnoid mater'?1:0;

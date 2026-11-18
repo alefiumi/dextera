@@ -1,10 +1,10 @@
-# Genera atlante/dati.json dai metadati di Z-Anatomy (za_meta.json), dalla Terminologia Anatomica (TA2.csv)
-# e dalle schede dei muscoli scritte a mano (schede.json).
-# Uso: python3 za_dati.py <za_meta.json> <dati.json>
+# Genera atlante/dati.json dai metadati di Z-Anatomy (za_meta.json) e dalla Terminologia Anatomica (TA2.csv),
+# poi applica i testi verificabili e le correzioni alla fonte di testi/ (testi.py).
+# Uso: python3 za_dati.py <za_meta.json> <dati.json>     (serve l'esportazione da Blender: vedi za_export.py)
+# Senza Blender, per aggiornare solo i testi: python3 atlante/build/testi.py
 import json, re, sys, os, collections
 HERE = os.path.dirname(os.path.abspath(__file__))
 META = json.load(open(sys.argv[1])); O = META['objects']; LAB = META['labels']
-CARDS = json.load(open(os.path.join(HERE, 'schede.json')))
 
 # --- Terminologia Anatomica 2: inglese -> (italiano, latino) ---
 TA = {}
@@ -62,29 +62,14 @@ for n, (layer, mat, g) in objs.items():
     if not kind: continue
     for r in GROUPS.get(root(base(n)), [root(base(n))]):
         if r in mus: mus[r][kind.group(1)].append(n)
-CARD_OF = {'psoas': 'psoas major', 'iliaco': 'iliacus', 'gmax': 'gluteus maximus', 'gmed': 'gluteus medius', 'gmin': 'gluteus minimus', 'tfl': 'tensor fasciae latae', 'pirif': 'piriformis',
- 'sart': 'sartorius', 'rf': 'rectus femoris', 'addl': 'adductor longus', 'grac': 'gracilis', 'bfem': 'biceps femoris', 'semit': 'semitendinosus', 'delt': 'deltoid', 'sovra': 'supraspinatus',
- 'sotto': 'infraspinatus', 'prot': 'teres minor', 'sscap': 'subscapularis', 'grot': 'teres major', 'gdors': 'latissimus dorsi', 'gpett': 'pectoralis major', 'ppett': 'pectoralis minor',
- 'trap': 'trapezius', 'elev': 'levator scapulae', 'romb': ['rhomboid major', 'rhomboid minor'], 'dent': 'serratus anterior', 'bic': 'biceps brachii', 'brac': 'brachialis', 'tric': 'triceps brachii',
- 'brrad': 'brachioradialis', 'pron': 'pronator teres', 'frc': 'flexor carpi radialis', 'fuc': 'flexor carpi ulnaris', 'erlc': 'extensor carpi radialis longus', 'erbc': 'extensor carpi radialis brevis',
- 'euc': 'extensor carpi ulnaris', 'vlat': 'vastus lateralis', 'vmed': 'vastus medialis', 'vint': 'vastus intermedius', 'semim': 'semimembranosus', 'addg': 'adductor magnus', 'pett': 'pectineus',
- 'tibant': 'tibialis anterior', 'tibpost': 'tibialis posterior', 'gastr': 'gastrocnemius', 'soleo': 'soleus', 'perl': 'fibularis longus', 'perb': 'fibularis brevis', 'retto': 'rectus abdominis',
- 'qlomb': 'quadratus lumborum', 'scm': 'sternocleidomastoid', 'scal': ['scalenus anterior', 'scalenus medius'], 'splen': 'splenius capitis', 'mass': 'masseter', 'temp': 'temporalis'}
-for cid, rs in CARD_OF.items():
-    for r in ([rs] if isinstance(rs, str) else rs):
-        assert r in mus, (cid, r)
-        c = CARDS[cid]; mus[r]['card'] = {'ot': c['ot'], 'it': c['it'], 'a': c['a'], 'nv': c['nv']}
-        if not isinstance(rs, str): mus[r]['card']['nota'] = 'Testo comune a: ' + c['n']
 for r, m in mus.items():
     t = look(r + ' muscle') or look(r) or look(m['parts'][0])
     m['n'] = t[0] if t else r.capitalize(); m['la'] = t[1] if t else ''
     for p in m['parts']: name_of(p)
 out = {'version': 1, 'fonte': 'Z-Anatomy (CC BY-SA 4.0), derivato da BodyParts3D; nomi dalla Terminologia Anatomica 2',
        'names': names, 'objs': objs, 'lm': lm, 'mus': mus}
-sys.path.insert(0, HERE); import descrizioni; out['desc'] = descrizioni.build(out)  # testi di ossa, reperi ed encefalo
-descrizioni.correggi_aree(mus)  # origine e inserzione scambiate nella fonte
-descrizioni.schede_muscoli(mus)  # testi dei muscoli che non sono in schede.json
-descrizioni.correggi_nomi(out)  # refusi della traduzione italiana di TA2
+sys.path.insert(0, HERE); import testi
+testi.applica(out)  # schede dei muscoli, nomi, descrizioni, correzioni delle aree e dei refusi, gruppi e strati (testi/)
 json.dump(out, open(sys.argv[2], 'w'), ensure_ascii=False, separators=(',', ':'))
 lay = collections.Counter(v[0] for v in objs.values())
 print(dict(lay)); print(len(lm), 'reperi,', len(mus), 'muscoli,', sum(1 for m in mus.values() if m['o'] or m['e']), 'con aree,', sum(1 for m in mus.values() if 'card' in m), 'con scheda,', len(names), 'nomi,', sum(1 for v in names.values() if not v[1]), 'senza traduzione')

@@ -1,0 +1,555 @@
+{
+ "version": 1,
+ "tipo": "gruppi",
+ "nota": "Gruppi: ossa del modulo corpo (gruppo.ossa.*), lobi e aree del cervello 2D (gruppo.encefalo.*; col è il colore), gruppi di muscoli e strati dell'encefalo dell'atlante 3D, descrizioni dei gruppi della fonte usate quando una struttura non ha la sua (gruppo.fonte.*).",
+ "campi": {"nome": "Nome", "latino": "Nome latino", "regione": "Regione", "in_breve": "In breve", "membri": "Muscoli del gruppo", "descrizione": "Descrizione", "clinica": "Nota clinica"},
+ "voci": [
+  {"id": "gruppo.ossa.cranio", "ref": "cranio", "modulo": "corpo", "dati": {
+   "nome": {"valore": "Cranio", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Cranium", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "regione": {"valore": "Testa", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Protegge l'encefalo e ospita gli organi di senso. È formato da neurocranio e splancnocranio.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "clinica": {"valore": "L'articolazione atlanto-occipitale permette l'annuire del capo.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "gruppo.ossa.mandibola", "ref": "mandibola", "modulo": "corpo", "dati": {
+   "nome": {"valore": "Mandibola", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Mandibula", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "regione": {"valore": "Testa", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Unico osso mobile del cranio. Si articola con l'osso temporale nell'articolazione temporo-mandibolare (ATM).", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "clinica": {"valore": "Le disfunzioni dell'ATM vengono trattate anche dal fisioterapista.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "gruppo.ossa.denti", "ref": "denti", "modulo": "corpo", "dati": {
+   "nome": {"valore": "Denti", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Dentes", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "regione": {"valore": "Testa", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "32 denti nell'adulto (8 per emiarcata: 2 incisivi, 1 canino, 2 premolari, 3 molari). Nel modello mancano i terzi molari.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "clinica": {"valore": "Il bruxismo e i disturbi dell'occlusione sono collegati al dolore dell'articolazione temporo-mandibolare e dei masticatori.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "gruppo.ossa.ioide", "ref": "ioide", "modulo": "corpo", "dati": {
+   "nome": {"valore": "Osso ioide", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Os hyoideum", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "regione": {"valore": "Collo", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Osso a ferro di cavallo alla base della lingua, senza articolazioni con altre ossa: ancora i muscoli sopraioidei e sottoioidei.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "clinica": {"valore": "Si sposta con la deglutizione; i muscoli ioidei sono coinvolti nei disturbi della deglutizione e nella postura del capo.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "gruppo.ossa.cervicali", "ref": "cervicali", "modulo": "corpo", "dati": {
+   "nome": {"valore": "Vertebre cervicali", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Vertebrae cervicales (C1–C7)", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "regione": {"valore": "Collo", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Sette vertebre. C1 (atlante) e C2 (epistrofeo) sono specializzate: permettono i movimenti di assenso e di rotazione del capo.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "clinica": {"valore": "Circa metà della rotazione cervicale avviene tra C1 e C2.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "gruppo.ossa.toraciche", "ref": "toraciche", "modulo": "corpo", "dati": {
+   "nome": {"valore": "Vertebre toraciche", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Vertebrae thoracicae (T1–T12)", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "regione": {"valore": "Colonna", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Dodici vertebre che si articolano con le costole. La gabbia toracica limita la mobilità in flessione ed estensione.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "clinica": {"valore": "Gran parte della rotazione del tronco avviene nel tratto toracico.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "gruppo.ossa.lombari", "ref": "lombari", "modulo": "corpo", "dati": {
+   "nome": {"valore": "Vertebre lombari", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Vertebrae lumbales (L1–L5)", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "regione": {"valore": "Colonna", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Cinque vertebre massicce che sostengono il carico del tronco e permettono flessione, estensione e inclinazione laterale.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "clinica": {"valore": "I livelli L4–L5 e L5–S1 sono quelli più spesso coinvolti nelle ernie discali.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "gruppo.ossa.sacro", "ref": "sacro", "modulo": "corpo", "dati": {
+   "nome": {"valore": "Sacro e coccige", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Os sacrum, Os coccygis", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "regione": {"valore": "Colonna", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Cinque vertebre sacrali fuse formano il sacro, che si articola con l'ileo nelle articolazioni sacroiliache. Sotto si trova il coccige.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "clinica": {"valore": "Le articolazioni sacroiliache sono poco mobili e possono essere fonte di dolore lombo-pelvico.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "gruppo.ossa.sterno", "ref": "sterno", "modulo": "corpo", "dati": {
+   "nome": {"valore": "Sterno", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Sternum", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "regione": {"valore": "Torace", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Osso piatto mediano formato da manubrio, corpo e processo xifoideo. Ancora le cartilagini costali.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "clinica": {"valore": "L'angolo sternale (giunzione manubrio-corpo) è un repere per la seconda costola.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "gruppo.ossa.costole", "ref": "costole", "modulo": "corpo", "dati": {
+   "nome": {"valore": "Costole", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Costae", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "regione": {"valore": "Torace", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Dodici paia: 7 vere, 3 false e 2 fluttuanti. Proteggono gli organi toracici e si muovono con il respiro.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "clinica": {"valore": "Le costole inferiori si muovono a 'manico di secchio', le superiori a 'braccio di pompa'.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "gruppo.ossa.clavicola", "ref": "clavicola", "modulo": "corpo", "dati": {
+   "nome": {"valore": "Clavicola", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Clavicula", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "regione": {"valore": "Spalla", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Osso a S che collega lo sterno all'acromion. È l'unico collegamento osseo tra arto superiore e scheletro assiale.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "clinica": {"valore": "Le fratture sono frequenti dopo cadute sulla spalla, tipicamente nel terzo medio.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "gruppo.ossa.scapola", "ref": "scapola", "modulo": "corpo", "dati": {
+   "nome": {"valore": "Scapola", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Scapula", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "regione": {"valore": "Spalla", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Osso piatto triangolare posteriore. Acromion, processo coracoideo e cavità glenoidea formano l'articolazione gleno-omerale.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "clinica": {"valore": "Il ritmo scapolo-omerale (circa 2:1) è fondamentale per l'elevazione del braccio.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "gruppo.ossa.omero", "ref": "omero", "modulo": "corpo", "dati": {
+   "nome": {"valore": "Omero", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Humerus", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "regione": {"valore": "Braccio", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Osso del braccio: testa, tubercoli maggiore e minore, diafisi, epicondili, troclea e capitello.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "clinica": {"valore": "Il collo chirurgico è a rischio per il nervo ascellare, la diafisi per il nervo radiale (solco del radiale).", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "gruppo.ossa.radio", "ref": "radio", "modulo": "corpo", "dati": {
+   "nome": {"valore": "Radio", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Radius", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "regione": {"valore": "Avambraccio", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Osso laterale (lato pollice) dell'avambraccio. Ruota attorno all'ulna nella prono-supinazione.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "clinica": {"valore": "La frattura dell'estremità distale (di Colles) è comune dopo una caduta sulla mano aperta.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "gruppo.ossa.ulna", "ref": "ulna", "modulo": "corpo", "dati": {
+   "nome": {"valore": "Ulna", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Ulna", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "regione": {"valore": "Avambraccio", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Osso mediale dell'avambraccio. L'olecrano forma la punta del gomito e si articola con la troclea omerale.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "clinica": {"valore": "Stabilizza il gomito nella flesso-estensione, mentre il radio ruota attorno a essa.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "gruppo.ossa.carpo", "ref": "carpo", "modulo": "corpo", "dati": {
+   "nome": {"valore": "Ossa del carpo", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Ossa carpi", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "regione": {"valore": "Mano", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Otto ossa in due file: scafoide, semilunare, piramidale, pisiforme e trapezio, trapezoide, capitato, uncinato.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "clinica": {"valore": "Lo scafoide è l'osso del carpo più spesso fratturato, con rischio di necrosi avascolare.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "gruppo.ossa.metacarpo", "ref": "metacarpo", "modulo": "corpo", "dati": {
+   "nome": {"valore": "Ossa del metacarpo", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Ossa metacarpi", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "regione": {"valore": "Mano", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Cinque ossa lunghe del palmo, tra carpo e falangi; il primo (del pollice) è il più corto e il più mobile.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "clinica": {"valore": "La 'frattura del boxer' interessa tipicamente il collo del quinto metacarpo.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "gruppo.ossa.falangi-mano", "ref": "falangi-mano", "modulo": "corpo", "dati": {
+   "nome": {"valore": "Falangi della mano", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Phalanges manus", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "regione": {"valore": "Mano", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "14 falangi per mano: prossimale, media e distale per ogni dito, solo prossimale e distale per il pollice.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "clinica": {"valore": "Le fratture della falange distale (dito a martello) e le lesioni dei legamenti collaterali sono frequenti nello sport.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "gruppo.ossa.bacino", "ref": "bacino", "modulo": "corpo", "dati": {
+   "nome": {"valore": "Bacino (ossa coxali)", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Ossa coxae", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "regione": {"valore": "Bacino", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Anello osseo formato da ileo, ischio e pube (con il sacro). Trasmette il peso del tronco agli arti inferiori e ospita l'acetabolo per la testa del femore.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "clinica": {"valore": "Le spine iliache (SIAS, SIAI) e la tuberosità ischiatica sono repere palpabili e punti di origine di molti muscoli di anca e coscia.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "gruppo.ossa.femore", "ref": "femore", "modulo": "corpo", "dati": {
+   "nome": {"valore": "Femore", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Femur", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "regione": {"valore": "Coscia", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Osso più lungo e robusto del corpo: testa, collo, grande e piccolo trocantere, condili.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "clinica": {"valore": "La frattura del collo femorale è tipica dell'anziano e richiede spesso riabilitazione post-chirurgica.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "gruppo.ossa.rotula", "ref": "rotula", "modulo": "corpo", "dati": {
+   "nome": {"valore": "Rotula", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Patella", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "regione": {"valore": "Ginocchio", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Osso sesamoide più grande del corpo, incluso nel tendine del quadricipite. Aumenta il braccio di leva dell'estensione del ginocchio.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "clinica": {"valore": "Nella sindrome femoro-rotulea la rotula scorre in modo anomalo nella troclea femorale.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "gruppo.ossa.tibia", "ref": "tibia", "modulo": "corpo", "dati": {
+   "nome": {"valore": "Tibia", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Tibia", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "regione": {"valore": "Gamba", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Osso mediale e portante della gamba: plateau tibiale, tuberosità tibiale, malleolo mediale.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "clinica": {"valore": "La cresta tibiale è subcutanea e palpabile. Sulla tuberosità si inserisce il legamento patellare.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "gruppo.ossa.fibula", "ref": "fibula", "modulo": "corpo", "dati": {
+   "nome": {"valore": "Fibula", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Fibula", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "regione": {"valore": "Gamba", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Osso laterale e sottile della gamba: sostiene poco peso, dà origine a molti muscoli e forma il malleolo laterale.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "clinica": {"valore": "Il nervo peroneo comune passa attorno al collo della fibula ed è vulnerabile alla compressione.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "gruppo.ossa.tarso", "ref": "tarso", "modulo": "corpo", "dati": {
+   "nome": {"valore": "Ossa del tarso", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Ossa tarsi", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "regione": {"valore": "Piede", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Sette ossa: talo, calcagno, navicolare, cuboide e tre cuneiformi. Il talo trasmette il peso dalla tibia al piede.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "clinica": {"valore": "Il calcagno riceve il tendine d'Achille, il più robusto tendine del corpo.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "gruppo.ossa.metatarso", "ref": "metatarso", "modulo": "corpo", "dati": {
+   "nome": {"valore": "Ossa del metatarso", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Ossa metatarsi", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "regione": {"valore": "Piede", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Cinque ossa lunghe tra tarso e falangi; le teste dei metatarsi sono i punti d'appoggio anteriori del piede.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "clinica": {"valore": "Le fratture da stress interessano spesso il secondo e il terzo metatarso.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "gruppo.ossa.falangi-piede", "ref": "falangi-piede", "modulo": "corpo", "dati": {
+   "nome": {"valore": "Falangi del piede", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Phalanges pedis", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "regione": {"valore": "Piede", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "14 falangi per piede: tre per dito, due per l'alluce. Nel modello le falangi medie del quinto dito possono essere fuse con le distali.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "clinica": {"valore": "L'alluce valgo e le dita a martello cambiano l'appoggio e possono dare metatarsalgia.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "gruppo.encefalo.frontale", "ref": "frontale", "modulo": "encefalo", "col": "#f4b6a6", "dati": {
+   "nome": {"valore": "Lobo frontale", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Lobus frontalis", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "regione": {"valore": "Telencefalo", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "in_breve": {"valore": "Pianificazione, decisioni e movimento volontario", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Movimento volontario, pianificazione, decisioni, comportamento e (a sinistra) produzione del linguaggio.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "clinica": {"valore": "Lesioni frontali possono causare apatia, disinibizione e disturbi delle funzioni esecutive.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "gruppo.encefalo.parietale", "ref": "parietale", "modulo": "encefalo", "col": "#f2d58a", "dati": {
+   "nome": {"valore": "Lobo parietale", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Lobus parietalis", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "regione": {"valore": "Telencefalo", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "in_breve": {"valore": "Sensibilità somatica e orientamento spaziale", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Sensibilità somatica, integrazione spaziale e schema corporeo.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "clinica": {"valore": "Una lesione parietale destra può causare eminegligenza spaziale sinistra.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "gruppo.encefalo.occipitale", "ref": "occipitale", "modulo": "encefalo", "col": "#a9d3f0", "dati": {
+   "nome": {"valore": "Lobo occipitale", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Lobus occipitalis", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "regione": {"valore": "Telencefalo", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "in_breve": {"valore": "Elaborazione della visione", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Elaborazione della visione (corteccia visiva primaria).", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "clinica": {"valore": "Le lesioni possono causare deficit del campo visivo, ad esempio emianopsia omonima controlaterale.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "gruppo.encefalo.temporale", "ref": "temporale", "modulo": "encefalo", "col": "#b9e0b0", "dati": {
+   "nome": {"valore": "Lobo temporale", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Lobus temporalis", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "regione": {"valore": "Telencefalo", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "in_breve": {"valore": "Udito e memoria (ippocampo)", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Udito, memoria, comprensione del linguaggio (area di Wernicke a sinistra) e riconoscimento di volti e oggetti.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "clinica": {"valore": "L'ippocampo, nel lobo temporale mediale, è cruciale per la memoria ed è colpito presto nella malattia di Alzheimer.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "gruppo.encefalo.cerebello", "ref": "cerebello", "modulo": "encefalo", "col": "#d7b9ec", "dati": {
+   "nome": {"valore": "Cerebello", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Cerebellum", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "regione": {"valore": "Fossa cranica posteriore", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "in_breve": {"valore": "Coordinazione del movimento e dell'equilibrio", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Coordinazione dei movimenti, equilibrio e apprendimento motorio.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "clinica": {"valore": "Le lesioni causano atassia, dismetria e tremore intenzionale, di norma omolaterali.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "gruppo.encefalo.tronco", "ref": "tronco", "modulo": "encefalo", "col": "#e6c9a8", "dati": {
+   "nome": {"valore": "Tronco encefalico", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Truncus encephali", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "regione": {"valore": "Tronco encefalico", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "in_breve": {"valore": "Collega encefalo e midollo; nuclei dei nervi cranici da III a XII", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Mesencefalo, ponte e bulbo: collega encefalo e midollo e contiene i nuclei dei nervi cranici (da III a XII) e centri vitali.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "clinica": {"valore": "Il bulbo contiene i centri di controllo del respiro e del sistema cardiovascolare.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "gruppo.encefalo.precentrale", "ref": "precentrale", "modulo": "encefalo", "col": "#ef8f78", "dati": {
+   "nome": {"valore": "Giro precentrale", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Gyrus precentralis", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "regione": {"valore": "Lobo frontale", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "in_breve": {"valore": "Corteccia motoria primaria", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Corteccia motoria primaria: movimenti volontari controlaterali, organizzati secondo l'homunculus motorio.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "clinica": {"valore": "Una lesione causa paresi controlaterale; mano e volto hanno un'ampia rappresentazione.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "gruppo.encefalo.postcentrale", "ref": "postcentrale", "modulo": "encefalo", "col": "#e8b94f", "dati": {
+   "nome": {"valore": "Giro postcentrale", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Gyrus postcentralis", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "regione": {"valore": "Lobo parietale", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "in_breve": {"valore": "Corteccia somatosensitiva primaria", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Corteccia somatosensitiva primaria: tatto, propriocezione, dolore e temperatura dal lato opposto del corpo.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "clinica": {"valore": "Una lesione causa deficit sensitivi controlaterali.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "gruppo.encefalo.broca", "ref": "broca", "modulo": "encefalo", "col": "#e0568c", "dati": {
+   "nome": {"valore": "Area di Broca", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Area di Broca", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "regione": {"valore": "Lobo frontale", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "in_breve": {"valore": "Produzione del linguaggio (afasia non fluente se danneggiata)", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Produzione del linguaggio, nell'emisfero dominante (di solito il sinistro), nel giro frontale inferiore.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "clinica": {"valore": "Un danno causa afasia non fluente: comprensione conservata ma eloquio faticoso.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "gruppo.encefalo.wernicke", "ref": "wernicke", "modulo": "encefalo", "col": "#9b5de5", "dati": {
+   "nome": {"valore": "Area di Wernicke", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Area di Wernicke", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "regione": {"valore": "Lobo temporale", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "in_breve": {"valore": "Comprensione del linguaggio (afasia fluente se danneggiata)", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Comprensione del linguaggio, nella parte posteriore del giro temporale superiore dell'emisfero dominante.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "clinica": {"valore": "Un danno causa afasia fluente: eloquio fluente ma privo di senso e comprensione ridotta.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "gruppo.encefalo.solcocentrale", "ref": "solcocentrale", "modulo": "encefalo", "col": "#5b6b73", "dati": {
+   "nome": {"valore": "Solco centrale (di Rolando)", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Sulcus centralis", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "regione": {"valore": "Telencefalo", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "in_breve": {"valore": "Separa lobo frontale e parietale", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Separa il lobo frontale dal parietale e il giro precentrale (motorio) dal postcentrale (sensitivo).", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "clinica": {"valore": "È un repere fondamentale per localizzare le aree motoria e sensitiva.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "gruppo.encefalo.solcolaterale", "ref": "solcolaterale", "modulo": "encefalo", "col": "#3f7d8c", "dati": {
+   "nome": {"valore": "Solco laterale (di Silvio)", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Sulcus lateralis", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "regione": {"valore": "Telencefalo", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "in_breve": {"valore": "Separa il lobo temporale da frontale e parietale", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Separa il lobo temporale dai lobi frontale e parietale.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "clinica": {"valore": "Intorno al solco laterale si trovano le aree del linguaggio; l'arteria cerebrale media irrora gran parte di questa zona.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "gruppo.encefalo.calloso", "ref": "calloso", "modulo": "encefalo", "col": "#c9a66b", "dati": {
+   "nome": {"valore": "Corpo calloso", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Corpus callosum", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "regione": {"valore": "Telencefalo", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "in_breve": {"valore": "Collega i due emisferi cerebrali", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Grande fascio di fibre che collega i due emisferi cerebrali.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "clinica": {"valore": "La callosotomia si usa in rari casi di epilessia grave per limitare la diffusione delle crisi.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "gruppo.encefalo.talamo", "ref": "talamo", "modulo": "encefalo", "col": "#f0a8c0", "dati": {
+   "nome": {"valore": "Talamo", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Thalamus", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "regione": {"valore": "Diencefalo", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "in_breve": {"valore": "Stazione di smistamento delle vie sensitive verso la corteccia", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Stazione di smistamento: quasi tutte le vie sensitive passano dal talamo prima di raggiungere la corteccia (tranne l'olfatto).", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "clinica": {"valore": "Una lesione talamica può causare perdita sensitiva e dolore centrale.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "gruppo.encefalo.ipotalamo", "ref": "ipotalamo", "modulo": "encefalo", "col": "#f28b82", "dati": {
+   "nome": {"valore": "Ipotalamo", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Hypothalamus", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "regione": {"valore": "Diencefalo", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "in_breve": {"valore": "Omeostasi: temperatura, fame, sete e controllo dell'ipofisi", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Regola omeostasi, temperatura, fame, sete, ritmi circadiani e sistema endocrino tramite l'ipofisi.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "clinica": {"valore": "Controlla l'ipofisi con ormoni di rilascio e di inibizione.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "gruppo.encefalo.epifisi", "ref": "epifisi", "modulo": "encefalo", "col": "#7a5cc2", "dati": {
+   "nome": {"valore": "Epifisi (ghiandola pineale)", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Glandula pinealis", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "regione": {"valore": "Diencefalo", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "in_breve": {"valore": "Produce melatonina", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Ghiandola endocrina che produce melatonina, legata al ritmo sonno-veglia.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "clinica": {"valore": "La secrezione dipende dalla luce: aumenta di notte.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "gruppo.encefalo.adeno", "ref": "adeno", "modulo": "encefalo", "col": "#f5a623", "dati": {
+   "nome": {"valore": "Adenoipofisi (ipofisi anteriore)", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Adenohypophysis", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "regione": {"valore": "Ghiandole", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "in_breve": {"valore": "Produce GH, prolattina, ACTH, TSH, FSH e LH", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Produce GH, prolattina, ACTH, TSH, FSH e LH, sotto il controllo di ormoni ipotalamici.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "clinica": {"valore": "Un adenoma ipofisario può dare iperproduzione ormonale o compressione del chiasma ottico (emianopsia bitemporale).", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "gruppo.encefalo.neuro", "ref": "neuro", "modulo": "encefalo", "col": "#e07b39", "dati": {
+   "nome": {"valore": "Neuroipofisi (ipofisi posteriore)", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Neurohypophysis", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "regione": {"valore": "Ghiandole", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "in_breve": {"valore": "Rilascia ossitocina e ADH", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Rilascia ossitocina e ormone antidiuretico (ADH), prodotti dall'ipotalamo.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "clinica": {"valore": "Un deficit di ADH causa diabete insipido, con poliuria e sete intensa.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "gruppo.encefalo.mesencefalo", "ref": "mesencefalo", "modulo": "encefalo", "col": "#c8a27a", "dati": {
+   "nome": {"valore": "Mesencefalo", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Mesencephalon", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "regione": {"valore": "Tronco encefalico", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "in_breve": {"valore": "Riflessi visivi e uditivi; contiene la substantia nigra", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Parte superiore del tronco: riflessi visivi e uditivi, controllo dei movimenti oculari e vie motorie. Contiene i nuclei dei nervi III e IV.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "clinica": {"valore": "La substantia nigra, nel mesencefalo, degenera nel morbo di Parkinson.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "gruppo.encefalo.ponte", "ref": "ponte", "modulo": "encefalo", "col": "#b58b62", "dati": {
+   "nome": {"valore": "Ponte", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Pons", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "regione": {"valore": "Tronco encefalico", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "in_breve": {"valore": "Collega cervello e cervelletto; nuclei dei nervi da V a VIII", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Collega cervello, cervelletto e midollo; contiene i nuclei dei nervi da V a VIII (in parte) e centri del respiro.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "clinica": {"valore": "Lesioni pontine estese possono causare la sindrome locked-in.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "gruppo.encefalo.bulbo", "ref": "bulbo", "modulo": "encefalo", "col": "#9c7248", "dati": {
+   "nome": {"valore": "Bulbo", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Medulla oblongata", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "regione": {"valore": "Tronco encefalico", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "in_breve": {"valore": "Centri del respiro e del battito; decussazione piramidale", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Contiene centri di controllo di respiro, frequenza cardiaca e pressione e i nuclei dei nervi IX, X e XII. Qui le vie piramidali si incrociano.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "clinica": {"valore": "La decussazione piramidale spiega perché una lesione cerebrale causa paralisi sul lato opposto del corpo.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "gruppo.encefalo.solchi", "ref": "solchi", "modulo": "encefalo", "col": "#8a8f98", "dati": {
+   "nome": {"valore": "Solchi e scissure principali", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Sulci cerebri", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "regione": {"valore": "Telencefalo", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Solco centrale (tra lobo frontale e parietale), scissura laterale di Silvio (separa il lobo temporale) e solco parieto-occipitale: i confini principali tra i lobi.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "clinica": {"valore": "Sono i punti di riferimento per localizzare le aree corticali e le lesioni nelle immagini.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "gruppo.encefalo.sostanza", "ref": "sostanza", "modulo": "encefalo", "col": "#e9e4d8", "dati": {
+   "nome": {"valore": "Sostanza bianca", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Substantia alba telencephali", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "regione": {"valore": "Telencefalo", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Fasci di fibre mielinizzate sotto la corteccia: collegano aree dello stesso emisfero, i due emisferi e la corteccia con le strutture profonde.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "clinica": {"valore": "Le lesioni della sostanza bianca (per esempio nella sclerosi multipla o nelle piccole ischemie) interrompono le connessioni anche con corteccia integra.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "gruppo.encefalo.ventricoli", "ref": "ventricoli", "modulo": "encefalo", "col": "#7cc3e8", "dati": {
+   "nome": {"valore": "Ventricoli e acquedotto", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Ventriculi encephali", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "regione": {"valore": "Sistema ventricolare", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Cavità piene di liquor: ventricoli laterali, terzo ventricolo, acquedotto del mesencefalo e quarto ventricolo.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "clinica": {"valore": "Un ostacolo al deflusso del liquor dilata i ventricoli (idrocefalo).", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "gruppo.encefalo.ipofisi", "ref": "ipofisi", "modulo": "encefalo", "col": "#f2a65a", "dati": {
+   "nome": {"valore": "Ipofisi", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Hypophysis", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "regione": {"valore": "Diencefalo", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Ghiandola endocrina nella sella turcica, collegata all'ipotalamo: adenoipofisi (ormoni trofici) e neuroipofisi (ossitocina e vasopressina).", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "clinica": {"valore": "Gli adenomi ipofisari possono comprimere il chiasma ottico (emianopsia bitemporale).", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "gruppo.encefalo.diencefalo", "ref": "diencefalo", "modulo": "encefalo", "col": "#b48ad6", "dati": {
+   "nome": {"valore": "Diencefalo", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Diencephalon", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "regione": {"valore": "Diencefalo", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Tra emisferi e tronco: talamo (stazione delle vie sensitive), ipotalamo (controllo endocrino e vegetativo), epitalamo con l'epifisi, chiasma e tratti ottici.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "clinica": {"valore": "Le lesioni talamiche possono dare deficit sensitivi e dolore centrale nell'emicorpo opposto.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "gruppo.encefalo.commissure", "ref": "commissure", "modulo": "encefalo", "col": "#f0d36b", "dati": {
+   "nome": {"valore": "Corpo calloso e commessure", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Commissurae telencephali", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "regione": {"valore": "Telencefalo", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Fasci che uniscono i due emisferi (corpo calloso, commessura anteriore e dell'ippocampo), con fornice e setto pellucido.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "clinica": {"valore": "La sezione del corpo calloso separa le informazioni dei due emisferi (sindrome da disconnessione).", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "gruppo.encefalo.limbico", "ref": "limbico", "modulo": "encefalo", "col": "#e58fa6", "dati": {
+   "nome": {"valore": "Lobo limbico", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Lobus limbicus", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "regione": {"valore": "Telencefalo", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Anello di corteccia sulla faccia mediale (giro del cingolo, giro paraippocampale) con ippocampo e nuclei del setto: memoria ed emozioni.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "clinica": {"valore": "L'ippocampo è tra le prime strutture colpite nella malattia di Alzheimer (memoria recente).", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "gruppo.encefalo.insula", "ref": "insula", "modulo": "encefalo", "col": "#9bd18b", "dati": {
+   "nome": {"valore": "Insula", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Insula", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "regione": {"valore": "Telencefalo", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Lobo nascosto in fondo alla scissura laterale, coperto dagli opercoli: gusto, sensibilità viscerale, consapevolezza corporea.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "clinica": {"valore": "È irrorata dall'arteria cerebrale media e spesso coinvolta negli ictus di quel territorio.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "gruppo.muscoli.zampa", "ref": "zampa", "modulo": "atlante", "vista": "e", "dati": {
+   "nome": {"valore": "Zampa d'oca", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Pes anserinus", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "membri": {"valore": ["sartorius", "gracilis", "semitendinosus"], "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Inserzione comune dei tendini di sartorio, gracile e semitendinoso sulla faccia mediale della tibia prossimale, sotto il condilo mediale e dietro la tuberosità tibiale. Tra i tendini e il legamento collaterale mediale c'è la borsa anserina (borsite anserina: dolore mediale del ginocchio). I tre muscoli flettono il ginocchio e lo ruotano internamente; rinforzano il lato mediale.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "gruppo.muscoli.ischio", "ref": "ischio", "modulo": "atlante", "dati": {
+   "nome": {"valore": "Muscoli ischiocrurali", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Musculi ischiocrurales", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "membri": {"valore": ["semitendinosus", "semimembranosus", "biceps femoris"], "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Semitendinoso, semimembranoso e capo lungo del bicipite femorale originano dalla tuberosità ischiatica: estendono l'anca e flettono il ginocchio. Il capo breve del bicipite origina dalla linea aspra e non agisce sull'anca. Innervazione: nervo sciatico (porzione tibiale; capo breve del bicipite: porzione peroneale).", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "gruppo.muscoli.cuffia", "ref": "cuffia", "modulo": "atlante", "dati": {
+   "nome": {"valore": "Cuffia dei rotatori", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Cuff musculotendinea", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "membri": {"valore": ["supraspinatus", "infraspinatus", "teres minor", "subscapularis"], "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Sovraspinato, infraspinato, piccolo rotondo (sul grande tubercolo) e sottoscapolare (sul piccolo tubercolo): tengono la testa dell'omero centrata nella glenoide. Il tendine del sovraspinato, sotto l'arco coraco-acromiale, è quello che si lesiona più spesso.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "gruppo.muscoli.sura", "ref": "sura", "modulo": "atlante", "dati": {
+   "nome": {"valore": "Tricipite della sura", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Musculus triceps surae", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "membri": {"valore": ["gastrocnemius", "soleus"], "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Gastrocnemio (due capi, dai condili femorali) e soleo (da tibia e fibula) si inseriscono con il tendine d'Achille sulla tuberosità del calcagno: flessione plantare della caviglia. Il gastrocnemio flette anche il ginocchio. Innervazione: nervo tibiale (S1-S2, riflesso achilleo).", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "gruppo.muscoli.quadricipite", "ref": "quadricipite", "modulo": "atlante", "dati": {
+   "nome": {"valore": "Quadricipite femorale", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Musculus quadriceps femoris", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "membri": {"valore": ["rectus femoris", "vastus lateralis", "vastus medialis", "vastus intermedius"], "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Retto femorale (dalla SIAI e dal solco sopracetabolare) e tre vasti (dal femore) si uniscono nel tendine quadricipitale sulla rotula; il legamento rotuleo continua fino alla tuberosità tibiale. Estende il ginocchio; il retto flette anche l'anca. Innervazione: nervo femorale (L2-L4, riflesso rotuleo).", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "gruppo.strato-encefalo.dura-madre", "ref": 0, "modulo": "atlante", "dati": {
+   "nome": {"valore": "Dura madre", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Meninge più esterna, spessa e fibrosa, aderente alle ossa del cranio. Forma la falce cerebrale e il tentorio e contiene i seni venosi. Tra dura e osso: spazio epidurale (ematoma epidurale, arterioso); sotto la dura: spazio subdurale (ematoma subdurale, venoso).", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "gruppo.strato-encefalo.aracnoide", "ref": 1, "modulo": "atlante", "dati": {
+   "nome": {"valore": "Aracnoide", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Meninge intermedia, sottile e trasparente, che passa sopra i solchi. Sotto di essa lo spazio subaracnoideo contiene il liquido cefalorachidiano e le arterie del cervello (emorragia subaracnoidea da aneurisma). La pia madre, aderente alla corteccia, non è disegnata.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "gruppo.strato-encefalo.corteccia-cerebrale-e-cervelletto", "ref": 2, "modulo": "atlante", "dati": {
+   "nome": {"valore": "Corteccia cerebrale e cervelletto", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Sostanza grigia della superficie, divisa in lobi (frontale, parietale, temporale, occipitale, insula, limbico) da solchi e scissure. Dietro e sotto: il cervelletto.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "gruppo.strato-encefalo.sostanza-bianca-e-commissure", "ref": 3, "modulo": "atlante", "dati": {
+   "nome": {"valore": "Sostanza bianca e commissure", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Fibre mieliniche sotto la corteccia: associative (tra aree dello stesso emisfero), commissurali (corpo calloso e commissura anteriore, tra i due emisferi) e di proiezione (capsula interna, verso tronco e midollo). Il setto pellucido separa i ventricoli laterali. Con questo strato va via anche il nucleo lenticolare intero, per mostrare putamen e globo pallido.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "gruppo.strato-encefalo.nuclei-della-base-caudato-e-putamen", "ref": 4, "modulo": "atlante", "dati": {
+   "nome": {"valore": "Nuclei della base: caudato e putamen", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Striato: nucleo caudato (a C, lungo il ventricolo laterale) e putamen (laterale alla capsula interna; con il globo pallido forma il nucleo lenticolare). Controllo del movimento, malattie di Parkinson e Huntington.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "gruppo.strato-encefalo.globo-pallido-e-sistema-limbico", "ref": 5, "modulo": "atlante", "dati": {
+   "nome": {"valore": "Globo pallido e sistema limbico", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Globo pallido (uscita dei nuclei della base). Sistema limbico profondo: ippocampo (memoria), amigdala (emozioni, paura), nuclei del setto, fornice e stria terminale.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "gruppo.strato-encefalo.diencefalo", "ref": 6, "modulo": "atlante", "dati": {
+   "nome": {"valore": "Diencefalo", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Talamo (smistamento delle vie sensitive e motorie), ipotalamo (omeostasi, ipofisi), corpi mammillari, corpi genicolati, abenula. Davanti: chiasma e tratti ottici. Nei ventricoli: plessi corioidei.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "gruppo.strato-encefalo.tronco-encefalico", "ref": 7, "modulo": "atlante", "dati": {
+   "nome": {"valore": "Tronco encefalico", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Mesencefalo, ponte e bulbo, con i nuclei dei nervi cranici dal III al XII, il nucleo rosso, i collicoli, le piramidi e le olive.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "gruppo.strato-encefalo.ventricoli", "ref": 8, "modulo": "atlante", "dati": {
+   "nome": {"valore": "Ventricoli", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Cavità piene di liquido cefalorachidiano: due ventricoli laterali, terzo ventricolo, acquedotto di Silvio, quarto ventricolo.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "gruppo.fonte.frontal-lobe", "ref": "Frontal lobe", "modulo": "atlante", "dati": {
+   "descrizione": {"valore": "Lobo frontale: movimento volontario, pianificazione, funzioni esecutive, linguaggio espressivo, comportamento e personalità.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "gruppo.fonte.parietal-lobe", "ref": "Parietal lobe", "modulo": "atlante", "dati": {
+   "descrizione": {"valore": "Lobo parietale: sensibilità del corpo, integrazione delle informazioni sensitive, attenzione e orientamento nello spazio.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "gruppo.fonte.temporal-lobe", "ref": "Temporal lobe", "modulo": "atlante", "dati": {
+   "descrizione": {"valore": "Lobo temporale: udito, comprensione del linguaggio, memoria e riconoscimento visivo.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "gruppo.fonte.occipital-lobe", "ref": "Occipital lobe", "modulo": "atlante", "dati": {
+   "descrizione": {"valore": "Lobo occipitale: elaborazione della visione.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "gruppo.fonte.limbic-lobe", "ref": "Limbic lobe", "modulo": "atlante", "dati": {
+   "descrizione": {"valore": "Lobo limbico: emozioni, motivazione e memoria.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "gruppo.fonte.insula", "ref": "Insula", "modulo": "atlante", "dati": {
+   "descrizione": {"valore": "Insula: sensibilità viscerale, gusto, consapevolezza del corpo.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "gruppo.fonte.interlobar-sulci", "ref": "Interlobar sulci", "modulo": "atlante", "dati": {
+   "descrizione": {"valore": "Solco della corteccia: separa giri e lobi.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "gruppo.fonte.cerebellum", "ref": "Cerebellum", "modulo": "atlante", "dati": {
+   "descrizione": {"valore": "Cervelletto: coordinazione dei movimenti, equilibrio e apprendimento motorio. Le lesioni danno atassia dallo stesso lato.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "gruppo.fonte.diencephalon", "ref": "Diencephalon", "modulo": "atlante", "dati": {
+   "descrizione": {"valore": "Diencefalo: talamo, ipotalamo ed epitalamo.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "gruppo.fonte.brainstem", "ref": "Brainstem", "modulo": "atlante", "dati": {
+   "descrizione": {"valore": "Tronco encefalico: collega encefalo e midollo; contiene i nuclei dei nervi cranici e i centri vitali.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "gruppo.fonte.grey-matter-of-medulla-oblongata", "ref": "Grey matter of medulla oblongata.", "modulo": "atlante", "dati": {
+   "descrizione": {"valore": "Nucleo di un nervo cranico nel bulbo.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "gruppo.fonte.grey-matter-of-pontine-tegmentum", "ref": "Grey matter of pontine tegmentum", "modulo": "atlante", "dati": {
+   "descrizione": {"valore": "Nucleo di un nervo cranico nel ponte.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "gruppo.fonte.grey-matter-of-tegmentum-of-midbrain", "ref": "Grey matter of tegmentum of midbrain", "modulo": "atlante", "dati": {
+   "descrizione": {"valore": "Nucleo nel tegmento del mesencefalo.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "gruppo.fonte.oculomotor-complex", "ref": "Oculomotor complex", "modulo": "atlante", "dati": {
+   "descrizione": {"valore": "Complesso dei nuclei del nervo oculomotore (III).", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "gruppo.fonte.tectum-of-midbrain", "ref": "Tectum of midbrain", "modulo": "atlante", "dati": {
+   "descrizione": {"valore": "Tetto del mesencefalo (lamina quadrigemina): riflessi visivi e uditivi.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "gruppo.fonte.medulla-oblongata", "ref": "Medulla oblongata", "modulo": "atlante", "dati": {
+   "descrizione": {"valore": "Parte del bulbo.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "gruppo.fonte.midbrain", "ref": "Midbrain", "modulo": "atlante", "dati": {
+   "descrizione": {"valore": "Parte del mesencefalo.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "gruppo.fonte.dorsal-striatum", "ref": "Dorsal striatum", "modulo": "atlante", "dati": {
+   "descrizione": {"valore": "Striato dorsale: nuclei della base, controllo del movimento.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "gruppo.fonte.corpus-striatum", "ref": "Corpus striatum", "modulo": "atlante", "dati": {
+   "descrizione": {"valore": "Corpo striato: nuclei della base, controllo del movimento.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "gruppo.fonte.basal-forebrain", "ref": "Basal forebrain", "modulo": "atlante", "dati": {
+   "descrizione": {"valore": "Prosencefalo basale: sistema limbico e colinergico (attenzione, memoria).", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "gruppo.fonte.commissural-fibres-of-telencephalon", "ref": "Commissural fibres of telencephalon", "modulo": "atlante", "dati": {
+   "descrizione": {"valore": "Fibre commissurali: collegano i due emisferi.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "gruppo.fonte.telencephalon", "ref": "Telencephalon", "modulo": "atlante", "dati": {
+   "descrizione": {"valore": "Telencefalo: emisferi cerebrali.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "gruppo.fonte.white-matter-of-diencephalon", "ref": "White matter of diencephalon", "modulo": "atlante", "dati": {
+   "descrizione": {"valore": "Fasci di fibre del diencefalo.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "gruppo.fonte.white-matter-of-telencephalon", "ref": "White matter of telencephalon", "modulo": "atlante", "dati": {
+   "descrizione": {"valore": "Fasci di fibre degli emisferi.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "gruppo.fonte.cranial-dura", "ref": "Cranial dura", "modulo": "atlante", "dati": {
+   "descrizione": {"valore": "Dura madre cranica: la meninge più esterna e robusta.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }}
+ ]
+}

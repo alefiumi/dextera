@@ -1,0 +1,68 @@
+{
+ "version": 1,
+ "tipo": "nervi-cranici",
+ "nota": "I 12 nervi cranici (gioco Nervi cranici, 2D e 3D).",
+ "campi": {"nome": "Nome", "tipo": "Tipo (sensitivo, motorio, misto)", "funzione": "Funzione"},
+ "voci": [
+  {"id": "nervo.i", "ref": "I", "numero": "I", "dati": {
+   "nome": {"valore": "Olfattivo", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "tipo": {"valore": "sensitivo", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "funzione": {"valore": "Olfatto", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "nervo.ii", "ref": "II", "numero": "II", "dati": {
+   "nome": {"valore": "Ottico", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "tipo": {"valore": "sensitivo", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "funzione": {"valore": "Vista", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "nervo.iii", "ref": "III", "numero": "III", "dati": {
+   "nome": {"valore": "Oculomotore", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "tipo": {"valore": "motorio", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "funzione": {"valore": "Movimenti dell'occhio, sollevamento della palpebra, restringimento della pupilla", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "nervo.iv", "ref": "IV", "numero": "IV", "dati": {
+   "nome": {"valore": "Trocleare", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "tipo": {"valore": "motorio", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "funzione": {"valore": "Muscolo obliquo superiore dell'occhio", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "nervo.v", "ref": "V", "numero": "V", "dati": {
+   "nome": {"valore": "Trigemino", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "tipo": {"valore": "misto", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "funzione": {"valore": "Sensibilità del volto e masticazione", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "nervo.vi", "ref": "VI", "numero": "VI", "dati": {
+   "nome": {"valore": "Abducente", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "tipo": {"valore": "motorio", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "funzione": {"valore": "Muscolo retto laterale (sposta l'occhio verso l'esterno)", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "nervo.vii", "ref": "VII", "numero": "VII", "dati": {
+   "nome": {"valore": "Facciale", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "tipo": {"valore": "misto", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "funzione": {"valore": "Mimica del volto, gusto dei due terzi anteriori della lingua, secrezione lacrimale e salivare", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "nervo.viii", "ref": "VIII", "numero": "VIII", "dati": {
+   "nome": {"valore": "Vestibolococleare", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "tipo": {"valore": "sensitivo", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "funzione": {"valore": "Udito ed equilibrio", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "nervo.ix", "ref": "IX", "numero": "IX", "dati": {
+   "nome": {"valore": "Glossofaringeo", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "tipo": {"valore": "misto", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "funzione": {"valore": "Gusto del terzo posteriore della lingua e sensibilità della faringe", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "nervo.x", "ref": "X", "numero": "X", "dati": {
+   "nome": {"valore": "Vago", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "tipo": {"valore": "misto", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "funzione": {"valore": "Parasimpatico di cuore, polmoni e visceri; deglutizione e voce", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "nervo.xi", "ref": "XI", "numero": "XI", "dati": {
+   "nome": {"valore": "Accessorio", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "tipo": {"valore": "motorio", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "funzione": {"valore": "Muscoli sternocleidomastoideo e trapezio", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "nervo.xii", "ref": "XII", "numero": "XII", "dati": {
+   "nome": {"valore": "Ipoglosso", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "tipo": {"valore": "motorio", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "funzione": {"valore": "Muscoli della lingua", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }}
+ ]
+}

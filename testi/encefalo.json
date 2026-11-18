@@ -1,0 +1,815 @@
+{
+ "version": 1,
+ "tipo": "encefalo",
+ "nota": "Strutture dell'encefalo, del midollo e delle meningi (3D e 2D). Nomi da TA2 o, dove TA2 non basta, scritti dall'AI; descrizioni dell'AI. Senza descrizione propria vale quella del gruppo della fonte (gruppi.json, gruppo.fonte.*).",
+ "campi": {"nome": "Nome italiano", "latino": "Nome latino", "descrizione": "Descrizione"},
+ "voci": [
+  {"id": "encefalo.temporal-pole", "ref": "Temporal pole", "dati": {
+   "nome": {"valore": "Polo temporale", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Polus temporalis", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Polo temporale: memoria semantica ed emozioni sociali.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "encefalo.occipital-pole", "ref": "Occipital pole", "dati": {
+   "nome": {"valore": "Polo occipitale", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Polus occipitalis", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Polo occipitale: qui arriva la visione centrale (macula).", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "encefalo.central-sulcus", "ref": "Central sulcus", "dati": {
+   "nome": {"valore": "Solco centrale", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Sulcus centralis", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Solco centrale (di Rolando): separa il lobo frontale (giro precentrale, motorio) dal parietale (giro postcentrale, sensitivo).", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "encefalo.parieto-occipital-sulcus", "ref": "Parieto-occipital sulcus", "dati": {
+   "nome": {"valore": "Solco parieto-occipitale", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Sulcus parietooccipitalis", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Solco parieto-occipitale: sulla faccia mediale separa il lobo parietale dall'occipitale.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "encefalo.subparietal-sulcus", "ref": "Subparietal sulcus", "dati": {
+   "nome": {"valore": "Solco subparietale", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Sulcus subparietalis", "fonte": "TA2", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "encefalo.cingulate-sulcus-marginal-part", "ref": "Cingulate sulcus (Marginal part*)", "dati": {
+   "nome": {"valore": "Solco del cingolo (parte marginale)", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Sulcus cinguli, pars marginalis", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "encefalo.circular-sulcus-of-insula", "ref": "Circular sulcus of insula", "dati": {
+   "nome": {"valore": "Solco circolare dell'insula", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Sulcus circularis insulae", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Solco circolare: circonda e delimita l'insula.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "encefalo.collateral-sulcus", "ref": "Collateral sulcus", "dati": {
+   "nome": {"valore": "Solco collaterale", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Sulcus collateralis", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Solco collaterale: separa il giro paraippocampale dal fusiforme.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "encefalo.anterior-occipital-sulcus", "ref": "Anterior occipital sulcus*", "dati": {
+   "nome": {"valore": "Anterior occipital sulcus*", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "encefalo.opercular-part-of-inferior-frontal-gyrus", "ref": "Opercular part of inferior frontal gyrus", "dati": {
+   "nome": {"valore": "Parte opercolare del giro frontale inferiore", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Pars opercularis gyri frontalis inferioris", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Con la parte triangolare forma l'area di Broca nell'emisfero dominante (di solito il sinistro): produzione del linguaggio. Una lesione dà afasia non fluente.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "encefalo.orbital-part-of-inferior-frontal-gyrus", "ref": "Orbital part of  inferior frontal gyrus", "dati": {
+   "nome": {"valore": "Parte orbitale del giro frontale inferiore", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Pars orbitalis gyri frontalis inferioris", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Parte orbitaria del giro frontale inferiore: linguaggio (significato) e controllo del comportamento.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "encefalo.triangular-part-of-inferior-frontal-gyrus", "ref": "Triangular part of inferior frontal gyrus", "dati": {
+   "nome": {"valore": "Parte triangolare del giro frontale inferiore", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Pars triangularis gyri frontalis inferioris", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Parte dell'area di Broca nell'emisfero dominante: produzione del linguaggio.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "encefalo.orbital-gyri-frontomarginal-gyrus-and-sulcus", "ref": "Orbital gyri (Frontomarginal gyrus and sulcus*)", "dati": {
+   "nome": {"valore": "Giro frontomarginale", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Gyrus frontomarginalis", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "encefalo.paracentral-gyrus-and-sulcus", "ref": "Paracentral gyrus and sulcus*", "dati": {
+   "nome": {"valore": "Lobulo paracentrale", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Lobulus paracentralis", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Lobulo paracentrale, sulla faccia mediale: controllo motorio e sensitivo dell'arto inferiore opposto e della vescica. Irrorato dall'arteria cerebrale anteriore.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "encefalo.transverse-frontopolar-gyrus-and-sulcus", "ref": "Transverse frontopolar gyrus and sulcus*", "dati": {
+   "nome": {"valore": "Giro e solco trasverso frontopolare", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Gyrus et sulcus transversus frontopolar", "fonte": "TA2", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "encefalo.straight-gyrus-gyrus-rectus", "ref": "Straight gyrus (Gyrus rectus)", "dati": {
+   "nome": {"valore": "Giro retto", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Gyrus rectus", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Giro retto: faccia inferiore del lobo frontale, accanto alla linea mediana; parte della corteccia orbitofrontale.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "encefalo.lat-fis-ant-vertical", "ref": "Lat_Fis-ant-Vertical", "dati": {
+   "nome": {"valore": "Ramo ascendente della scissura laterale", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Ramus ascendens sulci lateralis", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Ramo anteriore ascendente della scissura laterale: delimita la parte opercolare (Broca).", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "encefalo.inferior-frontal-sulcus", "ref": "Inferior frontal sulcus", "dati": {
+   "nome": {"valore": "Solco frontale inferiore", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Sulcus frontalis inferior", "fonte": "TA2", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "encefalo.middle-frontal-gyrus", "ref": "Middle frontal gyrus", "dati": {
+   "nome": {"valore": "Giro frontale medio", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Gyrus frontalis medius", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Lobo frontale: corteccia prefrontale dorsolaterale (funzioni esecutive, memoria di lavoro) e campi oculari frontali (movimenti coniugati degli occhi).", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "encefalo.orbital-gyri", "ref": "Orbital gyri", "dati": {
+   "nome": {"valore": "Giri orbitali", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Gyri orbitales", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Faccia inferiore del lobo frontale (corteccia orbitofrontale): comportamento sociale, decisioni, controllo degli impulsi.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "encefalo.precentral-gyrus", "ref": "Precentral gyrus", "dati": {
+   "nome": {"valore": "Giro precentrale", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Gyrus precentralis", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Corteccia motoria primaria (area 4): comanda i movimenti volontari del lato opposto del corpo, organizzati secondo l'homunculus motorio.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "encefalo.superior-frontal-gyrus", "ref": "Superior frontal gyrus", "dati": {
+   "nome": {"valore": "Giro frontale superiore", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Gyrus frontalis superior", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Lobo frontale: comprende l'area motoria supplementare (pianificazione e sequenza dei movimenti).", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "encefalo.superior-frontal-sulcus", "ref": "Superior frontal sulcus", "dati": {
+   "nome": {"valore": "Solco frontale superiore", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Sulcus frontalis superior", "fonte": "TA2", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "encefalo.paracentral-sulcus", "ref": "Paracentral sulcus", "dati": {
+   "nome": {"valore": "Solco paracentrale", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Sulcus paracentralis", "fonte": "TA2", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "encefalo.orbital-sulci-h-shaped-orbital-sulci", "ref": "Orbital sulci (H-shaped orbital sulci*)", "dati": {
+   "nome": {"valore": "Solchi orbitali (a H)", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Sulci orbitales", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "encefalo.orbital-sulci-lateral-orbital-sulcus", "ref": "Orbital sulci (Lateral Orbital sulcus*)", "dati": {
+   "nome": {"valore": "Solco orbitale laterale", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Sulcus orbitalis lateralis", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "encefalo.olfactory-sulcus", "ref": "Olfactory sulcus", "dati": {
+   "nome": {"valore": "Solco olfattorio", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Sulcus olfactorius", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Solco olfattivo: vi appoggiano il bulbo e il tratto olfattivo.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "encefalo.precentral-sulcus-inferior-part", "ref": "Precentral sulcus (inferior part)*", "dati": {
+   "nome": {"valore": "Solco precentrale (parte inferiore)", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Sulcus precentralis", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "encefalo.precentral-sulcus-superior-part", "ref": "Precentral sulcus (Superior part)*", "dati": {
+   "nome": {"valore": "Solco precentrale (parte superiore)", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Sulcus precentralis", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "encefalo.angular-gyrus", "ref": "Angular gyrus", "dati": {
+   "nome": {"valore": "Giro angolare", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Gyrus angularis", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Lobulo parietale inferiore: lettura, scrittura e calcolo nell'emisfero dominante (lesione: sindrome di Gerstmann).", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "encefalo.supramarginal-gyrus", "ref": "Supramarginal gyrus", "dati": {
+   "nome": {"valore": "Giro sopramarginale", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Gyrus supramarginalis", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Lobulo parietale inferiore: elaborazione fonologica e prassie. Fa parte dell'area di Wernicke allargata.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "encefalo.postcentral-gyrus", "ref": "Postcentral gyrus", "dati": {
+   "nome": {"valore": "Giro postcentrale", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Gyrus postcentralis", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Corteccia somatosensitiva primaria (aree 3, 1, 2): tatto, propriocezione, dolore e temperatura dal lato opposto del corpo.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "encefalo.postcentral-sulcus", "ref": "Postcentral sulcus", "dati": {
+   "nome": {"valore": "Solco postcentrale", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Sulcus postcentralis", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Solco postcentrale: limite posteriore della corteccia somatosensitiva primaria.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "encefalo.precuneus", "ref": "Precuneus", "dati": {
+   "nome": {"valore": "Precuneo", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Precuneus", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Faccia mediale del lobo parietale: immagini mentali, memoria autobiografica, coscienza di sé.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "encefalo.superior-parietal-lobule", "ref": "Superior parietal lobule", "dati": {
+   "nome": {"valore": "Lobulo parietale superiore", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Lobulus parietalis superior", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Lobo parietale: integrazione somatosensitiva e visiva, rappresentazione del corpo nello spazio.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "encefalo.intraparietal-sulcus", "ref": "Intraparietal sulcus", "dati": {
+   "nome": {"valore": "Solco intraparietale", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Sulcus intraparietalis", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Solco intraparietale: separa il lobulo parietale superiore dall'inferiore; coordinazione occhio-mano.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "encefalo.inferior-occipital-gyrus-and-sulcus", "ref": "Inferior occipital gyrus and sulcus*", "dati": {
+   "nome": {"valore": "Giro occipitale inferiore", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Gyrus occipitalis inferior", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Corteccia visiva associativa (via ventrale: che cosa sono gli oggetti).", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "encefalo.lingual-gyrus", "ref": "Lingual gyrus", "dati": {
+   "nome": {"valore": "Giro linguale", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Gyrus lingualis", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Sotto il solco calcarino: riceve la metà superiore del campo visivo opposto; elaborazione dei colori.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "encefalo.lateral-occipital-gyrus-middle-occipital-gyrus", "ref": "Lateral occipital gyrus (Middle occipital gyrus*)", "dati": {
+   "nome": {"valore": "Giro occipitale medio", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Gyrus occipitalis medius", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Corteccia visiva associativa: riconoscimento di forme e oggetti.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "encefalo.calcarine-sulcus", "ref": "Calcarine sulcus", "dati": {
+   "nome": {"valore": "Solco calcarino", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Sulcus calcarinus", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Solco calcarino: attorno ad esso c'è la corteccia visiva primaria (area 17). Una lesione dà emianopsia omonima controlaterale.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "encefalo.cuneus", "ref": "Cuneus", "dati": {
+   "nome": {"valore": "Cuneo", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Cuneus", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Sopra il solco calcarino: riceve la metà inferiore del campo visivo opposto.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "encefalo.superior-occipital-gyri", "ref": "Superior occipital gyri", "dati": {
+   "nome": {"valore": "Giro occipitale superiore", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Gyri occipitales superiores", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Corteccia visiva associativa (via dorsale: dove sono gli oggetti).", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "encefalo.lunate-sulcus", "ref": "Lunate sulcus", "dati": {
+   "nome": {"valore": "Solco lunato", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Sulcus lunatus", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "encefalo.transverse-occipital-sulcus", "ref": "Transverse occipital sulcus", "dati": {
+   "nome": {"valore": "Solco occipitale trasverso", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Sulcus occipitalis transversus", "fonte": "TA2", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "encefalo.transverse-temporal-gyri", "ref": "Transverse temporal gyri", "dati": {
+   "nome": {"valore": "Giro temporale trasverso", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Gyri temporales transversi", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Giri temporali trasversi (di Heschl): corteccia uditiva primaria (aree 41-42).", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "encefalo.temporal-plane", "ref": "Temporal plane", "dati": {
+   "nome": {"valore": "Piano temporale", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Planum temporale", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Planum temporale: dietro i giri di Heschl, più grande nell'emisfero sinistro; parte dell'area di Wernicke.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "encefalo.superior-temporal-gyrus-lateral-part", "ref": "Superior temporal gyrus (Lateral part)", "dati": {
+   "nome": {"valore": "Giro temporale superiore", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Gyrus temporalis superior", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Giro temporale superiore: elaborazione uditiva; la parte posteriore nell'emisfero dominante è l'area di Wernicke (comprensione del linguaggio, lesione: afasia fluente).", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "encefalo.lateral-occipitotemporal-gyrus", "ref": "Lateral occipitotemporal gyrus", "dati": {
+   "nome": {"valore": "Giro occipitotemporale laterale", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Gyrus occipitotemporalis lateralis", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Giro fusiforme: riconoscimento dei volti (prosopagnosia se leso) e delle parole scritte.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "encefalo.medial-occipitotemporal-gyrus-parahippocampal", "ref": "Medial occipitotemporal gyrus (Parahippocampal*)", "dati": {
+   "nome": {"valore": "Giro occipitotemporale mediale", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Gyrus occipitotemporalis medialis", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Giro paraippocampale: memoria e riconoscimento dei luoghi; davanti, la corteccia entorinale collega l'ippocampo alla corteccia.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "encefalo.inferior-temporal-sulcus", "ref": "Inferior temporal sulcus", "dati": {
+   "nome": {"valore": "Solco temporale inferiore", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Sulcus temporalis inferior", "fonte": "TA2", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "encefalo.inferior-temporal-gyrus", "ref": "Inferior temporal gyrus", "dati": {
+   "nome": {"valore": "Giro temporale inferiore", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Gyrus temporalis inferior", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Lobo temporale: riconoscimento visivo degli oggetti (via ventrale).", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "encefalo.middle-temporal-gyrus", "ref": "Middle temporal gyrus", "dati": {
+   "nome": {"valore": "Giro temporale medio", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Gyrus temporalis medius", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Lobo temporale: significato delle parole e percezione del movimento visivo.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "encefalo.superior-temporal-sulcus", "ref": "Superior temporal sulcus", "dati": {
+   "nome": {"valore": "Solco temporale superiore", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Sulcus temporalis superior", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Solco temporale superiore: percezione del movimento biologico, dello sguardo e della voce degli altri.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "encefalo.occipitotemporal-sulcus-lateral-part", "ref": "Occipitotemporal sulcus (Lateral part*)", "dati": {
+   "nome": {"valore": "Solco occipitotemporale", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Sulcus occipitotemporalis", "fonte": "TA2", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "encefalo.insula-subcentral-gyrus-and-ant-and-post-sulci", "ref": "Insula (Subcentral gyrus and ant. and post. sulci*)", "dati": {
+   "nome": {"valore": "Insula", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Insula", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Insula: corteccia nascosta in fondo alla scissura laterale. Gusto, sensibilità viscerale, consapevolezza del corpo, dolore.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "encefalo.cingulate-gyrus-and-sulcus-middle-anterior-part", "ref": "Cingulate gyrus and sulcus (Middle anterior part)", "dati": {
+   "nome": {"valore": "Giro del cingolo (parte medio-anteriore)", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Gyrus cinguli", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Giro del cingolo, sopra il corpo calloso: sistema limbico. La parte anteriore elabora emozioni, motivazione e dolore.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "encefalo.cingulate-gyrus-and-sulcus-middle-posterior-part", "ref": "Cingulate gyrus and sulcus (Middle posterior part)", "dati": {
+   "nome": {"valore": "Giro del cingolo (parte medio-posteriore)", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Gyrus cinguli", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Giro del cingolo: attenzione, controllo dei conflitti, movimento.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "encefalo.cingulate-gyrus-and-sulcus-posterior-dorsal-part", "ref": "Cingulate gyrus and sulcus (Posterior dorsal part)", "dati": {
+   "nome": {"valore": "Giro del cingolo (parte dorsale posteriore)", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Gyrus cinguli", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Cingolo posteriore: memoria autobiografica e orientamento nello spazio.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "encefalo.cingulate-gyrus-posteroventral-part", "ref": "Cingulate gyrus (Posteroventral part*)", "dati": {
+   "nome": {"valore": "Istmo del giro del cingolo", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Isthmus gyri cinguli", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Istmo del cingolo: collega il giro del cingolo al paraippocampale.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "encefalo.hippocampus", "ref": "Hippocampus", "dati": {
+   "nome": {"valore": "Ippocampo", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Hippocampus", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Ippocampo, nel lobo temporale mediale: formazione di nuovi ricordi e orientamento spaziale. È colpito precocemente nell'Alzheimer.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "encefalo.amygdaloid-body", "ref": "Amygdaloid body", "dati": {
+   "nome": {"valore": "Corpo amigdaloideo", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Corpus amygdaloideum", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Amigdala, nel lobo temporale mediale davanti all'ippocampo: paura, emozioni, memoria emotiva.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "encefalo.septal-nuclei", "ref": "Septal nuclei", "dati": {
+   "nome": {"valore": "Nuclei del setto", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Nuclei septales", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Nuclei del setto: sistema limbico, ricompensa e piacere.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "encefalo.caudate-nucleus", "ref": "Caudate nucleus", "dati": {
+   "nome": {"valore": "Nucleo caudato", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Nucleus caudatus", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Nucleo caudato: nucleo della base, con il putamen forma lo striato. Controllo del movimento, apprendimento di abitudini. Si atrofizza nella malattia di Huntington.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "encefalo.putamen", "ref": "Putamen", "dati": {
+   "nome": {"valore": "Putamen", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Putamen", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Putamen: nucleo della base, parte dello striato e del nucleo lenticolare. Controllo del movimento.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "encefalo.globus-pallidus", "ref": "Globus pallidus", "dati": {
+   "nome": {"valore": "Globo pallido", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Globus pallidus", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Globo pallido: nucleo della base, principale via d'uscita verso il talamo.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "encefalo.lentiform-nucleus", "ref": "Lentiform nucleus", "dati": {
+   "nome": {"valore": "Nucleo lentiforme", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Nucleus lentiformis", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Nucleo lenticolare: putamen più globo pallido, lateralmente alla capsula interna.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "encefalo.corpus-callosum", "ref": "Corpus callosum", "dati": {
+   "nome": {"valore": "Corpo calloso", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Corpus callosum", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Corpo calloso: la più grande commissura, collega i due emisferi.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "encefalo.anterior-commissure", "ref": "Anterior commissure", "dati": {
+   "nome": {"valore": "Commessura anteriore", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Commissura anterior", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Commissura anteriore: collega i lobi temporali e le vie olfattive dei due lati.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "encefalo.hippocampal-commissure", "ref": "Hippocampal commissure", "dati": {
+   "nome": {"valore": "Commessura dell'ippocampo", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Commissura hippocampi", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Commissura del fornice: collega i due ippocampi.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "encefalo.fornix", "ref": "Fornix", "dati": {
+   "nome": {"valore": "Fornice", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Fornix", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Fornice: fascio che porta le fibre dall'ippocampo ai corpi mammillari (circuito di Papez, memoria).", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "encefalo.stria-terminalis", "ref": "Stria terminalis", "dati": {
+   "nome": {"valore": "Stria terminale", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Stria terminalis", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Stria terminale: fascio che va dall'amigdala all'ipotalamo seguendo il nucleo caudato.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "encefalo.white-matter-of-telencephalon", "ref": "White matter of telencephalon", "dati": {
+   "nome": {"valore": "Sostanza bianca del telencefalo", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Substantia alba telencephali", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Sostanza bianca degli emisferi: fibre mieliniche che collegano le aree della corteccia tra loro e con le strutture profonde (capsula interna, corona radiata).", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "encefalo.lateral-ventricle", "ref": "Lateral ventricle", "dati": {
+   "nome": {"valore": "Ventricolo laterale", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Ventriculus lateralis", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Ventricolo laterale: cavità di ciascun emisfero piena di liquido cefalorachidiano, prodotto dai plessi corioidei.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "encefalo.septum-pellucidum", "ref": "Septum pellucidum", "dati": {
+   "nome": {"valore": "Setto pellucido", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Septum pellucidum", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Setto pellucido: sottile lamina che separa i due ventricoli laterali.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "encefalo.lat-fis-ant-horizont", "ref": "Lat_Fis-ant-Horizont", "dati": {
+   "nome": {"valore": "Ramo anteriore della scissura laterale", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Ramus anterior sulci lateralis", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Ramo anteriore orizzontale della scissura laterale: delimita la parte triangolare (Broca).", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "encefalo.lat-fis-post", "ref": "Lat_Fis-post", "dati": {
+   "nome": {"valore": "Ramo posteriore della scissura laterale", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Ramus posterior sulci lateralis", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Ramo posteriore della scissura laterale (di Silvio): separa il lobo temporale da frontale e parietale.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "encefalo.posterior-transverse-collateral-sulcus", "ref": " Posterior transverse collateral sulcus", "dati": {
+   "nome": {"valore": "Solco collaterale trasverso posteriore", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Sulcus collateralis transversus posterior", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Solco breve sulla faccia inferiore del lobo occipito-temporale, ramo trasverso del solco collaterale.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "encefalo.sulcus-interm-prim-jensen", "ref": "Sulcus interm_prim-Jensen", "dati": {
+   "nome": {"valore": "Sulcus interm_prim-Jensen", "fonte": "Z-Anatomy", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "encefalo.habenula", "ref": "Habenula", "dati": {
+   "nome": {"valore": "Abenula", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Habenula", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Abenula: piccolo nucleo dell'epitalamo, collega sistema limbico e mesencefalo (motivazione, ricompensa).", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "encefalo.optic-tract", "ref": "Optic tract", "dati": {
+   "nome": {"valore": "Tratto ottico", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Tractus opticus", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Tratto ottico: dal chiasma al corpo genicolato laterale; porta il campo visivo opposto.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "encefalo.thalamus", "ref": "Thalamus", "dati": {
+   "nome": {"valore": "Talamo", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Thalamus", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Talamo: stazione di smistamento. Quasi tutte le vie sensitive (non l'olfatto) passano di qui prima della corteccia; partecipa a movimento, vigilanza e memoria.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "encefalo.hypothalamus", "ref": "Hypothalamus", "dati": {
+   "nome": {"valore": "Ipotalamo", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Hypothalamus", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Ipotalamo: omeostasi, temperatura, fame, sete, ritmo sonno-veglia; controlla l'ipofisi e il sistema nervoso autonomo.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "encefalo.stria-medullaris-thalami", "ref": "Stria medullaris thalami", "dati": {
+   "nome": {"valore": "Stria midollare del talamo", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Stria medullaris thalami", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Stria midollare del talamo: fibre dirette all'abenula.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "encefalo.posterior-commissure", "ref": "Posterior commissure", "dati": {
+   "nome": {"valore": "Commessura posteriore", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Commissura posterior", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Commissura posteriore: fibre del riflesso pupillare consensuale.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "encefalo.third-ventricle", "ref": "Third ventricle", "dati": {
+   "nome": {"valore": "Terzo ventricolo", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Ventriculus tertius", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Terzo ventricolo: cavità mediana tra i due talami; comunica con i laterali (forami di Monro) e con il quarto (acquedotto).", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "encefalo.lateral-geniculate-body", "ref": "Lateral geniculate body", "dati": {
+   "nome": {"valore": "Corpo genicolato laterale", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Corpus geniculatum laterale", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Corpo genicolato laterale: stazione talamica della via visiva, tra tratto ottico e corteccia occipitale.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "encefalo.medial-geniculate-body", "ref": "Medial geniculate body", "dati": {
+   "nome": {"valore": "Corpo genicolato mediale", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Corpus geniculatum mediale", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Corpo genicolato mediale: stazione talamica della via uditiva.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "encefalo.mamillary-body", "ref": "Mamillary body", "dati": {
+   "nome": {"valore": "Corpo mammillare", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Corpus mammillare", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Corpi mammillari: ricevono il fornice, circuito della memoria. Lesi nella sindrome di Wernicke-Korsakoff (carenza di tiamina).", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "encefalo.optic-chiasm", "ref": "Optic chiasm", "dati": {
+   "nome": {"valore": "Chiasma ottico", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Chiasma opticum", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Chiasma ottico: si incrociano le fibre delle metà nasali delle retine. Un tumore dell'ipofisi lo comprime: emianopsia bitemporale.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "encefalo.base-of-peduncle", "ref": "Base of peduncle", "dati": {
+   "nome": {"valore": "Base del peduncolo", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Basis pedunculi", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Base del peduncolo cerebrale: vi scendono le vie corticospinali e corticobulbari.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "encefalo.nucleus-of-oculomotor-nerve", "ref": "Nucleus of oculomotor nerve", "dati": {
+   "nome": {"valore": "Nucleo del nervo oculomotore", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Nucleus nervi oculomotorius", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Nucleo del III: muove gli occhi (retti superiore, inferiore, mediale, obliquo inferiore) e solleva la palpebra.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "encefalo.accessory-nucleus-of-oculomotor-nerve", "ref": "Accessory nucleus of oculomotor nerve", "dati": {
+   "nome": {"valore": "Nucleo accessorio del nervo oculomotore", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Nucleus accessorius nervi oculomotorii", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Nucleo di Edinger-Westphal: parasimpatico, restringe la pupilla e regola l'accomodazione.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "encefalo.red-nucleus", "ref": "Red nucleus", "dati": {
+   "nome": {"valore": "Nucleo rosso", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Nucleus ruber", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Nucleo rosso: nel mesencefalo, coordinazione motoria (via rubrospinale), collegato al cervelletto.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "encefalo.aqueduct-of-midbrain", "ref": "Aqueduct of midbrain", "dati": {
+   "nome": {"valore": "Acquedotto del mesencefalo", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Aquaeductus mesencephali", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Acquedotto di Silvio: canale nel mesencefalo tra terzo e quarto ventricolo. La sua ostruzione causa idrocefalo.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "encefalo.superior-colliculus", "ref": "Superior colliculus", "dati": {
+   "nome": {"valore": "Collicolo superiore", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Colliculus superior", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Collicolo superiore: riflessi visivi e movimenti degli occhi e della testa verso uno stimolo.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "encefalo.inferior-colliculus", "ref": "Inferior colliculus", "dati": {
+   "nome": {"valore": "Collicolo inferiore", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Colliculus inferior", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Collicolo inferiore: stazione della via uditiva.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "encefalo.midbrain", "ref": "Midbrain", "dati": {
+   "nome": {"valore": "Mesencefalo", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Mesencephalon", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Mesencefalo: parte superiore del tronco. Nuclei dei nervi III e IV, substantia nigra (Parkinson), nucleo rosso, collicoli.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "encefalo.interpeduncular-fossa", "ref": "Interpeduncular fossa", "dati": {
+   "nome": {"valore": "Fossa interpeduncolare", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Fossa interpeduncularis", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Fossa interpeduncolare: tra i peduncoli; ne esce il nervo oculomotore (III).", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "encefalo.vestibular-nuclei", "ref": "Vestibular nuclei", "dati": {
+   "nome": {"valore": "Nuclei vestibolari", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Nuclei vestibulares", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Nuclei vestibolari: equilibrio, riflesso vestibolo-oculare, tono posturale.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "encefalo.nucleus-of-abducens-nerve", "ref": "Nucleus of abducens nerve", "dati": {
+   "nome": {"valore": "Nucleo del nervo abducente", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Nucleus nervi abducentis", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Nucleo del VI: retto laterale (abduzione dell'occhio).", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "encefalo.motor-nucleus-of-facial-nerve", "ref": "Motor nucleus of facial nerve", "dati": {
+   "nome": {"valore": "Nucleo del nervo facciale", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Nucleus nervi facialis", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Nucleo motore del VII: muscoli mimici. La metà superiore della faccia riceve fibre da entrambi gli emisferi.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "encefalo.superior-salivatory-nucleus", "ref": "Superior salivatory nucleus", "dati": {
+   "nome": {"valore": "Nucleo salivatorio superiore", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Nucleus salivatorius superior", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Parasimpatico del VII: ghiandole lacrimali, sottomandibolari e sottolinguali.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "encefalo.pons", "ref": "Pons", "dati": {
+   "nome": {"valore": "Ponte", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Pons", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Ponte: collega cervello, cervelletto e midollo; contiene i nuclei dei nervi V, VI, VII, VIII e centri del respiro.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "encefalo.fourth-ventricle", "ref": "Fourth ventricle", "dati": {
+   "nome": {"valore": "Quarto ventricolo", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Ventriculus quartus", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Quarto ventricolo: tra tronco e cervelletto; il liquor esce nello spazio subaracnoideo dai forami di Magendie e Luschka.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "encefalo.anterior-cochlear-nucleus", "ref": "Anterior cochlear nucleus", "dati": {
+   "nome": {"valore": "Nucleo cocleare anteriore", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Nucleus cochlearis anterior", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Nucleo cocleare anteriore: prima stazione della via uditiva.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "encefalo.medulla-oblongata", "ref": "Medulla oblongata", "dati": {
+   "nome": {"valore": "Midollo allungato", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Medulla oblongata", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Bulbo: centri del respiro, del battito e della pressione; nuclei dei nervi IX, X, XI, XII. Qui si incrociano le vie piramidali.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "encefalo.pyramid-of-medulla-oblongata", "ref": "Pyramid of medulla oblongata", "dati": {
+   "nome": {"valore": "Piramide del midollo allungato", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Pyramis medullae oblongatae", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Piramide del bulbo: contiene la via corticospinale, che in basso si incrocia (decussazione delle piramidi).", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "encefalo.olive", "ref": "Olive", "dati": {
+   "nome": {"valore": "Oliva", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Oliva", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Oliva: contiene il nucleo olivare inferiore, collegato al cervelletto (apprendimento motorio).", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "encefalo.wing-of-central-lobule", "ref": "Wing of central lobule", "dati": {
+   "nome": {"valore": "Ala del lobulo centrale", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Ala lobuli centralis", "fonte": "TA2", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "encefalo.uvula-of-vermis", "ref": "Uvula of vermis", "dati": {
+   "nome": {"valore": "Uvula", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Uvula vermis", "fonte": "TA2", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "encefalo.tuber-of-vermis", "ref": "Tuber of vermis", "dati": {
+   "nome": {"valore": "Tuber vermis", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Tuber vermis", "fonte": "TA2", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "encefalo.tonsil-of-cerebellum", "ref": "Tonsil of cerebellum", "dati": {
+   "nome": {"valore": "Tonsilla del cervelletto", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Tonsilla cerebelli", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Tonsilla del cervelletto: può erniare nel forame magno (malformazione di Chiari, ipertensione endocranica).", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "encefalo.superior-semilunar-lobule", "ref": "Superior semilunar lobule", "dati": {
+   "nome": {"valore": "Lobulo semilunare superiore", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Lobulus semilunaris superior", "fonte": "TA2", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "encefalo.superior-cerebellar-peduncle", "ref": "Superior cerebellar peduncle", "dati": {
+   "nome": {"valore": "Peduncolo cerebellare superiore", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Pedunculus cerebellaris superior", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Peduncolo cerebellare superiore: principale via d'uscita del cervelletto verso nucleo rosso e talamo.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "encefalo.pyramis-of-vermis", "ref": "Pyramis of vermis", "dati": {
+   "nome": {"valore": "Piramide", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Pyramis vermis", "fonte": "TA2", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "encefalo.posterior-quadrangular-lobule", "ref": "Posterior quadrangular lobule", "dati": {
+   "nome": {"valore": "Lobulo quadrangolare posteriore", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Lobulus quadrangularis posterior", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Lobo posteriore: coordinazione e pianificazione dei movimenti fini.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "encefalo.peduncle-of-flocculus", "ref": "Peduncle of flocculus", "dati": {
+   "nome": {"valore": "Peduncolo del flocculo", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Pedunculus flocculi", "fonte": "TA2", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "encefalo.nodule-of-vermis", "ref": "Nodule of vermis", "dati": {
+   "nome": {"valore": "Nodulo", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Nodulus vermis", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Nodulo del verme: con il flocculo forma il vestibolocerebello (equilibrio).", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "encefalo.lingula-of-cerebellum", "ref": "Lingula of cerebellum", "dati": {
+   "nome": {"valore": "Lingula del cervelletto", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Lingula cerebelli", "fonte": "TA2", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "encefalo.inferior-semilunar-lobule", "ref": "Inferior semilunar lobule", "dati": {
+   "nome": {"valore": "Lobulo semilunare inferiore", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Lobulus semilunaris inferior", "fonte": "TA2", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "encefalo.gracile-lobule", "ref": "Gracile lobule", "dati": {
+   "nome": {"valore": "Lobulo gracile", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Lobulus gracilis", "fonte": "TA2", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "encefalo.folium-of-vermis", "ref": "Folium of vermis", "dati": {
+   "nome": {"valore": "Folium vermis", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Folium vermis", "fonte": "TA2", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "encefalo.flocculus", "ref": "Flocculus", "dati": {
+   "nome": {"valore": "Flocculo", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Flocculus", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Flocculo: lobo flocculonodulare, equilibrio e movimenti oculari (vestibolocerebello).", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "encefalo.declive", "ref": "Declive", "dati": {
+   "nome": {"valore": "Declive", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Declive", "fonte": "TA2", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "encefalo.culmen", "ref": "Culmen", "dati": {
+   "nome": {"valore": "Culmen", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Culmen", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Culmine del verme: lobo anteriore, tono e postura del tronco (spinocerebello).", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "encefalo.central-lobule", "ref": "Central lobule", "dati": {
+   "nome": {"valore": "Lobulo centrale", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Lobulus centralis vermis", "fonte": "TA2", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "encefalo.biventral-lobule", "ref": "Biventral lobule", "dati": {
+   "nome": {"valore": "Lobulo biventrale", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Lobulus biventer", "fonte": "TA2", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "encefalo.anterior-quadrangular-lobule", "ref": "Anterior quadrangular lobule", "dati": {
+   "nome": {"valore": "Lobulo quadrangolare anteriore", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Lobulus quadrangularis anterior", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Lobo anteriore dell'emisfero cerebellare: coordinazione degli arti dello stesso lato.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "encefalo.anterior-chamber-of-eyeball", "ref": "Anterior chamber of eyeball", "dati": {
+   "nome": {"valore": "Camera anteriore del bulbo oculare", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Camera anterior bulbi oculi", "fonte": "TA2", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "encefalo.nucleus-of-trochlear-nerve", "ref": "Nucleus of trochlear nerve", "dati": {
+   "nome": {"valore": "Nucleo del nervo trocleare", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Nucleus nervi trochlearis", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Nucleo del IV: obliquo superiore. È l'unico nervo che esce dal dorso del tronco.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "encefalo.posterior-cochlear-nucleus", "ref": "Posterior cochlear nucleus", "dati": {
+   "nome": {"valore": "Nucleo cocleare posteriore", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Nucleus cochlearis posterior", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Nucleo cocleare posteriore: prima stazione della via uditiva.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "encefalo.inferior-salivatory-nucleus", "ref": "Inferior salivatory nucleus", "dati": {
+   "nome": {"valore": "Nucleo salivatorio inferiore", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Nucleus salivatorius inferior", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Parasimpatico del IX: parotide.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "encefalo.posterior-nucleus-of-vagus-nerve", "ref": "Posterior nucleus of vagus nerve", "dati": {
+   "nome": {"valore": "Nucleo posteriore del nervo vago", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Nucleus posterior nervi vagi", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Nucleo dorsale del vago: parasimpatico per cuore, polmoni e intestino.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "encefalo.nucleus-of-hypoglossal-nerve", "ref": "Nucleus of hypoglossal nerve", "dati": {
+   "nome": {"valore": "Nucleo del nervo ipoglosso", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Nucleus nervi hypoglossi", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Nucleo del XII: muscoli della lingua.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "encefalo.nucleus-ambiguus", "ref": "Nucleus ambiguus", "dati": {
+   "nome": {"valore": "Nucleo ambiguo", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Nucleus ambiguus", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Nucleo ambiguo: motore per faringe e laringe (IX, X); deglutizione e fonazione.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "encefalo.nucleus-of-accessory-nerve", "ref": "Nucleus of accessory nerve", "dati": {
+   "nome": {"valore": "Nucleo del nervo accessorio", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Nucleus nervi accessorii", "fonte": "TA2", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "encefalo.central-canal", "ref": "Central canal'", "dati": {
+   "nome": {"valore": "Canale centrale", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Canalis centralis", "fonte": "TA2", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "encefalo.white-matter-of-spinal-cord", "ref": "White matter of spinal cord", "dati": {
+   "nome": {"valore": "Sostanza bianca del midollo spinale", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Substantia alba medullae spinalis", "fonte": "TA2", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "encefalo.gracile-fasciculus", "ref": "Gracile fasciculus", "dati": {
+   "nome": {"valore": "Fascicolo gracile", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Fasciculus gracilis", "fonte": "TA2", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "encefalo.cuneate-fasciculus", "ref": "Cuneate fasciculus", "dati": {
+   "nome": {"valore": "Fascicolo cuneato", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Fasciculus cuneatus", "fonte": "TA2", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "encefalo.central-canal-2", "ref": "Central canal", "dati": {
+   "nome": {"valore": "Canale centrale", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Canalis centralis", "fonte": "TA2", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "encefalo.medial-vestibulospinal-tract", "ref": "Medial vestibulospinal tract", "dati": {
+   "nome": {"valore": "Tratto vestibolospinale mediale", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Tractus vestibulospinalis medialis", "fonte": "TA2", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "encefalo.intermediomedial-nucleus", "ref": "Intermediomedial nucleus", "dati": {
+   "nome": {"valore": "Nucleo intermediomediale", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Nucleus intermediomedialis", "fonte": "TA2", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "encefalo.nucleus-proprius", "ref": "Nucleus proprius", "dati": {
+   "nome": {"valore": "Nucleo proprio", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Nucleus proprius", "fonte": "TA2", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "encefalo.intermediolateral-nucleus", "ref": "Intermediolateral nucleus", "dati": {
+   "nome": {"valore": "Nucleo intermediolaterale", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Nucleus intermediolateralis", "fonte": "TA2", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "encefalo.spinal-reticular-process", "ref": "Spinal reticular process", "dati": {
+   "nome": {"valore": "Processo reticolare spinale", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Processus reticularis spinalis", "fonte": "TA2", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "encefalo.lateral-corticospinal-tract", "ref": "Lateral corticospinal tract", "dati": {
+   "nome": {"valore": "Tratto corticospinale laterale", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Tractus corticospinalis lateralis", "fonte": "TA2", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "encefalo.rubrospinal-tract", "ref": "Rubrospinal tract", "dati": {
+   "nome": {"valore": "Tratto rubrospinale", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Tractus rubrospinalis", "fonte": "TA2", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "encefalo.lateral-reticulospinal-tract", "ref": "Lateral reticulospinal tract", "dati": {
+   "nome": {"valore": "Tratto reticolospinale laterale", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Tractus reticulospinalis lateralis", "fonte": "TA2", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "encefalo.lateral-vestibulospinal-tract", "ref": "Lateral vestibulospinal tract", "dati": {
+   "nome": {"valore": "Tratto vestibolospinale laterale", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Tractus vestibulospinalis lateralis", "fonte": "TA2", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "encefalo.medial-reticulospinal-tract", "ref": "Medial reticulospinal tract", "dati": {
+   "nome": {"valore": "Tratto reticolospinale mediale", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Tractus reticulospinalis medialis tractus", "fonte": "TA2", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "encefalo.anterior-corticospinal-tract", "ref": "Anterior corticospinal tract", "dati": {
+   "nome": {"valore": "Tratto corticospinale anteriore", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Tractus corticospinalis anterior", "fonte": "TA2", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "encefalo.anterior-spinothalamic-tract", "ref": "Anterior spinothalamic tract", "dati": {
+   "nome": {"valore": "Tratto spinotalamico anteriore", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Tractus spinothalamicus anterior", "fonte": "TA2", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "encefalo.lateral-spinothalamic-tract", "ref": "Lateral spinothalamic tract", "dati": {
+   "nome": {"valore": "Tratto spinotalamico laterale", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Tractus spinothalamicus lateralis", "fonte": "TA2", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "encefalo.posterolateral-tract", "ref": "Posterolateral tract", "dati": {
+   "nome": {"valore": "Tratto posterolaterale", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Fasciculus posterolateralis", "fonte": "TA2", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "encefalo.posterior-spinocerebellar-tract", "ref": "Posterior spinocerebellar tract", "dati": {
+   "nome": {"valore": "Tratto spinocerebellare posteriore", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Tractus spinocerebellaris posterior", "fonte": "TA2", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "encefalo.anterior-spinocerebellar-tract", "ref": "Anterior spinocerebellar tract", "dati": {
+   "nome": {"valore": "Tratto spinocerebellare anteriore", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Tractus spinocerebellaris anterior", "fonte": "TA2", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "encefalo.tectospinal-tract", "ref": "Tectospinal tract", "dati": {
+   "nome": {"valore": "Tratto tettospinale", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Tractus tectospinalis", "fonte": "TA2", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "encefalo.lateral-intermediate-substance", "ref": "Lateral intermediate substance", "dati": {
+   "nome": {"valore": "Sostanza intermedia laterale", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Substantia intermedia lateralis", "fonte": "TA2", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "encefalo.posterior-fasciculus-proprius", "ref": "Posterior fasciculus proprius", "dati": {
+   "nome": {"valore": "Fascicolo proprio posteriore", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Fasciculus proprius posterior", "fonte": "TA2", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "encefalo.lateral-fasciculus-proprius", "ref": "Lateral fasciculus proprius", "dati": {
+   "nome": {"valore": "Fascicolo proprio laterale", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Fasciculus proprius lateralis", "fonte": "TA2", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "encefalo.posterior-horn-of-spinal-cord", "ref": "Posterior horn of spinal cord", "dati": {
+   "nome": {"valore": "Corno posteriore del midollo spinale", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Cornu posterius medullae spinalis", "fonte": "TA2", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "encefalo.anterior-fasciculus-proprius", "ref": "Anterior fasciculus proprius", "dati": {
+   "nome": {"valore": "Fascicolo proprio anteriore", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Fasciculus proprius anterior", "fonte": "TA2", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "encefalo.anterior-horn-of-spinal-cord", "ref": "Anterior horn of spinal cord", "dati": {
+   "nome": {"valore": "Corno anteriore del midollo spinale", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Cornu anterius medullae spinalis", "fonte": "TA2", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "encefalo.spinotectal-tract", "ref": "Spinotectal tract", "dati": {
+   "nome": {"valore": "Tratto spino-tettale", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Tractus spinotectalis", "fonte": "TA2", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "encefalo.tentorium-cerebelli", "ref": "Tentorium cerebelli", "dati": {
+   "nome": {"valore": "Tentorio del cervelletto", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Tentorium cerebelli", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Tentorio del cervelletto: piega della dura madre che separa il cervelletto dai lobi occipitali. Nel suo margine libero può erniare l'uncus (compressione del III).", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "encefalo.falx-cerebri", "ref": "Falx cerebri", "dati": {
+   "nome": {"valore": "Falce cerebrale", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Falx cerebri", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Falce cerebrale: piega della dura madre nella scissura interemisferica, tra i due emisferi. Contiene i seni sagittali superiore e inferiore.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "encefalo.spinal-dura", "ref": "Spinal dura", "dati": {
+   "nome": {"valore": "Dura spinale", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Dura spinalis", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Dura madre spinale: sacco che avvolge midollo e radici fino a S2; tra essa e l'osso c'è lo spazio epidurale.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "encefalo.choroid-plexus", "ref": "Choroid plexus", "dati": {
+   "nome": {"valore": "Plesso coroideo", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Plexus chorioideus", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Plesso corioideo: vasi della pia madre nei ventricoli, producono il liquido cefalorachidiano (circa 500 ml al giorno).", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "encefalo.wernicke-area", "ref": "Wernicke area", "solo2d": true, "dati": {
+   "nome": {"valore": "Area di Wernicke", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Area di Wernicke", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Parte posteriore del giro temporale superiore dell'emisfero dominante, legata alla comprensione del linguaggio. Il confine non è nella fonte: qui è il terzo posteriore del giro, un'approssimazione.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "encefalo.pineal-gland", "ref": "Pineal gland", "dati": {
+   "nome": {"valore": "Ghiandola pineale", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Glandula pinealis", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Epifisi: piccola ghiandola dell'epitalamo, dietro il terzo ventricolo; produce melatonina e regola il ritmo sonno-veglia.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "encefalo.adenohypophysis", "ref": "Adenohypophysis", "dati": {
+   "nome": {"valore": "Adenoipofisi", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Adenohypophysis", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Lobo anteriore dell'ipofisi: produce GH, prolattina, TSH, ACTH, FSH e LH sotto il controllo dell'ipotalamo.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "encefalo.neurohypophysis", "ref": "Neurohypophysis", "dati": {
+   "nome": {"valore": "Neuroipofisi", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Neurohypophysis", "fonte": "TA2", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Lobo posteriore dell'ipofisi: libera ossitocina e vasopressina (ADH) prodotte dai nuclei dell'ipotalamo.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "encefalo.posterior-transverse-collateral-sulcus-2", "ref": "Posterior transverse collateral sulcus", "dati": {
+   "nome": {"valore": "Solco collaterale trasverso posteriore", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "latino": {"valore": "Sulcus collateralis transversus posterior", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "descrizione": {"valore": "Solco breve sulla faccia inferiore del lobo occipito-temporale, ramo trasverso del solco collaterale.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }}
+ ]
+}

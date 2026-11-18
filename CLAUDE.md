@@ -88,16 +88,16 @@ Contenuto del gioco:
   sinistro visto di lato, 57 strutture) e `sag` (faccia mediale dell'emisfero destro, 81 strutture), 12 nervi cranici.
 - Disegni 2D ricavati dal modello 3D (non più a mano): `node atlante/build/proietta_2d.mjs <tmp.json>` proietta ossa,
   encefalo e aree di origine e inserzione (z-buffer in software, contorni dei pixel visibili → tracciati SVG; senza pacchetti
-  npm), poi `python3 atlante/build/contenuti_2d.py <tmp.json>` scrive `content/corpo.json`, `lat.json`, `sag.json` con nomi
-  (TA2), descrizioni (`desc` di `dati.json`), gruppi, muscoli e casi (testi dei gruppi di ossa e casi in `atlante/build/testi_2d.json`,
-  gruppi del cervello in `content/neuro-strutture.json`). Ogni struttura ha `s.a`/`s.p` (forme per vista; per le ossa pari il
+  npm), poi `python3 atlante/build/contenuti_2d.py <tmp.json>` scrive `content/corpo.json`, `lat.json`, `sag.json` con nomi,
+  descrizioni (`desc` di `dati.json`), gruppi, muscoli e casi (tutti i testi da `testi/`, vedi sotto). Di solito li lancia
+  `python3 atlante/build/testi.py`, che rifà tutto. Ogni struttura ha `s.a`/`s.p` (forme per vista; per le ossa pari il
   primo tracciato è il lato destro, usato per i pezzi del puzzle) e `g` (gruppo); i gruppi hanno `m` (membri). Nel cervello i
   gruppi sono i lobi (partizione) più aree che si sovrappongono (`area: true`: Broca, Wernicke, giro precentrale, talamo…).
   Esclusi dal 2D: ossicini, cellule etmoidali, seni, cartilagini di naso e laringe, sesamoidi; denti e cartilagini costali
   sono una voce ciascuno; nel cervello i nuclei profondi (si vedrebbero attraverso gli spazi tra le superfici).
 - Muscoli 2D: ossa di origine e inserzione dall'osso più vicino alle aree della fonte; dove la fonte non ha l'area, dal testo
   della scheda (`src: 'testo'`, segnalato nel pannello). 154 muscoli hanno origine e inserzione (usati nei giochi).
-  Aree segnate dalla parte sbagliata nella fonte: `SPOSTA` in `build/descrizioni.py` (es. capo breve del bicipite femorale).
+  Aree segnate dalla parte sbagliata nella fonte: correzioni `sposta_aree` in `testi/correzioni.json` (es. capo breve del bicipite femorale).
 - Figura: barra con "Anteriore/Posteriore ⇄" (solo corpo) e "Ossa singole/Gruppi" ("Giri e solchi/Lobi e aree" nel cervello),
   scelta salvata in `dextera-2d`. Le due viste sono nell'svg insieme (una nascosta), le marcature valgono in tutte e due.
   Con i gruppi tutti i giochi usano i gruppi (`items()`, `itemOf()` in `state.js`); la risposta è giusta se si tocca un membro.
@@ -172,32 +172,32 @@ Come si rigenera (serve Blender; i passaggi stanno in `atlante/build/`):
 1. `Blender -b Startup.blend --python build/za_export.py -- <cartella>` esporta gli strati grezzi e `za_meta.json`
    (`Startup.blend` è dentro `Z-Anatomy.zip` del repository Z-Anatomy/Models-of-human-anatomy).
 2. `node build/za_optimize.mjs <cartella> <uscita>` semplifica e comprime (pacchetti npm `@gltf-transform/*`, `meshoptimizer`).
-3. `python3 build/za_dati.py <cartella>/za_meta.json atlante/dati.json` unisce metadati, TA2, `build/schede.json`
-   e le descrizioni di `build/descrizioni.py` (chiave `desc`). Per aggiornare solo le descrizioni senza Blender:
-   `python3 build/descrizioni.py atlante/dati.json`.
+3. `python3 build/za_dati.py <cartella>/za_meta.json atlante/dati.json` unisce metadati e TA2, poi applica `testi/`
+   (non provato dopo il passaggio a `testi/`: serve l'esportazione da Blender). Per aggiornare solo i testi senza Blender:
+   `python3 atlante/build/testi.py` (vedi «Testi verificabili»).
 
 Funzioni dell'atlante (in `atlante.js`):
 - Muscolo: tre viste, "Forma e aree", "Punti e linee" (pallino blu al centro di ogni area di origine, arancione
   per l'inserzione, linea viola che li unisce, sempre in primo piano) ed "Entrambe"; reperi della fonte entro 2,5 cm dai punti.
-- Gruppi (`COMBO`): zampa d'oca, ischiocrurali, cuffia dei rotatori, tricipite della sura, quadricipite.
+- Gruppi (`COMBO`, da `DATA.combo`): zampa d'oca, ischiocrurali, cuffia dei rotatori, tricipite della sura, quadricipite.
 - Ricerca senza accenti, con abbreviazioni e nomi comuni (`SYN`: SIAS, SIPS, zampa d'oca, Broca…).
 - Encefalo (pulsante 🧠): sezioni assiale, coronale e sagittale con cursore (piano di taglio su tutta la scena;
-  durante il taglio il contorno è spento e le superfici sono a due facce) e scomposizione in 9 strati (`ST`), dalla
+  durante il taglio il contorno è spento e le superfici sono a due facce) e scomposizione in 9 strati (`ST`, da `DATA.strati`), dalla
   dura madre ai ventricoli. Dura madre e aracnoide craniche non sono nella fonte: `makeShells()` le genera
   avvolgendo la corteccia, forma schematica dichiarata nel pannello.
 
 Correzione all'esportazione: `Ciliary body-curve.l` in `sensi.glb` esce con una trasformazione sbagliata (anello di 2 m
-dietro lo scheletro); `atlante.js` lo sostituisce al caricamento con la copia speculare del destro (`MIRROR_FIX`).
+dietro lo scheletro); `atlante.js` lo sostituisce al caricamento con la copia speculare del destro (`MIRROR_FIX`, da `DATA.specchia`, cioè dalle correzioni `specchia` di `testi/correzioni.json`).
 
 Correzioni alla fonte: in 12 muscoli Z-Anatomy ha origine e inserzione scambiate (piccolo pettorale, dentato anteriore,
 trapezio, scaleni anteriore e medio, tiroioideo, retto dell'addome, retti e obliquo inferiore della testa; capo
-sternocostale del grande pettorale). `correggi_aree()` in `build/descrizioni.py` le scambia; il pannello lo segnala.
+sternocostale del grande pettorale). Sono correzioni `inverti_aree` e `aree_origine` in `testi/correzioni.json`, applicate da
+`correggi_aree()` in `build/testi.py` (riparte sempre dal tipo scritto nel nome dell'area, quindi è idempotente); il pannello lo segnala.
 I "muscoli qui vicino" di un repere contano solo le aree il cui osso più vicino è quello del repere.
 
 Cosa viene dalla fonte e cosa no: forme, posizioni dei reperi, aree di origine e inserzione e nomi vengono
-dalla fonte. Scritti dall'AI a memoria, da verificare su un atlante: i testi dei muscoli in `build/schede.json`
-(57 muscoli) e `build/schede2.py` (gli altri 151: ora tutti i 208 hanno la scheda), le descrizioni di `build/descrizioni.py` (tutte le ossa, tutti i 606 reperi,
-quasi tutte le strutture dell'encefalo) e i testi di gruppi e strati in `atlante.js`.
+dalla fonte. Scritti dall'AI a memoria, da verificare su un atlante: le schede dei 208 muscoli, le descrizioni (tutte le ossa,
+i reperi, quasi tutte le strutture dell'encefalo), i testi di gruppi, strati, nervi cranici e casi clinici. Tutti in `testi/`.
 Giochi sul modello 3D (si rifanno uno alla volta; quelli 2D restano come sono). Fatto: **Trova la struttura** in tre
 serie (ossa, muscoli, reperi), nella Palestra sotto "Sul modello 3D". Il menu chiama `play3d()` in `js/ui.js`, che apre l'Atlante
 in 3D e manda all'iframe `{bm:1,type:'game',set}` (anche in attesa del messaggio `ready` se l'atlante non è ancora carico);
@@ -212,7 +212,7 @@ risposta è giusta se il punto toccato dista al massimo 1,2 cm (`OI_TOL`) da un'
 triangoli, `distToArea`). Se sbagliata, il pannello dice se lì c'è l'area di un altro muscolo. Dopo la risposta si vedono
 le aree e la linea del muscolo sul lato toccato (vista `mv:'areas'`, senza la forma) e il testo della scheda (dell'AI).
 Domande: 120 origini e 83 inserzioni con almeno un'area visibile da fuori (conteggio a 400×800, le aree di mano e piede
-sono piccole). Refusi della traduzione italiana di TA2 corretti in `REFUSI` di `build/descrizioni.py`.
+sono piccole). Refusi della traduzione italiana di TA2: correzioni `refuso` in `testi/correzioni.json`.
 Fatti anche (18/11/2026): **Ricomponi** (`ricomponi`: le ossa di una zona di `ZONES` diventano trasparenti, si sceglie un pezzo
 e si tocca il suo posto; il raggio cerca solo tra i posti vuoti, anche dietro altre ossa), **Tendine-ponte** (`ponte`: osso di
 origine e poi di inserzione, ossa = osso più vicino alle aree della fonte, come nel 2D; 76 muscoli), **Caso clinico** (`caso`:
@@ -220,7 +220,7 @@ indizi progressivi, si tocca il muscolo; casi di `content/corpo.json` mandati da
 un muscolo visibile da fuori) e **Nervi cranici** (`nervi`: encefalo e solo i 12 nervi cranici accesi, ossa trasparenti; si
 chiede il nome o la funzione da `nervi-cranici.json`, anche questi mandati dall'app; `crNum()` riconosce anche i rami di V,
 VII, VIII). Funzione → struttura resta solo 2D: in 3D più muscoli hanno la stessa azione e il tocco sarebbe ambiguo.
-I casi clinici del corpo sono 21 (12 nuovi in `testi_2d.json`, scritti dall'AI: da verificare), validi anche nel 2D.
+I casi clinici del corpo sono 21 (12 nuovi, scritti dall'AI: da verificare; in `testi/casi.json`), validi anche nel 2D.
 Badge "Esploratore 3D": quattro sfide 3D diverse (testo aggiornato in `20261118150000_badge_3d.sql`, facoltativo).
 
 Requisiti dell'autore per il 3D (16/11/2026):
@@ -229,6 +229,29 @@ Requisiti dell'autore per il 3D (16/11/2026):
 - Strati sovrapponibili, come nei software di visualizzazione anatomica: scheletro, muscoli con la forma vera,
   cervello con le sue aree, sistema nervoso, ciascuno da accendere o spegnere sopra gli altri.
 - Precisione scientifica in ogni modalità di gioco: l'app serve per studiare e passare gli esami.
+
+## Testi verificabili (`testi/`, sezione 12 della specifica)
+Tutti i dati anatomici scritti a parole stanno in `testi/`, un file per tipo: `muscoli.json` (208: nome, latino, origine,
+inserzione, azione, innervazione), `ossa.json` (159 del modello più denti e cartilagini costali del 2D, `solo2d`), `reperi.json`
+(606; le 19 voci con `vedi` hanno nome e descrizione nella voce di un osso o dell'encefalo che ha lo stesso nome nella fonte),
+`encefalo.json` (strutture di encefalo, midollo e meningi, 3D e 2D, area di Wernicke), `nervi-cranici.json`, `gruppi.json`
+(gruppi di ossa `gruppo.ossa.*`, lobi e aree del cervello `gruppo.encefalo.*`, gruppi di muscoli e strati dell'encefalo
+dell'atlante, descrizioni dei gruppi della fonte `gruppo.fonte.*` usate quando una struttura non ha la sua), `casi.json` (36 casi).
+- Formato: `{"version","tipo","nota","campi":{campo: etichetta},"voci":[{"id","ref",…,"dati":{campo:{"valore","fonte","stato","verifica"}}}]}`.
+  L'id di un dato è `<id della voce>.<campo>` (es. `muscolo.semitendinosus.origine`). Gli id delle voci usano il nome inglese
+  della fonte come gli id di `content/` (`o.femur` → `osso.femur`, muscolo `semitendinosus`, `b.precentral-gyrus` → `encefalo.precentral-gyrus`):
+  non cambiano se si corregge il nome. `ref` è il nome nel modello (chiave di `dati.json`).
+- Fonte: `Z-Anatomy`, `TA2`, `AI`, `docente`. Stato: `da verificare`, `verificato`, `corretto`, `segnalato`. `verifica`: null oppure
+  `{"chi","quando","nota"}` (il nome del docente solo con il suo consenso; nell'app si vedrà solo «Verificato il …»).
+- `testi/correzioni.json`: correzioni alla fonte con il motivo: `inverti_aree` (12 muscoli), `aree_origine` (capo sternocostale del
+  grande pettorale), `sposta_aree` (6 muscoli), `refuso` (TA2), `specchia` (`Ciliary body-curve.l`).
+- `python3 atlante/build/testi.py` applica tutto ad `atlante/dati.json` (senza Blender, idempotente), scrive
+  `content/nervi-cranici.json` e `content/neuro-strutture.json`, rifà i moduli 2D e aumenta da sola le versioni dei file
+  cambiati e di `content/index.json`. Poi va aumentato `APP_VERSION` in `sw.js` se è cambiato `atlante/dati.json`.
+  `content/` e `atlante/dati.json` sono generati: mai correggerli a mano.
+- I nomi di vasi, nervi, legamenti e visceri non sono in `testi/`: vengono da TA2 (con i refusi corretti).
+- I testi sono stati portati in `testi/` dai file generati del 18/11/2026: l'uscita rigenerata è uguale, salvo i nomi italiani di
+  10 strutture del cervello ora anche nel 3D, le descrizioni di ipofisi ed epifisi nel 3D e i gruppi e strati passati da `atlante.js` a `dati.json`.
 
 ## Storia (da BodyMania)
 Ereditato da BodyMania e già fatto: contenuti JSON versionati e moduli JS, PWA con controllo delle versioni, schema

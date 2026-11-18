@@ -386,6 +386,8 @@ descrizioni; quelle con fonte Z-Anatomy dicono da quale vaso nasce o dove sbocca
   Nel sistema ogni pianeta ha intorno le lune dei suoi satelliti (colore dello stato, `moons()`); nell'universo ogni corso è un piccolo
   sistema, gli altri tre corsi «in arrivo». Riquadro dell'universo «Cosa studi?» con la scelta del percorso (`PERCORSI` in `path.js`: solo
   «Percorso completo» attivo, Fisioterapia, Medicina e MCB «in arrivo», fase 6). Intestazione: livello e titolo su due righe.
+  Pulsante Indietro (‹, `.pback`) prima delle briciole: sale di un livello. Nel satellite sul telefono restano Indietro e briciole (ferme in
+  alto mentre si scorrono i passi); nell'app installata su iPhone non c'è un tasto Indietro del browser.
 - Sincronizzazione in `syncPercorso()` di `account.js`; senza tabelle i dati restano in coda (avviso nel profilo).
 
 ## Mappa del percorso (`content/mappa.json`)

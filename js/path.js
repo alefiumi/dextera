@@ -72,8 +72,13 @@ export function renderPath(){
  // nel satellite la mappa mostra il suo pianeta con il satellite evidenziato (sul telefono è nascosta: contano i passi)
  const mapBody=ui.mode==='elenco'?`<div class="lcard">${listHtml(g)}</div>`:ui.lvl==='universo'?universeSvg():ui.lvl==='sistema'?systemSvg(g):planetSvg(curP,g,ui.lvl==='satellite'?sat:null);
  const side=ui.lvl==='satellite'?satHtml(sat,g):infoHtml(g,curP);
- $('panel').innerHTML=`<div class="path pv-${ui.lvl}"><section class="pmain" aria-label="Mappa del percorso"><div class="phead">${bc}${tog}</div>${mapBody}</section>
+ // pulsante Indietro: sale di un livello (nell'app installata su iPhone non c'è il tasto del browser)
+ const up=ui.lvl==='satellite'?['pianeta',curP.id]:ui.lvl==='pianeta'?['sistema']:ui.lvl==='sistema'?['universo']:null;
+ const back=up?`<button class="pback" data-p="lvl" data-lvl="${up[0]}"${up[1]?` data-id="${esc(up[1])}"`:''} aria-label="Indietro">‹</button>`:'';
+ $('panel').innerHTML=`<div class="path pv-${ui.lvl}"><section class="pmain" aria-label="Mappa del percorso"><div class="phead">${back}${bc}${tog}</div>${mapBody}</section>
   <div class="pside">${ui.lvl==='satellite'?side+topHtml(g):topHtml(g)+side}${glossary()}</div></div>`;
+ // briciole lunghe sul telefono: si vede la fine (dove sei)
+ const cr=$('panel').querySelector('.crumbs');if(cr)cr.scrollLeft=cr.scrollWidth;
 }
 function topHtml(g){
  const day=S.day&&S.day.d===P.today()?S.day:{xp:0},goal=P.goal(),pct=Math.min(1,(day.xp||0)/goal);
@@ -206,6 +211,7 @@ export function pathClick(e){
  else if(a==='cont'){const g=P.guide();ui.lvl='satellite';ui.s=g.sat.id;keep();if(P.stepOpen(g.sat,g.ps)&&(g.ps.tipo!=='progetto'||P.passi(g.sat).slice(0,-1).every(P.stepDone)))return go(g.sat,g.ps,g.ps.tipo==='progetto'?(P.casoOf(g.sat)?'caso':'quiz'):'lezione');}
  else if(a==='go'){const sat=P.satById(ui.s),ps=P.passi(sat).find(p=>p.id===b.dataset.id);keep();return go(sat,ps,b.dataset.k);}
  keep();renderPath();
+ if(a==='lvl'||a==='planet'||a==='sat')$('panel').scrollTop=0;
  const f=$('panel').querySelector('.crumbs [aria-current]');f?.setAttribute('tabindex','-1');
 }
 function go(sat,ps,kind){

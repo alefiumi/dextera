@@ -35,7 +35,7 @@ Dove questo file e la specifica differiscono, vale la specifica.
 ## Fasi (sezione 9 della specifica)
 - **Fase 0 – Fondazione e contenuti verificabili** (in corso, niente SQL): nome, icone e manifest; chiavi e cache
   `dextera-`; barra a 4 schede; testi in `testi/`; `content/mappa.json`; pagina `revisione/`.
-- Fase 1 – Percorso minimo (SQL: path_progress, dextera_settings, error_reports). Fasi 2–7: vedi la specifica.
+- Fase 1 – Percorso minimo (SQL: path_progress, dextera_settings, error_reports): online e SQL applicato il 18/11/2026. Fasi 2–7: vedi la specifica.
 - GitHub Pages attivo (ramo `main`, cartella radice): online su `alefiumi.github.io/dextera`.
 
 ## Situazione al 20/11/2026
@@ -369,7 +369,7 @@ descrizioni; quelle con fonte Z-Anatomy dicono da quale vaso nasce o dove sbocca
   vasi e polmoni che BodyMania tiene in `torace.py` e `atlante.js` (SYS) sono passati in `testi/`; l'uscita rigenerata è uguale a quella di
   BodyMania 63, salvo i titoli «Atlante 2D · …» e i nomi e le descrizioni del cervello già detti sopra (più culmine e declive del verme).
 
-## Percorso (fase 1, in corso: non ancora committata né pubblicata)
+## Percorso (fase 1: online dal 18/11/2026, app 65)
 - File: `js/percorso.js` (regole e stato: chiavi di maestria per aspetto `o.`/`r.`/`m.`/`oi.`/`fn.`, passi fatti, stati dei satelliti,
   stella guida, giorno/obiettivo/serie con scudi in `dayTick` prima di ogni `save()`), `js/lezione.js` (lezione da 8 domande, gradi per
   maestria, prova «Lo so già», quiz finale, caso clinico con ipotesi), `js/path.js` (mappa SVG universo → sistema → pianeta → satellite,
@@ -378,7 +378,7 @@ descrizioni; quelle con fonte Z-Anatomy dicono da quale vaso nasce o dove sbocca
   l'autore non abbina i casi), `content/lezioni.json` (generato da `testi.py`: reperi, id delle voci, stati non «da verificare»).
 - Solo 2D: muscoli e reperi non si toccano nel 2D (muscoli: scelta e nome; reperi: tocco sull'osso). Tocco 3D: da fare.
 - SQL: `supabase/migrations/20261121090000_dextera_percorso.sql` (path_progress, dextera_settings, error_reports, error_report_flags,
-  vista admin.segnalazioni), provato con PGlite (36 prove RLS). Da applicare dall'autore DOPO aver pubblicato l'app.
+  vista admin.segnalazioni), provato con PGlite (36 prove RLS). Applicato dall'autore il 18/11/2026 (tabelle, RLS e trigger controllati; Security Advisor senza avvisi nuovi).
 - Sincronizzazione in `syncPercorso()` di `account.js`; senza tabelle i dati restano in coda (avviso nel profilo).
 
 ## Mappa del percorso (`content/mappa.json`)

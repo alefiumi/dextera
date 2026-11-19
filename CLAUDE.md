@@ -41,7 +41,7 @@ Dove questo file e la specifica differiscono, vale la specifica.
 - Fase 4 – Flotta (SQL: costellazioni, stagioni, equipaggi): v0.85.0, vedi «Flotta». File SQL da applicare dall'autore.
 - Fase 5 – Profilo e competenze (SQL: righe in badge_classes, dextera_profili): v0.86.0, vedi «Profilo e competenze». Online e SQL applicato il 19/11/2026. Casata ed equipaggi nel Profilo: v0.87.0; obiettivo del giorno e date d'esame: v0.88.0.
 - Fase 6 – Altri corsi e percorsi (SQL: dextera_studio): v0.89.0 (correzione v0.89.1), vedi «Altri corsi e percorsi». Online e SQL applicato il 19/11/2026.
-- Test UCBM, Biologia giocabile (nessun SQL): v0.90.0, vedi «Test UCBM». Chimica giocabile (solo contenuti, nessun codice nuovo); Fisica ancora «in arrivo».
+- Test UCBM, Biologia giocabile (nessun SQL): v0.90.0, vedi «Test UCBM». Chimica giocabile (solo contenuti); Fisica giocabile e simulazione completa: v0.90.1.
 - Corso di neurologia: contenuti (primo rilascio) e corso giocabile (v0.81.0, vedi «Corso di neurologia giocabile»), Palestra sul cervello (v0.82.0), gioco 3D (v0.83.0).
 - GitHub Pages attivo (ramo `main`, cartella radice): online su `alefiumi.github.io/dextera`.
 
@@ -731,7 +731,7 @@ descrizioni; quelle con fonte Z-Anatomy dicono da quale vaso nasce o dove sbocca
   satellite acceso, prova sui polmoni, esame del pianeta Cuore, neurologia in UCBM, percorso parziale (piede solo sul telefono), Ripasso del
   giorno solo dei corsi scelti, cambio di percorso e di corsi dall'universo, radar con «Descrizione», invio con e senza il file SQL, offline,
   niente scorrimento di lato, dati e cache di BodyMania intatti.
-- Testi di cuore, vasi e polmoni, casi e programma UCBM sono scritti dall'AI (da verificare). Da v0.90.0 Biologia del Test UCBM è giocabile, poi anche Chimica (vedi «Test UCBM»).
+- Testi di cuore, vasi e polmoni, casi e programma UCBM sono scritti dall'AI (da verificare). Da v0.90.0 Biologia del Test UCBM è giocabile, poi Chimica e Fisica (v0.90.1, vedi «Test UCBM»).
 - Correzione v0.89.1 (19/11/2026, visto dall'autore sul telefono): l'app 0.88 aveva scaricato i contenuti 27 della 0.89 prima di aggiornarsi
   (i contenuti vanno in una cache a parte), non riconosceva le strutture `c.`/`p.` e segnava fatti tutti i passi di Cuore e vasi e
   Respiratorio (+30 XP ciascuno, con un avviso lunghissimo) e con un menu dei percorsi senza il Test UCBM (era ancora l'app vecchia).
@@ -747,7 +747,7 @@ descrizioni; quelle con fonte Z-Anatomy dicono da quale vaso nasce o dove sbocca
   `arrivoDi(pid)` in `percorso.js`) e la fonte (`fonte` del corso in `mappa.json`: Allegato B del bando UCBM 2026/27, copia del testo in
   `ucbm-allegato-b-programmi.txt` nelle note delle sessioni); sopra i corsi una riga dice che l'anatomia è la parte di Biologia già da studiare.
 
-## Test UCBM: Biologia (v0.90.0) e Chimica giocabili
+## Test UCBM: Biologia, Chimica e Fisica giocabili (v0.90.0–0.90.1)
 Scelte dell'autore: domande miste (nelle lezioni scelta tra 5 e risposta scritta, termine o numero; prove e simulazione solo formato del
 test), 3 passi per satellite, una materia alla volta (prima Biologia), simulazione sempre aperta.
 - Testi: `testi/ucbm-biologia.json`, 270 voci scritte dall'AI (fonte AI, stato «da verificare»): 9 argomenti × 30 (10 per passo). Ogni voce
@@ -758,7 +758,10 @@ test), 3 passi per satellite, una materia alla volta (prima Biologia), simulazio
 - Chimica: `testi/ucbm-chimica.json`, 300 voci (10 argomenti × 30, stesso formato, id `ucbm.chi.<arg>.<nn>`), scritte dall'AI e da verificare;
   esercizi di calcolo nel passo 2 con risposta numerica. Le domande la cui risposta è una frase restano solo a scelta (niente `scritta`);
   una risposta in percentuale ha anche il valore diviso per 100 (`qNum('80%')` = 0,8). Nessun codice nuovo: `testi.py` legge ogni
-  `testi/ucbm-*.json`, la revisione ha il tipo in `TIPI`. Fisica si aggiunge allo stesso modo (`testi/ucbm-fisica.json` e `TIPI`).
+  `testi/ucbm-*.json`, la revisione ha il tipo in `TIPI`.
+- Fisica (v0.90.1): `testi/ucbm-fisica.json`, 210 voci (7 argomenti × 30, id `ucbm.fis.<arg>.<nn>`), stesso formato e stesse regole.
+  Con tutte e tre le materie nessun pianeta è «in arrivo» e la simulazione è completa (60 domande, 100 minuti, soglia 12/60).
+  `elenco()` in `path.js` scrive «Biologia, Chimica e Fisica»; l'introduzione della simulazione completa elenca «(Biologia 20, Chimica 20, Fisica 20)».
 - `content/percorsi/ucbm.json` e `mappa.json` hanno i satelliti UCBM senza passi: `mergeUcbm()` in `content.js` li prende da `ucbm.json`;
   un pianeta senza passi ha `in_arrivo: true` (Chimica, Fisica), il corso perde `in_arrivo` appena una materia è pronta. Dati in `app.UCBM`.
 - Chiavi: l'id della voce (`q.bio.…`) è anche la chiave di maestria e ripasso (compatibile con le regole SQL di `review_items`,
@@ -775,8 +778,8 @@ test), 3 passi per satellite, una materia alla volta (prima Biologia), simulazio
 - Regole in `content/regole.json` → `ucbm` (`scelta_max`, `secondi`, `tolleranza`, `simulazione`). `app_min` 0.90.0.
 - Revisione: tipo `ucbm-biologia` in `revisione.js`, quesiti sotto il loro satellite con «Come lo vede lo studente» (`quizHtml()`).
   `importa_revisione.py` riporta a numero le correzioni numeriche di `scritta`.
-- Prova: `ucbm/prova.mjs` (26 controlli, solo Biologia), `ucbm-chi/prova.mjs` (28, con Chimica: 40 domande in 66 min 40 s) e la copia
-  aggiornata della prova di fase 6 nelle note delle sessioni. Generatori dei testi (`ucbm/*.py`, `ucbm-chi/*.py`, `build.py`) nelle stesse note.
+- Prova: `ucbm/prova.mjs` (26 controlli, solo Biologia), `ucbm-chi/prova.mjs` (28, con Chimica: 40 domande in 66 min 40 s), `ucbm-fis/prova.mjs` (29, simulazione completa) e la copia
+  aggiornata della prova di fase 6 nelle note delle sessioni. Generatori dei testi (`ucbm/*.py`, `ucbm-chi/*.py`, `ucbm-fis/*.py`, `build.py`) nelle stesse note.
 
 ## Mappa del percorso (`content/mappa.json`)
 Corso → 4 pianeti → 17 satelliti (con `ordine` della specifica) → 6 passi (`ossa`, `reperi`, `muscoli`, `connessioni`, `funzione`,

@@ -94,7 +94,7 @@ function intro(L){
  const I=L.info,Rs=R(),mat=I.mat.map(m=>`${esc(m.pl.nome)} (${m.n})`).join(', '),u=U(),best=u.sim?.length?Math.max(...u.sim.map(s=>s.pt/s.n)):null;
  $('panel').innerHTML=`<div class="lh"><button class="lx" data-l="quit" aria-label="Esci dalla simulazione">✕</button></div><div class="q" id="lq" tabindex="-1"><small>Simulazione del test UCBM</small></div>
   ${I.parziale?`<p class="party">Simulazione parziale: per ora ${I.mat.length===1?'c\'è solo':'ci sono solo'} ${mat}${I.arrivo.length?`; ${esc(I.arrivo.map(p=>p.nome).join(' e '))} in arrivo`:''}.</p>`:''}
-  <p>${I.n} domande a scelta tra 5${I.parziale?'':' ('+mat+')'}, ${durTxt(I.sec)} in tutto${I.parziale?`: lo stesso tempo per domanda del test vero (${Rs.minuti} minuti per ${Rs.domande} domande)`:''}.</p>
+  <p>${I.n} domande a scelta tra 5${I.parziale?'':' ('+I.mat.map(m=>`${esc(m.pl.nome)} ${m.n}`).join(', ')+')'}, ${durTxt(I.sec)} in tutto${I.parziale?`: lo stesso tempo per domanda del test vero (${Rs.minuti} minuti per ${Rs.domande} domande)`:''}.</p>
   <ul><li>Risposta giusta: +${num(Rs.giusta,2)} · sbagliata: ${num(Rs.sbagliata,2)} · in bianco: 0.</li>
   <li>Puoi saltare, lasciare in bianco e tornare indietro. Nel dubbio, lasciare in bianco non toglie punti.</li>
   <li>Soglia di idoneità del test: ${Rs.soglia} su ${Rs.domande}${I.parziale?` (qui, in proporzione, ${num(I.soglia)} su ${I.n})`:''}.</li>

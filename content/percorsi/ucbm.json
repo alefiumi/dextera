@@ -1,7 +1,7 @@
 {
- "version": 3,
+ "version": 4,
  "formato": 1,
- "nota": "Bozza (fase 6) del percorso per il test d'ingresso UCBM, da far rivedere a un docente. Il corso «Test d'ingresso UCBM» ha Biologia (9 argomenti) e Chimica (10 argomenti) giocabili, con 3 passi ciascuno: Concetti, Applicazione, Quesiti del test (quesiti in testi/ucbm-biologia.json e testi/ucbm-chimica.json, scritti dall'AI e da verificare), e la simulazione del test sempre aperta; Fisica resta in arrivo (solo il programma). Si gioca anche l'anatomia che il programma chiede: cuore e grandi vasi, apparato respiratorio, basi del sistema nervoso ed encefalo, le ossa dello scheletro (nel muscolo-scheletrico solo il passo Ossa di ogni satellite). I progressi valgono in tutti i percorsi.",
+ "nota": "Bozza (fase 6) del percorso per il test d'ingresso UCBM, da far rivedere a un docente. Il corso «Test d'ingresso UCBM» ha tutte e tre le materie giocabili, Biologia (9 argomenti), Chimica (10) e Fisica (7), con 3 passi ciascuno: Concetti, Applicazione, Quesiti del test (quesiti in testi/ucbm-biologia.json, ucbm-chimica.json e ucbm-fisica.json, scritti dall'AI e da verificare), e la simulazione completa del test sempre aperta (60 domande, 100 minuti). Si gioca anche l'anatomia che il programma chiede: cuore e grandi vasi, apparato respiratorio, basi del sistema nervoso ed encefalo, le ossa dello scheletro (nel muscolo-scheletrico solo il passo Ossa di ogni satellite). I progressi valgono in tutti i percorsi.",
  "id": "ucbm",
  "nome": "Test d'ingresso UCBM",
  "bozza": true,
@@ -11,9 +11,9 @@
   "version": 4
  },
  "rilascio": {
-  "numero": 3,
+  "numero": 4,
   "pubblicato_il": "2026-11-19",
-  "da": "a mano (fase 6, bozza): Biologia e Chimica del test UCBM"
+  "da": "a mano (fase 6, bozza): Biologia, Chimica e Fisica del test UCBM"
  },
  "nodi": [
   {

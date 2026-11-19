@@ -1,0 +1,1241 @@
+{
+ "version": 1,
+ "tipo": "ucbm-fisica",
+ "nota": "Test d'ingresso UCBM, Fisica (fase 6): quesiti per i 7 argomenti del programma (Allegato B del bando 2026/27). Ogni voce è un quesito: passo 1 Concetti (con il concetto da presentare prima della domanda), 2 Applicazione (esercizi e calcoli), 3 Quesiti del test (solo scelta). opzioni: 5, la prima è quella giusta (nell'app si mescolano); scritta: risposte scritte accettate (i numeri si confrontano con la tolleranza di regole.json → ucbm). Testi scritti dall'AI a memoria: da verificare con un docente.",
+ "campi": {"concetto": "Concetto (spiegazione prima della domanda)", "domanda": "Domanda", "opzioni": "Opzioni (la prima è quella giusta)", "scritta": "Risposte scritte accettate", "spiegazione": "Spiegazione"},
+ "voci": [
+  {"id": "ucbm.fis.misure.01", "sat": "ucbm-fis-misure", "passo": 1, "dati": {
+   "concetto": {"valore": "Il Sistema Internazionale (SI) ha sette grandezze fondamentali con le loro unità: lunghezza (metro, m), massa (kilogrammo, kg), tempo (secondo, s), intensità di corrente (ampere, A), temperatura (kelvin, K), quantità di sostanza (mole, mol), intensità luminosa (candela, cd). Tutte le altre sono grandezze derivate, ottenute combinando quelle fondamentali.", "fonte": "AI", "stato": "da verificare"},
+   "domanda": {"valore": "Qual è l'unità di misura della massa nel Sistema Internazionale?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Kilogrammo", "Grammo", "Newton", "Libbra", "Tonnellata"], "fonte": "AI", "stato": "da verificare"},
+   "scritta": {"valore": ["kilogrammo", "kg", "chilogrammo"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Nel SI l'unità di massa è il kilogrammo (kg), l'unica unità fondamentale con un prefisso nel nome. Il newton è l'unità della forza.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "ucbm.fis.misure.02", "sat": "ucbm-fis-misure", "passo": 1, "dati": {
+   "concetto": {"valore": "Le grandezze derivate si esprimono con le unità fondamentali. Velocità: m/s. Accelerazione: m/s². Forza: newton, 1 N = 1 kg·m/s². Energia e lavoro: joule, 1 J = 1 N·m. Potenza: watt, 1 W = 1 J/s. Pressione: pascal, 1 Pa = 1 N/m². Carica elettrica: coulomb, 1 C = 1 A·s.", "fonte": "AI", "stato": "da verificare"},
+   "domanda": {"valore": "A che cosa corrisponde 1 newton in unità fondamentali del SI?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["1 kg·m/s²", "1 kg·m/s", "1 kg·m²/s²", "1 g·cm/s²", "1 kg/m·s²"], "fonte": "AI", "stato": "da verificare"},
+   "scritta": {"valore": ["kg m/s2", "kg·m/s²", "kg*m/s^2", "1 kg·m/s²"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Dalla seconda legge F = m·a: kg × m/s² = kg·m/s². kg·m²/s² è il joule.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "ucbm.fis.misure.03", "sat": "ucbm-fis-misure", "passo": 1, "dati": {
+   "concetto": {"valore": "I prefissi del SI indicano multipli e sottomultipli in potenze di 10: giga (G) 10⁹, mega (M) 10⁶, kilo (k) 10³, etto (h) 10², deca (da) 10¹, deci (d) 10⁻¹, centi (c) 10⁻², milli (m) 10⁻³, micro (μ) 10⁻⁶, nano (n) 10⁻⁹, pico (p) 10⁻¹².", "fonte": "AI", "stato": "da verificare"},
+   "domanda": {"valore": "Quale potenza di 10 corrisponde al prefisso micro (μ)?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["10⁻⁶", "10⁻³", "10⁻⁹", "10⁶", "10⁻¹²"], "fonte": "AI", "stato": "da verificare"},
+   "scritta": {"valore": [1e-06, "10^-6"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Micro = 10⁻⁶ (un micrometro è un milionesimo di metro). Milli è 10⁻³, nano 10⁻⁹.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "ucbm.fis.misure.04", "sat": "ucbm-fis-misure", "passo": 1, "dati": {
+   "concetto": {"valore": "La notazione scientifica scrive un numero come a × 10ⁿ, con 1 ≤ a < 10 e n intero. Per esempio 4 500 000 = 4,5 × 10⁶ e 0,00032 = 3,2 × 10⁻⁴. Nei prodotti gli esponenti si sommano, nelle divisioni si sottraggono: 10³ × 10⁴ = 10⁷; 10⁵ / 10² = 10³. L'ordine di grandezza è la potenza di 10 più vicina al numero.", "fonte": "AI", "stato": "da verificare"},
+   "domanda": {"valore": "Come si scrive 0,0005 in notazione scientifica?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["5 × 10⁻⁴", "5 × 10⁻³", "0,5 × 10⁻³", "5 × 10⁴", "50 × 10⁻⁵"], "fonte": "AI", "stato": "da verificare"},
+   "scritta": {"valore": [0.0005, "5 × 10^-4", "5x10^-4"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Si sposta la virgola di 4 posti verso destra per avere 5: 5 × 10⁻⁴. 0,5 × 10⁻³ ha lo stesso valore ma non è in notazione scientifica (a deve essere tra 1 e 10).", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "ucbm.fis.misure.05", "sat": "ucbm-fis-misure", "passo": 1, "dati": {
+   "concetto": {"valore": "Le grandezze scalari sono descritte da un solo numero con l'unità (massa, tempo, temperatura, energia). Le grandezze vettoriali hanno anche direzione e verso (spostamento, velocità, accelerazione, forza) e si rappresentano con frecce. Due vettori si sommano con la regola del parallelogramma o mettendoli \"punta-coda\".", "fonte": "AI", "stato": "da verificare"},
+   "domanda": {"valore": "Quale di queste grandezze è vettoriale?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["La forza", "La massa", "Il tempo", "L'energia", "La temperatura"], "fonte": "AI", "stato": "da verificare"},
+   "scritta": {"valore": ["forza", "la forza"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "La forza ha intensità, direzione e verso. Massa, tempo, energia e temperatura sono scalari.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "ucbm.fis.misure.06", "sat": "ucbm-fis-misure", "passo": 1, "dati": {
+   "concetto": {"valore": "Il modulo della somma di due vettori dipende dall'angolo tra loro. Se hanno stessa direzione e verso, i moduli si sommano; se hanno verso opposto, si sottraggono; se sono perpendicolari, il modulo della risultante si trova con il teorema di Pitagora: R = √(a² + b²).", "fonte": "AI", "stato": "da verificare"},
+   "domanda": {"valore": "Due forze perpendicolari di 3 N e 4 N agiscono sullo stesso punto. Quanto vale la risultante?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["5 N", "7 N", "1 N", "12 N", "25 N"], "fonte": "AI", "stato": "da verificare"},
+   "scritta": {"valore": [5, "5 N"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Perpendicolari: R = √(3² + 4²) = √25 = 5 N. 7 N vale solo se le forze hanno stessa direzione e verso.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "ucbm.fis.misure.07", "sat": "ucbm-fis-misure", "passo": 1, "dati": {
+   "concetto": {"valore": "Un vettore si può scomporre in componenti lungo due assi perpendicolari. Se il vettore ha modulo v e forma un angolo α con l'asse x, le componenti sono vₓ = v·cos α e vᵧ = v·sin α. Valori utili: sin 30° = cos 60° = 0,5; cos 30° = sin 60° ≈ 0,87; sin 45° = cos 45° ≈ 0,71.", "fonte": "AI", "stato": "da verificare"},
+   "domanda": {"valore": "Un vettore di modulo 10 forma un angolo di 30° con l'asse x. Quanto vale la sua componente y?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["5", "8,7", "10", "7,1", "0,5"], "fonte": "AI", "stato": "da verificare"},
+   "scritta": {"valore": [5], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "vᵧ = v·sin 30° = 10 × 0,5 = 5. La componente x è 10 × cos 30° ≈ 8,7.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "ucbm.fis.misure.08", "sat": "ucbm-fis-misure", "passo": 1, "dati": {
+   "concetto": {"valore": "Il prodotto scalare di due vettori dà uno scalare: a·b = a·b·cos θ (massimo per vettori paralleli, nullo per vettori perpendicolari); il lavoro di una forza è un prodotto scalare. Il prodotto vettoriale a × b dà un vettore perpendicolare al piano dei due, di modulo a·b·sin θ (nullo per vettori paralleli); il momento di una forza e la forza magnetica su una carica sono prodotti vettoriali.", "fonte": "AI", "stato": "da verificare"},
+   "domanda": {"valore": "Quanto vale il prodotto scalare di due vettori perpendicolari?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Zero", "Il prodotto dei moduli", "La somma dei moduli", "Uno", "Il quadrato del modulo maggiore"], "fonte": "AI", "stato": "da verificare"},
+   "scritta": {"valore": [0, "zero"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "a·b = a·b·cos 90° = 0. Per questo una forza perpendicolare allo spostamento non compie lavoro.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "ucbm.fis.misure.09", "sat": "ucbm-fis-misure", "passo": 1, "dati": {
+   "concetto": {"valore": "Ogni misura ha un'incertezza. L'errore assoluto ha la stessa unità della misura (per esempio ± 0,1 cm); l'errore relativo è l'errore assoluto diviso il valore misurato (numero puro, spesso in percentuale) e indica la precisione. Gli errori casuali si riducono ripetendo le misure e facendo la media; gli errori sistematici (strumento starato) spostano tutte le misure nello stesso verso.", "fonte": "AI", "stato": "da verificare"},
+   "domanda": {"valore": "Come si calcola l'errore relativo di una misura?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Errore assoluto diviso valore misurato", "Valore misurato diviso errore assoluto", "Errore assoluto per valore misurato", "Valore massimo meno valore minimo", "Errore assoluto al quadrato"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "L'errore relativo è il rapporto tra l'errore assoluto e il valore misurato: permette di confrontare la precisione di misure diverse.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "ucbm.fis.misure.10", "sat": "ucbm-fis-misure", "passo": 1, "dati": {
+   "concetto": {"valore": "L'analisi dimensionale controlla le formule: i due membri di un'equazione devono avere le stesse dimensioni (lunghezza [L], massa [M], tempo [T]…). Si possono sommare solo grandezze omogenee. Per esempio s = ½·a·t² è corretta perché (m/s²)·s² = m.", "fonte": "AI", "stato": "da verificare"},
+   "domanda": {"valore": "Quali dimensioni ha una velocità?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["[L][T]⁻¹", "[L][T]⁻²", "[M][L][T]⁻²", "[L]²[T]⁻¹", "[M][T]⁻¹"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Velocità = spazio / tempo, quindi [L]/[T] = [L][T]⁻¹. [L][T]⁻² è un'accelerazione, [M][L][T]⁻² una forza.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "ucbm.fis.misure.11", "sat": "ucbm-fis-misure", "passo": 2, "dati": {
+   "domanda": {"valore": "A quanti metri al secondo corrispondono 72 km/h?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["20 m/s", "72 m/s", "7,2 m/s", "259 m/s", "2 m/s"], "fonte": "AI", "stato": "da verificare"},
+   "scritta": {"valore": [20, "20 m/s"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Si divide per 3,6: 72 / 3,6 = 20 m/s (1 km/h = 1000 m / 3600 s).", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "ucbm.fis.misure.12", "sat": "ucbm-fis-misure", "passo": 2, "dati": {
+   "domanda": {"valore": "A quanti metri cubi corrispondono 500 litri?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["0,5 m³", "5 m³", "50 m³", "0,05 m³", "500 m³"], "fonte": "AI", "stato": "da verificare"},
+   "scritta": {"valore": [0.5, "0,5 m3"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "1 m³ = 1000 L, quindi 500 L = 0,5 m³.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "ucbm.fis.misure.13", "sat": "ucbm-fis-misure", "passo": 2, "dati": {
+   "domanda": {"valore": "Quanto vale (3 × 10⁴) × (2 × 10⁻⁶)?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["6 × 10⁻²", "6 × 10²", "5 × 10⁻²", "6 × 10⁻²⁴", "6 × 10⁻¹⁰"], "fonte": "AI", "stato": "da verificare"},
+   "scritta": {"valore": [0.06, "6 × 10^-2", "6x10^-2"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Si moltiplicano i coefficienti (3 × 2 = 6) e si sommano gli esponenti (4 − 6 = −2): 6 × 10⁻².", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "ucbm.fis.misure.14", "sat": "ucbm-fis-misure", "passo": 2, "dati": {
+   "domanda": {"valore": "Quanto vale (8 × 10⁹) / (4 × 10³)?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["2 × 10⁶", "2 × 10³", "4 × 10⁶", "2 × 10¹²", "32 × 10¹²"], "fonte": "AI", "stato": "da verificare"},
+   "scritta": {"valore": [2000000.0, "2 × 10^6", "2x10^6"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "8 / 4 = 2; esponenti 9 − 3 = 6: 2 × 10⁶.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "ucbm.fis.misure.15", "sat": "ucbm-fis-misure", "passo": 2, "dati": {
+   "domanda": {"valore": "Quanti millisecondi ci sono in 2,5 secondi?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["2500 ms", "250 ms", "25 ms", "0,0025 ms", "25 000 ms"], "fonte": "AI", "stato": "da verificare"},
+   "scritta": {"valore": [2500, "2500 ms"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "1 s = 1000 ms: 2,5 × 1000 = 2500 ms.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "ucbm.fis.misure.16", "sat": "ucbm-fis-misure", "passo": 2, "dati": {
+   "domanda": {"valore": "A quanti metri quadrati corrispondono 50 cm²?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["5 × 10⁻³ m²", "5 × 10⁻¹ m²", "5 × 10⁻² m²", "5 × 10⁻⁴ m²", "0,5 m²"], "fonte": "AI", "stato": "da verificare"},
+   "scritta": {"valore": [0.005, "5 × 10^-3"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "1 cm² = 10⁻⁴ m² (perché 1 cm = 10⁻² m e si eleva al quadrato): 50 × 10⁻⁴ = 5 × 10⁻³ m².", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "ucbm.fis.misure.17", "sat": "ucbm-fis-misure", "passo": 2, "dati": {
+   "domanda": {"valore": "Un vettore di 10 N verso est e uno di 6 N verso ovest agiscono sullo stesso corpo. Quanto vale la risultante?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["4 N verso est", "16 N verso est", "4 N verso ovest", "8 N verso nord", "Zero"], "fonte": "AI", "stato": "da verificare"},
+   "scritta": {"valore": [4, "4 N"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Stessa direzione, verso opposto: si sottraggono i moduli, 10 − 6 = 4 N, nel verso della forza maggiore (est).", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "ucbm.fis.misure.18", "sat": "ucbm-fis-misure", "passo": 2, "dati": {
+   "domanda": {"valore": "Una lunghezza è misurata come 50,0 ± 0,5 cm. Qual è l'errore relativo percentuale?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["1%", "0,5%", "10%", "0,1%", "5%"], "fonte": "AI", "stato": "da verificare"},
+   "scritta": {"valore": [1, "1%", 0.01], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Errore relativo = 0,5 / 50,0 = 0,01 = 1%.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "ucbm.fis.misure.19", "sat": "ucbm-fis-misure", "passo": 2, "dati": {
+   "domanda": {"valore": "Quale delle seguenti formule è dimensionalmente corretta per uno spazio s (v velocità, a accelerazione, t tempo)?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["s = v·t + ½·a·t²", "s = v·t² + a·t", "s = v/t + a", "s = a·t", "s = v·a·t"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "v·t ha le dimensioni di una lunghezza (m/s × s = m), e anche a·t² (m/s² × s² = m). Le altre danno velocità o altre grandezze.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "ucbm.fis.misure.20", "sat": "ucbm-fis-misure", "passo": 2, "dati": {
+   "domanda": {"valore": "Quanto vale 1 kWh (kilowattora) in joule?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["3,6 × 10⁶ J", "1000 J", "3600 J", "3,6 × 10³ J", "1 J"], "fonte": "AI", "stato": "da verificare"},
+   "scritta": {"valore": [3600000.0, "3,6 × 10^6", "3600000"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "1 kWh = 1000 W × 3600 s = 3,6 × 10⁶ J. È un'unità di energia, non di potenza.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "ucbm.fis.misure.21", "sat": "ucbm-fis-misure", "passo": 3, "dati": {
+   "domanda": {"valore": "Quale delle seguenti NON è una grandezza fondamentale del Sistema Internazionale?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["La forza", "La massa", "Il tempo", "La temperatura", "L'intensità di corrente"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "La forza è derivata (N = kg·m/s²). Massa, tempo, temperatura e intensità di corrente sono fondamentali.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "ucbm.fis.misure.22", "sat": "ucbm-fis-misure", "passo": 3, "dati": {
+   "domanda": {"valore": "Il joule, espresso nelle unità fondamentali del SI, è:", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["kg·m²/s²", "kg·m/s²", "kg·m/s", "kg·m²/s³", "kg/(m·s²)"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "J = N·m = (kg·m/s²)·m = kg·m²/s². kg·m²/s³ è il watt, kg/(m·s²) il pascal.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "ucbm.fis.misure.23", "sat": "ucbm-fis-misure", "passo": 3, "dati": {
+   "domanda": {"valore": "Un nanometro corrisponde a:", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["10⁻⁹ m", "10⁻⁶ m", "10⁻³ m", "10⁻¹² m", "10⁹ m"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Nano = 10⁻⁹. È l'ordine di grandezza delle molecole e delle lunghezze d'onda della luce (400–700 nm).", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "ucbm.fis.misure.24", "sat": "ucbm-fis-misure", "passo": 3, "dati": {
+   "domanda": {"valore": "La somma di due vettori di modulo 6 e 8:", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Può avere qualsiasi modulo compreso tra 2 e 14", "Vale sempre 14", "Vale sempre 10", "Vale sempre 2", "Può superare 14"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Il modulo della risultante va da |8 − 6| = 2 (verso opposto) a 8 + 6 = 14 (stesso verso); vale 10 se sono perpendicolari.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "ucbm.fis.misure.25", "sat": "ucbm-fis-misure", "passo": 3, "dati": {
+   "domanda": {"valore": "Quale delle seguenti grandezze è scalare?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["L'energia cinetica", "La velocità", "L'accelerazione", "La quantità di moto", "Lo spostamento"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "L'energia è un numero senza direzione. Velocità, accelerazione, quantità di moto e spostamento sono vettori.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "ucbm.fis.misure.26", "sat": "ucbm-fis-misure", "passo": 3, "dati": {
+   "domanda": {"valore": "Il valore 0,000045 m scritto in notazione scientifica è:", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["4,5 × 10⁻⁵ m", "4,5 × 10⁻⁴ m", "45 × 10⁻⁶ m", "4,5 × 10⁵ m", "0,45 × 10⁻⁴ m"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "La virgola si sposta di 5 posti per avere 4,5: 4,5 × 10⁻⁵ m.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "ucbm.fis.misure.27", "sat": "ucbm-fis-misure", "passo": 3, "dati": {
+   "domanda": {"valore": "Un'unità di misura della pressione equivalente al pascal è:", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["N/m²", "N·m", "J/s", "kg·m/s", "N/m"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "La pressione è forza su superficie: 1 Pa = 1 N/m². N·m è il joule, J/s il watt.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "ucbm.fis.misure.28", "sat": "ucbm-fis-misure", "passo": 3, "dati": {
+   "domanda": {"valore": "Ripetendo molte volte una misura e facendo la media si riducono:", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Gli errori casuali", "Gli errori sistematici", "Gli errori di taratura dello strumento", "Tutti gli errori, compresi quelli sistematici", "Nessun errore"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Gli errori casuali si compensano in parte facendo la media; quelli sistematici (per esempio uno strumento starato) restano.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "ucbm.fis.misure.29", "sat": "ucbm-fis-misure", "passo": 3, "dati": {
+   "domanda": {"valore": "Il prodotto vettoriale di due vettori paralleli è:", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Il vettore nullo", "Un vettore di modulo massimo", "Uno scalare uguale al prodotto dei moduli", "Un vettore parallelo ai due", "Un vettore di modulo uguale alla somma dei moduli"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Il modulo del prodotto vettoriale è a·b·sin θ: con θ = 0° vale zero.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "ucbm.fis.misure.30", "sat": "ucbm-fis-misure", "passo": 3, "dati": {
+   "domanda": {"valore": "Quanti secondi ci sono, circa, in un giorno?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["8,6 × 10⁴ s", "3,6 × 10³ s", "8,6 × 10⁵ s", "1,4 × 10³ s", "3,2 × 10⁷ s"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "24 × 3600 = 86 400 s ≈ 8,6 × 10⁴ s. 3,6 × 10³ s è un'ora, 3,2 × 10⁷ s circa un anno.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "ucbm.fis.cinematica.01", "sat": "ucbm-fis-cinematica", "passo": 1, "dati": {
+   "concetto": {"valore": "La velocità media è lo spostamento diviso il tempo impiegato: v = Δs / Δt (m/s). Nel moto rettilineo uniforme la velocità è costante e la legge oraria è s = s₀ + v·t: il grafico spazio-tempo è una retta, la cui pendenza è la velocità.", "fonte": "AI", "stato": "da verificare"},
+   "domanda": {"valore": "Nel moto rettilineo uniforme, che forma ha il grafico spazio-tempo?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Una retta", "Una parabola", "Un'iperbole", "Una sinusoide", "Un cerchio"], "fonte": "AI", "stato": "da verificare"},
+   "scritta": {"valore": ["retta", "una retta"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Con velocità costante lo spazio cresce in modo proporzionale al tempo: s = s₀ + v·t è l'equazione di una retta.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "ucbm.fis.cinematica.02", "sat": "ucbm-fis-cinematica", "passo": 1, "dati": {
+   "concetto": {"valore": "L'accelerazione è la variazione di velocità nel tempo: a = Δv / Δt (m/s²). Nel moto uniformemente accelerato a è costante: v = v₀ + a·t e s = s₀ + v₀·t + ½·a·t². Utile anche la relazione senza il tempo: v² = v₀² + 2·a·Δs. Il grafico velocità-tempo è una retta, quello spazio-tempo una parabola.", "fonte": "AI", "stato": "da verificare"},
+   "domanda": {"valore": "Qual è l'unità di misura dell'accelerazione nel SI?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["m/s²", "m/s", "m²/s", "N", "km/h"], "fonte": "AI", "stato": "da verificare"},
+   "scritta": {"valore": ["m/s2", "m/s²", "m/s^2"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "L'accelerazione è una velocità (m/s) divisa per un tempo (s): m/s².", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "ucbm.fis.cinematica.03", "sat": "ucbm-fis-cinematica", "passo": 1, "dati": {
+   "concetto": {"valore": "Nel grafico velocità-tempo l'area sotto la curva è lo spazio percorso, mentre la pendenza è l'accelerazione. Nel grafico spazio-tempo la pendenza è la velocità.", "fonte": "AI", "stato": "da verificare"},
+   "domanda": {"valore": "Che cosa rappresenta l'area sotto il grafico velocità-tempo?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Lo spazio percorso", "L'accelerazione", "La velocità media", "La forza", "Il tempo impiegato"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Area = velocità × tempo = spazio. La pendenza del grafico v-t è invece l'accelerazione.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "ucbm.fis.cinematica.04", "sat": "ucbm-fis-cinematica", "passo": 1, "dati": {
+   "concetto": {"valore": "La caduta libera è un moto uniformemente accelerato con accelerazione g ≈ 9,8 m/s² (spesso approssimata a 10 m/s²), diretta verso il basso. Senza resistenza dell'aria tutti i corpi cadono con la stessa accelerazione, indipendentemente dalla massa. Partendo da fermo: v = g·t e h = ½·g·t².", "fonte": "AI", "stato": "da verificare"},
+   "domanda": {"valore": "In assenza di aria, una piuma e un martello lasciati cadere insieme dalla stessa altezza…", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Arrivano a terra insieme", "Arriva prima il martello", "Arriva prima la piuma", "La piuma non cade", "Dipende dalla forma"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Senza resistenza dell'aria l'accelerazione di gravità è la stessa per tutti i corpi: arrivano insieme (lo dimostrò un astronauta sulla Luna).", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "ucbm.fis.cinematica.05", "sat": "ucbm-fis-cinematica", "passo": 1, "dati": {
+   "concetto": {"valore": "Il moto di un proiettile lanciato in orizzontale (o in obliquo) si scompone in due moti indipendenti: orizzontale uniforme (velocità costante, se si trascura l'aria) e verticale uniformemente accelerato (caduta con g). La traiettoria è una parabola. Un corpo lanciato orizzontalmente e uno lasciato cadere dalla stessa altezza toccano terra nello stesso istante.", "fonte": "AI", "stato": "da verificare"},
+   "domanda": {"valore": "Che forma ha la traiettoria di un proiettile lanciato in orizzontale, trascurando l'aria?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Una parabola", "Una retta", "Una circonferenza", "Un'ellisse", "Una spirale"], "fonte": "AI", "stato": "da verificare"},
+   "scritta": {"valore": ["parabola", "una parabola"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "La combinazione di un moto orizzontale uniforme e di uno verticale accelerato dà una traiettoria parabolica.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "ucbm.fis.cinematica.06", "sat": "ucbm-fis-cinematica", "passo": 1, "dati": {
+   "concetto": {"valore": "Nel moto circolare uniforme il corpo percorre una circonferenza con velocità di modulo costante. Il periodo T è il tempo di un giro, la frequenza f = 1/T è il numero di giri al secondo (hertz, Hz). Velocità tangenziale: v = 2πr / T; velocità angolare: ω = 2π / T (rad/s), con v = ω·r.", "fonte": "AI", "stato": "da verificare"},
+   "domanda": {"valore": "Che relazione c'è tra frequenza f e periodo T?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["f = 1/T", "f = T", "f = 2πT", "f = T²", "f = T/2π"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "La frequenza è il numero di giri al secondo, il periodo la durata di un giro: sono uno l'inverso dell'altro.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "ucbm.fis.cinematica.07", "sat": "ucbm-fis-cinematica", "passo": 1, "dati": {
+   "concetto": {"valore": "Anche se il modulo della velocità è costante, nel moto circolare uniforme la direzione della velocità cambia continuamente: c'è quindi un'accelerazione, detta centripeta, diretta verso il centro della circonferenza. Vale a = v² / r = ω²·r.", "fonte": "AI", "stato": "da verificare"},
+   "domanda": {"valore": "Nel moto circolare uniforme, verso dove è diretta l'accelerazione?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Verso il centro della circonferenza", "Tangente alla traiettoria", "Verso l'esterno", "Nel verso del moto", "Non c'è accelerazione"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "La velocità cambia direzione verso l'interno della curva: l'accelerazione centripeta punta verso il centro, con modulo v²/r.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "ucbm.fis.cinematica.08", "sat": "ucbm-fis-cinematica", "passo": 1, "dati": {
+   "concetto": {"valore": "Il moto armonico è il moto di va e vieni di un corpo attorno a una posizione di equilibrio, per esempio una massa attaccata a una molla o un pendolo con piccole oscillazioni. La posizione segue una legge sinusoidale x = A·cos(ωt): A è l'ampiezza, ω = 2π/T la pulsazione. L'accelerazione è proporzionale allo spostamento e opposta: a = −ω²·x. La velocità è massima al centro e nulla agli estremi.", "fonte": "AI", "stato": "da verificare"},
+   "domanda": {"valore": "In un moto armonico, dove è massima la velocità?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Nella posizione di equilibrio (al centro)", "Agli estremi dell'oscillazione", "È sempre uguale", "A metà tra centro ed estremo", "Solo all'istante iniziale"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Agli estremi il corpo si ferma per invertire il moto (velocità nulla, accelerazione massima); al centro la velocità è massima e l'accelerazione nulla.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "ucbm.fis.cinematica.09", "sat": "ucbm-fis-cinematica", "passo": 1, "dati": {
+   "concetto": {"valore": "Il periodo di un pendolo semplice, per piccole oscillazioni, è T = 2π·√(L/g): dipende solo dalla lunghezza L e da g, non dalla massa né dall'ampiezza (isocronismo, scoperto da Galileo). Per una massa m su una molla di costante k: T = 2π·√(m/k).", "fonte": "AI", "stato": "da verificare"},
+   "domanda": {"valore": "Da che cosa dipende il periodo di un pendolo semplice per piccole oscillazioni?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Dalla lunghezza del filo e da g", "Dalla massa appesa", "Dall'ampiezza dell'oscillazione", "Dalla massa e dall'ampiezza", "Solo dalla massa del filo"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "T = 2π√(L/g): né la massa né l'ampiezza (se piccola) compaiono nella formula.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "ucbm.fis.cinematica.10", "sat": "ucbm-fis-cinematica", "passo": 1, "dati": {
+   "concetto": {"valore": "Il moto è relativo al sistema di riferimento. Per velocità lungo la stessa retta, la velocità di un corpo rispetto a terra è la somma della sua velocità rispetto a un mezzo in movimento e della velocità del mezzo (composizione galileiana delle velocità): una persona che cammina a 1 m/s sul vagone di un treno che va a 20 m/s, nello stesso verso, si muove a 21 m/s rispetto ai binari.", "fonte": "AI", "stato": "da verificare"},
+   "domanda": {"valore": "Un passeggero cammina a 2 m/s verso la coda di un treno che viaggia a 30 m/s. Che velocità ha rispetto ai binari?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["28 m/s", "32 m/s", "30 m/s", "2 m/s", "15 m/s"], "fonte": "AI", "stato": "da verificare"},
+   "scritta": {"valore": [28, "28 m/s"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Verso opposto al moto del treno: 30 − 2 = 28 m/s nel verso del treno.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "ucbm.fis.cinematica.11", "sat": "ucbm-fis-cinematica", "passo": 2, "dati": {
+   "domanda": {"valore": "Un'auto percorre 150 km in 2 ore. Qual è la sua velocità media in km/h?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["75 km/h", "300 km/h", "150 km/h", "20,8 km/h", "37,5 km/h"], "fonte": "AI", "stato": "da verificare"},
+   "scritta": {"valore": [75, "75 km/h"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "v = 150 km / 2 h = 75 km/h.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "ucbm.fis.cinematica.12", "sat": "ucbm-fis-cinematica", "passo": 2, "dati": {
+   "domanda": {"valore": "Un'auto passa da 0 a 30 m/s in 6 s con accelerazione costante. Quanto vale l'accelerazione (in m/s²)?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["5 m/s²", "180 m/s²", "0,2 m/s²", "30 m/s²", "36 m/s²"], "fonte": "AI", "stato": "da verificare"},
+   "scritta": {"valore": [5, "5 m/s2"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "a = Δv / Δt = 30 / 6 = 5 m/s².", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "ucbm.fis.cinematica.13", "sat": "ucbm-fis-cinematica", "passo": 2, "dati": {
+   "domanda": {"valore": "Un'auto passa da 0 a 30 m/s in 6 s con accelerazione costante. Quanta strada percorre in questo tempo?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["90 m", "180 m", "45 m", "30 m", "150 m"], "fonte": "AI", "stato": "da verificare"},
+   "scritta": {"valore": [90, "90 m"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "s = ½·a·t² = ½ × 5 × 36 = 90 m (oppure velocità media 15 m/s × 6 s).", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "ucbm.fis.cinematica.14", "sat": "ucbm-fis-cinematica", "passo": 2, "dati": {
+   "domanda": {"valore": "Un sasso cade da fermo per 3 s. Con g = 10 m/s², che velocità ha raggiunto (in m/s)?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["30 m/s", "45 m/s", "3,3 m/s", "90 m/s", "10 m/s"], "fonte": "AI", "stato": "da verificare"},
+   "scritta": {"valore": [30, "30 m/s"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "v = g·t = 10 × 3 = 30 m/s.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "ucbm.fis.cinematica.15", "sat": "ucbm-fis-cinematica", "passo": 2, "dati": {
+   "domanda": {"valore": "Un sasso cade da fermo e tocca terra dopo 3 s. Con g = 10 m/s², da che altezza è caduto?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["45 m", "30 m", "90 m", "15 m", "60 m"], "fonte": "AI", "stato": "da verificare"},
+   "scritta": {"valore": [45, "45 m"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "h = ½·g·t² = ½ × 10 × 9 = 45 m.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "ucbm.fis.cinematica.16", "sat": "ucbm-fis-cinematica", "passo": 2, "dati": {
+   "domanda": {"valore": "Un'auto a 20 m/s frena con decelerazione costante di 4 m/s². Quanti metri percorre prima di fermarsi?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["50 m", "100 m", "5 m", "80 m", "25 m"], "fonte": "AI", "stato": "da verificare"},
+   "scritta": {"valore": [50, "50 m"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "v² = v₀² − 2·a·s → 0 = 400 − 8·s → s = 50 m.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "ucbm.fis.cinematica.17", "sat": "ucbm-fis-cinematica", "passo": 2, "dati": {
+   "domanda": {"valore": "Una ruota compie 5 giri al secondo. Qual è il suo periodo (in secondi)?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["0,2 s", "5 s", "0,5 s", "2 s", "31,4 s"], "fonte": "AI", "stato": "da verificare"},
+   "scritta": {"valore": [0.2, "0,2 s", "1/5"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "T = 1/f = 1/5 = 0,2 s.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "ucbm.fis.cinematica.18", "sat": "ucbm-fis-cinematica", "passo": 2, "dati": {
+   "domanda": {"valore": "Un corpo percorre una circonferenza di raggio 2 m alla velocità costante di 4 m/s. Quanto vale l'accelerazione centripeta (in m/s²)?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["8 m/s²", "2 m/s²", "16 m/s²", "0,5 m/s²", "32 m/s²"], "fonte": "AI", "stato": "da verificare"},
+   "scritta": {"valore": [8, "8 m/s2"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "a = v² / r = 16 / 2 = 8 m/s².", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "ucbm.fis.cinematica.19", "sat": "ucbm-fis-cinematica", "passo": 2, "dati": {
+   "domanda": {"valore": "Un pendolo lungo 1 m ha periodo di circa 2 s. Quanto diventa il periodo se il filo è lungo 4 m?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Circa 4 s", "Circa 8 s", "Circa 1 s", "Circa 2 s", "Circa 16 s"], "fonte": "AI", "stato": "da verificare"},
+   "scritta": {"valore": [4, "4 s"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "T è proporzionale a √L: quadruplicare L raddoppia T, da 2 s a 4 s.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "ucbm.fis.cinematica.20", "sat": "ucbm-fis-cinematica", "passo": 2, "dati": {
+   "domanda": {"valore": "Una palla viene lanciata in orizzontale a 5 m/s da un tavolo alto 1,25 m. Dopo quanto tocca terra (g = 10 m/s²)?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["0,5 s", "0,25 s", "1 s", "0,125 s", "2,5 s"], "fonte": "AI", "stato": "da verificare"},
+   "scritta": {"valore": [0.5, "0,5 s"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Il moto verticale è una caduta da fermo: 1,25 = ½ × 10 × t² → t² = 0,25 → t = 0,5 s. La velocità orizzontale non conta per il tempo di caduta.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "ucbm.fis.cinematica.21", "sat": "ucbm-fis-cinematica", "passo": 3, "dati": {
+   "domanda": {"valore": "Un corpo si muove di moto uniformemente accelerato partendo da fermo. Lo spazio percorso è proporzionale:", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Al quadrato del tempo", "Al tempo", "Alla radice del tempo", "All'inverso del tempo", "Al cubo del tempo"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "s = ½·a·t²: raddoppiando il tempo lo spazio quadruplica.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "ucbm.fis.cinematica.22", "sat": "ucbm-fis-cinematica", "passo": 3, "dati": {
+   "domanda": {"valore": "Un oggetto viene lanciato verso l'alto. Nel punto più alto della traiettoria:", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["La velocità è nulla e l'accelerazione vale g verso il basso", "Velocità e accelerazione sono entrambe nulle", "L'accelerazione è nulla e la velocità massima", "L'accelerazione è diretta verso l'alto", "La velocità è massima"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Nel punto più alto la velocità si annulla per invertirsi, ma la gravità continua ad agire: a = g verso il basso.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "ucbm.fis.cinematica.23", "sat": "ucbm-fis-cinematica", "passo": 3, "dati": {
+   "domanda": {"valore": "Nel moto circolare uniforme:", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Il modulo della velocità è costante ma la direzione cambia", "La velocità è costante in modulo, direzione e verso", "L'accelerazione è nulla", "L'accelerazione è tangente alla traiettoria", "La frequenza aumenta nel tempo"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "La direzione della velocità cambia di continuo: c'è un'accelerazione centripeta, anche se la rapidità resta uguale.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "ucbm.fis.cinematica.24", "sat": "ucbm-fis-cinematica", "passo": 3, "dati": {
+   "domanda": {"valore": "Un'auto viaggia a 108 km/h. La sua velocità in m/s è:", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["30 m/s", "108 m/s", "10,8 m/s", "388,8 m/s", "3 m/s"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "108 / 3,6 = 30 m/s.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "ucbm.fis.cinematica.25", "sat": "ucbm-fis-cinematica", "passo": 3, "dati": {
+   "domanda": {"valore": "Nel grafico velocità-tempo di un moto, un tratto orizzontale indica:", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Velocità costante (accelerazione nulla)", "Corpo fermo", "Accelerazione costante diversa da zero", "Velocità crescente", "Moto circolare"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Un tratto orizzontale nel grafico v-t significa che v non cambia: moto uniforme, accelerazione nulla (fermo solo se la velocità è zero).", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "ucbm.fis.cinematica.26", "sat": "ucbm-fis-cinematica", "passo": 3, "dati": {
+   "domanda": {"valore": "Due sassi vengono lasciati dalla stessa altezza: uno cade da fermo, l'altro viene lanciato in orizzontale. Trascurando l'aria:", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Toccano terra nello stesso istante", "Arriva prima quello lasciato cadere", "Arriva prima quello lanciato", "Dipende dalla massa", "Dipende dalla velocità di lancio"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Il moto verticale è identico per entrambi (partono con velocità verticale nulla): il tempo di caduta è lo stesso.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "ucbm.fis.cinematica.27", "sat": "ucbm-fis-cinematica", "passo": 3, "dati": {
+   "domanda": {"valore": "Il periodo di oscillazione di un pendolo semplice:", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Non dipende dalla massa appesa", "Raddoppia se si raddoppia la massa", "Raddoppia se si raddoppia la lunghezza", "Aumenta se aumenta g", "Dipende dall'ampiezza anche per piccole oscillazioni"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "T = 2π√(L/g): la massa non compare. Raddoppiando L, T aumenta di √2; aumentando g, T diminuisce.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "ucbm.fis.cinematica.28", "sat": "ucbm-fis-cinematica", "passo": 3, "dati": {
+   "domanda": {"valore": "Un corpo in moto circolare uniforme compie 120 giri al minuto. La frequenza è:", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["2 Hz", "120 Hz", "0,5 Hz", "60 Hz", "12 Hz"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "120 giri / 60 s = 2 giri al secondo = 2 Hz.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "ucbm.fis.cinematica.29", "sat": "ucbm-fis-cinematica", "passo": 3, "dati": {
+   "domanda": {"valore": "Se a parità di raggio la velocità di un corpo in moto circolare uniforme raddoppia, l'accelerazione centripeta:", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Quadruplica", "Raddoppia", "Si dimezza", "Resta uguale", "Si riduce a un quarto"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "a = v²/r: raddoppiando v, a diventa 4 volte maggiore.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "ucbm.fis.cinematica.30", "sat": "ucbm-fis-cinematica", "passo": 3, "dati": {
+   "domanda": {"valore": "In un moto armonico, l'accelerazione è massima:", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Agli estremi dell'oscillazione", "Nella posizione di equilibrio", "Quando la velocità è massima", "È sempre costante", "È sempre nulla"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "a = −ω²·x: è massima dove lo spostamento è massimo, cioè agli estremi, dove la velocità è nulla.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "ucbm.fis.dinamica.01", "sat": "ucbm-fis-dinamica", "passo": 1, "dati": {
+   "concetto": {"valore": "Primo principio della dinamica (inerzia): un corpo resta fermo o si muove di moto rettilineo uniforme finché la risultante delle forze che agiscono su di esso è nulla. La tendenza di un corpo a mantenere il proprio stato di moto si chiama inerzia, e la sua misura è la massa.", "fonte": "AI", "stato": "da verificare"},
+   "domanda": {"valore": "Che cosa fa un corpo in moto se la risultante delle forze su di esso è nulla?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Continua a muoversi di moto rettilineo uniforme", "Si ferma subito", "Rallenta fino a fermarsi", "Accelera", "Si muove di moto circolare"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Per il principio d'inerzia, senza forza risultante la velocità non cambia: né modulo né direzione.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "ucbm.fis.dinamica.02", "sat": "ucbm-fis-dinamica", "passo": 1, "dati": {
+   "concetto": {"valore": "Secondo principio della dinamica: la forza risultante su un corpo è uguale al prodotto della massa per l'accelerazione, F = m·a. Forza e accelerazione hanno la stessa direzione e lo stesso verso. A parità di forza, un corpo di massa doppia ha accelerazione dimezzata.", "fonte": "AI", "stato": "da verificare"},
+   "domanda": {"valore": "Qual è l'espressione del secondo principio della dinamica?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["F = m·a", "F = m/a", "F = m·v", "F = m·g·h", "F = ½·m·v²"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "F = m·a. m·v è la quantità di moto, m·g·h l'energia potenziale, ½·m·v² l'energia cinetica.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "ucbm.fis.dinamica.03", "sat": "ucbm-fis-dinamica", "passo": 1, "dati": {
+   "concetto": {"valore": "Terzo principio della dinamica (azione e reazione): se un corpo A esercita una forza su un corpo B, B esercita su A una forza uguale in modulo e direzione e opposta in verso. Le due forze agiscono su corpi diversi, quindi non si annullano a vicenda.", "fonte": "AI", "stato": "da verificare"},
+   "domanda": {"valore": "Secondo il terzo principio, la forza che B esercita su A rispetto a quella che A esercita su B è…", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Uguale in modulo e opposta in verso", "Più piccola", "Più grande", "Uguale e nello stesso verso", "Perpendicolare"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Azione e reazione hanno sempre lo stesso modulo e verso opposto, e agiscono su corpi diversi.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "ucbm.fis.dinamica.04", "sat": "ucbm-fis-dinamica", "passo": 1, "dati": {
+   "concetto": {"valore": "Il peso è la forza con cui la Terra attira un corpo: P = m·g, con g ≈ 9,8 m/s². La massa è una proprietà del corpo e non cambia da un luogo all'altro; il peso invece dipende da g (sulla Luna g è circa 1/6 di quella terrestre). La forza di gravitazione universale tra due masse è F = G·m₁·m₂ / d².", "fonte": "AI", "stato": "da verificare"},
+   "domanda": {"valore": "Un astronauta va sulla Luna. Che cosa cambia?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Il suo peso, non la sua massa", "La sua massa, non il suo peso", "Sia la massa sia il peso", "Né la massa né il peso", "Solo il suo volume"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "La massa (quantità di materia, inerzia) resta la stessa; il peso m·g diminuisce perché sulla Luna g è circa un sesto.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "ucbm.fis.dinamica.05", "sat": "ucbm-fis-dinamica", "passo": 1, "dati": {
+   "concetto": {"valore": "La forza d'attrito si oppone allo scorrimento tra due superfici. L'attrito radente vale F = μ·N, dove μ è il coefficiente d'attrito (numero puro) e N la forza normale (perpendicolare alla superficie; su un piano orizzontale N = m·g). L'attrito statico, che impedisce l'inizio del moto, è di solito maggiore di quello dinamico.", "fonte": "AI", "stato": "da verificare"},
+   "domanda": {"valore": "Da che cosa dipende la forza d'attrito radente tra un corpo e un piano?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Dal coefficiente d'attrito e dalla forza normale", "Solo dalla velocità del corpo", "Solo dall'area di contatto", "Dal volume del corpo", "Dalla temperatura dell'aria"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "F = μ·N: conta la natura delle superfici (μ) e quanto sono premute l'una contro l'altra (N); in prima approssimazione non dipende dall'area.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "ucbm.fis.dinamica.06", "sat": "ucbm-fis-dinamica", "passo": 1, "dati": {
+   "concetto": {"valore": "La forza elastica di una molla segue la legge di Hooke: F = −k·x, dove x è l'allungamento (o la compressione) rispetto alla lunghezza a riposo e k la costante elastica (N/m). Il segno meno indica che la forza si oppone alla deformazione (forza di richiamo).", "fonte": "AI", "stato": "da verificare"},
+   "domanda": {"valore": "Se l'allungamento di una molla raddoppia, la forza elastica…", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Raddoppia", "Si dimezza", "Quadruplica", "Resta uguale", "Si annulla"], "fonte": "AI", "stato": "da verificare"},
+   "scritta": {"valore": ["raddoppia", "doppia"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "F = k·x: la forza è direttamente proporzionale all'allungamento.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "ucbm.fis.dinamica.07", "sat": "ucbm-fis-dinamica", "passo": 1, "dati": {
+   "concetto": {"valore": "La quantità di moto di un corpo è p = m·v (vettore, kg·m/s). In un sistema isolato (forze esterne risultanti nulle) la quantità di moto totale si conserva: è il principio usato per studiare urti ed esplosioni. L'impulso di una forza, F·Δt, è uguale alla variazione della quantità di moto.", "fonte": "AI", "stato": "da verificare"},
+   "domanda": {"valore": "In un sistema isolato, quale grandezza si conserva sempre negli urti?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["La quantità di moto totale", "L'energia cinetica totale", "La velocità di ogni corpo", "La forza", "L'accelerazione"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "La quantità di moto totale si conserva in ogni urto di un sistema isolato. L'energia cinetica si conserva solo negli urti elastici.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "ucbm.fis.dinamica.08", "sat": "ucbm-fis-dinamica", "passo": 1, "dati": {
+   "concetto": {"valore": "Il lavoro di una forza costante è L = F·s·cos θ (joule), dove θ è l'angolo tra forza e spostamento. È positivo se la forza favorisce il moto, negativo se lo ostacola (come l'attrito), nullo se la forza è perpendicolare allo spostamento. La potenza è il lavoro fatto nell'unità di tempo: P = L / t (watt).", "fonte": "AI", "stato": "da verificare"},
+   "domanda": {"valore": "Quanto lavoro compie una forza perpendicolare allo spostamento?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Zero", "Il massimo possibile", "Un lavoro negativo", "F·s", "Dipende dalla massa"], "fonte": "AI", "stato": "da verificare"},
+   "scritta": {"valore": [0, "zero", "nullo"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "cos 90° = 0: una forza perpendicolare allo spostamento, come la forza centripeta o il peso su un piano orizzontale, non compie lavoro.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "ucbm.fis.dinamica.09", "sat": "ucbm-fis-dinamica", "passo": 1, "dati": {
+   "concetto": {"valore": "L'energia cinetica è l'energia del moto: Ec = ½·m·v². L'energia potenziale gravitazionale vicino alla Terra è Ep = m·g·h. Il teorema dell'energia cinetica dice che il lavoro totale fatto su un corpo è uguale alla variazione della sua energia cinetica. L'energia potenziale elastica di una molla è ½·k·x².", "fonte": "AI", "stato": "da verificare"},
+   "domanda": {"valore": "Se la velocità di un corpo raddoppia, la sua energia cinetica…", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Quadruplica", "Raddoppia", "Resta uguale", "Si dimezza", "Triplica"], "fonte": "AI", "stato": "da verificare"},
+   "scritta": {"valore": ["quadruplica", "4 volte", "quattro volte"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Ec = ½·m·v²: dipende dal quadrato della velocità, quindi raddoppiando v l'energia diventa 4 volte maggiore.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "ucbm.fis.dinamica.10", "sat": "ucbm-fis-dinamica", "passo": 1, "dati": {
+   "concetto": {"valore": "Se agiscono solo forze conservative (gravità, forza elastica), l'energia meccanica totale si conserva: Ec + Ep = costante. Un corpo che cade trasforma energia potenziale in cinetica. Con l'attrito parte dell'energia meccanica si trasforma in calore, ma l'energia totale si conserva sempre.", "fonte": "AI", "stato": "da verificare"},
+   "domanda": {"valore": "Un corpo cade senza attrito. Che cosa succede alla sua energia meccanica totale?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Resta costante", "Aumenta", "Diminuisce", "Si annulla", "Raddoppia"], "fonte": "AI", "stato": "da verificare"},
+   "scritta": {"valore": ["costante", "resta costante", "si conserva"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Senza attrito l'energia potenziale persa diventa tutta energia cinetica: la somma resta costante.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "ucbm.fis.dinamica.11", "sat": "ucbm-fis-dinamica", "passo": 2, "dati": {
+   "domanda": {"valore": "Una forza risultante di 20 N agisce su un corpo di 4 kg. Quanto vale l'accelerazione (in m/s²)?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["5 m/s²", "80 m/s²", "0,2 m/s²", "24 m/s²", "16 m/s²"], "fonte": "AI", "stato": "da verificare"},
+   "scritta": {"valore": [5, "5 m/s2"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "a = F / m = 20 / 4 = 5 m/s².", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "ucbm.fis.dinamica.12", "sat": "ucbm-fis-dinamica", "passo": 2, "dati": {
+   "domanda": {"valore": "Quanto pesa una persona di 70 kg sulla Terra (g = 9,8 m/s²)?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["686 N", "70 N", "7,1 N", "70 kg", "6860 N"], "fonte": "AI", "stato": "da verificare"},
+   "scritta": {"valore": [686, "686 n"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "P = m·g = 70 × 9,8 = 686 N. La massa si misura in kg, il peso (una forza) in newton.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "ucbm.fis.dinamica.13", "sat": "ucbm-fis-dinamica", "passo": 2, "dati": {
+   "domanda": {"valore": "Una cassa di 10 kg viene trascinata su un pavimento con coefficiente d'attrito dinamico 0,3. Quanto vale la forza d'attrito (g = 10 m/s²)?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["30 N", "3 N", "100 N", "33 N", "0,3 N"], "fonte": "AI", "stato": "da verificare"},
+   "scritta": {"valore": [30, "30 n"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "N = m·g = 100 N; F = μ·N = 0,3 × 100 = 30 N.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "ucbm.fis.dinamica.14", "sat": "ucbm-fis-dinamica", "passo": 2, "dati": {
+   "domanda": {"valore": "Una molla con k = 200 N/m viene allungata di 5 cm. Quanto vale la forza elastica (in N)?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["10 N", "1000 N", "40 N", "0,25 N", "4 N"], "fonte": "AI", "stato": "da verificare"},
+   "scritta": {"valore": [10, "10 n"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "F = k·x = 200 × 0,05 = 10 N. L'allungamento va in metri.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "ucbm.fis.dinamica.15", "sat": "ucbm-fis-dinamica", "passo": 2, "dati": {
+   "domanda": {"valore": "Si solleva un corpo di 2 kg di 3 m in verticale a velocità costante. Quanto lavoro compie la forza che lo solleva (g = 10 m/s²)?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["60 J", "6 J", "20 J", "600 J", "30 J"], "fonte": "AI", "stato": "da verificare"},
+   "scritta": {"valore": [60, "60 j"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "A velocità costante la forza è uguale al peso: L = m·g·h = 2 × 10 × 3 = 60 J.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "ucbm.fis.dinamica.16", "sat": "ucbm-fis-dinamica", "passo": 2, "dati": {
+   "domanda": {"valore": "Qual è l'energia cinetica di un corpo di 2 kg che si muove a 3 m/s?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["9 J", "6 J", "18 J", "3 J", "12 J"], "fonte": "AI", "stato": "da verificare"},
+   "scritta": {"valore": [9, "9 j"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Ec = ½ × 2 × 3² = 9 J.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "ucbm.fis.dinamica.17", "sat": "ucbm-fis-dinamica", "passo": 2, "dati": {
+   "domanda": {"valore": "Un corpo cade da fermo da 5 m di altezza, senza attrito. Con che velocità arriva a terra (g = 10 m/s²)?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["10 m/s", "50 m/s", "5 m/s", "100 m/s", "25 m/s"], "fonte": "AI", "stato": "da verificare"},
+   "scritta": {"valore": [10, "10 m/s"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Conservazione dell'energia: m·g·h = ½·m·v² → v = √(2gh) = √100 = 10 m/s.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "ucbm.fis.dinamica.18", "sat": "ucbm-fis-dinamica", "passo": 2, "dati": {
+   "domanda": {"valore": "Un motore compie 6000 J di lavoro in 30 s. Qual è la sua potenza (in W)?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["200 W", "180 000 W", "6000 W", "0,005 W", "30 W"], "fonte": "AI", "stato": "da verificare"},
+   "scritta": {"valore": [200, "200 w"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "P = L / t = 6000 / 30 = 200 W.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "ucbm.fis.dinamica.19", "sat": "ucbm-fis-dinamica", "passo": 2, "dati": {
+   "domanda": {"valore": "Un carrello di 2 kg a 3 m/s urta un carrello fermo di 1 kg e i due restano attaccati. Con che velocità si muovono insieme?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["2 m/s", "3 m/s", "1 m/s", "6 m/s", "1,5 m/s"], "fonte": "AI", "stato": "da verificare"},
+   "scritta": {"valore": [2, "2 m/s"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Conservazione della quantità di moto: 2 × 3 = (2 + 1)·v → v = 6 / 3 = 2 m/s (urto anelastico).", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "ucbm.fis.dinamica.20", "sat": "ucbm-fis-dinamica", "passo": 2, "dati": {
+   "domanda": {"valore": "Un pallone di 0,5 kg arriva a 10 m/s e viene rinviato indietro a 10 m/s. Quanto vale la variazione della sua quantità di moto (in kg·m/s)?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["10 kg·m/s", "0 kg·m/s", "5 kg·m/s", "20 kg·m/s", "2,5 kg·m/s"], "fonte": "AI", "stato": "da verificare"},
+   "scritta": {"valore": [10, "10 kg m/s"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "La velocità passa da +10 a −10 m/s: Δp = m·Δv = 0,5 × 20 = 10 kg·m/s (in modulo). Non è zero, perché la quantità di moto è un vettore.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "ucbm.fis.dinamica.21", "sat": "ucbm-fis-dinamica", "passo": 3, "dati": {
+   "domanda": {"valore": "Un libro è fermo su un tavolo. La reazione al peso del libro (secondo il terzo principio) è:", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["La forza con cui il libro attira la Terra", "La forza normale del tavolo sul libro", "La forza d'attrito del tavolo", "La forza con cui il tavolo preme sul pavimento", "Non esiste"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Il peso è la forza della Terra sul libro: la reazione è la forza del libro sulla Terra. La normale del tavolo equilibra il peso, ma agisce sullo stesso corpo e non è la sua reazione.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "ucbm.fis.dinamica.22", "sat": "ucbm-fis-dinamica", "passo": 3, "dati": {
+   "domanda": {"valore": "Se a parità di forza la massa di un corpo raddoppia, la sua accelerazione:", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Si dimezza", "Raddoppia", "Resta uguale", "Quadruplica", "Si annulla"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "a = F/m: con m doppia, a è la metà.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "ucbm.fis.dinamica.23", "sat": "ucbm-fis-dinamica", "passo": 3, "dati": {
+   "domanda": {"valore": "Un'auto di 1000 kg viaggia a 20 m/s. La sua energia cinetica è:", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["2 × 10⁵ J", "2 × 10⁴ J", "4 × 10⁵ J", "1 × 10⁴ J", "2 × 10⁶ J"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Ec = ½ × 1000 × 400 = 200 000 J = 2 × 10⁵ J.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "ucbm.fis.dinamica.24", "sat": "ucbm-fis-dinamica", "passo": 3, "dati": {
+   "domanda": {"valore": "Una persona porta una valigia camminando in piano a velocità costante. Il lavoro compiuto dalla forza verticale che sorregge la valigia è:", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Nullo", "Positivo", "Negativo", "Uguale al peso per lo spostamento", "Infinito"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "La forza è verticale, lo spostamento orizzontale: sono perpendicolari, quindi il lavoro è nullo (anche se ci si stanca).", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "ucbm.fis.dinamica.25", "sat": "ucbm-fis-dinamica", "passo": 3, "dati": {
+   "domanda": {"valore": "Il kilowattora (kWh) è un'unità di misura di:", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Energia", "Potenza", "Forza", "Pressione", "Quantità di moto"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Potenza per tempo dà energia: 1 kWh = 3,6 × 10⁶ J.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "ucbm.fis.dinamica.26", "sat": "ucbm-fis-dinamica", "passo": 3, "dati": {
+   "domanda": {"valore": "In un urto perfettamente anelastico tra due corpi isolati:", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Si conserva la quantità di moto ma non l'energia cinetica", "Si conserva l'energia cinetica ma non la quantità di moto", "Si conservano entrambe", "Non si conserva nessuna delle due", "I corpi rimbalzano con la stessa velocità"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Nell'urto anelastico i corpi restano uniti e parte dell'energia cinetica si trasforma (calore, deformazione); la quantità di moto si conserva sempre.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "ucbm.fis.dinamica.27", "sat": "ucbm-fis-dinamica", "passo": 3, "dati": {
+   "domanda": {"valore": "Un corpo scende lungo un piano inclinato liscio partendo da fermo da un'altezza h. La velocità in fondo al piano:", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Dipende solo da h e da g", "Dipende dalla massa del corpo", "Dipende dall'inclinazione del piano", "È sempre la stessa qualunque sia h", "È maggiore per i corpi più pesanti"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "v = √(2gh) dalla conservazione dell'energia: né la massa né l'inclinazione contano (cambiano solo il tempo di discesa).", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "ucbm.fis.dinamica.28", "sat": "ucbm-fis-dinamica", "passo": 3, "dati": {
+   "domanda": {"valore": "Un oggetto di massa 5 kg è appeso a un filo ed è fermo. La tensione del filo vale (g = 9,8 m/s²):", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["49 N", "5 N", "0,5 N", "98 N", "9,8 N"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Il corpo è in equilibrio: la tensione bilancia il peso, T = m·g = 5 × 9,8 = 49 N.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "ucbm.fis.dinamica.29", "sat": "ucbm-fis-dinamica", "passo": 3, "dati": {
+   "domanda": {"valore": "Quale grandezza ha come unità di misura il kg·m/s?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["La quantità di moto", "La forza", "L'energia", "La potenza", "L'accelerazione"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "p = m·v: kg × m/s. La forza è kg·m/s², l'energia kg·m²/s².", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "ucbm.fis.dinamica.30", "sat": "ucbm-fis-dinamica", "passo": 3, "dati": {
+   "domanda": {"valore": "La forza di gravità tra due corpi, se la loro distanza raddoppia:", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Diventa un quarto", "Si dimezza", "Raddoppia", "Quadruplica", "Resta uguale"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "F = G·m₁·m₂/d²: raddoppiando d, il denominatore diventa 4 volte più grande e la forza un quarto.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "ucbm.fis.fluidi.01", "sat": "ucbm-fis-fluidi", "passo": 1, "dati": {
+   "concetto": {"valore": "La pressione è la forza perpendicolare che agisce su una superficie divisa per l'area: p = F / S. Nel SI si misura in pascal (1 Pa = 1 N/m²). Altre unità: l'atmosfera (1 atm ≈ 1,013 × 10⁵ Pa), il millimetro di mercurio (1 atm = 760 mmHg, usato per la pressione arteriosa) e il bar (10⁵ Pa).", "fonte": "AI", "stato": "da verificare"},
+   "domanda": {"valore": "A quanti mmHg corrisponde una pressione di 1 atm?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["760 mmHg", "100 mmHg", "1013 mmHg", "76 mmHg", "1 mmHg"], "fonte": "AI", "stato": "da verificare"},
+   "scritta": {"valore": [760, "760 mmhg"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Lo dimostrò Torricelli: la pressione atmosferica al livello del mare sostiene una colonna di mercurio alta 760 mm.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "ucbm.fis.fluidi.02", "sat": "ucbm-fis-fluidi", "passo": 1, "dati": {
+   "concetto": {"valore": "La densità di una sostanza è la massa per unità di volume: d = m / V (kg/m³). L'acqua ha densità 1000 kg/m³ (1 g/cm³); il mercurio circa 13 600 kg/m³; l'aria circa 1,2 kg/m³. Un corpo con densità minore del liquido galleggia, con densità maggiore affonda.", "fonte": "AI", "stato": "da verificare"},
+   "domanda": {"valore": "Qual è la densità dell'acqua in kg/m³?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["1000 kg/m³", "1 kg/m³", "100 kg/m³", "13 600 kg/m³", "1,2 kg/m³"], "fonte": "AI", "stato": "da verificare"},
+   "scritta": {"valore": [1000, "1000 kg/m3"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "1 g/cm³ = 1000 kg/m³: un metro cubo d'acqua ha massa di una tonnellata.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "ucbm.fis.fluidi.03", "sat": "ucbm-fis-fluidi", "passo": 1, "dati": {
+   "concetto": {"valore": "Legge di Stevino: in un liquido in quiete la pressione aumenta con la profondità, p = p₀ + d·g·h, dove p₀ è la pressione in superficie, d la densità del liquido e h la profondità. Punti alla stessa profondità nello stesso liquido hanno la stessa pressione, qualunque sia la forma del recipiente (principio dei vasi comunicanti).", "fonte": "AI", "stato": "da verificare"},
+   "domanda": {"valore": "Secondo la legge di Stevino, da che cosa dipende la pressione dovuta a un liquido in un punto?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Dalla profondità e dalla densità del liquido", "Dalla forma del recipiente", "Dalla quantità totale di liquido", "Dall'area della superficie libera", "Dal volume del recipiente"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "p = d·g·h: conta solo quanto si è in profondità e quanto è denso il liquido, non la forma o il volume del recipiente.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "ucbm.fis.fluidi.04", "sat": "ucbm-fis-fluidi", "passo": 1, "dati": {
+   "concetto": {"valore": "Principio di Pascal: una pressione applicata in un punto di un fluido chiuso si trasmette invariata in tutti i punti del fluido e sulle pareti. Su questo si basa il torchio idraulico: una piccola forza su un pistone piccolo produce una grande forza su un pistone grande, con F₁/S₁ = F₂/S₂.", "fonte": "AI", "stato": "da verificare"},
+   "domanda": {"valore": "Su quale principio si basa il funzionamento del torchio idraulico?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Principio di Pascal", "Principio di Archimede", "Legge di Stevino", "Teorema di Bernoulli", "Legge di Hooke"], "fonte": "AI", "stato": "da verificare"},
+   "scritta": {"valore": ["pascal", "principio di pascal"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "La pressione si trasmette uguale ovunque nel liquido: a parità di pressione, sul pistone di area maggiore agisce una forza maggiore.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "ucbm.fis.fluidi.05", "sat": "ucbm-fis-fluidi", "passo": 1, "dati": {
+   "concetto": {"valore": "Principio di Archimede: un corpo immerso in un fluido riceve una spinta verso l'alto uguale al peso del fluido spostato: Sₐ = d_fluido·g·V_immerso. Se la spinta è maggiore del peso il corpo sale e galleggia, se è minore affonda. Un corpo che galleggia ha la parte immersa tale che il peso del liquido spostato è uguale al suo peso.", "fonte": "AI", "stato": "da verificare"},
+   "domanda": {"valore": "A che cosa è uguale la spinta di Archimede su un corpo immerso?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Al peso del fluido spostato", "Al peso del corpo", "Al volume del corpo", "Alla massa del fluido nel recipiente", "Alla pressione atmosferica"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "La spinta è uguale al peso del volume di fluido che il corpo sposta; è uguale al peso del corpo solo se il corpo galleggia in equilibrio.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "ucbm.fis.fluidi.06", "sat": "ucbm-fis-fluidi", "passo": 1, "dati": {
+   "concetto": {"valore": "La portata è il volume di fluido che attraversa una sezione nell'unità di tempo: Q = S·v (m³/s), con S area della sezione e v velocità. Per un liquido incomprimibile in un condotto la portata è costante (equazione di continuità): S₁·v₁ = S₂·v₂. Dove il tubo si restringe, il liquido scorre più veloce.", "fonte": "AI", "stato": "da verificare"},
+   "domanda": {"valore": "In un tubo percorso da un liquido, dove la sezione si dimezza la velocità…", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Raddoppia", "Si dimezza", "Resta uguale", "Quadruplica", "Si annulla"], "fonte": "AI", "stato": "da verificare"},
+   "scritta": {"valore": ["raddoppia", "doppia"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Portata costante: S·v = costante. Con sezione dimezzata la velocità raddoppia (come quando si stringe la punta di un tubo da giardino).", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "ucbm.fis.fluidi.07", "sat": "ucbm-fis-fluidi", "passo": 1, "dati": {
+   "concetto": {"valore": "Il teorema di Bernoulli, per un fluido ideale (incomprimibile, senza attrito) in moto stazionario, esprime la conservazione dell'energia: p + ½·d·v² + d·g·h = costante lungo un tubo di flusso. A parità di altezza, dove il fluido è più veloce la pressione è più bassa (effetto Venturi): spiega la portanza delle ali e il risucchio tra due camion che si incrociano.", "fonte": "AI", "stato": "da verificare"},
+   "domanda": {"valore": "Secondo Bernoulli, a parità di altezza, dove la velocità del fluido aumenta la pressione…", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Diminuisce", "Aumenta", "Resta uguale", "Raddoppia", "Diventa uguale a quella atmosferica"], "fonte": "AI", "stato": "da verificare"},
+   "scritta": {"valore": ["diminuisce", "cala"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "L'energia per unità di volume si conserva: se aumenta il termine cinetico ½·d·v², la pressione deve diminuire.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "ucbm.fis.fluidi.08", "sat": "ucbm-fis-fluidi", "passo": 1, "dati": {
+   "concetto": {"valore": "La viscosità è l'attrito interno di un fluido, la resistenza allo scorrimento tra strati vicini (il miele è più viscoso dell'acqua). Per un fluido viscoso in un tubo, la legge di Poiseuille dice che la portata è proporzionale alla differenza di pressione e alla quarta potenza del raggio: Q = π·r⁴·Δp / (8·η·L). Per questo un piccolo restringimento di un vaso sanguigno riduce molto il flusso.", "fonte": "AI", "stato": "da verificare"},
+   "domanda": {"valore": "Secondo la legge di Poiseuille, se il raggio di un tubo si dimezza (a parità di differenza di pressione), la portata…", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Diventa un sedicesimo", "Si dimezza", "Diventa un quarto", "Raddoppia", "Resta uguale"], "fonte": "AI", "stato": "da verificare"},
+   "scritta": {"valore": ["un sedicesimo", "1/16", "si riduce di 16 volte", 0.0625], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Q è proporzionale a r⁴: (1/2)⁴ = 1/16.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "ucbm.fis.fluidi.09", "sat": "ucbm-fis-fluidi", "passo": 1, "dati": {
+   "concetto": {"valore": "La pressione atmosferica è dovuta al peso dell'aria sopra di noi; al livello del mare vale circa 1 atm (101 325 Pa) e diminuisce salendo di quota. Si misura con il barometro. La pressione manometrica è la differenza rispetto a quella atmosferica: la pressione arteriosa \"120/80 mmHg\" è una pressione manometrica.", "fonte": "AI", "stato": "da verificare"},
+   "domanda": {"valore": "Come varia la pressione atmosferica salendo in montagna?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Diminuisce", "Aumenta", "Resta uguale", "Prima aumenta poi diminuisce", "Dipende dalla temperatura soltanto"], "fonte": "AI", "stato": "da verificare"},
+   "scritta": {"valore": ["diminuisce", "cala"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Salendo c'è meno aria sopra di noi, quindi meno peso: la pressione diminuisce (e l'acqua bolle a meno di 100 °C).", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "ucbm.fis.fluidi.10", "sat": "ucbm-fis-fluidi", "passo": 1, "dati": {
+   "concetto": {"valore": "La tensione superficiale è la tendenza della superficie di un liquido a comportarsi come una membrana elastica, dovuta alle forze di coesione tra le molecole: permette ad alcuni insetti di camminare sull'acqua. La capillarità è la risalita (o la discesa) di un liquido in un tubo sottile: l'acqua sale nei capillari di vetro perché l'adesione al vetro prevale sulla coesione.", "fonte": "AI", "stato": "da verificare"},
+   "domanda": {"valore": "Quale fenomeno permette ad alcuni insetti di camminare sulla superficie dell'acqua?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["La tensione superficiale", "La spinta di Archimede", "La viscosità", "Il principio di Pascal", "L'effetto Venturi"], "fonte": "AI", "stato": "da verificare"},
+   "scritta": {"valore": ["tensione superficiale"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "La tensione superficiale fa comportare la superficie come una pellicola: sostiene corpi leggeri che non la rompono.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "ucbm.fis.fluidi.11", "sat": "ucbm-fis-fluidi", "passo": 2, "dati": {
+   "domanda": {"valore": "Una forza di 200 N agisce perpendicolarmente su una superficie di 0,5 m². Quanto vale la pressione (in Pa)?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["400 Pa", "100 Pa", "200 Pa", "0,0025 Pa", "40 Pa"], "fonte": "AI", "stato": "da verificare"},
+   "scritta": {"valore": [400, "400 pa"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "p = F / S = 200 / 0,5 = 400 Pa.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "ucbm.fis.fluidi.12", "sat": "ucbm-fis-fluidi", "passo": 2, "dati": {
+   "domanda": {"valore": "Quanto vale la pressione dovuta all'acqua (d = 1000 kg/m³) a 10 m di profondità, senza contare l'atmosfera (g = 10 m/s²)?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["10⁵ Pa", "10⁴ Pa", "10³ Pa", "10⁶ Pa", "100 Pa"], "fonte": "AI", "stato": "da verificare"},
+   "scritta": {"valore": [100000, "10^5", "1 atm"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "p = d·g·h = 1000 × 10 × 10 = 10⁵ Pa, circa 1 atm: ogni 10 m d'acqua la pressione aumenta di circa un'atmosfera.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "ucbm.fis.fluidi.13", "sat": "ucbm-fis-fluidi", "passo": 2, "dati": {
+   "domanda": {"valore": "In un torchio idraulico il pistone piccolo ha area 10 cm² e quello grande 1000 cm². Con una forza di 50 N sul piccolo, che forza si ottiene sul grande?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["5000 N", "50 N", "500 N", "0,5 N", "50 000 N"], "fonte": "AI", "stato": "da verificare"},
+   "scritta": {"valore": [5000, "5000 n"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "F₂ = F₁·S₂/S₁ = 50 × 100 = 5000 N.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "ucbm.fis.fluidi.14", "sat": "ucbm-fis-fluidi", "passo": 2, "dati": {
+   "domanda": {"valore": "Un corpo di volume 2 dm³ è completamente immerso in acqua (d = 1000 kg/m³). Quanto vale la spinta di Archimede (g = 10 m/s²)?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["20 N", "2 N", "200 N", "2000 N", "0,2 N"], "fonte": "AI", "stato": "da verificare"},
+   "scritta": {"valore": [20, "20 n"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "V = 2 dm³ = 0,002 m³; Sₐ = 1000 × 10 × 0,002 = 20 N.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "ucbm.fis.fluidi.15", "sat": "ucbm-fis-fluidi", "passo": 2, "dati": {
+   "domanda": {"valore": "Un cubo di legno con densità 600 kg/m³ galleggia in acqua (1000 kg/m³). Quale frazione del suo volume è immersa?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["60%", "40%", "100%", "6%", "167%"], "fonte": "AI", "stato": "da verificare"},
+   "scritta": {"valore": [60, "60%", "3/5", 0.6], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "All'equilibrio il peso del corpo è uguale al peso dell'acqua spostata: V_immerso / V = 600 / 1000 = 0,6, cioè il 60%.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "ucbm.fis.fluidi.16", "sat": "ucbm-fis-fluidi", "passo": 2, "dati": {
+   "domanda": {"valore": "Un liquido scorre a 2 m/s in un tubo di sezione 6 cm². Che velocità ha dove la sezione è 3 cm²?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["4 m/s", "1 m/s", "2 m/s", "8 m/s", "6 m/s"], "fonte": "AI", "stato": "da verificare"},
+   "scritta": {"valore": [4, "4 m/s"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "S₁·v₁ = S₂·v₂ → v₂ = 6 × 2 / 3 = 4 m/s.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "ucbm.fis.fluidi.17", "sat": "ucbm-fis-fluidi", "passo": 2, "dati": {
+   "domanda": {"valore": "Un rubinetto riempie un secchio da 10 L in 20 s. Qual è la portata in L/s?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["0,5 L/s", "2 L/s", "200 L/s", "10 L/s", "0,05 L/s"], "fonte": "AI", "stato": "da verificare"},
+   "scritta": {"valore": [0.5, "0,5 l/s"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Q = V / t = 10 / 20 = 0,5 L/s.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "ucbm.fis.fluidi.18", "sat": "ucbm-fis-fluidi", "passo": 2, "dati": {
+   "domanda": {"valore": "La pressione arteriosa massima è 120 mmHg. Quanto vale in pascal, sapendo che 760 mmHg ≈ 1,0 × 10⁵ Pa?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Circa 1,6 × 10⁴ Pa", "Circa 1,2 × 10⁵ Pa", "Circa 120 Pa", "Circa 1,6 × 10³ Pa", "Circa 9 × 10⁶ Pa"], "fonte": "AI", "stato": "da verificare"},
+   "scritta": {"valore": [16000, 15800, "1,6 × 10^4"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "120 / 760 × 10⁵ ≈ 0,158 × 10⁵ ≈ 1,6 × 10⁴ Pa.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "ucbm.fis.fluidi.19", "sat": "ucbm-fis-fluidi", "passo": 2, "dati": {
+   "domanda": {"valore": "Un corpo pesa 10 N in aria e 6 N quando è completamente immerso in acqua. Quanto vale la spinta di Archimede?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["4 N", "16 N", "6 N", "10 N", "0,6 N"], "fonte": "AI", "stato": "da verificare"},
+   "scritta": {"valore": [4, "4 n"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Il peso apparente è il peso meno la spinta: 10 − 6 = 4 N.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "ucbm.fis.fluidi.20", "sat": "ucbm-fis-fluidi", "passo": 2, "dati": {
+   "domanda": {"valore": "Il raggio di un'arteria si riduce del 50% per una placca. A parità di differenza di pressione, quanto diventa la portata (legge di Poiseuille)?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["1/16 di quella iniziale", "1/2 di quella iniziale", "1/4 di quella iniziale", "1/8 di quella iniziale", "Uguale"], "fonte": "AI", "stato": "da verificare"},
+   "scritta": {"valore": ["1/16", "un sedicesimo", 0.0625], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Q ∝ r⁴: (0,5)⁴ = 1/16. Per mantenere il flusso servirebbe una pressione molto maggiore.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "ucbm.fis.fluidi.21", "sat": "ucbm-fis-fluidi", "passo": 3, "dati": {
+   "domanda": {"valore": "Un subacqueo scende da 10 m a 20 m di profondità in mare. La pressione totale su di lui:", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Passa da circa 2 atm a circa 3 atm", "Raddoppia esattamente", "Resta uguale", "Passa da circa 1 atm a circa 2 atm", "Diminuisce"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Alla pressione atmosferica (1 atm) si aggiunge circa 1 atm ogni 10 m d'acqua: 2 atm a 10 m, 3 atm a 20 m. Non raddoppia, perché c'è la parte atmosferica.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "ucbm.fis.fluidi.22", "sat": "ucbm-fis-fluidi", "passo": 3, "dati": {
+   "domanda": {"valore": "Un corpo immerso in acqua affonda se:", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["La sua densità media è maggiore di quella dell'acqua", "La sua massa è maggiore di 1 kg", "Il suo volume è piccolo", "La sua densità è minore di quella dell'acqua", "È fatto di metallo, qualunque forma abbia"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Conta la densità media: una nave d'acciaio galleggia perché, con l'aria che contiene, ha densità media minore dell'acqua.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "ucbm.fis.fluidi.23", "sat": "ucbm-fis-fluidi", "passo": 3, "dati": {
+   "domanda": {"valore": "Secondo il principio di Pascal, una pressione applicata a un liquido in un recipiente chiuso:", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Si trasmette inalterata in ogni punto del liquido", "Si trasmette solo verso il basso", "Diminuisce con la distanza dal punto di applicazione", "Si trasmette solo alle pareti laterali", "Si annulla"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "La pressione si trasmette uguale in tutte le direzioni e in tutti i punti del fluido.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "ucbm.fis.fluidi.24", "sat": "ucbm-fis-fluidi", "passo": 3, "dati": {
+   "domanda": {"valore": "Un'ala d'aereo è sostenuta perché l'aria sopra l'ala scorre più veloce che sotto. Questo si spiega con:", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Il teorema di Bernoulli", "Il principio di Archimede", "La legge di Stevino", "Il principio di Pascal", "La legge di Hooke"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Più velocità sopra significa pressione più bassa sopra che sotto: la differenza di pressione dà la portanza.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "ucbm.fis.fluidi.25", "sat": "ucbm-fis-fluidi", "passo": 3, "dati": {
+   "domanda": {"valore": "Due recipienti di forma diversa contengono acqua fino alla stessa altezza. Sul fondo la pressione dovuta al liquido:", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["È uguale nei due recipienti", "È maggiore nel recipiente con più acqua", "È maggiore nel recipiente più largo", "È maggiore nel recipiente più stretto", "Dipende dall'area del fondo"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Per Stevino conta solo la profondità (e la densità): stessa altezza, stessa pressione (paradosso idrostatico).", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "ucbm.fis.fluidi.26", "sat": "ucbm-fis-fluidi", "passo": 3, "dati": {
+   "domanda": {"valore": "Un liquido ideale scorre in un tubo orizzontale che si restringe. Nel tratto stretto:", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["La velocità aumenta e la pressione diminuisce", "La velocità diminuisce e la pressione aumenta", "Velocità e pressione aumentano", "Velocità e pressione diminuiscono", "La portata aumenta"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Per continuità la velocità aumenta; per Bernoulli, a parità di altezza, la pressione diminuisce. La portata resta costante.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "ucbm.fis.fluidi.27", "sat": "ucbm-fis-fluidi", "passo": 3, "dati": {
+   "domanda": {"valore": "L'unità di misura della portata nel SI è:", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["m³/s", "m/s", "kg/m³", "Pa", "m²/s"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "La portata è volume per unità di tempo: m³/s.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "ucbm.fis.fluidi.28", "sat": "ucbm-fis-fluidi", "passo": 3, "dati": {
+   "domanda": {"valore": "Un pezzo di ghiaccio (densità circa 920 kg/m³) galleggia in acqua (1000 kg/m³). La parte immersa è circa:", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Il 92% del volume", "L'8% del volume", "Il 50% del volume", "Il 100% del volume", "Il 9% del volume"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "La frazione immersa è il rapporto tra le densità: 920/1000 = 0,92 (per questo si vede solo la punta dell'iceberg).", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "ucbm.fis.fluidi.29", "sat": "ucbm-fis-fluidi", "passo": 3, "dati": {
+   "domanda": {"valore": "La viscosità di un fluido:", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["È la resistenza interna allo scorrimento tra i suoi strati", "È la sua massa per unità di volume", "È la pressione che esercita sul fondo", "È la spinta verso l'alto sui corpi immersi", "È la sua tendenza a evaporare"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "La viscosità è l'attrito interno del fluido. La massa per unità di volume è la densità; la spinta verso l'alto è quella di Archimede.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "ucbm.fis.fluidi.30", "sat": "ucbm-fis-fluidi", "passo": 3, "dati": {
+   "domanda": {"valore": "Il valore della pressione atmosferica al livello del mare è circa:", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["1,013 × 10⁵ Pa", "1,013 × 10³ Pa", "760 Pa", "1 Pa", "9,8 Pa"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "1 atm ≈ 101 325 Pa ≈ 1,013 × 10⁵ Pa, cioè 760 mmHg (non 760 Pa).", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "ucbm.fis.termo.01", "sat": "ucbm-fis-termo", "passo": 1, "dati": {
+   "concetto": {"valore": "La temperatura misura l'energia cinetica media delle particelle di un corpo. Le scale più usate sono la Celsius (0 °C fusione del ghiaccio, 100 °C ebollizione dell'acqua a 1 atm) e la Kelvin, o assoluta: T(K) = t(°C) + 273,15. Lo zero assoluto (0 K = −273,15 °C) è la temperatura più bassa possibile. Una variazione di 1 °C è uguale a una variazione di 1 K.", "fonte": "AI", "stato": "da verificare"},
+   "domanda": {"valore": "A quanti gradi Celsius corrisponde lo zero assoluto?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["−273,15 °C", "0 °C", "−100 °C", "−373 °C", "273,15 °C"], "fonte": "AI", "stato": "da verificare"},
+   "scritta": {"valore": [-273.15, -273, "-273 °c"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "0 K = −273,15 °C: a questa temperatura l'agitazione delle particelle sarebbe minima.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "ucbm.fis.termo.02", "sat": "ucbm-fis-termo", "passo": 1, "dati": {
+   "concetto": {"valore": "Il calore è energia che passa da un corpo più caldo a uno più freddo a causa della differenza di temperatura; si misura in joule (oppure in calorie: 1 cal ≈ 4,186 J). Quando due corpi a contatto raggiungono la stessa temperatura sono in equilibrio termico e il passaggio di calore si ferma.", "fonte": "AI", "stato": "da verificare"},
+   "domanda": {"valore": "In che verso passa spontaneamente il calore tra due corpi a contatto?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Dal corpo più caldo a quello più freddo", "Dal corpo più freddo a quello più caldo", "Dal corpo più grande a quello più piccolo", "Dal corpo più pesante a quello più leggero", "In entrambi i versi allo stesso modo"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Il calore fluisce spontaneamente dalla temperatura più alta a quella più bassa, fino all'equilibrio termico.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "ucbm.fis.termo.03", "sat": "ucbm-fis-termo", "passo": 1, "dati": {
+   "concetto": {"valore": "Il calore necessario per scaldare un corpo è Q = m·c·ΔT, dove c è il calore specifico (J/(kg·K)), cioè il calore che serve per alzare di 1 K la temperatura di 1 kg di sostanza. L'acqua ha un calore specifico molto alto, circa 4186 J/(kg·K) (1 cal/(g·°C)): per questo mitiga il clima e regola la temperatura del corpo. La capacità termica di un corpo è C = m·c.", "fonte": "AI", "stato": "da verificare"},
+   "domanda": {"valore": "Come si chiama il calore necessario per alzare di 1 K la temperatura di 1 kg di una sostanza?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Calore specifico", "Capacità termica", "Calore latente", "Conducibilità termica", "Entropia"], "fonte": "AI", "stato": "da verificare"},
+   "scritta": {"valore": ["calore specifico"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "È il calore specifico c. La capacità termica (m·c) riguarda l'intero corpo; il calore latente i passaggi di stato.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "ucbm.fis.termo.04", "sat": "ucbm-fis-termo", "passo": 1, "dati": {
+   "concetto": {"valore": "Il calore si propaga in tre modi. Conduzione: passaggio di energia tra particelle a contatto, senza spostamento di materia (tipica dei solidi; i metalli sono buoni conduttori, aria e legno isolanti). Convezione: trasporto di calore con movimento di materia nei fluidi (correnti calde che salgono). Irraggiamento: emissione di onde elettromagnetiche, che avviene anche nel vuoto (il calore del Sole).", "fonte": "AI", "stato": "da verificare"},
+   "domanda": {"valore": "Come arriva sulla Terra il calore del Sole, attraverso lo spazio vuoto?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Per irraggiamento", "Per conduzione", "Per convezione", "Per evaporazione", "Per diffusione"], "fonte": "AI", "stato": "da verificare"},
+   "scritta": {"valore": ["irraggiamento", "radiazione"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Nel vuoto non ci sono particelle che conducano o si muovano: il calore viaggia come radiazione elettromagnetica.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "ucbm.fis.termo.05", "sat": "ucbm-fis-termo", "passo": 1, "dati": {
+   "concetto": {"valore": "Durante un cambiamento di stato di una sostanza pura la temperatura resta costante: il calore serve a cambiare lo stato. Il calore latente λ è il calore necessario per far cambiare stato a 1 kg di sostanza: Q = m·λ. Per l'acqua il calore latente di fusione è circa 334 kJ/kg, quello di vaporizzazione circa 2260 kJ/kg. Il sudore raffredda il corpo perché evaporando assorbe calore.", "fonte": "AI", "stato": "da verificare"},
+   "domanda": {"valore": "Perché l'evaporazione del sudore raffredda la pelle?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Perché per evaporare l'acqua assorbe calore dal corpo", "Perché il sudore è più freddo dell'aria", "Perché l'acqua cede calore evaporando", "Perché il sudore riflette i raggi del Sole", "Perché l'evaporazione produce ghiaccio"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Il passaggio da liquido a vapore richiede il calore latente di vaporizzazione, che viene sottratto alla pelle.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "ucbm.fis.termo.06", "sat": "ucbm-fis-termo", "passo": 1, "dati": {
+   "concetto": {"valore": "La dilatazione termica: quasi tutti i corpi si allungano quando si scaldano. Per un solido ΔL = λ·L₀·ΔT, dove λ è il coefficiente di dilatazione lineare. Per questo si lasciano giunti nei binari e nei ponti. L'acqua è un'eccezione: tra 0 °C e 4 °C si contrae scaldandosi, e ha densità massima a 4 °C; per questo il ghiaccio galleggia e i laghi gelano dall'alto.", "fonte": "AI", "stato": "da verificare"},
+   "domanda": {"valore": "A quale temperatura l'acqua ha la densità massima?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["4 °C", "0 °C", "100 °C", "−4 °C", "20 °C"], "fonte": "AI", "stato": "da verificare"},
+   "scritta": {"valore": [4, "4 °c", "4 gradi"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "L'acqua è più densa a 4 °C: sul fondo dei laghi l'acqua resta a circa 4 °C mentre in superficie si forma il ghiaccio.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "ucbm.fis.termo.07", "sat": "ucbm-fis-termo", "passo": 1, "dati": {
+   "concetto": {"valore": "Per un gas perfetto vale l'equazione di stato p·V = n·R·T, con R = 8,314 J/(mol·K). Da essa derivano le leggi di Boyle (T costante: p·V costante), di Charles o Gay-Lussac (p costante: V/T costante) e la seconda legge di Gay-Lussac (V costante: p/T costante). La temperatura va sempre espressa in kelvin.", "fonte": "AI", "stato": "da verificare"},
+   "domanda": {"valore": "In una trasformazione isoterma di un gas perfetto, che cosa resta costante?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Il prodotto p·V", "Il volume", "La pressione", "Il rapporto V/T", "L'energia scambiata"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Isoterma significa a temperatura costante: per la legge di Boyle p·V resta costante.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "ucbm.fis.termo.08", "sat": "ucbm-fis-termo", "passo": 1, "dati": {
+   "concetto": {"valore": "Primo principio della termodinamica: la variazione di energia interna di un sistema è uguale al calore assorbito meno il lavoro compiuto dal sistema: ΔU = Q − L. È una forma della conservazione dell'energia. In una trasformazione adiabatica non c'è scambio di calore (Q = 0); in una isocora il volume è costante e il lavoro è nullo; in una isobara la pressione è costante e L = p·ΔV.", "fonte": "AI", "stato": "da verificare"},
+   "domanda": {"valore": "In una trasformazione adiabatica, quale grandezza è nulla?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Il calore scambiato", "Il lavoro", "La variazione di energia interna", "La pressione", "La temperatura"], "fonte": "AI", "stato": "da verificare"},
+   "scritta": {"valore": ["calore", "il calore", "q", "calore scambiato"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Adiabatica = senza scambio di calore con l'esterno (Q = 0): ΔU = −L.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "ucbm.fis.termo.09", "sat": "ucbm-fis-termo", "passo": 1, "dati": {
+   "concetto": {"valore": "Secondo principio della termodinamica: il calore non passa spontaneamente da un corpo freddo a uno caldo (Clausius), ed è impossibile trasformare completamente in lavoro il calore preso da un'unica sorgente (Kelvin). Una macchina termica lavora tra una sorgente calda e una fredda e ha rendimento η = L / Q_assorbito, sempre minore di 1. Il rendimento massimo è quello di Carnot: η = 1 − T_fredda/T_calda (temperature in kelvin).", "fonte": "AI", "stato": "da verificare"},
+   "domanda": {"valore": "Il rendimento di una macchina termica reale può essere uguale al 100%?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["No, è sempre minore del 100%", "Sì, se non c'è attrito", "Sì, sempre", "Solo se la sorgente fredda è a 0 °C", "Solo per le macchine elettriche"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Per il secondo principio una parte del calore va sempre ceduta alla sorgente fredda: il rendimento è sempre minore di 1.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "ucbm.fis.termo.10", "sat": "ucbm-fis-termo", "passo": 1, "dati": {
+   "concetto": {"valore": "L'entropia è una grandezza che misura il disordine di un sistema e la frazione di energia non più utilizzabile per compiere lavoro. In un sistema isolato l'entropia non diminuisce mai: resta costante nelle trasformazioni reversibili e aumenta in quelle irreversibili (reali). Per questo i processi spontanei hanno un verso preciso, come il mescolamento di acqua calda e fredda.", "fonte": "AI", "stato": "da verificare"},
+   "domanda": {"valore": "In un sistema isolato, durante una trasformazione reale (irreversibile), l'entropia…", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Aumenta", "Diminuisce", "Resta sempre costante", "Si annulla", "Diventa negativa"], "fonte": "AI", "stato": "da verificare"},
+   "scritta": {"valore": ["aumenta", "cresce"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Nei processi reali di un sistema isolato l'entropia cresce: è un altro modo di enunciare il secondo principio.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "ucbm.fis.termo.11", "sat": "ucbm-fis-termo", "passo": 2, "dati": {
+   "domanda": {"valore": "Quanto calore serve per scaldare 2 kg di acqua da 20 °C a 70 °C (c = 4186 J/(kg·K))?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Circa 4,2 × 10⁵ J", "Circa 4,2 × 10³ J", "Circa 2,1 × 10⁵ J", "Circa 8,4 × 10⁵ J", "Circa 4186 J"], "fonte": "AI", "stato": "da verificare"},
+   "scritta": {"valore": [418600, 420000.0, "4,2 × 10^5"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Q = m·c·ΔT = 2 × 4186 × 50 = 418 600 J ≈ 4,2 × 10⁵ J.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "ucbm.fis.termo.12", "sat": "ucbm-fis-termo", "passo": 2, "dati": {
+   "domanda": {"valore": "A quanti kelvin corrispondono 27 °C?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["300 K", "246 K", "27 K", "273 K", "327 K"], "fonte": "AI", "stato": "da verificare"},
+   "scritta": {"valore": [300, 300.15, "300 k"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "T = 27 + 273 = 300 K.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "ucbm.fis.termo.13", "sat": "ucbm-fis-termo", "passo": 2, "dati": {
+   "domanda": {"valore": "Si mescolano 1 kg di acqua a 80 °C e 1 kg di acqua a 20 °C, senza perdite di calore. Quale temperatura si raggiunge?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["50 °C", "60 °C", "100 °C", "40 °C", "30 °C"], "fonte": "AI", "stato": "da verificare"},
+   "scritta": {"valore": [50, "50 °c"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Masse uguali della stessa sostanza: la temperatura di equilibrio è la media, (80 + 20) / 2 = 50 °C.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "ucbm.fis.termo.14", "sat": "ucbm-fis-termo", "passo": 2, "dati": {
+   "domanda": {"valore": "Quanto calore serve per fondere 2 kg di ghiaccio a 0 °C (calore latente di fusione 334 kJ/kg)?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["668 kJ", "334 kJ", "167 kJ", "2260 kJ", "0 kJ"], "fonte": "AI", "stato": "da verificare"},
+   "scritta": {"valore": [668, "668 kj", 668000], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Q = m·λ = 2 × 334 = 668 kJ. La temperatura resta a 0 °C durante tutta la fusione.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "ucbm.fis.termo.15", "sat": "ucbm-fis-termo", "passo": 2, "dati": {
+   "domanda": {"valore": "Un gas riceve 500 J di calore e compie un lavoro di 200 J. Di quanto varia la sua energia interna?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["+300 J", "+700 J", "−300 J", "+200 J", "0 J"], "fonte": "AI", "stato": "da verificare"},
+   "scritta": {"valore": [300, "+300", "300 j"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "ΔU = Q − L = 500 − 200 = +300 J.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "ucbm.fis.termo.16", "sat": "ucbm-fis-termo", "passo": 2, "dati": {
+   "domanda": {"valore": "Un gas a pressione costante di 10⁵ Pa si espande da 2 L a 5 L. Quanto lavoro compie (in J)?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["300 J", "3 × 10⁵ J", "500 J", "30 J", "700 J"], "fonte": "AI", "stato": "da verificare"},
+   "scritta": {"valore": [300, "300 j"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "L = p·ΔV = 10⁵ × 3 × 10⁻³ m³ = 300 J (1 L = 10⁻³ m³).", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "ucbm.fis.termo.17", "sat": "ucbm-fis-termo", "passo": 2, "dati": {
+   "domanda": {"valore": "Una macchina termica assorbe 1000 J dalla sorgente calda e compie un lavoro di 250 J. Qual è il suo rendimento?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["25%", "75%", "4%", "40%", "250%"], "fonte": "AI", "stato": "da verificare"},
+   "scritta": {"valore": [25, "25%", 0.25], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "η = L / Q = 250 / 1000 = 0,25 = 25%. Gli altri 750 J vanno alla sorgente fredda.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "ucbm.fis.termo.18", "sat": "ucbm-fis-termo", "passo": 2, "dati": {
+   "domanda": {"valore": "Qual è il rendimento massimo (di Carnot) di una macchina che lavora tra 600 K e 300 K?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["50%", "100%", "200%", "33%", "67%"], "fonte": "AI", "stato": "da verificare"},
+   "scritta": {"valore": [50, "50%", 0.5], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "η = 1 − T_fredda / T_calda = 1 − 300/600 = 0,5 = 50%.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "ucbm.fis.termo.19", "sat": "ucbm-fis-termo", "passo": 2, "dati": {
+   "domanda": {"valore": "Un gas perfetto chiuso a volume costante è a 300 K e 1 atm. Che pressione raggiunge a 600 K?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["2 atm", "0,5 atm", "1 atm", "4 atm", "3 atm"], "fonte": "AI", "stato": "da verificare"},
+   "scritta": {"valore": [2, "2 atm"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "A volume costante p/T è costante: raddoppia la temperatura assoluta, raddoppia la pressione.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "ucbm.fis.termo.20", "sat": "ucbm-fis-termo", "passo": 2, "dati": {
+   "domanda": {"valore": "Una sbarra d'acciaio lunga 10 m si scalda di 50 K. Di quanto si allunga, con coefficiente di dilatazione lineare 1,2 × 10⁻⁵ K⁻¹?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["6 mm", "0,6 mm", "6 cm", "60 cm", "0,06 mm"], "fonte": "AI", "stato": "da verificare"},
+   "scritta": {"valore": [6, "6 mm", 0.006], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "ΔL = λ·L₀·ΔT = 1,2 × 10⁻⁵ × 10 × 50 = 6 × 10⁻³ m = 6 mm.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "ucbm.fis.termo.21", "sat": "ucbm-fis-termo", "passo": 3, "dati": {
+   "domanda": {"valore": "Una variazione di temperatura di 10 °C corrisponde a una variazione di:", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["10 K", "283 K", "263 K", "50 K", "18 K"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Le due scale hanno gradi della stessa ampiezza: una differenza di 10 °C è una differenza di 10 K.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "ucbm.fis.termo.22", "sat": "ucbm-fis-termo", "passo": 3, "dati": {
+   "domanda": {"valore": "A parità di massa e di calore fornito, si scalda meno la sostanza che ha:", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Il calore specifico maggiore", "Il calore specifico minore", "La densità maggiore", "Il volume minore", "La temperatura iniziale più alta"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "ΔT = Q / (m·c): più grande è c, minore è l'aumento di temperatura (l'acqua si scalda lentamente).", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "ucbm.fis.termo.23", "sat": "ucbm-fis-termo", "passo": 3, "dati": {
+   "domanda": {"valore": "Durante l'ebollizione dell'acqua a pressione costante, il calore fornito:", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Serve a far passare l'acqua allo stato di vapore senza aumentarne la temperatura", "Fa aumentare la temperatura oltre i 100 °C", "Viene tutto disperso nell'ambiente", "Fa diminuire la temperatura", "Non ha alcun effetto"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "È il calore latente di vaporizzazione: la temperatura resta a 100 °C finché c'è acqua liquida.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "ucbm.fis.termo.24", "sat": "ucbm-fis-termo", "passo": 3, "dati": {
+   "domanda": {"valore": "In una trasformazione isocora di un gas perfetto:", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Il lavoro compiuto dal gas è nullo", "La temperatura resta costante", "Non c'è scambio di calore", "La pressione resta costante", "L'energia interna resta costante"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Isocora = volume costante: senza variazione di volume il gas non compie lavoro (L = p·ΔV = 0), quindi ΔU = Q.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "ucbm.fis.termo.25", "sat": "ucbm-fis-termo", "passo": 3, "dati": {
+   "domanda": {"valore": "Il calore si propaga per convezione:", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Nei fluidi, con movimento di materia", "Solo nel vuoto", "Solo nei solidi, senza movimento di materia", "Solo tramite onde elettromagnetiche", "Solo nei metalli"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "La convezione richiede un fluido che si muove: correnti calde salgono e fredde scendono (come nell'acqua in una pentola).", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "ucbm.fis.termo.26", "sat": "ucbm-fis-termo", "passo": 3, "dati": {
+   "domanda": {"valore": "Il primo principio della termodinamica è un'espressione:", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Della conservazione dell'energia", "Dell'aumento dell'entropia", "Della conservazione della massa", "Della legge di Boyle", "Della conservazione della quantità di moto"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "ΔU = Q − L: l'energia non si crea né si distrugge, si trasforma tra calore, lavoro ed energia interna.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "ucbm.fis.termo.27", "sat": "ucbm-fis-termo", "passo": 3, "dati": {
+   "domanda": {"valore": "Secondo il secondo principio della termodinamica:", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Il calore non passa spontaneamente da un corpo freddo a uno caldo", "L'energia si conserva sempre", "Il rendimento di una macchina può essere del 100%", "L'entropia di un sistema isolato diminuisce", "Il calore è una forma di temperatura"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "È l'enunciato di Clausius. Il frigorifero porta calore dal freddo al caldo, ma solo spendendo lavoro.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "ucbm.fis.termo.28", "sat": "ucbm-fis-termo", "passo": 3, "dati": {
+   "domanda": {"valore": "Un gas perfetto viene compresso a temperatura costante fino a metà del volume. La pressione:", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Raddoppia", "Si dimezza", "Resta uguale", "Quadruplica", "Si riduce a un quarto"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Isoterma: p·V costante; con V dimezzato, p raddoppia.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "ucbm.fis.termo.29", "sat": "ucbm-fis-termo", "passo": 3, "dati": {
+   "domanda": {"valore": "Il ghiaccio galleggia sull'acqua perché:", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Ha densità minore dell'acqua liquida", "Ha densità maggiore dell'acqua liquida", "È più freddo", "Contiene aria", "Ha calore specifico maggiore"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Solidificando l'acqua si espande (i legami a idrogeno formano un reticolo aperto): il ghiaccio è meno denso del liquido.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "ucbm.fis.termo.30", "sat": "ucbm-fis-termo", "passo": 3, "dati": {
+   "domanda": {"valore": "Quale delle seguenti macchine ha il rendimento teorico massimo più alto?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Quella che lavora tra 800 K e 200 K", "Quella che lavora tra 400 K e 200 K", "Quella che lavora tra 600 K e 400 K", "Quella che lavora tra 500 K e 400 K", "Quella che lavora tra 300 K e 200 K"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "η = 1 − T_f/T_c: 1 − 200/800 = 75%, il valore più alto; le altre danno 50%, 33%, 20% e 33%.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "ucbm.fis.elettro.01", "sat": "ucbm-fis-elettro", "passo": 1, "dati": {
+   "concetto": {"valore": "La carica elettrica può essere positiva o negativa; cariche dello stesso segno si respingono, di segno opposto si attraggono. Si misura in coulomb (C); la carica elementare è quella dell'elettrone (−1,6 × 10⁻¹⁹ C) e del protone (+1,6 × 10⁻¹⁹ C). In un sistema isolato la carica totale si conserva. I conduttori (metalli) lasciano muovere le cariche, gli isolanti (vetro, plastica) no.", "fonte": "AI", "stato": "da verificare"},
+   "domanda": {"valore": "Che cosa succede tra due cariche elettriche dello stesso segno?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Si respingono", "Si attraggono", "Non interagiscono", "Si annullano", "Si fondono"], "fonte": "AI", "stato": "da verificare"},
+   "scritta": {"valore": ["si respingono", "repulsione"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Cariche uguali si respingono, cariche opposte si attraggono.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "ucbm.fis.elettro.02", "sat": "ucbm-fis-elettro", "passo": 1, "dati": {
+   "concetto": {"valore": "La legge di Coulomb dà la forza tra due cariche puntiformi: F = k·q₁·q₂ / r², con k ≈ 9 × 10⁹ N·m²/C² nel vuoto. La forza è diretta lungo la retta che unisce le cariche ed è inversamente proporzionale al quadrato della distanza. In un mezzo materiale la forza è ridotta di un fattore pari alla costante dielettrica relativa εᵣ (per l'acqua circa 80).", "fonte": "AI", "stato": "da verificare"},
+   "domanda": {"valore": "Se la distanza tra due cariche raddoppia, la forza di Coulomb…", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Diventa un quarto", "Si dimezza", "Raddoppia", "Quadruplica", "Resta uguale"], "fonte": "AI", "stato": "da verificare"},
+   "scritta": {"valore": ["un quarto", "1/4", "diventa un quarto", 0.25], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "F ∝ 1/r²: raddoppiando r la forza diventa (1/2)² = 1/4.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "ucbm.fis.elettro.03", "sat": "ucbm-fis-elettro", "passo": 1, "dati": {
+   "concetto": {"valore": "Il campo elettrico in un punto è la forza che agirebbe su una carica di prova positiva unitaria posta lì: E = F / q (N/C, oppure V/m). Il campo di una carica puntiforme è E = k·Q / r². Le linee di campo escono dalle cariche positive ed entrano in quelle negative.", "fonte": "AI", "stato": "da verificare"},
+   "domanda": {"valore": "Da dove escono le linee del campo elettrico?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Dalle cariche positive", "Dalle cariche negative", "Dai poli nord dei magneti", "Dai conduttori neutri", "Da nessuna parte: sono chiuse"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Per convenzione le linee di campo escono dalle cariche positive ed entrano nelle negative; sono le linee del campo magnetico a essere chiuse.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "ucbm.fis.elettro.04", "sat": "ucbm-fis-elettro", "passo": 1, "dati": {
+   "concetto": {"valore": "Il potenziale elettrico V è l'energia potenziale per unità di carica: V = U / q, si misura in volt (1 V = 1 J/C). Conta la differenza di potenziale (d.d.p. o tensione) tra due punti: il lavoro per spostare una carica q tra due punti è L = q·ΔV. Le cariche positive si muovono spontaneamente verso potenziali più bassi.", "fonte": "AI", "stato": "da verificare"},
+   "domanda": {"valore": "A che cosa corrisponde 1 volt?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["1 joule per coulomb", "1 coulomb per secondo", "1 newton per coulomb", "1 watt per ampere al quadrato", "1 ohm per coulomb"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Il volt è energia per unità di carica: 1 V = 1 J/C. 1 C/s è l'ampere.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "ucbm.fis.elettro.05", "sat": "ucbm-fis-elettro", "passo": 1, "dati": {
+   "concetto": {"valore": "Un condensatore è formato da due conduttori (armature) separati da un isolante; accumula carica e energia. La capacità è C = Q / V, in farad (F). Per un condensatore piano C = ε·S / d: cresce con l'area delle armature e diminuisce con la distanza tra loro. L'energia immagazzinata è ½·C·V².", "fonte": "AI", "stato": "da verificare"},
+   "domanda": {"valore": "Come varia la capacità di un condensatore piano se si aumenta la distanza tra le armature?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Diminuisce", "Aumenta", "Resta uguale", "Raddoppia sempre", "Si annulla"], "fonte": "AI", "stato": "da verificare"},
+   "scritta": {"valore": ["diminuisce", "cala"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "C = ε·S/d: la capacità è inversamente proporzionale alla distanza tra le armature.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "ucbm.fis.elettro.06", "sat": "ucbm-fis-elettro", "passo": 1, "dati": {
+   "concetto": {"valore": "La corrente elettrica è il flusso ordinato di cariche: l'intensità è I = Q / t, in ampere (1 A = 1 C/s). Per convenzione il verso della corrente è quello in cui si muoverebbero le cariche positive, cioè dal polo positivo al negativo nel circuito esterno; nei metalli si muovono in realtà gli elettroni, nel verso opposto.", "fonte": "AI", "stato": "da verificare"},
+   "domanda": {"valore": "Qual è l'unità di misura dell'intensità di corrente?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Ampere", "Volt", "Ohm", "Coulomb", "Watt"], "fonte": "AI", "stato": "da verificare"},
+   "scritta": {"valore": ["ampere", "a"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "L'ampere (A), una delle sette unità fondamentali del SI: 1 A = 1 C/s.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "ucbm.fis.elettro.07", "sat": "ucbm-fis-elettro", "passo": 1, "dati": {
+   "concetto": {"valore": "Prima legge di Ohm: in un conduttore ohmico l'intensità di corrente è proporzionale alla tensione: V = R·I, dove R è la resistenza in ohm (Ω). Seconda legge di Ohm: R = ρ·L / S, la resistenza cresce con la lunghezza del filo e diminuisce con la sua sezione; ρ è la resistività del materiale.", "fonte": "AI", "stato": "da verificare"},
+   "domanda": {"valore": "Qual è l'espressione della prima legge di Ohm?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["V = R·I", "V = R/I", "I = R·V", "R = V·I", "P = R·I"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "V = R·I: a parità di resistenza, raddoppiando la tensione raddoppia la corrente.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "ucbm.fis.elettro.08", "sat": "ucbm-fis-elettro", "passo": 1, "dati": {
+   "concetto": {"valore": "Resistenze in serie sono attraversate dalla stessa corrente e la resistenza equivalente è la somma: R = R₁ + R₂. Resistenze in parallelo hanno la stessa tensione ai capi e vale 1/R = 1/R₁ + 1/R₂: la resistenza equivalente è minore della più piccola. Gli impianti di casa sono in parallelo.", "fonte": "AI", "stato": "da verificare"},
+   "domanda": {"valore": "Due resistenze uguali R sono collegate in parallelo. Quanto vale la resistenza equivalente?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["R/2", "2R", "R", "R²", "4R"], "fonte": "AI", "stato": "da verificare"},
+   "scritta": {"valore": ["r/2", "metà", "la metà"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "1/Req = 1/R + 1/R = 2/R → Req = R/2. In serie sarebbe 2R.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "ucbm.fis.elettro.09", "sat": "ucbm-fis-elettro", "passo": 1, "dati": {
+   "concetto": {"valore": "La potenza elettrica dissipata in un resistore è P = V·I = R·I² = V²/R (watt). Il passaggio di corrente in un conduttore produce calore (effetto Joule): è il principio di stufe, ferri da stiro e fusibili. L'energia consumata è P·t, spesso misurata in kWh.", "fonte": "AI", "stato": "da verificare"},
+   "domanda": {"valore": "Come si chiama il riscaldamento di un conduttore percorso da corrente?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Effetto Joule", "Effetto fotoelettrico", "Effetto Doppler", "Induzione elettromagnetica", "Effetto Venturi"], "fonte": "AI", "stato": "da verificare"},
+   "scritta": {"valore": ["effetto joule", "joule"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Gli elettroni urtano il reticolo del conduttore e cedono energia sotto forma di calore: effetto Joule, P = R·I².", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "ucbm.fis.elettro.10", "sat": "ucbm-fis-elettro", "passo": 1, "dati": {
+   "concetto": {"valore": "Il campo magnetico B si misura in tesla (T). È prodotto da magneti e da correnti elettriche; le sue linee sono chiuse ed escono dal polo nord del magnete per rientrare dal sud (non esistono poli magnetici isolati). Una carica q in moto con velocità v in un campo B subisce la forza di Lorentz F = q·v·B·sin θ, perpendicolare sia a v sia a B; un filo percorso da corrente subisce F = I·L·B·sin θ. Un campo magnetico che varia nel tempo produce una corrente indotta (legge di Faraday).", "fonte": "AI", "stato": "da verificare"},
+   "domanda": {"valore": "Quanto vale la forza magnetica su una carica che si muove parallela al campo magnetico?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Zero", "Il valore massimo", "q·v·B", "q·B", "Dipende dalla massa"], "fonte": "AI", "stato": "da verificare"},
+   "scritta": {"valore": [0, "zero", "nulla"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "F = q·v·B·sin θ: con θ = 0° (moto parallelo al campo) sin θ = 0 e la forza è nulla.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "ucbm.fis.elettro.11", "sat": "ucbm-fis-elettro", "passo": 2, "dati": {
+   "domanda": {"valore": "Una resistenza di 10 Ω è collegata a una tensione di 230 V. Che corrente la attraversa (in A)?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["23 A", "2300 A", "0,043 A", "240 A", "220 A"], "fonte": "AI", "stato": "da verificare"},
+   "scritta": {"valore": [23, "23 a"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "I = V / R = 230 / 10 = 23 A.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "ucbm.fis.elettro.12", "sat": "ucbm-fis-elettro", "passo": 2, "dati": {
+   "domanda": {"valore": "Qual è la resistenza equivalente di 3 Ω e 6 Ω in serie (in Ω)?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["9 Ω", "2 Ω", "18 Ω", "3 Ω", "4,5 Ω"], "fonte": "AI", "stato": "da verificare"},
+   "scritta": {"valore": [9, "9 ohm", "9 ω"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "In serie si sommano: 3 + 6 = 9 Ω.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "ucbm.fis.elettro.13", "sat": "ucbm-fis-elettro", "passo": 2, "dati": {
+   "domanda": {"valore": "Qual è la resistenza equivalente di 3 Ω e 6 Ω in parallelo (in Ω)?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["2 Ω", "9 Ω", "18 Ω", "4,5 Ω", "0,5 Ω"], "fonte": "AI", "stato": "da verificare"},
+   "scritta": {"valore": [2, "2 ohm", "2 ω"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "1/R = 1/3 + 1/6 = 3/6 → R = 2 Ω (oppure prodotto/somma: 18/9).", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "ucbm.fis.elettro.14", "sat": "ucbm-fis-elettro", "passo": 2, "dati": {
+   "domanda": {"valore": "Una lampadina funziona a 230 V e assorbe 0,5 A. Che potenza ha (in W)?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["115 W", "460 W", "230 W", "0,0022 W", "230,5 W"], "fonte": "AI", "stato": "da verificare"},
+   "scritta": {"valore": [115, "115 w"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "P = V·I = 230 × 0,5 = 115 W.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "ucbm.fis.elettro.15", "sat": "ucbm-fis-elettro", "passo": 2, "dati": {
+   "domanda": {"valore": "Una stufa da 2000 W resta accesa per 3 ore. Quanti kWh consuma?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["6 kWh", "6000 kWh", "0,67 kWh", "2 kWh", "667 kWh"], "fonte": "AI", "stato": "da verificare"},
+   "scritta": {"valore": [6, "6 kwh"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "E = P·t = 2 kW × 3 h = 6 kWh.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "ucbm.fis.elettro.16", "sat": "ucbm-fis-elettro", "passo": 2, "dati": {
+   "domanda": {"valore": "Due cariche di 2 μC ciascuna sono a 3 m di distanza nel vuoto (k = 9 × 10⁹ N·m²/C²). Quanto vale la forza tra loro (in N)?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["4 × 10⁻³ N", "1,2 × 10⁻² N", "4 × 10³ N", "6 × 10⁻³ N", "4 × 10⁻⁶ N"], "fonte": "AI", "stato": "da verificare"},
+   "scritta": {"valore": [0.004, "4 × 10^-3", "4x10^-3"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "F = 9 × 10⁹ × (2 × 10⁻⁶)² / 3² = 9 × 10⁹ × 4 × 10⁻¹² / 9 = 4 × 10⁻³ N.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "ucbm.fis.elettro.17", "sat": "ucbm-fis-elettro", "passo": 2, "dati": {
+   "domanda": {"valore": "Un condensatore da 10 μF è collegato a 100 V. Quanta carica accumula?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["1 × 10⁻³ C", "1 × 10⁻⁵ C", "1000 C", "10 C", "1 × 10⁻⁷ C"], "fonte": "AI", "stato": "da verificare"},
+   "scritta": {"valore": [0.001, "1 × 10^-3", "1 mc"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Q = C·V = 10 × 10⁻⁶ × 100 = 10⁻³ C.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "ucbm.fis.elettro.18", "sat": "ucbm-fis-elettro", "passo": 2, "dati": {
+   "domanda": {"valore": "Quanto lavoro si compie per spostare una carica di 2 C tra due punti con differenza di potenziale 12 V?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["24 J", "6 J", "0,17 J", "14 J", "10 J"], "fonte": "AI", "stato": "da verificare"},
+   "scritta": {"valore": [24, "24 j"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "L = q·ΔV = 2 × 12 = 24 J.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "ucbm.fis.elettro.19", "sat": "ucbm-fis-elettro", "passo": 2, "dati": {
+   "domanda": {"valore": "In un filo passano 3 C di carica in 2 s. Qual è l'intensità di corrente?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["1,5 A", "6 A", "0,67 A", "5 A", "1 A"], "fonte": "AI", "stato": "da verificare"},
+   "scritta": {"valore": [1.5, "1,5 a"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "I = Q / t = 3 / 2 = 1,5 A.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "ucbm.fis.elettro.20", "sat": "ucbm-fis-elettro", "passo": 2, "dati": {
+   "domanda": {"valore": "Un filo ha resistenza 4 Ω. Quanto diventa la resistenza di un filo dello stesso materiale lungo il doppio e con sezione doppia?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["4 Ω", "8 Ω", "2 Ω", "16 Ω", "1 Ω"], "fonte": "AI", "stato": "da verificare"},
+   "scritta": {"valore": [4, "4 ohm", "4 ω"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "R = ρ·L/S: L doppia raddoppia R, S doppia la dimezza; gli effetti si compensano e R resta 4 Ω.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "ucbm.fis.elettro.21", "sat": "ucbm-fis-elettro", "passo": 3, "dati": {
+   "domanda": {"valore": "Se in un resistore ohmico la tensione raddoppia, la potenza dissipata:", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Quadruplica", "Raddoppia", "Si dimezza", "Resta uguale", "Diventa un quarto"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "P = V²/R: con V doppia, P diventa 4 volte maggiore.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "ucbm.fis.elettro.22", "sat": "ucbm-fis-elettro", "passo": 3, "dati": {
+   "domanda": {"valore": "Aggiungendo una lampadina in parallelo in un circuito alimentato a tensione costante, la corrente totale erogata dal generatore:", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Aumenta", "Diminuisce", "Resta uguale", "Si annulla", "Si inverte"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "In parallelo la resistenza equivalente diminuisce; a tensione costante la corrente totale I = V/R aumenta.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "ucbm.fis.elettro.23", "sat": "ucbm-fis-elettro", "passo": 3, "dati": {
+   "domanda": {"valore": "L'unità di misura del campo elettrico è:", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["N/C", "C/N", "J·C", "A·s", "T"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "E = F/q: newton per coulomb (equivalente a V/m). Il tesla è l'unità del campo magnetico.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "ucbm.fis.elettro.24", "sat": "ucbm-fis-elettro", "passo": 3, "dati": {
+   "domanda": {"valore": "Un elettrone si muove perpendicolarmente a un campo magnetico uniforme. Il suo moto è:", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Circolare uniforme", "Rettilineo uniforme", "Uniformemente accelerato in linea retta", "Fermo", "Parabolico"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "La forza di Lorentz è sempre perpendicolare alla velocità: cambia la direzione ma non il modulo della velocità, quindi la traiettoria è una circonferenza.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "ucbm.fis.elettro.25", "sat": "ucbm-fis-elettro", "passo": 3, "dati": {
+   "domanda": {"valore": "Le linee del campo magnetico di una calamita:", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Sono chiuse: escono dal polo nord e rientrano dal polo sud", "Partono dal polo sud e finiscono nel nord", "Sono rette parallele infinite", "Escono da cariche magnetiche isolate", "Non esistono all'esterno del magnete"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Le linee magnetiche sono sempre chiuse (dentro il magnete vanno da sud a nord): non esistono monopoli magnetici.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "ucbm.fis.elettro.26", "sat": "ucbm-fis-elettro", "passo": 3, "dati": {
+   "domanda": {"valore": "Un condensatore piano ha capacità C. Raddoppiando l'area delle armature e dimezzando la distanza, la capacità diventa:", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["4C", "2C", "C", "C/2", "C/4"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "C = ε·S/d: S doppia moltiplica per 2, d dimezzata moltiplica ancora per 2: 4C.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "ucbm.fis.elettro.27", "sat": "ucbm-fis-elettro", "passo": 3, "dati": {
+   "domanda": {"valore": "Tre resistenze da 6 Ω collegate in parallelo hanno resistenza equivalente:", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["2 Ω", "18 Ω", "6 Ω", "3 Ω", "0,5 Ω"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "1/R = 3/6 → R = 2 Ω: n resistenze uguali in parallelo valgono R/n.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "ucbm.fis.elettro.28", "sat": "ucbm-fis-elettro", "passo": 3, "dati": {
+   "domanda": {"valore": "La differenza di potenziale si misura con:", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Il voltmetro, collegato in parallelo", "L'amperometro, collegato in serie", "Il voltmetro, collegato in serie", "L'amperometro, collegato in parallelo", "Il barometro"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Il voltmetro si collega in parallelo ai due punti di cui si vuole la d.d.p.; l'amperometro in serie, per essere attraversato dalla stessa corrente.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "ucbm.fis.elettro.29", "sat": "ucbm-fis-elettro", "passo": 3, "dati": {
+   "domanda": {"valore": "Secondo la legge di Faraday-Neumann, una corrente indotta si genera in una spira quando:", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Varia il flusso del campo magnetico attraverso la spira", "Il campo magnetico è costante e la spira è ferma", "La spira è fatta di materiale isolante", "La spira è attraversata da una corrente continua costante", "La temperatura della spira aumenta"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Serve una variazione del flusso magnetico (magnete che si muove, spira che ruota, corrente che cambia): è il principio di alternatori e trasformatori.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "ucbm.fis.elettro.30", "sat": "ucbm-fis-elettro", "passo": 3, "dati": {
+   "domanda": {"valore": "Due cariche di segno opposto vengono avvicinate fino a metà della distanza iniziale. La forza tra loro:", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Diventa 4 volte più intensa, attrattiva", "Raddoppia, repulsiva", "Diventa 4 volte più intensa, repulsiva", "Si dimezza, attrattiva", "Resta uguale"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Cariche opposte si attraggono; F ∝ 1/r², quindi dimezzando la distanza la forza quadruplica.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "ucbm.fis.ottica.01", "sat": "ucbm-fis-ottica", "passo": 1, "dati": {
+   "concetto": {"valore": "La luce è un'onda elettromagnetica: nel vuoto viaggia a c ≈ 3 × 10⁸ m/s. Per ogni onda vale v = λ·f, dove λ è la lunghezza d'onda e f la frequenza. Lo spettro elettromagnetico, dalle frequenze più basse alle più alte: onde radio, microonde, infrarosso, luce visibile (circa 400–700 nm, dal viola al rosso), ultravioletto, raggi X, raggi gamma. L'energia di un fotone è E = h·f: più alta la frequenza, più energia.", "fonte": "AI", "stato": "da verificare"},
+   "domanda": {"valore": "Quanto vale circa la velocità della luce nel vuoto?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["3 × 10⁸ m/s", "3 × 10⁵ m/s", "340 m/s", "3 × 10⁶ km/s", "1,5 × 10⁸ m/s"], "fonte": "AI", "stato": "da verificare"},
+   "scritta": {"valore": [300000000.0, "3 × 10^8", "300000 km/s"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "c ≈ 3 × 10⁸ m/s, cioè circa 300 000 km/s. 340 m/s è la velocità del suono nell'aria.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "ucbm.fis.ottica.02", "sat": "ucbm-fis-ottica", "passo": 1, "dati": {
+   "concetto": {"valore": "Nella luce visibile il colore dipende dalla lunghezza d'onda: il rosso ha la lunghezza d'onda maggiore (circa 700 nm) e la frequenza minore, il viola la lunghezza d'onda minore (circa 400 nm) e la frequenza maggiore. Oltre il viola c'è l'ultravioletto, prima del rosso l'infrarosso.", "fonte": "AI", "stato": "da verificare"},
+   "domanda": {"valore": "Quale colore della luce visibile ha la frequenza più alta?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Viola", "Rosso", "Verde", "Giallo", "Arancione"], "fonte": "AI", "stato": "da verificare"},
+   "scritta": {"valore": ["viola", "violetto"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Frequenza e lunghezza d'onda sono inversamente proporzionali (f = c/λ): il viola, con λ più piccola, ha f più grande.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "ucbm.fis.ottica.03", "sat": "ucbm-fis-ottica", "passo": 1, "dati": {
+   "concetto": {"valore": "Legge della riflessione: il raggio incidente, il raggio riflesso e la normale alla superficie stanno nello stesso piano, e l'angolo di riflessione è uguale all'angolo di incidenza (gli angoli si misurano dalla normale). Uno specchio piano dà un'immagine virtuale, diritta, della stessa grandezza dell'oggetto e simmetrica rispetto allo specchio.", "fonte": "AI", "stato": "da verificare"},
+   "domanda": {"valore": "Un raggio colpisce uno specchio piano con angolo di incidenza 30°. Quanto vale l'angolo di riflessione?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["30°", "60°", "90°", "15°", "120°"], "fonte": "AI", "stato": "da verificare"},
+   "scritta": {"valore": [30, "30°", "30 gradi"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Per la legge della riflessione l'angolo di riflessione è uguale a quello di incidenza: 30°.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "ucbm.fis.ottica.04", "sat": "ucbm-fis-ottica", "passo": 1, "dati": {
+   "concetto": {"valore": "La rifrazione è la deviazione della luce quando passa da un mezzo a un altro in cui ha velocità diversa. L'indice di rifrazione è n = c / v (aria ≈ 1, acqua ≈ 1,33, vetro ≈ 1,5). Legge di Snell: n₁·sin θ₁ = n₂·sin θ₂. Passando in un mezzo con n maggiore la luce rallenta e si avvicina alla normale; la frequenza resta la stessa, cambia la lunghezza d'onda.", "fonte": "AI", "stato": "da verificare"},
+   "domanda": {"valore": "Quando la luce passa dall'aria all'acqua, che cosa NON cambia?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["La frequenza", "La velocità", "La lunghezza d'onda", "La direzione (se l'incidenza è obliqua)", "L'indice di rifrazione del mezzo"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "La frequenza dipende dalla sorgente e resta uguale; velocità e lunghezza d'onda diminuiscono nell'acqua.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "ucbm.fis.ottica.05", "sat": "ucbm-fis-ottica", "passo": 1, "dati": {
+   "concetto": {"valore": "Quando la luce passa da un mezzo più rifrangente a uno meno rifrangente (per esempio dal vetro all'aria) si allontana dalla normale. Oltre un angolo limite, la luce non esce più e viene tutta riflessa: è la riflessione totale, con sin θ_lim = n₂ / n₁. È il principio delle fibre ottiche, usate anche negli endoscopi.", "fonte": "AI", "stato": "da verificare"},
+   "domanda": {"valore": "Su quale fenomeno si basano le fibre ottiche?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Riflessione totale", "Diffrazione", "Polarizzazione", "Effetto fotoelettrico", "Dispersione"], "fonte": "AI", "stato": "da verificare"},
+   "scritta": {"valore": ["riflessione totale", "riflessione totale interna"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "La luce dentro la fibra colpisce la parete con angolo maggiore dell'angolo limite e viene riflessa tutta, restando intrappolata.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "ucbm.fis.ottica.06", "sat": "ucbm-fis-ottica", "passo": 1, "dati": {
+   "concetto": {"valore": "Le lenti convergenti (più spesse al centro) fanno convergere i raggi paralleli nel fuoco; le divergenti (più sottili al centro) li fanno divergere. La distanza focale f si misura dal centro della lente al fuoco. Il potere diottrico è P = 1/f (f in metri) e si misura in diottrie (D): positivo per le convergenti, negativo per le divergenti. La miopia si corregge con lenti divergenti, l'ipermetropia con lenti convergenti.", "fonte": "AI", "stato": "da verificare"},
+   "domanda": {"valore": "Che tipo di lente si usa per correggere la miopia?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Divergente", "Convergente", "Cilindrica", "Bifocale convergente", "Nessuna"], "fonte": "AI", "stato": "da verificare"},
+   "scritta": {"valore": ["divergente", "lente divergente"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Nell'occhio miope l'immagine si forma davanti alla retina: una lente divergente sposta il fuoco indietro, sulla retina.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "ucbm.fis.ottica.07", "sat": "ucbm-fis-ottica", "passo": 1, "dati": {
+   "concetto": {"valore": "Per le lenti sottili vale l'equazione dei punti coniugati: 1/p + 1/q = 1/f, con p distanza dell'oggetto e q dell'immagine. L'ingrandimento è G = q/p (in modulo). Con una lente convergente, un oggetto oltre il fuoco dà un'immagine reale e capovolta; un oggetto tra il fuoco e la lente dà un'immagine virtuale, diritta e ingrandita (lente d'ingrandimento).", "fonte": "AI", "stato": "da verificare"},
+   "domanda": {"valore": "Che immagine dà una lente convergente di un oggetto posto tra il fuoco e la lente?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Virtuale, diritta e ingrandita", "Reale, capovolta e rimpicciolita", "Reale, diritta e ingrandita", "Virtuale, capovolta e rimpicciolita", "Nessuna immagine"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "È il caso della lente d'ingrandimento: i raggi escono divergenti e l'occhio vede un'immagine virtuale, diritta e più grande.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "ucbm.fis.ottica.08", "sat": "ucbm-fis-ottica", "passo": 1, "dati": {
+   "concetto": {"valore": "Il microscopio ottico composto ha due lenti convergenti: l'obiettivo, vicino al campione, forma un'immagine reale ingrandita; l'oculare la ingrandisce ancora come una lente d'ingrandimento. L'ingrandimento totale è il prodotto dei due: per esempio obiettivo 40× e oculare 10× danno 400×. Il potere risolutivo, cioè la distanza minima tra due punti distinguibili, è limitato dalla lunghezza d'onda della luce (circa 0,2 μm); il microscopio elettronico arriva molto più in là.", "fonte": "AI", "stato": "da verificare"},
+   "domanda": {"valore": "Un microscopio ha obiettivo 40× e oculare 10×. Qual è l'ingrandimento totale?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["400×", "50×", "4×", "30×", "4000×"], "fonte": "AI", "stato": "da verificare"},
+   "scritta": {"valore": [400, "400x", "400 volte"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Gli ingrandimenti si moltiplicano: 40 × 10 = 400 volte.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "ucbm.fis.ottica.09", "sat": "ucbm-fis-ottica", "passo": 1, "dati": {
+   "concetto": {"valore": "L'interferenza è la sovrapposizione di due onde coerenti: dove arrivano in fase si rafforzano (interferenza costruttiva, frange chiare), dove arrivano in opposizione di fase si annullano (distruttiva, frange scure). L'esperimento della doppia fenditura di Young dimostrò la natura ondulatoria della luce. La diffrazione è la capacità delle onde di aggirare ostacoli e aperture di dimensioni confrontabili con la lunghezza d'onda.", "fonte": "AI", "stato": "da verificare"},
+   "domanda": {"valore": "Come si chiama l'interferenza in cui due onde arrivano in opposizione di fase e si annullano?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Distruttiva", "Costruttiva", "Totale", "Diffusa", "Polarizzata"], "fonte": "AI", "stato": "da verificare"},
+   "scritta": {"valore": ["distruttiva", "interferenza distruttiva"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "In opposizione di fase una cresta incontra un ventre e le onde si cancellano: interferenza distruttiva (frange scure).", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "ucbm.fis.ottica.10", "sat": "ucbm-fis-ottica", "passo": 1, "dati": {
+   "concetto": {"valore": "La dispersione è la separazione della luce bianca nei colori quando attraversa un prisma: l'indice di rifrazione dipende dalla lunghezza d'onda (il viola è deviato più del rosso). L'arcobaleno nasce dalla dispersione e dalla riflessione della luce nelle gocce di pioggia.", "fonte": "AI", "stato": "da verificare"},
+   "domanda": {"valore": "Quale fenomeno separa la luce bianca nei colori dell'arcobaleno attraverso un prisma?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Dispersione", "Riflessione totale", "Polarizzazione", "Interferenza", "Assorbimento"], "fonte": "AI", "stato": "da verificare"},
+   "scritta": {"valore": ["dispersione"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Ogni colore ha un indice di rifrazione leggermente diverso e viene deviato di un angolo diverso: è la dispersione.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "ucbm.fis.ottica.11", "sat": "ucbm-fis-ottica", "passo": 2, "dati": {
+   "domanda": {"valore": "Una lente convergente ha distanza focale 50 cm. Qual è il suo potere diottrico?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["+2 D", "+0,02 D", "+50 D", "−2 D", "+0,5 D"], "fonte": "AI", "stato": "da verificare"},
+   "scritta": {"valore": [2, "+2", "2 d", "2 diottrie"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "P = 1/f = 1/0,5 m = +2 D. La distanza focale va in metri.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "ucbm.fis.ottica.12", "sat": "ucbm-fis-ottica", "passo": 2, "dati": {
+   "domanda": {"valore": "Una lente ha potere diottrico −4 D. Che tipo di lente è e qual è la sua distanza focale?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Divergente, 25 cm", "Convergente, 25 cm", "Divergente, 4 m", "Convergente, 4 cm", "Divergente, 4 cm"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Potere negativo = divergente; |f| = 1/4 m = 25 cm.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "ucbm.fis.ottica.13", "sat": "ucbm-fis-ottica", "passo": 2, "dati": {
+   "domanda": {"valore": "Qual è la frequenza di una luce con lunghezza d'onda 600 nm (c = 3 × 10⁸ m/s)?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["5 × 10¹⁴ Hz", "5 × 10¹⁷ Hz", "1,8 × 10¹¹ Hz", "2 × 10⁻¹⁵ Hz", "5 × 10⁸ Hz"], "fonte": "AI", "stato": "da verificare"},
+   "scritta": {"valore": [500000000000000.0, "5 × 10^14", "5x10^14"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "f = c/λ = 3 × 10⁸ / 6 × 10⁻⁷ = 5 × 10¹⁴ Hz.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "ucbm.fis.ottica.14", "sat": "ucbm-fis-ottica", "passo": 2, "dati": {
+   "domanda": {"valore": "Qual è la velocità della luce nell'acqua (n = 1,33, c = 3 × 10⁸ m/s)?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Circa 2,26 × 10⁸ m/s", "Circa 4 × 10⁸ m/s", "3 × 10⁸ m/s", "Circa 1,33 × 10⁸ m/s", "Circa 2,26 × 10⁵ m/s"], "fonte": "AI", "stato": "da verificare"},
+   "scritta": {"valore": [226000000.0, 225000000.0, "2,26 × 10^8"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "v = c/n = 3 × 10⁸ / 1,33 ≈ 2,26 × 10⁸ m/s.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "ucbm.fis.ottica.15", "sat": "ucbm-fis-ottica", "passo": 2, "dati": {
+   "domanda": {"valore": "Un oggetto è a 30 cm da una lente convergente di distanza focale 10 cm. A che distanza dalla lente si forma l'immagine (in cm)?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["15 cm", "20 cm", "7,5 cm", "40 cm", "30 cm"], "fonte": "AI", "stato": "da verificare"},
+   "scritta": {"valore": [15, "15 cm"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "1/q = 1/f − 1/p = 1/10 − 1/30 = 2/30 → q = 15 cm (immagine reale e capovolta).", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "ucbm.fis.ottica.16", "sat": "ucbm-fis-ottica", "passo": 2, "dati": {
+   "domanda": {"valore": "Una lente convergente forma l'immagine di un oggetto posto a 30 cm a una distanza di 15 cm dalla lente. Quanto vale l'ingrandimento?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["0,5", "2", "1", "45", "0,25"], "fonte": "AI", "stato": "da verificare"},
+   "scritta": {"valore": [0.5, "0,5", "1/2"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "G = q/p = 15/30 = 0,5: l'immagine è grande la metà dell'oggetto.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "ucbm.fis.ottica.17", "sat": "ucbm-fis-ottica", "passo": 2, "dati": {
+   "domanda": {"valore": "Un raggio passa dall'aria (n = 1) al vetro (n = 1,5) con angolo di incidenza 30°. Quanto vale il seno dell'angolo di rifrazione?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Circa 0,33", "0,75", "0,5", "1,5", "Circa 0,87"], "fonte": "AI", "stato": "da verificare"},
+   "scritta": {"valore": [0.33, 0.333, "1/3"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Snell: 1 × sin 30° = 1,5 × sin θ₂ → sin θ₂ = 0,5 / 1,5 ≈ 0,33 (circa 19,5°): il raggio si avvicina alla normale.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "ucbm.fis.ottica.18", "sat": "ucbm-fis-ottica", "passo": 2, "dati": {
+   "domanda": {"valore": "Qual è il seno dell'angolo limite per la luce che passa dal vetro (n = 1,5) all'aria (n = 1)?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Circa 0,67", "1,5", "0,5", "Circa 0,33", "1"], "fonte": "AI", "stato": "da verificare"},
+   "scritta": {"valore": [0.67, 0.667, "2/3"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "sin θ_lim = n₂/n₁ = 1/1,5 ≈ 0,67 (circa 42°).", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "ucbm.fis.ottica.19", "sat": "ucbm-fis-ottica", "passo": 2, "dati": {
+   "domanda": {"valore": "Una persona si trova a 2 m da uno specchio piano. A che distanza da sé vede la propria immagine?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["4 m", "2 m", "1 m", "8 m", "0 m"], "fonte": "AI", "stato": "da verificare"},
+   "scritta": {"valore": [4, "4 m"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "L'immagine è dietro lo specchio alla stessa distanza dell'oggetto: 2 m + 2 m = 4 m dalla persona.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "ucbm.fis.ottica.20", "sat": "ucbm-fis-ottica", "passo": 2, "dati": {
+   "domanda": {"valore": "Quale di queste radiazioni ha l'energia per fotone più alta?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Raggi X", "Onde radio", "Microonde", "Infrarosso", "Luce rossa"], "fonte": "AI", "stato": "da verificare"},
+   "scritta": {"valore": ["raggi x", "x"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "E = h·f: i raggi X hanno frequenza molto più alta delle altre radiazioni dell'elenco, quindi fotoni più energetici (per questo sono ionizzanti).", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "ucbm.fis.ottica.21", "sat": "ucbm-fis-ottica", "passo": 3, "dati": {
+   "domanda": {"valore": "Quale sequenza di radiazioni è in ordine di frequenza crescente?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Onde radio, infrarosso, visibile, ultravioletto, raggi X", "Raggi X, ultravioletto, visibile, infrarosso, onde radio", "Visibile, onde radio, raggi X, infrarosso, ultravioletto", "Infrarosso, onde radio, visibile, raggi X, ultravioletto", "Ultravioletto, visibile, infrarosso, raggi X, onde radio"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Dalle onde radio (frequenza più bassa) ai raggi X (più alta). La seconda opzione è in ordine decrescente.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "ucbm.fis.ottica.22", "sat": "ucbm-fis-ottica", "passo": 3, "dati": {
+   "domanda": {"valore": "Quando la luce passa da un mezzo con indice di rifrazione minore a uno con indice maggiore:", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Rallenta e si avvicina alla normale", "Accelera e si allontana dalla normale", "Rallenta e si allontana dalla normale", "Cambia frequenza", "Subisce sempre riflessione totale"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "n maggiore significa velocità minore; per la legge di Snell il raggio si avvicina alla normale. La frequenza non cambia.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "ucbm.fis.ottica.23", "sat": "ucbm-fis-ottica", "passo": 3, "dati": {
+   "domanda": {"valore": "Una lente con distanza focale di 25 cm ha un potere diottrico di:", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["4 diottrie", "25 diottrie", "0,25 diottrie", "0,04 diottrie", "2,5 diottrie"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "P = 1/f = 1/0,25 m = 4 D.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "ucbm.fis.ottica.24", "sat": "ucbm-fis-ottica", "passo": 3, "dati": {
+   "domanda": {"valore": "L'ipermetropia si corregge con:", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Lenti convergenti", "Lenti divergenti", "Specchi piani", "Prismi", "Filtri polarizzatori"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Nell'occhio ipermetrope l'immagine cade dietro la retina: serve una lente convergente che la anticipi.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "ucbm.fis.ottica.25", "sat": "ucbm-fis-ottica", "passo": 3, "dati": {
+   "domanda": {"valore": "Il potere risolutivo di un microscopio ottico è limitato principalmente da:", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["La lunghezza d'onda della luce", "La lunghezza del tubo", "Il peso delle lenti", "Il numero di oculari", "L'intensità della lampada"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Due punti più vicini di circa metà della lunghezza d'onda non si distinguono: è un limite dovuto alla diffrazione. Il microscopio elettronico usa elettroni con lunghezza d'onda molto minore.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "ucbm.fis.ottica.26", "sat": "ucbm-fis-ottica", "passo": 3, "dati": {
+   "domanda": {"valore": "L'immagine data da uno specchio piano è:", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Virtuale, diritta e della stessa grandezza dell'oggetto", "Reale, capovolta e ingrandita", "Reale, diritta e rimpicciolita", "Virtuale, capovolta e ingrandita", "Reale e della stessa grandezza"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Lo specchio piano dà sempre un'immagine virtuale (dietro lo specchio), diritta e uguale all'oggetto, ma invertita destra-sinistra.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "ucbm.fis.ottica.27", "sat": "ucbm-fis-ottica", "passo": 3, "dati": {
+   "domanda": {"valore": "La frangia chiara centrale nell'esperimento della doppia fenditura è dovuta a:", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Interferenza costruttiva", "Interferenza distruttiva", "Riflessione totale", "Dispersione", "Polarizzazione"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Al centro le onde dalle due fenditure percorrono la stessa distanza e arrivano in fase: si rafforzano.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "ucbm.fis.ottica.28", "sat": "ucbm-fis-ottica", "passo": 3, "dati": {
+   "domanda": {"valore": "La luce ultravioletta, rispetto alla luce visibile, ha:", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Lunghezza d'onda minore e frequenza maggiore", "Lunghezza d'onda maggiore e frequenza minore", "La stessa frequenza", "Velocità nel vuoto maggiore", "Energia per fotone minore"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "L'UV sta oltre il viola: λ più corta, f e energia maggiori. Nel vuoto tutte le onde elettromagnetiche viaggiano a c.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "ucbm.fis.ottica.29", "sat": "ucbm-fis-ottica", "passo": 3, "dati": {
+   "domanda": {"valore": "Un oggetto si trova a una distanza doppia della focale da una lente convergente (p = 2f). L'immagine è:", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Reale, capovolta, della stessa grandezza, a distanza 2f", "Virtuale, diritta e ingrandita", "Reale, diritta e rimpicciolita", "All'infinito", "Virtuale e rimpicciolita"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "1/q = 1/f − 1/(2f) = 1/(2f) → q = 2f e G = 1: immagine reale, capovolta e uguale all'oggetto.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "ucbm.fis.ottica.30", "sat": "ucbm-fis-ottica", "passo": 3, "dati": {
+   "domanda": {"valore": "La riflessione totale può avvenire quando la luce passa:", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Da un mezzo più rifrangente a uno meno rifrangente", "Da un mezzo meno rifrangente a uno più rifrangente", "Tra due mezzi con lo stesso indice", "Solo nel vuoto", "Solo attraverso una lente convergente"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Solo passando a un mezzo con n minore il raggio si allontana dalla normale e oltre l'angolo limite non può uscire.", "fonte": "AI", "stato": "da verificare"}
+  }}
+ ]
+}

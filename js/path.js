@@ -218,10 +218,12 @@ function studioForm(pid,sel,first){
 // con gli argomenti del programma; le materie pronte (pianeti con i passi) sono segnate «pronta»
 const MICO={'ucbm-biologia':'🧬','ucbm-chimica':'⚗️','ucbm-fisica':'🧲'};
 const testDi=pid=>[...P.arrivoDi(pid),...P.corsiDi(pid).filter(P.isUcbm)];
+// «A», «A e B», «A, B e C»
+const elenco=L=>L.length<2?L.join(''):L.slice(0,-1).join(', ')+' e '+L[L.length-1];
 function materieHtml(pid){
  return testDi(pid).map(c=>{const ok=c.in_arrivo?[]:c.pianeti.filter(pl=>!pl.in_arrivo),no=c.pianeti.filter(pl=>c.in_arrivo||pl.in_arrivo);
   return `<fieldset class="pstudio materie"><legend class="kick">Le materie del test</legend>
-  <p class="mut">${c.pianeti.map(pl=>esc(pl.nome)).join(', ')}${c.pianeti.every(pl=>pl.domande_test)?`: ${c.pianeti.map(pl=>pl.domande_test).join(' + ')} domande`:''}. Tocca una materia per vedere gli argomenti. ${ok.length?`Pronta: ${esc(ok.map(p=>p.nome).join(' e '))}, con la simulazione del test. `:''}${no.length?`Le domande di ${esc(no.map(p=>p.nome).join(' e '))} arriveranno.`:''}</p>
+  <p class="mut">${c.pianeti.map(pl=>esc(pl.nome)).join(', ')}${c.pianeti.every(pl=>pl.domande_test)?`: ${c.pianeti.map(pl=>pl.domande_test).join(' + ')} domande`:''}. Tocca una materia per vedere gli argomenti. ${ok.length?`${ok.length>1?'Pronte':'Pronta'}: ${esc(elenco(ok.map(p=>p.nome)))}, con la simulazione del test. `:''}${no.length?`Le domande di ${esc(elenco(no.map(p=>p.nome)))} arriveranno.`:''}</p>
   ${c.pianeti.map(pl=>`<details class="mat"><summary><span>${MICO[pl.id]||'🪐'} <b>${esc(pl.nome)}</b> <small class="mut">${ok.includes(pl)?'pronta · ':''}${pl.domande_test?pl.domande_test+' domande · ':''}${pl.satelliti.length} argomenti</small></span></summary>
    <ul class="sl arr">${pl.satelliti.map(s=>`<li><b>${esc(s.nome)}</b>${s.programma?`<br><small class="mut">${esc(s.programma)}</small>`:''}</li>`).join('')}</ul></details>`).join('')}
   ${c.fonte?`<p class="mut"><small>${esc(c.fonte)}</small></p>`:''}</fieldset>`;}).join('');

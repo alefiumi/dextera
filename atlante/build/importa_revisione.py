@@ -12,7 +12,7 @@ Per ogni riga con un esito:
 verifica = {"chi", "quando", "nota"}. Se il valore nel CSV non è più quello di testi/ (il file è cambiato dopo
 l'esportazione) la riga si salta e si segnala. Le righe senza esito si ignorano.
 """
-import csv, io, os, sys, subprocess
+import csv, io, os, re, sys, subprocess
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
 import testi
@@ -62,6 +62,8 @@ def main():
         elif corr and campo:
             vecchio = d['valore']
             d['valore'] = [x.strip() for x in corr.split('|') if x.strip()] if isinstance(vecchio, list) else corr
+            if campo == 'scritta':  # quesiti UCBM: i numeri restano numeri (si confrontano con la tolleranza)
+                d['valore'] = [float(x.replace(',', '.')) if re.fullmatch(r'[-+]?\d+([.,]\d+)?', x) else x for x in d['valore']]
             d['fonte'] = 'docente'; d['stato'] = 'corretto'; verifica['prima'] = vecchio; n['sbagliato'] += 1
         else:
             d['stato'] = 'segnalato'; n['segnalato'] += 1

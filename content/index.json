@@ -1,6 +1,6 @@
 {
- "version": 29,
- "app_min": "0.89.0",
+ "version": 30,
+ "app_min": "0.90.0",
  "modules": [
   "corpo",
   "cervello",
@@ -14,7 +14,8 @@
   "lezioni.json",
   "regole.json",
   "percorsi/base.json",
-  "percorsi/ucbm.json"
+  "percorsi/ucbm.json",
+  "ucbm.json"
  ],
  "percorsi": [
   {

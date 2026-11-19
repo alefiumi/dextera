@@ -56,10 +56,12 @@ const fullPl=pl=>pl.satelliti.every(s=>pnode(s.id)&&fullSat(s));
 const LOC=()=>P().loc||(P().loc={});
 const lkey=id=>percorsoId()+':'+id;
 // pianeti e satelliti del percorso, nell'ordine consigliato (ordine del percorso pubblicato)
+// i pianeti «in arrivo» di un corso aperto (test UCBM: le materie ancora senza domande) non entrano nei conti: pianetiArrivo()
 export function pianeti(c=corso()){
  const ord=id=>pnode(id)?.ordine??99;
- return c.pianeti.filter(p=>pnode(p.id)).slice().sort((a,b)=>ord(a.id)-ord(b.id));
+ return c.pianeti.filter(p=>pnode(p.id)&&!p.in_arrivo).slice().sort((a,b)=>ord(a.id)-ord(b.id));
 }
+export const pianetiArrivo=(c=corso())=>c.pianeti.filter(p=>pnode(p.id)&&p.in_arrivo);
 export function satelliti(p,c){
  const ord=id=>pnode(id)?.ordine??99;
  return (p?p.satelliti:pianeti(c).flatMap(x=>x.satelliti)).filter(s=>pnode(s.id)).slice().sort((a,b)=>ord(a.id)-ord(b.id));
@@ -73,6 +75,13 @@ export const isNeuro=sid=>String(sid).startsWith('n.');
 // corsi di cuore e vasi e del respiratorio (fase 6): strutture dei moduli 2D 'c.<slug>' (cuore) e 'p.<slug>' (polmoni), testi in
 // testi/torace.json (nome e descrizione, nel modulo: n, l, f)
 export const isTor=sid=>/^[cp]\./.test(String(sid));
+// test d'ingresso UCBM (fase 6): quesiti senza figura 'q.<materia>.<argomento>.<n>' (testi/ucbm-*.json → content/ucbm.json, app.UCBM):
+// {sat, p (passo 1 concetti, 2 applicazione, 3 quesiti del test), c (concetto da presentare), d (domanda), o (5 opzioni, la prima
+// giusta), s (risposte scritte accettate; un numero si confronta con la tolleranza), x (spiegazione), u (unità di misura)}.
+// Una sola maestria per quesito: la chiave è l'id stesso.
+export const isQ=sid=>String(sid).startsWith('q.');
+export const qz=sid=>app.UCBM?.[sid]||null;
+export const isUcbm=c=>c?.id==='ucbm';
 export const torMod=sid=>String(sid)[0]==='c'?'cuore':'polmoni';
 export const tor=sid=>app.MODS[torMod(sid)]?.byId[sid]||null;
 export const neuro=sid=>app.LEZ.neuro?.[sid]||null;
@@ -125,6 +134,7 @@ export const rep=id=>app.LEZ.reperi[id];
 // neurologia: 'n.<voce>' (nome e posizione), 'nd.' (dove si trova), 'nf.' (funzione), 'nl.' (lesione), 'nc.' (connessioni e vie)
 const NK={dove:'nd.',fn:'nf.',lesione:'nl.',vie:'nc.'};
 export function key(sid,asp){
+ if(isQ(sid))return sid;
  if(isNeuro(sid))return NK[asp]?NK[asp]+sid.slice(2):sid;
  if(isTor(sid))return asp==='desc'?sid[0]+'d.'+sid.slice(2):sid; // 'c.x' nome e posizione, 'cd.x' riconosciuta dalla descrizione
  if(asp==='oi')return 'oi.'+sid;if(asp==='fn')return 'fn.'+sid;
@@ -137,9 +147,11 @@ export const CAMPI={ossa:['nome','latino','descrizione'],reperi:['nome','latino'
 export const NCAMPI={strutture:['nome','dove'],dove:['dove','nome'],funzione:['funzione','nome'],lesione:['lesione','nome'],connessioni:['connessioni','nome']};
 // campo del testo di neurologia per tipo di passo (n, d, f, le, c in content/lezioni.json)
 export const TCAMPI={strutture:['nome','descrizione'],descrizione:['descrizione','nome']};
+// quesiti UCBM: concetto (solo passo 1), domanda, opzioni, risposta scritta se c'è, spiegazione
+export const QCAMPI=sid=>{const q=qz(sid);return q?[...(q.c?['concetto']:[]),'domanda','opzioni',...(q.s?['scritta']:[]),'spiegazione']:[];};
 export const NCAMPO={strutture:'n',dove:'d',funzione:'f',lesione:'le',connessioni:'c'};
 export const voce=sid=>app.LEZ.voci[sid]||null;
-export const dataIds=(sid,tipo)=>{const v=voce(sid);return v?((isNeuro(sid)?NCAMPI:isTor(sid)?TCAMPI:CAMPI)[tipo]||[]).map(c=>v+'.'+c):[];};
+export const dataIds=(sid,tipo)=>{const v=voce(sid);if(!v)return [];if(isQ(sid))return QCAMPI(sid).map(c=>v+'.'+c);return ((isNeuro(sid)?NCAMPI:isTor(sid)?TCAMPI:CAMPI)[tipo]||[]).map(c=>v+'.'+c);};
 const stato=d=>app.LEZ.stati[d]||['da verificare'];
 // «Verificato il …» solo se tutti i dati della domanda sono verificati o corretti da un docente; altrimenti «da verificare»
 export function verifica(ids){
@@ -159,6 +171,7 @@ export function usable(ps){
  if(!Array.isArray(ps.strutture))return [];
  return ps.strutture.filter(sid=>{
   if(isNeuro(sid)){const n=neuro(sid),f=NCAMPO[ps.tipo];return !!(n&&f&&n[f]);}
+  if(isQ(sid)){const q=qz(sid);return !!(q&&q.d&&Array.isArray(q.o)&&q.o.length>=2);}
   if(isTor(sid)){const t=tor(sid);return !!(t&&(ps.tipo!=='descrizione'||t.f));}
   if(ps.tipo==='ossa')return !!bone(sid);
   if(ps.tipo==='reperi')return !!rep(sid);

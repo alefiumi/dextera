@@ -587,3 +587,20 @@ input.code{font-size:20px;text-transform:uppercase}
 .exl label{flex:1 1 140px;font-weight:600}.exl label small{display:block;font-weight:400;color:var(--mut);font-size:13px}
 .exl input{font:inherit;font-size:16px;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:12px;min-height:44px;padding:0 10px}
 .exams{margin-top:10px}.exams summary{min-height:44px;display:flex;align-items:center;cursor:pointer;font-weight:600}
+/* Test UCBM (fase 6): quesiti senza figura, simulazione del test */
+.q.qz{font-size:17px;line-height:1.45}
+.qq{margin:8px 0 4px;font-weight:600}.qq p,.qc p,.qx p{margin:0 0 8px}
+.qc{font-size:17px;line-height:1.5}.qx{border-left:3px solid var(--acc);padding-left:10px}
+button.opt .ol{display:inline-block;min-width:1.6em;font-weight:700;color:var(--mut)}
+button.opt.sel{border:2px solid var(--acc);padding:11px;font-weight:600}
+button.opt.sel .ol{color:var(--acc)}
+.snav{display:flex;gap:8px;flex-wrap:wrap;margin:6px 0}.snav .btn{flex:1 1 auto;min-height:44px}
+.sgrid{margin:8px 0}.sgrid summary{min-height:44px;display:flex;align-items:center;cursor:pointer}
+.sgrid>div{display:grid;grid-template-columns:repeat(auto-fill,minmax(44px,1fr));gap:6px}
+button.sg{font:inherit;min-height:44px;border-radius:10px;border:1px solid var(--line);background:var(--bg);color:var(--ink)}
+button.sg.on{background:var(--acc);border-color:var(--acc);color:var(--on-acc)}button.sg.cur{outline:3px solid var(--ink);outline-offset:1px}
+.stab{width:100%;border-collapse:collapse;margin:8px 0;text-align:center;font-variant-numeric:tabular-nums}
+.stab th,.stab td{padding:6px 4px;border-bottom:1px solid var(--line)}.stab th[scope=row]{text-align:left}
+ol.srev{text-align:left;padding-left:0;list-style:none}ol.srev li{border-bottom:1px solid var(--line);padding:4px 0}
+ol.srev summary{min-height:44px;padding:8px 0;cursor:pointer}
+.res ul{text-align:left}

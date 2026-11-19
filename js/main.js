@@ -72,7 +72,7 @@ wireSocial($('panel'));addAccountListener(socialAccountChanged);
 boot();
 try{
  const c=await loadContent();
- app.MODS=c.MODS;app.NC=c.NC;app.MAPPA=c.MAPPA;app.LEZ=c.LEZ;app.REGOLE=c.REGOLE;app.PERCORSO=c.PERCORSO;
+ app.MODS=c.MODS;app.UCBM=c.UCBM;app.NC=c.NC;app.MAPPA=c.MAPPA;app.LEZ=c.LEZ;app.REGOLE=c.REGOLE;app.PERCORSO=c.PERCORSO;
  app.PBASE=c.PERCORSO;app.PERCORSI=c.PERCORSI;app.PCAT=c.PCAT;applyStudio();if(repairTor())save(); // percorso scelto in «Cosa studi?» (fase 6)
  useMod('corpo');head();
 }catch(e){

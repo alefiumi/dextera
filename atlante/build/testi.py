@@ -21,6 +21,9 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.normpath(os.path.join(HERE, '..', '..'))
 TESTI = os.path.join(ROOT, 'testi')
 TIPI = ['muscoli', 'ossa', 'reperi', 'encefalo', 'torace', 'nervi-cranici', 'gruppi', 'casi', 'neuro']
+# test d'ingresso UCBM (fase 6): un file per materia, testi/ucbm-<materia>.json (quesiti, non dati anatomici)
+UCBM = sorted(f[:-5] for f in os.listdir(TESTI) if f.startswith('ucbm-') and f.endswith('.json'))
+TIPI += UCBM
 STATI = ['da verificare', 'verificato', 'corretto', 'segnalato']
 FONTI = ['Z-Anatomy', 'TA2', 'AI', 'docente', 'lezione']   # lezione: materiale del corso (guida e slide del docente)
 
@@ -270,6 +273,9 @@ def lezioni():
                 for ps in s['passi']:
                     for i in ps['strutture'] if isinstance(ps['strutture'], list) else []:
                         if i[2:] in tor: voci[i] = 'torace.' + i[2:]
+    # test UCBM: quesiti q.<materia>.<argomento>.<n> → voce ucbm.<materia>.<argomento>.<n>
+    for t in UCBM:
+        for v in carica(t): voci['q.' + v['id'][5:]] = v['id']
     stati = {}
     for t in TIPI:
         for v in carica(t):
@@ -278,6 +284,44 @@ def lezioni():
                     q = (d.get('verifica') or {}).get('quando')
                     stati[v['id'] + '.' + c] = [d['stato'], q] if q else [d['stato']]
     return scrivi_versionato(os.path.join(ROOT, 'content/lezioni.json'), {'voci': voci, 'reperi': reperi, 'stati': stati, 'neuro': neuro, 'casi_neuro': casi_neuro})
+
+PASSI_UCBM = [(1, 'concetti', 'Concetti'), (2, 'applicazione', 'Applicazione'), (3, 'test', 'Quesiti del test')]
+def ucbm():
+    """content/ucbm.json: quesiti del test d'ingresso UCBM (testi/ucbm-*.json) e passi dei satelliti del corso 'ucbm'.
+    La mappa resta scritta a mano senza passi: content.js li aggiunge al caricamento; un pianeta senza passi resta «in arrivo».
+    Quesito: d domanda, o 5 opzioni (la prima giusta), s risposte scritte accettate (testi o numeri), c concetto (passo 1),
+    x spiegazione, u unità di misura, sat, p passo."""
+    M = json.load(open(os.path.join(ROOT, 'content/mappa.json')))
+    co = next((c for c in M['corsi'] if c['id'] == 'ucbm'), None)
+    if not co: return False
+    sats = {s['id'] for pl in co['pianeti'] for s in pl['satelliti']}
+    err = []; Q = {}; per = {}
+    for t in UCBM:
+        for v in carica(t):
+            i = v['id']; q = 'q.' + i[5:]
+            if not re.match(r'^ucbm\.[a-z]{2,4}\.[a-z0-9]{2,20}\.\d{2}$', i): err.append(f'{i}: id non valido'); continue
+            if v.get('sat') not in sats: err.append(f"{i}: satellite {v.get('sat')}")
+            if v.get('passo') not in (1, 2, 3): err.append(f"{i}: passo {v.get('passo')}")
+            o = val(v, 'opzioni') or []
+            if not val(v, 'domanda'): err.append(f'{i}: manca la domanda')
+            if len(o) != 5 or len({x.strip().lower() for x in o}) != 5 or not all(isinstance(x, str) and x.strip() for x in o): err.append(f'{i}: servono 5 opzioni diverse')
+            if v.get('passo') == 1 and not val(v, 'concetto'): err.append(f'{i}: il passo 1 vuole il concetto')
+            if v.get('passo') == 3 and val(v, 'scritta'): err.append(f'{i}: il passo 3 è solo a scelta (formato del test)')
+            if not val(v, 'spiegazione'): err.append(f'{i}: manca la spiegazione')
+            sc = val(v, 'scritta')
+            if sc is not None and (not isinstance(sc, list) or not sc or not all(isinstance(x, (str, int, float)) for x in sc)): err.append(f'{i}: scritta non valida')
+            x = {'sat': v['sat'], 'p': v['passo'], 'd': val(v, 'domanda'), 'o': o, 'x': val(v, 'spiegazione')}
+            if val(v, 'concetto'): x['c'] = val(v, 'concetto')
+            if sc: x['s'] = sc
+            if v.get('unita'): x['u'] = v['unita']
+            Q[q] = x; per.setdefault(v['sat'], {}).setdefault(v['passo'], []).append(q)
+    if err: raise SystemExit('testi/ucbm non valido:\n  ' + '\n  '.join(err[:30]))
+    passi = {}
+    for sat, P in per.items():
+        passi[sat] = [{'id': f'{sat}.{n}', 'n': n, 'tipo': tipo, 'nome': nome, 'aspetto': 'q', 'domande': ['scelta', 'nome'] if n < 3 else ['scelta'], 'giochi': [], 'strutture': sorted(P[n])}
+                      for n, tipo, nome in PASSI_UCBM if P.get(n)]
+    print('test UCBM:', len(Q), 'quesiti in', len(passi), 'satelliti')
+    return scrivi_versionato(os.path.join(ROOT, 'content/ucbm.json'), {'quesiti': Q, 'passi': passi})
 
 def controlla_percorsi():
     """ogni nodo di content/percorsi/*.json esiste nella mappa, i passi sono del satellite, il caso esiste"""
@@ -382,6 +426,7 @@ def main():
         import contenuti_2d
         changed = contenuti_2d.main(p) or changed
     changed = lezioni() or changed
+    changed = ucbm() or changed
     idx = os.path.join(ROOT, 'content/index.json')
     if changed:
         I = json.load(open(idx)); I['version'] += 1; json.dump(I, open(idx, 'w'), ensure_ascii=False, indent=1); open(idx, 'a').write('\n')

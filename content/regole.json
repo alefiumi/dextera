@@ -1,5 +1,5 @@
 {
- "version": 6,
+ "version": 7,
  "nota": "Numeri del percorso (sezioni 3, 4, 5 e 6 della specifica: lezione, sblocchi ed esame, ripasso, serie; palestra per zone, sezione 7; luce dei pianeti; Flotta, sezione 6; badge e profilo, fase 5): stanno qui e non nel codice. Dalla fase 3 arriveranno dalla tabella rules del gestionale, con gli stessi nomi.",
  "lezione": {"domande": 8, "cuori": 3, "non_scelta_min": 3, "ripasso_passi_fatti": 2, "dopo_presentazione_min": 4, "opzioni": 4},
  "stelle": {"tre": 0.95, "due": 0.8},
@@ -15,5 +15,6 @@
  "palestra": {"domande": 8, "cuori": 3, "zone_deboli": 2},
  "badge": {"ripassi_del_giorno": 10},
  "profilo": {"vetrina": 3, "min_vis": 0.25, "viste": {"corpo": ["a", "p"], "cervello": ["ls", "m"]}},
- "flotta": {"tetto_giorno": 300, "pianeta_scelto": 2, "giorni": 40, "invio_giorni": 34, "equipaggio": {"min": 2, "max": 10, "per_membro": 6, "xp": 50, "max_per_persona": 3}, "sfida": {"strutture": 5, "giorni": 14}}
+ "flotta": {"tetto_giorno": 300, "pianeta_scelto": 2, "giorni": 40, "invio_giorni": 34, "equipaggio": {"min": 2, "max": 10, "per_membro": 6, "xp": 50, "max_per_persona": 3}, "sfida": {"strutture": 5, "giorni": 14}},
+ "ucbm": {"nota": "Test d'ingresso UCBM (fase 6): quesiti a scelta tra 5 come nel test. scelta_max: maestria massima con la scelta per i quesiti senza risposta scritta (con la risposta scritta vale maestria.scelta_max). secondi: tempo per domanda nel passo «Quesiti del test» e nell'esame del pianeta. tolleranza: scarto relativo ammesso nelle risposte numeriche. simulazione: regole del bando (60 domande, 20 per materia, 100 minuti, +1 / −0,2 / 0, idoneità con 12 punti), xp_giusta per ogni risposta giusta.", "scelta_max": 2, "secondi": 100, "tolleranza": 0.02, "simulazione": {"domande": 60, "per_materia": 20, "minuti": 100, "giusta": 1, "sbagliata": -0.2, "vuota": 0, "soglia": 12, "xp_giusta": 3}}
 }

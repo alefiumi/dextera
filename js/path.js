@@ -6,6 +6,7 @@ import {$,toast} from './util.js';
 import {app,S,save,head} from './state.js';
 import * as P from './percorso.js';
 import {startLesson,startReview,startExam,renderLesson,lessonClick,lessonSubmit,setLessonExit} from './lezione.js';
+import {startSim,simInfo,setSimExit} from './simulazione.js';
 
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const UK='dextera-percorso-ui';
@@ -23,6 +24,8 @@ export function initPath(h){
   if(go){ui.lvl='satellite';ui.s=go.sat.id;keep();}
   hooks.setTab('path');
  });
+ // dal risultato della simulazione UCBM: «Studia …» apre il satellite
+ setSimExit(sat=>{if(sat){ui.lvl='satellite';ui.s=sat.id;ui.c=P.corsoOf(sat).id;P.setCorso(ui.c);keep();}hooks.setTab('path');});
 }
 
 // apre un satellite nella scheda Percorso (dal foglio della zona della Palestra)
@@ -34,9 +37,23 @@ const PROBN={strutture:'Riconoscerle e sapere che cosa sono',dove:'Dove si trova
 const neuroC=c=>c.modulo==='cervello';
 // passi dei corsi di cuore e vasi e del respiratorio (fase 6)
 const PROBT={strutture:'Riconoscerle sulla figura',descrizione:'Riconoscerle da come sono fatte e da cosa fanno',progetto:'Il caso clinico'};
-const probOf=c=>c.modulo==='cervello'?PROBN:c.modulo==='cuore'||c.modulo==='polmoni'?PROBT:PROB;
+// passi del test d'ingresso UCBM (fase 6)
+const PROBQ={concetti:'Le idee chiave: prima una spiegazione, poi le domande',applicazione:'Problemi ed esercizi, anche con i calcoli',test:'Quesiti misti come quelli del test, con il tempo'};
+const probOf=c=>P.isUcbm(c)?PROBQ:c.modulo==='cervello'?PROBN:c.modulo==='cuore'||c.modulo==='polmoni'?PROBT:PROB;
 const ICO={corpo:'🦴',cervello:'🧠',cuore:'🫀',polmoni:'🫁'};
 export const icoOf=c=>ICO[c?.modulo]||'🎓';
+// test UCBM: riquadro della simulazione (sempre aperta) e materie ancora in arrivo, nel sistema del corso
+function simCard(C){
+ if(!P.isUcbm(C))return '';
+ const I=simInfo(),arr=P.pianetiArrivo(C),u=S.ucbm?.sim||[],last=u.at(-1);
+ const ar=arr.length?`<div class="card info arrivo"><div class="kick">In arrivo</div><p class="mut">${esc(arr.map(p=>p.nome).join(' e '))}: le domande si stanno scrivendo. Il programma:</p>${arr.map(p=>`<details><summary><b>${esc(p.nome)}</b> · ${p.satelliti.length} argomenti</summary><ul>${p.satelliti.map(s=>`<li><b>${esc(s.nome)}</b>${s.programma?`: ${esc(s.programma)}`:''}</li>`).join('')}</ul></details>`).join('')}</div>`:'';
+ if(!I||!I.n)return ar;
+ const mm=Math.round(I.sec/60);
+ return `<div class="card info exam"><div class="kick">Simulazione del test</div><h2>Prova come il giorno del test</h2>
+  <p class="mut">${I.n} domande a scelta tra 5, circa ${mm} minuti, +1 / −0,2 / 0.${I.parziale?' Parziale: solo le materie pronte, con il tempo in proporzione.':''} Sempre aperta: non serve finire il percorso.</p>
+  ${last?`<p class="pn">Ultima: ${String(last.pt).replace('.',',')} punti su ${last.n} (${esc(P.itDate(last.d))})</p>`:''}
+  <button class="btn" data-p="sim">Inizia la simulazione</button></div>`+ar;
+}
 // nome del percorso aperto (catalogo di index.json)
 const pName=()=>(P.percorsiCat().find(x=>x.id===P.percorsoId())||{nome:app.PERCORSO?.nome||'Percorso completo'}).nome;
 // simboli degli stati (oltre al colore e alla parola): cerchio vuoto, anello, pieno; pieno con l'orologio (da ripassare),
@@ -167,8 +184,8 @@ function infoHtml(g,pl){
   ${studioForm(P.percorsoId(),S.studio?.corsi||[],false)}
   ${pbar(lit,all.length)}<p class="pn">${esc(C.nome)}: ${lit} satelliti accesi su ${all.length}</p></div>`;
  return `<div class="card info"><div class="kick">Sistema · ${esc(pName())}</div><h2>${esc(C.nome)}</h2>
-  <p class="mut">${P.pianeti().length} pianeti e ${all.length} satelliti, tutti aperti: parti ${neuroC(C)?'dall\'argomento':'dalla regione'} che stai studiando a lezione. Tocca un pianeta per vedere i suoi satelliti.</p>${P.corsi().length>1?`<button class="lnk" data-p="lvl" data-lvl="universo">Cambia corso</button>`:''}
-  ${pbar(lit,all.length)}<p class="pn">${lit} satelliti accesi su ${all.length}</p>${legend()}</div>`;
+  <p class="mut">${P.pianeti().length} pianeti e ${all.length} satelliti, tutti aperti: parti ${neuroC(C)||P.isUcbm(C)?'dall\'argomento':'dalla regione'} che stai studiando a lezione. Tocca un pianeta per vedere i suoi satelliti.</p>${P.corsi().length>1?`<button class="lnk" data-p="lvl" data-lvl="universo">Cambia corso</button>`:''}
+  ${pbar(lit,all.length)}<p class="pn">${lit} satelliti accesi su ${all.length}</p>${legend()}</div>${simCard(C)}`;
 }
 // riga sulla luce del pianeta nel suo riquadro: a parole cosa dice il disegno
 function glowHtml(pl){
@@ -193,18 +210,21 @@ function studioForm(pid,sel,first){
  const cat=P.percorsiCat(),cs=P.corsiDi(pid),on=c=>!sel.length||sel.includes(c.id);
  return `<fieldset class="pstudio"><legend class="kick">Percorso</legend>${cat.map(x=>`<label class="popt${x.ok?'':' off'}"><input type="radio" name="spercorso" data-p="spercorso" value="${esc(x.id)}"${x.id===pid?' checked':''}${x.ok?'':' disabled'}>
    <span><b>${esc(x.nome)}</b>${x.bozza?' <small class="tag">bozza</small>':''}${x.ok?'':' <small class="mut">in arrivo</small>'}</span></label>`).join('')}</fieldset>
-  ${materieHtml(pid)}<fieldset class="pstudio"><legend class="kick">I tuoi corsi</legend>${P.arrivoDi(pid).length?'<p class="mut">Già da studiare: l\'anatomia, che nel programma del test sta in Biologia («Anatomia e fisiologia dell\'uomo»).</p>':''}${cs.map(c=>`<label class="popt"><input type="checkbox" data-p="scorso" value="${esc(c.id)}"${on(c)?' checked':''}>
+  ${materieHtml(pid)}<fieldset class="pstudio"><legend class="kick">I tuoi corsi</legend>${testDi(pid).length?'<p class="mut">Già da studiare: l\'anatomia, che nel programma del test sta in Biologia («Anatomia e fisiologia dell\'uomo»).</p>':''}${cs.map(c=>`<label class="popt"><input type="checkbox" data-p="scorso" value="${esc(c.id)}"${on(c)?' checked':''}>
    <span>${icoOf(c)} <b>${esc(c.nome)}</b> <small class="mut">${P.pianeti(c).length||c.pianeti.length} pianeti</small></span></label>`).join('')}
 </fieldset>`;
 }
-// materie di un corso «in arrivo» del percorso (Test UCBM): un riquadro apribile per materia con gli argomenti del programma
+// materie del corso del test d'ingresso del percorso (Test UCBM), in arrivo o già in parte giocabile: un riquadro apribile per materia
+// con gli argomenti del programma; le materie pronte (pianeti con i passi) sono segnate «pronta»
 const MICO={'ucbm-biologia':'🧬','ucbm-chimica':'⚗️','ucbm-fisica':'🧲'};
+const testDi=pid=>[...P.arrivoDi(pid),...P.corsiDi(pid).filter(P.isUcbm)];
 function materieHtml(pid){
- return P.arrivoDi(pid).map(c=>`<fieldset class="pstudio materie"><legend class="kick">Le materie del test</legend>
-  <p class="mut">${c.pianeti.map(pl=>esc(pl.nome)).join(', ')}${c.pianeti.every(pl=>pl.domande_test)?`: ${c.pianeti.map(pl=>pl.domande_test).join(' + ')} domande`:''}. Tocca una materia per vedere gli argomenti. Le domande arriveranno.</p>
-  ${c.pianeti.map(pl=>`<details class="mat"><summary><span>${MICO[pl.id]||'🪐'} <b>${esc(pl.nome)}</b> <small class="mut">${pl.domande_test?pl.domande_test+' domande · ':''}${pl.satelliti.length} argomenti</small></span></summary>
+ return testDi(pid).map(c=>{const ok=c.in_arrivo?[]:c.pianeti.filter(pl=>!pl.in_arrivo),no=c.pianeti.filter(pl=>c.in_arrivo||pl.in_arrivo);
+  return `<fieldset class="pstudio materie"><legend class="kick">Le materie del test</legend>
+  <p class="mut">${c.pianeti.map(pl=>esc(pl.nome)).join(', ')}${c.pianeti.every(pl=>pl.domande_test)?`: ${c.pianeti.map(pl=>pl.domande_test).join(' + ')} domande`:''}. Tocca una materia per vedere gli argomenti. ${ok.length?`Pronta: ${esc(ok.map(p=>p.nome).join(' e '))}, con la simulazione del test. `:''}${no.length?`Le domande di ${esc(no.map(p=>p.nome).join(' e '))} arriveranno.`:''}</p>
+  ${c.pianeti.map(pl=>`<details class="mat"><summary><span>${MICO[pl.id]||'🪐'} <b>${esc(pl.nome)}</b> <small class="mut">${ok.includes(pl)?'pronta · ':''}${pl.domande_test?pl.domande_test+' domande · ':''}${pl.satelliti.length} argomenti</small></span></summary>
    <ul class="sl arr">${pl.satelliti.map(s=>`<li><b>${esc(s.nome)}</b>${s.programma?`<br><small class="mut">${esc(s.programma)}</small>`:''}</li>`).join('')}</ul></details>`).join('')}
-  ${c.fonte?`<p class="mut"><small>${esc(c.fonte)}</small></p>`:''}</fieldset>`).join('');
+  ${c.fonte?`<p class="mut"><small>${esc(c.fonte)}</small></p>`:''}</fieldset>`;}).join('');
 }
 function studioScreen(){
  const d=draft||(draft={percorso:'base',corsi:[]});
@@ -360,6 +380,7 @@ export function pathClick(e){
  else if(a==='cont'){const g=P.guide();ui.lvl='satellite';ui.s=g.sat.id;keep();if(P.stepOpen(g.sat,g.ps)&&(g.ps.tipo!=='progetto'||P.passi(g.sat).slice(0,-1).every(P.stepDone)))return go(g.sat,g.ps,g.ps.tipo==='progetto'?(P.casoOf(g.sat)?'caso':'quiz'):'lezione');}
  else if(a==='rip'){let ks=P.dailyLeft();if(!ks.length){ks=P.moreDaily();save();}keep();if(!startReview(P.slotsOf(ks),{daily:true})){toast('Niente da ripassare adesso.');renderPath();return;}return hooks.setTab('path');}
  else if(a==='ripsat'){const sat=P.satById(ui.s);keep();if(!startReview(P.slotsOf(P.satReview(sat)),{sat})){toast('Niente da ripassare in questo satellite.');renderPath();return;}return hooks.setTab('path');}
+ else if(a==='sim'){keep();if(!startSim()){toast('La simulazione non è ancora disponibile.');renderPath();return;}return hooks.setTab('path');}
  else if(a==='esame'){const pl=P.pianeti().find(p=>p.id===ui.p);keep();if(!pl||!startExam(pl)){toast('L\'esame non è ancora disponibile.');renderPath();return;}return hooks.setTab('path');}
  else if(a==='3d'){const sat=P.satById(ui.s),ps=P.passi(sat).find(p=>p.id===b.dataset.id);if(sat&&ps){keep();return hooks.play3d(ps.tipo,sat.id);}}
  else if(a==='go'){const sat=P.satById(ui.s),ps=P.passi(sat).find(p=>p.id===b.dataset.id);keep();return go(sat,ps,b.dataset.k);}

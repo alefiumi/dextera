@@ -2,7 +2,9 @@
    mostra ogni dato con fonte e stato, diviso per satellite; il docente segna Giusto/Sbagliato e scrive la correzione.
    Le risposte restano in questo browser (localStorage, chiave dextera-revisione) e si esportano in CSV per
    atlante/build/importa_revisione.py. Nessun account, nessun invio in rete. */
-const TIPI=['ossa','reperi','muscoli','encefalo','nervi-cranici','torace','gruppi','casi','neuro','correzioni'];
+const TIPI=['ossa','reperi','muscoli','encefalo','nervi-cranici','torace','gruppi','casi','neuro','correzioni','ucbm-biologia'];
+// test d'ingresso UCBM (fase 6): quesiti per materia (testi/ucbm-<materia>.json); ogni voce è un quesito, mostrato anche come lo vede lo studente
+const PASSO_Q={1:'Concetti',2:'Applicazione',3:'Quesiti del test'};
 const STATI=['da verificare','verificato','corretto','segnalato'];
 const FONTI=['Z-Anatomy','TA2','AI','docente','lezione'];   // lezione: materiale del corso (guida e slide del docente)
 const SEP=' | ';           // valori che sono elenchi (opzioni dei casi, membri dei gruppi)
@@ -57,10 +59,12 @@ async function carica(){
    else if(tipo==='gruppi'){const [,k,r]=v.id.split('.');if(k==='ossa')sats=satOf(['g.'+r]);else if(k==='encefalo'||k==='strato-encefalo')sez='enc';else if(/^(strato-)?(cuore|polmoni)$/.test(k))sez='tor';}
    else if(tipo==='torace'){sez='tor';atl=v.ref;}
    else if(tipo==='encefalo'||tipo==='nervi-cranici'){sez='enc';if(tipo==='encefalo')atl=v.ref;if(tipo==='nervi-cranici')nome='Nervo '+v.numero+' – '+nome;}
+   else if(tipo.startsWith('ucbm-')){sats=[v.sat];const d=String(v.dati?.domanda?.valore||'');nome=`Quesito ${+v.id.split('.').pop()} · ${PASSO_Q[v.passo]||''}: ${d.length>80?d.slice(0,78)+'…':d}`;}
    else if(tipo==='correzioni'){sez='corr';nome=(TIPO_IT[v.tipo]||v.tipo)+(v.muscolo?': '+v.muscolo:v.cerca?': «'+v.cerca+'»':v.parte?': '+v.parte:'');
     if(v.muscolo){sats=satOf([slug(v.muscolo)]);atl=v.muscolo;}}
    if(!sats.length&&!sez)sez='altro';
    const voce={id:v.id,tipo,nome,ref:v.ref,atl,sats,sez,lez:v.lezione||'',campi:F.campi||{motivo:'Motivo'},dati:[]};
+   if(tipo.startsWith('ucbm-'))voce.quiz={passo:v.passo,unita:v.unita||''};
    if(tipo==='casi'&&v.modulo==='neuro')voce.caso={n:+String(v.caso).replace(/\D/g,''),struttura:v.struttura,snome:NOMEN[v.struttura]||'',sat:v.satellite};
    const dati=v.dati?Object.entries(v.dati):[['motivo',{valore:v.motivo,fonte:v.fonte,stato:v.stato,verifica:v.verifica}]];
    for(const [c,d] of dati){
@@ -139,9 +143,29 @@ function casoHtml(voce){
   ${avv.map(a=>`<p class="avv" role="note">⚠️ ${esc(a)}</p>`).join('')}
   <div class="row noprint"><button class="btn small" data-tutto="${esc(voce.id)}">Segna giusti i dati ancora da segnare</button></div></div>`;
 }
+// quesito UCBM come lo vede lo studente: concetto (passo 1), domanda, 5 opzioni con la giusta segnata (la prima del file), risposte
+// scritte accettate, spiegazione; con una correzione già scritta si vede il quesito corretto. Controlli: 5 opzioni diverse.
+function quizHtml(voce){
+ const d=Object.fromEntries(voce.dati.map(x=>[x.campo,x]));
+ const corr=k=>{const r=R.esiti[d[k]?.id];return r?.e==='sbagliato'&&r.c?.trim()?r.c:'';};
+ const val=k=>corr(k)||d[k]?.valore||'';
+ const lst=k=>(corr(k)?corr(k).split('|'):(d[k]?.valore||'').split(SEP)).map(s=>s.trim()).filter(Boolean);
+ const opz=lst('opzioni'),scr=lst('scritta'),avv=[];
+ if(opz.length!==5)avv.push(`Le opzioni sono ${opz.length}: servono 5.`);
+ if(new Set(opz.map(norm)).size<opz.length)avv.push('Ci sono opzioni ripetute.');
+ const par=t=>String(t).split(/\n+/).filter(Boolean).map(x=>`<p class="small">${esc(x)}</p>`).join('');
+ return `<div class="caso"><details open><summary class="small"><b>Come lo vede lo studente</b> · passo ${voce.quiz.passo} (${esc(PASSO_Q[voce.quiz.passo]||'')})</summary>
+  ${val('concetto')?`<p class="small mut">Prima della domanda, il concetto:</p>${par(val('concetto'))}`:''}
+  <p class="small"><b>${esc(val('domanda'))}</b></p>
+  <ul class="opz">${opz.map((o,i)=>i===0?`<li class="giusta"><span aria-hidden="true">✓</span> ${esc(o)} <span class="sr">(risposta giusta)</span></li>`:`<li>${esc(o)}</li>`).join('')}</ul>
+  <p class="small mut">Nell'app le opzioni si mescolano. ${voce.quiz.passo===3?'Passo 3: solo scelta, con il tempo.':scr.length?`Risposta scritta accettata: ${scr.map(x=>'«'+esc(x)+'»').join(', ')}${voce.quiz.unita?' (in '+esc(voce.quiz.unita)+')':''}. Accenti, maiuscole e articoli non contano; i numeri valgono con il 2% di tolleranza.`:'Solo scelta (nessuna risposta scritta).'}</p>
+  ${val('spiegazione')?`<p class="small"><b>Spiegazione:</b> ${esc(val('spiegazione'))}</p>`:''}</details>
+  ${avv.map(a=>`<p class="avv" role="note">⚠️ ${esc(a)}</p>`).join('')}
+  <div class="row noprint"><button class="btn small" data-tutto="${esc(voce.id)}">Segna giusti i dati ancora da segnare</button></div></div>`;
+}
 function voceHtml({voce,dati}){
  const link=voce.atl?`<a class="noprint small" href="../atlante/index.html?vedi=${encodeURIComponent(voce.atl)}" target="_blank" rel="noopener">Vedi nell'atlante</a>`:'';
- return `<article class="voce"><header><div><h3>${esc(voce.nome)}</h3><code>${esc(voce.id)}</code>${voce.lez?`<small class="mut"> · nel corso: ${esc(voce.lez)}</small>`:''}</div>${link}</header>${voce.caso?casoHtml(voce):''}${dati.map(datoHtml).join('')}</article>`;
+ return `<article class="voce"><header><div><h3>${esc(voce.nome)}</h3><code>${esc(voce.id)}</code>${voce.lez?`<small class="mut"> · nel corso: ${esc(voce.lez)}</small>`:''}</div>${link}</header>${voce.caso?casoHtml(voce):voce.quiz?quizHtml(voce):''}${dati.map(datoHtml).join('')}</article>`;
 }
 function disegna(){
  const f=filtri();try{sessionStorage.setItem(KEY+'-filtri',JSON.stringify({...f,q:$('f-q').value}));}catch(e){}

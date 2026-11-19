@@ -1,19 +1,19 @@
 {
- "version": 1,
+ "version": 2,
  "formato": 1,
- "nota": "Bozza (fase 6) del percorso per il test d'ingresso UCBM, da far rivedere a un docente. Stessa mappa degli altri percorsi: il corso «Test d'ingresso UCBM» (Biologia, Chimica, Fisica) è solo la struttura, in arrivo; si gioca già l'anatomia che il programma chiede: cuore e grandi vasi, apparato respiratorio, basi del sistema nervoso ed encefalo, le ossa dello scheletro (nel muscolo-scheletrico solo il passo Ossa di ogni satellite). I progressi valgono in tutti i percorsi.",
+ "nota": "Bozza (fase 6) del percorso per il test d'ingresso UCBM, da far rivedere a un docente. Il corso «Test d'ingresso UCBM» ha Biologia giocabile (9 argomenti, 3 passi ciascuno: Concetti, Applicazione, Quesiti del test; quesiti in testi/ucbm-biologia.json, scritti dall'AI e da verificare) e la simulazione del test sempre aperta; Chimica e Fisica restano in arrivo (solo il programma). Si gioca anche l'anatomia che il programma chiede: cuore e grandi vasi, apparato respiratorio, basi del sistema nervoso ed encefalo, le ossa dello scheletro (nel muscolo-scheletrico solo il passo Ossa di ogni satellite). I progressi valgono in tutti i percorsi.",
  "id": "ucbm",
  "nome": "Test d'ingresso UCBM",
  "bozza": true,
- "corso": "cuore-vasi",
+ "corso": "ucbm",
  "mappa": {
   "file": "mappa.json",
   "version": 4
  },
  "rilascio": {
-  "numero": 1,
+  "numero": 2,
   "pubblicato_il": "2026-11-19",
-  "da": "a mano (fase 6, bozza)"
+  "da": "a mano (fase 6, bozza): Biologia del test UCBM"
  },
  "nodi": [
   {
@@ -32,64 +32,55 @@
    "id": "ucbm-bio-chimica",
    "tipo": "satellite",
    "genitore": "ucbm-biologia",
-   "ordine": 1,
-   "passi": []
+   "ordine": 1
   },
   {
    "id": "ucbm-bio-cellula",
    "tipo": "satellite",
    "genitore": "ucbm-biologia",
-   "ordine": 2,
-   "passi": []
+   "ordine": 2
   },
   {
    "id": "ucbm-bio-genetica",
    "tipo": "satellite",
    "genitore": "ucbm-biologia",
-   "ordine": 3,
-   "passi": []
+   "ordine": 3
   },
   {
    "id": "ucbm-bio-divisione",
    "tipo": "satellite",
    "genitore": "ucbm-biologia",
-   "ordine": 4,
-   "passi": []
+   "ordine": 4
   },
   {
    "id": "ucbm-bio-anatomia",
    "tipo": "satellite",
    "genitore": "ucbm-biologia",
-   "ordine": 5,
-   "passi": []
+   "ordine": 5
   },
   {
    "id": "ucbm-bio-energia",
    "tipo": "satellite",
    "genitore": "ucbm-biologia",
-   "ordine": 6,
-   "passi": []
+   "ordine": 6
   },
   {
    "id": "ucbm-bio-biotech",
    "tipo": "satellite",
    "genitore": "ucbm-biologia",
-   "ordine": 7,
-   "passi": []
+   "ordine": 7
   },
   {
    "id": "ucbm-bio-evoluzione",
    "tipo": "satellite",
    "genitore": "ucbm-biologia",
-   "ordine": 8,
-   "passi": []
+   "ordine": 8
   },
   {
    "id": "ucbm-bio-ecologia",
    "tipo": "satellite",
    "genitore": "ucbm-biologia",
-   "ordine": 9,
-   "passi": []
+   "ordine": 9
   },
   {
    "id": "ucbm-chimica",
@@ -101,71 +92,61 @@
    "id": "ucbm-chi-materia",
    "tipo": "satellite",
    "genitore": "ucbm-chimica",
-   "ordine": 10,
-   "passi": []
+   "ordine": 10
   },
   {
    "id": "ucbm-chi-atomo",
    "tipo": "satellite",
    "genitore": "ucbm-chimica",
-   "ordine": 11,
-   "passi": []
+   "ordine": 11
   },
   {
    "id": "ucbm-chi-legame",
    "tipo": "satellite",
    "genitore": "ucbm-chimica",
-   "ordine": 12,
-   "passi": []
+   "ordine": 12
   },
   {
    "id": "ucbm-chi-stechiometria",
    "tipo": "satellite",
    "genitore": "ucbm-chimica",
-   "ordine": 13,
-   "passi": []
+   "ordine": 13
   },
   {
    "id": "ucbm-chi-reazioni",
    "tipo": "satellite",
    "genitore": "ucbm-chimica",
-   "ordine": 14,
-   "passi": []
+   "ordine": 14
   },
   {
    "id": "ucbm-chi-composti",
    "tipo": "satellite",
    "genitore": "ucbm-chimica",
-   "ordine": 15,
-   "passi": []
+   "ordine": 15
   },
   {
    "id": "ucbm-chi-soluzioni",
    "tipo": "satellite",
    "genitore": "ucbm-chimica",
-   "ordine": 16,
-   "passi": []
+   "ordine": 16
   },
   {
    "id": "ucbm-chi-acidi",
    "tipo": "satellite",
    "genitore": "ucbm-chimica",
-   "ordine": 17,
-   "passi": []
+   "ordine": 17
   },
   {
    "id": "ucbm-chi-organica",
    "tipo": "satellite",
    "genitore": "ucbm-chimica",
-   "ordine": 18,
-   "passi": []
+   "ordine": 18
   },
   {
    "id": "ucbm-chi-applicata",
    "tipo": "satellite",
    "genitore": "ucbm-chimica",
-   "ordine": 19,
-   "passi": []
+   "ordine": 19
   },
   {
    "id": "ucbm-fisica",
@@ -177,50 +158,43 @@
    "id": "ucbm-fis-misure",
    "tipo": "satellite",
    "genitore": "ucbm-fisica",
-   "ordine": 20,
-   "passi": []
+   "ordine": 20
   },
   {
    "id": "ucbm-fis-cinematica",
    "tipo": "satellite",
    "genitore": "ucbm-fisica",
-   "ordine": 21,
-   "passi": []
+   "ordine": 21
   },
   {
    "id": "ucbm-fis-dinamica",
    "tipo": "satellite",
    "genitore": "ucbm-fisica",
-   "ordine": 22,
-   "passi": []
+   "ordine": 22
   },
   {
    "id": "ucbm-fis-fluidi",
    "tipo": "satellite",
    "genitore": "ucbm-fisica",
-   "ordine": 23,
-   "passi": []
+   "ordine": 23
   },
   {
    "id": "ucbm-fis-termo",
    "tipo": "satellite",
    "genitore": "ucbm-fisica",
-   "ordine": 24,
-   "passi": []
+   "ordine": 24
   },
   {
    "id": "ucbm-fis-elettro",
    "tipo": "satellite",
    "genitore": "ucbm-fisica",
-   "ordine": 25,
-   "passi": []
+   "ordine": 25
   },
   {
    "id": "ucbm-fis-ottica",
    "tipo": "satellite",
    "genitore": "ucbm-fisica",
-   "ordine": 26,
-   "passi": []
+   "ordine": 26
   },
   {
    "id": "cuore-vasi",

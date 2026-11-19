@@ -4,7 +4,7 @@ import {app,S,bone,save,touchStreak,head,bump,queue,items,members,itemOf,itemSet
 import {clearMarks,mark,refreshMastery,resetZoom,showMuscle,muscleHtml,visible,visibleIn,focusItem,focusPts,itemBox,setView,baseView,hasView} from './figure.js';
 import {startPuzzle} from './puzzle.js';
 import * as P from './percorso.js';
-import {startZone,renderLesson,leaveZone,setPlayExit} from './lezione.js';
+import {startZone,renderLesson,leaveZone,setPlayExit,lessonMod} from './lezione.js';
 import {openSat} from './path.js';
 
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -15,7 +15,11 @@ const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&
    con le regole della lezione (startZone in lezione.js): stesse chiavi di maestria per aspetto e stesso ripasso del Percorso. */
 const TIPI=[['ossa','🦴','Ossa','Riconoscerle e trovarle sulla figura'],['reperi','📍','Reperi','Riconoscerli e trovare il loro osso'],
  ['muscoli','💪','Muscoli','Riconoscerli dal tracciato'],['connessioni','🎯','Origine e inserzione','Da dove partono e dove arrivano'],['funzione','⚙️','Funzione','Quale muscolo fa questa azione']];
-const zoneOn=()=>app.MOD.id==='corpo'&&P.ready();
+// neurologia (figura del cervello): una zona è un satellite del corso, i tipi sono i suoi passi
+const TIPIN=[['strutture','🧠','Strutture','Riconoscerle e trovarle sulla figura'],['dove','📍','Dove si trova','Riconoscerle dalla posizione'],
+ ['funzione','⚙️','Funzione','Che cosa fanno'],['lesione','🩹','Se si danneggia','Che cosa succede con una lesione'],['connessioni','🔗','Connessioni e vie','Con che cosa sono collegate']];
+const ZC=()=>P.zoneCorso(),neu=()=>ZC()?.modulo==='cervello',tipi=()=>neu()?TIPIN:TIPI;
+const zoneOn=()=>P.ready()&&!!ZC();
 const avgTxt=a=>a.toFixed(1).replace('.',',');
 const dot=a=>`<span class="mdot m${Math.min(3,Math.floor(a+1e-9))}" aria-hidden="true">${Math.min(3,Math.floor(a+1e-9))}</span>`;
 // strutture usabili di un tipo di passo nella zona (chiavi diverse)
@@ -23,7 +27,7 @@ const zoneCount=(sat,tipo)=>new Set(P.passi(sat).filter(ps=>ps.tipo!=='progetto'
 setPlayExit(()=>renderMenu());
 // tocco su un osso della figura, fuori dai giochi: apre il foglio della sua zona
 export function zoneTap(sid){
- if(!zoneOn())return false;const L=P.satsOf(sid).filter(s=>P.satKeys(s).length);if(!L.length)return false;
+ if(!zoneOn())return false;const L=P.satsOf(sid,ZC()).filter(s=>P.satKeys(s).length);if(!L.length)return false;
  app.Z={id:L[0].id,alt:L.map(s=>s.id)};renderMenu();return true;
 }
 export function zoneClick(b){
@@ -31,27 +35,27 @@ export function zoneClick(b){
  if(a==='open'){app.Z={id:b.dataset.id,alt:[b.dataset.id]};renderMenu();$('panel').querySelector('.zsheet h2')?.focus();}
  else if(a==='alt'&&app.Z){app.Z.id=b.dataset.id;renderMenu();}
  else if(a==='close'){app.Z=null;clearMarks();resetZoom(true);renderMenu();}
- else if(a==='weak'){const ws=P.weakZones();if(ws.length)startZone(ws,{label:ws.map(s=>s.nome).join(' e ')});}
- else if(a==='train'&&sat){const t=b.dataset.t||null,T=TIPI.find(x=>x[0]===t);startZone([sat],{tipo:t,label:sat.nome+(T?' · '+T[2]:'')});}
+ else if(a==='weak'){const ws=P.weakZones(ZC());if(ws.length)startZone(ws,{label:ws.map(s=>s.nome).join(' e ')});}
+ else if(a==='train'&&sat){const t=b.dataset.t||null,T=tipi().find(x=>x[0]===t);startZone([sat],{tipo:t,label:sat.nome+(T?' · '+T[2]:'')});}
  else if(a==='sat'&&sat){app.Z=null;openSat(sat.id);}
 }
 function zoneHead(){
- const ws=P.weakZones();
- const pls=P.pianeti(P.corpoCorso()).map(p=>{const ss=P.satelliti(p).filter(s=>P.satKeys(s).length);if(!ss.length)return '';
+ const ws=P.weakZones(ZC()),nn=neu();
+ const pls=P.pianeti(ZC()).map(p=>{const ss=P.satelliti(p).filter(s=>P.satKeys(s).length);if(!ss.length)return '';
   return `<div class="zpl"><div class="sub">${esc(p.nome)}</div><div class="zlist">${ss.map(s=>{const a=P.zoneAvg(s);
    return `<button class="zchip" data-z="open" data-id="${esc(s.id)}" aria-label="${esc(s.nome)}: maestria media ${avgTxt(a)} su 3">${dot(a)}<span>${esc(s.nome)}</span></button>`;}).join('')}</div></div>`;}).join('');
  return `<div class="card zhead"><div class="kick">Allenamento per zone</div><h2>Tocca una zona per allenarti</h2>
-  <p class="mut">La figura è colorata per maestria (da beige a oro). Tocca un osso: si apre la sua zona, con i giochi solo su quella. Tutto fa salire la stessa maestria del Percorso.</p>
+  <p class="mut">${nn?'Tocca una parte del cervello: si apre la sua zona (un satellite del corso di neurologia), con i giochi solo su quella.':'La figura è colorata per maestria (da beige a oro). Tocca un osso: si apre la sua zona, con i giochi solo su quella.'} Tutto fa salire la stessa maestria del Percorso.</p>
   ${ws.length?`<button class="btn" data-z="weak">💪 Allenati sulle zone deboli</button><p class="mut zweak">${ws.length>1?'Le zone':'La zona'} più ${ws.length>1?'deboli':'debole'}: <b>${ws.map(s=>esc(s.nome)).join('</b> e <b>')}</b></p>`:''}
   <details class="zall"><summary>Tutte le zone</summary>${pls}</details></div>`;
 }
 function zoneSheet(sat){
  const pl=P.planetOf(sat),a=P.zoneAvg(sat),st=P.look(sat);
  const tl=(t,i,n,x)=>{const c=zoneCount(sat,t);return c?`<button class="mode tile" data-z="train"${t?` data-t="${t}"`:''}><span class="ti" aria-hidden="true">${i}</span><b>${n}</b><small>${x} · ${c} ${c===1?'struttura':'strutture'}</small></button>`:'';};
- const alt=app.Z.alt.length>1?`<p class="mut">L'osso toccato sta anche in: ${app.Z.alt.filter(id=>id!==sat.id).map(id=>`<button class="lnk" data-z="alt" data-id="${esc(id)}">${esc(P.satById(id).nome)}</button>`).join(', ')}</p>`:'';
+ const alt=app.Z.alt.length>1?`<p class="mut">${neu()?'La struttura toccata':'L\'osso toccato'} sta anche in: ${app.Z.alt.filter(id=>id!==sat.id).map(id=>`<button class="lnk" data-z="alt" data-id="${esc(id)}">${esc(P.satById(id).nome)}</button>`).join(', ')}</p>`:'';
  return `<div class="card zsheet"><div class="zsh"><div><div class="kick">Zona · ${esc(pl?.nome||'')}</div><h2 tabindex="-1">${esc(sat.nome)}</h2></div><button class="lx" data-z="close" aria-label="Chiudi la zona">✕</button></div>
   <p class="zst">${dot(a)} Maestria media <b>${avgTxt(a)}</b> su 3 · ${esc(P.STATI[st]||'')}</p>${alt}
-  <div class="tiles">${tl(null,'🔀','Allenamento misto',"Un po' di tutto, dalle più deboli")}${TIPI.map(([t,i,n,x])=>tl(t,i,n,x)).join('')}</div>
+  <div class="tiles">${tl(null,'🔀','Allenamento misto',"Un po' di tutto, dalle più deboli")}${tipi().map(([t,i,n,x])=>tl(t,i,n,x)).join('')}</div>
   <div class="zbtns"><button class="btn alt" data-z="sat">Vai al satellite</button></div></div>`;
 }
 // evidenzia la zona sulla figura (le sue ossa) e la porta in primo piano
@@ -61,9 +65,10 @@ function showZone(sat){
 }
 
 export function renderMenu(){
- if(app.L?.tab==='play'){if(app.MOD.id==='corpo'){app.G=null;renderLesson();return;}leaveZone();}
+ // allenamento per zone in corso: continua se la figura è quella che serve, altrimenti (cambiato modulo) si chiude
+ if(app.L?.tab==='play'){if(app.MOD.id===lessonMod(app.L)){app.G=null;renderLesson();return;}leaveZone();}
  app.G=null;clearGhosts();baseView();const body=app.MOD.id==='corpo';
- const zon=zoneOn(),zsat=zon&&app.Z&&P.satById(app.Z.id);if(app.Z&&!zsat)app.Z=null;
+ const zon=zoneOn(),zsat=zon&&app.Z&&P.satelliti(null,ZC()).find(s=>s.id===app.Z.id);if(app.Z&&!zsat)app.Z=null; // la zona deve essere del corso della figura aperta
  // riquadri a due colonne come nel prototipo: icona, nome, una riga di spiegazione; le sezioni dicono se si gioca in 2D o sul modello 3D
  const mb=(m,i,t,x)=>`<button class="mode tile" data-mode="${m}"><span class="ti" aria-hidden="true">${i}</span><b>${t}</b><small>${x}</small></button>`;
  const sec=(k,t,n)=>`<h3 class="gsec"><span class="tag">${k}</span>${t}</h3><div class="tiles">${n}</div>`;

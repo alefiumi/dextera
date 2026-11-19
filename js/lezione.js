@@ -24,11 +24,7 @@ const NL={strutture:'Che cos\'è',dove:'Dove si trova',funzione:'Che cosa fa',le
 const nx=sid=>P.neuro(sid)||{};
 // testo del passo: per le strutture la funzione (la prima frase), per gli altri passi il loro campo
 const ntext=(sid,tipo)=>tipo==='strutture'?first(nx(sid).f):nx(sid)[P.NCAMPO[tipo]]||'';
-// strutture del cervello 2D della voce (id b.* o gruppi g:<gruppo>, che valgono per tutti i loro membri)
-function nfig(sid){
- const M=app.MODS.cervello;if(!M)return [];
- return [...new Set((nx(sid).fig||[]).flatMap(x=>x.startsWith('g:')?(M.byId[x.slice(2)]?.m||[]):[x]))].filter(id=>M.byId[id]);
-}
+const nfig=P.nfig;
 // mostra la struttura sulla figura: nella vista in cui se ne vede di più, evidenziata (hl) o no (tocco)
 function showNeuro(sid,hl){
  const ids=nfig(sid);if(!ids.length||app.MOD.id!=='cervello')return;
@@ -47,6 +43,7 @@ function nmask(t,name){
 const conn=slot=>slot.ps.tipo==='connessioni'&&!P.isNeuro(slot.sid);
 // figura che serve alla domanda in corso (il corso di neurologia usa il cervello)
 const modOf=sid=>sid&&P.isNeuro(sid)?'cervello':'corpo';
+export const lessonMod=L=>needMod(L)||modOf(L.slots[0]?.sid);
 function needMod(L){
  if(L.screen==='end')return null;
  if(L.screen==='caso')return L.caso?.src==='neuro'?'cervello':'corpo';
@@ -411,7 +408,7 @@ function finish(){
   else L.msg=`Serve almeno l'${Math.round(Rg.progetto.quiz_soglia*100)}% con i cuori rimasti: riprova quando vuoi.`;
  }
  L.rewards=P.checkProgress();
- queue.add({module:L.kind==='palestra'?'corpo':'percorso',mode:L.kind==='palestra'?'zona':L.kind,score:L.ok,total:L.n,xp:Math.max(0,S.xp-L.xp0)});
+ queue.add({module:L.kind==='palestra'?modOf(L.slots[0]?.sid):'percorso',mode:L.kind==='palestra'?'zona':L.kind,score:L.ok,total:L.n,xp:Math.max(0,S.xp-L.xp0)});
  save();head();refreshMastery();
  L.gain=Math.max(0,S.xp-L.xp0);L.screen='end';endScreen(L);
 }

@@ -38,7 +38,7 @@ Dove questo file e la specifica differiscono, vale la specifica.
 - Fase 1 – Percorso minimo (SQL: path_progress, dextera_settings, error_reports): online e SQL applicato il 18/11/2026.
 - Fase 2 – Ripasso ed esame (SQL: review_items), in tre rilasci scelti dall'autore il 19/11/2026: 1) ripasso, luce dei satelliti,
   data d'esame (v0.76.0, vedi «Ripasso»); 2) esame del pianeta (v0.77.0, vedi «Esame del pianeta»); 3) Palestra con la figura per zone (v0.78.0, vedi «Palestra per zone»). Fasi 3–7: vedi la specifica.
-- Corso di neurologia: contenuti (primo rilascio) e corso giocabile (v0.81.0, vedi «Corso di neurologia giocabile»).
+- Corso di neurologia: contenuti (primo rilascio) e corso giocabile (v0.81.0, vedi «Corso di neurologia giocabile»), Palestra sul cervello (v0.82.0).
 - GitHub Pages attivo (ramo `main`, cartella radice): online su `alefiumi.github.io/dextera`.
 
 ## Situazione al 20/11/2026
@@ -539,7 +539,19 @@ descrizioni; quelle con fonte Z-Anatomy dicono da quale vaso nasce o dove sbocca
 - Prova: `neuro.mjs` (copia nelle note delle sessioni, Chrome headless, tutto offline): universo, cambio di corso, lezione con presentazioni,
   scelta, tocco e nome sul cervello, tocco sbagliato, passo «Dove si trova», caso, ripasso misto corpo e cervello, esame superato, logo,
   lezione del corpo dopo, Palestra solo corpo; dati di BodyMania intatti.
-- Da fare: Palestra di neurologia (zone sul cervello), tocco sul modello 3D.
+- Da fare: tocco sul modello 3D.
+
+## Palestra di neurologia (zone sul cervello, v0.82.0)
+- Con la figura del cervello la Palestra ha le zone del corso di neurologia, come il corpo ha le sue (cuore e polmoni: nessuna zona).
+  `zoneCorso()` in `percorso.js` sceglie il corso dalla figura aperta (corpo → muscolo-scheletrico, cervello → il corso con `modulo: 'cervello'`);
+  `satsOf(sid, corso)`, `weakZones(corso)` e `zoneBones()` lo prendono. In neurologia le strutture della figura di una zona sono le parti del
+  cervello 2D delle voci del passo «strutture» (`nfig()`, ora in `percorso.js`); il tocco su una parte apre prima la zona in cui ha meno compagni.
+- `game.js`: tipi di allenamento di neurologia (`TIPIN`: strutture, dove, funzione, lesione, connessioni); la zona aperta (`app.Z`) vale solo se
+  è del corso della figura; un allenamento continua solo se la figura è quella che serve (`lessonMod()` in `lezione.js`), cambiando figura
+  si chiude. In coda come `{module:'cervello', mode:'zona'}`.
+- Le strutture profonde (talamo…) non si vedono abbastanza in nessuna vista del 2D (`visibleIn`): si allenano dall'elenco «Tutte le zone».
+- Prova: `zneuro.mjs` (copia nelle note delle sessioni): tocco vero sul giro precentrale, foglio della zona, allenamento misto e per tipo,
+  cambio di figura a metà, zone deboli, «Vai al satellite», cuore senza zone; `zone.mjs` aggiornata (il cervello ora ha le zone).
 
 ## Mappa del percorso (`content/mappa.json`)
 Corso → 4 pianeti → 17 satelliti (con `ordine` della specifica) → 6 passi (`ossa`, `reperi`, `muscoli`, `connessioni`, `funzione`,

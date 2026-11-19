@@ -46,6 +46,11 @@ export const neuro=sid=>app.LEZ.neuro?.[sid]||null;
 const casesOf=c=>c.modulo==='corpo'?corpo().CASES:c.modulo==='cervello'?(app.LEZ.casi_neuro||[]):[];
 const caseIn=(c,id)=>casesOf(c).find(x=>x.id===id)||null;
 export const caseAns=c=>c?.mid||c?.bid||null;
+// strutture del cervello 2D di una voce di neurologia (id b.* o gruppi g:<gruppo>, che valgono per tutti i loro membri)
+export function nfig(sid){
+ const M=app.MODS.cervello;if(!M)return [];
+ return [...new Set((neuro(sid)?.fig||[]).flatMap(x=>x.startsWith('g:')?(M.byId[x.slice(2)]?.m||[]):[x]))].filter(id=>M.byId[id]);
+}
 // passi del satellite inclusi nel percorso (i passi 'salta' della mappa non ci sono)
 export const passi=sat=>{const inc=pnode(sat.id)?.passi;return sat.passi.filter(ps=>!ps.salta&&(!inc||inc.includes(ps.id)));};
 export const casoOf=sat=>{const c=pnode(sat.id)?.caso;return c?caseIn(corsoOf(sat),c):null;};
@@ -345,21 +350,27 @@ export function weakSats(pl,res){
  return satelliti(pl).slice().sort((a,b)=>err(b)-err(a)||light(a)-light(b)||avg(a)-avg(b)).slice(0,2);
 }
 
-/* ---------- Palestra per zone (fase 2, terzo rilascio): una zona della figura è un satellite ---------- */
+/* ---------- Palestra per zone (fase 2, terzo rilascio): una zona della figura è un satellite ----------
+   Corso delle zone: quello della figura aperta (corpo → muscolo-scheletrico, cervello → neurologia); negli altri moduli niente zone. */
+export const zoneCorso=()=>{const m=app.MOD?.id;return m==='corpo'?corpoCorso():corsi().find(c=>c.modulo===m)||null;};
+// nel corpo le strutture della figura sono gli id del passo; in neurologia le voci del passo «strutture» con le loro parti del cervello 2D
+const zoneIds=(ps)=>ps.strutture.flatMap(x=>isNeuro(x)?nfig(x):[x]);
+const zstep=c=>c&&c.modulo==='cervello'?'strutture':'ossa';
 // satelliti che contengono una struttura toccata sulla figura (un osso condiviso sta in più zone): prima quelli in cui l'osso ha meno
 // compagni nel passo delle ossa (il femore porta alla coscia, poi ginocchio e anca), a parità nell'ordine del percorso
-export function satsOf(sid){
- const nb=sat=>{const ps=passi(sat).find(p=>p.tipo==='ossa'&&Array.isArray(p.strutture)&&p.strutture.includes(sid));return ps?ps.strutture.length:999;};
- return satelliti(null,corpoCorso()).filter(sat=>passi(sat).some(ps=>Array.isArray(ps.strutture)&&ps.strutture.includes(sid))).map((s,i)=>({s,i,n:nb(s)})).sort((a,b)=>a.n-b.n||a.i-b.i).map(x=>x.s);
+export function satsOf(sid,c=corpoCorso()){
+ const has=ps=>Array.isArray(ps.strutture)&&zoneIds(ps).includes(sid);
+ const nb=sat=>{const ps=passi(sat).find(p=>p.tipo===zstep(c)&&has(p));return ps?zoneIds(ps).length:999;};
+ return satelliti(null,c).filter(sat=>passi(sat).some(has)).map((s,i)=>({s,i,n:nb(s)})).sort((a,b)=>a.n-b.n||a.i-b.i).map(x=>x.s);
 }
-// ossa della zona (per evidenziarla sulla figura)
-export const zoneBones=sat=>passi(sat).filter(ps=>ps.tipo==='ossa').flatMap(ps=>usable(ps));
+// strutture della figura della zona (per evidenziarla): ossa nel corpo, parti del cervello in neurologia
+export const zoneBones=sat=>passi(sat).filter(ps=>ps.tipo==='ossa'||ps.tipo==='strutture').flatMap(ps=>usable(ps).flatMap(x=>isNeuro(x)?nfig(x):[x]));
 // maestria media della zona (tutte le chiavi del satellite, 0–3) e quota delle chiavi viste almeno una volta
 export function zoneAvg(sat){const ks=satKeys(sat);return ks.length?ks.reduce((a,k)=>a+mastery(k),0)/ks.length:0;}
 const zoneSeen=sat=>satKeys(sat).some(k=>mastery(k)>0||(S.seen||{})[k]);
 // zone deboli: tra quelle già cominciate le N con la maestria media più bassa; se sono meno di N, le prossime nell'ordine del percorso
-export function weakZones(){
- const n=R().palestra.zone_deboli,L=satelliti(null,corpoCorso()).filter(s=>satKeys(s).length),on=L.filter(zoneSeen);
+export function weakZones(c=corpoCorso()){
+ const n=R().palestra.zone_deboli,L=satelliti(null,c).filter(s=>satKeys(s).length),on=L.filter(zoneSeen);
  const out=on.slice().sort((a,b)=>zoneAvg(a)-zoneAvg(b)).filter(s=>zoneAvg(s)<R().maestria.max).slice(0,n);
  for(const s of L)if(out.length<n&&!out.includes(s)&&!zoneSeen(s))out.push(s);
  return out;

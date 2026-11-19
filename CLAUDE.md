@@ -39,7 +39,7 @@ Dove questo file e la specifica differiscono, vale la specifica.
 - Fase 2 – Ripasso ed esame (SQL: review_items), in tre rilasci scelti dall'autore il 19/11/2026: 1) ripasso, luce dei satelliti,
   data d'esame (v0.76.0, vedi «Ripasso»); 2) esame del pianeta (v0.77.0, vedi «Esame del pianeta»); 3) Palestra con la figura per zone (v0.78.0, vedi «Palestra per zone»). Fasi 3–7: vedi la specifica.
 - Fase 4 – Flotta (SQL: costellazioni, stagioni, equipaggi): v0.85.0, vedi «Flotta». File SQL da applicare dall'autore.
-- Fase 5 – Profilo e competenze (SQL: righe in badge_classes, dextera_profili): v0.86.0, vedi «Profilo e competenze». File SQL da applicare dall'autore.
+- Fase 5 – Profilo e competenze (SQL: righe in badge_classes, dextera_profili): v0.86.0, vedi «Profilo e competenze». Online e SQL applicato il 19/11/2026.
 - Corso di neurologia: contenuti (primo rilascio) e corso giocabile (v0.81.0, vedi «Corso di neurologia giocabile»), Palestra sul cervello (v0.82.0), gioco 3D (v0.83.0).
 - GitHub Pages attivo (ramo `main`, cartella radice): online su `alefiumi.github.io/dextera`.
 
@@ -671,7 +671,7 @@ descrizioni; quelle con fonte Z-Anatomy dicono da quale vaso nasce o dove sbocca
   «Scarica i miei dati» ha `copertina_e_titolo`.
 - Flotta: negli amici il pulsante «Profilo» apre la scheda dell'amico (copertina, foto, titolo, badge in vetrina; `friendCard()` in `social.js`,
   `SO.cards` da `dextera_profili`, copia offline in `dextera-social`).
-- SQL: `supabase/migrations/20261124090000_dextera_badge.sql` (da applicare dall'autore; prima si pubblica l'app): 8 righe in `badge_classes`
+- SQL: `supabase/migrations/20261124090000_dextera_badge.sql` (applicato dall'autore il 19/11/2026: 28 righe in `badge_classes`, RLS, 4 regole e trigger controllati; Security Advisor senza avvisi nuovi): 8 righe in `badge_classes`
   (stessi id e testi di `BADGES5`) e la tabella `dextera_profili` (copertina tra le 6 della galleria, vetrina di al massimo 3, titolo e id del
   titolo; la leggono sé e gli amici accettati, la scrive solo sé; il trigger `private.dextera_profilo()` toglie dalla vetrina i badge che la
   persona non ha in `badge_assertions` e riporta a oggi una data nel futuro; nessun `update` senza `where`). Provato con PGlite: 28 prove

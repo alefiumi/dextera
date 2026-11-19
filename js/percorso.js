@@ -48,19 +48,31 @@ export function corsiDi(pid){const P0=app.PERCORSI?.[pid];if(!P0)return [];const
  return app.MAPPA.corsi.filter(c=>ns.has(c.id)&&!c.in_arrivo).sort((a,b)=>(ns.get(a.id).ordine??99)-(ns.get(b.id).ordine??99));}
 // corsi «in arrivo» di un percorso (il Test UCBM): si mostrano con il programma, senza domande
 export function arrivoDi(pid){const P0=app.PERCORSI?.[pid];if(!P0)return [];const ids=new Set(P0.nodi.map(n=>n.id));return app.MAPPA.corsi.filter(c=>c.in_arrivo&&ids.has(c.id));}
-// un satellite è «intero» nel percorso se ne ha tutti i passi. I percorsi parziali (la bozza UCBM: solo il passo Ossa del corpo) non
-// scrivono in path_progress il satellite acceso né l'esame del pianeta, che varrebbero anche nel percorso completo: li tengono sul
-// telefono in S.path.loc {'<percorso>:<nodo>': data}
+// un satellite è «intero» nel percorso se ne ha tutti i passi. I percorsi parziali (UCBM: gli ospiti con il solo passo Ossa) non
+// scrivono come nodo comune il satellite acceso né l'esame del pianeta, che varrebbero anche nel percorso completo: li tengono per
+// percorso in S.path.pp {'<percorso>': {nodo: {stato:'acceso', fatto_il, u}}} (u = da inviare a path_progress con la colonna percorso,
+// file 20261126090000_dextera_percorsi.sql). Fino alla v0.91 stavano solo sul telefono in S.path.loc {'<percorso>:<nodo>': data}.
 const fullSat=sat=>{const inc=pnode(sat.id)?.passi;return !inc||sat.passi.filter(p=>!p.salta).every(p=>inc.includes(p.id));};
 const fullPl=pl=>pl.satelliti.every(s=>pnode(s.id)&&fullSat(s));
-const LOC=()=>P().loc||(P().loc={});
-const lkey=id=>percorsoId()+':'+id;
+export function ppAll(){
+ const p=P();
+ if(p.loc){for(const [k,v] of Object.entries(p.loc)){const i=k.indexOf(':');if(i<1)continue;const m=(p.pp||(p.pp={}))[k.slice(0,i)]||(p.pp[k.slice(0,i)]={});
+  if(!m[k.slice(i+1)])m[k.slice(i+1)]={stato:'acceso',fatto_il:v,u:1};}delete p.loc;}
+ return p.pp||(p.pp={});
+}
+const ppNode=id=>ppAll()[percorsoId()]?.[id]||null;
+const ppSet=(id,when)=>{const a=ppAll(),m=a[percorsoId()]||(a[percorsoId()]={});if(!m[id])m[id]={stato:'acceso',fatto_il:when,u:1};};
+// calcoli fatti come se fosse aperto un altro percorso (profilo: livello e completamento di ogni percorso)
+export function withPercorso(pid,f){const o=app.PERCORSO,x=app.PERCORSI?.[pid];if(!x)return null;app.PERCORSO=x;try{return f();}finally{app.PERCORSO=o;}}
 // pianeti e satelliti del percorso, nell'ordine consigliato (ordine del percorso pubblicato)
 // i pianeti «in arrivo» di un corso aperto (test UCBM: le materie ancora senza domande) non entrano nei conti: pianetiArrivo()
+// un corso che non è nel percorso ma ha dei satelliti ospiti (UCBM: corpo, neurologia, cuore e respiratorio) ha come pianeti quelli
+// con almeno un ospite, e come satelliti solo gli ospiti: così Palestra per zone, sagoma, radar e badge li contano
 export function pianeti(c=corso()){
- const ord=id=>pnode(id)?.ordine??99;
- return c.pianeti.filter(p=>pnode(p.id)&&!p.in_arrivo).slice().sort((a,b)=>ord(a.id)-ord(b.id));
+ const ord=id=>pnode(id)?.ordine??99,inP=!!pnode(c.id);
+ return c.pianeti.filter(p=>(inP?pnode(p.id):p.satelliti.some(s=>pnode(s.id)?.ospite_di))&&!p.in_arrivo).slice().sort((a,b)=>ord(a.id)-ord(b.id));
 }
+export const corsiOspiti=()=>app.MAPPA.corsi.filter(c=>!pnode(c.id)&&!c.in_arrivo&&pianeti(c).length);
 export const pianetiArrivo=(c=corso())=>c.pianeti.filter(p=>pnode(p.id)&&p.in_arrivo);
 export function satelliti(p,c){
  const ord=id=>pnode(id)?.ordine??99;
@@ -75,7 +87,10 @@ const mapSat=id=>{for(const c of app.MAPPA.corsi)for(const p of c.pianeti)for(co
 export const ospiti=sat=>app.PERCORSO.nodi.filter(n=>n.tipo==='satellite'&&n.ospite_di===sat.id).sort((a,b)=>(a.ordine??99)-(b.ordine??99)).map(n=>mapSat(n.id)).filter(Boolean);
 const ownSats=()=>allPl().flatMap(p=>satelliti(p));
 const allSats=()=>{const o=ownSats();return [...o,...o.flatMap(ospiti)];};
+// completamento del percorso aperto: satelliti accesi (ospiti compresi) ed esami superati dei suoi pianeti
+export function completamento(){const ss=allSats(),pl=allPl();return {lit:ss.filter(lit).length,n:ss.length,esami:pl.filter(examPassed).length,pianeti:pl.length};}
 export const satById=id=>allSats().find(s=>s.id===id);
+export const tuttiSat=()=>allSats(); // satelliti del percorso aperto, ospiti compresi
 // satellite che ospita (null se il satellite è del suo corso)
 export const hostOf=sat=>{const h=sat&&pnode(sat.id)?.ospite_di;return h?ownSats().find(s=>s.id===h)||null:null;};
 export const planetOf=sat=>{const t=hostOf(sat)||sat;return allPl().find(p=>p.satelliti.includes(t));};
@@ -261,7 +276,7 @@ export function checkProgress(){
    if(ps.tipo==='progetto')continue;
    if(!dones.has(node(ps.id)?.stato)&&stepDone(ps)){setNode(ps.id,{stato:'fatto',fatto_il:now});gain(X.passo_fatto,true,[planetOf(sat)?.id]);out.push({t:'passo',sat,ps,xp:X.passo_fatto});}
   }
-  if(!fullSat(sat)){if(!LOC()[lkey(sat.id)]&&node(sat.id)?.stato!=='acceso'&&passi(sat).every(stepDone)){LOC()[lkey(sat.id)]=now;gain(X.satellite_acceso,true,[planetOf(sat)?.id]);out.push({t:'satellite',sat,xp:X.satellite_acceso});}}
+  if(!fullSat(sat)){if(!ppNode(sat.id)&&node(sat.id)?.stato!=='acceso'&&passi(sat).every(stepDone)){ppSet(sat.id,now);gain(X.satellite_acceso,true,[planetOf(sat)?.id]);out.push({t:'satellite',sat,xp:X.satellite_acceso});}}
   else if(node(sat.id)?.stato!=='acceso'&&passi(sat).every(stepDone)){setNode(sat.id,{stato:'acceso',fatto_il:now});gain(X.satellite_acceso,true,[planetOf(sat)?.id]);out.push({t:'satellite',sat,xp:X.satellite_acceso});}
   else if(!node(sat.id)&&passi(sat).some(stepDone))setNode(sat.id,{stato:'iniziato'});
  }
@@ -269,6 +284,8 @@ export function checkProgress(){
 }
 // XP: quelli di progresso (passo fatto, satellite acceso, livello nuovo, ripasso in tempo, esame) si contano a parte per la Flotta
 // (fase 4): classifica della settimana tra amici e punti della casata (pls = pianeti da cui vengono, per il pianeta scelto)
+// Ogni XP ricorda il percorso in cui è stato guadagnato (S.xpBy {percorso: XP}, in dayTick: vale anche per i giochi della Palestra);
+// la Flotta conta i punti per percorso (fleetGain).
 export function gain(n,progress,pls){S.xp+=n;if(progress){S.pxp=(S.pxp||0)+n;fleetGain(n,pls);}}
 export const plsOf=k=>[...(kidx().k.get(k)?.pls||[])];
 
@@ -290,6 +307,9 @@ export const setPrio=(id,l)=>{if(l&&l.length)P().prio[id]=l;else delete P().prio
 /* ---------- giorno: XP del giorno, obiettivo e serie con gli scudi (sezione 6) ---------- */
 export const goal=()=>{const s=S.set||{},sc=R()?.obiettivo;return (s.obiettivo&&sc&&sc.scelte.includes(s.obiettivo))?s.obiettivo:(sc?.predefinito||60);};
 export function setGoal(v){S.set={...(S.set||{}),obiettivo:v,t:Date.now(),u:1};}
+// XP al percorso aperto (S.xpU = da inviare a dextera_percorsi_xp)
+function xpTo(n){const id=percorsoId();S.xpBy[id]=(S.xpBy[id]||0)+n;S.xpU=1;}
+export const xpOf=id=>(S.xpBy||{base:S.xp})[id]||0;
 const dayNum=s=>{const [y,m,d]=s.split('-').map(Number);return Math.round(Date.UTC(y,m-1,d)/864e5);};
 // Prima di ogni salvataggio: gli XP guadagnati da allora vanno al giorno di oggi; con l'obiettivo raggiunto +10 XP una volta;
 // con almeno 30 XP nel giorno il giorno vale per la serie (un giorno saltato consuma uno scudo; uno scudo ogni 7 giorni).
@@ -297,9 +317,10 @@ function dayTick(){
  const t=today(),Rg=R();
  if(!S.day||S.day.d!==t)S.day={d:t,xp:0,goal:false};
  if(S.lastXp==null)S.lastXp=S.xp;
- const dx=S.xp-S.lastXp;if(dx>0)S.day.xp+=dx;S.lastXp=S.xp;
+ if(!S.xpBy)S.xpBy={base:S.lastXp}; // gli XP di prima dei percorsi separati vanno al percorso completo
+ const dx=S.xp-S.lastXp;if(dx>0){S.day.xp+=dx;xpTo(dx);}S.lastXp=S.xp;
  if(!Rg)return;
- if(!S.day.goal&&S.day.xp>=goal()){S.day.goal=true;S.xp+=Rg.xp.obiettivo;S.lastXp=S.xp;S.day.xp+=Rg.xp.obiettivo;}
+ if(!S.day.goal&&S.day.xp>=goal()){S.day.goal=true;S.xp+=Rg.xp.obiettivo;S.lastXp=S.xp;S.day.xp+=Rg.xp.obiettivo;xpTo(Rg.xp.obiettivo);}
  if((S.day.xp>=Rg.serie.xp_giorno||S.day.rip)&&S.last!==t){
   const gap=S.last?dayNum(t)-dayNum(S.last)-1:0,sh=S.shields||0;
   if(S.last&&gap===0)S.streak=(S.streak||0)+1;
@@ -309,7 +330,7 @@ function dayTick(){
   if(S.streak%Rg.serie.scudo_ogni===0&&(S.shields||0)<Rg.serie.scudi_max){S.shields=(S.shields||0)+1;S.set={...(S.set||{}),t:Date.now(),u:1};}
  }
 }
-onBeforeSave(()=>{ensureRev();dayTick();});
+onBeforeSave(()=>{if(S.path?.loc)ppAll();ensureRev();dayTick();}); // ppAll: porta subito S.path.loc (v0.91) in S.path.pp
 
 /* ---------- ripasso a intervalli (sezione 5) ----------
    Una struttura entra nel calendario quando arriva a maestria 2 (nell'aspetto del passo: 'o.femur', 'm.…', 'oi.…', 'fn.…').
@@ -409,8 +430,8 @@ export const daysTo=d=>dayNum(d)-tdn();
 const EX=()=>P().esami||(P().esami={});
 export const examMissing=pl=>satelliti(pl).filter(s=>!lit(s)).length;
 export const examOpen=pl=>satelliti(pl).length>0&&examMissing(pl)===0;
-export const examPassed=pl=>fullPl(pl)?node(pl.id)?.stato==='acceso':!!LOC()[lkey(pl.id)];
-export const examDate=pl=>fullPl(pl)?node(pl.id)?.fatto_il:LOC()[lkey(pl.id)];
+export const examPassed=pl=>fullPl(pl)?node(pl.id)?.stato==='acceso':!!ppNode(pl.id);
+export const examDate=pl=>fullPl(pl)?node(pl.id)?.fatto_il:ppNode(pl.id)?.fatto_il;
 export const examLast=pl=>EX()[pl.id]||null;
 // «Esperto dell'arto inferiore», «Esperto della testa e collo», «Esperto del …»; un titolo scritto nella mappa (pl.titolo) vince
 export function expertTitle(pl){
@@ -447,7 +468,7 @@ export function examDone(pl,ok){const o=EX()[pl.id];if(o)o.best=Math.max(o.best|
 // superato: titolo e XP solo la prima volta (ritorna true se è la prima)
 export function examPass(pl,stelle){
  const first=!examPassed(pl);
- if(fullPl(pl))setNode(pl.id,{stato:'acceso',stelle,fatto_il:new Date().toISOString()});else if(first)LOC()[lkey(pl.id)]=new Date().toISOString();
+ if(fullPl(pl))setNode(pl.id,{stato:'acceso',stelle,fatto_il:new Date().toISOString()});else if(first)ppSet(pl.id,new Date().toISOString());
  if(first)gain(R().esame.xp,true,[pl.id]);
  return first;
 }
@@ -460,7 +481,9 @@ export function weakSats(pl,res){
 
 /* ---------- Palestra per zone (fase 2, terzo rilascio): una zona della figura è un satellite ----------
    Corso delle zone: quello della figura aperta (corpo → muscolo-scheletrico, cervello → neurologia); negli altri moduli niente zone. */
-export const zoneCorso=()=>{const m=app.MOD?.id;return m==='corpo'?corpoCorso():m==='cervello'?corsi().find(c=>c.modulo===m)||null:null;}; // cuore e polmoni: niente zone
+// nei percorsi in cui il corso non c'è ma ha satelliti ospiti (UCBM) le zone sono gli ospiti (pianeti() e satelliti() li danno)
+export const zoneCorso=()=>{const m=app.MOD?.id;const c=m==='corpo'?corpoCorso():m==='cervello'?[...corsi(),...corsiOspiti()].find(c=>c.modulo===m)||null:null; // cuore e polmoni: niente zone
+ return c&&pianeti(c).length?c:null;};
 // nel corpo le strutture della figura sono gli id del passo; in neurologia le voci del passo «strutture» con le loro parti del cervello 2D
 const zoneIds=(ps)=>ps.strutture.flatMap(x=>isNeuro(x)?nfig(x):[x]);
 const zstep=c=>c&&c.modulo==='cervello'?'strutture':'ossa';

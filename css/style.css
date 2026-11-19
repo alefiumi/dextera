@@ -432,7 +432,7 @@ button.zchip:hover{border-color:var(--acc)}
 .ntg{font-size:12px;font-weight:600;color:var(--acc);border:1px solid currentColor;border-radius:8px;padding:0 6px;margin-left:4px;white-space:nowrap}
 /* Profilo (dalla foto in alto): stesso stile a riquadri */
 .prof{display:grid;gap:12px}
-.pcol{display:contents}.pfhero{order:1}.prof .stats{order:2}.pfst{order:3}.pfs{order:4}.pfl{order:5}.pfc{order:6}.pfb{order:7}.pfside{order:8}.pfm{order:9}
+.pcol{display:contents}.pfhero{order:1}.prof .stats{order:2}.pfst{order:3}.pfpc{order:3}.pfs{order:4}.pfl{order:5}.pfc{order:6}.pfb{order:7}.pfside{order:8}.pfm{order:9}
 .pg #panel>.prof{max-width:980px}
 .pfhero h2{margin:2px 0 2px;overflow-wrap:anywhere}
 .pfhero .pf{margin:0}
@@ -604,3 +604,10 @@ button.sg.on{background:var(--acc);border-color:var(--acc);color:var(--on-acc)}b
 ol.srev{text-align:left;padding-left:0;list-style:none}ol.srev li{border-bottom:1px solid var(--line);padding:4px 0}
 ol.srev summary{min-height:44px;padding:8px 0;cursor:pointer}
 .res ul{text-align:left}
+
+/* Percorsi nel Profilo (v0.92.0): livello e completamento di ogni percorso */
+.pfpl{list-style:none;margin:10px 0 0;padding:0;display:grid;gap:10px}
+.pfp{background:var(--bg);border-radius:12px;padding:10px 12px}
+.pfp.on{outline:2px solid var(--acc)}
+.pfph{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px}.pfph span{margin-left:auto;font-weight:600}
+.pfp .pbar{margin:8px 0 4px}

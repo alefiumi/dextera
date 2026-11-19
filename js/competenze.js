@@ -10,7 +10,7 @@
    Numeri in regole.json → profilo. */
 import {app,S,level,TITLES} from './state.js';
 import * as P from './percorso.js';
-import {BADGES} from './badges.js';
+import {badgeList} from './badges.js';
 import {sym} from './path.js';
 
 const RP=()=>({vetrina:3,min_vis:.25,viste:{corpo:['a','p'],cervello:['ls','m']},...(P.R()?.profilo||{})});
@@ -88,7 +88,7 @@ export const satList=c=>P.satelliti(null,c).map(s=>({s,st:P.look(s)}));
 export function titoli(){
  const {L}=level(),out=TITLES.slice(0,Math.min(L,TITLES.length)).map((t,i)=>({id:'liv:'+(i+1),t,src:'Livello '+(i+1)}));
  if(P.ready())for(const c of P.corsi())for(const pl of P.pianeti(c))if(P.examPassed(pl))out.push({id:'esp:'+pl.id,t:P.expertTitle(pl),src:'Esame di '+pl.nome});
- for(const b of BADGES)if(b.title&&S.badges?.[b.id])out.push({id:'badge:'+b.id,t:b.title,src:'Badge «'+b.name+'»'});
+ for(const b of badgeList())if(b.title&&S.badges?.[b.id])out.push({id:'badge:'+b.id,t:b.title,src:'Badge «'+b.name+'»'});
  return out;
 }
 // il titolo da mostrare: quello scelto, se si può ancora scegliere, altrimenti quello del livello

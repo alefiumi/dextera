@@ -4,9 +4,9 @@
    L'accesso si fa nella schermata di avvio (gate.js); qui ci sono le funzioni e il riquadro Account del profilo. */
 import {S,save,head,onSave,queue,resetLocal} from './state.js';
 import {reports,setFlagged,flaggedAge} from './segnala.js';
-import {syncFlotta,missing as fleetMissing,SQL_FILE as FLEET_SQL} from './flotta.js';
-import {NEW_BADGES} from './badges.js';
-import {applyStudio} from './percorso.js';
+import {syncFlotta,missing as fleetMissing,SQL_FILE as FLEET_SQL,probePx,PX,PX_SQL} from './flotta.js';
+import {NEW_BADGES,isPpVariant} from './badges.js';
+import {applyStudio,ppAll} from './percorso.js';
 import {SUPABASE_URL,SUPABASE_KEY} from './config.js';
 
 export const configured=!!(SUPABASE_URL&&SUPABASE_KEY);
@@ -168,18 +168,19 @@ export async function myData(){
   const [p,g,m,b,f,pp,ds,er,rv,cm,fd,cw,ca,dp]=await Promise.all([ownProfile(sb,uid),sb.from('game_results').select('*').eq('user_id',uid).order('played_at'),
    sb.from('mastery').select('item_id,level,updated_at'),sb.from('badge_assertions').select('badge_id,issued_at').eq('user_id',uid),
    sb.from('friendships').select('user_id,friend_id,status,created_at'),
-   sb.from('path_progress').select('node_id,stato,stelle,fatto_il,aggiornato_il').eq('user_id',uid),
+   sb.from('path_progress').select('*').eq('user_id',uid),
    sb.from('dextera_settings').select('*').eq('user_id',uid),sb.from('error_reports').select('id,data_id,nota,valore,stato,creato_il').eq('user_id',uid),
    sb.from('review_items').select('item_id,intervallo,scadenza,ripassato_il,aggiornato_il').eq('user_id',uid).limit(10000),
    sb.from('constellation_members').select('constellation_id,precedente,cambiata_il,entrata_il').eq('user_id',uid),
-   sb.from('fleet_days').select('giorno,constellation_id,xp,punti').eq('user_id',uid).order('giorno'),
+   sb.from('fleet_days').select('*').eq('user_id',uid).order('giorno'),
    sb.from('crew_weeks').select('crew_id,settimana,pianeta,contributi').eq('user_id',uid),
    sb.from('crew_challenge_answers').select('challenge_id,giuste,risposto_il').eq('user_id',uid),
    sb.from('dextera_profili').select('copertina,vetrina,titolo,aggiornato_il').eq('user_id',uid)]);
   const st=await sb.from('dextera_studio').select('percorso,corsi,aggiornato_il').eq('user_id',uid); // fase 6 (senza il file SQL: errore, campo vuoto)
+  const xp=await sb.from('dextera_percorsi_xp').select('percorso,xp,aggiornato_il').eq('user_id',uid); // più percorsi (stessa regola)
   out.account={email:A.user.email,registrato_il:A.user.created_at,ultimo_accesso:A.user.last_sign_in_at,consenso_privacy:A.user.user_metadata||{},
    profilo:p.data,partite:g.data,maestria:m.data,badge:b.data,amicizie:f.data,percorso:pp.data,impostazioni:ds.data,segnalazioni:er.data,ripasso:rv.data,
-   flotta:{casata:cm.data,giorni:fd.data,contributi_equipaggi:cw.data,risposte_sfide:ca.data},copertina_e_titolo:dp.data,cosa_studi:st.data};
+   flotta:{casata:cm.data,giorni:fd.data,contributi_equipaggi:cw.data,risposte_sfide:ca.data},copertina_e_titolo:dp.data,cosa_studi:st.data,xp_per_percorso:xp.data};
  }else if(A.user)out.account={email:A.user.email,nota:'Senza connessione: qui ci sono solo i dati del dispositivo.'};
  return out;
 }
@@ -246,12 +247,22 @@ export async function sync(full){
     if(A.choice==='fresh')resetLocal();
    }
    A.choice=null;A.conflict=null;A.prevDirty=false;
-   const [{data:p,error:e1},{data:ms,error:e2},{data:bs}]=await Promise.all([ownProfile(sb,uid),
-    sb.from('mastery').select('item_id,level'),sb.from('badge_assertions').select('badge_id,issued_at').eq('user_id',uid)]);
+   const px=await probePx(sb,true).catch(()=>false);
+   const [{data:p,error:e1},{data:ms,error:e2},{data:bs},xr]=await Promise.all([ownProfile(sb,uid),
+    sb.from('mastery').select('item_id,level'),sb.from('badge_assertions').select('badge_id,issued_at').eq('user_id',uid),
+    px?sb.from('dextera_percorsi_xp').select('percorso,xp').eq('user_id',uid):{data:[]}]);
    if(e1)throw e1;if(e2)throw e2;
    A.profile=p;
    // unione: si tiene il valore più alto (o il giorno più recente per la serie)
-   S.xp=Math.max(S.xp,p.xp);S.lastXp=S.xp;S.ok=Math.max(S.ok,p.ok);S.ko=Math.max(S.ko,p.ko); // lastXp: gli XP del server non contano per l'obiettivo di oggi
+   S.xp=Math.max(S.xp,p.xp);S.ok=Math.max(S.ok,p.ok);S.ko=Math.max(S.ko,p.ko);
+   // XP per percorso: per ognuno il più alto tra qui e il server; il totale è almeno la loro somma, e gli XP del totale che non
+   // hanno un percorso (di prima, o di un altro telefono senza il file SQL) vanno al percorso base
+   const by=S.xpBy||(S.xpBy={base:S.lastXp??S.xp});
+   for(const r of xr.data||[])if(/^[a-z0-9-]{1,40}$/.test(r.percorso)){if((by[r.percorso]||0)<r.xp)by[r.percorso]=r.xp;else if((by[r.percorso]||0)>r.xp)S.xpU=1;}
+   if(px&&!(xr.data||[]).length&&Object.keys(by).length)S.xpU=1;
+   const sum=Object.values(by).reduce((a,x)=>a+x,0);
+   if(sum>S.xp)S.xp=sum;else if(S.xp>sum){by.base=(by.base||0)+S.xp-sum;S.xpU=1;}
+   S.lastXp=S.xp; // gli XP del server non contano per l'obiettivo di oggi
    const srv=ymdIso(p.last_day),loc=ymdIso(S.last);
    if(srv&&(!loc||srv>loc)){S.last=ymdApp(p.last_day);S.streak=p.streak;}else if(srv===loc)S.streak=Math.max(S.streak,p.streak);
    for(const m of ms||[])S.mastery[m.item_id]=Math.max(S.mastery[m.item_id]||0,m.level);
@@ -271,6 +282,12 @@ export async function sync(full){
   }
   const prof={xp:S.xp,streak:S.streak,last_day:ymdIso(S.last),ok:S.ok,ko:S.ko,updated_at:new Date().toISOString()};
   const {error:e3}=await sb.from('profiles').update(prof).eq('id',uid);if(e3)throw e3;Object.assign(A.profile,prof);
+  // XP per percorso (profilo): senza il file SQL dei percorsi restano qui (avviso nel riquadro Account)
+  try{if(await probePx(sb)){A.pxMissing='';if(S.xpU&&S.xpBy){const snap=JSON.stringify(S.xpBy);
+    const rows=Object.entries(S.xpBy).filter(([k,v])=>/^[a-z0-9-]{1,40}$/.test(k)&&v>0).map(([percorso,xp])=>({user_id:uid,percorso,xp:Math.min(1e8,Math.round(xp))}));
+    if(rows.length){const {error}=await sb.from('dextera_percorsi_xp').upsert(rows,{onConflict:'user_id,percorso'});if(error)throw error;}
+    if(JSON.stringify(S.xpBy)===snap)delete S.xpU;}}
+   else A.pxMissing=PX_WARN;}catch(e){A.warn='Punti dei percorsi non sincronizzati: riprovo più tardi.';}
   const rows=Object.entries(S.mastery).map(([item_id,level])=>({user_id:uid,item_id,level,updated_at:new Date().toISOString()}));
   if(rows.length){const {error:e4}=await sb.from('mastery').upsert(rows,{onConflict:'user_id,item_id'});if(e4)throw e4;}
   const q=queue.all();
@@ -282,7 +299,10 @@ export async function sync(full){
   // badge: se sul server manca l'elenco (secondo file SQL non ancora applicato) restano solo qui, senza bloccare il resto.
   // Quelli della fase 5 partono a parte: finché manca il loro file SQL (righe di badge_classes) non bloccano gli altri.
   const nb=Object.entries(S.badges).filter(([id])=>!sentBadges.has(id));
-  for(const part of [nb.filter(([id])=>!NEW_BADGES.has(id)),nb.filter(([id])=>NEW_BADGES.has(id))]){
+  // le varianti per percorso dei badge di contenuto (sat1-ucbm…) partono a parte: le loro righe arrivano con il file dei percorsi
+  const pv=nb.filter(([id])=>isPpVariant(id)),nb2=nb.filter(([id])=>!isPpVariant(id));
+  if(pv.length&&PX.ok){const {error}=await sb.from('badge_assertions').upsert(pv.map(([badge_id,issued_at])=>({user_id:uid,badge_id,issued_at})),{onConflict:'user_id,badge_id',ignoreDuplicates:true});if(!error)pv.forEach(([id])=>sentBadges.add(id));}
+  for(const part of [nb2.filter(([id])=>!NEW_BADGES.has(id)),nb2.filter(([id])=>NEW_BADGES.has(id))]){
    if(!part.length)continue;const f5=NEW_BADGES.has(part[0][0]);
    const {error:e6}=await sb.from('badge_assertions').upsert(part.map(([badge_id,issued_at])=>({user_id:uid,badge_id,issued_at})),{onConflict:'user_id,badge_id',ignoreDuplicates:true});
    if(e6){A.warn=f5?BADGE_WARN:'I badge restano solo su questo dispositivo: sul server manca l\'elenco (file supabase/migrations/20261117120000_profilo_badge.sql).';if(f5)A.badgeMissing=BADGE_WARN;}
@@ -332,6 +352,7 @@ async function syncCard(sb,uid,full){
 
 // «Cosa studi?» (fase 6): percorso e corsi scelti in dextera_studio, così valgono su tutti i dispositivi. All'accesso vince la scelta
 // più recente (S.studio.t contro aggiornato_il); poi si invia quando cambia (S.studio.u).
+export const PX_WARN='Punti, satelliti accesi ed esami dei percorsi diversi dal completo, ed equipaggi per percorso, restano su questo telefono finché sul server non c\'è il file '+PX_SQL+'.';
 export const STUDIO_SQL='supabase/migrations/20261125090000_dextera_studio.sql';
 const PID=/^[a-z0-9-]{1,40}$/;
 async function syncStudio(sb,uid,full){
@@ -361,10 +382,15 @@ async function syncPercorso(sb,uid,full){
   if(ids.length){const {error}=await sb.from('path_progress').delete().eq('user_id',uid).in('node_id',ids);if(error)throw error;}
   delete P.del;try{localStorage.setItem('dextera-v1',JSON.stringify(S));}catch(e){}}
  if(full){
-  const [{data:pp,error:a},{data:ds,error:b}]=await Promise.all([sb.from('path_progress').select('node_id,stato,stelle,fatto_il').eq('user_id',uid),
+  const px=await probePx(sb);
+  const [{data:pp,error:a},{data:ds,error:b}]=await Promise.all([sb.from('path_progress').select(px?'node_id,stato,stelle,fatto_il,percorso':'node_id,stato,stelle,fatto_il').eq('user_id',uid),
    sb.from('dextera_settings').select('obiettivo,scudi,date_esame,pianeta,aggiornato_il').eq('user_id',uid).maybeSingle()]);
   if(a)throw a;if(b)throw b;
+  const PPa=ppAll();
   for(const r of pp||[]){
+   // satellite acceso ed esame di un percorso parziale (colonna percorso): in S.path.pp
+   if(r.percorso&&r.percorso!=='base'){if(!/^[a-z0-9-]{1,40}$/.test(r.percorso))continue;const m=PPa[r.percorso]||(PPa[r.percorso]={}),l=m[r.node_id];
+    if(!l)m[r.node_id]={stato:r.stato,fatto_il:r.fatto_il};else if(r.fatto_il&&l.fatto_il&&r.fatto_il<l.fatto_il)l.fatto_il=r.fatto_il;continue;}
    const n=P.nodes[r.node_id]||{stato:'',stelle:0,fatto_il:null};
    const out={stato:RANK[r.stato]>RANK[n.stato||'']?r.stato:n.stato,stelle:Math.max(n.stelle||0,r.stelle||0),fatto_il:[n.fatto_il,r.fatto_il].filter(Boolean).sort()[0]||null};
    // da reinviare solo se qui c'è qualcosa di più avanzato del server
@@ -376,11 +402,19 @@ async function syncPercorso(sb,uid,full){
   else if(S.set&&S.set.t)S.set.u=1;
   try{localStorage.setItem('dextera-v1',JSON.stringify(S));}catch(e){}
  }
- const sent=Object.entries(P.nodes).filter(([,n])=>n.u);
+ const sent=Object.entries(P.nodes).filter(([,n])=>n.u),px=await probePx(sb);
  if(sent.length){
-  const {error}=await sb.from('path_progress').upsert(sent.map(([node_id,n])=>({user_id:uid,node_id,stato:n.stato||'iniziato',stelle:n.stelle||0,fatto_il:n.fatto_il||null})),{onConflict:'user_id,node_id'});
+  const {error}=await sb.from('path_progress').upsert(sent.map(([node_id,n])=>({user_id:uid,node_id,stato:n.stato||'iniziato',stelle:n.stelle||0,fatto_il:n.fatto_il||null,...(px?{percorso:'base'}:{})})),{onConflict:px?'user_id,percorso,node_id':'user_id,node_id'});
   if(error)throw error;
   for(const [id,n] of sent)if(P.nodes[id]===n)delete n.u; // cambiato nel frattempo: resta da inviare
+ }
+ // percorsi parziali (S.path.pp): solo con il file SQL dei percorsi; prima restano qui
+ const ppu=Object.entries(ppAll()).flatMap(([pid,m])=>/^[a-z0-9-]{1,40}$/.test(pid)?Object.entries(m).filter(([id,n])=>n.u&&/^[a-z0-9-]{1,40}(\.[0-9]{1,2})?$/.test(id)).map(([id,n])=>[pid,id,n]):[]);
+ if(ppu.length&&px){
+  const {error}=await sb.from('path_progress').upsert(ppu.map(([percorso,node_id,n])=>({user_id:uid,percorso,node_id,stato:n.stato||'acceso',stelle:0,fatto_il:n.fatto_il||null})),{onConflict:'user_id,percorso,node_id'});
+  if(error)throw error;
+  for(const [,,n] of ppu)delete n.u;
+  try{localStorage.setItem('dextera-v1',JSON.stringify(S));}catch(e){}
  }
  const set=S.set;
  if(set&&set.u){
@@ -437,7 +471,7 @@ export const esc=t=>String(t??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;'
 const hm=d=>d.toLocaleTimeString('it',{hour:'2-digit',minute:'2-digit'});
 export function accountHtml(){
  if(!configured)return '';
- const note=(A.err?`<p class="err">${esc(A.err)}</p>`:'')+(A.msg?`<p class="okm">${esc(A.msg)}</p>`:'')+(A.warn?`<p class="note">${esc(A.warn)}</p>`:'')+(A.studioMissing&&A.studioMissing!==A.warn?`<p class="note">${esc(A.studioMissing)}</p>`:'');
+ const note=(A.err?`<p class="err">${esc(A.err)}</p>`:'')+(A.msg?`<p class="okm">${esc(A.msg)}</p>`:'')+(A.warn?`<p class="note">${esc(A.warn)}</p>`:'')+(A.studioMissing&&A.studioMissing!==A.warn?`<p class="note">${esc(A.studioMissing)}</p>`:'')+(A.pxMissing&&A.pxMissing!==A.warn?`<p class="note">${esc(A.pxMissing)}</p>`:'');
  const last=lastAccount();
  if(A.user){
   const pend=queue.all().length,dirty=last&&last.dirty;

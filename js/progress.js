@@ -1,9 +1,9 @@
 /* Scheda Profilo: foto, nome, ruolo e presentazione (modificabili), titolo scelto, statistiche, sagoma e radar delle competenze
    (fase 5, js/competenze.js), obiettivo del giorno e date d'esame (studyHtml), casata ed equipaggi (fleetCard in social.js), badge, account, maestria. */
 import {$,toast} from './util.js';
-import {app,S,save,level,items} from './state.js';
+import {app,S,save,level,levelOf,items} from './state.js';
 import {account as A,accountHtml,saveProfile,NAME_RE,NAME_RULE,esc,myData,deleteAccount,CONTATTO,online} from './account.js';
-import {BADGES} from './badges.js';
+import {badgeList} from './badges.js';
 import {fillVersion} from './install.js';
 import * as P from './percorso.js';
 import {openSat} from './path.js';
@@ -32,7 +32,7 @@ const day=iso=>new Date(iso).toLocaleDateString('it',{day:'numeric',month:'short
 export function renderProg(){
  SHOW_MAX=vetrinaMax();
  const p=S.prof,{L,title}=level(),tot=S.ok+S.ko,st=S.stats||{};
- const name=p.name||(A.user?'':'Ospite'),got=BADGES.filter(b=>S.badges[b.id]);
+ const name=p.name||(A.user?'':'Ospite'),BADGES=badgeList(),got=BADGES.filter(b=>S.badges[b.id]);
  const lo=30*(L-1)**2,hi=30*L**2,pct=Math.round((S.xp-lo)/(hi-lo)*100);
  const hero=editing?`<div class="card pfhero edit">${banner({...p,banner:draft.banner,show:draft.show},got)}<div class="kick">Modifica profilo</div>${editHtml(got)}</div>`:
   `<div class="card pfhero">${banner(p,got)}<div class="pf">${avatar(p.avatar,name)}<div class="pfi"><div class="kick">Profilo</div><h2>${esc(name)||'<span class="mut">Senza nome</span>'}</h2>
@@ -56,9 +56,23 @@ export function renderProg(){
   <div class="pbar" aria-hidden="true"><i style="width:${IL.length?Math.round(mastered/IL.length*100):0}%"></i></div>${seg}<div class="mrows">${rows}</div></div>`;
  // due colonne sul computer; sul telefono una sola nell'ordine profilo, numeri, badge, account e privacy, maestria (order in style.css)
  const [sag,comp]=compHtml();
- $('panel').innerHTML=`<div class="prof"><div class="pcol">${hero}${sag}${badges}</div><div class="pcol">${stats}${studyHtml()}${fleetCard()}${comp}<div class="pfside">${accountHtml()}${privacyHtml()}</div>${mast}</div></div>`;
+ $('panel').innerHTML=`<div class="prof"><div class="pcol">${hero}${sag}${badges}</div><div class="pcol">${stats}${pathsHtml()}${studyHtml()}${fleetCard()}${comp}<div class="pfside">${accountHtml()}${privacyHtml()}</div>${mast}</div></div>`;
  fillVersion($('panel'));
  refreshFleet(()=>{if(app.tab==='prog'&&!editing)renderProg();});
+}
+
+// Percorsi (v0.92.0): per ogni percorso aperto o già giocato il suo livello (XP guadagnati lì, S.xpBy) e il completamento
+// (satelliti accesi, ospiti compresi, ed esami superati, calcolati come se quel percorso fosse aperto); sotto, il livello totale
+function pathsHtml(){
+ if(!P.ready())return '';
+ const cur=P.percorsoId(),L=P.percorsiCat().filter(x=>x.ok&&(x.id===cur||P.xpOf(x.id)>0));
+ if(!L.length)return '';
+ const rows=L.map(x=>{const xp=P.xpOf(x.id),lv=levelOf(xp),c=P.withPercorso(x.id,P.completamento)||{lit:0,n:0,esami:0,pianeti:0},pct=c.n?Math.round(c.lit/c.n*100):0;
+  return `<li class="pfp${x.id===cur?' on':''}"><div class="pfph"><b>${esc(x.nome)}</b>${x.id===cur?' <small class="mut">(aperto)</small>':''}<span>Liv. ${lv} · ${xp.toLocaleString('it')} XP</span></div>
+   <div class="pbar" role="progressbar" aria-label="Completamento di ${esc(x.nome)}" aria-valuemin="0" aria-valuemax="100" aria-valuenow="${pct}"><i style="width:${pct}%"></i></div>
+   <small class="mut">${pct}% completato · ${c.lit} su ${c.n} satelliti accesi${c.pianeti?` · ${c.esami} su ${c.pianeti} esami`:''}</small></li>`;}).join('');
+ const {L:T}=level();
+ return `<div class="card pfpc"><div class="kick">Percorsi</div><h2>Livello totale ${T}</h2><p class="mut">${S.xp.toLocaleString('it')} XP in tutto. Ogni percorso ha il suo livello con gli XP guadagnati lì; maestria, ripasso e passi fatti valgono in tutti.</p><ul class="pfpl">${rows}</ul></div>`;
 }
 
 // Studio: obiettivo del giorno (anello come nel Percorso, scelta 30/60/120 XP), serie con gli scudi, date d'esame dei pianeti
@@ -81,7 +95,7 @@ function studyHtml(){
 // Sagoma e radar delle competenze (fase 5): corso scelto qui (all'inizio quello del percorso), radar per passo o per regione
 function compHtml(){
  if(!P.ready())return ['',''];
- const cs=P.corsi(),c=cs.find(x=>x.id===PS.c)||P.corso();PS.c=c.id;
+ const cs=[...P.corsi(),...P.corsiOspiti()],c=cs.find(x=>x.id===PS.c)||P.corso();PS.c=c.id; // con i corsi dei satelliti ospiti (UCBM)
  const chips=cs.length>1?`<div class="chips pmods" role="group" aria-label="Corso">${cs.map(x=>`<button class="chip${x===c?' on':''}" aria-pressed="${x===c}" data-pf="pc" data-v="${esc(x.id)}">${esc(x.nome)}</button>`).join('')}</div>`:'';
  const ax=radar(c,PS.r),seg=`<div class="seg3" role="group" aria-label="Vista del radar">${[['passi','Per passo'],['regioni','Per regione']].map(([v,t])=>`<button data-pf="rm" data-v="${v}" aria-pressed="${PS.r===v}">${t}</button>`).join('')}</div>`;
  const tot=ax.length?Math.round(ax.reduce((a,x)=>a+x.v,0)/ax.length*100):0;
@@ -166,7 +180,7 @@ export function wireProfile(panel){
   else if(k==='pc'){PS.c=b.dataset.v;keepPS();renderProg();}
   else if(k==='rm'){PS.r=b.dataset.v==='regioni'?'regioni':'passi';keepPS();renderProg();panel.querySelector(`[data-pf=rm][data-v=${PS.r}]`)?.focus();}
   else if(k==='sat'){if(P.satById(b.dataset.id))openSat(b.dataset.id);}
-  else if(k==='bone'){const c=P.corsi().find(x=>x.id===PS.c)||P.corso(),s=P.satsOf(b.dataset.id,c)[0];if(s)openSat(s.id);}
+  else if(k==='bone'){const c=[...P.corsi(),...P.corsiOspiti()].find(x=>x.id===PS.c)||P.corso(),s=P.satsOf(b.dataset.id,c)[0];if(s)openSat(s.id);}
   else if(k==='export')exportData();
   else if(k==='wipe'){if(confirm(A.user?'Cancellare da questo dispositivo progressi, profilo e accesso? Il tuo account e i dati sul server restano: li ritrovi accedendo di nuovo.':'Cancellare da questo dispositivo tutti i progressi e il profilo? Senza account non si possono recuperare.'))wipeDevice();}
   else if(k==='delacc'){

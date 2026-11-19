@@ -9,7 +9,10 @@
      già dati (S.fleet.premi {'<equipaggio>:<lunedì>': 1}), pianeti degli equipaggi (S.fleet.crewPl {id: pianeta}).
    Si inviano con syncFlotta() (account.js); finché sul server manca il file SQL restano qui.
    - Stagioni vinte (badge «Vincitore di stagione», fase 5): S.fleet.vinte {'AAAA-MM': casata}, quando la casata vincitrice di una
-     stagione chiusa (seasons.vincitore) ha ricevuto dei punti da questa persona in quel mese (fleet_days, casata decisa dal server). */
+     stagione chiusa (seasons.vincitore) ha ricevuto dei punti da questa persona in quel mese (fleet_days, casata decisa dal server).
+   - Più percorsi (v0.92.0): ogni giorno ha anche p {'<percorso>': {xp, raw}}; il tetto di 300 punti vale per ogni percorso e sul server
+     c'è una riga per giorno e percorso (fleet_days.percorso, file 20261126090000_dextera_percorsi.sql). Finché il file manca si invia
+     solo il percorso base e gli altri restano da inviare. I giorni di prima (senza p) sono del percorso base. */
 import {app,S} from './state.js';
 
 export const FR=()=>{const r=app.REGOLE?.flotta||{};return {tetto_giorno:300,pianeta_scelto:2,giorni:40,invio_giorni:34,...r,
@@ -24,13 +27,30 @@ export const monday=(d=new Date())=>{const x=new Date(d.getFullYear(),d.getMonth
 export const season=(d=new Date())=>d.getFullYear()+'-'+pad(d.getMonth()+1);
 const back=n=>{const d=new Date();d.setDate(d.getDate()-n);return iso(d);};
 export const points=x=>Math.min(FR().tetto_giorno,Math.round(x?.raw||0));
+export const pid=()=>app.PERCORSO?.id||'base';
+// conti di un giorno per percorso: {percorso: {xp, raw}} (giorni di prima: tutto al percorso base)
+export const parts=x=>x?.p||{base:{xp:x?.xp||0,raw:x?.raw||0}};
+// punti di un giorno: di un percorso, o di tutti (somma con il tetto per percorso)
+export const dayPoints=(x,p)=>p?points(parts(x)[p]):Object.values(parts(x)).reduce((a,y)=>a+points(y),0);
+// il file SQL dei percorsi c'è? (null = non ancora controllato). Si controlla con la tabella nuova, che arriva insieme alle colonne
+export const PX={ok:null,at:0};
+export const PX_SQL='supabase/migrations/20261126090000_dextera_percorsi.sql';
+export const pxMissing=e=>/dextera_percorsi_xp|percorso|schema cache|does not exist|PGRST205|PGRST204|42P01|42703|42P10/i.test(((e&&e.message)||'')+((e&&e.code)||''));
+export async function probePx(sb,force){
+ if(PX.ok&&!force)return true;
+ if(PX.ok===false&&!force&&Date.now()-PX.at<6e4)return false;
+ const {error}=await sb.from('dextera_percorsi_xp').select('percorso').limit(1);
+ if(error&&!pxMissing(error))throw error;
+ PX.ok=!error;PX.at=Date.now();return PX.ok;
+}
 
 // XP di progresso guadagnati ora: pls = pianeti da cui vengono (per il raddoppio del pianeta scelto)
 export function fleetGain(n,pls){
  if(!(n>0))return;
  const f=F(),d=isoToday(),x=f.days[d]||(f.days[d]={xp:0,raw:0}),pl=S.set&&S.set.pianeta;
  const mult=pl&&pls&&[...pls].includes(pl)?FR().pianeta_scelto:1;
- x.xp+=n;x.raw+=n*mult;x.u=1;
+ if(!x.p)x.p=parts(x);const y=x.p[pid()]||(x.p[pid()]={xp:0,raw:0});
+ x.xp+=n;x.raw+=n*mult;y.xp+=n;y.raw+=n*mult;x.u=1;
  const old=back(FR().giorni);for(const k of Object.keys(f.days))if(k<old)delete f.days[k];
 }
 // settimana dei contributi: il lunedì riparte da zero (la settimana prima resta da inviare se non è partita)
@@ -46,8 +66,9 @@ export function fleetContrib(pls){
 }
 export const myContrib=pl=>week().pl[pl]||0;
 // riepiloghi locali: punti di oggi e della stagione, XP di progresso della settimana
-export const todayPoints=()=>points(F().days[isoToday()]);
-export const seasonPoints=()=>{const s=season();return Object.entries(F().days).filter(([d])=>d.startsWith(s)).reduce((a,[,x])=>a+points(x),0);};
+// p = percorso (senza: tutti i percorsi, come le casate di oggi)
+export const todayPoints=p=>dayPoints(F().days[isoToday()],p);
+export const seasonPoints=p=>{const s=season();return Object.entries(F().days).filter(([d])=>d.startsWith(s)).reduce((a,[,x])=>a+dayPoints(x,p),0);};
 export const weekXp=()=>{const m=monday();return Object.entries(F().days).filter(([d])=>d>=m).reduce((a,[,x])=>a+(x.xp||0),0);};
 // la casata si cambia al massimo una volta per stagione (mese)
 export const canChange=()=>{const c=F().cambiata;return !c||season(new Date(c))!==season();};
@@ -70,12 +91,13 @@ export async function ensureCasata(sb,uid){
 export async function syncFlotta(sb,uid,full){
  const f=F();
  if(full||!f.casata)await ensureCasata(sb,uid);
- const from=back(FR().invio_giorni),days=Object.entries(f.days).filter(([d,x])=>x.u&&d>=from);
+ const from=back(FR().invio_giorni),days=Object.entries(f.days).filter(([d,x])=>x.u&&d>=from),px=await probePx(sb);
  if(days.length){
-  const sent=days.map(([d,x])=>[d,x,x.xp,x.raw]);
-  const {error}=await sb.from('fleet_days').upsert(sent.map(([giorno,x])=>({user_id:uid,giorno,xp:Math.min(20000,Math.round(x.xp||0)),punti:points(x)})),{onConflict:'user_id,giorno'});
-  if(error)throw error;
-  for(const [,x,xp,raw] of sent)if(x.xp===xp&&x.raw===raw)delete x.u; // cambiato nel frattempo: resta da inviare
+  const sent=days.map(([d,x])=>[d,x,JSON.stringify(x)]),row=(giorno,p,y)=>({user_id:uid,giorno,xp:Math.min(20000,Math.round(y.xp||0)),punti:points(y),...(px?{percorso:p}:{})});
+  // con il file dei percorsi una riga per giorno e percorso; senza, solo il percorso base (gli altri restano da inviare)
+  const rows=sent.flatMap(([giorno,x])=>Object.entries(parts(x)).filter(([p,y])=>(px||p==='base')&&/^[a-z0-9-]{1,40}$/.test(p)&&(y.xp>0||y.raw>0)).map(([p,y])=>row(giorno,p,y)));
+  if(rows.length){const {error}=await sb.from('fleet_days').upsert(rows,{onConflict:px?'user_id,giorno,percorso':'user_id,giorno'});if(error)throw error;}
+  for(const [,x,snap] of sent)if(JSON.stringify(x)===snap&&(px||Object.keys(parts(x)).every(p=>p==='base'||!(parts(x)[p].xp>0))))delete x.u; // cambiato nel frattempo: resta da inviare
  }
  for(const [d,x] of Object.entries(f.days))if(x.u&&d<from)delete x.u; // troppo vecchi per il server
  week();

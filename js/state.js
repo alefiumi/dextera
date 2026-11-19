@@ -56,7 +56,9 @@ export const ymd=d=>d.getFullYear()+'-'+(d.getMonth()+1)+'-'+d.getDate();
 // Resta per i giochi che la chiamavano a ogni risposta.
 export function touchStreak(){}
 export const TITLES=['Matricola','Tirocinante','Studente di fisio','Terapista junior','Terapista esperto','Maestro di anatomia'];
-export const level=()=>{const L=Math.floor(Math.sqrt(S.xp/30))+1;return {L,title:TITLES[Math.min(TITLES.length-1,L-1)]};};
+// livello da un numero di XP (anche di un solo percorso: profilo); level() è il livello totale, con gli XP di tutti i percorsi
+export const levelOf=xp=>Math.floor(Math.sqrt(Math.max(0,xp)/30))+1;
+export const level=()=>{const L=levelOf(S.xp);return {L,title:TITLES[Math.min(TITLES.length-1,L-1)]};};
 // foto (o iniziale) in alto a sinistra: apre il Profilo
 function meBtn(){const b=$('me'),p=S.prof||{},src=p.avatar||'';if(b.dataset.src===src+'|'+(p.name||''))return;b.dataset.src=src+'|'+(p.name||'');
  b.replaceChildren();if(src){const i=document.createElement('img');i.src=src;i.alt='';b.append(i);}else b.textContent=((p.name||'').trim().charAt(0)||'👤').toUpperCase();}

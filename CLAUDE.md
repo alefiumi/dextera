@@ -42,6 +42,7 @@ Dove questo file e la specifica differiscono, vale la specifica.
 - Fase 5 – Profilo e competenze (SQL: righe in badge_classes, dextera_profili): v0.86.0, vedi «Profilo e competenze». Online e SQL applicato il 19/11/2026. Casata ed equipaggi nel Profilo: v0.87.0; obiettivo del giorno e date d'esame: v0.88.0.
 - Fase 6 – Altri corsi e percorsi (SQL: dextera_studio): v0.89.0 (correzione v0.89.1), vedi «Altri corsi e percorsi». Online e SQL applicato il 19/11/2026.
 - Test UCBM, Biologia giocabile (nessun SQL): v0.90.0, vedi «Test UCBM». Chimica giocabile (solo contenuti); Fisica giocabile e simulazione completa: v0.90.1. Percorso UCBM con il solo Test e l'anatomia dentro Biologia (satelliti ospiti): v0.91.0, vedi «Satelliti ospiti».
+- Più percorsi (SQL: colonna percorso, dextera_percorsi_xp): v0.92.0, vedi «Più percorsi». File SQL da applicare dall'autore dopo la pubblicazione.
 - Corso di neurologia: contenuti (primo rilascio) e corso giocabile (v0.81.0, vedi «Corso di neurologia giocabile»), Palestra sul cervello (v0.82.0), gioco 3D (v0.83.0).
 - GitHub Pages attivo (ramo `main`, cartella radice): online su `alefiumi.github.io/dextera`.
 
@@ -712,9 +713,9 @@ descrizioni; quelle con fonte Z-Anatomy dicono da quale vaso nasce o dove sbocca
   Ogni file di `content/percorsi/` ha i nodi del gestionale e `corso` (il primo corso da aprire). `content.js` li carica tutti (`app.PERCORSI`,
   `app.PCAT`, `app.PBASE` = base); `applyStudio()` in `percorso.js` mette in `app.PERCORSO` quello scelto. `content/percorsi/ucbm.json` (bozza):
   da v0.91.0 il solo corso Test UCBM; l'anatomia (cuore, respiratorio, neurologia, ossa) sta dentro Biologia come satelliti ospiti (vedi «Satelliti ospiti»).
-  Nei percorsi parziali satellite acceso ed esame superato non vanno in `path_progress` (sono gli stessi nodi del percorso completo, dove
-  servono tutti i passi): restano sul telefono in `S.path.loc {'<percorso>:<nodo>': data}` (`fullSat`/`fullPl`, `LOC` in `percorso.js`).
-  Maestria, ripasso e passi fatti sono in comune tra i percorsi.
+  Nei percorsi parziali satellite acceso ed esame superato non sono nodi comuni (sono gli stessi nodi del percorso completo, dove
+  servono tutti i passi): da v0.92.0 stanno in `S.path.pp` e vanno in `path_progress` con la colonna `percorso` (vedi «Più percorsi»;
+  fino alla v0.91 restavano sul telefono in `S.path.loc`). Maestria, ripasso e passi fatti sono in comune tra i percorsi.
 - **«Cosa studi?»** (`studioScreen()` in `path.js`): alla prima apertura del Percorso (`!S.studio`) a tutto schermo, percorso (radio) e corsi
   (caselle; almeno uno), «Inizia» o «Decidi dopo»; poi lo stesso riquadro nell'universo, dove ogni cambio vale subito. `S.studio {percorso, corsi,
   t, u}` (`setStudio()`; corsi vuoti = tutti). I corsi scelti vengono prima sulla mappa e da loro partono Continua e il Ripasso del giorno
@@ -794,9 +795,50 @@ proprio satellite i satelliti di altri corsi, senza aprire quei corsi sulla mapp
   le briciole e «su» di un ospite tornano all'ospitante. Caso clinico di un ospite: i distretti tra cui scegliere sono gli altri ospiti
   dello stesso corso (`lezione.js`).
 - `ucbm.json`: 38 ospiti in `ucbm-bio-anatomia` (cuore e vasi, respiratorio, neurologia; muscolo-scheletrico con il solo passo Ossa).
-- Non ancora per percorso: Palestra per zone (cerca il corso del corpo tra i corsi del percorso), badge e competenze che contano i satelliti
-  dei corsi, XP, casate e campionato (vedi la proposta sulla gamification per percorso, da decidere con l'autore).
+- Da v0.92.0 Palestra per zone, badge, competenze, XP, campionato ed equipaggi sono per percorso: vedi «Più percorsi».
 - Prova: `osp/prova.mjs` (13 controlli) e `fase6c.mjs` (71, la prova di fase 6 adattata) nelle note delle sessioni.
+
+## Più percorsi (v0.92.0, file SQL `20261126090000_dextera_percorsi.sql`)
+Decisioni dell'autore del 19/11/2026 (sezione «Più percorsi» del documento delle decisioni): la parte di gioco si separa per percorso;
+maestria, ripasso e passi fatti restano in comune. Piano approvato il 20/11/2026: per percorso XP, campionato, equipaggi, titoli ed esami dei
+pianeti; unici per persona serie e scudi; badge di abitudine unici, badge di contenuto per percorso. Casate: per ora le 4 di prima, che sommano
+tutti i percorsi. **Ancora da decidere con l'autore**: casate su due livelli (macro casate dell'app e casate tematiche di ogni percorso), come i
+punti delle casate di percorso arrivano alla macro casata, nomi e numero delle casate tematiche (proposta: Osteon, Myon, Neuron, Cor diventano le
+casate del percorso completo, macro casate nuove con nomi scelti dall'autore, per UCBM una casata per materia).
+- **XP per percorso**: `S.xpBy {percorso: XP}`. In `dayTick` (prima di ogni `save()`) gli XP arrivati da allora (`S.xp − S.lastXp`, quindi anche
+  giochi della Palestra, premi d'equipaggio, obiettivo del giorno) vanno al percorso aperto (`xpTo`, `S.xpU` = da inviare). Gli XP di prima vanno
+  al percorso base. `P.xpOf(id)`. Totale (`S.xp`, livello nell'intestazione) = tutti i percorsi; `levelOf(xp)` in `state.js`.
+  All'accesso (`sync(true)`): per ogni percorso il più alto tra telefono e `dextera_percorsi_xp`; se la somma supera `S.xp` il totale sale,
+  se `S.xp` è più alto la differenza va al percorso base. Poi si inviano dopo `profiles` quando `S.xpU`.
+- **Percorsi parziali**: `S.path.pp {percorso: {nodo: {stato:'acceso', fatto_il, u}}}` (`ppAll()`, `ppNode`, `ppSet` in `percorso.js`; `ppAll`
+  porta `S.path.loc` della v0.91 in `pp` prima del primo salvataggio). In `path_progress` con la colonna `percorso`; i passi e i nodi interi si
+  scrivono sempre con `base`. `withPercorso(pid, f)` calcola come se fosse aperto un altro percorso; `completamento()` = satelliti accesi
+  (ospiti compresi) ed esami superati del percorso aperto.
+- **Corsi ospiti**: `pianeti(c)` di un corso che non è nel percorso dà i pianeti con almeno un ospite (e `satelliti()` i soli ospiti);
+  `corsiOspiti()`. Così Palestra per zone (`zoneCorso()`: corpo e cervello anche come ospiti), sagoma, radar e scelta del corso nel Profilo
+  funzionano in UCBM. `tuttiSat()` = satelliti del percorso aperto, ospiti compresi.
+- **Flotta** (`flotta.js`): ogni giorno ha `p {percorso: {xp, raw}}`, tetto di 300 punti per percorso (`dayPoints`, `todayPoints(p)`,
+  `seasonPoints(p)`; senza `p` = tutti). Con il file SQL una riga di `fleet_days` per giorno e percorso; senza, solo il percorso base (gli altri
+  restano da inviare). `PX.ok` / `probePx(sb)`: il file c'è se si legge `dextera_percorsi_xp`. Scheda Flotta (`social.js`): le casate sommano
+  `season_scores` di tutti i percorsi (`scTot`); fuori dal percorso completo c'è anche il riquadro «Campionato · <percorso>» (`scOf`).
+  Equipaggi: si vedono quelli del percorso aperto (`myCrews`) con una nota sugli altri; uno nuovo nasce nel percorso aperto (`crews.percorso`,
+  non si cambia); il limite di 3 a testa vale per tutti i percorsi insieme. La classifica della settimana tra amici somma tutti i percorsi.
+- **Badge** (`badges.js`): i badge di contenuto (`pp: true`: `sat1`, `pianeta1`, `corso1`, `sistema`) si controllano nel percorso aperto; nel
+  completo hanno l'id di sempre, negli altri `<id>-<percorso>` (`ppBadgeId`, `badgeById`, `badgeList`: le varianti dei percorsi aperti o giocati,
+  nome «… · <percorso>»). Partono a parte e solo con il file SQL, che ha le righe di `badge_classes` per `ucbm`: **un percorso nuovo vuole le
+  sue quattro righe**. Badge di abitudine unici. Titoli: quelli degli esami del percorso aperto e dei badge, varianti comprese.
+- **Profilo**: riquadro «Percorsi» (`pathsHtml()` in `progress.js`, `.pfpc`, dopo i numeri): per ogni percorso aperto o con XP livello, XP e
+  completamento (barra, satelliti accesi, esami); in alto il livello totale.
+- **SQL** `supabase/migrations/20261126090000_dextera_percorsi.sql` (da applicare dall'autore **dopo** aver pubblicato l'app e aspettato che si
+  aggiorni: un'app 0.91 o più vecchia, dopo il file, non riesce più a inviare `path_progress` e `fleet_days` perché cambia la chiave; i dati le
+  restano in coda finché non si aggiorna). In una transazione, si può rieseguire. Colonna `percorso` (default `base`, i dati di oggi vanno lì) in
+  `path_progress` (chiave `user_id, percorso, node_id`), `fleet_days` (`user_id, giorno, percorso`), `season_scores` (`stagione, constellation_id,
+  percorso`), `crews`, `crew_weeks` (copiata dall'equipaggio dal trigger). `private.flotta_stagione(c, g, p)`; `admin.chiudi_stagione()` somma i
+  percorsi per casata. Tabella `dextera_percorsi_xp` (vince il valore più alto, la legge e la scrive solo la persona). 4 righe in `badge_classes`.
+  Provato con PGlite: 39 prove (`percorsi_rls.mjs` nelle note delle sessioni). Senza il file l'app funziona come prima e il riquadro Account
+  lo dice (`A.pxMissing`, `PX_WARN`). «Scarica i miei dati» ha `xp_per_percorso`; `privacy.html` una riga nuova.
+- Prova: `percorsi.mjs` (39 controlli) e `fase6d.mjs` (la copia di `fase6c.mjs` adattata, 71) nelle note delle sessioni; `osp/prova.mjs` passa.
+  `flotta.mjs` e `profilo.mjs` hanno gli stessi errori anche sulla v0.91 (prove vecchie: «Cosa studi?» alla prima apertura, versione).
 
 ## Mappa del percorso (`content/mappa.json`)
 Corso → 4 pianeti → 17 satelliti (con `ordine` della specifica) → 6 passi (`ossa`, `reperi`, `muscoli`, `connessioni`, `funzione`,

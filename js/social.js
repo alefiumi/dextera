@@ -14,7 +14,7 @@ import {account as A,configured,esc,online} from './account.js';
 import * as P from './percorso.js';
 import * as FL from './flotta.js';
 import {startChallenge,structName} from './lezione.js';
-import {BADGES} from './badges.js';
+import {badgeById} from './badges.js';
 
 const KEY='dextera-social';
 const SO={tab:'friends',all:[],rank:null,friends:[],rel:{fr:[],inc:[],out:[]},cards:{},card:null,at:0,fleet:null,done:{},loading:false,err:'',ferr:'',found:null,q:'',chg:false,pick:null,pk:null,sel:[]};
@@ -72,12 +72,13 @@ export async function loadSocial(){
 /* ---------- dati della Flotta ---------- */
 async function loadFleet(sb,uid){
  await FL.ensureCasata(sb,uid);
+ const px=await FL.probePx(sb).catch(()=>false); // con il file dei percorsi: punti delle casate ed equipaggi per percorso
  const [k,sc,ss,wk,cr]=await Promise.all([
   sb.from('constellations').select('id,nome,simbolo,colore,ordine,membri').order('ordine'),
-  sb.from('season_scores').select('constellation_id,punti,membri_attivi').eq('stagione',FL.season()),
+  sb.from('season_scores').select(px?'constellation_id,punti,membri_attivi,percorso':'constellation_id,punti,membri_attivi').eq('stagione',FL.season()),
   sb.from('seasons').select('stagione,vincitore,classifica').order('stagione',{ascending:false}).limit(6),
   sb.from('dextera_classifica_settimana').select('id,username,avatar,xp').order('xp',{ascending:false}).limit(200),
-  sb.from('crews').select('id,nome,codice,capo,vice,pianeta,membri_ids,settimana,contributi,creato_il').order('creato_il')]);
+  sb.from('crews').select('id,nome,codice,capo,vice,pianeta,membri_ids,settimana,contributi,creato_il'+(px?',percorso':'')).order('creato_il')]);
  for(const r of [k,sc,ss,wk,cr])if(r.error)throw r.error;
  const crews=cr.data||[],ids=[...new Set(crews.flatMap(c=>c.membri_ids||[]))];
  const since=new Date(Date.now()-FL.FR().sfida.giorni*864e5).toISOString();
@@ -187,7 +188,7 @@ function friendsHtml(fresh,fl){
 // scheda di un amico: copertina, foto, nome, titolo e badge in vetrina (quelli che ha scelto di mostrare)
 const BANS=['notte','aurora','tramonto','oceano','foresta','sole'];
 function friendCard(p){
- const c=SO.cards[p.id]||{},b=BANS.includes(c.copertina)?c.copertina:'notte',show=(c.vetrina||[]).map(id=>BADGES.find(x=>x.id===id)).filter(Boolean);
+ const c=SO.cards[p.id]||{},b=BANS.includes(c.copertina)?c.copertina:'notte',show=(c.vetrina||[]).map(badgeById).filter(Boolean);
  return `<div class="fcard"><div class="pfban ban-${b}">${show.length?`<ul class="vetrina" aria-label="Badge in vetrina">${show.map(x=>`<li title="${esc(x.name)}"><span aria-hidden="true">${x.icon}</span><span class="sr">${esc(x.name)}</span></li>`).join('')}</ul>`:''}</div>
   <div class="fci">${av(p.avatar,p.username)}<div><b>${esc(p.username)}</b><div class="mut">${c.titolo?'🎖️ '+esc(c.titolo):'Nessun titolo scelto'}</div></div></div>
   ${show.length?`<p class="mut">In vetrina: ${show.map(x=>esc(x.name)).join(', ')}</p>`:SO.cards[p.id]?'':'<p class="mut">Non ha ancora scelto copertina e badge da mostrare.</p>'}</div>`;
@@ -197,6 +198,15 @@ function resHtml(){
  if(!SO.found.length)return '<p class="mut">Nessun utente con questo nome.</p>';
  return SO.found.map(p=>person(p,relBtn(p.id))).join('');
 }
+
+/* ---------- percorsi (v0.92.0) ----------
+   Con il file 20261126090000_dextera_percorsi.sql season_scores ha una riga per casata e percorso: le casate di oggi sommano tutti i
+   percorsi (scTot), il campionato del percorso aperto usa le sue righe (scOf). Gli equipaggi giocano in un percorso: si vedono quelli
+   del percorso aperto (myCrews); il limite di 3 equipaggi a testa vale per tutti i percorsi insieme. */
+const pname=id=>(P.percorsiCat().find(x=>x.id===id)?.nome)||id;
+function scTot(fl){const m={};for(const r of fl.sc){const x=m[r.constellation_id]||(m[r.constellation_id]={constellation_id:r.constellation_id,punti:0,membri_attivi:0});x.punti+=+r.punti||0;x.membri_attivi=Math.max(x.membri_attivi,r.membri_attivi||0);}return Object.values(m);}
+const scOf=(fl,p)=>fl.sc.filter(r=>(r.percorso||'base')===p);
+const myCrews=fl=>fl.crews.filter(c=>(c.percorso||'base')===FL.pid());
 
 /* ---------- Casate ---------- */
 const allPlanets=()=>P.ready()?P.corsi().flatMap(c=>P.pianeti(c).map(p=>({p,c}))):[];
@@ -215,17 +225,21 @@ function housesHtml(fl){
  const change=FL.canChange()?(SO.chg?`<div class="sub">Passa a un'altra casata</div><p class="mut">Si può cambiare una volta per stagione; i punti già fatti restano a ${esc(my.nome)}.</p><div class="chips">${K.filter(k=>k.id!==my.id).map(k=>`<button class="chip hchip" style="--c:${esc(k.colore)}" data-so="house" data-h="${esc(k.id)}"><span aria-hidden="true">${esc(k.simbolo)}</span> ${esc(k.nome)}</button>`).join('')}<button class="chip" data-so="chg">Annulla</button></div>`
   :`<button class="chip" data-so="chg">Cambia casata</button>`):`<p class="mut">Hai già cambiato casata in questa stagione: potrai cambiarla di nuovo dal ${esc(nextTxt)}.</p>`;
  const mine=`<div class="card house" style="--c:${esc(my.colore)}"><div class="hhead"><span class="hsym" aria-hidden="true">${esc(my.simbolo)}</span><div><div class="kick">La tua casata</div><h3>${esc(my.nome)}</h3><p class="mut">${fmt(my.membri)} ${my.membri===1?'membro':'membri'}</p></div></div>
-  <div class="hnums"><div><b>${FL.todayPoints()}</b><small>punti oggi (al massimo ${Rf.tetto_giorno})</small></div><div><b>${fmt(FL.seasonPoints())}</b><small>tuoi punti a ${esc(monthName().split(' ')[0].toLowerCase())}</small></div></div>
+  <div class="hnums"><div><b>${FL.todayPoints()}</b><small>punti oggi (al massimo ${Rf.tetto_giorno} per percorso)</small></div><div><b>${fmt(FL.seasonPoints())}</b><small>tuoi punti a ${esc(monthName().split(' ')[0].toLowerCase())}</small></div></div>
   ${opts?`<label class="fl" for="sopl">Pianeta che stai studiando</label><select id="sopl" class="soq" data-so="pl">${opts}</select><p class="mut">Lì i tuoi punti valgono doppio; il tetto di ${Rf.tetto_giorno} al giorno resta.</p>`:''}
   ${change}</div>`;
- const sc=Object.fromEntries(fl.sc.map(r=>[r.constellation_id,r])),rows=K.map(k=>({k,p:+(sc[k.id]?.punti||0),a:sc[k.id]?.membri_attivi||0})).sort((a,b)=>b.p-a.p||a.k.ordine-b.k.ordine);
- const top=Math.max(1,...rows.map(r=>r.p));
+ const ranking=list=>{const sc=Object.fromEntries(list.map(r=>[r.constellation_id,r]));return K.map(k=>({k,p:+(sc[k.id]?.punti||0),a:sc[k.id]?.membri_attivi||0})).sort((a,b)=>b.p-a.p||a.k.ordine-b.k.ordine);};
+ const rows=ranking(scTot(fl)),top=Math.max(1,...rows.map(r=>r.p));
+ const hrow=(r,i,tp)=>`<div class="lb hrow${r.k.id===my.id?' me':''}" style="--c:${esc(r.k.colore)}"><span class="pos">${r.p?(i<3?MED[i]:i+1):'–'}</span><span class="hsym s" aria-hidden="true">${esc(r.k.simbolo)}</span><span class="nm">${esc(r.k.nome)}${r.k.id===my.id?' <small>(la tua)</small>':''}<small class="hm">${r.a} ${r.a===1?'membro attivo':'membri attivi'}</small></span><b>${fmt(r.p)} punti</b><i class="lbbar" style="width:calc((100% - 44px) * ${Math.max(.02,r.p/tp).toFixed(3)})" aria-hidden="true"></i></div>`;
+ // campionato del percorso aperto (solo fuori dal percorso completo, con il file SQL dei percorsi)
+ const pid=FL.pid(),prow=pid!=='base'&&FL.PX.ok?ranking(scOf(fl,pid)):null,ptop=prow?Math.max(1,...prow.map(r=>r.p)):1;
+ const camp=prow?card('Campionato · '+esc(pname(pid)),'',`<p class="mut">Solo i punti fatti nel percorso ${esc(pname(pid))}, al massimo ${Rf.tetto_giorno} al giorno a testa. Tuoi punti qui: ${FL.todayPoints(pid)} oggi, ${fmt(FL.seasonPoints(pid))} questo mese.</p>`+prow.map((r,i)=>hrow(r,i,ptop)).join('')):'';
  const season=card('Stagione di '+esc(monthName()),'',`<p class="mut">Finisce il ${esc(lastTxt)}: vince la casata con più punti. Ogni XP di progresso di un membro vale un punto, al massimo ${Rf.tetto_giorno} al giorno a testa.</p>`+
-  rows.map((r,i)=>`<div class="lb hrow${r.k.id===my.id?' me':''}" style="--c:${esc(r.k.colore)}"><span class="pos">${r.p?(i<3?MED[i]:i+1):'–'}</span><span class="hsym s" aria-hidden="true">${esc(r.k.simbolo)}</span><span class="nm">${esc(r.k.nome)}${r.k.id===my.id?' <small>(la tua)</small>':''}<small class="hm">${r.a} ${r.a===1?'membro attivo':'membri attivi'}</small></span><b>${fmt(r.p)} punti</b><i class="lbbar" style="width:calc((100% - 44px) * ${Math.max(.02,r.p/top).toFixed(3)})" aria-hidden="true"></i></div>`).join(''));
+  rows.map((r,i)=>hrow(r,i,top)).join('')+'<p class="note">Le casate sommano i punti di tutti i percorsi.</p>');
  const kn=id=>K.find(k=>k.id===id);
  const albo=fl.ss.length?card('Albo delle stagioni','',`<ul class="albo">${fl.ss.map(s=>{const w=kn(s.vincitore),pts=(s.classifica||[]).find(x=>x.casata===s.vincitore)?.punti;
   return `<li><span>${esc(monthName(s.stagione))}</span><b>${w?`🏆 <span aria-hidden="true">${esc(w.simbolo)}</span> ${esc(w.nome)}${pts!=null?` · ${fmt(pts)} punti`:''}`:'nessun punto'}</b></li>`;}).join('')}</ul>`):'';
- return mine+season+albo;
+ return mine+season+camp+albo;
 }
 
 /* ---------- riquadro Flotta nel Profilo (sezione 7 della specifica: costellazione ed equipaggio) ----------
@@ -237,9 +251,9 @@ export function fleetCard(){
  const fl=SO.fleet&&SO.fleet.uid===A.user.id?SO.fleet:null,f=FL.F(),my=fl?.k.find(k=>k.id===f.casata);
  const open=(v,t)=>`<button class="chip" data-pf="flotta" data-v="${v}">${t}</button>`;
  if(!fl||!my)return `<div class="card pfl">${kick}<h2>Casata ed equipaggi</h2><p class="mut">${A.fleetMissing?'Casate ed equipaggi arrivano quando sul server c\'è il file della Flotta. Intanto i tuoi punti si contano su questo telefono.':'Apri la scheda Flotta con la connessione per vedere la tua casata.'}</p><div class="chips">${open('houses','🚀 Apri la Flotta')}</div></div>`;
- const sc=fl.sc.map(r=>({id:r.constellation_id,p:+r.punti||0})).sort((a,b)=>b.p-a.p),pos=sc.findIndex(r=>r.id===my.id),mp=sc.find(r=>r.id===my.id)?.p||0;
+ const sc=scTot(fl).map(r=>({id:r.constellation_id,p:+r.punti||0})).sort((a,b)=>b.p-a.p),pos=sc.findIndex(r=>r.id===my.id),mp=sc.find(r=>r.id===my.id)?.p||0;
  const E=FL.FR().equipaggio,w=FL.monday();
- const crews=fl.crews.map(c=>{const n=(c.membri_ids||[]).length,goal=n*E.per_membro,tot=c.settimana===w?c.contributi:0,pl=planetById(c.pianeta),role=c.capo===A.user.id?' · 👑 capo':c.vice===A.user.id?' · ⭐ vice':'';
+ const crews=myCrews(fl).map(c=>{const n=(c.membri_ids||[]).length,goal=n*E.per_membro,tot=c.settimana===w?c.contributi:0,pl=planetById(c.pianeta),role=c.capo===A.user.id?' · 👑 capo':c.vice===A.user.id?' · ⭐ vice':'';
   const g=pl&&n>=E.min?`<div class="gbar" role="progressbar" aria-label="Obiettivo di ${esc(c.nome)}" aria-valuemin="0" aria-valuemax="${goal}" aria-valuenow="${Math.min(tot,goal)}"><i style="width:${(Math.min(1,tot/goal)*100).toFixed(1)}%"></i></div><small class="mut">${tot}/${goal} contributi su ${esc(pl.nome)}${tot>=goal?' · 🏅 obiettivo raggiunto':''} · il tuo: ${FL.myContrib(c.pianeta)}</small>`
    :`<small class="mut">${pl?'Serve almeno un altro membro':'Pianeta dell\'obiettivo da scegliere'}</small>`;
   return `<li><b>${esc(c.nome)}</b> <small class="mut">${n} ${n===1?'membro':'membri'}${role}</small>${g}</li>`;}).join('');
@@ -269,12 +283,13 @@ function chKeys(pl){
 }
 function crewsHtml(fl){
  const E=FL.FR().equipaggio,full=fl.crews.length>=E.max_per_persona,off=online()?'':' disabled';
- const list=fl.crews.map(c=>crewHtml(fl,c)).join('');
+ const mc=myCrews(fl),oth=fl.crews.length-mc.length;
+ const list=mc.map(c=>crewHtml(fl,c)).join(''),onote=oth?`<p class="note">Altri ${oth===1?'1 equipaggio':oth+' equipaggi'} in altri percorsi: li vedi aprendo quel percorso.</p>`:'';
  const mk=full?'':card('Nuovo equipaggio','Crea un equipaggio',`<form data-so="mk" class="sofm"><label class="fl" for="sonm">Nome</label><input id="sonm" name="nome" class="soq" minlength="3" maxlength="30" required autocomplete="off" placeholder="Per esempio: Ossa rotte">
   <label class="fl" for="sompl">Pianeta dell'obiettivo</label><select id="sompl" name="pianeta" class="soq">${planetOptions('','Lo scegliete dopo')}</select>
   <button class="btn"${off}>Crea</button></form><p class="mut">Da ${E.min} a ${E.max} persone: dopo averlo creato condividi il codice d'invito.</p>`);
  const join=full?`<p class="note">Sei già in ${E.max_per_persona} equipaggi: è il massimo. Per entrare in un altro esci da uno.</p>`:card('Hai un codice?','Entra in un equipaggio',`<form data-so="join" class="sofm"><label class="fl" for="socd">Codice d'invito (6 caratteri)</label><input id="socd" name="codice" class="soq code" maxlength="6" minlength="6" required autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="ABC234"><button class="btn"${off}>Entra</button></form>`);
- return (list||card('Equipaggi','','<p class="mut">Non sei ancora in un equipaggio. Un equipaggio è un piccolo gruppo di amici con un obiettivo della settimana su un pianeta: ognuno contribuisce con le strutture che porta a maestria 2 o che ripassa in tempo.</p>'))+mk+join;
+ return (list||card('Equipaggi','','<p class="mut">Non sei ancora in un equipaggio. Un equipaggio è un piccolo gruppo di amici con un obiettivo della settimana su un pianeta: ognuno contribuisce con le strutture che porta a maestria 2 o che ripassa in tempo.</p>'))+onote+mk+join;
 }
 function crewHtml(fl,c){
  const me=A.user.id,capo=c.capo===me,vice=c.vice===me,ids=c.membri_ids||[],n=ids.length,E=FL.FR().equipaggio,goal=n*E.per_membro,w=FL.monday();
@@ -407,7 +422,7 @@ export function wireSocial(panel){
   if(app.tab!=='soc'||!A.user)return;const f=e.target.closest('form[data-so]');if(!f)return;e.preventDefault();
   if(f.dataset.so==='mk'){const nome=f.elements.nome.value.trim(),pl=PLID.test(f.elements.pianeta.value)?f.elements.pianeta.value:null;
    if(nome.length<3||nome.length>30){toast('Il nome va da 3 a 30 caratteri.');return;}
-   act(()=>A.sb.from('crews').insert({nome,pianeta:pl}),'Equipaggio creato: condividi il codice d\'invito.').then(ok=>{if(ok){SO.tab='crews';keep();}});}
+   act(()=>A.sb.from('crews').insert({nome,pianeta:pl,...(FL.PX.ok?{percorso:FL.pid()}:{})}),'Equipaggio creato: condividi il codice d\'invito.').then(ok=>{if(ok){SO.tab='crews';keep();}});}
   else if(f.dataset.so==='join'){const c=f.elements.codice.value.trim().toUpperCase();
    if(!/^[A-HJ-NP-Z2-9]{6}$/.test(c)){toast('Il codice ha 6 caratteri: lettere e numeri (senza 0, 1, I, O).');return;}
    act(()=>A.sb.from('crew_members').insert({user_id:A.user.id,codice:c}),'Ora fai parte dell\'equipaggio!');}

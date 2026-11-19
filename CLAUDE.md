@@ -37,8 +37,7 @@ Dove questo file e la specifica differiscono, vale la specifica.
   `dextera-`; barra a 4 schede; testi in `testi/`; `content/mappa.json`; pagina `revisione/`.
 - Fase 1 – Percorso minimo (SQL: path_progress, dextera_settings, error_reports): online e SQL applicato il 18/11/2026.
 - Fase 2 – Ripasso ed esame (SQL: review_items), in tre rilasci scelti dall'autore il 19/11/2026: 1) ripasso, luce dei satelliti,
-  data d'esame (v0.76.0, vedi «Ripasso»); 2) esame del pianeta (60 secondi a domanda, caso scelto in automatico finché l'autore non lo
-  sceglie in `esame.caso` del percorso pubblicato); 3) Palestra con la figura per zone. Fasi 3–7: vedi la specifica.
+  data d'esame (v0.76.0, vedi «Ripasso»); 2) esame del pianeta (v0.77.0, vedi «Esame del pianeta»); 3) Palestra con la figura per zone. Fasi 3–7: vedi la specifica.
 - GitHub Pages attivo (ramo `main`, cartella radice): online su `alefiumi.github.io/dextera`.
 
 ## Situazione al 20/11/2026
@@ -444,6 +443,25 @@ descrizioni; quelle con fonte Z-Anatomy dicono da quale vaso nasce o dove sbocca
 - SQL: `supabase/migrations/20261122090000_dextera_ripasso.sql` (review_items con RLS; vince il ripasso più recente, `ripassato_il`, con un
   trigger), provato con PGlite (20 prove). Da applicare dall'autore DOPO aver pubblicato l'app; senza la tabella il calendario resta sul
   telefono (avviso nel profilo). Sincronizzazione in `syncRipasso()` di `account.js`; «Scarica i miei dati» include `ripasso`.
+
+## Esame del pianeta (fase 2, secondo rilascio, v0.77.0)
+- Regole in `js/percorso.js` (sezione «esame del pianeta»), numeri in `regole.json` → `esame` (domande 20, secondi 60, soglia 16,
+  per_satellite 3, xp 250, caso_indizio_max 3, caso_errori_max 1); gioco in `js/lezione.js` (`startExam()`, `kind:'esame'`, `examNext()`).
+- Si apre con tutti i satelliti del pianeta accesi (`examOpen()`); prima il riquadro «Esame del pianeta» (`examCard()` in `path.js`, nel
+  riquadro del pianeta) dice «Esame: mancano N satelliti». Domande (`examSlots()`): almeno una per tipo di passo, almeno 3 per satellite,
+  poi le altre fino a 20, senza doppioni; prima quelle che non erano nell'ultimo tentativo. Tipo: tocco o nome; a scelta solo sotto maestria 2.
+- Cronometro: scadenza per domanda `q.end`, `#ltim` con `role="timer"` (numero e barra, rosso negli ultimi 10 s con un avviso a voce);
+  allo scadere la risposta conta come sbagliata (`timeout()`: maestria −1, ripasso a 1 giorno). Se si cambia scheda la scadenza resta:
+  al ritorno la domanda scaduta conta sbagliata. Niente cuori né aiuti; le risposte giuste di richiamo valgono come ripasso.
+- Poi il caso clinico (`casoScreen`, senza tempo, ipotesi come nel progetto, al massimo 3 indizi): risolto con la risposta giusta e al
+  massimo un errore; al secondo errore finisce. Caso: `P.esameCasi(pl)` (scelto in `esame.caso` o in automatico, diverso dall'ultimo se ce
+  ne sono altri); senza casi l'esame è di sole 20 domande.
+- Superato (almeno 16/20, in proporzione se le domande sono meno, e caso risolto): nodo del pianeta `acceso` in `path_progress` (`examPass()`),
+  titolo «Esperto dell'arto inferiore» (`expertTitle()`: dell'/della/del dal nome del pianeta), +250 XP solo la prima volta. Il titolo si vede
+  nel riquadro del pianeta e nell'Elenco. Non superato: i 2 satelliti più deboli (`weakSats()`: più errori, poi luce e maestria più basse) con
+  «Ripassa …». `S.path.esami {pianeta: {keys, caso, n, best, t}}` resta sul telefono (non va sul server); si scrive quando si preme Inizia.
+- Prova: `esame.mjs` (copia nelle note delle sessioni, Chrome headless, tutto offline): esame chiuso e aperto, non superato, tempo scaduto
+  (anche in un'altra scheda), superato, XP una volta, caso con due errori, pianeta senza casi; dati e cache di BodyMania intatti.
 
 ## Mappa del percorso (`content/mappa.json`)
 Corso → 4 pianeti → 17 satelliti (con `ordine` della specifica) → 6 passi (`ossa`, `reperi`, `muscoli`, `connessioni`, `funzione`,

@@ -267,3 +267,58 @@ export function setExam(pid,d){
  for(const [k,r] of Object.entries(RV())){const left=examLeft(k);if(left===null)continue;const lim=t+Math.max(1,Math.floor(left/2));if(dueDay(r)>lim){r.due=isoDay(lim);stamp(r);}}
 }
 export const daysTo=d=>dayNum(d)-tdn();
+
+/* ---------- esame del pianeta (fase 2, sezione 4) ----------
+   Si apre con tutti i satelliti del pianeta accesi. 20 domande (almeno 3 per satellite, almeno una per tipo di passo), 60 secondi
+   ciascuna, senza aiuti né cuori; poi un caso clinico senza tempo. Superato con almeno 16 giuste e il caso risolto: il nodo del
+   pianeta va a 'acceso' in path_progress (titolo «Esperto di…») e +250 XP una volta sola. Numeri in regole.json, «esame».
+   S.path.esami {pianeta: {keys, caso, n, best, t}}: domande e caso dell'ultimo tentativo (non si ripetono), tentativi, miglior punteggio. */
+const EX=()=>P().esami||(P().esami={});
+const TIPI=['ossa','reperi','muscoli','connessioni','funzione'];
+export const examMissing=pl=>satelliti(pl).filter(s=>!lit(s)).length;
+export const examOpen=pl=>satelliti(pl).length>0&&examMissing(pl)===0;
+export const examPassed=pl=>node(pl.id)?.stato==='acceso';
+export const examLast=pl=>EX()[pl.id]||null;
+// «Esperto dell'arto inferiore», «Esperto della testa e collo», «Esperto del …»
+export function expertTitle(pl){
+ const n=String(pl.nome||''),l=n.charAt(0).toLowerCase()+n.slice(1),w=l.split(' ')[0];
+ return 'Esperto '+(/^[aeiouh]/.test(l)?"dell'":/a$/.test(w)?'della ':'del ')+l;
+}
+const mix=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;};
+// domande dell'esame {sid, ps, sat}: prima quelle che non erano nell'ultimo tentativo (le altre solo se mancano strutture)
+export function examSlots(pl){
+ const E=R().esame,sats=satelliti(pl),last=new Set(examLast(pl)?.keys||[]),seen=new Set(),all=[];
+ for(const sat of sats)for(const ps of passi(sat)){if(ps.tipo==='progetto')continue;
+  for(const sid of usable(ps)){const k=key(sid,ps.aspetto);if(seen.has(k))continue;seen.add(k);all.push({sid,ps,sat,k,rep:last.has(k)?1:0});}}
+ const cand=mix(all).sort((a,b)=>a.rep-b.rep),out=[],cnt=new Map(),per=Math.min(E.per_satellite,Math.floor(E.domande/Math.max(1,sats.length)));
+ const take=x=>{out.push(x);cand.splice(cand.indexOf(x),1);cnt.set(x.sat.id,(cnt.get(x.sat.id)||0)+1);};
+ // almeno una per tipo di passo, nel satellite che ne ha meno
+ for(const t of TIPI){const c=cand.filter(x=>x.ps.tipo===t).sort((a,b)=>a.rep-b.rep||(cnt.get(a.sat.id)||0)-(cnt.get(b.sat.id)||0))[0];if(c)take(c);}
+ // almeno 3 per satellite
+ for(const sat of sats)while((cnt.get(sat.id)||0)<per){const c=cand.find(x=>x.sat===sat);if(!c)break;take(c);}
+ while(out.length<E.domande&&cand.length)take(cand[0]);
+ return mix(out).map(({sid,ps,sat})=>({sid,ps,sat}));
+}
+// satellite del pianeta a cui appartiene la risposta del caso (per l'ipotesi «Quale distretto è coinvolto?»)
+export function caseSat(pl,c){
+ const L=satelliti(pl);
+ return L.find(s=>s.passi.some(ps=>Array.isArray(ps.strutture)&&ps.strutture.includes(c?.mid)))||L[0];
+}
+// all'inizio del tentativo: domande e caso di questo tentativo diventano «l'ultimo tentativo»
+export function examStart(pl,slots,caso){
+ const o=examLast(pl)||{};EX()[pl.id]={...o,keys:slots.map(s=>key(s.sid,s.ps.aspetto)),caso:caso?.id||null,n:(o.n||0)+1,t:Date.now()};
+}
+export function examDone(pl,ok){const o=EX()[pl.id];if(o)o.best=Math.max(o.best||0,ok);}
+// superato: titolo e XP solo la prima volta (ritorna true se è la prima)
+export function examPass(pl,stelle){
+ const first=!examPassed(pl);
+ setNode(pl.id,{stato:'acceso',stelle,fatto_il:new Date().toISOString()});
+ if(first)gain(R().esame.xp,true);
+ return first;
+}
+// i 2 satelliti più deboli: più errori in questo esame, poi luce più bassa, poi maestria media più bassa
+export function weakSats(pl,res){
+ const avg=s=>{const ks=satKeys(s);return ks.length?ks.reduce((a,k)=>a+mastery(k),0)/ks.length:0;};
+ const err=s=>res.filter(r=>r.sat===s&&!r.ok).length;
+ return satelliti(pl).slice().sort((a,b)=>err(b)-err(a)||light(a)-light(b)||avg(a)-avg(b)).slice(0,2);
+}

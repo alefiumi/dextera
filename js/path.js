@@ -5,7 +5,7 @@
 import {$,toast} from './util.js';
 import {app,S,save,head} from './state.js';
 import * as P from './percorso.js';
-import {startLesson,startReview,renderLesson,lessonClick,lessonSubmit,setLessonExit} from './lezione.js';
+import {startLesson,startReview,startExam,renderLesson,lessonClick,lessonSubmit,setLessonExit} from './lezione.js';
 
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const UK='dextera-percorso-ui';
@@ -111,7 +111,7 @@ function infoHtml(g,pl){
   return `<div class="card info"><div class="kick">Pianeta</div><h2>${esc(pl.nome)}</h2>
    <p class="mut">${L.length} satelliti. Le linee uniscono quelli che hanno strutture in comune: impararle in uno fa avanzare anche l'altro.</p>
    ${pbar(pl_lit,L.length)}<p class="pn">${pl_lit} accesi su ${L.length}</p>
-   <ul class="sl">${L.map(s=>srow(s,g)).join('')}</ul>${legend()}</div><div class="card info">${examHtml(pl)}</div>`;
+   <ul class="sl">${L.map(s=>srow(s,g)).join('')}</ul>${legend()}</div>${examCard(pl)}<div class="card info">${examHtml(pl)}</div>`;
  }
  if(ui.lvl==='universo')return `<div class="card info"><div class="kick">Universo</div><h2>Cosa studi?</h2>
   <p class="mut">Ogni percorso è lo stesso universo visto con lenti diverse: i progressi valgono in tutti. Ogni corso è un sistema solare: i pianeti sono le regioni del corpo, i satelliti le zone da studiare.</p>
@@ -178,7 +178,7 @@ function planetSvg(pl,g,selSat){
 const srow=(s,g)=>{const st=P.look(s),done=P.passi(s).filter(P.stepDone).length,tot=P.passi(s).length;
  return `<li><button class="srow" data-p="sat" data-id="${esc(s.id)}">${symIcon(st)}<span class="sn">${esc(s.nome)}${s===g.sat?' <span class="star" aria-label="consigliato">★</span>':''}</span><small>${P.STATI[st]} · ${done}/${tot} passi</small></button></li>`;};
 function listHtml(g){
- return P.pianeti().map(p=>`<h3 class="lp">🪐 ${esc(p.nome)}</h3><ul class="sl">`+P.satelliti(p).map(s=>srow(s,g)).join('')+'</ul>').join('');
+ return P.pianeti().map(p=>`<h3 class="lp">🪐 ${esc(p.nome)}${P.examPassed(p)?` <span class="mut">· 🏅 ${esc(P.expertTitle(p))}</span>`:''}</h3><ul class="sl">`+P.satelliti(p).map(s=>srow(s,g)).join('')+'</ul>').join('');
 }
 function satHtml(sat,g){
  const st=P.look(sat),L=P.passi(sat),caso=P.casoOf(sat),pl=P.planetOf(sat);
@@ -211,6 +211,19 @@ function satRev(sat){
  return `<div class="srev">${lt!==null?`<p class="pn">Luce ${lt}%${lt<Math.round(P.R().ripasso.luce_min*100)?' · sotto il 70%: ripassa per riaccenderlo':''}</p>`:''}
   <button class="btn alt" data-p="ripsat">↻ Ripassa questo satellite</button><small class="mut">${ks.length} domande sulle strutture più deboli${od?` · ${od} da ripassare oggi`:''}</small></div>`;
 }
+// esame del pianeta (fase 2): si apre con tutti i satelliti accesi; superato dà il titolo «Esperto di…»
+function examCard(pl){
+ const E=P.R().esame,miss=P.examMissing(pl),pass=P.examPassed(pl),last=P.examLast(pl),T=P.expertTitle(pl);
+ const head=`<div class="kick">Esame del pianeta</div>`;
+ if(miss)return `<div class="card info exam">${head}<p class="pn">Esame: ${miss===1?'manca 1 satellite':`mancano ${miss} satelliti`}</p>
+  <p class="mut">Si apre quando tutti i satelliti di ${esc(pl.nome)} sono accesi. Superato, diventi «${esc(T)}».</p></div>`;
+ const tries=last&&last.n?`<p class="mut">Tentativi: ${last.n}${last.best!=null?` · miglior punteggio ${last.best}/${E.domande}`:''}</p>`:'';
+ if(pass)return `<div class="card info exam done">${head}<p class="title">🏅 <b>${esc(T)}</b></p><p class="mut">Esame superato${P.node(pl.id)?.fatto_il?' il '+esc(P.itDate(P.node(pl.id).fatto_il)):''}. Puoi rifarlo per allenarti: il titolo e gli XP restano quelli.</p>
+  ${tries}<button class="btn alt" data-p="esame">Rifai l'esame</button></div>`;
+ return `<div class="card info exam">${head}<h2>Pronto per l'esame</h2>
+  <p class="mut">${E.domande} domande, ${E.secondi} secondi ciascuna, senza aiuti né cuori, poi un caso clinico senza tempo. Con almeno ${E.soglia} giuste e il caso risolto diventi «${esc(T)}» (+${E.xp} XP).</p>
+  ${tries}<button class="btn" data-p="esame">Inizia l'esame</button></div>`;
+}
 // data d'esame del pianeta (facoltativa): i ripassi delle sue strutture si avvicinano
 function examHtml(pl){
  const d=P.exams()[pl.id]||'',left=d?P.daysTo(d):null,min=new Date(Date.now()+864e5).toISOString().slice(0,10);
@@ -225,6 +238,7 @@ function glossary(){
   ['Ripasso','una struttura a maestria 2 torna dopo 1, 3, 7, 14, 30 e 60 giorni; se sbagli riparte da 1 giorno'],
   ['Ripasso del giorno','al massimo 10 strutture al giorno, le più in ritardo; finirlo vale un giorno di serie'],
   ['Luce','quota delle strutture di un satellite acceso non in ritardo; sotto il 70% è da ripassare'],
+  ['Esame del pianeta',`${P.R().esame.domande} domande a tempo e un caso clinico; si apre con tutti i satelliti del pianeta accesi e superato dà il titolo «Esperto di…»`],
   ['Brillante','satellite acceso con tutte le strutture a un intervallo di 30 giorni o più'],['Lo so già','una prova per saltare un passo che conosci già (una al giorno per passo)'],
   ['Cuori','3 per lezione: ogni errore ne toglie uno'],['Obiettivo del giorno','gli XP da fare oggi; con almeno 30 XP il giorno conta per la serie'],
   ['Scudo 🛡','uno ogni 7 giorni di serie (al massimo 2): salva la serie se salti un giorno'],['Da verificare','testo scritto dall\'AI, non ancora controllato da un docente']];
@@ -244,6 +258,7 @@ export function pathClick(e){
  else if(a==='cont'){const g=P.guide();ui.lvl='satellite';ui.s=g.sat.id;keep();if(P.stepOpen(g.sat,g.ps)&&(g.ps.tipo!=='progetto'||P.passi(g.sat).slice(0,-1).every(P.stepDone)))return go(g.sat,g.ps,g.ps.tipo==='progetto'?(P.casoOf(g.sat)?'caso':'quiz'):'lezione');}
  else if(a==='rip'){let ks=P.dailyLeft();if(!ks.length){ks=P.moreDaily();save();}keep();if(!startReview(P.slotsOf(ks),{daily:true})){toast('Niente da ripassare adesso.');renderPath();return;}return hooks.setTab('path');}
  else if(a==='ripsat'){const sat=P.satById(ui.s);keep();if(!startReview(P.slotsOf(P.satReview(sat)),{sat})){toast('Niente da ripassare in questo satellite.');renderPath();return;}return hooks.setTab('path');}
+ else if(a==='esame'){const pl=P.pianeti().find(p=>p.id===ui.p);keep();if(!pl||!startExam(pl)){toast('L\'esame non è ancora disponibile.');renderPath();return;}return hooks.setTab('path');}
  else if(a==='go'){const sat=P.satById(ui.s),ps=P.passi(sat).find(p=>p.id===b.dataset.id);keep();return go(sat,ps,b.dataset.k);}
  keep();renderPath();
  if(a==='lvl'||a==='planet'||a==='sat')$('panel').scrollTop=0;

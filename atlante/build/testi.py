@@ -341,6 +341,9 @@ def controlla_percorsi():
             if n['tipo'] == 'satellite':
                 err += [f"{f}: passo {x}" for x in n.get('passi', []) if x not in nodi[n['id']]]
                 if n.get('caso') and n['caso'] not in casi: err.append(f"{f}: caso {n['caso']}")
+                # satellite ospite: sta dentro un satellite di questo percorso (Test UCBM: l'anatomia in «Anatomia e fisiologia»)
+                h = n.get('ospite_di')
+                if h and (h == n['id'] or not any(m['id'] == h and m['tipo'] == 'satellite' and not m.get('ospite_di') for m in P['nodi'])): err.append(f"{f}: ospite_di {h} di {n['id']}")
     if err: raise SystemExit('content/percorsi non valido:\n  ' + '\n  '.join(err[:30]))
     print('content/percorsi: nodi validi')
 

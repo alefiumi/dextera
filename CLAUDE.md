@@ -41,7 +41,7 @@ Dove questo file e la specifica differiscono, vale la specifica.
 - Fase 4 – Flotta (SQL: costellazioni, stagioni, equipaggi): v0.85.0, vedi «Flotta». File SQL da applicare dall'autore.
 - Fase 5 – Profilo e competenze (SQL: righe in badge_classes, dextera_profili): v0.86.0, vedi «Profilo e competenze». Online e SQL applicato il 19/11/2026. Casata ed equipaggi nel Profilo: v0.87.0; obiettivo del giorno e date d'esame: v0.88.0.
 - Fase 6 – Altri corsi e percorsi (SQL: dextera_studio): v0.89.0 (correzione v0.89.1), vedi «Altri corsi e percorsi». Online e SQL applicato il 19/11/2026.
-- Test UCBM, Biologia giocabile (nessun SQL): v0.90.0, vedi «Test UCBM». Chimica giocabile (solo contenuti); Fisica giocabile e simulazione completa: v0.90.1.
+- Test UCBM, Biologia giocabile (nessun SQL): v0.90.0, vedi «Test UCBM». Chimica giocabile (solo contenuti); Fisica giocabile e simulazione completa: v0.90.1. Percorso UCBM con il solo Test e l'anatomia dentro Biologia (satelliti ospiti): v0.91.0, vedi «Satelliti ospiti».
 - Corso di neurologia: contenuti (primo rilascio) e corso giocabile (v0.81.0, vedi «Corso di neurologia giocabile»), Palestra sul cervello (v0.82.0), gioco 3D (v0.83.0).
 - GitHub Pages attivo (ramo `main`, cartella radice): online su `alefiumi.github.io/dextera`.
 
@@ -711,7 +711,7 @@ descrizioni; quelle con fonte Z-Anatomy dicono da quale vaso nasce o dove sbocca
 - **Percorsi**: elenco in `content/index.json` → `percorsi` (id, nome, `file`; senza file = «in arrivo»: Fisioterapia, Medicina, MCB; `bozza`).
   Ogni file di `content/percorsi/` ha i nodi del gestionale e `corso` (il primo corso da aprire). `content.js` li carica tutti (`app.PERCORSI`,
   `app.PCAT`, `app.PBASE` = base); `applyStudio()` in `percorso.js` mette in `app.PERCORSO` quello scelto. `content/percorsi/ucbm.json` (bozza):
-  Test UCBM, Cuore e vasi (Cuore e Grandi vasi), Respiratorio, Neurologia (Basi ed Encefalo) e muscolo-scheletrico con il **solo passo Ossa**.
+  da v0.91.0 il solo corso Test UCBM; l'anatomia (cuore, respiratorio, neurologia, ossa) sta dentro Biologia come satelliti ospiti (vedi «Satelliti ospiti»).
   Nei percorsi parziali satellite acceso ed esame superato non vanno in `path_progress` (sono gli stessi nodi del percorso completo, dove
   servono tutti i passi): restano sul telefono in `S.path.loc {'<percorso>:<nodo>': data}` (`fullSat`/`fullPl`, `LOC` in `percorso.js`).
   Maestria, ripasso e passi fatti sono in comune tra i percorsi.
@@ -745,7 +745,7 @@ descrizioni; quelle con fonte Z-Anatomy dicono da quale vaso nasce o dove sbocca
 - Materie del Test UCBM visibili (v0.89.2, chiesto dall'autore): con il percorso UCBM il riquadro «Cosa studi?» (prima apertura e universo)
   ha «Le materie del test»: Biologia, Chimica e Fisica (20 + 20 + 20 domande), ognuna apribile con gli argomenti (`materieHtml()` in `path.js`,
   `arrivoDi(pid)` in `percorso.js`) e la fonte (`fonte` del corso in `mappa.json`: Allegato B del bando UCBM 2026/27, copia del testo in
-  `ucbm-allegato-b-programmi.txt` nelle note delle sessioni); sopra i corsi una riga dice che l'anatomia è la parte di Biologia già da studiare.
+  `ucbm-allegato-b-programmi.txt` nelle note delle sessioni); sopra i corsi una riga dice che l'anatomia è dentro Biologia, nell'argomento «Anatomia e fisiologia» (v0.91.0).
 
 ## Test UCBM: Biologia, Chimica e Fisica giocabili (v0.90.0–0.90.1)
 Scelte dell'autore: domande miste (nelle lezioni scelta tra 5 e risposta scritta, termine o numero; prove e simulazione solo formato del
@@ -780,6 +780,23 @@ test), 3 passi per satellite, una materia alla volta (prima Biologia), simulazio
   `importa_revisione.py` riporta a numero le correzioni numeriche di `scritta`.
 - Prova: `ucbm/prova.mjs` (26 controlli, solo Biologia), `ucbm-chi/prova.mjs` (28, con Chimica: 40 domande in 66 min 40 s), `ucbm-fis/prova.mjs` (29, simulazione completa) e la copia
   aggiornata della prova di fase 6 nelle note delle sessioni. Generatori dei testi (`ucbm/*.py`, `ucbm-chi/*.py`, `ucbm-fis/*.py`, `build.py`) nelle stesse note.
+
+## Satelliti ospiti (v0.91.0, `app_min` 0.91.0, contenuti 33, `ucbm.json` v5)
+Chiesto dall'autore: percorsi separati (Test UCBM, corso MCB, Medicina), ognuno con il suo universo. Un percorso può mostrare dentro un
+proprio satellite i satelliti di altri corsi, senza aprire quei corsi sulla mappa.
+- Nodo satellite con `"ospite_di": "<satellite dello stesso percorso>"`: contenuti, passi, chiavi di maestria e progressi restano quelli del
+  satellite originale (in comune con gli altri percorsi); la figura della lezione è quella del suo modulo. `controlla_percorsi` in `testi.py`
+  vuole che `ospite_di` punti a un satellite non ospite dello stesso percorso.
+- `percorso.js`: `ospiti(sat)` (gli ospiti di un satellite, per `ordine`), `hostOf(sat)`, `satById` li trova, `planetOf` dà il pianeta
+  dell'ospitante, `corsoNav(x)` il corso della navigazione (invece `corsoOf` resta il corso dei contenuti). `checkProgress`, l'indice delle
+  chiavi e il Ripasso del giorno contano anche gli ospiti; non entrano nella mappa del pianeta, nell'esame né nella simulazione.
+- `path.js`: nella scheda del satellite ospitante il riquadro «Anatomia da studiare» (`ospitiHtml`, raggruppati per corso con i passi);
+  le briciole e «su» di un ospite tornano all'ospitante. Caso clinico di un ospite: i distretti tra cui scegliere sono gli altri ospiti
+  dello stesso corso (`lezione.js`).
+- `ucbm.json`: 38 ospiti in `ucbm-bio-anatomia` (cuore e vasi, respiratorio, neurologia; muscolo-scheletrico con il solo passo Ossa).
+- Non ancora per percorso: Palestra per zone (cerca il corso del corpo tra i corsi del percorso), badge e competenze che contano i satelliti
+  dei corsi, XP, casate e campionato (vedi la proposta sulla gamification per percorso, da decidere con l'autore).
+- Prova: `osp/prova.mjs` (13 controlli) e `fase6c.mjs` (71, la prova di fase 6 adattata) nelle note delle sessioni.
 
 ## Mappa del percorso (`content/mappa.json`)
 Corso → 4 pianeti → 17 satelliti (con `ordine` della specifica) → 6 passi (`ossa`, `reperi`, `muscoli`, `connessioni`, `funzione`,

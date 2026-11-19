@@ -549,7 +549,7 @@ function casoScreen(L){
  const m=c.mid?mu(c.mid):null,nb=c.bid&&P.isNeuro(c.bid)?P.neuro(c.bid):null;
  if(L.stage==='h1'||L.stage==='h2'){
   if(!L.hq||L.hq.stage!==L.stage){
-   if(L.stage==='h1'){const others=shuffle(P.satelliti(null,P.corsoOf(sat)).filter(s=>s.id!==sat.id)).slice(0,3);L.hq={stage:'h1',q:'Quale distretto è coinvolto?',right:sat.nome,opts:shuffle([sat.nome,...others.map(s=>s.nome)])};}
+   if(L.stage==='h1'){const h=P.hostOf(sat),pool=h?P.ospiti(h).filter(s=>P.corsoOf(s)===P.corsoOf(sat)):P.satelliti(null,P.corsoOf(sat)),others=shuffle(pool.filter(s=>s.id!==sat.id)).slice(0,3);L.hq={stage:'h1',q:'Quale distretto è coinvolto?',right:sat.nome,opts:shuffle([sat.nome,...others.map(s=>s.nome)])};}
    else if(nb){const a=first(nb.f),pool=shuffle(Object.values(app.LEZ.neuro).map(x=>first(x.f)).filter(x=>x&&x!==a)).filter((x,i,arr)=>arr.indexOf(x)===i).slice(0,3);L.hq={stage:'h2',q:'Quale funzione è compromessa?',right:a,opts:shuffle([a,...pool])};}
    else{const a=m?.a||c.a,pool=shuffle(app.MOD.M.filter(x=>x.a&&x.a!==a).map(x=>x.a)).filter((x,i,arr)=>arr.indexOf(x)===i).slice(0,3);L.hq={stage:'h2',q:'Quale funzione è compromessa?',right:a,opts:shuffle([a,...pool])};}
   }

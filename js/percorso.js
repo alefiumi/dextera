@@ -67,8 +67,21 @@ export function satelliti(p,c){
  return (p?p.satelliti:pianeti(c).flatMap(x=>x.satelliti)).filter(s=>pnode(s.id)).slice().sort((a,b)=>ord(a.id)-ord(b.id));
 }
 const allPl=()=>corsi().flatMap(c=>pianeti(c));
-export const satById=id=>allPl().flatMap(p=>p.satelliti).find(s=>s.id===id);
-export const planetOf=sat=>allPl().find(p=>p.satelliti.includes(sat));
+// satelliti ospiti: un nodo satellite del percorso con «ospite_di»: <id di un satellite del percorso> porta dentro quel satellite un
+// satellite di un altro corso, con i passi scelti in «passi» (Test UCBM: l'anatomia dentro «Anatomia e fisiologia» di Biologia, così
+// l'universo del percorso mostra solo il corso del test). Contenuti, chiavi e progressi sono quelli del satellite originale (valgono in
+// tutti i percorsi); la figura viene dalle sue strutture. Non entrano nella mappa del pianeta, nell'esame né nella simulazione.
+const mapSat=id=>{for(const c of app.MAPPA.corsi)for(const p of c.pianeti)for(const s of p.satelliti)if(s.id===id)return s;return null;};
+export const ospiti=sat=>app.PERCORSO.nodi.filter(n=>n.tipo==='satellite'&&n.ospite_di===sat.id).sort((a,b)=>(a.ordine??99)-(b.ordine??99)).map(n=>mapSat(n.id)).filter(Boolean);
+const ownSats=()=>allPl().flatMap(p=>satelliti(p));
+const allSats=()=>{const o=ownSats();return [...o,...o.flatMap(ospiti)];};
+export const satById=id=>allSats().find(s=>s.id===id);
+// satellite che ospita (null se il satellite è del suo corso)
+export const hostOf=sat=>{const h=sat&&pnode(sat.id)?.ospite_di;return h?ownSats().find(s=>s.id===h)||null:null;};
+export const planetOf=sat=>{const t=hostOf(sat)||sat;return allPl().find(p=>p.satelliti.includes(t));};
+// corso della mappa del percorso in cui si trova un satellite o un pianeta (per un ospite: quello del satellite che lo ospita);
+// corsoOf() resta il corso dei contenuti (modulo, casi, nomi dei problemi)
+export const corsoNav=x=>{const pl=x&&x.satelliti?x:planetOf(x);return (pl&&corsi().find(c=>c.pianeti.includes(pl)))||corsoOf(x);};
 export const corsoOf=x=>app.MAPPA.corsi.find(c=>c.pianeti.includes(x)||c.pianeti.some(p=>p.satelliti.includes(x)))||corpoCorso();
 // corso di neurologia: strutture 'n.<voce>' con i testi in app.LEZ.neuro e i casi in app.LEZ.casi_neuro
 export const isNeuro=sid=>String(sid).startsWith('n.');
@@ -243,7 +256,7 @@ export const light=sat=>{const ks=satKeys(sat);if(!ks.length)return 1;const od=o
 export function checkProgress(){
  if(!ready())return [];
  const out=[],X=R().xp,now=new Date().toISOString();
- for(const sat of corsi().flatMap(c=>satelliti(null,c))){
+ for(const sat of corsi().flatMap(c=>satelliti(null,c)).flatMap(s=>[s,...ospiti(s)])){
   for(const ps of passi(sat)){
    if(ps.tipo==='progetto')continue;
    if(!dones.has(node(ps.id)?.stato)&&stepDone(ps)){setNode(ps.id,{stato:'fatto',fatto_il:now});gain(X.passo_fatto,true,[planetOf(sat)?.id]);out.push({t:'passo',sat,ps,xp:X.passo_fatto});}
@@ -314,7 +327,7 @@ let KI=null,KIm=null,KIp=null;
 function kidx(){
  if(KI&&KIm===app.MAPPA&&KIp===app.PERCORSO)return KI;
  KI={k:new Map(),s:new Map()};KIm=app.MAPPA;KIp=app.PERCORSO;
- for(const p of allPl())for(const sat of satelliti(p)){
+ for(const p of allPl())for(const sat of satelliti(p).flatMap(s=>[s,...ospiti(s)])){
   const ks=[];
   for(const ps of passi(sat)){if(ps.tipo==='progetto'||!Array.isArray(ps.strutture))continue;
    for(const sid of ps.strutture){const k=key(sid,ps.aspetto);ks.push([k,sid,ps]);
@@ -357,7 +370,7 @@ onBump((id,d)=>{if(d)reviewAnswer(id,d>0,true);});
 // chiavi scadute (oggi o prima) e usabili, le più in ritardo prima, a parità quelle con maestria più bassa
 function dueKeys(excl){
  const t=tdn(),out=[];
- for(const [k,r] of Object.entries(RV())){if(excl.has(k)||dueDay(r)>t)continue;const e=revEntry(k);if(!e||!isMine(corsoOf(e.sat))||!usable({...e.ps,strutture:[e.sid]}).length)continue;out.push(k);}
+ for(const [k,r] of Object.entries(RV())){if(excl.has(k)||dueDay(r)>t)continue;const e=revEntry(k);if(!e||!isMine(corsoNav(e.sat))||!usable({...e.ps,strutture:[e.sid]}).length)continue;out.push(k);}
  return out.sort((a,b)=>dueDay(RV()[a])-dueDay(RV()[b])||mastery(a)-mastery(b));
 }
 // ripassi di oggi: scelti una volta al giorno (al massimo 10); quelli rimandati non contano come scaduti per la luce

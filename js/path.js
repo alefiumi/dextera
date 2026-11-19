@@ -25,7 +25,7 @@ export function initPath(h){
   hooks.setTab('path');
  });
  // dal risultato della simulazione UCBM: «Studia …» apre il satellite
- setSimExit(sat=>{if(sat){ui.lvl='satellite';ui.s=sat.id;ui.c=P.corsoOf(sat).id;P.setCorso(ui.c);keep();}hooks.setTab('path');});
+ setSimExit(sat=>{if(sat){ui.lvl='satellite';ui.s=sat.id;ui.c=P.corsoNav(sat).id;P.setCorso(ui.c);keep();}hooks.setTab('path');});
 }
 
 // apre un satellite nella scheda Percorso (dal foglio della zona della Palestra)
@@ -129,13 +129,14 @@ export function renderPath(){
  if(!S.studio)return studioScreen(); // «Cosa studi?» alla prima apertura (fase 6)
  const rw=P.checkProgress();if(rw.length){save();head();toast(rwText(rw));}
  // il corso aperto segue il satellite (aperto dalla Palestra, dal ripasso o da un altro corso)
- const sat0=ui.lvl==='satellite'&&ui.s&&P.satById(ui.s);if(sat0&&P.corsoOf(sat0)!==P.corso()){ui.c=P.corsoOf(sat0).id;P.setCorso(ui.c);keep();}
+ const sat0=ui.lvl==='satellite'&&ui.s&&P.satById(ui.s);if(sat0&&P.corsoNav(sat0)!==P.corso()){ui.c=P.corsoNav(sat0).id;P.setCorso(ui.c);keep();}
  const g=P.guide(),C=P.corso();
  const sat=ui.s&&P.satById(ui.s),pl=ui.p&&P.pianeti().find(p=>p.id===ui.p);
  if(ui.lvl==='satellite'&&!sat)ui.lvl='sistema';if(ui.lvl==='pianeta'&&!pl)ui.lvl='sistema';
  const crumbs=ui.lvl==='universo'?[['universo','Universo']]:[['universo','Universo'],['sistema',C.nome]];
  const curP=ui.lvl==='satellite'?P.planetOf(sat):pl;
  if(ui.lvl==='pianeta'||ui.lvl==='satellite')crumbs.push(['pianeta',curP.nome,curP.id]);
+ const host=ui.lvl==='satellite'&&P.hostOf(sat);if(host)crumbs.push(['satellite',host.nome,host.id]);
  if(ui.lvl==='satellite')crumbs.push(['satellite',sat.nome,sat.id]);
  const bc=`<div class="crumbs" role="navigation" aria-label="Dove sei">${crumbs.map(([l,n,id],i)=>i===crumbs.length-1?`<span aria-current="page">${esc(n)}</span>`:`<button class="lnk" data-p="lvl" data-lvl="${l}"${id?` data-id="${esc(id)}"`:''}>${esc(n)}</button><span aria-hidden="true"> › </span>`).join('')}</div>`;
  const IC={mappa:'<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><ellipse cx="12" cy="12" rx="10" ry="4.2" fill="none" transform="rotate(-20 12 12)"/></svg>',elenco:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16" fill="none"/></svg>'};
@@ -144,7 +145,7 @@ export function renderPath(){
  const mapBody=ui.mode==='elenco'?`<div class="lcard">${listHtml(g)}</div>`:ui.lvl==='universo'?universeSvg():ui.lvl==='sistema'?systemSvg(g):planetSvg(curP,g,ui.lvl==='satellite'?sat:null);
  const side=ui.lvl==='satellite'?satHtml(sat,g):infoHtml(g,curP);
  // pulsante Indietro: sale di un livello (nell'app installata su iPhone non c'è il tasto del browser)
- const up=ui.lvl==='satellite'?['pianeta',curP.id]:ui.lvl==='pianeta'?['sistema']:ui.lvl==='sistema'?['universo']:null;
+ const up=ui.lvl==='satellite'?(host?['satellite',host.id]:['pianeta',curP.id]):ui.lvl==='pianeta'?['sistema']:ui.lvl==='sistema'?['universo']:null;
  const back=up?`<button class="pback" data-p="lvl" data-lvl="${up[0]}"${up[1]?` data-id="${esc(up[1])}"`:''} aria-label="Indietro">‹</button>`:'';
  $('panel').innerHTML=`<div class="path pv-${ui.lvl}"><section class="pmain" aria-label="Mappa del percorso"><div class="phead">${back}${bc}${tog}</div>${mapBody}</section>
   <div class="pside">${ui.lvl==='satellite'?side+topHtml(g):topHtml(g)+side}${glossary()}</div></div>`;
@@ -210,7 +211,7 @@ function studioForm(pid,sel,first){
  const cat=P.percorsiCat(),cs=P.corsiDi(pid),on=c=>!sel.length||sel.includes(c.id);
  return `<fieldset class="pstudio"><legend class="kick">Percorso</legend>${cat.map(x=>`<label class="popt${x.ok?'':' off'}"><input type="radio" name="spercorso" data-p="spercorso" value="${esc(x.id)}"${x.id===pid?' checked':''}${x.ok?'':' disabled'}>
    <span><b>${esc(x.nome)}</b>${x.bozza?' <small class="tag">bozza</small>':''}${x.ok?'':' <small class="mut">in arrivo</small>'}</span></label>`).join('')}</fieldset>
-  ${materieHtml(pid)}<fieldset class="pstudio"><legend class="kick">I tuoi corsi</legend>${testDi(pid).length?'<p class="mut">Già da studiare: l\'anatomia, che nel programma del test sta in Biologia («Anatomia e fisiologia dell\'uomo»).</p>':''}${cs.map(c=>`<label class="popt"><input type="checkbox" data-p="scorso" value="${esc(c.id)}"${on(c)?' checked':''}>
+  ${materieHtml(pid)}<fieldset class="pstudio"><legend class="kick">I tuoi corsi</legend>${testDi(pid).length?'<p class="mut">L\'anatomia che il test chiede è dentro Biologia, nell\'argomento «Anatomia e fisiologia»: si studia sulle figure dei corsi di anatomia.</p>':''}${cs.map(c=>`<label class="popt"><input type="checkbox" data-p="scorso" value="${esc(c.id)}"${on(c)?' checked':''}>
    <span>${icoOf(c)} <b>${esc(c.nome)}</b> <small class="mut">${P.pianeti(c).length||c.pianeti.length} pianeti</small></span></label>`).join('')}
 </fieldset>`;
 }
@@ -298,7 +299,7 @@ function listHtml(g){
  return P.pianeti().map(p=>`<h3 class="lp">🪐 ${esc(p.nome)} <span class="mut">· ${esc(glowTxt(P.planetGlow(p)))}</span>${P.examPassed(p)?` <span class="mut">· 🏅 ${esc(P.expertTitle(p))}</span>`:''}</h3><ul class="sl">`+P.satelliti(p).map(s=>srow(s,g)).join('')+'</ul>').join('');
 }
 function satHtml(sat,g){
- const st=P.look(sat),L=P.passi(sat),caso=P.casoOf(sat),pl=P.planetOf(sat),PR=probOf(P.corsoOf(sat));
+ const st=P.look(sat),L=P.passi(sat),caso=P.casoOf(sat),pl=P.planetOf(sat),PR=probOf(P.corsoOf(sat)),host=P.hostOf(sat);
  const steps=L.map((ps,i)=>{
   const open=P.stepOpen(sat,ps),done=P.stepDone(ps),nd=P.node(ps.id),use=P.usable(ps),stars=nd?.stelle||0,isG=ps===g.ps&&sat===g.sat;
   const prev=L.slice(0,i).filter(p=>!P.stepDone(p)).pop();
@@ -320,9 +321,20 @@ function satHtml(sat,g){
    <small class="mut">${state}${pct}${stars?` · <span aria-label="${stars} stelle su 3">${'⭐'.repeat(stars)}</span>`:''}</small>${act}</div></li>`;
  }).join('');
  const skip=sat.passi.filter(p=>p.salta).map(p=>p.nome).join(', '),nd=L.filter(P.stepDone).length;
- return `<div class="card info sat"><div class="kick">${esc(pl.nome)} · satellite</div><div class="sath"><h2>${esc(sat.nome)}</h2><span class="badge s-${st}">${symIcon(st)}${P.STATI[st]} · ${nd}/${L.length}</span></div>
+ return `<div class="card info sat"><div class="kick">${host?`${esc(host.nome)} · ${esc(P.corsoOf(sat).nome)}`:`${esc(pl.nome)} · satellite`}</div><div class="sath"><h2>${esc(sat.nome)}</h2><span class="badge s-${st}">${symIcon(st)}${P.STATI[st]} · ${nd}/${L.length}</span></div>
   ${pbar(nd,L.length)}${satRev(sat)}
-  ${skip?`<p class="mut">Passi saltati in questo satellite (non ci sono strutture): ${esc(skip)}.</p>`:''}<ol class="steps">${steps}</ol></div>`;
+  ${skip?`<p class="mut">Passi saltati in questo satellite (non ci sono strutture): ${esc(skip)}.</p>`:''}<ol class="steps">${steps}</ol></div>${ospitiHtml(sat,g)}`;
+}
+// satelliti ospiti (Test UCBM: l'anatomia dentro «Anatomia e fisiologia»), divisi per corso d'origine, con i passi scelti dal percorso
+function ospitiHtml(sat,g){
+ const O=P.ospiti(sat);if(!O.length)return '';
+ const by=new Map();for(const s of O){const c=P.corsoOf(s);if(!by.has(c))by.set(c,[]);by.get(c).push(s);}
+ const lit=O.filter(s=>P.lit(s)).length;
+ return `<div class="card info osp"><div class="kick">Sulla figura</div><h2>Anatomia da studiare</h2>
+  <p class="mut">Le strutture da riconoscere sulle figure, dai corsi di anatomia di Dextera: i progressi valgono anche in quei corsi e negli altri percorsi.</p>
+  ${pbar(lit,O.length)}<p class="pn">${lit} accesi su ${O.length}</p>
+  ${[...by].map(([c,L])=>{const ps=[...new Set(L.flatMap(s=>P.passi(s).map(x=>x.nome)))];
+   return `<h3 class="lp">${esc(c.nome)}${ps.length<=2?` <span class="mut">· ${esc(ps.join(', '))}</span>`:''}</h3><ul class="sl">${L.map(s=>srow(s,g)).join('')}</ul>`;}).join('')}</div>`;
 }
 // luce del satellite e «Ripassa questo satellite» (solo con strutture nel calendario del ripasso)
 function satRev(sat){
@@ -372,7 +384,7 @@ export function pathClick(e){
  e.preventDefault();
  const a=b.dataset.p;
  if(a==='mode'){ui.mode=b.dataset.v;}
- else if(a==='lvl'){ui.lvl=b.dataset.lvl;if(ui.lvl==='pianeta')ui.p=b.dataset.id;}
+ else if(a==='lvl'){ui.lvl=b.dataset.lvl;if(ui.lvl==='pianeta')ui.p=b.dataset.id;if(ui.lvl==='satellite'&&b.dataset.id)ui.s=b.dataset.id;}
  else if(a==='planet'){ui.lvl='pianeta';ui.p=b.dataset.id;}
  else if(a==='corso'){ui.c=b.dataset.id;P.setCorso(ui.c);ui.lvl='sistema';ui.arr='';}
  else if(a==='arrivo'){ui.arr=ui.arr===b.dataset.id?'':b.dataset.id;}

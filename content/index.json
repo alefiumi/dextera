@@ -1,6 +1,6 @@
 {
- "version": 32,
- "app_min": "0.90.0",
+ "version": 33,
+ "app_min": "0.91.0",
  "modules": [
   "corpo",
   "cervello",

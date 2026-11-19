@@ -1,7 +1,7 @@
 {
- "version": 4,
+ "version": 5,
  "formato": 1,
- "nota": "Bozza (fase 6) del percorso per il test d'ingresso UCBM, da far rivedere a un docente. Il corso «Test d'ingresso UCBM» ha tutte e tre le materie giocabili, Biologia (9 argomenti), Chimica (10) e Fisica (7), con 3 passi ciascuno: Concetti, Applicazione, Quesiti del test (quesiti in testi/ucbm-biologia.json, ucbm-chimica.json e ucbm-fisica.json, scritti dall'AI e da verificare), e la simulazione completa del test sempre aperta (60 domande, 100 minuti). Si gioca anche l'anatomia che il programma chiede: cuore e grandi vasi, apparato respiratorio, basi del sistema nervoso ed encefalo, le ossa dello scheletro (nel muscolo-scheletrico solo il passo Ossa di ogni satellite). I progressi valgono in tutti i percorsi.",
+ "nota": "Bozza (fase 6) del percorso per il test d'ingresso UCBM, da far rivedere a un docente. Il corso «Test d'ingresso UCBM» ha tutte e tre le materie giocabili, Biologia (9 argomenti), Chimica (10) e Fisica (7), con 3 passi ciascuno: Concetti, Applicazione, Quesiti del test (quesiti in testi/ucbm-biologia.json, ucbm-chimica.json e ucbm-fisica.json, scritti dall'AI e da verificare), e la simulazione completa del test sempre aperta (60 domande, 100 minuti). L'anatomia che il programma chiede sta dentro l'argomento «Anatomia e fisiologia» di Biologia, come satelliti ospiti (ospite_di) presi dai corsi di anatomia: cuore e grandi vasi, apparato respiratorio, basi del sistema nervoso ed encefalo, le ossa dello scheletro (del muscolo-scheletrico solo il passo Ossa di ogni satellite). L'universo del percorso mostra solo il corso del test. I progressi valgono in tutti i percorsi.",
  "id": "ucbm",
  "nome": "Test d'ingresso UCBM",
  "bozza": true,
@@ -11,9 +11,9 @@
   "version": 4
  },
  "rilascio": {
-  "numero": 4,
+  "numero": 5,
   "pubblicato_il": "2026-11-19",
-  "da": "a mano (fase 6, bozza): Biologia, Chimica e Fisica del test UCBM"
+  "da": "a mano (fase 6, bozza): Test UCBM con l'anatomia dentro «Anatomia e fisiologia» di Biologia"
  },
  "nodi": [
   {
@@ -197,214 +197,153 @@
    "ordine": 26
   },
   {
-   "id": "cuore-vasi",
-   "tipo": "corso",
-   "genitore": null,
-   "ordine": 2
-  },
-  {
-   "id": "cv-cuore",
-   "tipo": "pianeta",
-   "genitore": "cuore-vasi",
-   "ordine": 1,
-   "esame": {
-    "caso": null
-   }
-  },
-  {
    "id": "cv-camere",
    "tipo": "satellite",
-   "genitore": "cv-cuore",
+   "genitore": "ucbm-bio-anatomia",
    "ordine": 1,
    "passi": [
     "cv-camere.1",
     "cv-camere.2",
     "cv-camere.3"
    ],
-   "caso": "t7"
+   "caso": "t7",
+   "ospite_di": "ucbm-bio-anatomia"
   },
   {
    "id": "cv-coronarie",
    "tipo": "satellite",
-   "genitore": "cv-cuore",
+   "genitore": "ucbm-bio-anatomia",
    "ordine": 2,
    "passi": [
     "cv-coronarie.1",
     "cv-coronarie.2",
     "cv-coronarie.3"
    ],
-   "caso": "t1"
-  },
-  {
-   "id": "cv-grandi-vasi",
-   "tipo": "pianeta",
-   "genitore": "cuore-vasi",
-   "ordine": 2,
-   "esame": {
-    "caso": null
-   }
+   "caso": "t1",
+   "ospite_di": "ucbm-bio-anatomia"
   },
   {
    "id": "cv-aorta",
    "tipo": "satellite",
-   "genitore": "cv-grandi-vasi",
+   "genitore": "ucbm-bio-anatomia",
    "ordine": 3,
    "passi": [
     "cv-aorta.1",
     "cv-aorta.2",
     "cv-aorta.3"
    ],
-   "caso": "t6"
+   "caso": "t6",
+   "ospite_di": "ucbm-bio-anatomia"
   },
   {
    "id": "cv-vene-cave",
    "tipo": "satellite",
-   "genitore": "cv-grandi-vasi",
+   "genitore": "ucbm-bio-anatomia",
    "ordine": 4,
    "passi": [
     "cv-vene-cave.1",
     "cv-vene-cave.2",
     "cv-vene-cave.3"
    ],
-   "caso": null
+   "caso": null,
+   "ospite_di": "ucbm-bio-anatomia"
   },
   {
    "id": "cv-circolo-polmonare",
    "tipo": "satellite",
-   "genitore": "cv-grandi-vasi",
+   "genitore": "ucbm-bio-anatomia",
    "ordine": 5,
    "passi": [
     "cv-circolo-polmonare.1",
     "cv-circolo-polmonare.2",
     "cv-circolo-polmonare.3"
    ],
-   "caso": "t4"
-  },
-  {
-   "id": "respiratorio",
-   "tipo": "corso",
-   "genitore": null,
-   "ordine": 3
-  },
-  {
-   "id": "re-polmoni",
-   "tipo": "pianeta",
-   "genitore": "respiratorio",
-   "ordine": 1,
-   "esame": {
-    "caso": null
-   }
+   "caso": "t4",
+   "ospite_di": "ucbm-bio-anatomia"
   },
   {
    "id": "re-lobi",
    "tipo": "satellite",
-   "genitore": "re-polmoni",
-   "ordine": 1,
+   "genitore": "ucbm-bio-anatomia",
+   "ordine": 6,
    "passi": [
     "re-lobi.1",
     "re-lobi.2",
     "re-lobi.3"
    ],
-   "caso": "t3"
-  },
-  {
-   "id": "re-vie-aeree",
-   "tipo": "pianeta",
-   "genitore": "respiratorio",
-   "ordine": 2,
-   "esame": {
-    "caso": null
-   }
+   "caso": "t3",
+   "ospite_di": "ucbm-bio-anatomia"
   },
   {
    "id": "re-bronchi",
    "tipo": "satellite",
-   "genitore": "re-vie-aeree",
-   "ordine": 2,
+   "genitore": "ucbm-bio-anatomia",
+   "ordine": 7,
    "passi": [
     "re-bronchi.1",
     "re-bronchi.2",
     "re-bronchi.3"
    ],
-   "caso": "t2"
+   "caso": "t2",
+   "ospite_di": "ucbm-bio-anatomia"
   },
   {
    "id": "re-segmentari-dx",
    "tipo": "satellite",
-   "genitore": "re-vie-aeree",
-   "ordine": 3,
+   "genitore": "ucbm-bio-anatomia",
+   "ordine": 8,
    "passi": [
     "re-segmentari-dx.1",
     "re-segmentari-dx.2",
     "re-segmentari-dx.3"
    ],
-   "caso": "t9"
+   "caso": "t9",
+   "ospite_di": "ucbm-bio-anatomia"
   },
   {
    "id": "re-segmentari-sx",
    "tipo": "satellite",
-   "genitore": "re-vie-aeree",
-   "ordine": 4,
+   "genitore": "ucbm-bio-anatomia",
+   "ordine": 9,
    "passi": [
     "re-segmentari-sx.1",
     "re-segmentari-sx.2",
     "re-segmentari-sx.3"
    ],
-   "caso": null
-  },
-  {
-   "id": "re-vasi",
-   "tipo": "pianeta",
-   "genitore": "respiratorio",
-   "ordine": 3,
-   "esame": {
-    "caso": null
-   }
+   "caso": null,
+   "ospite_di": "ucbm-bio-anatomia"
   },
   {
    "id": "re-arterie",
    "tipo": "satellite",
-   "genitore": "re-vasi",
-   "ordine": 5,
+   "genitore": "ucbm-bio-anatomia",
+   "ordine": 10,
    "passi": [
     "re-arterie.1",
     "re-arterie.2",
     "re-arterie.3"
    ],
-   "caso": null
+   "caso": null,
+   "ospite_di": "ucbm-bio-anatomia"
   },
   {
    "id": "re-vene",
    "tipo": "satellite",
-   "genitore": "re-vasi",
-   "ordine": 6,
+   "genitore": "ucbm-bio-anatomia",
+   "ordine": 11,
    "passi": [
     "re-vene.1",
     "re-vene.2",
     "re-vene.3"
    ],
-   "caso": null
-  },
-  {
-   "id": "neurologia",
-   "tipo": "corso",
-   "genitore": null,
-   "ordine": 4
-  },
-  {
-   "id": "neuro-basi",
-   "tipo": "pianeta",
-   "genitore": "neurologia",
-   "ordine": 1,
-   "esame": {
-    "caso": null
-   }
+   "caso": null,
+   "ospite_di": "ucbm-bio-anatomia"
   },
   {
    "id": "n-neurone",
    "tipo": "satellite",
-   "genitore": "neuro-basi",
-   "ordine": 1,
+   "genitore": "ucbm-bio-anatomia",
+   "ordine": 12,
    "passi": [
     "n-neurone.1",
     "n-neurone.2",
@@ -412,87 +351,84 @@
     "n-neurone.4",
     "n-neurone.6"
    ],
-   "caso": "n1"
+   "caso": "n1",
+   "ospite_di": "ucbm-bio-anatomia"
   },
   {
    "id": "n-potenziale",
    "tipo": "satellite",
-   "genitore": "neuro-basi",
-   "ordine": 2,
+   "genitore": "ucbm-bio-anatomia",
+   "ordine": 13,
    "passi": [
     "n-potenziale.1",
     "n-potenziale.2",
     "n-potenziale.3",
     "n-potenziale.6"
    ],
-   "caso": null
+   "caso": null,
+   "ospite_di": "ucbm-bio-anatomia"
   },
   {
    "id": "n-sinapsi",
    "tipo": "satellite",
-   "genitore": "neuro-basi",
-   "ordine": 3,
+   "genitore": "ucbm-bio-anatomia",
+   "ordine": 14,
    "passi": [
     "n-sinapsi.1",
     "n-sinapsi.2",
     "n-sinapsi.3",
     "n-sinapsi.6"
    ],
-   "caso": null
+   "caso": null,
+   "ospite_di": "ucbm-bio-anatomia"
   },
   {
    "id": "n-riflessi",
    "tipo": "satellite",
-   "genitore": "neuro-basi",
-   "ordine": 4,
+   "genitore": "ucbm-bio-anatomia",
+   "ordine": 15,
    "passi": [
     "n-riflessi.1",
     "n-riflessi.2",
     "n-riflessi.3",
     "n-riflessi.6"
    ],
-   "caso": null
+   "caso": null,
+   "ospite_di": "ucbm-bio-anatomia"
   },
   {
    "id": "n-sostanze",
    "tipo": "satellite",
-   "genitore": "neuro-basi",
-   "ordine": 5,
+   "genitore": "ucbm-bio-anatomia",
+   "ordine": 16,
    "passi": [
     "n-sostanze.1",
     "n-sostanze.2",
     "n-sostanze.3",
     "n-sostanze.6"
    ],
-   "caso": null
-  },
-  {
-   "id": "neuro-encefalo",
-   "tipo": "pianeta",
-   "genitore": "neurologia",
-   "ordine": 2,
-   "esame": {
-    "caso": null
-   }
+   "caso": null,
+   "ospite_di": "ucbm-bio-anatomia"
   },
   {
    "id": "n-encefalo",
    "tipo": "satellite",
-   "genitore": "neuro-encefalo",
-   "ordine": 6,
+   "genitore": "ucbm-bio-anatomia",
+   "ordine": 17,
    "passi": [
     "n-encefalo.1",
     "n-encefalo.2",
     "n-encefalo.3",
     "n-encefalo.6"
    ],
-   "caso": null
+   "caso": null,
+   "ospite_di": "ucbm-bio-anatomia"
   },
   {
    "id": "n-tronco",
    "tipo": "satellite",
-   "genitore": "neuro-encefalo",
-   "ordine": 7,
+   "genitore": "ucbm-bio-anatomia",
+   "ordine": 18,
    "passi": [
     "n-tronco.1",
     "n-tronco.2",
@@ -500,13 +436,14 @@
     "n-tronco.4",
     "n-tronco.6"
    ],
-   "caso": null
+   "caso": null,
+   "ospite_di": "ucbm-bio-anatomia"
   },
   {
    "id": "n-cervelletto",
    "tipo": "satellite",
-   "genitore": "neuro-encefalo",
-   "ordine": 8,
+   "genitore": "ucbm-bio-anatomia",
+   "ordine": 19,
    "passi": [
     "n-cervelletto.1",
     "n-cervelletto.2",
@@ -514,13 +451,14 @@
     "n-cervelletto.4",
     "n-cervelletto.6"
    ],
-   "caso": null
+   "caso": null,
+   "ospite_di": "ucbm-bio-anatomia"
   },
   {
    "id": "n-limbico",
    "tipo": "satellite",
-   "genitore": "neuro-encefalo",
-   "ordine": 9,
+   "genitore": "ucbm-bio-anatomia",
+   "ordine": 20,
    "passi": [
     "n-limbico.1",
     "n-limbico.2",
@@ -528,13 +466,14 @@
     "n-limbico.4",
     "n-limbico.6"
    ],
-   "caso": "n12"
+   "caso": "n12",
+   "ospite_di": "ucbm-bio-anatomia"
   },
   {
    "id": "n-protezione",
    "tipo": "satellite",
-   "genitore": "neuro-encefalo",
-   "ordine": 10,
+   "genitore": "ucbm-bio-anatomia",
+   "ordine": 21,
    "passi": [
     "n-protezione.1",
     "n-protezione.2",
@@ -542,219 +481,195 @@
     "n-protezione.4",
     "n-protezione.6"
    ],
-   "caso": "n2"
-  },
-  {
-   "id": "muscolo-scheletrico",
-   "tipo": "corso",
-   "genitore": null,
-   "ordine": 5
-  },
-  {
-   "id": "arto-inferiore",
-   "tipo": "pianeta",
-   "genitore": "muscolo-scheletrico",
-   "ordine": 1,
-   "esame": {
-    "caso": null
-   }
+   "caso": "n2",
+   "ospite_di": "ucbm-bio-anatomia"
   },
   {
    "id": "piede",
    "tipo": "satellite",
-   "genitore": "arto-inferiore",
-   "ordine": 1,
+   "genitore": "ucbm-bio-anatomia",
+   "ordine": 22,
    "passi": [
     "piede.1"
    ],
-   "caso": null
+   "caso": null,
+   "ospite_di": "ucbm-bio-anatomia"
   },
   {
    "id": "gamba",
    "tipo": "satellite",
-   "genitore": "arto-inferiore",
-   "ordine": 2,
+   "genitore": "ucbm-bio-anatomia",
+   "ordine": 23,
    "passi": [
     "gamba.1"
    ],
-   "caso": null
+   "caso": null,
+   "ospite_di": "ucbm-bio-anatomia"
   },
   {
    "id": "ginocchio",
    "tipo": "satellite",
-   "genitore": "arto-inferiore",
-   "ordine": 3,
+   "genitore": "ucbm-bio-anatomia",
+   "ordine": 24,
    "passi": [
     "ginocchio.1"
    ],
-   "caso": null
+   "caso": null,
+   "ospite_di": "ucbm-bio-anatomia"
   },
   {
    "id": "coscia",
    "tipo": "satellite",
-   "genitore": "arto-inferiore",
-   "ordine": 4,
+   "genitore": "ucbm-bio-anatomia",
+   "ordine": 25,
    "passi": [
     "coscia.1"
    ],
-   "caso": null
+   "caso": null,
+   "ospite_di": "ucbm-bio-anatomia"
   },
   {
    "id": "anca",
    "tipo": "satellite",
-   "genitore": "arto-inferiore",
-   "ordine": 5,
+   "genitore": "ucbm-bio-anatomia",
+   "ordine": 26,
    "passi": [
     "anca.1"
    ],
-   "caso": null
-  },
-  {
-   "id": "colonna-tronco",
-   "tipo": "pianeta",
-   "genitore": "muscolo-scheletrico",
-   "ordine": 2,
-   "esame": {
-    "caso": null
-   }
+   "caso": null,
+   "ospite_di": "ucbm-bio-anatomia"
   },
   {
    "id": "schiena",
    "tipo": "satellite",
-   "genitore": "colonna-tronco",
-   "ordine": 6,
+   "genitore": "ucbm-bio-anatomia",
+   "ordine": 27,
    "passi": [
     "schiena.1"
    ],
-   "caso": null
+   "caso": null,
+   "ospite_di": "ucbm-bio-anatomia"
   },
   {
    "id": "colonna",
    "tipo": "satellite",
-   "genitore": "colonna-tronco",
-   "ordine": 7,
+   "genitore": "ucbm-bio-anatomia",
+   "ordine": 28,
    "passi": [
     "colonna.1"
    ],
-   "caso": null
+   "caso": null,
+   "ospite_di": "ucbm-bio-anatomia"
   },
   {
    "id": "torace",
    "tipo": "satellite",
-   "genitore": "colonna-tronco",
-   "ordine": 9,
+   "genitore": "ucbm-bio-anatomia",
+   "ordine": 29,
    "passi": [
     "torace.1"
    ],
-   "caso": null
+   "caso": null,
+   "ospite_di": "ucbm-bio-anatomia"
   },
   {
    "id": "addome",
    "tipo": "satellite",
-   "genitore": "colonna-tronco",
-   "ordine": 10,
+   "genitore": "ucbm-bio-anatomia",
+   "ordine": 30,
    "passi": [
     "addome.1"
    ],
-   "caso": null
-  },
-  {
-   "id": "arto-superiore",
-   "tipo": "pianeta",
-   "genitore": "muscolo-scheletrico",
-   "ordine": 3,
-   "esame": {
-    "caso": null
-   }
+   "caso": null,
+   "ospite_di": "ucbm-bio-anatomia"
   },
   {
    "id": "spalla",
    "tipo": "satellite",
-   "genitore": "arto-superiore",
-   "ordine": 8,
+   "genitore": "ucbm-bio-anatomia",
+   "ordine": 31,
    "passi": [
     "spalla.1"
    ],
-   "caso": null
+   "caso": null,
+   "ospite_di": "ucbm-bio-anatomia"
   },
   {
    "id": "braccio",
    "tipo": "satellite",
-   "genitore": "arto-superiore",
-   "ordine": 11,
+   "genitore": "ucbm-bio-anatomia",
+   "ordine": 32,
    "passi": [
     "braccio.1"
    ],
-   "caso": null
+   "caso": null,
+   "ospite_di": "ucbm-bio-anatomia"
   },
   {
    "id": "avambraccio",
    "tipo": "satellite",
-   "genitore": "arto-superiore",
-   "ordine": 12,
+   "genitore": "ucbm-bio-anatomia",
+   "ordine": 33,
    "passi": [
     "avambraccio.1"
    ],
-   "caso": null
+   "caso": null,
+   "ospite_di": "ucbm-bio-anatomia"
   },
   {
    "id": "mano",
    "tipo": "satellite",
-   "genitore": "arto-superiore",
-   "ordine": 13,
+   "genitore": "ucbm-bio-anatomia",
+   "ordine": 34,
    "passi": [
     "mano.1"
    ],
-   "caso": null
-  },
-  {
-   "id": "testa-collo",
-   "tipo": "pianeta",
-   "genitore": "muscolo-scheletrico",
-   "ordine": 4,
-   "esame": {
-    "caso": null
-   }
+   "caso": null,
+   "ospite_di": "ucbm-bio-anatomia"
   },
   {
    "id": "collo",
    "tipo": "satellite",
-   "genitore": "testa-collo",
-   "ordine": 14,
+   "genitore": "ucbm-bio-anatomia",
+   "ordine": 35,
    "passi": [
     "collo.1"
    ],
-   "caso": null
+   "caso": null,
+   "ospite_di": "ucbm-bio-anatomia"
   },
   {
    "id": "cranio",
    "tipo": "satellite",
-   "genitore": "testa-collo",
-   "ordine": 15,
+   "genitore": "ucbm-bio-anatomia",
+   "ordine": 36,
    "passi": [
     "cranio.1"
    ],
-   "caso": null
+   "caso": null,
+   "ospite_di": "ucbm-bio-anatomia"
   },
   {
    "id": "faccia",
    "tipo": "satellite",
-   "genitore": "testa-collo",
-   "ordine": 16,
+   "genitore": "ucbm-bio-anatomia",
+   "ordine": 37,
    "passi": [
     "faccia.1"
    ],
-   "caso": null
+   "caso": null,
+   "ospite_di": "ucbm-bio-anatomia"
   },
   {
    "id": "visceri-testa",
    "tipo": "satellite",
-   "genitore": "testa-collo",
-   "ordine": 17,
+   "genitore": "ucbm-bio-anatomia",
+   "ordine": 38,
    "passi": [
     "visceri-testa.1"
    ],
-   "caso": null
+   "caso": null,
+   "ospite_di": "ucbm-bio-anatomia"
   }
  ]
 }

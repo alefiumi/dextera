@@ -9,7 +9,13 @@
      stanno in una cache a parte (MODEL_CACHE), che non si riscarica a ogni nuova versione dell'app: all'installazione
      si salva la base (motore e scheletro), ogni altro strato la prima volta che viene richiesto con la rete.
      Quando cambi un file in atlante/vendor/ o un .glb, aumenta MODEL_VERSION. */
-const APP_VERSION = '68';
+// Versione dell'app (numerazione classica, MAGGIORE.MINORE.CORREZIONE, fase «alpha»):
+//   0   → 1 quando l'app esce dalla prova (rilascio pubblico, fase 7);
+//   68  → +1 per ogni funzione nuova pubblicata (la CORREZIONE riparte da 0);
+//   .X  → +1 per ogni commit che cambia un file dell'app (correzioni e ritocchi).
+// È anche il nome della cache: cambiandola il browser riscarica l'app. L'app la legge dal nome della cache (install.js).
+const APP_STAGE = 'alpha';
+const APP_VERSION = '0.68.1';
 const APP_CACHE = 'dextera-app-' + APP_VERSION;
 const CONTENT_PREFIX = 'dextera-content-';
 const MODEL_VERSION = '1';

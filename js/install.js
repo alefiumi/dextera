@@ -37,6 +37,12 @@ export async function offlineReady(){
  return k.some(x=>x.startsWith('dextera-app-'))&&k.some(x=>x.startsWith('dextera-content-'));
 }
 
+// versione dell'app («alpha v0.68.1»), letta dal nome della cache dell'app (la scrive sw.js): c'è anche offline
+export async function appVersion(){
+ try{const k=(await caches.keys()).filter(x=>x.startsWith('dextera-app-')).map(x=>x.slice(12));
+  const v=k.sort((a,b)=>a.localeCompare(b,undefined,{numeric:true})).pop();return v?(/^\d+$/.test(v)?'v0.'+v:'v'+v):'';}catch(e){return '';}
+}
+export async function fillVersion(root=document){const v=await appVersion();root.querySelectorAll('[data-appv]').forEach(e=>{e.textContent=v?`Dextera alpha ${v}`:'Dextera alpha';});}
 export async function showInstall(){
  const p=platform(),me=HOW[p],inst=isStandalone();
  const ready=await offlineReady();
@@ -50,7 +56,8 @@ export async function showInstall(){
    (me?`<div class="sub">${me[0]}</div><p>${me[1]}</p>`:'<p>Apri questa pagina sul telefono e usa la voce del menu del browser per aggiungerla alla schermata Home.</p>')+
    '<p class="mut">Dopo l\'installazione apri l\'app <b>dall\'icona</b> una volta con la connessione e aspetta il messaggio "Pronta": da lì funziona anche in modalità aereo.</p>'+
    `<details><summary class="mut">Altri telefoni e browser</summary>${others}</details>`)+
-  '<button class="btn alt act" data-act="back">Indietro</button>';
+  '<p class="note" data-appv>Dextera alpha</p><button class="btn alt act" data-act="back">Indietro</button>';
+ fillVersion($('panel'));
 }
 
 /* ---------- installazione guidata ---------- */

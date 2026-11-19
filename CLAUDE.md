@@ -127,6 +127,11 @@ Codice di BodyMania con nome, chiavi e schede di Dextera. Diviso in:
   `dextera-3d-<MODEL_VERSION>`.
   Il service worker copia in cache l'elenco `APP_FILES` all'installazione e serve l'app dalla cache; all'installazione
   scarica anche i contenuti se la versione è cambiata (una versione nuova dell'app può richiedere il formato nuovo).
+  **Versione dell'app** (dal 19/11/2026, numerazione classica MAGGIORE.MINORE.CORREZIONE, fase «alpha»): `APP_VERSION` in `sw.js` è
+  per esempio `'0.69.0'` e nell'app si legge «Dextera alpha v0.69.0» (profilo, Privacy e dati; pannello Installa; `appVersion()` in
+  `install.js` la ricava dal nome della cache). 0 → 1 quando l'app esce dalla prova (rilascio pubblico); il numero di mezzo +1 per ogni
+  funzione nuova (la correzione riparte da 0); l'ultimo +1 per ogni commit che cambia un file dell'app (correzioni e ritocchi).
+  Prima del 19/11 era un numero solo (fino a 68). I contenuti (`version` dei JSON) restano numeri interi a parte.
   **Quando modifichi o aggiungi un file dell'app, aumenta `APP_VERSION` in `sw.js`** (e aggiorna `APP_FILES`
   se aggiungi o togli file), altrimenti chi ha l'app installata continua a usare la versione vecchia.
   I contenuti stanno in una cache separata per versione: a ogni avvio con rete il service worker legge

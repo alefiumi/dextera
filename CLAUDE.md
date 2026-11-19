@@ -387,8 +387,11 @@ descrizioni; quelle con fonte Z-Anatomy dicono da quale vaso nasce o dove sbocca
   maestria, prova «Lo so già», quiz finale, caso clinico con ipotesi), `js/path.js` (mappa SVG universo → sistema → pianeta → satellite,
   Elenco, Continua, glossario), `js/segnala.js` (coda `dextera-segnalazioni`, dati segnalati `dextera-segnalati`).
 - Dati: `content/regole.json` (numeri), `content/percorsi/base.json` (formato dei nodi del gestionale; `caso: null` = quiz finale finché
-  l'autore non abbina i casi), `content/lezioni.json` (generato da `testi.py`: reperi, id delle voci, stati non «da verificare»).
-- Solo 2D: muscoli e reperi non si toccano nel 2D (muscoli: scelta e nome; reperi: tocco sull'osso). Tocco 3D: da fare.
+  il satellite non ha un caso; abbinati il 19/11/2026, v4: gamba c3, ginocchio c8, coscia c6, anca c1, spalla c2, braccio c14, avambraccio c10,
+  mano c9, collo c13, faccia c20; senza un caso adatto piede, schiena, colonna, torace, addome, cranio, visceri della testa), `content/lezioni.json` (generato da `testi.py`: reperi, id delle voci, stati non «da verificare»).
+- Nelle lezioni muscoli e reperi non si toccano nel 2D (muscoli: scelta e nome; reperi: tocco sull'osso). Tocco sul 3D: vedi «Corso del corpo sul modello 3D».
+- Casi con un osso per risposta (`bid`, gruppo del 2D: `rotula`, `carpo`): `caseIds()` in `percorso.js` li porta alle ossa del gruppo, così
+  valgono per l'esame del pianeta (`esameCasi`) e per il distretto giusto (`caseSat`); prima finivano nel primo satellite del pianeta.
 - SQL: `supabase/migrations/20261121090000_dextera_percorso.sql` (path_progress, dextera_settings, error_reports, error_report_flags,
   vista admin.segnalazioni), provato con PGlite (36 prove RLS). Applicato dall'autore il 18/11/2026 (tabelle, RLS e trigger controllati; Security Advisor senza avvisi nuovi).
 - Aspetto (18/11/2026, sul modello del prototipo): due zone, `.pmain` (briciole, Mappa/Elenco e mappa su cielo stellato con pianeti sfumati)
@@ -442,7 +445,7 @@ descrizioni; quelle con fonte Z-Anatomy dicono da quale vaso nasce o dove sbocca
 - Caso dell'esame: `esame.caso` nei nodi pianeta di `content/percorsi/base.json` (formato del gestionale); null = in automatico i casi la cui
   risposta è un muscolo del pianeta (`esameCasi()`).
 - SQL: `supabase/migrations/20261122090000_dextera_ripasso.sql` (review_items con RLS; vince il ripasso più recente, `ripassato_il`, con un
-  trigger), provato con PGlite (20 prove). Da applicare dall'autore DOPO aver pubblicato l'app; senza la tabella il calendario resta sul
+  trigger), provato con PGlite (20 prove). Applicato dall'autore (confermato il 19/11/2026); senza la tabella il calendario restava sul
   telefono (avviso nel profilo). Sincronizzazione in `syncRipasso()` di `account.js`; «Scarica i miei dati» include `ripasso`.
 
 ## Esame del pianeta (fase 2, secondo rilascio, v0.77.0)
@@ -568,6 +571,19 @@ descrizioni; quelle con fonte Z-Anatomy dicono da quale vaso nasce o dove sbocca
   In coda `{module:'3d', mode:'neuro'}`.
 - Prova: `neuro3d.mjs` (copia nelle note delle sessioni): gioco dalla Palestra, tocchi veri sul modello (punto trovato con il raggio),
   una risposta sbagliata, maestria `n.`, gioco dal foglio della zona con le sole strutture del satellite.
+
+## Corso del corpo sul modello 3D (v0.84.0)
+- Nei passi Ossa, Reperi e Muscoli aperti di un satellite del corpo c'è «🧊 Tocca sul modello 3D» (`data-p="3d"` in `path.js`); nel foglio di una
+  zona della Palestra (corpo) i riquadri «Ossa/Reperi/Muscoli sul 3D» (`T3DN` in `game.js`). Aprono i giochi 3D di sempre (`ossa`, `reperi`,
+  `muscoli`) con le sole strutture del satellite: `P.corpo3d([sat], tipo)` → [{id, key}] (strutture usabili del passo, chiave del corso),
+  mandate da `play3d(set, sat)` in `ui.js` nel messaggio del gioco (`sel`, `lab` = nome del satellite).
+- Atlante (`SEL_ID` in `atlante.js`): riconosce le parti dal nome inglese della fonte (`o.<slug>`, `r.<slug>`, `<slug>` del muscolo: tutti gli
+  id della mappa coincidono), tiene solo quelle del satellite tra le visibili da fuori, titolo «Ossa · Gamba», vista sulla zona dal lato della
+  struttura chiesta (`zoneView()`: il repere dalla sua direzione verso fuori, ossa e muscoli dallo spostamento rispetto al centro della zona).
+  La risposta torna sulla chiave del corso (`o.`, `r.`, `m.`, campo `ck`): sale la stessa maestria della lezione e vale come ripasso.
+  «Rigioca» resta sul satellite (`GAME.again`). Senza satellite i giochi 3D della Palestra restano quelli di prima (chiavi `3d:<serie>:<nome>`).
+- Prova: `corpo3d.mjs` (copia nelle note delle sessioni): casi abbinati e distretti, pulsante nel satellite, tocchi veri su ossa, muscoli e
+  reperi della gamba, maestria `o.`/`m.`/`r.`, Rigioca, foglio della zona, gioco 3D generale invariato; dati di BodyMania intatti.
 
 ## Mappa del percorso (`content/mappa.json`)
 Corso → 4 pianeti → 17 satelliti (con `ordine` della specifica) → 6 passi (`ossa`, `reperi`, `muscoli`, `connessioni`, `funzione`,

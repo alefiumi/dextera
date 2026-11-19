@@ -699,6 +699,10 @@ const SETS={
  polmoni:{n:'Polmoni',ask:'Tocca'}};
 // casi clinici e nervi cranici arrivano dall'app con il messaggio del gioco (stanno nei contenuti dell'app)
 const EXTRA={cases:[],nc:[],neuro:[]};
+/* Corso del corpo: con un satellite l'app manda le strutture dei suoi passi (sel: [{id, key}], id del corso o.<slug>, r.<slug>,
+   <slug> del muscolo) e il nome del satellite (lab). Si chiedono solo quelle (tra le visibili da fuori), la vista si avvicina alla zona
+   e la risposta torna sulla chiave del corso (o., r., m.): sale la stessa maestria della lezione e vale come ripasso. */
+const SEL_ID={ossa:k=>'o.'+slug(k),reperi:k=>'r.'+slug(k),muscoli:k=>slug(k)};
 /* Neurologia: l'app manda le voci del corso con la loro parte del modello (ref). A ogni domanda resta acceso solo lo strato della
    struttura (encefalo, midollo, nervi o meningi): le strutture del corso di quello strato si vedono intere, il resto è trasparente,
    così anche i nuclei profondi (talamo, amigdala…) e i fasci del midollo si toccano. Gli involucri grandi (sostanza bianca del
@@ -719,6 +723,16 @@ function neuroScene(it){
  dir.y=0;if(dir.length()<0.002)dir.set(0,0,1);dir.normalize();dir.y=0.25;dir.normalize();
  const r=Math.max(tb.getSize(new THREE.Vector3()).length()/2,0.04),dist=Math.max(0.3,r*1.6/Math.tan(THREE.MathUtils.degToRad(camera.fov)/2)/Math.min(1,camera.aspect));
  flyTo(tc.clone().addScaledVector(dir,dist),tc);
+}
+// satellite del corso del corpo: la zona intera, vista dal lato della struttura chiesta (il repere dalla sua direzione verso fuori;
+// ossa e muscoli dallo spostamento in orizzontale rispetto al centro della zona), così anche ciò che sta dietro si tocca senza girare
+function zoneView(G){
+ const zb=G.zbox,zc=zb.getCenter(new THREE.Vector3()),it=G.cur,dir=new THREE.Vector3();
+ if(G.set==='reperi'){const l=lmTargets(it).find(l=>l.p.x<=0.001)||lmTargets(it)[0];if(l)dir.copy(l.d);}
+ else{const t=targets(it),r=t.filter(m=>m.userData.side!=='l');if(t.length)dir.copy(boxOf(r.length?r:t).getCenter(new THREE.Vector3()).sub(zc));}
+ dir.y=0;if(dir.length()<0.002)dir.set(0,0,1);dir.normalize();dir.y=0.2;dir.normalize();
+ const rad=Math.max(zb.getSize(new THREE.Vector3()).length()/2,0.05),dist=Math.max(0.3,rad*1.35/Math.tan(THREE.MathUtils.degToRad(camera.fov)/2)/Math.min(1,camera.aspect));
+ flyTo(zc.clone().addScaledVector(dir,dist),zc);
 }
 // zone del gioco Ricomponi, dai gruppi della fonte (Terminologia Anatomica)
 const ZONES=[
@@ -846,7 +860,8 @@ const lmTargets=it=>LMS.filter(l=>l.b===it.key);
 async function startGame(set,extra){
  if(!SETS[set])return;
  if(extra){if(extra.cases)EXTRA.cases=extra.cases;if(extra.nc)EXTRA.nc=extra.nc;if(extra.neuro)EXTRA.neuro=extra.neuro;}
- GAME={set,q:0,total:8,hearts:3,score:0,gain:0,cur:null,locked:false,used:new Set(),last:null,pool:null,marks:[]};
+ const sel=SEL_ID[set]&&Array.isArray(extra?.sel)?new Map(extra.sel.filter(x=>x&&typeof x.id==='string'&&typeof x.key==='string').map(x=>[x.id,x.key])):null;
+ GAME={set,q:0,total:8,hearts:3,score:0,gain:0,cur:null,locked:false,used:new Set(),last:null,pool:null,marks:[],zsel:sel,lab:sel?String(extra.lab||''):'',again:sel?{sel:extra.sel,lab:extra.lab}:null};
  document.body.classList.add('game');
  S.mus=S.combo=S.lm=S.part=null;S.list=null;S.cut.ax=null;S.lev=0;S.mv='both';
  for(const k in V)V[k]=false;S.bones='on';S.allLm=false;S.on={cuore:false,polmoni:false};S.solo=null;meshes.forEach(m=>m.userData.hidden=false);
@@ -864,6 +879,10 @@ async function startGame(set,extra){
   meshes.forEach(m=>{if(m.userData.layer==='nervi'&&!crNum(m.userData))m.userData.hidden=true;}); // solo i 12 nervi cranici
   if(!brainBox)brainBox=boxOf(meshes.filter(m=>m.userData.layer==='encefalo'&&m.userData.st===2));}
  S.loading=false;
+ if(sel){GAME.pool=GAME.pool.filter(i=>sel.has(SEL_ID[set](i.key))).map(i=>({...i,ck:sel.get(SEL_ID[set](i.key))}));GAME.total=Math.min(8,GAME.pool.length);
+  // riquadro della zona: le strutture del satellite (lato destro), per avvicinare la vista
+  const box=new THREE.Box3();for(const it of GAME.pool){if(set==='reperi')lmTargets(it).filter(l=>l.p.x<=0.001).forEach(l=>box.expandByPoint(l.p));else{const t=targets(it),r=t.filter(m=>m.userData.side!=='l');(r.length?r:t).forEach(m=>box.expandByObject(m));}}
+  GAME.zbox=box.isEmpty()?null:box;}
  if(!GAME.pool.length){GAME.empty=true;refresh();return;}
  if(set==='caso')GAME.total=Math.min(5,GAME.pool.length);
  if(set==='neuro'){GAME.total=Math.min(8,GAME.pool.length);S.bones='ghost';}
@@ -965,6 +984,7 @@ function nextGameQ(){
   flyTo(c.clone().addScaledVector(new THREE.Vector3(0,-0.55,1).normalize(),dist),c);
  }else if(G.set==='cuore'||G.set==='polmoni')flySys(G.set,'front');
  else if(G.set==='neuro')neuroScene(G.cur);
+ else if(G.zbox)zoneView(G);
  else flyTo(center.clone().add(new THREE.Vector3(0,0,1).multiplyScalar(fitDist())),center.clone());
 }
 function gameTap(x,y){
@@ -996,7 +1016,7 @@ function gameTap(x,y){
  }
  G.locked=true;G.hint='';G.q++;
  if(ok){G.score++;G.gain+=10;}else G.hearts--;
- toApp({type:'res',ok,key:G.set==='neuro'?G.cur.key:'3d:'+G.set+':'+G.cur.key});
+ toApp({type:'res',ok,key:G.cur.ck||(G.set==='neuro'?G.cur.key:'3d:'+G.set+':'+G.cur.key)});
  // colori: verde la risposta giusta (tutti e due i lati), rosso quella toccata se sbagliata
  if(G.set==='reperi'){
   const tl=lmTargets(G.cur);tl.forEach(l=>{const k=markerOf(l);k.visible=true;});gameMark(tl.map(l=>l.mesh),MKG.ok);if(!ok)gameMark([hit.l.mesh],MKG.bad);
@@ -1028,12 +1048,12 @@ function ponteAnswer(G){
   (c.ot?`<p class="mut">Origine: ${c.ot}. Inserzione: ${c.it}.</p><p class="note">Ossa dalle aree della fonte Z-Anatomy; testo della scheda scritto dall'AI, da verificare.</p>`:'');
 }
 function gamePanel(){
- const G=GAME,hearts=`<div class="gh"><span>${'❤️'.repeat(Math.max(0,G.hearts))}${'🖤'.repeat(3-Math.max(0,G.hearts))}</span><span>${SETS[G.set].n} · ${Math.min(G.q+(G.res?0:1),G.total)}/${G.total}</span></div>`;
+ const G=GAME,hearts=`<div class="gh"><span>${'❤️'.repeat(Math.max(0,G.hearts))}${'🖤'.repeat(3-Math.max(0,G.hearts))}</span><span>${SETS[G.set].n}${G.lab?' · '+esc(G.lab):''} · ${Math.min(G.q+(G.res?0:1),G.total)}/${G.total}</span></div>`;
  if(G.over){const st=G.score/G.q>=.9?3:G.score/G.q>=.6?2:1;
   return `<div class="res"><div class="big">${'⭐'.repeat(st)}${'☆'.repeat(3-st)}</div><div class="h">${G.score}/${G.q} corrette</div><p>+${G.gain} XP${G.hearts>0&&G.q>=G.total?' (bonus round +20)':''}</p>
    ${G.hearts<=0?'<p class="mut">Cuori finiti: ripassa esplorando il modello e riprova.</p>':''}
    <div class="chips" style="justify-content:center"><button class="chip on" data-g="again">Rigioca</button><button class="chip" data-g="menu">Cambia sfida</button><button class="chip" data-g="quit">Esplora il modello</button></div></div>`;}
- if(G.empty)return `<p>${G.set==='nervi'||G.set==='caso'||G.set==='neuro'?'Questa sfida si apre dalla Palestra dell\'app.':'Nessuna domanda disponibile.'}</p><div class="chips"><button class="chip" data-g="quit">Esci</button></div>`;
+ if(G.empty)return `<p>${G.set==='nervi'||G.set==='caso'||G.set==='neuro'?'Questa sfida si apre dalla Palestra dell\'app.':G.zsel?'In questa zona non ci sono strutture che si vedono da fuori sul modello.':'Nessuna domanda disponibile.'}</p><div class="chips"><button class="chip" data-g="quit">Esci</button></div>`;
  if(G.set==='ricomponi'&&G.cur)return hearts.replace(/\d+\/\d+/,(G.total-G.left.length)+'/'+G.total)+`<div class="q">Zona: <b>${G.zone}</b></div><p class="mut">${G.msg||'Scegli un pezzo, poi tocca il suo posto sul modello (le ossa trasparenti). Ruota e ingrandisci come vuoi: vale tutti e due i lati.'}</p>`+
   `<div class="chips">${G.left.map(b=>`<button class="chip${G.sel===b?' on':''}" data-pc="${b}">${clean(itOf(b))}</button>`).join('')}</div><div class="chips"><button class="chip" data-g="quit">Esci</button></div>`;
  if(!G.cur)return `<p class="mut">${S.loading?(G.set==='muscoli'&&!FILES.muscoli?.loaded?'Carico i muscoli…':'Preparo le domande…'):''}</p>`;
@@ -1112,7 +1132,7 @@ $('panel').addEventListener('click',e=>{
  const b=e.target.closest('button');if(!b)return;const d=b.dataset;
  if(d.pc&&GAME){GAME.sel=GAME.sel===d.pc?null:d.pc;GAME.msg='';panel();return;}
  if(d.g==='clue'){GAME.clues++;panel();return;}
- if(d.g){if(d.g==='next')nextGameQ();else if(d.g==='again')startGame(GAME.set);else if(d.g==='menu'){quitGame();toApp({type:'menu'});}else quitGame();}
+ if(d.g){if(d.g==='next')nextGameQ();else if(d.g==='again')startGame(GAME.set,GAME.again);else if(d.g==='menu'){quitGame();toApp({type:'menu'});}else quitGame();}
  else if(d.mu)showMuscle(d.mu);
  else if(d.offall){if(!OFF.busy)offlineAll();}
  else if(d.combo)showCombo(d.combo);

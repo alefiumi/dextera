@@ -1,7 +1,7 @@
 {
- "version": 3,
+ "version": 4,
  "formato": 1,
- "nota": "Percorso pubblicato (sezione 8 della specifica): quali nodi di content/mappa.json include, in che ordine consigliato e con quale caso clinico. È nel formato che produrrà il gestionale della fase 3 (una versione di releases con i nodi): fino ad allora si scrive a mano. caso null = il passo 6 è un quiz finale finché l'autore non abbina un caso al satellite. Nei pianeti esame.caso è il caso clinico dell'esame del pianeta (id di un caso di content/corpo.json): null = scelto dall'app tra i casi la cui risposta è un muscolo del pianeta, finché l'autore non lo sceglie. Dal rilascio 2 della neurologia contiene anche il corso «neurologia» (i suoi casi sono quelli del modulo neuro di testi/casi.json, in content/lezioni.json → casi_neuro).",
+ "nota": "Percorso pubblicato (sezione 8 della specifica): quali nodi di content/mappa.json include, in che ordine consigliato e con quale caso clinico. È nel formato che produrrà il gestionale della fase 3 (una versione di releases con i nodi): fino ad allora si scrive a mano. caso null = il passo 6 è un quiz finale finché il satellite non ha un caso (il 19/11/2026 abbinati i casi ai 10 satelliti del corpo che ne hanno uno adatto, con la risposta tra le strutture del satellite). Nei pianeti esame.caso è il caso clinico dell'esame del pianeta (id di un caso di content/corpo.json): null = scelto dall'app tra i casi la cui risposta è un muscolo del pianeta, finché l'autore non lo sceglie. Dal rilascio 2 della neurologia contiene anche il corso «neurologia» (i suoi casi sono quelli del modulo neuro di testi/casi.json, in content/lezioni.json → casi_neuro).",
  "id": "base",
  "nome": "Percorso base",
  "corso": "muscolo-scheletrico",
@@ -85,7 +85,7 @@
     "gamba.5",
     "gamba.6"
    ],
-   "caso": null
+   "caso": "c3"
   },
   {
    "id": "ginocchio",
@@ -100,7 +100,7 @@
     "ginocchio.5",
     "ginocchio.6"
    ],
-   "caso": null
+   "caso": "c8"
   },
   {
    "id": "coscia",
@@ -115,7 +115,7 @@
     "coscia.5",
     "coscia.6"
    ],
-   "caso": null
+   "caso": "c6"
   },
   {
    "id": "anca",
@@ -130,7 +130,7 @@
     "anca.5",
     "anca.6"
    ],
-   "caso": null
+   "caso": "c1"
   },
   {
    "id": "schiena",
@@ -205,7 +205,7 @@
     "spalla.5",
     "spalla.6"
    ],
-   "caso": null
+   "caso": "c2"
   },
   {
    "id": "braccio",
@@ -220,7 +220,7 @@
     "braccio.5",
     "braccio.6"
    ],
-   "caso": null
+   "caso": "c14"
   },
   {
    "id": "avambraccio",
@@ -235,7 +235,7 @@
     "avambraccio.5",
     "avambraccio.6"
    ],
-   "caso": null
+   "caso": "c10"
   },
   {
    "id": "mano",
@@ -250,7 +250,7 @@
     "mano.5",
     "mano.6"
    ],
-   "caso": null
+   "caso": "c9"
   },
   {
    "id": "collo",
@@ -265,7 +265,7 @@
     "collo.5",
     "collo.6"
    ],
-   "caso": null
+   "caso": "c13"
   },
   {
    "id": "cranio",
@@ -292,7 +292,7 @@
     "faccia.5",
     "faccia.6"
    ],
-   "caso": null
+   "caso": "c20"
   },
   {
    "id": "visceri-testa",

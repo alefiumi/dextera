@@ -14,7 +14,7 @@ let ui={lvl:'sistema',p:'',s:'',mode:'mappa',c:''};
 try{ui={...ui,...JSON.parse(localStorage.getItem(UK)||'{}')};}catch(e){}
 P.setCorso(ui.c); // corso aperto (ui.c, '' = quello del percorso pubblicato)
 const keep=()=>{try{localStorage.setItem(UK,JSON.stringify(ui));}catch(e){}};
-let hooks={useMod:()=>{},setTab:()=>{}};
+let hooks={useMod:()=>{},setTab:()=>{},play3d:()=>{}};
 // ui.js passa useMod e setTab (niente import circolari)
 export function initPath(h){
  hooks=h;
@@ -231,6 +231,9 @@ function satHtml(sat,g){
    act=(open?`<button class="btn" data-p="go" data-id="${esc(ps.id)}" data-k="lezione">${done?'Ripeti lezione':'Inizia lezione'}</button>`:`<p class="mut">Dopo il passo ${prev?prev.n:ps.n-1} · oppure mettiti alla prova</p>`)+
     (done?'':`<button class="btn alt" data-p="go" data-id="${esc(ps.id)}" data-k="prova"${pv?' disabled':''}>Lo so già: mettimi alla prova</button>${pv?'<small class="mut">Prova già fatta oggi: riprova domani.</small>':''}`);
   }
+  // corso del corpo: ossa, reperi e muscoli si toccano anche sul modello 3D (la maestria è la stessa della lezione)
+  const n3=open&&P.T3D[ps.tipo]&&!neuroC(P.corsoOf(sat))?P.corpo3d([sat],ps.tipo).length:0;
+  if(n3)act+=`<button class="btn alt" data-p="3d" data-id="${esc(ps.id)}">🧊 Tocca sul modello 3D</button>`;
   const pct=ps.tipo==='progetto'?'':` · ${Math.round(P.stepPct(ps)*use.length)}/${use.length} a maestria 2`;
   return `<li class="step ${i%2?'zr':'zl'}${done?' done':''}${open?' open':' lock'}${isG?' guide':''}"><div class="sc" aria-hidden="true">${done?'✓':open?ps.n:'🔒'}</div>
    <div class="sb"><b>${ps.n}. ${esc(ps.nome)}${isG?' <span class="star" aria-label="consigliato">★</span>':''}</b><small>${PR[ps.tipo]||''}</small>
@@ -297,6 +300,7 @@ export function pathClick(e){
  else if(a==='rip'){let ks=P.dailyLeft();if(!ks.length){ks=P.moreDaily();save();}keep();if(!startReview(P.slotsOf(ks),{daily:true})){toast('Niente da ripassare adesso.');renderPath();return;}return hooks.setTab('path');}
  else if(a==='ripsat'){const sat=P.satById(ui.s);keep();if(!startReview(P.slotsOf(P.satReview(sat)),{sat})){toast('Niente da ripassare in questo satellite.');renderPath();return;}return hooks.setTab('path');}
  else if(a==='esame'){const pl=P.pianeti().find(p=>p.id===ui.p);keep();if(!pl||!startExam(pl)){toast('L\'esame non è ancora disponibile.');renderPath();return;}return hooks.setTab('path');}
+ else if(a==='3d'){const sat=P.satById(ui.s),ps=P.passi(sat).find(p=>p.id===b.dataset.id);if(sat&&ps){keep();return hooks.play3d(ps.tipo,sat.id);}}
  else if(a==='go'){const sat=P.satById(ui.s),ps=P.passi(sat).find(p=>p.id===b.dataset.id);keep();return go(sat,ps,b.dataset.k);}
  keep();renderPath();
  if(a==='lvl'||a==='planet'||a==='sat')$('panel').scrollTop=0;

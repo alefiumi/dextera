@@ -46,6 +46,8 @@ export const neuro=sid=>app.LEZ.neuro?.[sid]||null;
 const casesOf=c=>c.modulo==='corpo'?corpo().CASES:c.modulo==='cervello'?(app.LEZ.casi_neuro||[]):[];
 const caseIn=(c,id)=>casesOf(c).find(x=>x.id===id)||null;
 export const caseAns=c=>c?.mid||c?.bid||null;
+// strutture del percorso che sono la risposta del caso: il muscolo, oppure le ossa del gruppo (bid: 'rotula' → o.patella, 'carpo' → le 8 ossa)
+const caseIds=c=>c?.mid?[c.mid]:c?.bid?(corpo().byId[c.bid]?.m||[c.bid]):caseAns(c)?[caseAns(c)]:[];
 // strutture del cervello 2D di una voce di neurologia (id b.* o gruppi g:<gruppo>, che valgono per tutti i loro membri)
 // voci di neurologia da toccare sul modello 3D (con una parte del modello, ref) dei satelliti dati, o di tutto il corso:
 // le manda l'app all'atlante con il gioco 3D «Neurologia» (la maestria torna sulla chiave n.<voce>, come il tocco nel 2D)
@@ -54,6 +56,15 @@ export function neuro3d(sats){
  const out=[],seen=new Set();
  for(const sat of sats||satelliti(null,c))for(const ps of passi(sat)){if(ps.tipo!=='strutture')continue;
   for(const sid of usable(ps)){const n=neuro(sid);if(!n?.ref||seen.has(sid))continue;seen.add(sid);out.push({key:sid,n:n.n,ref:n.ref,f:String(n.f||'').split(/(?<=\.)\s/)[0]});}}
+ return out;
+}
+// corso del corpo sul modello 3D: ossa, reperi e muscoli da toccare dei passi dei satelliti dati (solo strutture usabili). L'atlante
+// riconosce le parti dal nome inglese della fonte (o.<slug>, r.<slug>, <slug> del muscolo) e rimanda la risposta sulla chiave del corso
+export const T3D={ossa:'ossa',reperi:'reperi',muscoli:'muscoli'};
+export function corpo3d(sats,tipo){
+ const out=[],seen=new Set();
+ for(const sat of sats)for(const ps of passi(sat)){if(ps.tipo!==tipo||!T3D[tipo])continue;
+  for(const sid of usable(ps)){if(seen.has(sid))continue;seen.add(sid);out.push({id:sid,key:key(sid,ps.aspetto)});}}
  return out;
 }
 export function nfig(sid){
@@ -68,7 +79,7 @@ export const casoOf=sat=>{const c=pnode(sat.id)?.caso;return c?caseIn(corsoOf(sa
 export function esameCasi(pl){
  const co=corsoOf(pl),c=pnode(pl.id)?.esame?.caso;if(c){const x=caseIn(co,c);if(x)return [x];}
  const ms=new Set(pl.satelliti.flatMap(s=>s.passi.flatMap(ps=>Array.isArray(ps.strutture)?ps.strutture:[])));
- return casesOf(co).filter(k=>caseAns(k)&&ms.has(caseAns(k)));
+ return casesOf(co).filter(k=>caseIds(k).some(id=>ms.has(id)));
 }
 
 /* ---------- strutture, chiavi e dati ---------- */
@@ -338,7 +349,8 @@ export function examSlots(pl){
 // satellite del pianeta a cui appartiene la risposta del caso (per l'ipotesi «Quale distretto è coinvolto?»)
 export function caseSat(pl,c){
  const L=satelliti(pl);
- return L.find(s=>s.passi.some(ps=>Array.isArray(ps.strutture)&&ps.strutture.includes(caseAns(c))))||L[0];
+ const ids=caseIds(c);
+ return L.find(s=>s.passi.some(ps=>Array.isArray(ps.strutture)&&ids.some(id=>ps.strutture.includes(id))))||L[0];
 }
 // all'inizio del tentativo: domande e caso di questo tentativo diventano «l'ultimo tentativo»
 export function examStart(pl,slots,caso){

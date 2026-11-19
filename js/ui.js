@@ -33,11 +33,14 @@ let atlasReady=false,pending3d=null;
 const atlasWin=()=>$('atlas').querySelector('iframe')?.contentWindow;
 // casi clinici e nervi cranici stanno nei contenuti dell'app: viaggiano con il messaggio
 // neurologia: le voci da toccare (tutto il corso o i satelliti di una zona della Palestra) viaggiano con il messaggio
-const gameMsg=(set,neuro)=>({bm:1,type:'game',set,cases:(app.MODS.corpo&&app.MODS.corpo.CASES)||[],nc:app.NC,neuro:neuro||[]});
+// corso del corpo: con un satellite, ossa, reperi o muscoli dei suoi passi (sel) e il nome del satellite (lab)
+const gameMsg=(set,neuro,sel)=>({bm:1,type:'game',set,cases:(app.MODS.corpo&&app.MODS.corpo.CASES)||[],nc:app.NC,neuro:neuro||[],sel:sel?.items||null,lab:sel?.lab||''});
 function play3d(set,sat){
- const neuro=set==='neuro'?P.neuro3d(sat?[P.satById(sat)].filter(Boolean):null):null;
+ const s=sat?P.satById(sat):null;
+ const neuro=set==='neuro'?P.neuro3d(s?[s]:null):null;
+ const sel=s&&P.T3D[set]?{items:P.corpo3d([s],set),lab:s.nome}:null;
  app.av='3d';setTab('atlas');
- if(atlasReady)atlasWin().postMessage(gameMsg(set,neuro),location.origin);else pending3d=[set,neuro];
+ if(atlasReady)atlasWin().postMessage(gameMsg(set,neuro,sel),location.origin);else pending3d=[set,neuro,sel];
 }
 window.addEventListener('message',e=>{
  const d=e.data;if(e.origin!==location.origin||!d||!d.bm||e.source!==atlasWin())return;
@@ -135,4 +138,4 @@ $('panel').addEventListener('change',e=>{if(app.tab==='path')pathChange(e);});
 // mappa del percorso: i corpi celesti (link SVG con role=button) si aprono anche con Invio e Spazio
 $('panel').addEventListener('keydown',e=>{const a=(e.key==='Enter'||e.key===' ')&&e.target.closest?.('svg a[role=button]');if(a){e.preventDefault();a.dispatchEvent(new MouseEvent('click',{bubbles:true}));}});
 $('panel').addEventListener('submit',e=>{if(app.tab==='path')pathSubmit(e);else if(app.tab==='play'&&app.L?.tab==='play')lessonSubmit(e);});
-initPath({useMod,setTab});
+initPath({useMod,setTab,play3d});

@@ -2,7 +2,7 @@
    mostra ogni dato con fonte e stato, diviso per satellite; il docente segna Giusto/Sbagliato e scrive la correzione.
    Le risposte restano in questo browser (localStorage, chiave dextera-revisione) e si esportano in CSV per
    atlante/build/importa_revisione.py. Nessun account, nessun invio in rete. */
-const TIPI=['ossa','reperi','muscoli','encefalo','nervi-cranici','torace','gruppi','casi','neuro','correzioni','ucbm-biologia'];
+const TIPI=['ossa','reperi','muscoli','encefalo','nervi-cranici','torace','gruppi','casi','neuro','correzioni','ucbm-biologia','ucbm-chimica'];
 // test d'ingresso UCBM (fase 6): quesiti per materia (testi/ucbm-<materia>.json); ogni voce è un quesito, mostrato anche come lo vede lo studente
 const PASSO_Q={1:'Concetti',2:'Applicazione',3:'Quesiti del test'};
 const STATI=['da verificare','verificato','corretto','segnalato'];

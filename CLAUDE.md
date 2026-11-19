@@ -403,8 +403,13 @@ descrizioni; quelle con fonte Z-Anatomy dicono da quale vaso nasce o dove sbocca
   sul telefono una colonna nell'ordine profilo, numeri, badge, account, privacy, maestria (`order` in `style.css`).
   Schermata di avvio nello stesso stile (19/11/2026, v0.72.0, `gate.js`): cielo stellato come la mappa, modulo in un riquadro con
   etichetta e titolo; interruttore Accedi/Registrati in alto (`.gtabs`, `data-g` login/signup) al posto del link in fondo.
-  Caricamento (v0.75.0): il logo è un SVG in `index.html` (`.glogo`); mentre c'è `.spin` in `#gbody` il satellite giallo gira sull'orbita
-  (animateMotion, due copie: dietro e davanti al pianeta con un clipPath), altrimenti sta fermo; fermo anche con «riduci movimento».
+  Caricamento (v0.75.1): il logo è un SVG (`.glogo`) in `index.html` e in `atlante/index.html`. Il satellite giallo gira con un'animazione CSS
+  (`@keyframes lgorb`, 36 punti sull'orbita, in `style.css` e nello stile dell'atlante; due copie, dietro e davanti al pianeta con un clipPath).
+  In v0.75.0 era animateMotion (SMIL) mostrato con `:has()` e su iPhone non girava. Avvio: `#gate.busy` (messo da `wireGate()` con un
+  MutationObserver quando in `#gbody` c'è `.spin`) fa girare il satellite e mette il logo al centro dello schermo. Atlante 3D: logo al centro
+  mentre si carica il modello (`#msg`) e in un riquadro sopra il modello mentre si carica uno strato (`#busy`, segue `S.loading` in `panel()`).
+  Con «riduci movimento» il satellite sta fermo.
+  Sotto la scritta di caricamento la versione («alpha v0.75.2», `#gver`, da `appVersion()`; solo durante il caricamento e se la copia c'è già).
   Copertina del profilo (19/11/2026, v0.73.0): sfondo da una galleria di sei (`BANNERS` in `progress.js`: notte, aurora, tramonto,
   oceano, foresta, sole) con sopra fino a 3 badge guadagnati in vetrina, scelti in «Modifica profilo»; foto sovrapposta al bordo.
   Per ora solo sul dispositivo (`S.prof.banner`, `S.prof.show`): sul server e visibile agli amici con la fase 5 (serve SQL nuovo).

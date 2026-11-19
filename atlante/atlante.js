@@ -422,6 +422,7 @@ function musTools(){
 }
 function panel(){
  const p=$('panel');let h='';
+ const bz=$('busy');if(bz)bz.hidden=!S.loading; // satellite che gira al centro del modello mentre si carica uno strato
  if(GAME){p.innerHTML=gamePanel();return;}
  if(S.combo){
   const c=COMBO[S.combo];

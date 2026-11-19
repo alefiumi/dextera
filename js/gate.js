@@ -3,7 +3,7 @@
    Con un account la cui sessione non vale più (per esempio dopo aver giocato offline a lungo) chiede di accedere di nuovo;
    chi preferisce può continuare senza account e sincronizzare dopo dal profilo. */
 import {$,toast} from './util.js';
-import {installHint} from './install.js';
+import {installHint,appVersion} from './install.js';
 import {S} from './state.js';
 import {account as A,configured,startAccount,addAccountListener,lastAccount,signIn,signUp,google,resetPw,setView,saveProfile,NAME_RE,NAME_RULE,esc,resolveOwner,signOut,hasPassword,importDevice,recoverPassword,online,checkNet} from './account.js';
 
@@ -145,6 +145,11 @@ addAccountListener(()=>{
  }
 });
 export function wireGate(){
+ // logo animato: #gate.busy quando in #gbody c'è la rotellina (stato di caricamento); il CSS fa girare il satellite e centra il logo
+ const busy=()=>$('gate').classList.toggle('busy',!!box().querySelector('.spin'));
+ new MutationObserver(busy).observe(box(),{childList:true});busy();
+ // versione sotto la scritta di caricamento (dal nome della copia sul dispositivo: c'è anche offline; alla prima apertura non c'è ancora)
+ appVersion().then(v=>{const e=$('gver');if(v){e.textContent='alpha '+v;e.hidden=false;}});
  // spunta "elimina il vecchio account": mostra il campo della sua password
  $('gate').addEventListener('change',e=>{if(e.target.name!=='del')return;delOld=e.target.checked;const op=e.target.form.elements.op;op.hidden=!delOld;op.required=delOld;if(delOld)op.focus();});
  $('gate').addEventListener('click',e=>{

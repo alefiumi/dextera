@@ -54,10 +54,11 @@ export async function loadSocial(){
 const av=(src,name)=>src?`<img class="sav" src="${esc(src)}" alt="">`:`<span class="sav">${esc((name||'?').charAt(0).toUpperCase())}</span>`;
 const MED=['🥇','🥈','🥉'];
 // Una riga della classifica: toccando il nome di un altro giocatore si apre sotto la riga la richiesta di amicizia.
+let TOP=1; // XP del primo della classifica mostrata: la barra di ogni riga è in proporzione
 function row(r,i){
  const me=A.user&&r.id===A.user.id,open=!me&&SO.pick===r.id;
  return `<div class="lb${me?' me':''}${open?' open':''}"${me?'':` data-so="pick" data-id="${esc(r.id)}" role="button"`}><span class="pos">${i<3?MED[i]:i+1}</span>${av(r.avatar,r.username)}<span class="nm">${esc(r.username)}${me?' <small>(tu)</small>':''}</span>`+
-  `<span class="sk">${r.streak?'🔥 '+r.streak:''}</span><b>⭐ ${r.xp}</b></div>`+(open?`<div class="lbx">${relBtn(r.id)}</div>`:'');
+  `<span class="sk">${r.streak?'🔥 '+r.streak:''}</span><b>⭐ ${r.xp}</b><i class="lbbar" style="width:calc((100% - 44px) * ${Math.max(.02,(r.xp||0)/TOP).toFixed(3)})" aria-hidden="true"></i></div>`+(open?`<div class="lbx">${relBtn(r.id)}</div>`:'');
 }
 // stato dell'amicizia con un giocatore e il pulsante per l'azione possibile
 function relBtn(id){
@@ -69,32 +70,40 @@ function relBtn(id){
 function person(p,btns){return `<div class="lb">${av(p.avatar,p.username)}<span class="nm">${esc(p.username)}</span><span class="pb">${btns}</span></div>`;}
 const hm=t=>new Date(t).toLocaleString('it',{day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'});
 
+// testata della scheda e anteprima delle casate (fase 4: Osteon, Myon, Neuron, Cor)
+const HEAD=`<div class="card ghead"><div class="kick">Flotta</div><h2>Amici e classifiche</h2><p class="mut">Sfida gli amici: in classifica contano gli XP di tutti i giochi.</p></div>`;
+const CASATE=[['Osteon','#f0c75e','🦴'],['Myon','#f87171','💪'],['Neuron','#a78bfa','🧠'],['Cor','#60a5fa','🫀']];
+const SOON=`<div class="card soon"><div class="kick">In arrivo</div><h3>Casate ed equipaggi</h3><p class="mut">Quattro casate in gara a ogni campionato, con capo e vice votati dai membri, e piccoli equipaggi di amici con il loro obiettivo.</p>
+ <ul class="casate">${CASATE.map(([n,c,i])=>`<li style="--c:${c}"><span aria-hidden="true">${i}</span>${n}</li>`).join('')}</ul></div>`;
 export function renderSocial(){
  const P=$('panel');
- if(!configured){P.innerHTML='<div class="h">🚀 Flotta: amici e classifiche</div><p class="mut">Il server non è configurato: questa copia dell\'app funziona solo in locale.</p>';return;}
+ if(!configured){P.innerHTML=`<div class="fleet">${HEAD}<div class="card"><p class="mut">Il server non è configurato: questa copia dell'app funziona solo in locale.</p></div></div>`;return;}
  if(!A.user){
-  P.innerHTML=`<div class="h">🚀 Flotta: amici e classifiche</div><p class="mut">Per entrare in classifica e sfidare gli amici serve un account (gratuito). Senza account continui a giocare come sempre e i progressi restano su questo dispositivo.</p>
-   <div class="chips"><button class="chip on" data-acc="login">Accedi o registrati</button></div>`;return;
+  P.innerHTML=`<div class="fleet">${HEAD}<div class="card cta"><div class="sky" aria-hidden="true">🚀</div><h3>Entra nella Flotta</h3><p class="mut">Per entrare in classifica e sfidare gli amici serve un account (gratuito). Senza account continui a giocare come sempre e i progressi restano su questo dispositivo.</p>
+   <button class="btn wide" data-acc="login">Accedi o registrati</button></div>${SOON}</div>`;return;
  }
  const fresh=SO.uid===A.user.id,name=A.profile&&A.profile.username;
- const tabs=`<div class="chips seg"><button class="chip${SO.tab==='all'?' on':''}" data-so="tab" data-v="all">🌍 Tutti</button><button class="chip${SO.tab==='friends'?' on':''}" data-so="tab" data-v="friends">👥 Amici${fresh&&SO.rel.inc.length?' <span class="cnt">'+SO.rel.inc.length+'</span>':''}</button></div>`;
+ const tabs=`<div class="seg3" role="group" aria-label="Classifica"><button data-so="tab" data-v="all" aria-pressed="${SO.tab==='all'}">🌍 Tutti</button><button data-so="tab" data-v="friends" aria-pressed="${SO.tab==='friends'}">👥 Amici${fresh&&SO.rel.inc.length?' <span class="cnt">'+SO.rel.inc.length+'</span>':''}</button></div>`;
  const state=SO.loading?'<p class="mut">⏳ Aggiorno…</p>':SO.err?`<p class="err">${esc(SO.err)}</p>`:!online()?`<p class="mut">📴 Senza connessione${fresh&&SO.at?': classifica del '+hm(SO.at):''}.</p>`:'';
  const noName=name?'':'<p class="note">⚠️ Non hai ancora un nome utente: sceglilo nel Profilo (tocca la tua foto in alto) per comparire in classifica e farti trovare dagli amici.</p>';
+ const card=(k,t,inner)=>`<div class="card"><div class="kick">${k}</div>${t?`<h3>${t}</h3>`:''}${inner}</div>`;
  let body='';
- if(!fresh){body=SO.loading?'':'<p class="mut">Classifica non ancora scaricata: serve la connessione.</p>';}
+ if(!fresh){body=SO.loading?'':card('Classifica','','<p class="mut">Classifica non ancora scaricata: serve la connessione.</p>');}
  else if(SO.tab==='all'){
-  body=`<div class="sub">Classifica generale · XP</div><p class="mut">Tocca un nome per chiedere l'amicizia.</p>`+(SO.all.length?SO.all.map(row).join(''):'<p class="mut">Nessuno in classifica per ora.</p>');
-  if(SO.rank&&name)body+=`<div class="gap">…</div>`+row({id:A.user.id,username:name,xp:S.xp,streak:S.streak,avatar:S.prof.avatar},SO.rank-1);
+  TOP=Math.max(1,...SO.all.map(r=>r.xp||0),S.xp);
+  let list=SO.all.length?SO.all.map(row).join(''):'<p class="mut">Nessuno in classifica per ora.</p>';
+  if(SO.rank&&name&&SO.rank>SO.all.length)list+=`<div class="gap">…</div>`+row({id:A.user.id,username:name,xp:S.xp,streak:S.streak,avatar:S.prof.avatar},SO.rank-1);
+  body=card('Classifica generale · XP','',`<p class="mut">Tocca un nome per chiedere l'amicizia.</p>${list}`);
  }else{
-  const R=SO.rel;
-  body=(R.inc.length?`<div class="sub">Richieste ricevute</div>`+R.inc.map(p=>person(p,`<button class="chip on" data-so="acc" data-id="${esc(p.id)}">Accetta</button><button class="chip" data-so="del" data-id="${esc(p.id)}">Rifiuta</button>`)).join(''):'')+
-   `<div class="sub">Classifica tra amici · XP</div>`+(SO.friends.length>1?SO.friends.map(row).join(''):'<p class="mut">Ancora nessun amico: cercalo qui sotto per nome utente e mandagli una richiesta.</p>')+
-   `<div class="sub">Aggiungi un amico</div><input id="soq" class="soq" placeholder="Nome utente…" autocomplete="off" autocapitalize="none" value="${esc(SO.q)}"${online()?'':' disabled'}><div id="sres">${resHtml()}</div>`+
-   (R.out.length?`<div class="sub">Richieste inviate</div>`+R.out.map(p=>person(p,`<span class="mut">in attesa</span><button class="chip" data-so="del" data-id="${esc(p.id)}">Annulla</button>`)).join(''):'')+
-   (R.fr.length?`<div class="sub">I tuoi amici (${R.fr.length})</div>`+R.fr.map(p=>person(p,`<button class="chip" data-so="rm" data-id="${esc(p.id)}" data-n="${esc(p.username)}">Togli</button>`)).join(''):'');
+  const R=SO.rel;TOP=Math.max(1,...SO.friends.map(r=>r.xp||0));
+  body=(R.inc.length?card('Richieste ricevute','',R.inc.map(p=>person(p,`<button class="chip on" data-so="acc" data-id="${esc(p.id)}">Accetta</button><button class="chip" data-so="del" data-id="${esc(p.id)}">Rifiuta</button>`)).join('')):'')+
+   card('Classifica tra amici · XP','',SO.friends.length>1?SO.friends.map(row).join(''):'<p class="mut">Ancora nessun amico: cercalo qui sotto per nome utente e mandagli una richiesta.</p>')+
+   card('Aggiungi un amico','',`<input id="soq" class="soq" placeholder="Nome utente…" autocomplete="off" autocapitalize="none" aria-label="Cerca per nome utente" value="${esc(SO.q)}"${online()?'':' disabled'}><div id="sres">${resHtml()}</div>`)+
+   (R.out.length?card('Richieste inviate','',R.out.map(p=>person(p,`<span class="mut">in attesa</span><button class="chip" data-so="del" data-id="${esc(p.id)}">Annulla</button>`)).join('')):'')+
+   (R.fr.length?card(`I tuoi amici (${R.fr.length})`,'',R.fr.map(p=>person(p,`<button class="chip" data-so="rm" data-id="${esc(p.id)}" data-n="${esc(p.username)}">Togli</button>`)).join('')):'');
  }
- P.innerHTML=`<div class="h">🚀 Flotta: amici e classifiche</div>`+tabs+state+noName+body+
-  `<p class="note">Punteggi calcolati sui dispositivi di chi gioca: valgono come sfida tra amici. La serie 🔥 conta solo se si è giocato ieri o oggi.</p>`;
+ P.innerHTML=`<div class="fleet">${HEAD}${tabs}${state}${noName}${body}${SOON}`+
+  `<p class="note">Punteggi calcolati sui dispositivi di chi gioca: valgono come sfida tra amici. La serie 🔥 conta solo se si è giocato ieri o oggi.</p></div>`;
 }
 function resHtml(){
  if(!SO.found)return '';

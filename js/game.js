@@ -6,28 +6,31 @@ import {startPuzzle} from './puzzle.js';
 
 export function renderMenu(){
  app.G=null;clearGhosts();baseView();const body=app.MOD.id==='corpo';
- const mb=(m,t,x)=>`<button class="mode" data-mode="${m}"><b>${t}</b><small>${x}</small></button>`;
+ // riquadri a due colonne come nel prototipo: icona, nome, una riga di spiegazione; le sezioni dicono se si gioca in 2D o sul modello 3D
+ const mb=(m,i,t,x)=>`<button class="mode tile" data-mode="${m}"><span class="ti" aria-hidden="true">${i}</span><b>${t}</b><small>${x}</small></button>`;
+ const sec=(k,t,n)=>`<h3 class="gsec"><span class="tag">${k}</span>${t}</h3><div class="tiles">${n}</div>`;
  const brain=app.MOD.id==='cervello',M=app.MOD;
  const what=M.grpn?(app.grp?'per <b>gruppi</b>':'sulle <b>strutture singole</b>'):app.grp?(body?'per <b>gruppi</b> di ossa':'per <b>lobi e aree</b>'):(body?'sulle <b>ossa singole</b>':'su <b>giri e solchi</b>');
- $('panel').innerHTML=`<div class="h">Palestra · scegli una sfida</div><p class="mut">3 cuori a round. Ogni risposta giusta dà XP e fa salire la maestria (da beige a oro). Ora giochi ${what}: cambia in alto, dove scegli anche la vista.</p><div class="sub">Puzzle</div>`+
-  mb('puzzle','🧩 Ricomponi','Rimetti al posto i pezzi mancanti (trascina o tocca)')+
-  mb('build','🧱 Componi','Puzzle vero su schermo vuoto: collega i pezzi tra loro, senza sagome')+
-  (body?mb('bridge','🌉 Tendine-ponte',"Collega l'osso di origine a quello di inserzione"):'')+
-  (M.CASES&&M.CASES.length?mb('case','🩺 Caso clinico','Indizi progressivi: meno indizi usi, più XP'):'')+
-  '<div class="sub">Quiz</div>'+mb('find','🎯 Trova la struttura','Tocca quella giusta sulla figura')+
-  (body?mb('musc','💪 Origine e inserzione','Collega ogni muscolo al suo osso'):mb('func',(brain?'🧠':'❤️')+' Funzione → struttura','Quale struttura svolge questa funzione?')+(brain?mb('nc','🔢 Nervi cranici','Nome, numero e funzione dei 12 nervi'):''))+
-  mb('mix','🔀 Misto',"Un po' di tutto")+
+ $('panel').innerHTML=`<div class="gym"><div class="card ghead"><div class="kick">Palestra</div><h2>Scegli una sfida</h2><p class="mut">3 cuori a round. Ogni risposta giusta dà XP e fa salire la maestria (da beige a oro). Ora giochi ${what}: cambia in alto, dove scegli anche la vista.</p></div>`+
+  sec('2D','Puzzle',
+  mb('puzzle','🧩','Ricomponi','Rimetti al posto i pezzi mancanti')+
+  mb('build','🧱','Componi','Collega i pezzi su schermo vuoto')+
+  (body?mb('bridge','🌉','Tendine-ponte',"Dall'osso di origine a quello di inserzione"):'')+
+  (M.CASES&&M.CASES.length?mb('case','🩺','Caso clinico','Indizi progressivi: meno ne usi, più XP'):''))+
+  sec('2D','Quiz',mb('find','🎯','Trova la struttura','Tocca quella giusta sulla figura')+
+  (body?mb('musc','💪','Origine e inserzione','Collega ogni muscolo al suo osso'):mb('func',brain?'🧠':'❤️','Funzione → struttura','Quale struttura svolge questa funzione?')+(brain?mb('nc','🔢','Nervi cranici','Nome, numero e funzione dei 12 nervi'):''))+
+  mb('mix','🔀','Misto',"Un po' di tutto"))+
   // giochi sul modello 3D: si giocano nella scheda Atlante, vista 3D (vedi play3d in ui.js)
-  '<div class="sub">Sul modello 3D</div>'+mb('3d-ossa','🦴 Trova l\'osso','Tocca l\'osso giusto sul modello 3D')+
-  mb('3d-muscoli','💪 Trova il muscolo','Tocca il muscolo giusto tra quelli visibili')+
-  mb('3d-reperi','📍 Trova il repere','Tocca il repere osseo giusto (SIAS, epicondili…)')+
-  mb('3d-oi','🎯 Origine e inserzione','Tocca sull\'osso il punto esatto dove il muscolo si attacca')+
-  mb('3d-ricomponi','🧩 Ricomponi','Rimetti al loro posto le ossa di una zona (mano, piede, cranio…)')+
-  mb('3d-ponte','🌉 Tendine-ponte',"Tocca l'osso di origine e poi quello di inserzione")+
-  mb('3d-caso','🩺 Caso clinico','Leggi gli indizi e tocca il muscolo coinvolto')+
-  mb('3d-nervi','🔢 Nervi cranici','Tocca il nervo giusto alla base dell\'encefalo')+
-  mb('3d-cuore','🫀 Cuore e grandi vasi','Tocca la camera, la coronaria o il grande vaso giusto')+
-  mb('3d-polmoni','🫁 Polmoni','Tocca il lobo o il bronco giusto');
+  sec('3D','Sul modello 3D',mb('3d-ossa','🦴','Trova l\'osso','Tocca l\'osso giusto sul modello')+
+  mb('3d-muscoli','💪','Trova il muscolo','Tra quelli visibili da fuori')+
+  mb('3d-reperi','📍','Trova il repere','SIAS, epicondili, malleoli…')+
+  mb('3d-oi','🎯','Origine e inserzione','Il punto esatto dove si attacca')+
+  mb('3d-ricomponi','🧩','Ricomponi','Le ossa di mano, piede, cranio…')+
+  mb('3d-ponte','🌉','Tendine-ponte','Osso di origine, poi di inserzione')+
+  mb('3d-caso','🩺','Caso clinico','Leggi gli indizi, tocca il muscolo')+
+  mb('3d-nervi','🔢','Nervi cranici','Alla base dell\'encefalo')+
+  mb('3d-cuore','🫀','Cuore e grandi vasi','Camere, coronarie, grandi vasi')+
+  mb('3d-polmoni','🫁','Polmoni','Lobi e bronchi'))+'</div>';
 }
 export const clearGhosts=()=>{document.querySelectorAll('.bone.ghost,.bone.gone,.bone.placed').forEach(g=>g.classList.remove('ghost','gone','placed'));
  document.querySelectorAll('#fig .view.bare').forEach(v=>{v.classList.remove('bare');v.removeAttribute('transform');});};

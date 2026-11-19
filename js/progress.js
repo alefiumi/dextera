@@ -1,7 +1,7 @@
 /* Scheda Profilo: foto, nome, ruolo e presentazione (modificabili), titolo scelto, statistiche, sagoma e radar delle competenze
-   (fase 5, js/competenze.js), casata ed equipaggi (fleetCard in social.js), badge, account, maestria. */
+   (fase 5, js/competenze.js), obiettivo del giorno e date d'esame (studyHtml), casata ed equipaggi (fleetCard in social.js), badge, account, maestria. */
 import {$,toast} from './util.js';
-import {app,S,level,items} from './state.js';
+import {app,S,save,level,items} from './state.js';
 import {account as A,accountHtml,saveProfile,NAME_RE,NAME_RULE,esc,myData,deleteAccount,CONTATTO,online} from './account.js';
 import {BADGES} from './badges.js';
 import {fillVersion} from './install.js';
@@ -56,9 +56,26 @@ export function renderProg(){
   <div class="pbar" aria-hidden="true"><i style="width:${IL.length?Math.round(mastered/IL.length*100):0}%"></i></div>${seg}<div class="mrows">${rows}</div></div>`;
  // due colonne sul computer; sul telefono una sola nell'ordine profilo, numeri, badge, account e privacy, maestria (order in style.css)
  const [sag,comp]=compHtml();
- $('panel').innerHTML=`<div class="prof"><div class="pcol">${hero}${sag}${badges}</div><div class="pcol">${stats}${fleetCard()}${comp}<div class="pfside">${accountHtml()}${privacyHtml()}</div>${mast}</div></div>`;
+ $('panel').innerHTML=`<div class="prof"><div class="pcol">${hero}${sag}${badges}</div><div class="pcol">${stats}${studyHtml()}${fleetCard()}${comp}<div class="pfside">${accountHtml()}${privacyHtml()}</div>${mast}</div></div>`;
  fillVersion($('panel'));
  refreshFleet(()=>{if(app.tab==='prog'&&!editing)renderProg();});
+}
+
+// Studio: obiettivo del giorno (anello come nel Percorso, scelta 30/60/120 XP), serie con gli scudi, date d'esame dei pianeti
+// (le stesse del riquadro sotto il pianeta: P.setExam accorcia i ripassi). Sezione 7 della specifica.
+function studyHtml(){
+ if(!P.ready())return '';
+ const day=S.day&&S.day.d===P.today()?S.day:{xp:0},goal=P.goal(),xp=day.xp||0,pct=Math.min(1,xp/goal);
+ const ring=`<div class="ring big" role="img" aria-label="Obiettivo del giorno: ${xp} XP su ${goal}"><svg viewBox="0 0 36 36" aria-hidden="true"><circle cx="18" cy="18" r="15" class="rb"/><circle cx="18" cy="18" r="15" class="rf" stroke-dasharray="${(pct*94.2).toFixed(1)} 94.2"/></svg><span>${xp}/${goal}</span></div>`;
+ const nm=v=>v===30?'Leggero':v===60?'Normale':'Intenso';
+ const seg=`<div class="seg3" role="group" aria-label="Obiettivo del giorno">${P.R().obiettivo.scelte.map(v=>`<button data-pf="goal" data-v="${v}" aria-pressed="${v===goal}">${nm(v)}<small>${v} XP</small></button>`).join('')}</div>`;
+ const min=new Date(Date.now()+864e5).toISOString().slice(0,10),E=P.exams(),nd=Object.values(E).filter(d=>P.daysTo(d)>0).length;
+ const rows=P.corsi().map(c=>{const pl=P.pianeti(c);return `<div class="sub">${esc(c.nome)}</div><ul class="exl">${pl.map(p=>{const d=E[p.id]||'',left=d?P.daysTo(d):null;
+  return `<li><label for="ex-${esc(p.id)}">${esc(p.nome)}<small>${d&&left>0?`tra ${left===1?'1 giorno':left+' giorni'}`:d?'data passata':'nessuna data'}</small></label><input type="date" id="ex-${esc(p.id)}" data-pf="exam" data-id="${esc(p.id)}" value="${esc(d)}" min="${min}">${d?`<button type="button" class="chip" data-pf="noexam" data-id="${esc(p.id)}" aria-label="Togli la data dell'esame di ${esc(p.nome)}">Togli</button>`:''}</li>`;}).join('')}</ul>`;}).join('');
+ return `<div class="card pfst"><div class="kick">Studio</div><h2>Obiettivo di oggi${day.goal?' ✓':''}</h2>
+  <div class="dayrow">${ring}<span class="dst"><b>${day.goal?'Raggiunto':goal-xp+' XP al traguardo'}</b><span>🔥 ${S.streak===1?'1 giorno di fila':(S.streak||0)+' giorni di fila'}${S.shields?` · 🛡 ${S.shields} ${S.shields===1?'scudo':'scudi'}`:''}</span></span></div>
+  ${seg}<p class="mut">Con almeno ${P.R().serie.xp_giorno} XP (o il Ripasso del giorno finito) il giorno vale per la serie, qualunque obiettivo scegli.</p>
+  <details class="exams"${nd?' open':''}><summary>Date degli esami${nd?` · ${nd}`:''}</summary><p class="mut">Facoltative: con una data i ripassi di quel pianeta si accorciano, così ogni struttura si ripassa almeno 2 volte prima.</p>${rows}</details></div>`;
 }
 
 // Sagoma e radar delle competenze (fase 5): corso scelto qui (all'inizio quello del percorso), radar per passo o per regione
@@ -144,6 +161,8 @@ export function wireProfile(panel){
   else if(k==='nophoto'){formVals();draft.avatar='';renderProg();}
   else if(k==='mod'){pmod=b.dataset.v;renderProg();}
   else if(k==='flotta')openFleet(b.dataset.v);
+  else if(k==='goal'){P.setGoal(+b.dataset.v);save();renderProg();panel.querySelector(`[data-pf=goal][data-v="${+b.dataset.v}"]`)?.focus();}
+  else if(k==='noexam'){P.setExam(b.dataset.id,'');save();renderProg();toast('Data dell\'esame tolta');}
   else if(k==='pc'){PS.c=b.dataset.v;keepPS();renderProg();}
   else if(k==='rm'){PS.r=b.dataset.v==='regioni'?'regioni':'passi';keepPS();renderProg();panel.querySelector(`[data-pf=rm][data-v=${PS.r}]`)?.focus();}
   else if(k==='sat'){if(P.satById(b.dataset.id))openSat(b.dataset.id);}
@@ -158,6 +177,8 @@ export function wireProfile(panel){
  // simboli della sagoma: si aprono anche con Invio e Spazio
  panel.addEventListener('keydown',e=>{if(app.tab!=='prog'||(e.key!=='Enter'&&e.key!==' '))return;const g=e.target.closest('[data-pf][role=button]');if(g&&g===e.target){e.preventDefault();g.dispatchEvent(new MouseEvent('click',{bubbles:true}));}});
  panel.addEventListener('change',async e=>{
+  const ex=e.target.closest('input[data-pf=exam]');
+  if(ex){const v=/^\d{4}-\d{2}-\d{2}$/.test(ex.value)&&P.daysTo(ex.value)>0?ex.value:'';P.setExam(ex.dataset.id,v);save();renderProg();$('ex-'+ex.dataset.id)?.focus();toast(v?'Data dell\'esame salvata':'Data dell\'esame tolta');return;}
   // copertina e vetrina: anteprima subito; al massimo SHOW_MAX badge
   if(e.target.name==='ban'||e.target.name==='show'){
    const f=e.target.form,on=[...f.querySelectorAll('input[name=show]:checked')];

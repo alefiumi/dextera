@@ -39,7 +39,7 @@ Dove questo file e la specifica differiscono, vale la specifica.
 - Fase 2 – Ripasso ed esame (SQL: review_items), in tre rilasci scelti dall'autore il 19/11/2026: 1) ripasso, luce dei satelliti,
   data d'esame (v0.76.0, vedi «Ripasso»); 2) esame del pianeta (v0.77.0, vedi «Esame del pianeta»); 3) Palestra con la figura per zone (v0.78.0, vedi «Palestra per zone»). Fasi 3–7: vedi la specifica.
 - Fase 4 – Flotta (SQL: costellazioni, stagioni, equipaggi): v0.85.0, vedi «Flotta». File SQL da applicare dall'autore.
-- Fase 5 – Profilo e competenze (SQL: righe in badge_classes, dextera_profili): v0.86.0, vedi «Profilo e competenze». Online e SQL applicato il 19/11/2026. Casata ed equipaggi nel Profilo: v0.87.0.
+- Fase 5 – Profilo e competenze (SQL: righe in badge_classes, dextera_profili): v0.86.0, vedi «Profilo e competenze». Online e SQL applicato il 19/11/2026. Casata ed equipaggi nel Profilo: v0.87.0; obiettivo del giorno e date d'esame: v0.88.0.
 - Corso di neurologia: contenuti (primo rilascio) e corso giocabile (v0.81.0, vedi «Corso di neurologia giocabile»), Palestra sul cervello (v0.82.0), gioco 3D (v0.83.0).
 - GitHub Pages attivo (ramo `main`, cartella radice): online su `alefiumi.github.io/dextera`.
 
@@ -684,7 +684,11 @@ descrizioni; quelle con fonte Z-Anatomy dicono da quale vaso nasce o dove sbocca
   della casata, tuoi punti di oggi e del mese; ogni equipaggio con membri, ruolo (capo o vice), barra dell'obiettivo della settimana e il tuo
   contributo. «Casate» ed «Equipaggi» aprono la Flotta sulla vista giusta (`openFleet()`). Aprendo il Profilo con la rete la Flotta si rilegge
   (`refreshFleet()`, al massimo ogni 10 minuti). Senza account: invito ad accedere; senza il file SQL della Flotta: avviso.
-- Non ancora nel Profilo (sezione 7 della specifica): date d'esame per pianeta e obiettivo giornaliero (stanno nella scheda Percorso).
+- Obiettivo del giorno e date d'esame nel Profilo (v0.88.0, riquadro «Studio», `.pfst`, subito dopo i numeri): `studyHtml()` in `progress.js`.
+  Anello dell'obiettivo come nel Percorso, serie e scudi, scelta Leggero/Normale/Intenso (30/60/120 XP, `P.setGoal`); date degli esami di tutti i
+  pianeti dei corsi, divise per corso, in «Date degli esami» (chiusa se non ci sono date, aperta con il numero di date se ci sono), con «Togli»:
+  sono le stesse del riquadro sotto il pianeta (`P.setExam`, `S.set.date_esame` → `dextera_settings`). Con questo il Profilo ha tutto quello
+  che chiede la sezione 7 della specifica.
 
 ## Mappa del percorso (`content/mappa.json`)
 Corso → 4 pianeti → 17 satelliti (con `ordine` della specifica) → 6 passi (`ossa`, `reperi`, `muscoli`, `connessioni`, `funzione`,

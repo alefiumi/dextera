@@ -57,9 +57,14 @@ function stars(w,h,n,seed=7){let x=seed,o='';const r=()=>(x=(x*16807)%2147483647
  for(let i=0;i<n;i++)o+=`<circle cx="${(r()*w*3-w).toFixed(1)}" cy="${(r()*h*1.6-h*.3).toFixed(1)}" r="${(r()*1.1+.3).toFixed(2)}" opacity="${(r()*.6+.25).toFixed(2)}"/>`;
  return `<g class="stars" aria-hidden="true">${o}</g>`;}
 // sfumature dei corpi celesti (luce dall'alto a sinistra) e alone
-// un colore per pianeta (P.planetIdx: posizione tra tutti i pianeti di tutti i corsi); niente oro (satelliti accesi) né grigio (da iniziare)
-const PC=[['#93c5fd','#2563eb'],['#f9a8d4','#db2777'],['#6ee7b7','#059669'],['#fdba74','#ea580c'],
- ['#c4b5fd','#7c3aed'],['#67e8f9','#0891b2'],['#fca5a5','#dc2626'],['#bef264','#65a30d'],['#a5b4fc','#4338ca'],['#5eead4','#0d9488']];
+// colori dei pianeti: una famiglia per ogni sole (stesso ordine di SUNS), un tono diverso per ogni pianeta del corso; sempre colorati,
+// anche «da iniziare» (solo più scuri). Corpo (sole giallo): toni caldi senza l'oro dei satelliti accesi; neurologia (sole lilla): viola
+const PCS=[
+ [['#fdba74','#ea580c'],['#fda4af','#e11d48'],['#f0b48a','#9a3412'],['#fcd34d','#b45309'],['#f9a8d4','#be185d']],
+ [['#ddd6fe','#7c3aed'],['#f5d0fe','#a21caf'],['#c7d2fe','#4338ca'],['#f0c6e8','#9d2b7a'],['#e9d5ff','#6b21a8']],
+ [['#fecaca','#dc2626'],['#fda4af','#be123c'],['#fdba74','#c2410c'],['#f9a8d4','#9d174d'],['#fca5a5','#7f1d1d']],
+ [['#bfdbfe','#2563eb'],['#a5f3fc','#0891b2'],['#c7d2fe','#4f46e5'],['#99f6e4','#0f766e'],['#93c5fd','#1e3a8a']],
+ [['#bbf7d0','#16a34a'],['#d9f99d','#65a30d'],['#99f6e4','#0d9488'],['#a7f3d0','#047857'],['#fef08a','#a16207']]];
 // sole di ogni corso nel colore del suo satellite nel logo di avvio (COLORI in logo.js, stessa posizione in mappa.json): corpo giallo,
 // neurologia viola, poi rosso, azzurro, verde
 const SUNS=[['#fff3c4','#f6b93b','#e07b12'],['#ede9fe','#a78bfa','#6d28d9'],['#fee2e2','#f87171','#b91c1c'],['#dbeafe','#60a5fa','#1d4ed8'],['#d1fae5','#34d399','#047857']];
@@ -68,15 +73,17 @@ const DEFS=`<defs>${SUNS.map(([a,b,c],i)=>`<radialGradient id="gsun${i}" cx=".38
  <radialGradient id="ghalo"><stop offset=".55" stop-color="#f6b93b" stop-opacity=".35"/><stop offset="1" stop-color="#f6b93b" stop-opacity="0"/></radialGradient>
  <radialGradient id="glit" cx=".38" cy=".35" r=".7"><stop offset="0" stop-color="#fff3c4"/><stop offset="1" stop-color="#f0b429"/></radialGradient>
  <radialGradient id="goff" cx=".38" cy=".35" r=".7"><stop offset="0" stop-color="#6b7499"/><stop offset="1" stop-color="#363d5e"/></radialGradient>
- ${PC.map(([a,b],i)=>`<radialGradient id="gp${i}" cx=".38" cy=".35" r=".7"><stop offset="0" stop-color="${a}"/><stop offset="1" stop-color="${b}"/></radialGradient><radialGradient id="gh${i}"><stop offset=".45" stop-color="${a}" stop-opacity=".55"/><stop offset="1" stop-color="${b}" stop-opacity="0"/></radialGradient>`).join('')}</defs>`;
+ ${PCS.flatMap((F,f)=>F.map(([a,b],k)=>`<radialGradient id="gp${f}-${k}" cx=".38" cy=".35" r=".7"><stop offset="0" stop-color="${a}"/><stop offset="1" stop-color="${b}"/></radialGradient><radialGradient id="gh${f}-${k}"><stop offset=".45" stop-color="${a}" stop-opacity=".55"/><stop offset="1" stop-color="${b}" stop-opacity="0"/></radialGradient>`)).join('')}</defs>`;
 const svgOpen=(h,label)=>`<svg class="map" viewBox="0 0 360 ${h}" role="group" aria-label="${esc(label)}">${DEFS}${stars(360,h,260)}`;
-// pianeta con la sua luce (planetGlow in percorso.js): da iniziare grigio con un velo scuro e senza alone; poi l'alone cresce e
+// colore del pianeta: famiglia del sole del suo corso, tono dalla posizione nel corso
+const pcol=pl=>{const c=P.corsoOf(pl),F=PCS[sunIdx(c)];return sunIdx(c)+'-'+Math.max(0,P.pianeti(c).indexOf(pl))%F.length;};
+// pianeta con la sua luce (planetGlow in percorso.js): da iniziare colorato ma scuro (velo) e senza alone; poi l'alone cresce e
 // il velo si toglie man mano che si avanza; dopo l'esame cala piano piano quando si avvicina il ripasso; orologio se da ripassare
 function planetBody(pl,x,y,r){
- const g=P.planetGlow(pl),v=g.v,f=n=>n.toFixed(2),i=P.planetIdx(pl)%PC.length;
+ const g=P.planetGlow(pl),v=g.v,f=n=>n.toFixed(2),i=pcol(pl);
  const halo=v>0?`<circle cx="${x}" cy="${y}" r="${f(r*(1.35+.75*v))}" fill="url(#gh${i})" opacity="${f(.25+.75*v)}"/>`:'';
- const body=`<circle cx="${x}" cy="${y}" r="${r}" fill="${g.st==='nuovo'?'url(#goff)':`url(#gp${i})`}"${g.st==='nuovo'?' stroke="#7d86ad" stroke-width="1"':''}/>`;
- const veil=g.st==='nuovo'?.35:.6*(1-v),vl=veil>.01?`<circle cx="${x}" cy="${y}" r="${r}" fill="#05071a" opacity="${f(veil)}"/>`:'';
+ const body=`<circle cx="${x}" cy="${y}" r="${r}" fill="url(#gp${i})"/>`;
+ const veil=g.st==='nuovo'?.32:.4*(1-v),vl=veil>.01?`<circle cx="${x}" cy="${y}" r="${r}" fill="#05071a" opacity="${f(veil)}"/>`:'';
  const ring=g.st==='esperto'&&v>.9?`<circle cx="${x}" cy="${y}" r="${f(r+3)}" fill="none" stroke="#fde68a" stroke-opacity=".7" stroke-width="1.2"/>`:'';
  const cr=Math.max(5,r*.32),cx=f(x+r*.72),cy=f(y-r*.72);
  const clk=g.st==='ripassare'&&r>=10?`<circle cx="${cx}" cy="${cy}" r="${f(cr)}" class="sy rip"/>${CLOCK(+cx,+cy,cr-1)}`:'';

@@ -492,15 +492,17 @@ descrizioni; quelle con fonte Z-Anatomy dicono da quale vaso nasce o dove sbocca
 
 ## Luce dei pianeti e corsi nel logo (v0.80.0, chiesti dall'autore il 19/11/2026)
 - Luce del pianeta (`planetGlow()` in `percorso.js`, disegno `planetBody()` in `path.js`, numeri in `regole.json` → `luce_pianeta`): «Da iniziare»
-  grigio (`#goff`) con un velo scuro e senza alone; «In corso» la luce va da `min_corso` a `max_corso` con l'avanzamento medio dei passi
+  colorato con un velo scuro e senza alone; «In corso» la luce va da `min_corso` a `max_corso` con l'avanzamento medio dei passi
   (`stepPct`); «Pronto per l'esame» con tutti i satelliti accesi; dopo l'esame superato «Completato» a luce piena, che cala piano piano
   quando si avvicina il ripasso (`planetFresh()`: ogni struttura piena nella prima metà del suo intervallo, poi giù fino alla scadenza),
   mai sotto `min_esperto`; «Da ripassare» con l'orologio se un suo satellite lo è o la freschezza scende sotto 1 − `luce_min`. Lo stato è
   scritto anche a parole (etichette, `aria-label`, riga `.glow` nel riquadro del pianeta, Elenco). Pianeti dell'universo, del sistema e del pianeta aperto.
-  Colore: ogni pianeta ha il suo, diverso da quelli di tutti i corsi (`PC` in `path.js`, 10 colori; indice `P.planetIdx(pl)` = posizione
-  tra tutti i pianeti dei corsi, v0.84.1): prima dipendeva dalla posizione nel corso e i due corsi avevano gli stessi 4 colori.
   Sole: ogni corso ha il sole del colore del suo satellite nel logo di avvio (`SUNS` in `path.js`, stessa posizione in `mappa.json` di
-  `COLORI` in `logo.js`: corpo giallo, neurologia viola, v0.84.2). I pianeti «Da iniziare» restano grigi in ogni corso.
+  `COLORI` in `logo.js`: corpo giallo, neurologia lilla-viola, v0.84.2).
+  Colore dei pianeti (v0.84.3, chiesto dall'autore): sempre colorati, anche «Da iniziare» (solo un velo scuro più forte e niente alone, non più
+  grigi), nei toni del sole del loro corso e diversi tra loro (`PCS` in `path.js`, una famiglia di 5 toni per sole; `pcol()`: famiglia del
+  corso, tono dalla posizione nel corso). Corpo: arancio, corallo, terracotta, ocra (niente oro: è il colore dei satelliti accesi);
+  neurologia: viola, orchidea, indaco, malva. Uguale in universo, sistema e pianeta aperto.
 - Logo della schermata di avvio (`js/logo.js`, chiamato da `wireGate()`): ogni corso iniziato è un satellite sull'orbita del logo nel suo
   colore (`COLORI`: il primo è il giallo di sempre e c'è anche prima di cominciare); un corso completato (tutti i pianeti con l'esame
   superato) ha un anello. Stato in `S.logo` [{id, st}], calcolato da `logoTick()` in `percorso.js` prima di ogni salvataggio per tutti

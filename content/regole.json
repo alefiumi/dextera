@@ -1,6 +1,6 @@
 {
- "version": 4,
- "nota": "Numeri del percorso (sezioni 3, 4, 5 e 6 della specifica: lezione, sblocchi ed esame, ripasso, serie; palestra per zone, sezione 7; luce dei pianeti): stanno qui e non nel codice. Dalla fase 3 arriveranno dalla tabella rules del gestionale, con gli stessi nomi.",
+ "version": 5,
+ "nota": "Numeri del percorso (sezioni 3, 4, 5 e 6 della specifica: lezione, sblocchi ed esame, ripasso, serie; palestra per zone, sezione 7; luce dei pianeti; Flotta, sezione 6): stanno qui e non nel codice. Dalla fase 3 arriveranno dalla tabella rules del gestionale, con gli stessi nomi.",
  "lezione": {"domande": 8, "cuori": 3, "non_scelta_min": 3, "ripasso_passi_fatti": 2, "dopo_presentazione_min": 4, "opzioni": 4},
  "stelle": {"tre": 0.95, "due": 0.8},
  "maestria": {"max": 3, "scelta_max": 1, "tocco_max": 2, "nome_max": 3, "errore": -1, "passo_fatto": 2},
@@ -12,5 +12,6 @@
  "ripasso": {"da_maestria": 2, "intervalli": [1, 3, 7, 14, 30, 60], "entro_giorni": 1, "al_giorno": 10, "altre": 10, "luce_min": 0.7, "brillante_giorni": 30, "xp_puntuale": 2, "satellite": 5},
  "luce_pianeta": {"min_corso": 0.25, "max_corso": 0.85, "min_esperto": 0.45, "meta_intervallo": 0.5},
  "esame": {"domande": 20, "secondi": 60, "soglia": 16, "per_satellite": 3, "xp": 250, "caso_indizio_max": 3, "caso_errori_max": 1},
- "palestra": {"domande": 8, "cuori": 3, "zone_deboli": 2}
+ "palestra": {"domande": 8, "cuori": 3, "zone_deboli": 2},
+ "flotta": {"tetto_giorno": 300, "pianeta_scelto": 2, "giorni": 40, "invio_giorni": 34, "equipaggio": {"min": 2, "max": 10, "per_membro": 6, "xp": 50, "max_per_persona": 3}, "sfida": {"strutture": 5, "giorni": 14}}
 }

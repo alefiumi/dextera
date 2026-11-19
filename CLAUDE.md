@@ -38,6 +38,7 @@ Dove questo file e la specifica differiscono, vale la specifica.
 - Fase 1 – Percorso minimo (SQL: path_progress, dextera_settings, error_reports): online e SQL applicato il 18/11/2026.
 - Fase 2 – Ripasso ed esame (SQL: review_items), in tre rilasci scelti dall'autore il 19/11/2026: 1) ripasso, luce dei satelliti,
   data d'esame (v0.76.0, vedi «Ripasso»); 2) esame del pianeta (v0.77.0, vedi «Esame del pianeta»); 3) Palestra con la figura per zone (v0.78.0, vedi «Palestra per zone»). Fasi 3–7: vedi la specifica.
+- Fase 4 – Flotta (SQL: costellazioni, stagioni, equipaggi): v0.85.0, vedi «Flotta». File SQL da applicare dall'autore.
 - Corso di neurologia: contenuti (primo rilascio) e corso giocabile (v0.81.0, vedi «Corso di neurologia giocabile»), Palestra sul cervello (v0.82.0), gioco 3D (v0.83.0).
 - GitHub Pages attivo (ramo `main`, cartella radice): online su `alefiumi.github.io/dextera`.
 
@@ -594,6 +595,49 @@ descrizioni; quelle con fonte Z-Anatomy dicono da quale vaso nasce o dove sbocca
   «Rigioca» resta sul satellite (`GAME.again`). Senza satellite i giochi 3D della Palestra restano quelli di prima (chiavi `3d:<serie>:<nome>`).
 - Prova: `corpo3d.mjs` (copia nelle note delle sessioni): casi abbinati e distretti, pulsante nel satellite, tocchi veri su ossa, muscoli e
   reperi della gamba, maestria `o.`/`m.`/`r.`, Rigioca, foglio della zona, gioco 3D generale invariato; dati di BodyMania intatti.
+
+## Flotta (fase 4, v0.85.0)
+- Decisioni dell'autore (19/11/2026): casate Osteon 🦴 (oro), Myon 💪 (rosso), Neuron 🧠 (viola), Cor 🫀 (blu); si cambia casata al
+  massimo una volta per stagione (mese, ora italiana) e i punti già fatti restano alla casata di prima; vince la stagione la casata con
+  più **punti totali**; in questo rilascio solo il nucleo. Rimandati: voto di capo e vice delle casate, annunci, banner caricati
+  (Storage), tabellone delle azioni, segnalazioni dei contenuti, membro migliore della settimana, badge «Vincitore di stagione» e
+  «Obiettivo d'equipaggio» (fase 5).
+- Conti sul telefono (`js/flotta.js`, numeri in `regole.json` → `flotta`): `gain(n, true, pls)` in `percorso.js` (XP di progresso:
+  passo fatto, satellite acceso, livello nuovo, ripasso in tempo, che ora conta come progresso come dice la specifica, esame) chiama
+  `fleetGain()`: `S.fleet.days {'AAAA-MM-GG': {xp, raw, u}}`, punti = min(300, raw), doppi se vengono dal pianeta scelto (`S.set.pianeta`,
+  colonna `pianeta` di `dextera_settings`, che c'era già). `pls` = pianeti della chiave (`plsOf(k)`, dall'indice `kidx`).
+  Contributi agli equipaggi (`fleetContrib()`): una chiave del percorso che entra nel calendario del ripasso (maestria 2, una volta) o
+  ripassata in tempo vale 1 per ogni suo pianeta; `S.fleet.wk {w: lunedì, pl: {pianeta: n}}` (la settimana prima in `wkp` finché non
+  parte). Casata in `S.fleet.casata`/`cambiata`, risposte alle sfide in coda `S.fleet.ans`, premi dati `S.fleet.premi`.
+- Sincronizzazione: `syncFlotta()` (da `sync()` in `account.js`): casata (`ensureCasata`: se manca la assegna il server), giorni in
+  `fleet_days` (ultimi 34), contributi in `crew_weeks` per ogni equipaggio (`S.fleet.crewPl`, aggiornato dalla scheda), risposte una alla
+  volta. Senza il file SQL tutto resta sul telefono, avviso nel profilo e nella Flotta (`A.fleetMissing`). «Scarica i miei dati» ha `flotta`.
+- Scheda Flotta (`js/social.js`), quattro viste (`.seg3.s4`): **Amici** (classifica della settimana per XP di progresso, vista
+  `dextera_classifica_settimana`; senza il file SQL la vecchia per XP totali), **Casate** (la propria con punti di oggi e del mese, pianeta
+  scelto, cambio una volta per stagione; stagione in corso da `season_scores`; albo da `seasons`), **Equipaggi** (codice con Copia e
+  Condividi, obiettivo della settimana = 6 contributi per membro sul pianeta scelto da capo o vice, il proprio contributo visto solo da sé,
+  +50 XP a testa una volta per settimana quando `crews.contributi` arriva all'obiettivo; il capo nomina il vice (da 3 membri) e toglie membri;
+  sfide), **Tutti** (classifica generale di prima).
+- Sfide: un membro sceglie 5 strutture del pianeta dell'equipaggio (passi ossa, reperi, muscoli, strutture: chiavi del percorso) e le
+  lancia (`crew_challenges`); gli altri rispondono una volta: `startChallenge()` in `lezione.js` (`kind:'sfida'`, scheda Palestra, tocco o
+  nome, a scelta sotto maestria 2, niente cuori), `useMod` e `setTab` arrivano da `ui.js` (`setSocialNav`). I nomi delle strutture si vedono
+  solo dopo aver risposto. Fine: «Torna alla Flotta», risultato in coda e poi in `crew_challenge_answers`; in coda partite `mode:'sfida'`.
+- SQL: `supabase/migrations/20261123090000_dextera_flotta.sql` (da applicare dall'autore; prima si pubblica l'app). Tabelle
+  `constellations` (4 righe, `membri`), `constellation_members` (casata scelta dal server, la meno numerosa; cambio una volta per stagione,
+  hint `dextera_cambio`), `fleet_days` (casata del giorno decisa dal server, ultimi 35 giorni, vince il valore più alto; leggono sé e gli
+  amici), `season_scores` (ricontate da trigger), `seasons` (storico, `admin.chiudi_stagione()` con pg_cron il primo del mese alle 00:30 UTC;
+  i punti arrivati dopo la chiusura non cambiano il vincitore), `crews` (codice di 6 caratteri senza 0, 1, I, O generato dal server,
+  `membri_ids` tenuto dai trigger e usato dalle regole di accesso, al massimo 10 membri e 3 equipaggi a testa; se esce il capo lo diventa il
+  vice o il primo entrato; senza membri si scioglie), `crew_members` (si entra solo con il codice), `crew_weeks`, `crew_challenges` (10 al
+  giorno per equipaggio), `crew_challenge_answers`. Le modifiche interne dei trigger passano con `set_config('dextera.interno')`.
+  Errori con `hint` `dextera_*`, tradotti in `HINTS` di `social.js`. Provato con PGlite: 82 prove (`flotta_rls.mjs` nelle note delle
+  sessioni). Cancellazione dell'account: durante i 30 giorni la persona resta negli equipaggi (la funzione di BodyMania non cambia);
+  dopo, la cascata la toglie e il capo passa a un altro.
+- `privacy.html`: due righe nuove nella tabella dei dati (Flotta ed equipaggi).
+- Prova: `flotta.mjs` (copia nelle note delle sessioni, Chrome headless con un finto Supabase in memoria): ospite, account senza il file
+  SQL (avvisi, punti in coda), con il file (casata, invio dei giorni, classifica della settimana, pianeta doppio, tetto di 300, cambio di
+  casata una volta), equipaggi (crea, codice sbagliato, entra, premio una volta, contributo inviato, sfida con 5 strutture, risposta giocata
+  nella Palestra e inviata, esci), offline, dati e cache di BodyMania intatti.
 
 ## Mappa del percorso (`content/mappa.json`)
 Corso → 4 pianeti → 17 satelliti (con `ordine` della specifica) → 6 passi (`ossa`, `reperi`, `muscoli`, `connessioni`, `funzione`,

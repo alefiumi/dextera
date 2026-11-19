@@ -10,6 +10,7 @@
    - Ripasso (fase 2, sezione 5): S.rev {chiave: {i, due, t, u}} (i = indice dell'intervallo, due = giorno 'AAAA-MM-GG' in cui torna,
      t = ms dell'ultimo ripasso, u = da inviare a review_items); S.revDay {d, keys} = ripassi scelti per oggi (al massimo 10, i più in ritardo). */
 import {app,S,onBeforeSave,onBump,ymd} from './state.js';
+import {fleetGain,fleetContrib} from './flotta.js';
 import {flaggedIds} from './segnala.js';
 
 export const R=()=>app.REGOLE;
@@ -177,15 +178,17 @@ export function checkProgress(){
  for(const sat of corsi().flatMap(c=>satelliti(null,c))){
   for(const ps of passi(sat)){
    if(ps.tipo==='progetto')continue;
-   if(!dones.has(node(ps.id)?.stato)&&stepDone(ps)){setNode(ps.id,{stato:'fatto',fatto_il:now});gain(X.passo_fatto,true);out.push({t:'passo',sat,ps,xp:X.passo_fatto});}
+   if(!dones.has(node(ps.id)?.stato)&&stepDone(ps)){setNode(ps.id,{stato:'fatto',fatto_il:now});gain(X.passo_fatto,true,[planetOf(sat)?.id]);out.push({t:'passo',sat,ps,xp:X.passo_fatto});}
   }
-  if(node(sat.id)?.stato!=='acceso'&&passi(sat).every(stepDone)){setNode(sat.id,{stato:'acceso',fatto_il:now});gain(X.satellite_acceso,true);out.push({t:'satellite',sat,xp:X.satellite_acceso});}
+  if(node(sat.id)?.stato!=='acceso'&&passi(sat).every(stepDone)){setNode(sat.id,{stato:'acceso',fatto_il:now});gain(X.satellite_acceso,true,[planetOf(sat)?.id]);out.push({t:'satellite',sat,xp:X.satellite_acceso});}
   else if(!node(sat.id)&&passi(sat).some(stepDone))setNode(sat.id,{stato:'iniziato'});
  }
  return out;
 }
-// XP: quelli di progresso (passo fatto, satellite acceso, livello nuovo) si contano a parte per le classifiche della fase 4
-export function gain(n,progress){S.xp+=n;if(progress)S.pxp=(S.pxp||0)+n;}
+// XP: quelli di progresso (passo fatto, satellite acceso, livello nuovo, ripasso in tempo, esame) si contano a parte per la Flotta
+// (fase 4): classifica della settimana tra amici e punti della casata (pls = pianeti da cui vengono, per il pianeta scelto)
+export function gain(n,progress,pls){S.xp+=n;if(progress){S.pxp=(S.pxp||0)+n;fleetGain(n,pls);}}
+export const plsOf=k=>[...(kidx().k.get(k)?.pls||[])];
 
 /* ---------- stella guida e «Continua» ---------- */
 // prossimo passo consigliato: l'ultimo satellite usato se non è acceso, altrimenti il primo non acceso nell'ordine del percorso
@@ -269,7 +272,7 @@ const stamp=r=>{r.t=Date.now();r.u=1;};
 // nuove strutture a maestria 2 → nel calendario, tornano domani
 function ensureRev(){
  if(!ready())return;const t=tdn(),min=R().ripasso?.da_maestria??2;
- for(const [k] of kidx().k)if(!RV()[k]&&mastery(k)>=min){const r={i:0,due:isoDay(t+nextGap(k,0))};stamp(r);RV()[k]=r;}
+ for(const [k,e] of kidx().k)if(!RV()[k]&&mastery(k)>=min){const r={i:0,due:isoDay(t+nextGap(k,0))};stamp(r);RV()[k]=r;fleetContrib(e.pls);} // contributo agli equipaggi
 }
 // risposta su una struttura: true se vale come ripasso fatto (per i +2 XP del ripasso)
 export function reviewAnswer(k,ok,recall=true){
@@ -277,6 +280,7 @@ export function reviewAnswer(k,ok,recall=true){
  if(!ok){r.i=0;r.due=isoDay(t+1);stamp(r);return false;}
  if(!recall||dueDay(r)>t+(R().ripasso?.entro_giorni??1))return false;
  r.i=Math.min(r.i+1,INT().length-1);r.due=isoDay(t+nextGap(k,r.i));stamp(r);
+ fleetContrib(kidx().k.get(k)?.pls); // ripassata in tempo: contributo agli equipaggi
  return true;
 }
 // giochi della Palestra (Trova, Ricomponi…): ogni risposta conta come richiamo sulla chiave della struttura
@@ -361,7 +365,7 @@ export function examDone(pl,ok){const o=EX()[pl.id];if(o)o.best=Math.max(o.best|
 export function examPass(pl,stelle){
  const first=!examPassed(pl);
  setNode(pl.id,{stato:'acceso',stelle,fatto_il:new Date().toISOString()});
- if(first)gain(R().esame.xp,true);
+ if(first)gain(R().esame.xp,true,[pl.id]);
  return first;
 }
 // i 2 satelliti più deboli: più errori in questo esame, poi luce più bassa, poi maestria media più bassa

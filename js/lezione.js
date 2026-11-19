@@ -160,9 +160,20 @@ export function startZone(sats,{tipo=null,label=''}={}){
   ok:0,n:0,nonChoice:0,pres:new Set(),presAt:{},up:[],wrong:[],xp0:S.xp,screen:'q',cur:null};
  renderLesson();return true;
 }
+// Sfida d'equipaggio (Flotta, fase 4): le 5 strutture scelte da un membro, una domanda ciascuna (tocco o nome; a scelta sotto
+// maestria 2), senza cuori; si gioca nella scheda Palestra come un allenamento. done(giuste, domande) alla fine, back() per tornare
+// alla Flotta. Non avvia il disegno: chi la chiama porta la figura giusta e apre la scheda Palestra (social.js).
+export function startChallenge(slots,{label='',done=()=>{},back=null}={}){
+ if(!slots.length)return false;
+ if(app.L&&app.L.tab!=='play')app.Lp=app.L;
+ app.L={kind:'sfida',tab:'play',zone:{sats:[],label},sfida:{done,back},sat:null,ps:null,slots,si:0,qn:0,hearts:0,
+  ok:0,n:0,nonChoice:0,pres:new Set(),presAt:{},up:[],wrong:[],xp0:S.xp,screen:'q',cur:null};
+ return true;
+}
+export const structName=sid=>info(sid).n;
 // esce da un allenamento della Palestra: torna la lezione del percorso messa da parte (se c'era)
 export const leaveZone=()=>{if(app.L?.tab==='play'){stopTick();app.L=app.Lp||null;app.Lp=null;}};
-export const quitLesson=()=>{const pl=app.L?.tab==='play';if(pl){leaveZone();clearMarks();baseView();onPlayExit();return;}app.L=null;stopTick();clearMarks();baseView();onExit();};
+export const quitLesson=()=>{const pl=app.L?.tab==='play',sf=app.L?.sfida?.back;if(pl){leaveZone();clearMarks();baseView();sf?sf():onPlayExit();return;}app.L=null;stopTick();clearMarks();baseView();onExit();};
 
 /* ---------- cronometro dell'esame: scadenza per domanda (q.end); allo scadere la risposta conta come sbagliata ---------- */
 let TK=null;
@@ -188,7 +199,7 @@ function pickType(L,slot){
  const {sid,ps}=slot,k=P.key(sid,ps.aspetto),m=P.mastery(k),tc=canTap(ps,sid),Rl=P.R().lezione;
  if(L.kind==='prova'||L.kind==='ripasso')return tc&&Math.random()<.5?'tocco':'nome';
  // esame: niente presentazioni; a maestria 2 o più mai a scelta
- if(L.kind==='esame')return tc&&Math.random()<.5?'tocco':m>=P.R().maestria.passo_fatto?'nome':'scelta';
+ if(L.kind==='esame'||L.kind==='sfida')return tc&&Math.random()<.5?'tocco':m>=P.R().maestria.passo_fatto?'nome':'scelta';
  if(m===0&&!L.pres.has(k))return 'pres';
  let t=m===0?'scelta':m===1?(tc?'tocco':'nome'):'nome';
  const justPres=L.pres.has(k)&&L.qn-L.presAt[k]<Rl.dopo_presentazione_min;
@@ -279,7 +290,7 @@ function headHtml(L){
  return `<div class="lh"><button class="lx" data-l="quit" aria-label="Esci dalla lezione">✕</button>
   <div class="lbar" role="progressbar" aria-label="Avanzamento" aria-valuemin="0" aria-valuemax="${tot}" aria-valuenow="${done}"><i style="width:${done/tot*100}%"></i></div>${h}</div>`;
 }
-const title=L=>L.kind==='palestra'?'Palestra · '+esc(L.zone.label):L.kind==='esame'?'Esame · '+esc(L.pl.nome):L.kind==='ripasso'?(L.daily?'Ripasso del giorno':'Ripasso · '+esc(L.sat?.nome||'')):({lezione:'Lezione',prova:'Lo so già: mettimi alla prova',quiz:'Quiz finale',caso:'Caso clinico'}[L.kind])+' · '+esc(L.ps.nome);
+const title=L=>L.kind==='sfida'?'Sfida · '+esc(L.zone.label):L.kind==='palestra'?'Palestra · '+esc(L.zone.label):L.kind==='esame'?'Esame · '+esc(L.pl.nome):L.kind==='ripasso'?(L.daily?'Ripasso del giorno':'Ripasso · '+esc(L.sat?.nome||'')):({lezione:'Lezione',prova:'Lo so già: mettimi alla prova',quiz:'Quiz finale',caso:'Caso clinico'}[L.kind])+' · '+esc(L.ps.nome);
 export function renderLesson(){
  const L=app.L;if(!L)return;
  const md=needMod(L);if(md&&app.MODS[md]&&app.MOD.id!==md){onExit(md);return;} // useMod ridisegna la figura e torna qui
@@ -347,10 +358,10 @@ function answer(L,q,ok){
  if(L.kind==='prova'&&ok)nm=Math.max(nm,M.passo_fatto);
  S.mastery[k]=nm;(S.seen||(S.seen={}))[k]=Date.now();
  // ripasso: una risposta di richiamo giusta su una struttura che scade entro 1 giorno la porta all'intervallo successivo
- if(P.reviewAnswer(k,ok,q.t!=='scelta')&&L.kind==='ripasso'){L.rv++;P.gain(P.R().ripasso.xp_puntuale,false);}
+ if(P.reviewAnswer(k,ok,q.t!=='scelta')&&L.kind==='ripasso'){L.rv++;P.gain(P.R().ripasso.xp_puntuale,true,P.plsOf(k));} // di progresso (sezione 6)
  const mmax=S.mmax||(S.mmax={}),reached=mmax[k]??m;
  if(ok){S.ok++;L.ok++;P.gain(m>=M.max?X.giusta_gia_3:X.giusta,false);}else{S.ko++;if(L.hearts0)L.hearts--;L.wrong.push(sid);}
- if(nm>reached){mmax[k]=nm;P.gain(X.livello_nuovo,true);}
+ if(nm>reached){mmax[k]=nm;P.gain(X.livello_nuovo,true,P.plsOf(k));}
  if(nm>m)L.up.push({k,sid,nm});
  if(q.t!=='scelta')L.nonChoice++;
  if(L.kind==='esame')L.res.push({sat:q.slot.sat,ok});
@@ -396,11 +407,12 @@ function finish(){
   if(L.daily&&completed)L.msg+=(L.msg?' ':'')+'Il ripasso di oggi vale per la serie.';
  }
  else if(L.kind==='palestra'){if(completed)P.gain(Rg.xp.lezione_con_cuori,false);}
+ else if(L.kind==='sfida'){L.msg='Risultato inviato al tuo equipaggio.';try{L.sfida.done(L.ok,L.n);}catch(e){}}
  else if(L.kind==='lezione'){if(completed){P.gain(Rg.xp.lezione_con_cuori,false);P.setNode(L.ps.id,{stato:'iniziato',stelle:stars});}}
  else if(L.kind==='prova'){
   P.setProva(L.ps.id);const wrong=[...new Set(L.wrong)];
   if(acc>=Rg.prova.soglia){
-   if(!['fatto','acceso'].includes(P.node(L.ps.id)?.stato)){P.setNode(L.ps.id,{stato:'fatto',stelle:stars,fatto_il:now});P.gain(Rg.xp.passo_fatto,true);L.msg=`🎉 Passo fatto con la prova! +${Rg.xp.passo_fatto} XP`;}
+   if(!['fatto','acceso'].includes(P.node(L.ps.id)?.stato)){P.setNode(L.ps.id,{stato:'fatto',stelle:stars,fatto_il:now});P.gain(Rg.xp.passo_fatto,true,[P.planetOf(L.sat)?.id]);L.msg=`🎉 Passo fatto con la prova! +${Rg.xp.passo_fatto} XP`;}
    P.setPrio(L.ps.id,wrong);if(wrong.length)L.next={kind:'lezione',pool:wrong,label:'Lezione sulle sbagliate'};
   }else{P.setPrio(L.ps.id,wrong);L.msg='Le prossime lezioni partono dalle strutture sbagliate.';}
  }else if(L.kind==='quiz'){
@@ -408,7 +420,7 @@ function finish(){
   else L.msg=`Serve almeno l'${Math.round(Rg.progetto.quiz_soglia*100)}% con i cuori rimasti: riprova quando vuoi.`;
  }
  L.rewards=P.checkProgress();
- queue.add({module:L.kind==='palestra'?modOf(L.slots[0]?.sid):'percorso',mode:L.kind==='palestra'?'zona':L.kind,score:L.ok,total:L.n,xp:Math.max(0,S.xp-L.xp0)});
+ queue.add({module:L.tab==='play'?modOf(L.slots[0]?.sid):'percorso',mode:L.kind==='palestra'?'zona':L.kind,score:L.ok,total:L.n,xp:Math.max(0,S.xp-L.xp0)});
  save();head();refreshMastery();
  L.gain=Math.max(0,S.xp-L.xp0);L.screen='end';endScreen(L);
 }
@@ -418,9 +430,9 @@ function endScreen(L){
  const rw=(L.rewards||[]).map(r=>`<p class="party">${r.t==='satellite'?`🌟 ${esc(r.sat.nome)} acceso! +${r.xp} XP`:`🎉 ${esc(r.ps.nome)} (${esc(r.sat.nome)}): passo fatto! +${r.xp} XP`}</p>`).join('');
  const nextStep=L.ps&&P.passi(L.sat).find(p=>!P.stepDone(p)),ex=L.kind==='esame';
  const ring=`<div class="ring" role="img" aria-label="Obiettivo del giorno: ${day.xp||0} XP su ${g}"><svg viewBox="0 0 36 36" aria-hidden="true"><circle cx="18" cy="18" r="15" class="rb"/><circle cx="18" cy="18" r="15" class="rf" stroke-dasharray="${(pct*94.2).toFixed(1)} 94.2"/></svg><span>${day.xp||0}/${g}</span></div>`;
- const stars=L.kind==='prova'||L.kind==='ripasso'||(ex&&!L.passed)?'':`<div class="big" aria-label="${L.stars} stelle su 3">${'⭐'.repeat(L.stars)}${'☆'.repeat(3-L.stars)}</div>`;
+ const stars=L.kind==='prova'||L.kind==='ripasso'||L.kind==='sfida'||(ex&&!L.passed)?'':`<div class="big" aria-label="${L.stars} stelle su 3">${'⭐'.repeat(L.stars)}${'☆'.repeat(3-L.stars)}</div>`;
  const pz=L.kind==='palestra';
- const btns=pz?`<button class="btn" data-l="again" data-k="palestra">Ancora su ${esc(L.zone.label)}</button>`+(L.sat?`<button class="btn alt" data-l="gosat">Vai al satellite</button>`:'')+'<button class="btn alt" data-l="quit">Torna alla Palestra</button>':(L.next?`<button class="btn" data-l="again" data-k="${L.next.kind}">${esc(L.next.label)}</button>`:'')+
+ const btns=L.kind==='sfida'?'<button class="btn" data-l="quit">Torna alla Flotta</button>':pz?`<button class="btn" data-l="again" data-k="palestra">Ancora su ${esc(L.zone.label)}</button>`+(L.sat?`<button class="btn alt" data-l="gosat">Vai al satellite</button>`:'')+'<button class="btn alt" data-l="quit">Torna alla Palestra</button>':(L.next?`<button class="btn" data-l="again" data-k="${L.next.kind}">${esc(L.next.label)}</button>`:'')+
   (done&&nextStep&&nextStep.id!==L.ps.id?`<button class="btn" data-l="step" data-id="${esc(nextStep.id)}">Prossimo passo</button>`:'')+
   (!done&&L.kind==='lezione'?`<button class="btn" data-l="again" data-k="lezione">Ancora una lezione</button>`:'')+
   (L.kind==='quiz'&&!done?`<button class="btn" data-l="again" data-k="quiz">Riprova</button>`:'')+

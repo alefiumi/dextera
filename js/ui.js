@@ -6,7 +6,7 @@ import {renderExplore,showNc,selectBone} from './explore.js';
 import {renderMenu,zoneTap,zoneClick,clearGhosts,startGame,nextQ,answerFind,answerMusc,answerBridge,answerFunc,answerNc,answerCase,bridgePrompt,casePanel} from './game.js';
 import {placeAttempt,freeDrop} from './puzzle.js';
 import {renderProg} from './progress.js';
-import {renderSocial,loadSocial,setSocialOpen} from './social.js';
+import {renderSocial,loadSocial,setSocialOpen,setSocialNav} from './social.js';
 import {renderPath,initPath,pathClick,pathChange,pathSubmit} from './path.js';
 import {lessonTap,lessonClick,lessonSubmit,leaveZone} from './lezione.js';
 import {showInstall,promptInstall,installNow} from './install.js';
@@ -139,3 +139,4 @@ $('panel').addEventListener('change',e=>{if(app.tab==='path')pathChange(e);});
 $('panel').addEventListener('keydown',e=>{const a=(e.key==='Enter'||e.key===' ')&&e.target.closest?.('svg a[role=button]');if(a){e.preventDefault();a.dispatchEvent(new MouseEvent('click',{bubbles:true}));}});
 $('panel').addEventListener('submit',e=>{if(app.tab==='path')pathSubmit(e);else if(app.tab==='play'&&app.L?.tab==='play')lessonSubmit(e);});
 initPath({useMod,setTab,play3d});
+setSocialNav({useMod,setTab}); // sfide d'equipaggio: si giocano nella Palestra e si torna alla Flotta

@@ -4,6 +4,7 @@
    L'accesso si fa nella schermata di avvio (gate.js); qui ci sono le funzioni e il riquadro Account del profilo. */
 import {S,save,head,onSave,queue,resetLocal} from './state.js';
 import {reports,setFlagged,flaggedAge} from './segnala.js';
+import {syncFlotta,missing as fleetMissing,SQL_FILE as FLEET_SQL} from './flotta.js';
 import {SUPABASE_URL,SUPABASE_KEY} from './config.js';
 
 export const configured=!!(SUPABASE_URL&&SUPABASE_KEY);
@@ -162,14 +163,19 @@ export async function myData(){
  const out={app:'Dextera',creato_il:new Date().toISOString(),dispositivo:{progressi:S,partite_da_inviare:queue.all(),segnalazioni_da_inviare:reports.all()}};
  if(A.user&&A.sb&&online()){
   const sb=A.sb,uid=A.user.id;
-  const [p,g,m,b,f,pp,ds,er,rv]=await Promise.all([ownProfile(sb,uid),sb.from('game_results').select('*').eq('user_id',uid).order('played_at'),
+  const [p,g,m,b,f,pp,ds,er,rv,cm,fd,cw,ca]=await Promise.all([ownProfile(sb,uid),sb.from('game_results').select('*').eq('user_id',uid).order('played_at'),
    sb.from('mastery').select('item_id,level,updated_at'),sb.from('badge_assertions').select('badge_id,issued_at').eq('user_id',uid),
    sb.from('friendships').select('user_id,friend_id,status,created_at'),
    sb.from('path_progress').select('node_id,stato,stelle,fatto_il,aggiornato_il').eq('user_id',uid),
    sb.from('dextera_settings').select('*').eq('user_id',uid),sb.from('error_reports').select('id,data_id,nota,valore,stato,creato_il').eq('user_id',uid),
-   sb.from('review_items').select('item_id,intervallo,scadenza,ripassato_il,aggiornato_il').eq('user_id',uid).limit(10000)]);
+   sb.from('review_items').select('item_id,intervallo,scadenza,ripassato_il,aggiornato_il').eq('user_id',uid).limit(10000),
+   sb.from('constellation_members').select('constellation_id,precedente,cambiata_il,entrata_il').eq('user_id',uid),
+   sb.from('fleet_days').select('giorno,constellation_id,xp,punti').eq('user_id',uid).order('giorno'),
+   sb.from('crew_weeks').select('crew_id,settimana,pianeta,contributi').eq('user_id',uid),
+   sb.from('crew_challenge_answers').select('challenge_id,giuste,risposto_il').eq('user_id',uid)]);
   out.account={email:A.user.email,registrato_il:A.user.created_at,ultimo_accesso:A.user.last_sign_in_at,consenso_privacy:A.user.user_metadata||{},
-   profilo:p.data,partite:g.data,maestria:m.data,badge:b.data,amicizie:f.data,percorso:pp.data,impostazioni:ds.data,segnalazioni:er.data,ripasso:rv.data};
+   profilo:p.data,partite:g.data,maestria:m.data,badge:b.data,amicizie:f.data,percorso:pp.data,impostazioni:ds.data,segnalazioni:er.data,ripasso:rv.data,
+   flotta:{casata:cm.data,giorni:fd.data,contributi_equipaggi:cw.data,risposte_sfide:ca.data}};
  }else if(A.user)out.account={email:A.user.email,nota:'Senza connessione: qui ci sono solo i dati del dispositivo.'};
  return out;
 }
@@ -282,6 +288,9 @@ export async function sync(full){
   // calendario del ripasso (fase 2): stessa regola, con il suo file SQL
   try{await syncRipasso(sb,uid,full);}catch(e){A.warn=/review_items|schema cache|does not exist|PGRST205|42P01/i.test((e.message||'')+(e.code||''))
    ?'Il calendario del ripasso resta su questo telefono finché sul server non c\'è il file supabase/migrations/20261122090000_dextera_ripasso.sql.':'Ripasso non sincronizzato: riprovo più tardi.';}
+  // Flotta (fase 4): casata, punti del giorno, contributi agli equipaggi e risposte alle sfide; stessa regola, con il suo file SQL
+  try{await syncFlotta(sb,uid,full);A.fleetMissing=false;}catch(e){A.fleetMissing=fleetMissing(e);A.warn=A.fleetMissing
+   ?'I punti della Flotta (casata ed equipaggi) restano su questo telefono finché sul server non c\'è il file '+FLEET_SQL+'.':'Flotta non sincronizzata: riprovo più tardi.';}
   A.lastSync=new Date();A.err='';markDirty(false);
  }catch(e){A.err='Sincronizzazione non riuscita: riprovo più tardi. ('+(e.message||e)+')';}
  A.syncing=false;onChange();
@@ -294,7 +303,7 @@ async function syncPercorso(sb,uid,full){
  const P=S.path||(S.path={nodes:{},last:'',prova:{},prio:{}});
  if(full){
   const [{data:pp,error:a},{data:ds,error:b}]=await Promise.all([sb.from('path_progress').select('node_id,stato,stelle,fatto_il').eq('user_id',uid),
-   sb.from('dextera_settings').select('obiettivo,scudi,date_esame,aggiornato_il').eq('user_id',uid).maybeSingle()]);
+   sb.from('dextera_settings').select('obiettivo,scudi,date_esame,pianeta,aggiornato_il').eq('user_id',uid).maybeSingle()]);
   if(a)throw a;if(b)throw b;
   for(const r of pp||[]){
    const n=P.nodes[r.node_id]||{stato:'',stelle:0,fatto_il:null};
@@ -304,7 +313,7 @@ async function syncPercorso(sb,uid,full){
    P.nodes[r.node_id]=out;
   }
   const st=ds?Date.parse(ds.aggiornato_il):0;
-  if(ds&&st>((S.set&&S.set.t)||0)){S.set={obiettivo:ds.obiettivo,date_esame:okDates(ds.date_esame),t:st};S.shields=ds.scudi;}
+  if(ds&&st>((S.set&&S.set.t)||0)){S.set={obiettivo:ds.obiettivo,date_esame:okDates(ds.date_esame),pianeta:okPl(ds.pianeta),t:st};S.shields=ds.scudi;}
   else if(S.set&&S.set.t)S.set.u=1;
   try{localStorage.setItem('dextera-v1',JSON.stringify(S));}catch(e){}
  }
@@ -316,7 +325,7 @@ async function syncPercorso(sb,uid,full){
  }
  const set=S.set;
  if(set&&set.u){
-  const {error}=await sb.from('dextera_settings').upsert({user_id:uid,obiettivo:set.obiettivo||60,scudi:S.shields||0,date_esame:okDates(set.date_esame),aggiornato_il:new Date(set.t||Date.now()).toISOString()},{onConflict:'user_id'});
+  const {error}=await sb.from('dextera_settings').upsert({user_id:uid,obiettivo:set.obiettivo||60,scudi:S.shields||0,date_esame:okDates(set.date_esame),pianeta:okPl(set.pianeta),aggiornato_il:new Date(set.t||Date.now()).toISOString()},{onConflict:'user_id'});
   if(error)throw error;
   if(S.set===set)delete set.u;
  }
@@ -335,6 +344,8 @@ async function syncPercorso(sb,uid,full){
  }
 }
 
+// pianeta scelto (Flotta: lì i punti valgono doppio), stessa regola della colonna dextera_settings.pianeta
+const okPl=p=>typeof p==='string'&&/^[a-z0-9-]{1,40}$/.test(p)?p:null;
 // date d'esame {pianeta: 'AAAA-MM-GG'}: solo voci ben formate (arrivano anche dal server)
 const okDates=o=>Object.fromEntries(Object.entries(o&&typeof o==='object'?o:{}).filter(([k,v])=>/^[a-z0-9-]{1,40}$/.test(k)&&/^\d{4}-\d{2}-\d{2}$/.test(v)).slice(0,30));
 

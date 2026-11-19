@@ -40,7 +40,7 @@ Dove questo file e la specifica differiscono, vale la specifica.
   data d'esame (v0.76.0, vedi «Ripasso»); 2) esame del pianeta (v0.77.0, vedi «Esame del pianeta»); 3) Palestra con la figura per zone (v0.78.0, vedi «Palestra per zone»). Fasi 3–7: vedi la specifica.
 - Fase 4 – Flotta (SQL: costellazioni, stagioni, equipaggi): v0.85.0, vedi «Flotta». File SQL da applicare dall'autore.
 - Fase 5 – Profilo e competenze (SQL: righe in badge_classes, dextera_profili): v0.86.0, vedi «Profilo e competenze». Online e SQL applicato il 19/11/2026. Casata ed equipaggi nel Profilo: v0.87.0; obiettivo del giorno e date d'esame: v0.88.0.
-- Fase 6 – Altri corsi e percorsi (SQL: dextera_studio): v0.89.0, vedi «Altri corsi e percorsi». File SQL da applicare dall'autore.
+- Fase 6 – Altri corsi e percorsi (SQL: dextera_studio): v0.89.0, vedi «Altri corsi e percorsi». Online e SQL applicato il 19/11/2026.
 - Corso di neurologia: contenuti (primo rilascio) e corso giocabile (v0.81.0, vedi «Corso di neurologia giocabile»), Palestra sul cervello (v0.82.0), gioco 3D (v0.83.0).
 - GitHub Pages attivo (ramo `main`, cartella radice): online su `alefiumi.github.io/dextera`.
 
@@ -721,7 +721,7 @@ descrizioni; quelle con fonte Z-Anatomy dicono da quale vaso nasce o dove sbocca
 - Sincronizzazione: `syncStudio()` in `account.js` (prima di `syncPercorso`): all'accesso vince la scelta più recente (`S.studio.t` contro
   `aggiornato_il`), poi si invia quando `S.studio.u`. Senza la tabella la scelta resta sul telefono e il riquadro Account lo dice
   (`A.studioMissing`, con il nome del file). «Scarica i miei dati» ha `cosa_studi`. `privacy.html`: una riga nuova.
-- SQL: `supabase/migrations/20261125090000_dextera_studio.sql` (da applicare dall'autore; prima si pubblica l'app): tabella `dextera_studio`
+- SQL: `supabase/migrations/20261125090000_dextera_studio.sql` (applicato dall'autore il 19/11/2026, dopo la pubblicazione dell'app): tabella `dextera_studio`
   (user_id, percorso, corsi fino a 20 con id controllati, aggiornato_il), RLS con `(select auth.uid())`, la legge e la scrive solo la persona;
   il trigger `private.dextera_studio()` toglie i corsi doppi e riporta a oggi una data nel futuro; nessun `update` senza `where`. Provato con
   PGlite: 27 prove (`studio_rls.mjs` nelle note delle sessioni).

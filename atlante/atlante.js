@@ -694,10 +694,32 @@ const SETS={
  ponte:{n:'Tendine-ponte',ask:''},
  caso:{n:'Caso clinico',ask:'Tocca il muscolo'},
  nervi:{n:'Nervi cranici',ask:'Tocca il nervo'},
+ neuro:{n:'Neurologia',ask:'Tocca'},
  cuore:{n:'Cuore',ask:'Tocca'},
  polmoni:{n:'Polmoni',ask:'Tocca'}};
 // casi clinici e nervi cranici arrivano dall'app con il messaggio del gioco (stanno nei contenuti dell'app)
-const EXTRA={cases:[],nc:[]};
+const EXTRA={cases:[],nc:[],neuro:[]};
+/* Neurologia: l'app manda le voci del corso con la loro parte del modello (ref). A ogni domanda resta acceso solo lo strato della
+   struttura (encefalo, midollo, nervi o meningi): le strutture del corso di quello strato si vedono intere, il resto è trasparente,
+   così anche i nuclei profondi (talamo, amigdala…) e i fasci del midollo si toccano. Gli involucri grandi (sostanza bianca del
+   telencefalo e del midollo, dura madre spinale) sono interi solo quando sono loro la domanda. La maestria torna sulla chiave n.<voce>. */
+const esc=t=>String(t??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const NMIN=12; // pixel minimi (su 300×600) da almeno una direzione: si chiede solo ciò che si tocca senza fatica
+const NLAY=['encefalo','midollo','nervi','meningi'],SHELL=/^(White matter of telencephalon|White matter of spinal cord|Spinal dura)$/;
+function neuroScene(it){
+ const G=GAME;for(const k of NLAY)V[k]=k===it.lay;refresh(true);
+ const refs=new Set(G.pool.filter(p=>p.lay===it.lay&&(!SHELL.test(p.ref)||p.ref===it.ref)).map(p=>p.ref));
+ const lay=meshes.filter(m=>m.visible&&m.userData.layer===it.lay);
+ G.opaque=lay.filter(m=>refs.has(m.userData.base));
+ gameMark(lay.filter(m=>!refs.has(m.userData.base)),M_GHOST);
+ // vista dal lato della struttura (centro del lato destro rispetto al centro delle strutture dello strato), inquadrata sulla struttura
+ const ctx=boxOf(G.opaque.length?G.opaque:lay),cc=ctx.getCenter(new THREE.Vector3()),t=targets(it),tr=t.filter(m=>m.userData.side!=='l');
+ const tb=boxOf(tr.length?tr:t),tc=tb.getCenter(new THREE.Vector3()),dir=tc.clone().sub(cc);
+ // conta lo spostamento in orizzontale (davanti, dietro, di lato): anche pochi millimetri dicono da che parte guardare
+ dir.y=0;if(dir.length()<0.002)dir.set(0,0,1);dir.normalize();dir.y=0.25;dir.normalize();
+ const r=Math.max(tb.getSize(new THREE.Vector3()).length()/2,0.04),dist=Math.max(0.3,r*1.6/Math.tan(THREE.MathUtils.degToRad(camera.fov)/2)/Math.min(1,camera.aspect));
+ flyTo(tc.clone().addScaledVector(dir,dist),tc);
+}
 // zone del gioco Ricomponi, dai gruppi della fonte (Terminologia Anatomica)
 const ZONES=[
  {n:'Cranio e mandibola',g:/^(Bones of cranium|Frontal bone|Sphenoid bone|Ethmoid bone|Extracranial bones of head)$/},
@@ -786,6 +808,20 @@ async function poolOf(set){
   const have=new Set(meshes.filter(m=>m.userData.layer==='nervi').map(m=>crNum(m.userData)).filter(Boolean));
   for(const n of EXTRA.nc)if(have.has(n.n))items.push({key:n.n,n:'Nervo '+n.nm.toLowerCase()+' ('+n.n+')',fam:n.n,f:n.f,t:n.t,byF:Math.random()<.5});
   return items;
+ }else if(set==='neuro'){
+  // una domanda per parte del modello (due voci con la stessa parte valgono una); solo le parti che si vedono tra le strutture
+  // del corso del loro strato (senza gli involucri), contate come negli altri giochi
+  const want=EXTRA.neuro.filter(i=>i.ref),layOf=r=>(DATA.objs[r]||DATA.objs[r+'.r']||DATA.objs[r+'.l']||[])[0];
+  await Promise.all([...new Set(want.map(i=>layOf(i.ref)).filter(l=>NLAY.includes(l)))].map(loadFile));
+  const all=EXTRA.neuro.filter(i=>i.ref),cand=new Map();
+  for(const i of all){if(cand.has(i.ref))continue;const ms=meshes.filter(m=>m.userData.base===i.ref&&NLAY.includes(m.userData.layer));if(ms.length)cand.set(i.ref,{i,ms,lay:ms[0].userData.layer});}
+  const vis=new Set();
+  for(const L of NLAY){const c=[...cand.values()].filter(x=>x.lay===L);if(!c.length)continue;
+   c.filter(x=>SHELL.test(x.i.ref)).forEach(x=>vis.add(x.i.ref));
+   const inner=c.filter(x=>!SHELL.test(x.i.ref)),seen=seenFrom(inner.flatMap(x=>x.ms),[],300);
+   for(const x of inner)if(x.ms.some(m=>(seen.get(m)||0)>=NMIN))vis.add(x.i.ref);}
+  for(const [r,x] of cand)if(vis.has(r))items.push({key:x.i.key,ref:r,n:x.i.n,f:x.i.f,fam:r,lay:x.lay});
+  return items; // niente cache: le voci arrivano dall'app
  }else if(set==='ricomponi'){
   // pezzi possibili: le ossa che si vedono da fuori (come in Trova l'osso), divise per zona
   const ok=new Set((await poolOf('ossa')).map(i=>i.key));
@@ -805,11 +841,11 @@ const pickQ=()=>{const G=GAME,fams=[...new Set(G.pool.map(i=>i.fam))];let it,tri
  do{const f=fams[Math.floor(Math.random()*fams.length)],c=G.pool.filter(i=>i.fam===f);it=c[Math.floor(Math.random()*c.length)];}while((G.used.has(it.key)||it.key===G.last)&&++tries<50);
  G.used.add(it.key);G.last=it.key;return it;};
 // le parti che rispondono alla domanda (tutti e due i lati)
-const targets=it=>GAME.set==='nervi'?meshes.filter(m=>m.userData.layer==='nervi'&&crNum(m.userData)===it.key):GAME.set==='caso'?meshes.filter(m=>m.userData.layer==='muscoli'&&m.userData.root===it.root):GAME.set==='muscoli'?meshes.filter(m=>m.userData.layer==='muscoli'&&m.userData.root===it.key):GAME.set==='ossa'?meshes.filter(m=>m.userData.layer==='ossa'&&m.userData.base===it.key):[];
+const targets=it=>GAME.set==='neuro'?meshes.filter(m=>m.userData.base===it.ref&&m.userData.layer===it.lay):GAME.set==='nervi'?meshes.filter(m=>m.userData.layer==='nervi'&&crNum(m.userData)===it.key):GAME.set==='caso'?meshes.filter(m=>m.userData.layer==='muscoli'&&m.userData.root===it.root):GAME.set==='muscoli'?meshes.filter(m=>m.userData.layer==='muscoli'&&m.userData.root===it.key):GAME.set==='ossa'?meshes.filter(m=>m.userData.layer==='ossa'&&m.userData.base===it.key):[];
 const lmTargets=it=>LMS.filter(l=>l.b===it.key);
 async function startGame(set,extra){
  if(!SETS[set])return;
- if(extra){if(extra.cases)EXTRA.cases=extra.cases;if(extra.nc)EXTRA.nc=extra.nc;}
+ if(extra){if(extra.cases)EXTRA.cases=extra.cases;if(extra.nc)EXTRA.nc=extra.nc;if(extra.neuro)EXTRA.neuro=extra.neuro;}
  GAME={set,q:0,total:8,hearts:3,score:0,gain:0,cur:null,locked:false,used:new Set(),last:null,pool:null,marks:[]};
  document.body.classList.add('game');
  S.mus=S.combo=S.lm=S.part=null;S.list=null;S.cut.ax=null;S.lev=0;S.mv='both';
@@ -830,6 +866,7 @@ async function startGame(set,extra){
  S.loading=false;
  if(!GAME.pool.length){GAME.empty=true;refresh();return;}
  if(set==='caso')GAME.total=Math.min(5,GAME.pool.length);
+ if(set==='neuro'){GAME.total=Math.min(8,GAME.pool.length);S.bones='ghost';}
  if(set==='ricomponi')return startZone();
  nextGameQ();
 }
@@ -927,6 +964,7 @@ function nextGameQ(){
   const c=brainBox.getCenter(new THREE.Vector3()),r=brainBox.getSize(new THREE.Vector3()).length()/2,dist=r*1.1/Math.tan(THREE.MathUtils.degToRad(camera.fov)/2)/Math.min(1,camera.aspect);
   flyTo(c.clone().addScaledVector(new THREE.Vector3(0,-0.55,1).normalize(),dist),c);
  }else if(G.set==='cuore'||G.set==='polmoni')flySys(G.set,'front');
+ else if(G.set==='neuro')neuroScene(G.cur);
  else flyTo(center.clone().add(new THREE.Vector3(0,0,1).multiplyScalar(fitDist())),center.clone());
 }
 function gameTap(x,y){
@@ -939,6 +977,11 @@ function gameTap(x,y){
   const m=pickPart(x,y);if(!m)return;const u=m.userData;
   if(u.layer!=='nervi'){G.hint='Hai toccato '+(u.layer==='encefalo'?'l\'encefalo':'un\'altra struttura')+': tocca un nervo.';panel();return;}
   const n=crNum(u);hit={n:n?'Nervo '+((EXTRA.nc.find(x=>x.n===n)||{}).nm||'').toLowerCase()+' ('+n+')':clean(itOf(u.base))+' (non è un nervo cranico)',m};ok=n===G.cur.key;
+ }else if(G.set==='neuro'){
+  const r=renderer.domElement.getBoundingClientRect();ndc.set((x-r.left)/r.width*2-1,-(y-r.top)/r.height*2+1);ray.setFromCamera(ndc,camera);
+  const h=kept(ray.intersectObjects((G.opaque||[]).filter(m=>m.visible),false))[0];
+  if(!h){G.hint='Tocca una delle strutture colorate: le altre sono trasparenti.';panel();return;}
+  const b=h.object.userData.base,it=G.pool.find(p=>p.ref===b);hit={n:it?it.n:clean(itOf(b)),m:h.object};ok=b===G.cur.ref;
  }else if(G.set==='caso'){
   const m=pickPart(x,y);if(!m)return;const u=m.userData;
   if(u.layer!=='muscoli'){G.hint='Hai toccato un osso: tocca un muscolo.';panel();return;}
@@ -953,13 +996,14 @@ function gameTap(x,y){
  }
  G.locked=true;G.hint='';G.q++;
  if(ok){G.score++;G.gain+=10;}else G.hearts--;
- toApp({type:'res',ok,key:'3d:'+G.set+':'+G.cur.key});
+ toApp({type:'res',ok,key:G.set==='neuro'?G.cur.key:'3d:'+G.set+':'+G.cur.key});
  // colori: verde la risposta giusta (tutti e due i lati), rosso quella toccata se sbagliata
  if(G.set==='reperi'){
   const tl=lmTargets(G.cur);tl.forEach(l=>{const k=markerOf(l);k.visible=true;});gameMark(tl.map(l=>l.mesh),MKG.ok);if(!ok)gameMark([hit.l.mesh],MKG.bad);
   if(!ok){const near=tl.reduce((a,b)=>a.p.distanceTo(hit.l.p)<b.p.distanceTo(hit.l.p)?a:b);flyTo(near.p.clone().addScaledVector(near.d,0.35),near.p.clone());}
  }else{
   const t=targets(G.cur);gameMark(t,M_OK);if(!ok)gameMark([hit.m],M_BAD);
+  if(G.set==='neuro')gameMark((G.opaque||[]).filter(m=>!t.includes(m)&&m!==hit.m),M_GHOST); // dopo la risposta si vedono solo la giusta e quella toccata
   if(!ok){const side=hit.m.userData.side,same=t.filter(m=>!side||m.userData.side===side);frameBox(boxOf(same.length?same:t),0.3);}
  }
  G.res={ok,hit:ok?null:hit.n};panel();
@@ -989,12 +1033,13 @@ function gamePanel(){
   return `<div class="res"><div class="big">${'⭐'.repeat(st)}${'☆'.repeat(3-st)}</div><div class="h">${G.score}/${G.q} corrette</div><p>+${G.gain} XP${G.hearts>0&&G.q>=G.total?' (bonus round +20)':''}</p>
    ${G.hearts<=0?'<p class="mut">Cuori finiti: ripassa esplorando il modello e riprova.</p>':''}
    <div class="chips" style="justify-content:center"><button class="chip on" data-g="again">Rigioca</button><button class="chip" data-g="menu">Cambia sfida</button><button class="chip" data-g="quit">Esplora il modello</button></div></div>`;}
- if(G.empty)return `<p>${G.set==='nervi'||G.set==='caso'?'Questa sfida si apre dalla Palestra dell\'app.':'Nessuna domanda disponibile.'}</p><div class="chips"><button class="chip" data-g="quit">Esci</button></div>`;
+ if(G.empty)return `<p>${G.set==='nervi'||G.set==='caso'||G.set==='neuro'?'Questa sfida si apre dalla Palestra dell\'app.':'Nessuna domanda disponibile.'}</p><div class="chips"><button class="chip" data-g="quit">Esci</button></div>`;
  if(G.set==='ricomponi'&&G.cur)return hearts.replace(/\d+\/\d+/,(G.total-G.left.length)+'/'+G.total)+`<div class="q">Zona: <b>${G.zone}</b></div><p class="mut">${G.msg||'Scegli un pezzo, poi tocca il suo posto sul modello (le ossa trasparenti). Ruota e ingrandisci come vuoi: vale tutti e due i lati.'}</p>`+
   `<div class="chips">${G.left.map(b=>`<button class="chip${G.sel===b?' on':''}" data-pc="${b}">${clean(itOf(b))}</button>`).join('')}</div><div class="chips"><button class="chip" data-g="quit">Esci</button></div>`;
  if(!G.cur)return `<p class="mut">${S.loading?(G.set==='muscoli'&&!FILES.muscoli?.loaded?'Carico i muscoli…':'Preparo le domande…'):''}</p>`;
  const ask=G.set==='oi'?`Tocca sull'osso ${G.cur.k==='o'?"l'<b>origine</b>":"l'<b>inserzione</b>"} di`:G.set==='ponte'?(G.step==='o'?"Tocca l'osso di <b>origine</b> di":"✅ Origine giusta. Ora tocca l'osso di <b>inserzione</b> di"):SETS[G.set].ask;
  let q=`<div class="q">${ask}:<br><b>${G.cur.n}</b> ${G.cur.la?`<i>${G.cur.la}</i>`:''}</div>`;
+ if(G.set==='neuro')q=`<div class="q">Tocca sul modello:<br><b>${esc(G.cur.n)}</b></div>`;
  if(G.set==='nervi'&&G.cur.byF)q=`<div class="q">Tocca il nervo cranico che serve per:<br><b>${G.cur.f}</b></div>`;
  if(G.set==='caso'){const c=G.cur.c;q=`<div class="q"><small>Caso clinico</small></div>`+c.clues.slice(0,G.res?c.clues.length:G.clues).map(t=>`<div class="row">• ${t}</div>`).join('')+
   (G.res?'':`<p><b>Tocca sul modello il muscolo coinvolto.</b></p>`+(G.clues<c.clues.length?'<div class="chips"><button class="chip" data-g="clue">Altro indizio</button></div>':''));}
@@ -1002,7 +1047,8 @@ function gamePanel(){
  const last=G.hearts<=0||G.q>=G.total;
  return hearts+`<div class="h">${G.res.ok?'✅ Esatto! +10 XP':'❌ Non proprio'}</div>`+
   (G.set==='oi'?oiAnswer(G):G.set==='ponte'?ponteAnswer(G):G.set==='caso'?`<p>${G.res.ok?'':'Hai toccato: <b>'+G.res.hit+'</b>. '}In verde: <b>${G.cur.n}</b>.</p><p>${G.cur.c.r}</p><p class="note">Caso scritto dall'AI: da verificare.</p>`:
-   G.set==='nervi'?`<p>${G.res.ok?'':'Hai toccato: <b>'+G.res.hit+'</b>. '}In verde: <b>${G.cur.n}</b> (${G.cur.t}): ${G.cur.f}.</p>`:G.res.ok?`<p><b>${G.cur.n}</b> ${G.cur.la?`<i>${G.cur.la}</i>`:''}</p>`:`<p>Hai toccato: <b>${G.res.hit}</b>. In verde: <b>${G.cur.n}</b>.</p>`)+
+   G.set==='nervi'?`<p>${G.res.ok?'':'Hai toccato: <b>'+G.res.hit+'</b>. '}In verde: <b>${G.cur.n}</b> (${G.cur.t}): ${G.cur.f}.</p>`:
+   G.set==='neuro'?`<p>${G.res.ok?'':'Hai toccato: <b>'+esc(G.res.hit)+'</b>. '}In verde: <b>${esc(G.cur.n)}</b>${G.cur.f?': '+esc(G.cur.f):''}</p><p class="note">Testo del corso, da verificare. Forme dalla fonte Z-Anatomy.</p>`:G.res.ok?`<p><b>${G.cur.n}</b> ${G.cur.la?`<i>${G.cur.la}</i>`:''}</p>`:`<p>Hai toccato: <b>${G.res.hit}</b>. In verde: <b>${G.cur.n}</b>.</p>`)+
   `<div class="chips"><button class="chip on" data-g="next">${last?'Vedi risultato':'Avanti'}</button></div>`;
 }
 window.addEventListener('message',e=>{

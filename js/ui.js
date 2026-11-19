@@ -10,6 +10,7 @@ import {renderSocial,loadSocial,setSocialOpen} from './social.js';
 import {renderPath,initPath,pathClick,pathChange,pathSubmit} from './path.js';
 import {lessonTap,lessonClick,lessonSubmit,leaveZone} from './lezione.js';
 import {showInstall,promptInstall,installNow} from './install.js';
+import * as P from './percorso.js';
 
 export function useMod(id){
  const MOD=app.MODS[id];if(!MOD)return;
@@ -31,14 +32,16 @@ $('asw').addEventListener('click',e=>{const b=e.target.closest('[data-av]');if(b
 let atlasReady=false,pending3d=null;
 const atlasWin=()=>$('atlas').querySelector('iframe')?.contentWindow;
 // casi clinici e nervi cranici stanno nei contenuti dell'app: viaggiano con il messaggio
-const gameMsg=set=>({bm:1,type:'game',set,cases:(app.MODS.corpo&&app.MODS.corpo.CASES)||[],nc:app.NC});
-function play3d(set){
+// neurologia: le voci da toccare (tutto il corso o i satelliti di una zona della Palestra) viaggiano con il messaggio
+const gameMsg=(set,neuro)=>({bm:1,type:'game',set,cases:(app.MODS.corpo&&app.MODS.corpo.CASES)||[],nc:app.NC,neuro:neuro||[]});
+function play3d(set,sat){
+ const neuro=set==='neuro'?P.neuro3d(sat?[P.satById(sat)].filter(Boolean):null):null;
  app.av='3d';setTab('atlas');
- if(atlasReady)atlasWin().postMessage(gameMsg(set),location.origin);else pending3d=set;
+ if(atlasReady)atlasWin().postMessage(gameMsg(set,neuro),location.origin);else pending3d=[set,neuro];
 }
 window.addEventListener('message',e=>{
  const d=e.data;if(e.origin!==location.origin||!d||!d.bm||e.source!==atlasWin())return;
- if(d.type==='ready'){atlasReady=true;if(pending3d){atlasWin().postMessage(gameMsg(pending3d),location.origin);pending3d=null;}}
+ if(d.type==='ready'){atlasReady=true;if(pending3d){atlasWin().postMessage(gameMsg(...pending3d),location.origin);pending3d=null;}}
  else if(d.type==='res'){touchStreak();if(d.ok){S.xp+=10;S.ok++;bump(d.key,1);}else{S.ko++;bump(d.key,-1);}save();head();}
  else if(d.type==='end'){if(d.done)S.xp+=20;queue.add({module:'3d',mode:d.set,score:d.score|0,total:d.total|0,xp:d.gain|0});save();head();}
  else if(d.type==='menu')setTab('play');
@@ -113,7 +116,7 @@ $('panel').addEventListener('click',e=>{
  const G=app.G;
  if(t.classList.contains('mc')&&t.dataset.sb){selectBone(t.dataset.sb);focusItem(t.dataset.sb,20);}
  else if(t.classList.contains('mc')){const m=app.M.find(x=>x.id===t.dataset.m);const ok=showMuscle(m);$('mdet').innerHTML=muscleHtml(m)+(ok?'':'<p class="mut">Da questa vista i punti di attacco non si vedono: prova l\'altra vista.</p>');}
- else if(t.classList.contains('mode')){const m=t.dataset.mode;if(m.startsWith('3d-'))play3d(m.slice(3));else startGame(m);}
+ else if(t.classList.contains('mode')){const m=t.dataset.mode;if(m.startsWith('3d-'))play3d(m.slice(3),t.dataset.sat);else startGame(m);}
  else if(t.classList.contains('opt')&&G&&G.cur.t==='musc')answerMusc(t.dataset.id);
  else if(t.classList.contains('opt')&&G&&G.cur.t==='func')answerFunc(t.dataset.id);
  else if(t.classList.contains('opt')&&G&&G.cur.t==='nc')answerNc(t.dataset.k);

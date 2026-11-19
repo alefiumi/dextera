@@ -50,12 +50,12 @@ function zoneHead(){
   <details class="zall"><summary>Tutte le zone</summary>${pls}</details></div>`;
 }
 function zoneSheet(sat){
- const pl=P.planetOf(sat),a=P.zoneAvg(sat),st=P.look(sat);
+ const pl=P.planetOf(sat),a=P.zoneAvg(sat),st=P.look(sat),n3=neu()?P.neuro3d([sat]).length:0;
  const tl=(t,i,n,x)=>{const c=zoneCount(sat,t);return c?`<button class="mode tile" data-z="train"${t?` data-t="${t}"`:''}><span class="ti" aria-hidden="true">${i}</span><b>${n}</b><small>${x} · ${c} ${c===1?'struttura':'strutture'}</small></button>`:'';};
  const alt=app.Z.alt.length>1?`<p class="mut">${neu()?'La struttura toccata':'L\'osso toccato'} sta anche in: ${app.Z.alt.filter(id=>id!==sat.id).map(id=>`<button class="lnk" data-z="alt" data-id="${esc(id)}">${esc(P.satById(id).nome)}</button>`).join(', ')}</p>`:'';
  return `<div class="card zsheet"><div class="zsh"><div><div class="kick">Zona · ${esc(pl?.nome||'')}</div><h2 tabindex="-1">${esc(sat.nome)}</h2></div><button class="lx" data-z="close" aria-label="Chiudi la zona">✕</button></div>
   <p class="zst">${dot(a)} Maestria media <b>${avgTxt(a)}</b> su 3 · ${esc(P.STATI[st]||'')}</p>${alt}
-  <div class="tiles">${tl(null,'🔀','Allenamento misto',"Un po' di tutto, dalle più deboli")}${tipi().map(([t,i,n,x])=>tl(t,i,n,x)).join('')}</div>
+  <div class="tiles">${tl(null,'🔀','Allenamento misto',"Un po' di tutto, dalle più deboli")}${tipi().map(([t,i,n,x])=>tl(t,i,n,x)).join('')}${n3?`<button class="mode tile" data-mode="3d-neuro" data-sat="${esc(sat.id)}"><span class="ti" aria-hidden="true">🧊</span><b>Sul modello 3D</b><small>Tocca le strutture della zona sul modello · ${n3} ${n3===1?'struttura':'strutture'}</small></button>`:''}</div>
   <div class="zbtns"><button class="btn alt" data-z="sat">Vai al satellite</button></div></div>`;
 }
 // evidenzia la zona sulla figura (le sue ossa) e la porta in primo piano
@@ -92,6 +92,7 @@ export function renderMenu(){
   mb('3d-ponte','🌉','Tendine-ponte','Osso di origine, poi di inserzione')+
   mb('3d-caso','🩺','Caso clinico','Leggi gli indizi, tocca il muscolo')+
   mb('3d-nervi','🔢','Nervi cranici','Alla base dell\'encefalo')+
+  (P.ready()&&P.neuro3d().length?mb('3d-neuro','🧠','Neurologia','Le strutture del corso, sul modello'):'')+
   mb('3d-cuore','🫀','Cuore e grandi vasi','Camere, coronarie, grandi vasi')+
   mb('3d-polmoni','🫁','Polmoni','Lobi e bronchi'))+'</div>';
  clearMarks();if(zsat)showZone(zsat);

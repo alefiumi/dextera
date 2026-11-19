@@ -258,6 +258,7 @@ def lezioni():
         if val(v, 'lesione'): n['le'] = val(v, 'lesione')
         if val(v, 'connessioni'): n['c'] = val(v, 'connessioni')
         if v.get('figura'): n['fig'] = v['figura']
+        if v.get('ref'): n['ref'] = v['ref']
         neuro[i] = n; voci[i] = v['id']
     casi_neuro = [{**c, 'src': 'neuro'} for c in casi('neuro')]
     stati = {}

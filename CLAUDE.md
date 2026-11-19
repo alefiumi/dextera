@@ -38,7 +38,7 @@ Dove questo file e la specifica differiscono, vale la specifica.
 - Fase 1 – Percorso minimo (SQL: path_progress, dextera_settings, error_reports): online e SQL applicato il 18/11/2026.
 - Fase 2 – Ripasso ed esame (SQL: review_items), in tre rilasci scelti dall'autore il 19/11/2026: 1) ripasso, luce dei satelliti,
   data d'esame (v0.76.0, vedi «Ripasso»); 2) esame del pianeta (v0.77.0, vedi «Esame del pianeta»); 3) Palestra con la figura per zone (v0.78.0, vedi «Palestra per zone»). Fasi 3–7: vedi la specifica.
-- Corso di neurologia: contenuti (primo rilascio) e corso giocabile (v0.81.0, vedi «Corso di neurologia giocabile»), Palestra sul cervello (v0.82.0).
+- Corso di neurologia: contenuti (primo rilascio) e corso giocabile (v0.81.0, vedi «Corso di neurologia giocabile»), Palestra sul cervello (v0.82.0), gioco 3D (v0.83.0).
 - GitHub Pages attivo (ramo `main`, cartella radice): online su `alefiumi.github.io/dextera`.
 
 ## Situazione al 20/11/2026
@@ -539,7 +539,7 @@ descrizioni; quelle con fonte Z-Anatomy dicono da quale vaso nasce o dove sbocca
 - Prova: `neuro.mjs` (copia nelle note delle sessioni, Chrome headless, tutto offline): universo, cambio di corso, lezione con presentazioni,
   scelta, tocco e nome sul cervello, tocco sbagliato, passo «Dove si trova», caso, ripasso misto corpo e cervello, esame superato, logo,
   lezione del corpo dopo, Palestra solo corpo; dati di BodyMania intatti.
-- Da fare: tocco sul modello 3D.
+- Tocco sul modello 3D: gioco 3D «Neurologia» (v0.83.0, vedi sotto).
 
 ## Palestra di neurologia (zone sul cervello, v0.82.0)
 - Con la figura del cervello la Palestra ha le zone del corso di neurologia, come il corpo ha le sue (cuore e polmoni: nessuna zona).
@@ -552,6 +552,22 @@ descrizioni; quelle con fonte Z-Anatomy dicono da quale vaso nasce o dove sbocca
 - Le strutture profonde (talamo…) non si vedono abbastanza in nessuna vista del 2D (`visibleIn`): si allenano dall'elenco «Tutte le zone».
 - Prova: `zneuro.mjs` (copia nelle note delle sessioni): tocco vero sul giro precentrale, foglio della zona, allenamento misto e per tipo,
   cambio di figura a metà, zone deboli, «Vai al satellite», cuore senza zone; `zone.mjs` aggiornata (il cervello ora ha le zone).
+
+## Neurologia sul modello 3D (v0.83.0)
+- Gioco 3D `neuro` («🧠 Neurologia» nella sezione 3D della Palestra, e «🧊 Sul modello 3D» nel foglio di una zona del cervello con le sole
+  strutture di quel satellite). L'app manda all'atlante le voci da toccare (`neuro3d(sats)` in `percorso.js`: voci usabili del passo
+  «strutture» con `ref`, la parte del modello; `content/lezioni.json` → `neuro` ora ha anche `ref`) nel messaggio del gioco (`neuro`).
+- Atlante (`atlante.js`, «Neurologia»): una domanda per parte (due voci con la stessa parte valgono una). A ogni domanda resta acceso solo lo
+  strato della struttura (`NLAY`: encefalo, midollo, nervi, meningi): le parti del corso di quello strato sono intere e si toccano, il resto è
+  trasparente (`neuroScene()`), così anche talamo, amigdala e i fasci del midollo si toccano; gli involucri (`SHELL`: sostanza bianca del
+  telencefalo e del midollo, dura madre spinale) sono interi solo quando la domanda è su di loro. Si chiedono solo le parti che, tra le parti
+  del corso del loro strato, si vedono almeno `NMIN` (12) pixel da una delle 26 direzioni: 33 parti su 46 voci con il modello. La telecamera
+  guarda la struttura dal suo lato (spostamento in orizzontale rispetto al centro dello strato). Dopo la risposta si vedono solo la giusta
+  (verde) e quella toccata (rossa).
+- La risposta torna all'app sulla chiave del corso `n.<voce>` (non `3d:…`): sale la stessa maestria del tocco nel 2D e vale come ripasso.
+  In coda `{module:'3d', mode:'neuro'}`.
+- Prova: `neuro3d.mjs` (copia nelle note delle sessioni): gioco dalla Palestra, tocchi veri sul modello (punto trovato con il raggio),
+  una risposta sbagliata, maestria `n.`, gioco dal foglio della zona con le sole strutture del satellite.
 
 ## Mappa del percorso (`content/mappa.json`)
 Corso → 4 pianeti → 17 satelliti (con `ordine` della specifica) → 6 passi (`ossa`, `reperi`, `muscoli`, `connessioni`, `funzione`,

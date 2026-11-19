@@ -47,6 +47,15 @@ const casesOf=c=>c.modulo==='corpo'?corpo().CASES:c.modulo==='cervello'?(app.LEZ
 const caseIn=(c,id)=>casesOf(c).find(x=>x.id===id)||null;
 export const caseAns=c=>c?.mid||c?.bid||null;
 // strutture del cervello 2D di una voce di neurologia (id b.* o gruppi g:<gruppo>, che valgono per tutti i loro membri)
+// voci di neurologia da toccare sul modello 3D (con una parte del modello, ref) dei satelliti dati, o di tutto il corso:
+// le manda l'app all'atlante con il gioco 3D «Neurologia» (la maestria torna sulla chiave n.<voce>, come il tocco nel 2D)
+export function neuro3d(sats){
+ const c=corsi().find(x=>x.modulo==='cervello');if(!c)return [];
+ const out=[],seen=new Set();
+ for(const sat of sats||satelliti(null,c))for(const ps of passi(sat)){if(ps.tipo!=='strutture')continue;
+  for(const sid of usable(ps)){const n=neuro(sid);if(!n?.ref||seen.has(sid))continue;seen.add(sid);out.push({key:sid,n:n.n,ref:n.ref,f:String(n.f||'').split(/(?<=\.)\s/)[0]});}}
+ return out;
+}
 export function nfig(sid){
  const M=app.MODS.cervello;if(!M)return [];
  return [...new Set((neuro(sid)?.fig||[]).flatMap(x=>x.startsWith('g:')?(M.byId[x.slice(2)]?.m||[]):[x]))].filter(id=>M.byId[id]);

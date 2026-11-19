@@ -322,3 +322,23 @@ export function weakSats(pl,res){
  const err=s=>res.filter(r=>r.sat===s&&!r.ok).length;
  return satelliti(pl).slice().sort((a,b)=>err(b)-err(a)||light(a)-light(b)||avg(a)-avg(b)).slice(0,2);
 }
+
+/* ---------- Palestra per zone (fase 2, terzo rilascio): una zona della figura è un satellite ---------- */
+// satelliti che contengono una struttura toccata sulla figura (un osso condiviso sta in più zone): prima quelli in cui l'osso ha meno
+// compagni nel passo delle ossa (il femore porta alla coscia, poi ginocchio e anca), a parità nell'ordine del percorso
+export function satsOf(sid){
+ const nb=sat=>{const ps=passi(sat).find(p=>p.tipo==='ossa'&&Array.isArray(p.strutture)&&p.strutture.includes(sid));return ps?ps.strutture.length:999;};
+ return satelliti().filter(sat=>passi(sat).some(ps=>Array.isArray(ps.strutture)&&ps.strutture.includes(sid))).map((s,i)=>({s,i,n:nb(s)})).sort((a,b)=>a.n-b.n||a.i-b.i).map(x=>x.s);
+}
+// ossa della zona (per evidenziarla sulla figura)
+export const zoneBones=sat=>passi(sat).filter(ps=>ps.tipo==='ossa').flatMap(ps=>usable(ps));
+// maestria media della zona (tutte le chiavi del satellite, 0–3) e quota delle chiavi viste almeno una volta
+export function zoneAvg(sat){const ks=satKeys(sat);return ks.length?ks.reduce((a,k)=>a+mastery(k),0)/ks.length:0;}
+const zoneSeen=sat=>satKeys(sat).some(k=>mastery(k)>0||(S.seen||{})[k]);
+// zone deboli: tra quelle già cominciate le N con la maestria media più bassa; se sono meno di N, le prossime nell'ordine del percorso
+export function weakZones(){
+ const n=R().palestra.zone_deboli,L=satelliti().filter(s=>satKeys(s).length),on=L.filter(zoneSeen);
+ const out=on.slice().sort((a,b)=>zoneAvg(a)-zoneAvg(b)).filter(s=>zoneAvg(s)<R().maestria.max).slice(0,n);
+ for(const s of L)if(out.length<n&&!out.includes(s)&&!zoneSeen(s))out.push(s);
+ return out;
+}

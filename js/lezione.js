@@ -107,7 +107,33 @@ export function startExam(pl){
  if(app.MOD.id!=='corpo'){onExit('corpo');return true;}
  renderLesson();return true;
 }
-export const quitLesson=()=>{app.L=null;stopTick();clearMarks();baseView();onExit();};
+// Palestra per zone (fase 2, terzo rilascio): allenamento sulle strutture di uno o più satelliti (zone), tutte o di un solo tipo di
+// passo, con le regole della lezione (presentazione, scelta, tocco, nome, cuori) e le stesse chiavi di maestria e di ripasso.
+// Si gioca nella scheda Palestra (L.tab='play'); una lezione del percorso aperta resta da parte (app.Lp) e torna all'uscita.
+let onPlayExit=()=>{};export const setPlayExit=f=>{onPlayExit=f;};
+export function zoneSlots(sats,tipo){
+ const Rz=P.R().palestra,lists=sats.map(sat=>{const seen=new Set(),out=[];
+  for(const ps of P.passi(sat)){if(ps.tipo==='progetto'||(tipo&&ps.tipo!==tipo))continue;
+   for(const sid of P.usable(ps)){const k=P.key(sid,ps.aspetto);if(!seen.has(k)){seen.add(k);out.push({sid,ps,sat,k});}}}
+  // prima le più deboli (maestria più bassa, poi le viste meno di recente), a parità in ordine casuale
+  return shuffle(out).sort((a,b)=>P.mastery(a.k)-P.mastery(b.k)||((S.seen||{})[a.k]||0)-((S.seen||{})[b.k]||0));});
+ const all=[],n=Rz.domande;
+ for(let i=0;all.length<n&&lists.some(l=>l.length>i);i++)for(const l of lists)if(l[i]&&all.length<n)all.push(l[i]);
+ // poche strutture: si ripetono, come nella lezione
+ for(let i=0,b=all.length;b&&all.length<n;i++)all.push(all[i%b]);
+ return all.map(({sid,ps,sat})=>({sid,ps,sat}));
+}
+export function startZone(sats,{tipo=null,label=''}={}){
+ const slots=zoneSlots(sats,tipo);if(!slots.length)return false;
+ if(app.L&&app.L.tab!=='play')app.Lp=app.L;
+ app.L={kind:'palestra',tab:'play',zone:{sats,tipo,label},sat:sats.length===1?sats[0]:null,ps:null,slots,si:0,qn:0,hearts:P.R().palestra.cuori,
+  ok:0,n:0,nonChoice:0,pres:new Set(),presAt:{},up:[],wrong:[],xp0:S.xp,screen:'q',cur:null};
+ if(app.MOD.id!=='corpo'){onExit('corpo');return true;}
+ renderLesson();return true;
+}
+// esce da un allenamento della Palestra: torna la lezione del percorso messa da parte (se c'era)
+export const leaveZone=()=>{if(app.L?.tab==='play'){stopTick();app.L=app.Lp||null;app.Lp=null;}};
+export const quitLesson=()=>{const pl=app.L?.tab==='play';if(pl){leaveZone();clearMarks();baseView();onPlayExit();return;}app.L=null;stopTick();clearMarks();baseView();onExit();};
 
 /* ---------- cronometro dell'esame: scadenza per domanda (q.end); allo scadere la risposta conta come sbagliata ---------- */
 let TK=null;
@@ -212,7 +238,7 @@ function headHtml(L){
  return `<div class="lh"><button class="lx" data-l="quit" aria-label="Esci dalla lezione">✕</button>
   <div class="lbar" role="progressbar" aria-label="Avanzamento" aria-valuemin="0" aria-valuemax="${tot}" aria-valuenow="${done}"><i style="width:${done/tot*100}%"></i></div>${h}</div>`;
 }
-const title=L=>L.kind==='esame'?'Esame · '+esc(L.pl.nome):L.kind==='ripasso'?(L.daily?'Ripasso del giorno':'Ripasso · '+esc(L.sat?.nome||'')):({lezione:'Lezione',prova:'Lo so già: mettimi alla prova',quiz:'Quiz finale',caso:'Caso clinico'}[L.kind])+' · '+esc(L.ps.nome);
+const title=L=>L.kind==='palestra'?'Palestra · '+esc(L.zone.label):L.kind==='esame'?'Esame · '+esc(L.pl.nome):L.kind==='ripasso'?(L.daily?'Ripasso del giorno':'Ripasso · '+esc(L.sat?.nome||'')):({lezione:'Lezione',prova:'Lo so già: mettimi alla prova',quiz:'Quiz finale',caso:'Caso clinico'}[L.kind])+' · '+esc(L.ps.nome);
 export function renderLesson(){
  const L=app.L;if(!L)return;
  if(L.hearts0==null)L.hearts0=L.hearts;
@@ -318,6 +344,7 @@ function finish(){
   L.msg=L.rv?`${L.rv} ${L.rv===1?'struttura ripassata':'strutture ripassate'} in tempo: +${L.rv*P.R().ripasso.xp_puntuale} XP.`:'';
   if(L.daily&&completed)L.msg+=(L.msg?' ':'')+'Il ripasso di oggi vale per la serie.';
  }
+ else if(L.kind==='palestra'){if(completed)P.gain(Rg.xp.lezione_con_cuori,false);}
  else if(L.kind==='lezione'){if(completed){P.gain(Rg.xp.lezione_con_cuori,false);P.setNode(L.ps.id,{stato:'iniziato',stelle:stars});}}
  else if(L.kind==='prova'){
   P.setProva(L.ps.id);const wrong=[...new Set(L.wrong)];
@@ -330,7 +357,7 @@ function finish(){
   else L.msg=`Serve almeno l'${Math.round(Rg.progetto.quiz_soglia*100)}% con i cuori rimasti: riprova quando vuoi.`;
  }
  L.rewards=P.checkProgress();
- queue.add({module:'percorso',mode:L.kind,score:L.ok,total:L.n,xp:Math.max(0,S.xp-L.xp0)});
+ queue.add({module:L.kind==='palestra'?'corpo':'percorso',mode:L.kind==='palestra'?'zona':L.kind,score:L.ok,total:L.n,xp:Math.max(0,S.xp-L.xp0)});
  save();head();refreshMastery();
  L.gain=Math.max(0,S.xp-L.xp0);L.screen='end';endScreen(L);
 }
@@ -341,7 +368,8 @@ function endScreen(L){
  const nextStep=L.ps&&P.passi(L.sat).find(p=>!P.stepDone(p)),ex=L.kind==='esame';
  const ring=`<div class="ring" role="img" aria-label="Obiettivo del giorno: ${day.xp||0} XP su ${g}"><svg viewBox="0 0 36 36" aria-hidden="true"><circle cx="18" cy="18" r="15" class="rb"/><circle cx="18" cy="18" r="15" class="rf" stroke-dasharray="${(pct*94.2).toFixed(1)} 94.2"/></svg><span>${day.xp||0}/${g}</span></div>`;
  const stars=L.kind==='prova'||L.kind==='ripasso'||(ex&&!L.passed)?'':`<div class="big" aria-label="${L.stars} stelle su 3">${'⭐'.repeat(L.stars)}${'☆'.repeat(3-L.stars)}</div>`;
- const btns=(L.next?`<button class="btn" data-l="again" data-k="${L.next.kind}">${esc(L.next.label)}</button>`:'')+
+ const pz=L.kind==='palestra';
+ const btns=pz?`<button class="btn" data-l="again" data-k="palestra">Ancora su ${esc(L.zone.label)}</button>`+(L.sat?`<button class="btn alt" data-l="gosat">Vai al satellite</button>`:'')+'<button class="btn alt" data-l="quit">Torna alla Palestra</button>':(L.next?`<button class="btn" data-l="again" data-k="${L.next.kind}">${esc(L.next.label)}</button>`:'')+
   (done&&nextStep&&nextStep.id!==L.ps.id?`<button class="btn" data-l="step" data-id="${esc(nextStep.id)}">Prossimo passo</button>`:'')+
   (!done&&L.kind==='lezione'?`<button class="btn" data-l="again" data-k="lezione">Ancora una lezione</button>`:'')+
   (L.kind==='quiz'&&!done?`<button class="btn" data-l="again" data-k="quiz">Riprova</button>`:'')+
@@ -430,6 +458,8 @@ export function lessonClick(e){
  else if(a==='next'){if(L.cur&&L.cur.t==='pres'){L.cur=null;}renderLesson();}
  else if(a==='opt'&&L.cur&&!L.cur.done){const q=L.cur,id=b.dataset.id;q.picked=id;answer(L,q,id===q.right);}
  else if(a==='more'){const add=P.moreDaily();save();if(!startReview(P.slotsOf(add),{daily:true}))quitLesson();}
+ else if(a==='again'&&L.kind==='palestra'){if(!startZone(L.zone.sats,L.zone))quitLesson();}
+ else if(a==='gosat'){const sat=L.sat;leaveZone();app.L=null;app.Lp=null;clearMarks();baseView();onExit(null,{sat});}
  else if(a==='again'){const k=b.dataset.k;startLesson(L.sat,L.ps,k,k==='lezione'&&L.next?.pool?L.next.pool:undefined);}
  else if(a==='step'){const ps=P.passi(L.sat).find(p=>p.id===b.dataset.id);app.L=null;onExit(null,{sat:L.sat,ps});}
  return true;

@@ -3,12 +3,12 @@ import {$} from './util.js';
 import {app,S,save,saveGrp,head,touchStreak,bump,queue,itemOf} from './state.js';
 import {buildFig,boneAt,slotAt,clearMarks,refreshMastery,resetZoom,zoomAt,showMuscle,muscleHtml,takePan,setView,focusItem,baseView,viewMenu,closeViewMenu,doubleTapZoom} from './figure.js';
 import {renderExplore,showNc,selectBone} from './explore.js';
-import {renderMenu,clearGhosts,startGame,nextQ,answerFind,answerMusc,answerBridge,answerFunc,answerNc,answerCase,bridgePrompt,casePanel} from './game.js';
+import {renderMenu,zoneTap,zoneClick,clearGhosts,startGame,nextQ,answerFind,answerMusc,answerBridge,answerFunc,answerNc,answerCase,bridgePrompt,casePanel} from './game.js';
 import {placeAttempt,freeDrop} from './puzzle.js';
 import {renderProg} from './progress.js';
 import {renderSocial,loadSocial,setSocialOpen} from './social.js';
 import {renderPath,initPath,pathClick,pathChange,pathSubmit} from './path.js';
-import {lessonTap} from './lezione.js';
+import {lessonTap,lessonClick,lessonSubmit,leaveZone} from './lezione.js';
 import {showInstall,promptInstall,installNow} from './install.js';
 
 export function useMod(id){
@@ -46,6 +46,7 @@ window.addEventListener('message',e=>{
 /* Schede: Percorso (path), Palestra (play, l'ex Gioca), Atlante (atlas: 2D o 3D), Flotta (soc, l'ex Amici).
    Il Profilo (prog) non ha una scheda: si apre toccando la foto in alto (#me). */
 export function setTab(t){
+ if(t!=='play'&&app.L?.tab==='play')leaveZone(); // allenamento della Palestra lasciato a metà: si chiude (torna la lezione messa da parte)
  app.tab=t;document.body.classList.toggle('pg',t==='prog'||t==='soc'||(t==='path'&&!app.L)); // percorso (fuori dalla lezione), profilo e flotta: tutto lo schermo, senza figura
  document.querySelectorAll('body>nav button').forEach(b=>{b.classList.toggle('on',b.dataset.t===t);b.setAttribute('aria-selected',b.dataset.t===t);});
  if(t!=='prog')$('pw').setAttribute('aria-labelledby','tab-'+t);
@@ -94,16 +95,20 @@ function tapAt(x,y){
  // sid: struttura singola toccata; con i gruppi la voce è il suo gruppo
  if(app.tab==='play'&&app.G&&app.G.mode==='build'){if(app.G.sel)freeDrop(x,y);return;} // Componi: si mette il pezzo scelto dove si tocca
  const G=app.G,g=app.tab==='play'&&G&&G.mode==='puzzle'&&G.sel?slotAt(x,y,G.sel):boneAt(x,y);if(!g)return;const sid=g.dataset.id;
- if(app.tab==='path'&&app.L)lessonTap(sid); // lezione del percorso: sempre la struttura singola
+ // lezione del percorso o allenamento per zone della Palestra (app.L.tab='play'): sempre la struttura singola
+ if(app.L&&(app.L.tab||'path')===app.tab)lessonTap(sid);
  else if(app.tab==='atlas')selectBone(itemOf(sid));
  else if(app.tab==='play'&&G){
   if(G.mode==='puzzle')placeAttempt(itemOf(sid));
   else if(G.cur&&G.cur.t==='find')answerFind(sid);
   else if(G.cur&&G.cur.t==='bridge')answerBridge(sid);
  }
+ else if(app.tab==='play'&&!G)zoneTap(sid); // fuori dai giochi: il foglio della zona di quell'osso
 }
 $('panel').addEventListener('click',e=>{
  if(app.tab==='path'){pathClick(e);return;} // scheda Percorso e lezioni: path.js e lezione.js
+ if(app.tab==='play'&&app.L?.tab==='play'){if(!e.target.closest('form'))lessonClick(e);return;} // allenamento per zone
+ const zb=e.target.closest('[data-z]');if(zb&&app.tab==='play'){zoneClick(zb);return;}
  const t=e.target.closest('button,.row');if(!t)return;
  const G=app.G;
  if(t.classList.contains('mc')&&t.dataset.sb){selectBone(t.dataset.sb);focusItem(t.dataset.sb,20);}
@@ -126,5 +131,5 @@ $('panel').addEventListener('click',e=>{
 $('panel').addEventListener('change',e=>{if(app.tab==='path')pathChange(e);});
 // mappa del percorso: i corpi celesti (link SVG con role=button) si aprono anche con Invio e Spazio
 $('panel').addEventListener('keydown',e=>{const a=(e.key==='Enter'||e.key===' ')&&e.target.closest?.('svg a[role=button]');if(a){e.preventDefault();a.dispatchEvent(new MouseEvent('click',{bubbles:true}));}});
-$('panel').addEventListener('submit',e=>{if(app.tab==='path')pathSubmit(e);});
+$('panel').addEventListener('submit',e=>{if(app.tab==='path')pathSubmit(e);else if(app.tab==='play'&&app.L?.tab==='play')lessonSubmit(e);});
 initPath({useMod,setTab});

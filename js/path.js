@@ -24,6 +24,9 @@ export function initPath(h){
  });
 }
 
+// apre un satellite nella scheda Percorso (dal foglio della zona della Palestra)
+export function openSat(id){ui.lvl='satellite';ui.s=id;keep();hooks.setTab('path');}
+
 const PROB={ossa:'Riconoscerle sulla figura',reperi:'Riconoscerli e trovare il loro osso',muscoli:'Riconoscerli',connessioni:'Da dove partono e dove arrivano',funzione:'Cosa fanno',progetto:'Il caso clinico della regione'};
 // simboli degli stati (oltre al colore e alla parola): cerchio vuoto, anello, pieno; pieno con l'orologio (da ripassare),
 // pieno con i raggi (brillante)

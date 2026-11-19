@@ -1,17 +1,75 @@
 /* Scheda Palestra (l'ex Gioca): menu, quiz, Tendine-ponte, Caso clinico, fine partita. */
 import {$,shuffle,pick} from './util.js';
 import {app,S,bone,save,touchStreak,head,bump,queue,items,members,itemOf,itemSet,bonesName} from './state.js';
-import {clearMarks,mark,refreshMastery,resetZoom,showMuscle,muscleHtml,visible,visibleIn,focusItem,itemBox,setView,baseView,hasView} from './figure.js';
+import {clearMarks,mark,refreshMastery,resetZoom,showMuscle,muscleHtml,visible,visibleIn,focusItem,focusPts,itemBox,setView,baseView,hasView} from './figure.js';
 import {startPuzzle} from './puzzle.js';
+import * as P from './percorso.js';
+import {startZone,renderLesson,leaveZone,setPlayExit} from './lezione.js';
+import {openSat} from './path.js';
+
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+
+/* ---------- Palestra per zone (fase 2, terzo rilascio; sezione 7 della specifica) ----------
+   Figura 2D colorata per maestria: toccando un osso si apre il foglio della sua zona (= un satellite, app.Z) con i giochi solo su
+   quella zona e «Vai al satellite»; «Allenati sulle zone deboli» allena le zone più deboli. I giochi della zona sono allenamenti
+   con le regole della lezione (startZone in lezione.js): stesse chiavi di maestria per aspetto e stesso ripasso del Percorso. */
+const TIPI=[['ossa','🦴','Ossa','Riconoscerle e trovarle sulla figura'],['reperi','📍','Reperi','Riconoscerli e trovare il loro osso'],
+ ['muscoli','💪','Muscoli','Riconoscerli dal tracciato'],['connessioni','🎯','Origine e inserzione','Da dove partono e dove arrivano'],['funzione','⚙️','Funzione','Quale muscolo fa questa azione']];
+const zoneOn=()=>app.MOD.id==='corpo'&&P.ready();
+const avgTxt=a=>a.toFixed(1).replace('.',',');
+const dot=a=>`<span class="mdot m${Math.min(3,Math.floor(a+1e-9))}" aria-hidden="true">${Math.min(3,Math.floor(a+1e-9))}</span>`;
+// strutture usabili di un tipo di passo nella zona (chiavi diverse)
+const zoneCount=(sat,tipo)=>new Set(P.passi(sat).filter(ps=>ps.tipo!=='progetto'&&(!tipo||ps.tipo===tipo)).flatMap(ps=>P.usable(ps).map(sid=>P.key(sid,ps.aspetto)))).size;
+setPlayExit(()=>renderMenu());
+// tocco su un osso della figura, fuori dai giochi: apre il foglio della sua zona
+export function zoneTap(sid){
+ if(!zoneOn())return false;const L=P.satsOf(sid).filter(s=>P.satKeys(s).length);if(!L.length)return false;
+ app.Z={id:L[0].id,alt:L.map(s=>s.id)};renderMenu();return true;
+}
+export function zoneClick(b){
+ const a=b.dataset.z,sat=app.Z&&P.satById(app.Z.id);
+ if(a==='open'){app.Z={id:b.dataset.id,alt:[b.dataset.id]};renderMenu();$('panel').querySelector('.zsheet h2')?.focus();}
+ else if(a==='alt'&&app.Z){app.Z.id=b.dataset.id;renderMenu();}
+ else if(a==='close'){app.Z=null;clearMarks();resetZoom(true);renderMenu();}
+ else if(a==='weak'){const ws=P.weakZones();if(ws.length)startZone(ws,{label:ws.map(s=>s.nome).join(' e ')});}
+ else if(a==='train'&&sat){const t=b.dataset.t||null,T=TIPI.find(x=>x[0]===t);startZone([sat],{tipo:t,label:sat.nome+(T?' · '+T[2]:'')});}
+ else if(a==='sat'&&sat){app.Z=null;openSat(sat.id);}
+}
+function zoneHead(){
+ const ws=P.weakZones();
+ const pls=P.pianeti().map(p=>{const ss=P.satelliti(p).filter(s=>P.satKeys(s).length);if(!ss.length)return '';
+  return `<div class="zpl"><div class="sub">${esc(p.nome)}</div><div class="zlist">${ss.map(s=>{const a=P.zoneAvg(s);
+   return `<button class="zchip" data-z="open" data-id="${esc(s.id)}" aria-label="${esc(s.nome)}: maestria media ${avgTxt(a)} su 3">${dot(a)}<span>${esc(s.nome)}</span></button>`;}).join('')}</div></div>`;}).join('');
+ return `<div class="card zhead"><div class="kick">Allenamento per zone</div><h2>Tocca una zona per allenarti</h2>
+  <p class="mut">La figura è colorata per maestria (da beige a oro). Tocca un osso: si apre la sua zona, con i giochi solo su quella. Tutto fa salire la stessa maestria del Percorso.</p>
+  ${ws.length?`<button class="btn" data-z="weak">💪 Allenati sulle zone deboli</button><p class="mut zweak">${ws.length>1?'Le zone':'La zona'} più ${ws.length>1?'deboli':'debole'}: <b>${ws.map(s=>esc(s.nome)).join('</b> e <b>')}</b></p>`:''}
+  <details class="zall"><summary>Tutte le zone</summary>${pls}</details></div>`;
+}
+function zoneSheet(sat){
+ const pl=P.planetOf(sat),a=P.zoneAvg(sat),st=P.look(sat);
+ const tl=(t,i,n,x)=>{const c=zoneCount(sat,t);return c?`<button class="mode tile" data-z="train"${t?` data-t="${t}"`:''}><span class="ti" aria-hidden="true">${i}</span><b>${n}</b><small>${x} · ${c} ${c===1?'struttura':'strutture'}</small></button>`:'';};
+ const alt=app.Z.alt.length>1?`<p class="mut">L'osso toccato sta anche in: ${app.Z.alt.filter(id=>id!==sat.id).map(id=>`<button class="lnk" data-z="alt" data-id="${esc(id)}">${esc(P.satById(id).nome)}</button>`).join(', ')}</p>`:'';
+ return `<div class="card zsheet"><div class="zsh"><div><div class="kick">Zona · ${esc(pl?.nome||'')}</div><h2 tabindex="-1">${esc(sat.nome)}</h2></div><button class="lx" data-z="close" aria-label="Chiudi la zona">✕</button></div>
+  <p class="zst">${dot(a)} Maestria media <b>${avgTxt(a)}</b> su 3 · ${esc(P.STATI[st]||'')}</p>${alt}
+  <div class="tiles">${tl(null,'🔀','Allenamento misto',"Un po' di tutto, dalle più deboli")}${TIPI.map(([t,i,n,x])=>tl(t,i,n,x)).join('')}</div>
+  <div class="zbtns"><button class="btn alt" data-z="sat">Vai al satellite</button></div></div>`;
+}
+// evidenzia la zona sulla figura (le sue ossa) e la porta in primo piano
+function showZone(sat){
+ const bs=P.zoneBones(sat);bs.forEach(id=>mark(id,'sel'));
+ const pts=bs.flatMap(id=>itemBox(id,true));if(pts.length)setTimeout(()=>focusPts(pts,14),30);
+}
 
 export function renderMenu(){
+ if(app.L?.tab==='play'){if(app.MOD.id==='corpo'){app.G=null;renderLesson();return;}leaveZone();}
  app.G=null;clearGhosts();baseView();const body=app.MOD.id==='corpo';
+ const zon=zoneOn(),zsat=zon&&app.Z&&P.satById(app.Z.id);if(app.Z&&!zsat)app.Z=null;
  // riquadri a due colonne come nel prototipo: icona, nome, una riga di spiegazione; le sezioni dicono se si gioca in 2D o sul modello 3D
  const mb=(m,i,t,x)=>`<button class="mode tile" data-mode="${m}"><span class="ti" aria-hidden="true">${i}</span><b>${t}</b><small>${x}</small></button>`;
  const sec=(k,t,n)=>`<h3 class="gsec"><span class="tag">${k}</span>${t}</h3><div class="tiles">${n}</div>`;
  const brain=app.MOD.id==='cervello',M=app.MOD;
  const what=M.grpn?(app.grp?'per <b>gruppi</b>':'sulle <b>strutture singole</b>'):app.grp?(body?'per <b>gruppi</b> di ossa':'per <b>lobi e aree</b>'):(body?'sulle <b>ossa singole</b>':'su <b>giri e solchi</b>');
- $('panel').innerHTML=`<div class="gym"><div class="card ghead"><div class="kick">Palestra</div><h2>Scegli una sfida</h2><p class="mut">3 cuori a round. Ogni risposta giusta dà XP e fa salire la maestria (da beige a oro). Ora giochi ${what}: cambia in alto, dove scegli anche la vista.</p></div>`+
+ $('panel').innerHTML=`<div class="gym">${zsat?zoneSheet(zsat):zon?zoneHead():''}<div class="card ghead"><div class="kick">Palestra</div><h2>${zon?'Giochi liberi':'Scegli una sfida'}</h2><p class="mut">3 cuori a round. Ogni risposta giusta dà XP e fa salire la maestria (da beige a oro). Ora giochi ${what}: cambia in alto, dove scegli anche la vista.</p></div>`+
   sec('2D','Puzzle',
   mb('puzzle','🧩','Ricomponi','Rimetti al posto i pezzi mancanti')+
   mb('build','🧱','Componi','Collega i pezzi su schermo vuoto')+
@@ -31,6 +89,7 @@ export function renderMenu(){
   mb('3d-nervi','🔢','Nervi cranici','Alla base dell\'encefalo')+
   mb('3d-cuore','🫀','Cuore e grandi vasi','Camere, coronarie, grandi vasi')+
   mb('3d-polmoni','🫁','Polmoni','Lobi e bronchi'))+'</div>';
+ clearMarks();if(zsat)showZone(zsat);
 }
 export const clearGhosts=()=>{document.querySelectorAll('.bone.ghost,.bone.gone,.bone.placed').forEach(g=>g.classList.remove('ghost','gone','placed'));
  document.querySelectorAll('#fig .view.bare').forEach(v=>{v.classList.remove('bare');v.removeAttribute('transform');});};

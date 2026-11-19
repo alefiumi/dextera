@@ -37,7 +37,7 @@ Dove questo file e la specifica differiscono, vale la specifica.
   `dextera-`; barra a 4 schede; testi in `testi/`; `content/mappa.json`; pagina `revisione/`.
 - Fase 1 – Percorso minimo (SQL: path_progress, dextera_settings, error_reports): online e SQL applicato il 18/11/2026.
 - Fase 2 – Ripasso ed esame (SQL: review_items), in tre rilasci scelti dall'autore il 19/11/2026: 1) ripasso, luce dei satelliti,
-  data d'esame (v0.76.0, vedi «Ripasso»); 2) esame del pianeta (v0.77.0, vedi «Esame del pianeta»); 3) Palestra con la figura per zone. Fasi 3–7: vedi la specifica.
+  data d'esame (v0.76.0, vedi «Ripasso»); 2) esame del pianeta (v0.77.0, vedi «Esame del pianeta»); 3) Palestra con la figura per zone (v0.78.0, vedi «Palestra per zone»). Fasi 3–7: vedi la specifica.
 - GitHub Pages attivo (ramo `main`, cartella radice): online su `alefiumi.github.io/dextera`.
 
 ## Situazione al 20/11/2026
@@ -63,7 +63,7 @@ Codice di BodyMania con nome, chiavi e schede di Dextera. Diviso in:
 - `index.html` (solo struttura), `css/style.css`.
 - `js/`: moduli ES. `main.js` avvia, `content.js` carica i JSON, `shapes.js` trasforma le forme in SVG,
   `state.js` (stato condiviso `app`, salvataggio), `figure.js` (figura, zoom, pan), `explore.js`,
-  `game.js`, `puzzle.js`, `progress.js`, `ui.js` (cambio di modulo e tab, clic),
+  `game.js` (Palestra, anche per zone), `puzzle.js`, `progress.js`, `ui.js` (cambio di modulo e tab, clic),
   `gate.js` (schermata di avvio), `account.js`, `badges.js`, `social.js` (scheda Flotta), `path.js` (scheda Percorso, per ora un segnaposto con pianeti e satelliti di `content/mappa.json`), `install.js` (pannello "Installa e usa offline": istruzioni per browser, stato della copia offline).
 - Barra in basso a 4 schede (`setTab` in `js/ui.js`): **Percorso** (`path`, segnaposto fino alla fase 1),
   **Palestra** (`play`, l'ex Gioca: tutti i giochi 2D e 3D), **Atlante** (`atlas`: l'ex Esplora in 2D e l'atlante 3D,
@@ -462,6 +462,29 @@ descrizioni; quelle con fonte Z-Anatomy dicono da quale vaso nasce o dove sbocca
   «Ripassa …». `S.path.esami {pianeta: {keys, caso, n, best, t}}` resta sul telefono (non va sul server); si scrive quando si preme Inizia.
 - Prova: `esame.mjs` (copia nelle note delle sessioni, Chrome headless, tutto offline): esame chiuso e aperto, non superato, tempo scaduto
   (anche in un'altra scheda), superato, XP una volta, caso con due errori, pianeta senza casi; dati e cache di BodyMania intatti.
+
+## Palestra per zone (fase 2, terzo rilascio, v0.78.0)
+- Solo nel modulo corpo (negli altri moduli la Palestra è quella di prima). In cima alla Palestra il riquadro «Tocca una zona per allenarti»
+  (`zoneHead()` in `game.js`): la figura è già colorata per maestria (`refreshMastery`, le chiavi delle ossa `o.…` sono le stesse del
+  Percorso), «💪 Allenati sulle zone deboli» con i nomi delle zone e «Tutte le zone» (elenco a pulsanti, l'alternativa al tocco per chi
+  usa la tastiera o il lettore di schermo). Sotto, «Giochi liberi»: i giochi di prima, invariati.
+- Zona = satellite. Il tocco su un osso fuori dai giochi (`zoneTap()`, da `tapAt` in `ui.js`) apre il foglio della zona (`app.Z {id, alt}`,
+  `zoneSheet()`): maestria media, stato, le altre zone dell'osso («L'osso toccato sta anche in»), i giochi solo su quella zona (misto e uno
+  per tipo di passo con almeno una struttura: ossa, reperi, muscoli, origine e inserzione, funzione) e «Vai al satellite» (`openSat()` in
+  `path.js`). Le ossa della zona sono evidenziate e la figura si ingrandisce su di loro. Un osso condiviso apre prima la zona in cui ha meno
+  compagni nel passo delle ossa (`satsOf()` in `percorso.js`: femore → coscia, poi ginocchio e anca).
+- I giochi della zona sono allenamenti con il motore della lezione (`startZone()` in `lezione.js`, `kind:'palestra'`, `L.tab='play'`):
+  presentazione, scelta, tocco e nome come nella lezione, 3 cuori, chiavi di maestria per aspetto e ripasso (`reviewAnswer`) come nel
+  Percorso; domande dalle strutture più deboli (`zoneSlots()`, a turno tra le zone). Fine: «Ancora su …», «Vai al satellite», «Torna alla
+  Palestra»; +20 XP (non di progresso) se finito con i cuori; in coda come `{module:'corpo', mode:'zona'}`. Niente stato dei passi.
+- Zone deboli (`weakZones()`): tra le zone già cominciate (una chiave con maestria o vista) le `palestra.zone_deboli` (2) con la maestria
+  media più bassa, escluse quelle tutte a 3; se mancano, le prossime nell'ordine del percorso. Numeri in `regole.json` → `palestra`.
+- Una lezione del percorso aperta resta da parte durante l'allenamento (`app.Lp`) e torna all'uscita; cambiando scheda a metà
+  l'allenamento si chiude (`leaveZone()` in `setTab`). Nella scheda Palestra i clic e le risposte scritte dell'allenamento vanno a
+  `lessonClick`/`lessonSubmit`, il tocco a `lessonTap` (in `ui.js`, secondo `app.L.tab`).
+- Prova: `zone.mjs` (copia nelle note delle sessioni, Chrome headless, tutto offline): tocco vero sulla figura, foglio, allenamento misto
+  e per tipo, ripasso, cuori, lezione messa da parte, «Vai al satellite», zone deboli, elenco, cervello senza zone; dati e cache di
+  BodyMania intatti.
 
 ## Mappa del percorso (`content/mappa.json`)
 Corso → 4 pianeti → 17 satelliti (con `ordine` della specifica) → 6 passi (`ossa`, `reperi`, `muscoli`, `connessioni`, `funzione`,

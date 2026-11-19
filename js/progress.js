@@ -8,14 +8,23 @@ import {fillVersion} from './install.js';
 let editing=false,draft=null,pmod=null; // pmod: modulo di cui si guarda la maestria (corpo o cervello)
 const ROLES=['Studente di fisioterapia','Fisioterapista','Studente di medicina','Medico','Studente di scienze motorie','Chinesiologo','Altro'];
 const avatar=(src,name,cls='av')=>src?`<img class="${cls}" src="${esc(src)}" alt="">`:`<div class="${cls}">${esc((name||'?').trim().charAt(0).toUpperCase()||'?')}</div>`;
+// copertina del profilo (come la foto di copertina di Facebook): sfondi della galleria, sopra i badge scelti da mostrare.
+// Per ora restano sul dispositivo (S.prof.banner, S.prof.show); sul server con la fase 5.
+const BANNERS=[['notte','Notte stellata'],['aurora','Aurora'],['tramonto','Tramonto'],['oceano','Oceano'],['foresta','Foresta'],['sole','Sole']];
+const SHOW_MAX=3;
+const banner=(p,got)=>{
+ const b=BANNERS.some(x=>x[0]===p.banner)?p.banner:'notte',show=(p.show||[]).map(id=>got.find(x=>x.id===id)).filter(Boolean);
+ return `<div class="pfban ban-${b}">`+(show.length?`<ul class="vetrina" aria-label="Badge in vetrina">${show.map(x=>`<li title="${esc(x.name)}"><span aria-hidden="true">${x.icon}</span><span class="sr">${esc(x.name)}</span></li>`).join('')}</ul>`
+  :got.length&&!editing?'<button class="banhint" data-pf="edit">🏅 Scegli i badge da mostrare</button>':'')+'</div>';
+};
 const day=iso=>new Date(iso).toLocaleDateString('it',{day:'numeric',month:'short',year:'numeric'});
 
 export function renderProg(){
  const p=S.prof,{L,title}=level(),tot=S.ok+S.ko,st=S.stats||{};
  const name=p.name||(A.user?'':'Ospite'),got=BADGES.filter(b=>S.badges[b.id]);
  const lo=30*(L-1)**2,hi=30*L**2,pct=Math.round((S.xp-lo)/(hi-lo)*100);
- const hero=editing?`<div class="card pfhero"><div class="kick">Modifica profilo</div>${editHtml()}</div>`:
-  `<div class="card pfhero"><div class="pf">${avatar(p.avatar,name)}<div class="pfi"><div class="kick">Profilo</div><h2>${esc(name)||'<span class="mut">Senza nome</span>'}</h2>
+ const hero=editing?`<div class="card pfhero edit">${banner({...p,banner:draft.banner,show:draft.show},got)}<div class="kick">Modifica profilo</div>${editHtml(got)}</div>`:
+  `<div class="card pfhero">${banner(p,got)}<div class="pf">${avatar(p.avatar,name)}<div class="pfi"><div class="kick">Profilo</div><h2>${esc(name)||'<span class="mut">Senza nome</span>'}</h2>
    <div class="mut">${p.role?esc(p.role):A.user?'':'Senza account: i progressi restano su questo dispositivo'}</div></div></div>${p.bio?`<p class="bio">${esc(p.bio)}</p>`:''}
    <div class="pflv"><b>Liv. ${L} · ${title}</b><span>${S.xp-lo}/${hi-lo} XP al livello ${L+1}</span></div>
    <div class="pbar" role="progressbar" aria-label="Avanzamento del livello" aria-valuemin="0" aria-valuemax="100" aria-valuenow="${pct}"><i style="width:${pct}%"></i></div>
@@ -60,7 +69,7 @@ async function exportData(){
  }catch(e){toast('Non riuscito: riprova tra poco.');}
 }
 
-function editHtml(){
+function editHtml(got){
  const d=draft,login=!!A.user;
  return `<form class="pfe" data-pf="save"><div class="pf">${avatar(d.avatar,d.name)}<div class="pfi">
    <label class="chip">📷 ${d.avatar?'Cambia foto':'Aggiungi foto'}<input type="file" accept="image/*" data-pf="photo" hidden></label>
@@ -70,6 +79,8 @@ function editHtml(){
   <label>Ruolo<input name="role" value="${esc(d.role)}" maxlength="40" list="roles" placeholder="Es. Studente di fisioterapia"></label>
   <datalist id="roles">${ROLES.map(r=>`<option value="${r}">`).join('')}</datalist>
   <label>Presentazione<textarea name="bio" maxlength="160" rows="2" placeholder="Due righe su di te (facoltativo)">${esc(d.bio)}</textarea></label>
+  <fieldset class="bansel"><legend>Copertina</legend><div class="banopts">${BANNERS.map(([id,n])=>`<label class="ban-${id}"><input type="radio" name="ban" value="${id}"${d.banner===id?' checked':''}><span class="sr">${n}</span></label>`).join('')}</div></fieldset>
+  <fieldset class="showsel"><legend>Badge in vetrina (fino a ${SHOW_MAX})</legend>${got.length?`<div class="chips">${got.map(b=>`<label class="chip"><input type="checkbox" name="show" value="${b.id}"${d.show.includes(b.id)?' checked':''}> ${b.icon} ${esc(b.name)}</label>`).join('')}</div>`:'<p class="note">Quando guadagni un badge puoi metterlo qui, sulla copertina.</p>'}</fieldset>
   ${A.err?`<p class="err">${esc(A.err)}</p>`:''}
   <div class="pfbtn"><button class="btn"${A.busy?' disabled':''}>${A.busy?'Salvo…':'Salva'}</button><button type="button" class="btn alt" data-pf="cancel">Annulla</button></div>
   ${login?'':'<p class="note">Senza account il profilo resta su questo dispositivo.</p>'}</form>`;
@@ -84,12 +95,12 @@ function shrink(file){
   img.onerror=()=>{URL.revokeObjectURL(url);ko(new Error('Immagine non leggibile.'));};img.src=url;
  });
 }
-const formVals=()=>{const f=$('panel').querySelector('form.pfe');if(f){draft.name=f.elements.name.value.trim();draft.role=f.elements.role.value.trim();draft.bio=f.elements.bio.value.trim();}};
+const formVals=()=>{const f=$('panel').querySelector('form.pfe');if(f){draft.name=f.elements.name.value.trim();draft.role=f.elements.role.value.trim();draft.bio=f.elements.bio.value.trim();draft.banner=(f.querySelector('input[name=ban]:checked')||{}).value||draft.banner;draft.show=[...f.querySelectorAll('input[name=show]:checked')].map(i=>i.value).slice(0,SHOW_MAX);}};
 
 export function wireProfile(panel){
  panel.addEventListener('click',e=>{
   const b=e.target.closest('[data-pf]');if(!b||b.tagName==='FORM'||b.tagName==='INPUT')return;const k=b.dataset.pf;
-  if(k==='edit'){editing=true;A.err='';A.msg='';draft={name:S.prof.name||'',role:S.prof.role||'',bio:S.prof.bio||'',avatar:S.prof.avatar||''};renderProg();}
+  if(k==='edit'){editing=true;A.err='';A.msg='';draft={name:S.prof.name||'',role:S.prof.role||'',bio:S.prof.bio||'',avatar:S.prof.avatar||'',banner:S.prof.banner||'notte',show:(S.prof.show||[]).slice()};renderProg();}
   else if(k==='cancel'){editing=false;A.err='';renderProg();}
   else if(k==='nophoto'){formVals();draft.avatar='';renderProg();}
   else if(k==='mod'){pmod=b.dataset.v;renderProg();}
@@ -101,6 +112,12 @@ export function wireProfile(panel){
   }
  });
  panel.addEventListener('change',async e=>{
+  // copertina e vetrina: anteprima subito; al massimo SHOW_MAX badge
+  if(e.target.name==='ban'||e.target.name==='show'){
+   const f=e.target.form,on=[...f.querySelectorAll('input[name=show]:checked')];
+   if(on.length>SHOW_MAX){e.target.checked=false;toast('Al massimo '+SHOW_MAX+' badge in vetrina.');return;}
+   const id=e.target.name+':'+e.target.value;formVals();renderProg();$('panel').querySelector(`input[name=${id.split(':')[0]}][value="${id.split(':')[1]}"]`)?.focus();return;
+  }
   const i=e.target.closest('input[data-pf="photo"]');if(!i||!i.files[0])return;
   formVals();try{draft.avatar=await shrink(i.files[0]);}catch(x){toast(x.message);}renderProg();
  });

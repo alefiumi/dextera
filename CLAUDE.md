@@ -399,6 +399,10 @@ descrizioni; quelle con fonte Z-Anatomy dicono da quale vaso nasce o dove sbocca
   sul telefono una colonna nell'ordine profilo, numeri, badge, account, privacy, maestria (`order` in `style.css`).
   Schermata di avvio nello stesso stile (19/11/2026, v0.72.0, `gate.js`): cielo stellato come la mappa, modulo in un riquadro con
   etichetta e titolo; interruttore Accedi/Registrati in alto (`.gtabs`, `data-g` login/signup) al posto del link in fondo.
+  Copertina del profilo (19/11/2026, v0.73.0): sfondo da una galleria di sei (`BANNERS` in `progress.js`: notte, aurora, tramonto,
+  oceano, foresta, sole) con sopra fino a 3 badge guadagnati in vetrina, scelti in «Modifica profilo»; foto sovrapposta al bordo.
+  Per ora solo sul dispositivo (`S.prof.banner`, `S.prof.show`): sul server e visibile agli amici con la fase 5 (serve SQL nuovo).
+  Spazi nei riquadri: regola unica in fondo a `style.css` (`.card>.kick+…`), così righe e campi non toccano l'etichetta.
   Nel sistema ogni pianeta ha intorno le lune dei suoi satelliti (colore dello stato, `moons()`); nell'universo ogni corso è un piccolo
   sistema, gli altri tre corsi «in arrivo». Riquadro dell'universo «Cosa studi?» con la scelta del percorso (`PERCORSI` in `path.js`: solo
   «Percorso completo» attivo, Fisioterapia, Medicina e MCB «in arrivo», fase 6). Intestazione: livello e titolo su due righe.

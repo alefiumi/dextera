@@ -60,6 +60,16 @@ label.ck{display:flex;gap:6px;align-items:center;font-size:.9rem}
 .corr{display:flex;flex-direction:column;gap:6px}
 .corr textarea{width:100%;min-height:3.2em;padding:6px 8px;border:1px solid var(--line);border-radius:8px;background:var(--bg);resize:vertical}
 .more{align-self:center}
+/* casi clinici: come li vede lo studente */
+.caso{padding:10px 14px;display:flex;flex-direction:column;gap:6px;background:var(--bg);border-bottom:1px solid var(--line)}
+.caso summary{cursor:pointer}
+.caso ol,.caso ul{margin:6px 0;padding-left:1.4em}
+.caso .opz{list-style:none;padding-left:0;display:flex;flex-direction:column;gap:3px}
+.caso .opz li{border:1px solid var(--line);border-radius:8px;padding:3px 9px;background:var(--card)}
+.caso .opz li.giusta{border-color:var(--ok);font-weight:600}
+.caso .opz li.giusta span[aria-hidden]{color:var(--ok)}
+.avv{color:var(--bad);font-size:.85rem;font-weight:600}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 @media(max-width:560px){.dato{grid-template-columns:1fr}.dato .k{padding:0}}
 @media print{
  body{background:#fff;color:#000;padding:0;font-size:11pt}

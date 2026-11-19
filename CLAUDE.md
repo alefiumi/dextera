@@ -585,6 +585,11 @@ correzioni alla fonte). Filtri per satellite, stato, fonte, testo e «solo da se
 nell'atlante» apre `atlante/index.html?vedi=<ref>` (muscolo, repere o osso; per il resto la ricerca). Il docente segna Giusto/Sbagliato
 e scrive correzione e nota: tutto resta nel browser (`dextera-revisione`) finché non esporta il CSV (punto e virgola, con BOM per Excel;
 colonne id, tipo, voce, campo, valore, fonte, stato, esito, correzione, nota, revisore, data; gli elenchi con ` | `).
+Casi clinici di neurologia: voce «Casi clinici di neurologia» (`#casin`, `CASIN` in `revisione.js`) nel filtro e nell'avanzamento, con i 14
+casi divisi per satellite (campo `satellite` del caso); non compare in «Tutti», dove i casi stanno già sotto i loro satelliti. Ogni caso
+ha sopra i suoi dati il riquadro «Come lo vede lo studente» (`casoHtml()`: struttura del corso, indizi in ordine, opzioni con la giusta
+segnata, spiegazione; con una correzione scritta mostra il caso corretto), gli avvisi se la risposta non è tra le opzioni o ci sono
+opzioni ripetute, e «Segna giusti i dati ancora da segnare». Gli id esportati restano `caso.neuro.<n>.<campo>`.
 `python3 atlante/build/importa_revisione.py risposte.csv` mostra le differenze; con `--applica` scrive `testi/` (giusto → verificato,
 correzione → fonte docente e stato corretto, valore di prima in `verifica.prima`; sbagliato senza correzione → segnalato), aumenta la
 `version` dei file toccati e rilancia `testi.py`. Salta le righe il cui valore è cambiato dopo l'esportazione. `--senza-nomi` non salva

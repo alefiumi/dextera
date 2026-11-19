@@ -486,6 +486,20 @@ descrizioni; quelle con fonte Z-Anatomy dicono da quale vaso nasce o dove sbocca
   e per tipo, ripasso, cuori, lezione messa da parte, «Vai al satellite», zone deboli, elenco, cervello senza zone; dati e cache di
   BodyMania intatti.
 
+## Luce dei pianeti e corsi nel logo (v0.80.0, chiesti dall'autore il 19/11/2026)
+- Luce del pianeta (`planetGlow()` in `percorso.js`, disegno `planetBody()` in `path.js`, numeri in `regole.json` → `luce_pianeta`): «Da iniziare»
+  grigio (`#goff`) con un velo scuro e senza alone; «In corso» la luce va da `min_corso` a `max_corso` con l'avanzamento medio dei passi
+  (`stepPct`); «Pronto per l'esame» con tutti i satelliti accesi; dopo l'esame superato «Completato» a luce piena, che cala piano piano
+  quando si avvicina il ripasso (`planetFresh()`: ogni struttura piena nella prima metà del suo intervallo, poi giù fino alla scadenza),
+  mai sotto `min_esperto`; «Da ripassare» con l'orologio se un suo satellite lo è o la freschezza scende sotto 1 − `luce_min`. Lo stato è
+  scritto anche a parole (etichette, `aria-label`, riga `.glow` nel riquadro del pianeta, Elenco). Pianeti dell'universo, del sistema e del pianeta aperto.
+- Logo della schermata di avvio (`js/logo.js`, chiamato da `wireGate()`): ogni corso iniziato è un satellite sull'orbita del logo nel suo
+  colore (`COLORI`: il primo è il giallo di sempre e c'è anche prima di cominciare); un corso completato (tutti i pianeti con l'esame
+  superato) ha un anello. Stato in `S.logo` [{id, st}], calcolato da `logoTick()` in `percorso.js` prima di ogni salvataggio per tutti
+  i corsi di `mappa.json` (così il logo si disegna all'avvio senza contenuti). In caricamento i satelliti girano sfasati (`animation-delay`).
+  Solo la schermata di avvio: i logo di caricamento dell'atlante 3D e l'icona dell'app restano quelli di sempre.
+- Prova: `luce.mjs` (copia nelle note delle sessioni, Chrome headless, tutto offline).
+
 ## Mappa del percorso (`content/mappa.json`)
 Corso → 4 pianeti → 17 satelliti (con `ordine` della specifica) → 6 passi (`ossa`, `reperi`, `muscoli`, `connessioni`, `funzione`,
 `progetto`). Ogni passo ha `strutture` (id di `content/corpo.json`: `o.<osso>` e muscoli; reperi `r.<slug del nome inglese>`), `aspetto`,

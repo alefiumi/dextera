@@ -5,6 +5,7 @@
 import {$,toast} from './util.js';
 import {installHint,appVersion} from './install.js';
 import {S} from './state.js';
+import {drawLogo} from './logo.js';
 import {account as A,configured,startAccount,addAccountListener,lastAccount,signIn,signUp,google,resetPw,setView,saveProfile,NAME_RE,NAME_RULE,esc,resolveOwner,signOut,hasPassword,importDevice,recoverPassword,online,checkNet} from './account.js';
 
 const GUEST='dextera-guest'; // "Continua senza account" scelto: agli avvii successivi non si chiede più
@@ -145,6 +146,8 @@ addAccountListener(()=>{
  }
 });
 export function wireGate(){
+ // corsi iniziati e completati come satelliti del logo (logo.js)
+ drawLogo(document.querySelector('#gate .glogo'));
  // logo animato: #gate.busy quando in #gbody c'è la rotellina (stato di caricamento); il CSS fa girare il satellite e centra il logo
  const busy=()=>$('gate').classList.toggle('busy',!!box().querySelector('.spin'));
  new MutationObserver(busy).observe(box(),{childList:true});busy();

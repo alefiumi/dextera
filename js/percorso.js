@@ -342,3 +342,41 @@ export function weakZones(){
  for(const s of L)if(out.length<n&&!out.includes(s)&&!zoneSeen(s))out.push(s);
  return out;
 }
+
+/* ---------- luce del pianeta (v0.79.0) ----------
+   Da iniziare: grigio, senza alone, con un velo scuro. Durante il percorso si accende man mano (avanzamento medio dei passi).
+   Dopo l'esame superato: luce piena, che si abbassa piano piano quando si avvicina il ripasso delle sue strutture (ogni struttura
+   resta piena nella prima metà del suo intervallo, poi cala fino alla scadenza); non torna mai scuro come all'inizio.
+   «Da ripassare» (con l'orologio) quando uno dei suoi satelliti lo è o, dopo l'esame, quando la freschezza scende sotto 1 − luce_min. Numeri in regole.json, «luce_pianeta». */
+export const PSTATI={nuovo:'Da iniziare',corso:'In corso',pronto:"Pronto per l'esame",esperto:'Completato',ripassare:'Da ripassare'};
+const LG=()=>({min_corso:.25,max_corso:.85,min_esperto:.45,meta_intervallo:.5,...(R()?.luce_pianeta||{})});
+// freschezza delle strutture del pianeta nel calendario: 1 appena ripassate, 0 alla scadenza
+export function planetFresh(pl){
+ const t=tdn(),m=LG().meta_intervallo,ks=new Set(satelliti(pl).flatMap(satKeys));let n=0,sum=0;
+ for(const k of ks){const r=RV()[k];if(!r)continue;const I=INT()[Math.min(r.i,INT().length-1)],left=dueDay(r)-t;
+  sum+=Math.max(0,Math.min(1,left/(I*(1-m)||1)));n++;}
+ return n?sum/n:1;
+}
+export function planetGlow(pl){
+ const G=LG(),ss=satelliti(pl),ps=ss.flatMap(passi);
+ const p=ps.length?ps.reduce((a,x)=>a+(stepDone(x)?1:x.tipo==='progetto'?0:stepPct(x)),0)/ps.length:0;
+ const rp=ss.some(s=>look(s)==='ripassare'),lit_=ss.filter(lit).length;
+ if(examPassed(pl)){const f=planetFresh(pl);return {st:rp||f<1-(R()?.ripasso?.luce_min??.7)?'ripassare':'esperto',v:G.min_esperto+(1-G.min_esperto)*f,p:1,f,lit:lit_,n:ss.length};}
+ if(p<=0&&ss.every(s=>satState(s)==='nuovo'))return {st:'nuovo',v:0,p:0,lit:0,n:ss.length};
+ return {st:rp?'ripassare':lit_===ss.length?'pronto':'corso',v:G.min_corso+(G.max_corso-G.min_corso)*p,p,lit:lit_,n:ss.length};
+}
+
+/* ---------- corsi nel logo di caricamento (v0.80.0) ----------
+   S.logo [{id, st}] in ordine di corso: st '' (mai iniziato), 'iniziato', 'completato' (tutti i pianeti con l'esame superato).
+   Calcolato prima di ogni salvataggio, così la schermata di avvio lo disegna subito, prima di caricare i contenuti (gate.js). */
+function logoTick(){
+ if(!ready())return;
+ const cur=corso(),out=app.MAPPA.corsi.map(c=>{
+  let st='';
+  if(c===cur){const g=pianeti().map(planetGlow);if(g.length&&pianeti().every(examPassed))st='completato';else if(g.some(x=>x.st!=='nuovo'))st='iniziato';}
+  else{const ids=new Set();for(const p of c.pianeti||[]){ids.add(p.id);for(const s of p.satelliti||[]){ids.add(s.id);for(const x of s.passi||[])ids.add(x.id);}}
+   const ns=P().nodes;if((c.pianeti||[]).length&&c.pianeti.every(p=>ns[p.id]?.stato==='acceso'))st='completato';else if(Object.keys(ns).some(id=>ids.has(id)))st='iniziato';}
+  return {id:c.id,st};});
+ if(JSON.stringify(out)!==JSON.stringify(S.logo||null))S.logo=out;
+}
+onBeforeSave(logoTick);

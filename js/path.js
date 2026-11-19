@@ -58,9 +58,22 @@ const DEFS=`<defs><radialGradient id="gsun" cx=".38" cy=".35" r=".7"><stop offse
  <radialGradient id="ghalo"><stop offset=".55" stop-color="#f6b93b" stop-opacity=".35"/><stop offset="1" stop-color="#f6b93b" stop-opacity="0"/></radialGradient>
  <radialGradient id="glit" cx=".38" cy=".35" r=".7"><stop offset="0" stop-color="#fff3c4"/><stop offset="1" stop-color="#f0b429"/></radialGradient>
  <radialGradient id="goff" cx=".38" cy=".35" r=".7"><stop offset="0" stop-color="#6b7499"/><stop offset="1" stop-color="#363d5e"/></radialGradient>
- ${PC.map(([a,b],i)=>`<radialGradient id="gp${i}" cx=".38" cy=".35" r=".7"><stop offset="0" stop-color="${a}"/><stop offset="1" stop-color="${b}"/></radialGradient>`).join('')}</defs>`;
+ ${PC.map(([a,b],i)=>`<radialGradient id="gp${i}" cx=".38" cy=".35" r=".7"><stop offset="0" stop-color="${a}"/><stop offset="1" stop-color="${b}"/></radialGradient><radialGradient id="gh${i}"><stop offset=".45" stop-color="${a}" stop-opacity=".55"/><stop offset="1" stop-color="${b}" stop-opacity="0"/></radialGradient>`).join('')}</defs>`;
 const svgOpen=(h,label)=>`<svg class="map" viewBox="0 0 360 ${h}" role="group" aria-label="${esc(label)}">${DEFS}${stars(360,h,260)}`;
-const halo=(x,y,r,c)=>`<circle cx="${x}" cy="${y}" r="${r}" fill="${c}" opacity=".18"/>`;
+// pianeta con la sua luce (planetGlow in percorso.js): da iniziare grigio con un velo scuro e senza alone; poi l'alone cresce e
+// il velo si toglie man mano che si avanza; dopo l'esame cala piano piano quando si avvicina il ripasso; orologio se da ripassare
+function planetBody(pl,x,y,r,i){
+ const g=P.planetGlow(pl),v=g.v,f=n=>n.toFixed(2);
+ const halo=v>0?`<circle cx="${x}" cy="${y}" r="${f(r*(1.35+.75*v))}" fill="url(#gh${i%4})" opacity="${f(.25+.75*v)}"/>`:'';
+ const body=`<circle cx="${x}" cy="${y}" r="${r}" fill="${g.st==='nuovo'?'url(#goff)':`url(#gp${i%4})`}"${g.st==='nuovo'?' stroke="#7d86ad" stroke-width="1"':''}/>`;
+ const veil=g.st==='nuovo'?.35:.6*(1-v),vl=veil>.01?`<circle cx="${x}" cy="${y}" r="${r}" fill="#05071a" opacity="${f(veil)}"/>`:'';
+ const ring=g.st==='esperto'&&v>.9?`<circle cx="${x}" cy="${y}" r="${f(r+3)}" fill="none" stroke="#fde68a" stroke-opacity=".7" stroke-width="1.2"/>`:'';
+ const cr=Math.max(5,r*.32),cx=f(x+r*.72),cy=f(y-r*.72);
+ const clk=g.st==='ripassare'&&r>=10?`<circle cx="${cx}" cy="${cy}" r="${f(cr)}" class="sy rip"/>${CLOCK(+cx,+cy,cr-1)}`:'';
+ return halo+body+vl+ring+clk;
+}
+// testo della luce di un pianeta per le etichette e il lettore di schermo
+const glowTxt=g=>g.st==='corso'?`${P.PSTATI.corso} · ${Math.round(g.p*100)}%`:P.PSTATI[g.st];
 const sun=(x,y,r)=>`<circle cx="${x}" cy="${y}" r="${r*1.9}" fill="url(#ghalo)"/><circle cx="${x}" cy="${y}" r="${r}" fill="url(#gsun)"/>`;
 
 export function renderPath(){
@@ -113,7 +126,7 @@ function infoHtml(g,pl){
   const L=P.satelliti(pl),pl_lit=L.filter(s=>P.lit(s)).length;
   return `<div class="card info"><div class="kick">Pianeta</div><h2>${esc(pl.nome)}</h2>
    <p class="mut">${L.length} satelliti. Le linee uniscono quelli che hanno strutture in comune: impararle in uno fa avanzare anche l'altro.</p>
-   ${pbar(pl_lit,L.length)}<p class="pn">${pl_lit} accesi su ${L.length}</p>
+   ${pbar(pl_lit,L.length)}<p class="pn">${pl_lit} accesi su ${L.length}</p>${glowHtml(pl)}
    <ul class="sl">${L.map(s=>srow(s,g)).join('')}</ul>${legend()}</div>${examCard(pl)}<div class="card info">${examHtml(pl)}</div>`;
  }
  if(ui.lvl==='universo')return `<div class="card info"><div class="kick">Universo</div><h2>Cosa studi?</h2>
@@ -123,6 +136,16 @@ function infoHtml(g,pl){
  return `<div class="card info"><div class="kick">Sistema · ${esc((PERCORSI.find(x=>x[0]===(app.PERCORSO.id||'base'))||PERCORSI[0])[1])}</div><h2>${esc(C.nome)}</h2>
   <p class="mut">${P.pianeti().length} pianeti e ${all.length} satelliti, tutti aperti: parti dalla regione che stai studiando a lezione. Tocca un pianeta per vedere i suoi satelliti.</p>
   ${pbar(lit,all.length)}<p class="pn">${lit} satelliti accesi su ${all.length}</p>${legend()}</div>`;
+}
+// riga sulla luce del pianeta nel suo riquadro: a parole cosa dice il disegno
+function glowHtml(pl){
+ const g=P.planetGlow(pl);
+ const t={nuovo:'Il pianeta è spento: si accende man mano che fai i passi dei suoi satelliti.',
+  corso:`Il pianeta si sta accendendo: ${Math.round(g.p*100)}% del percorso fatto.`,
+  pronto:"Tutti i satelliti sono accesi: supera l'esame per dare al pianeta la luce piena.",
+  esperto:g.f>=.99?'Luce piena: hai superato l\'esame e i ripassi sono in ordine.':'Il pianeta si scurisce piano piano quando si avvicina il ripasso: ripassa per tenerlo acceso.',
+  ripassare:'Alcune strutture sono da ripassare: il pianeta si è scurito. Ripassa per riaccenderlo.'}[g.st];
+ return `<p class="glow"><b>${esc(P.PSTATI[g.st])}.</b> ${esc(t)}</p>`;
 }
 // piccole lune intorno a un pianeta: una per satellite, nel colore del suo stato
 function moons(x,y,ss,rr=29){
@@ -138,7 +161,7 @@ function universeSvg(){
  const altri=[['Neuroanatomia','#a78bfa',268,98],['Cuore e vasi','#f87171',92,272],['Respiratorio','#60a5fa',268,272]];
  return `${svgOpen(390,'Universo dei corsi')}<g class="enter">
   <a href="#" data-p="lvl" data-lvl="sistema" role="button" aria-label="${esc(C.nome)}: ${pl.length} pianeti, ${n} satelliti, ${lit} accesi">
-  <circle cx="92" cy="98" r="66" class="hit"/>${pl.map((p,i)=>{const r=34+i*10,a=(-110+i*95)*Math.PI/180,x=92+r*Math.cos(a),y=98+r*Math.sin(a);return `<circle cx="92" cy="98" r="${r}" class="orbit"/><circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="6" fill="url(#gp${i%4})"/>`;}).join('')}
+  <circle cx="92" cy="98" r="66" class="hit"/>${pl.map((p,i)=>{const r=34+i*10,a=(-110+i*95)*Math.PI/180,x=92+r*Math.cos(a),y=98+r*Math.sin(a);return `<circle cx="92" cy="98" r="${r}" class="orbit"/>${planetBody(p,+x.toFixed(1),+y.toFixed(1),6,i)}`;}).join('')}
   ${sun(92,98,20)}${svgText(92,180,C.nome,'lab',20)}<text x="92" y="${180+14*lines(C.nome,20).length}" text-anchor="middle" class="wd">${pl.length} pianeti · ${n} satelliti</text></a>
   ${altri.map(([t,c,x,y])=>`<g class="off" aria-hidden="true">${mini(x,y,3)}<circle cx="${x}" cy="${y}" r="17" fill="${c}" opacity=".5"/>${svgText(x,y+70,t,'lab dim',16)}<text x="${x}" y="${y+84}" text-anchor="middle" class="wd">in arrivo</text></g>`).join('')}
   </g><text x="12" y="382" class="wd">Tocca un corso</text></svg>`;
@@ -149,10 +172,10 @@ function systemSvg(g){
  const orbits=L.map((p,i)=>`<circle cx="${cx}" cy="${cy}" r="${R[i%4]}" class="orbit"/>`).join('');
  const bodies=L.map((p,i)=>{const r=R[i%4],a=ang[i%4]*Math.PI/180,x=cx+r*Math.cos(a),y=cy+r*Math.sin(a),up=y<cy;
   const ss=P.satelliti(p),lit=ss.filter(s=>P.lit(s)).length,orb=ss.filter(s=>P.satState(s)!=='nuovo').length,rp=ss.filter(s=>P.look(s)==='ripassare').length,nl=lines(p.nome,14).length;
-  const wd=`${ss.length} satelliti · ${lit} accesi${orb>lit?` · ${orb-lit} in orbita`:''}${rp?` · ${rp} da ripassare`:''}`;
+  const gl=P.planetGlow(p),wd=`${glowTxt(gl)} · ${lit}/${ss.length} accesi${rp?` · ${rp} da ripassare`:''}`;
   const ty=up?y-46-14*nl:y+48,wy=up?y-44:y+48+14*nl;
-  return `<a href="#" data-p="planet" data-id="${esc(p.id)}" role="button" aria-label="${esc(p.nome)}: ${ss.length} satelliti, ${lit} accesi${p===gp?', consigliato':''}">
-   <circle cx="${x}" cy="${y}" r="38" class="hit"/>${halo(x,y,22,PC[i%4][1])}<circle cx="${x}" cy="${y}" r="16" fill="url(#gp${i%4})"/>${moons(x,y,ss)}${p===gp?`<text x="${x+10}" y="${y-8}" class="star" aria-hidden="true">★</text>`:''}
+  return `<a href="#" data-p="planet" data-id="${esc(p.id)}" role="button" aria-label="${esc(p.nome)}: ${glowTxt(gl)}, ${ss.length} satelliti, ${lit} accesi${orb>lit?`, ${orb-lit} in orbita`:''}${p===gp?', consigliato':''}">
+   <circle cx="${x}" cy="${y}" r="38" class="hit"/>${planetBody(p,x,y,16,i)}${moons(x,y,ss)}${p===gp?`<text x="${x+10}" y="${y-8}" class="star" aria-hidden="true">★</text>`:''}
    ${svgText(x,ty,p.nome,'lab',14)}<text x="${x}" y="${wy}" text-anchor="middle" class="wd">${wd}</text></a>`;}).join('');
  return `${svgOpen(440,'Sistema: '+P.corso().nome)}<g class="enter">${orbits}${sun(cx,cy,22)}${bodies}</g><text x="12" y="432" class="wd">Tocca un pianeta</text></svg>`;
 }
@@ -176,12 +199,12 @@ function planetSvg(pl,g,selSat){
    <circle cx="${x}" cy="${y}" r="28" class="hit"/>${satBody(st,x,y,15,s===selSat)}${s===g.sat?`<text x="${x+14}" y="${y-13}" class="star" aria-hidden="true">★</text>`:''}
    ${svgText(x,y+32,s.nome,'lab',15)}<text x="${x}" y="${y+32+14*lines(s.nome,15).length}" text-anchor="middle" class="wd">${P.STATI[st]} · ${done}/${tot}</text></a>`;}).join('');
  return `${svgOpen(400,'Pianeta '+pl.nome)}<g class="enter"><circle cx="${cx}" cy="${cy}" r="${r}" class="orbit"/>${links.join('')}
-  ${halo(cx,cy,44,PC[pi%4][1])}<circle cx="${cx}" cy="${cy}" r="34" fill="url(#gp${pi%4})"/>${svgText(cx,cy+4-7*(lines(pl.nome,12).length-1),pl.nome,'lab in',12)}${bodies}</g><text x="12" y="390" class="wd">Tocca un satellite</text></svg>`;
+  ${planetBody(pl,cx,cy,34,pi)}${svgText(cx,cy+4-7*(lines(pl.nome,12).length-1),pl.nome,'lab in',12)}${bodies}</g><text x="12" y="390" class="wd">Tocca un satellite</text></svg>`;
 }
 const srow=(s,g)=>{const st=P.look(s),done=P.passi(s).filter(P.stepDone).length,tot=P.passi(s).length;
  return `<li><button class="srow" data-p="sat" data-id="${esc(s.id)}">${symIcon(st)}<span class="sn">${esc(s.nome)}${s===g.sat?' <span class="star" aria-label="consigliato">★</span>':''}</span><small>${P.STATI[st]} · ${done}/${tot} passi</small></button></li>`;};
 function listHtml(g){
- return P.pianeti().map(p=>`<h3 class="lp">🪐 ${esc(p.nome)}${P.examPassed(p)?` <span class="mut">· 🏅 ${esc(P.expertTitle(p))}</span>`:''}</h3><ul class="sl">`+P.satelliti(p).map(s=>srow(s,g)).join('')+'</ul>').join('');
+ return P.pianeti().map(p=>`<h3 class="lp">🪐 ${esc(p.nome)} <span class="mut">· ${esc(glowTxt(P.planetGlow(p)))}</span>${P.examPassed(p)?` <span class="mut">· 🏅 ${esc(P.expertTitle(p))}</span>`:''}</h3><ul class="sl">`+P.satelliti(p).map(s=>srow(s,g)).join('')+'</ul>').join('');
 }
 function satHtml(sat,g){
  const st=P.look(sat),L=P.passi(sat),caso=P.casoOf(sat),pl=P.planetOf(sat);

@@ -179,11 +179,29 @@ export function setNode(id,o){
  return out;
 }
 const dones=new Set(['fatto','acceso']);
+// Riparazione (v0.89.1, una volta per telefono): l'app 0.88 aperta con i contenuti della 0.89 non riconosceva le strutture di cuore e
+// polmoni (c./p.), vedeva i passi senza strutture e li segnava tutti fatti (+30 XP ciascuno). Qui si tolgono i passi di Cuore e vasi e
+// Respiratorio segnati fatti senza la maestria che serve e i satelliti rimasti «iniziato» senza passi fatti; sul server si cancellano
+// con la coda S.path.del (syncPercorso). Gli XP restano: sul server vince il valore più alto.
+export function repairTor(){
+ if(!ready()||S.fix89)return 0;
+ const Pn=P(),del=new Set(Pn.del||[]);let n=0;
+ for(const c of app.MAPPA.corsi.filter(c=>c.modulo==='cuore'||c.modulo==='polmoni'))for(const pl of c.pianeti)for(const sat of pl.satelliti){
+  for(const ps of sat.passi||[]){
+   if(ps.tipo==='progetto'||!dones.has(Pn.nodes[ps.id]?.stato))continue;
+   const L=usable(ps);
+   if(!L.length||!L.every(sid=>mastery(key(sid,ps.aspetto))>=R().maestria.passo_fatto)){delete Pn.nodes[ps.id];del.add(ps.id);n++;}
+  }
+  if(Pn.nodes[sat.id]?.stato==='iniziato'&&!(sat.passi||[]).some(ps=>dones.has(Pn.nodes[ps.id]?.stato))){delete Pn.nodes[sat.id];del.add(sat.id);}
+ }
+ if(del.size)Pn.del=[...del];
+ S.fix89=1;return del.size||n;
+}
 // Passo fatto: tutte le sue strutture almeno a maestria 2 nell'aspetto del passo (guadagnata ovunque); un passo fatto resta fatto.
 export function stepDone(ps){
  if(dones.has(node(ps.id)?.stato))return true;
  if(ps.tipo==='progetto')return false;
- const L=usable(ps);
+ const L=usable(ps);if(!L.length)return false; // un passo senza strutture usabili non si fa da solo
  return L.every(sid=>mastery(key(sid,ps.aspetto))>=R().maestria.passo_fatto);
 }
 export const stepOpen=(sat,ps)=>{const L=passi(sat),i=L.indexOf(ps);return i<=0||L.slice(0,i).every(stepDone);};

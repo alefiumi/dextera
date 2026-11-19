@@ -356,6 +356,10 @@ async function syncStudio(sb,uid,full){
 const RANK={'':0,iniziato:1,fatto:2,acceso:3};
 async function syncPercorso(sb,uid,full){
  const P=S.path||(S.path={nodes:{},last:'',prova:{},prio:{}});
+ // passi tolti dalla riparazione di v0.89.1 (repairTor in percorso.js): si cancellano prima di leggere il server, che terrebbe lo stato più alto
+ if(P.del?.length){const ids=P.del.filter(x=>/^[a-z0-9.-]{1,80}$/.test(x));
+  if(ids.length){const {error}=await sb.from('path_progress').delete().eq('user_id',uid).in('node_id',ids);if(error)throw error;}
+  delete P.del;try{localStorage.setItem('dextera-v1',JSON.stringify(S));}catch(e){}}
  if(full){
   const [{data:pp,error:a},{data:ds,error:b}]=await Promise.all([sb.from('path_progress').select('node_id,stato,stelle,fatto_il').eq('user_id',uid),
    sb.from('dextera_settings').select('obiettivo,scudi,date_esame,pianeta,aggiornato_il').eq('user_id',uid).maybeSingle()]);

@@ -8,7 +8,7 @@ import {addAccountListener,wireAccount} from './account.js';
 import {refreshProg,wireProfile} from './progress.js';
 import {boot,wireGate,openLogin} from './gate.js';
 import {checkBadges} from './badges.js';
-import {applyStudio} from './percorso.js';
+import {applyStudio,repairTor} from './percorso.js';
 import {wireSocial,socialAccountChanged} from './social.js';
 
 /* ---------- sfondo chiaro o scuro ---------- */
@@ -73,7 +73,7 @@ boot();
 try{
  const c=await loadContent();
  app.MODS=c.MODS;app.NC=c.NC;app.MAPPA=c.MAPPA;app.LEZ=c.LEZ;app.REGOLE=c.REGOLE;app.PERCORSO=c.PERCORSO;
- app.PBASE=c.PERCORSO;app.PERCORSI=c.PERCORSI;app.PCAT=c.PCAT;applyStudio(); // percorso scelto in «Cosa studi?» (fase 6)
+ app.PBASE=c.PERCORSO;app.PERCORSI=c.PERCORSI;app.PCAT=c.PCAT;applyStudio();if(repairTor())save(); // percorso scelto in «Cosa studi?» (fase 6)
  useMod('corpo');head();
 }catch(e){
  console.error(e);

@@ -100,11 +100,17 @@ function planetBody(pl,x,y,r){
 const glowTxt=g=>g.st==='corso'?`${P.PSTATI.corso} · ${Math.round(g.p*100)}%`:P.PSTATI[g.st];
 const sun=(x,y,r,c)=>{const i=sunIdx(c);return `<circle cx="${x}" cy="${y}" r="${r*1.9}" fill="url(#ghs${i})"/><circle cx="${x}" cy="${y}" r="${r}" fill="url(#gsun${i})"/>`;};
 
+// avviso dei passi fatti e dei satelliti accesi: uno o due per nome, di più in un riassunto breve
+function rwText(rw){
+ if(rw.length<=2)return rw.map(r=>r.t==='satellite'?`🌟 ${r.sat.nome} acceso! +${r.xp} XP`:`🎉 ${r.ps.nome} (${r.sat.nome}) fatto! +${r.xp} XP`).join(' · ');
+ const ns=rw.filter(r=>r.t==='satellite').length,np=rw.length-ns,xp=rw.reduce((a,r)=>a+r.xp,0);
+ return `🎉 ${[np?`${np} ${np===1?'passo fatto':'passi fatti'}`:'',ns?`${ns} ${ns===1?'satellite acceso':'satelliti accesi'}`:''].filter(Boolean).join(' e ')}! +${xp} XP`;
+}
 export function renderPath(){
  if(!P.ready()){$('panel').innerHTML=`<div class="path"><div class="h">Il tuo percorso</div><p class="mut">I contenuti del percorso non sono ancora su questo telefono: apri l'app una volta con la connessione.</p></div>`;return;}
  if(app.L){renderLesson();return;} // renderLesson cambia figura se la domanda è di un altro corso
  if(!S.studio)return studioScreen(); // «Cosa studi?» alla prima apertura (fase 6)
- const rw=P.checkProgress();if(rw.length){save();head();toast(rw.map(r=>r.t==='satellite'?`🌟 ${r.sat.nome} acceso! +${r.xp} XP`:`🎉 ${r.ps.nome} (${r.sat.nome}) fatto! +${r.xp} XP`).join(' · '));}
+ const rw=P.checkProgress();if(rw.length){save();head();toast(rwText(rw));}
  // il corso aperto segue il satellite (aperto dalla Palestra, dal ripasso o da un altro corso)
  const sat0=ui.lvl==='satellite'&&ui.s&&P.satById(ui.s);if(sat0&&P.corsoOf(sat0)!==P.corso()){ui.c=P.corsoOf(sat0).id;P.setCorso(ui.c);keep();}
  const g=P.guide(),C=P.corso();

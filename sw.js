@@ -16,7 +16,7 @@
 //   .X  → +1 per ogni commit che cambia un file dell'app (correzioni e ritocchi).
 // È anche il nome della cache: cambiandola il browser riscarica l'app. L'app la legge dal nome della cache (install.js).
 const APP_STAGE = 'alpha';
-const APP_VERSION = '0.89.0';
+const APP_VERSION = '0.89.1';
 const APP_CACHE = 'dextera-app-' + APP_VERSION;
 const CONTENT_PREFIX = 'dextera-content-';
 const MODEL_VERSION = '1';
@@ -94,13 +94,17 @@ function fillModels() {
     finally { filling = null; }
   })();
 }
+// Contenuti che chiedono un'app più nuova (app_min in content/index.json): non si scaricano con questa versione, li scarica
+// all'installazione la versione nuova del service worker. Così un'app vecchia non apre mai contenuti di un formato che non conosce.
+const ver = v => String(v || '0').split('.').map(Number);
+const tooNew = idx => { const a = ver(APP_VERSION), b = ver(idx.app_min); for (let i = 0; i < 3; i++) { if ((a[i] || 0) !== (b[i] || 0)) return (a[i] || 0) < (b[i] || 0); } return false; };
 let checking = null;
 // Controllo delle versioni (solo con rete). Se scarica un set nuovo, avvisa le pagine aperte.
 function checkContent() {
   return checking ||= (async () => {
     try {
       const idx = await fetchIndex(), old = await cachedVersion();
-      if (String(idx.version) === old) return;
+      if (String(idx.version) === old || tooNew(idx)) return;
       await downloadContent(idx);
       if (old !== null) for (const c of await self.clients.matchAll()) c.postMessage({type: 'content-updated', version: idx.version});
     } catch (e) { /* offline o server irraggiungibile: si continua con la cache */ }
@@ -115,7 +119,7 @@ self.addEventListener('install', e => {
     await cache.addAll(APP_FILES.map(f => new Request(abs(f), {cache: 'reload'})));
     // contenuti: una versione nuova dell'app può aver bisogno dei contenuti nuovi (formato cambiato), quindi si
     // scaricano qui, prima di attivarla. Senza rete si tengono quelli in cache (se non ce ne sono, l'installazione fallisce).
-    try { const idx = await fetchIndex(); if (String(idx.version) !== await cachedVersion()) await downloadContent(idx); }
+    try { const idx = await fetchIndex(); if (String(idx.version) !== await cachedVersion() && !tooNew(idx)) await downloadContent(idx); }
     catch (err) { if (!(await contentCacheName())) throw err; }
     // base dell'atlante 3D: solo i file che mancano (gli strati già salvati restano)
     const models = await caches.open(MODEL_CACHE);

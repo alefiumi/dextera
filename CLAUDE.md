@@ -40,7 +40,7 @@ Dove questo file e la specifica differiscono, vale la specifica.
   data d'esame (v0.76.0, vedi «Ripasso»); 2) esame del pianeta (v0.77.0, vedi «Esame del pianeta»); 3) Palestra con la figura per zone (v0.78.0, vedi «Palestra per zone»). Fasi 3–7: vedi la specifica.
 - Fase 4 – Flotta (SQL: costellazioni, stagioni, equipaggi): v0.85.0, vedi «Flotta». File SQL da applicare dall'autore.
 - Fase 5 – Profilo e competenze (SQL: righe in badge_classes, dextera_profili): v0.86.0, vedi «Profilo e competenze». Online e SQL applicato il 19/11/2026. Casata ed equipaggi nel Profilo: v0.87.0; obiettivo del giorno e date d'esame: v0.88.0.
-- Fase 6 – Altri corsi e percorsi (SQL: dextera_studio): v0.89.0, vedi «Altri corsi e percorsi». Online e SQL applicato il 19/11/2026.
+- Fase 6 – Altri corsi e percorsi (SQL: dextera_studio): v0.89.0 (correzione v0.89.1), vedi «Altri corsi e percorsi». Online e SQL applicato il 19/11/2026.
 - Corso di neurologia: contenuti (primo rilascio) e corso giocabile (v0.81.0, vedi «Corso di neurologia giocabile»), Palestra sul cervello (v0.82.0), gioco 3D (v0.83.0).
 - GitHub Pages attivo (ramo `main`, cartella radice): online su `alefiumi.github.io/dextera`.
 
@@ -731,6 +731,16 @@ descrizioni; quelle con fonte Z-Anatomy dicono da quale vaso nasce o dove sbocca
   giorno solo dei corsi scelti, cambio di percorso e di corsi dall'universo, radar con «Descrizione», invio con e senza il file SQL, offline,
   niente scorrimento di lato, dati e cache di BodyMania intatti.
 - Testi di cuore, vasi e polmoni, casi e programma UCBM sono scritti dall'AI (da verificare); il Test UCBM è una bozza.
+- Correzione v0.89.1 (19/11/2026, visto dall'autore sul telefono): l'app 0.88 aveva scaricato i contenuti 27 della 0.89 prima di aggiornarsi
+  (i contenuti vanno in una cache a parte), non riconosceva le strutture `c.`/`p.` e segnava fatti tutti i passi di Cuore e vasi e
+  Respiratorio (+30 XP ciascuno, con un avviso lunghissimo) e con un menu dei percorsi senza il Test UCBM (era ancora l'app vecchia).
+  Ora: un passo senza strutture usabili non si fa mai da solo (`stepDone`); `repairTor()` in `percorso.js` (una volta per telefono, `S.fix89`)
+  toglie i passi di quei due corsi segnati fatti senza la maestria e i loro satelliti rimasti «iniziato», e li cancella dal server
+  (`S.path.del`, cancellati in `syncPercorso` prima di leggere, perché il server tiene lo stato più alto); gli XP restano (sul server vince
+  il valore più alto). Con più di due premi insieme l'avviso è un riassunto («🎉 5 passi fatti! +150 XP», `rwText()` in `path.js`).
+  `content/index.json` ha `app_min`: un service worker più vecchio non scarica quei contenuti (`tooNew()` in `sw.js`), li scarica la
+  versione nuova all'installazione. Quando i contenuti richiedono codice nuovo, alza `app_min` alla versione che li capisce.
+  Prova: `fix891.mjs` nelle note delle sessioni.
 
 ## Mappa del percorso (`content/mappa.json`)
 Corso → 4 pianeti → 17 satelliti (con `ordine` della specifica) → 6 passi (`ossa`, `reperi`, `muscoli`, `connessioni`, `funzione`,

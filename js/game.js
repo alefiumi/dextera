@@ -37,7 +37,7 @@ export function zoneClick(b){
 }
 function zoneHead(){
  const ws=P.weakZones();
- const pls=P.pianeti().map(p=>{const ss=P.satelliti(p).filter(s=>P.satKeys(s).length);if(!ss.length)return '';
+ const pls=P.pianeti(P.corpoCorso()).map(p=>{const ss=P.satelliti(p).filter(s=>P.satKeys(s).length);if(!ss.length)return '';
   return `<div class="zpl"><div class="sub">${esc(p.nome)}</div><div class="zlist">${ss.map(s=>{const a=P.zoneAvg(s);
    return `<button class="zchip" data-z="open" data-id="${esc(s.id)}" aria-label="${esc(s.nome)}: maestria media ${avgTxt(a)} su 3">${dot(a)}<span>${esc(s.nome)}</span></button>`;}).join('')}</div></div>`;}).join('');
  return `<div class="card zhead"><div class="kick">Allenamento per zone</div><h2>Tocca una zona per allenarti</h2>

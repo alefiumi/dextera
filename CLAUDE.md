@@ -38,6 +38,7 @@ Dove questo file e la specifica differiscono, vale la specifica.
 - Fase 1 – Percorso minimo (SQL: path_progress, dextera_settings, error_reports): online e SQL applicato il 18/11/2026.
 - Fase 2 – Ripasso ed esame (SQL: review_items), in tre rilasci scelti dall'autore il 19/11/2026: 1) ripasso, luce dei satelliti,
   data d'esame (v0.76.0, vedi «Ripasso»); 2) esame del pianeta (v0.77.0, vedi «Esame del pianeta»); 3) Palestra con la figura per zone (v0.78.0, vedi «Palestra per zone»). Fasi 3–7: vedi la specifica.
+- Corso di neurologia: contenuti (primo rilascio) e corso giocabile (v0.81.0, vedi «Corso di neurologia giocabile»).
 - GitHub Pages attivo (ramo `main`, cartella radice): online su `alefiumi.github.io/dextera`.
 
 ## Situazione al 20/11/2026
@@ -510,12 +511,35 @@ descrizioni; quelle con fonte Z-Anatomy dicono da quale vaso nasce o dove sbocca
   (dove se ne parla nel corso), `figura` (id del cervello 2D `b.*` o gruppi `g:<gruppo>`, per il tocco), `ref` (parte del modello 3D).
   Fonte nuova `lezione` (materiale del corso, in `FONTI` di `testi.py` e `revisione.js`); dove l'AI ha corretto o aggiunto, fonte `AI` e
   nel dato `nota` con quello che diceva la guida (la pagina di revisione la mostra). Tutto «da verificare».
-- 14 casi in `testi/casi.json` (modulo `neuro`, `struttura` = `n.<voce>`): per ora non vanno in nessun modulo 2D.
+- 14 casi in `testi/casi.json` (modulo `neuro`, `struttura` = `n.<voce>`).
 - `content/mappa.json`: secondo corso `neurologia` (modulo `cervello`), strutture `n.<voce>`, passi con `casi` e `senza_figura`
   (strutture senza figura: domande a scelta). Scritto una volta da uno script (copia `neuro_genera.py` nelle note delle sessioni), poi
   si corregge a mano; `testi.py` controlla id, figure e casi e che ogni voce stia in un satellite.
-- L'app non usa ancora il corso: il percorso legge solo il corso di `content/percorsi/base.json`. Il secondo rilascio (corso giocabile:
-  percorso con più corsi, lezioni sul cervello 2D, Palestra ed esame) è da fare.
+- 14 casi: nell'app arrivano da `content/lezioni.json` → `casi_neuro` (con `src: 'neuro'`, id dei dati `caso.neuro.<id>`), non da un modulo 2D.
+
+## Corso di neurologia giocabile (secondo rilascio, v0.81.0)
+- Più corsi: `content/percorsi/base.json` (v3) contiene anche i nodi di `neurologia` (pianeti con `esame.caso` null, satelliti con `passi` e
+  `caso` = il primo caso del passo progetto della mappa). In `percorso.js`: `corsi()` (corsi del percorso pubblicato, in ordine), `corso()`
+  = corso aperto (`setCorso()`, scelto nella scheda Percorso e salvato in `dextera-percorso-ui` → `c`; senza scelta il corso del corpo),
+  `corpoCorso()`, `corsoOf(satellite o pianeta)`. `pianeti(c)` e `satelliti(p, c)` prendono il corso; passi fatti (`checkProgress`), calendario
+  del ripasso (`kidx`), `satById`, `planetOf` e il logo valgono per tutti i corsi; Palestra per zone solo sul corpo (`satsOf`, `weakZones`,
+  `zoneHead` in `game.js`). Aprendo un satellite di un altro corso (ripasso, Palestra) il corso aperto lo segue (`renderPath`).
+- Universo (`universeSvg` in `path.js`): un sistema per corso vero (tocco → `data-p="corso"`), Cuore e vasi e Respiratorio «in arrivo»;
+  nel riquadro «Cosa studi?» l'elenco dei corsi; nel sistema «Cambia corso». Passi con i nomi di neurologia (`PROBN`).
+- Dati (`lezioni()` in `testi.py`): `content/lezioni.json` → `neuro` {`n.<voce>`: {n, d, f, le, c, fig}} e `voci['n.x'] = 'neuro.x'`.
+- Chiavi della maestria e del ripasso (`key()`): `n.<voce>` (strutture: nome e posizione), `nd.` (dove), `nf.` (funzione), `nl.` (lesione),
+  `nc.` (connessioni). Rispettano la regola di `review_items` e `path_progress` (niente SQL nuovo). `usable()` vuole il campo del passo
+  (`NCAMPO`); dati per la verifica e «Segnala un errore» in `NCAMPI`.
+- Lezioni (`lezione.js`, sezione «corso di neurologia»): la figura giusta si sceglie a ogni domanda (`needMod()`: `n.` → cervello, altrimenti
+  corpo; `renderLesson` chiama `useMod` tramite `setLessonExit`), così il Ripasso del giorno mescola i corsi. Strutture: presentazione con
+  dove e funzione, struttura evidenziata sul cervello 2D (`showNeuro()`: vista in cui se ne vede di più, gruppi `g:` = tutti i membri),
+  scelta e nome; tocco solo per le voci con `figura` (`canTap`). Altri passi: indizio con il testo del passo senza il nome (`nmask()`),
+  scelta o nome della struttura. Caso: ipotesi «Quale distretto» tra i satelliti dello stesso corso e «Quale funzione» tra le funzioni delle
+  voci. Esame: tipi di passo presi dal pianeta; titolo «Esperto delle basi del sistema nervoso» (`expertTitle`, anche `pl.titolo` nella mappa).
+- Prova: `neuro.mjs` (copia nelle note delle sessioni, Chrome headless, tutto offline): universo, cambio di corso, lezione con presentazioni,
+  scelta, tocco e nome sul cervello, tocco sbagliato, passo «Dove si trova», caso, ripasso misto corpo e cervello, esame superato, logo,
+  lezione del corpo dopo, Palestra solo corpo; dati di BodyMania intatti.
+- Da fare: Palestra di neurologia (zone sul cervello), tocco sul modello 3D.
 
 ## Mappa del percorso (`content/mappa.json`)
 Corso → 4 pianeti → 17 satelliti (con `ordine` della specifica) → 6 passi (`ossa`, `reperi`, `muscoli`, `connessioni`, `funzione`,

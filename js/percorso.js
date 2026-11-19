@@ -18,28 +18,43 @@ const corpo=()=>app.MODS.corpo;
 export const today=()=>ymd(new Date());
 
 /* ---------- percorso e mappa ---------- */
-export const corso=()=>app.MAPPA.corsi.find(c=>c.id===app.PERCORSO.corso)||app.MAPPA.corsi[0];
+/* Più corsi (rilascio 2 della neurologia): il percorso pubblicato contiene i nodi di tutti i corsi; corso() è quello aperto nella
+   scheda Percorso (setCorso), il corso del percorso pubblicato (muscolo-scheletrico) se non se ne è scelto un altro.
+   Calendario dei ripassi, passi fatti e stati valgono per tutti i corsi; Palestra per zone solo per il corso del corpo (corpoCorso). */
 const pnode=id=>app.PERCORSO.nodi.find(n=>n.id===id);
+export const corsi=()=>app.MAPPA.corsi.filter(c=>pnode(c.id)).sort((a,b)=>(pnode(a.id).ordine??99)-(pnode(b.id).ordine??99));
+export const corpoCorso=()=>app.MAPPA.corsi.find(c=>c.id===app.PERCORSO.corso)||app.MAPPA.corsi[0];
+let CUR='';
+export const setCorso=id=>{CUR=id||'';};
+export const corso=()=>app.MAPPA.corsi.find(c=>c.id===CUR&&pnode(c.id))||corpoCorso();
 // pianeti e satelliti del percorso, nell'ordine consigliato (ordine del percorso pubblicato)
-export function pianeti(){
+export function pianeti(c=corso()){
  const ord=id=>pnode(id)?.ordine??99;
- return corso().pianeti.filter(p=>pnode(p.id)).slice().sort((a,b)=>ord(a.id)-ord(b.id));
+ return c.pianeti.filter(p=>pnode(p.id)).slice().sort((a,b)=>ord(a.id)-ord(b.id));
 }
-export function satelliti(p){
+export function satelliti(p,c){
  const ord=id=>pnode(id)?.ordine??99;
- return (p?p.satelliti:pianeti().flatMap(x=>x.satelliti)).filter(s=>pnode(s.id)).slice().sort((a,b)=>ord(a.id)-ord(b.id));
+ return (p?p.satelliti:pianeti(c).flatMap(x=>x.satelliti)).filter(s=>pnode(s.id)).slice().sort((a,b)=>ord(a.id)-ord(b.id));
 }
-export const satById=id=>pianeti().flatMap(p=>p.satelliti).find(s=>s.id===id);
-export const planetOf=sat=>pianeti().find(p=>p.satelliti.includes(sat));
+const allPl=()=>corsi().flatMap(c=>pianeti(c));
+export const satById=id=>allPl().flatMap(p=>p.satelliti).find(s=>s.id===id);
+export const planetOf=sat=>allPl().find(p=>p.satelliti.includes(sat));
+export const corsoOf=x=>app.MAPPA.corsi.find(c=>c.pianeti.includes(x)||c.pianeti.some(p=>p.satelliti.includes(x)))||corpoCorso();
+// corso di neurologia: strutture 'n.<voce>' con i testi in app.LEZ.neuro e i casi in app.LEZ.casi_neuro
+export const isNeuro=sid=>String(sid).startsWith('n.');
+export const neuro=sid=>app.LEZ.neuro?.[sid]||null;
+const casesOf=c=>c.modulo==='corpo'?corpo().CASES:c.modulo==='cervello'?(app.LEZ.casi_neuro||[]):[];
+const caseIn=(c,id)=>casesOf(c).find(x=>x.id===id)||null;
+export const caseAns=c=>c?.mid||c?.bid||null;
 // passi del satellite inclusi nel percorso (i passi 'salta' della mappa non ci sono)
 export const passi=sat=>{const inc=pnode(sat.id)?.passi;return sat.passi.filter(ps=>!ps.salta&&(!inc||inc.includes(ps.id)));};
-export const casoOf=sat=>{const c=pnode(sat.id)?.caso;return c?corpo().CASES.find(x=>x.id===c)||null:null;};
+export const casoOf=sat=>{const c=pnode(sat.id)?.caso;return c?caseIn(corsoOf(sat),c):null;};
 // caso clinico dell'esame del pianeta (fase 2): quello scelto nel percorso pubblicato (esame.caso, dal gestionale), altrimenti
-// in automatico i casi la cui risposta è un muscolo del pianeta
+// in automatico i casi la cui risposta è un muscolo (o una struttura del corso di neurologia) del pianeta
 export function esameCasi(pl){
- const c=pnode(pl.id)?.esame?.caso;if(c){const x=corpo().CASES.find(k=>k.id===c);if(x)return [x];}
+ const co=corsoOf(pl),c=pnode(pl.id)?.esame?.caso;if(c){const x=caseIn(co,c);if(x)return [x];}
  const ms=new Set(pl.satelliti.flatMap(s=>s.passi.flatMap(ps=>Array.isArray(ps.strutture)?ps.strutture:[])));
- return corpo().CASES.filter(k=>k.mid&&ms.has(k.mid));
+ return casesOf(co).filter(k=>caseAns(k)&&ms.has(caseAns(k)));
 }
 
 /* ---------- strutture, chiavi e dati ---------- */
@@ -47,7 +62,10 @@ export const bone=id=>corpo().byId[id];
 export const muscle=id=>corpo().M.find(m=>m.id===id);
 export const rep=id=>app.LEZ.reperi[id];
 // chiave della maestria di una struttura nell'aspetto di un passo
+// neurologia: 'n.<voce>' (nome e posizione), 'nd.' (dove si trova), 'nf.' (funzione), 'nl.' (lesione), 'nc.' (connessioni e vie)
+const NK={dove:'nd.',fn:'nf.',lesione:'nl.',vie:'nc.'};
 export function key(sid,asp){
+ if(isNeuro(sid))return NK[asp]?NK[asp]+sid.slice(2):sid;
  if(asp==='oi')return 'oi.'+sid;if(asp==='fn')return 'fn.'+sid;
  return sid.startsWith('o.')||sid.startsWith('r.')?sid:'m.'+sid;
 }
@@ -55,8 +73,11 @@ export const mastery=k=>S.mastery[k]||0;
 // campi di testi/ che una domanda usa, per tipo di passo (etichetta di verifica e «Segnala un errore»)
 export const CAMPI={ossa:['nome','latino','descrizione'],reperi:['nome','latino','descrizione'],muscoli:['nome','latino','azione'],
  connessioni:['origine','inserzione'],funzione:['azione','nome']};
+export const NCAMPI={strutture:['nome','dove'],dove:['dove','nome'],funzione:['funzione','nome'],lesione:['lesione','nome'],connessioni:['connessioni','nome']};
+// campo del testo di neurologia per tipo di passo (n, d, f, le, c in content/lezioni.json)
+export const NCAMPO={strutture:'n',dove:'d',funzione:'f',lesione:'le',connessioni:'c'};
 export const voce=sid=>app.LEZ.voci[sid]||null;
-export const dataIds=(sid,tipo)=>{const v=voce(sid);return v?(CAMPI[tipo]||[]).map(c=>v+'.'+c):[];};
+export const dataIds=(sid,tipo)=>{const v=voce(sid);return v?((isNeuro(sid)?NCAMPI:CAMPI)[tipo]||[]).map(c=>v+'.'+c):[];};
 const stato=d=>app.LEZ.stati[d]||['da verificare'];
 // «Verificato il …» solo se tutti i dati della domanda sono verificati o corretti da un docente; altrimenti «da verificare»
 export function verifica(ids){
@@ -75,6 +96,7 @@ export function excluded(sid,tipo){
 export function usable(ps){
  if(!Array.isArray(ps.strutture))return [];
  return ps.strutture.filter(sid=>{
+  if(isNeuro(sid)){const n=neuro(sid),f=NCAMPO[ps.tipo];return !!(n&&f&&n[f]);}
   if(ps.tipo==='ossa')return !!bone(sid);
   if(ps.tipo==='reperi')return !!rep(sid);
   const m=muscle(sid);if(!m)return false;
@@ -127,7 +149,7 @@ export const light=sat=>{const ks=satKeys(sat);if(!ks.length)return 1;const od=o
 export function checkProgress(){
  if(!ready())return [];
  const out=[],X=R().xp,now=new Date().toISOString();
- for(const sat of satelliti()){
+ for(const sat of corsi().flatMap(c=>satelliti(null,c))){
   for(const ps of passi(sat)){
    if(ps.tipo==='progetto')continue;
    if(!dones.has(node(ps.id)?.stato)&&stepDone(ps)){setNode(ps.id,{stato:'fatto',fatto_il:now});gain(X.passo_fatto,true);out.push({t:'passo',sat,ps,xp:X.passo_fatto});}
@@ -144,7 +166,7 @@ export function gain(n,progress){S.xp+=n;if(progress)S.pxp=(S.pxp||0)+n;}
 // prossimo passo consigliato: l'ultimo satellite usato se non è acceso, altrimenti il primo non acceso nell'ordine del percorso
 // (con dei ripassi da fare oggi la stella guida va prima sul «Ripasso del giorno»: lo decide path.js con dailyLeft())
 export function guide(){
- const L=satelliti();const last=satById(P().last);
+ const L=satelliti();const last=L.find(s=>s.id===P().last);
  const sat=(last&&satState(last)!=='acceso')?last:L.find(s=>satState(s)!=='acceso')||L[0];
  const ps=passi(sat).find(p=>!stepDone(p))||passi(sat).at(-1);
  return {sat,ps};
@@ -195,7 +217,7 @@ let KI=null,KIm=null,KIp=null;
 function kidx(){
  if(KI&&KIm===app.MAPPA&&KIp===app.PERCORSO)return KI;
  KI={k:new Map(),s:new Map()};KIm=app.MAPPA;KIp=app.PERCORSO;
- for(const p of pianeti())for(const sat of satelliti(p)){
+ for(const p of allPl())for(const sat of satelliti(p)){
   const ks=[];
   for(const ps of passi(sat)){if(ps.tipo==='progetto'||!Array.isArray(ps.strutture))continue;
    for(const sid of ps.strutture){const k=key(sid,ps.aspetto);ks.push([k,sid,ps]);
@@ -274,20 +296,20 @@ export const daysTo=d=>dayNum(d)-tdn();
    pianeta va a 'acceso' in path_progress (titolo «Esperto di…») e +250 XP una volta sola. Numeri in regole.json, «esame».
    S.path.esami {pianeta: {keys, caso, n, best, t}}: domande e caso dell'ultimo tentativo (non si ripetono), tentativi, miglior punteggio. */
 const EX=()=>P().esami||(P().esami={});
-const TIPI=['ossa','reperi','muscoli','connessioni','funzione'];
 export const examMissing=pl=>satelliti(pl).filter(s=>!lit(s)).length;
 export const examOpen=pl=>satelliti(pl).length>0&&examMissing(pl)===0;
 export const examPassed=pl=>node(pl.id)?.stato==='acceso';
 export const examLast=pl=>EX()[pl.id]||null;
-// «Esperto dell'arto inferiore», «Esperto della testa e collo», «Esperto del …»
+// «Esperto dell'arto inferiore», «Esperto della testa e collo», «Esperto del …»; un titolo scritto nella mappa (pl.titolo) vince
 export function expertTitle(pl){
+ if(pl.titolo)return pl.titolo;
  const n=String(pl.nome||''),l=n.charAt(0).toLowerCase()+n.slice(1),w=l.split(' ')[0];
- return 'Esperto '+(/^[aeiouh]/.test(l)?"dell'":/a$/.test(w)?'della ':'del ')+l;
+ return 'Esperto '+(/^[aeiouh]/.test(l)?"dell'":/a$/.test(w)?'della ':/i$/.test(w)?'delle ':'del ')+l;
 }
 const mix=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;};
 // domande dell'esame {sid, ps, sat}: prima quelle che non erano nell'ultimo tentativo (le altre solo se mancano strutture)
 export function examSlots(pl){
- const E=R().esame,sats=satelliti(pl),last=new Set(examLast(pl)?.keys||[]),seen=new Set(),all=[];
+ const E=R().esame,sats=satelliti(pl),TIPI=[...new Set(sats.flatMap(s=>passi(s).map(p=>p.tipo)))].filter(t=>t!=='progetto'),last=new Set(examLast(pl)?.keys||[]),seen=new Set(),all=[];
  for(const sat of sats)for(const ps of passi(sat)){if(ps.tipo==='progetto')continue;
   for(const sid of usable(ps)){const k=key(sid,ps.aspetto);if(seen.has(k))continue;seen.add(k);all.push({sid,ps,sat,k,rep:last.has(k)?1:0});}}
  const cand=mix(all).sort((a,b)=>a.rep-b.rep),out=[],cnt=new Map(),per=Math.min(E.per_satellite,Math.floor(E.domande/Math.max(1,sats.length)));
@@ -302,7 +324,7 @@ export function examSlots(pl){
 // satellite del pianeta a cui appartiene la risposta del caso (per l'ipotesi «Quale distretto è coinvolto?»)
 export function caseSat(pl,c){
  const L=satelliti(pl);
- return L.find(s=>s.passi.some(ps=>Array.isArray(ps.strutture)&&ps.strutture.includes(c?.mid)))||L[0];
+ return L.find(s=>s.passi.some(ps=>Array.isArray(ps.strutture)&&ps.strutture.includes(caseAns(c))))||L[0];
 }
 // all'inizio del tentativo: domande e caso di questo tentativo diventano «l'ultimo tentativo»
 export function examStart(pl,slots,caso){
@@ -328,7 +350,7 @@ export function weakSats(pl,res){
 // compagni nel passo delle ossa (il femore porta alla coscia, poi ginocchio e anca), a parità nell'ordine del percorso
 export function satsOf(sid){
  const nb=sat=>{const ps=passi(sat).find(p=>p.tipo==='ossa'&&Array.isArray(p.strutture)&&p.strutture.includes(sid));return ps?ps.strutture.length:999;};
- return satelliti().filter(sat=>passi(sat).some(ps=>Array.isArray(ps.strutture)&&ps.strutture.includes(sid))).map((s,i)=>({s,i,n:nb(s)})).sort((a,b)=>a.n-b.n||a.i-b.i).map(x=>x.s);
+ return satelliti(null,corpoCorso()).filter(sat=>passi(sat).some(ps=>Array.isArray(ps.strutture)&&ps.strutture.includes(sid))).map((s,i)=>({s,i,n:nb(s)})).sort((a,b)=>a.n-b.n||a.i-b.i).map(x=>x.s);
 }
 // ossa della zona (per evidenziarla sulla figura)
 export const zoneBones=sat=>passi(sat).filter(ps=>ps.tipo==='ossa').flatMap(ps=>usable(ps));
@@ -337,7 +359,7 @@ export function zoneAvg(sat){const ks=satKeys(sat);return ks.length?ks.reduce((a
 const zoneSeen=sat=>satKeys(sat).some(k=>mastery(k)>0||(S.seen||{})[k]);
 // zone deboli: tra quelle già cominciate le N con la maestria media più bassa; se sono meno di N, le prossime nell'ordine del percorso
 export function weakZones(){
- const n=R().palestra.zone_deboli,L=satelliti().filter(s=>satKeys(s).length),on=L.filter(zoneSeen);
+ const n=R().palestra.zone_deboli,L=satelliti(null,corpoCorso()).filter(s=>satKeys(s).length),on=L.filter(zoneSeen);
  const out=on.slice().sort((a,b)=>zoneAvg(a)-zoneAvg(b)).filter(s=>zoneAvg(s)<R().maestria.max).slice(0,n);
  for(const s of L)if(out.length<n&&!out.includes(s)&&!zoneSeen(s))out.push(s);
  return out;
@@ -371,9 +393,9 @@ export function planetGlow(pl){
    Calcolato prima di ogni salvataggio, così la schermata di avvio lo disegna subito, prima di caricare i contenuti (gate.js). */
 function logoTick(){
  if(!ready())return;
- const cur=corso(),out=app.MAPPA.corsi.map(c=>{
+ const on=new Set(corsi()),out=app.MAPPA.corsi.map(c=>{
   let st='';
-  if(c===cur){const g=pianeti().map(planetGlow);if(g.length&&pianeti().every(examPassed))st='completato';else if(g.some(x=>x.st!=='nuovo'))st='iniziato';}
+  if(on.has(c)){const pl=pianeti(c),g=pl.map(planetGlow);if(g.length&&pl.every(examPassed))st='completato';else if(g.some(x=>x.st!=='nuovo'))st='iniziato';}
   else{const ids=new Set();for(const p of c.pianeti||[]){ids.add(p.id);for(const s of p.satelliti||[]){ids.add(s.id);for(const x of s.passi||[])ids.add(x.id);}}
    const ns=P().nodes;if((c.pianeti||[]).length&&c.pianeti.every(p=>ns[p.id]?.stato==='acceso'))st='completato';else if(Object.keys(ns).some(id=>ids.has(id)))st='iniziato';}
   return {id:c.id,st};});

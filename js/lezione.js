@@ -1,12 +1,13 @@
 /* Lezione del percorso (sezione 3 della specifica), prova «Lo so già» (sezione 4) e progetto del passo 6 (caso clinico con
-   ipotesi o quiz finale). Si gioca sulla figura 2D del modulo corpo; numeri da content/regole.json.
+   ipotesi o quiz finale). Si gioca sulla figura 2D del modulo corpo, o del cervello per il corso di neurologia (strutture 'n.<voce>':
+   la figura cambia da sola a ogni domanda, anche nel Ripasso del giorno che mescola i corsi); numeri da content/regole.json.
    Una lezione è una fila di posti {sid, ps} (struttura e passo); il tipo di domanda si sceglie al momento dalla maestria attuale:
    0 → presentazione e poi scelta tra 4; 1 → richiamo con il tocco (o il nome se la struttura non si tocca nel 2D); 2–3 → nome.
    Almeno 3 domande su 8 non sono a scelta: se mancano, le ultime diventano richiami (tocchi sulle strutture appena presentate
    solo dopo almeno 4 domande). Una risposta giusta a scelta porta al massimo a 1, il tocco a 2, il nome a 3; un errore toglie 1. */
 import {$,shuffle,pick} from './util.js';
 import {app,S,save,head,queue,bonesName} from './state.js';
-import {clearMarks,mark,refreshMastery,resetZoom,showMuscle,muscleHtml,focusItem,itemBox,setView,hasView,visibleIn,baseView} from './figure.js';
+import {clearMarks,mark,refreshMastery,resetZoom,showMuscle,muscleHtml,focusItem,focusPts,itemBox,setView,hasView,visibleIn,baseView} from './figure.js';
 import * as P from './percorso.js';
 import {openReport} from './segnala.js';
 import {account} from './account.js';
@@ -18,13 +19,48 @@ const first=s=>{const t=String(s||'');const i=t.search(/[.;](\s|$)/);return i>0?
 // nome mostrato di un repere: senza le parentesi della fonte (strutture incostanti)
 const clean=s=>String(s||'').replace(/^\((.*)\)$/,'$1');
 
+/* ---------- corso di neurologia: testi in app.LEZ.neuro {n, d, f, le, c, fig}, figura del cervello 2D ---------- */
+const NL={strutture:'Che cos\'è',dove:'Dove si trova',funzione:'Che cosa fa',lesione:'Se si danneggia',connessioni:'Connessioni e vie'};
+const nx=sid=>P.neuro(sid)||{};
+// testo del passo: per le strutture la funzione (la prima frase), per gli altri passi il loro campo
+const ntext=(sid,tipo)=>tipo==='strutture'?first(nx(sid).f):nx(sid)[P.NCAMPO[tipo]]||'';
+// strutture del cervello 2D della voce (id b.* o gruppi g:<gruppo>, che valgono per tutti i loro membri)
+function nfig(sid){
+ const M=app.MODS.cervello;if(!M)return [];
+ return [...new Set((nx(sid).fig||[]).flatMap(x=>x.startsWith('g:')?(M.byId[x.slice(2)]?.m||[]):[x]))].filter(id=>M.byId[id]);
+}
+// mostra la struttura sulla figura: nella vista in cui se ne vede di più, evidenziata (hl) o no (tocco)
+function showNeuro(sid,hl){
+ const ids=nfig(sid);if(!ids.length||app.MOD.id!=='cervello')return;
+ const n=v=>ids.filter(id=>visibleIn(id,v)).length,v=n(app.view)?app.view:app.MOD.views.slice().sort((a,b)=>n(b)-n(a))[0];
+ if(v&&v!==app.view)setView(v,true);
+ if(!hl)return resetZoom();
+ ids.forEach(id=>mark(id,'sel'));
+ setTimeout(()=>{const pts=ids.flatMap(id=>itemBox(id));if(pts.length)focusPts(pts,24);},30);
+}
+// toglie dal testo il nome della struttura (intero, senza parentesi e quello tra parentesi)
+function nmask(t,name){
+ const ns=[name,String(name).replace(/\s*\([^)]*\)/g,''),...(String(name).match(/\(([^)]+)\)/g)||[]).map(x=>x.slice(1,-1))];
+ t=String(t||'');for(const n of ns.filter(x=>x&&x.length>3))t=t.replace(new RegExp(n.replace(/[.*+?^${}()|[\]\\]/g,'\\$&'),'gi'),'___');
+ return t;
+}
+const conn=slot=>slot.ps.tipo==='connessioni'&&!P.isNeuro(slot.sid);
+// figura che serve alla domanda in corso (il corso di neurologia usa il cervello)
+const modOf=sid=>sid&&P.isNeuro(sid)?'cervello':'corpo';
+function needMod(L){
+ if(L.screen==='end')return null;
+ if(L.screen==='caso')return L.caso?.src==='neuro'?'cervello':'corpo';
+ const sl=L.slots[Math.min(L.si,L.slots.length-1)];return sl?modOf(sl.sid):null;
+}
+
 /* ---------- strutture: nomi, testi, figura ---------- */
 const info=sid=>{
+ if(P.isNeuro(sid)){const n=nx(sid);return {n:n.n||sid,l:'',d:n.f||''};}
  if(sid.startsWith('o.')){const b=P.bone(sid);return {n:b.n,l:b.l,d:b.f||''};}
  if(sid.startsWith('r.')){const r=P.rep(sid);return {n:clean(r.n),l:clean(r.l),d:r.d};}
  const m=P.muscle(sid);return {n:m.n,l:m.l,d:m.a};
 };
-const canTap=(ps,sid)=>ps.tipo==='ossa'||ps.tipo==='connessioni'||(ps.tipo==='reperi'&&!!P.rep(sid).o);
+const canTap=(ps,sid)=>P.isNeuro(sid)?ps.tipo==='strutture'&&nfig(sid).length>0:ps.tipo==='ossa'||ps.tipo==='connessioni'||(ps.tipo==='reperi'&&!!P.rep(sid).o);
 // vista in cui un osso si vede: la vista di zona del suo gruppo (mano, piede, cranio) o una vista del corpo in cui è visibile
 function boneView(id){
  const b=P.bone(id),g=b&&app.MOD.byId[b.g];
@@ -83,8 +119,7 @@ export function startLesson(sat,ps,kind='lezione',pool){
  }
  P.setLast(sat.id);app.L=L;
  if(!L.slots.length&&kind!=='caso'){app.L=null;return false;}
- if(app.MOD.id!=='corpo'){onExit('corpo');return true;} // useMod('corpo') ridisegna la figura e torna qui (renderLesson)
- renderLesson();return true;
+ renderLesson();return true; // se serve un'altra figura renderLesson la cambia (useMod ridisegna e torna qui)
 }
 // Ripasso (fase 2, sezione 5): domande di richiamo (tocco o nome, mai a scelta), senza cuori. daily = «Ripasso del giorno»
 // (finirlo vale un giorno di serie), altrimenti «Ripassa questo satellite» (sat). +2 XP per ogni ripasso fatto in tempo.
@@ -92,7 +127,6 @@ export function startReview(slots,{daily=false,sat=null}={}){
  const L={kind:'ripasso',daily,sat,ps:null,slots:shuffle(slots),si:0,qn:0,hearts:0,ok:0,n:0,nonChoice:0,pres:new Set(),presAt:{},up:[],wrong:[],xp0:S.xp,screen:'q',cur:null,rv:0};
  if(!L.slots.length)return false;
  app.L=L;if(sat)P.setLast(sat.id);
- if(app.MOD.id!=='corpo'){onExit('corpo');return true;}
  renderLesson();return true;
 }
 // Esame del pianeta (fase 2, sezione 4): 20 domande con 60 secondi ciascuna, senza aiuti né cuori (le strutture a maestria 2 o più
@@ -104,7 +138,6 @@ export function startExam(pl){
  const L={kind:'esame',pl,sat:null,ps:null,slots,si:0,qn:0,hearts:0,ok:0,n:0,nonChoice:0,pres:new Set(),presAt:{},up:[],wrong:[],xp0:S.xp,
   screen:'intro',cur:null,caso:cs2.length?pick(cs2):null,res:[]};
  app.L=L;
- if(app.MOD.id!=='corpo'){onExit('corpo');return true;}
  renderLesson();return true;
 }
 // Palestra per zone (fase 2, terzo rilascio): allenamento sulle strutture di uno o più satelliti (zone), tutte o di un solo tipo di
@@ -128,7 +161,6 @@ export function startZone(sats,{tipo=null,label=''}={}){
  if(app.L&&app.L.tab!=='play')app.Lp=app.L;
  app.L={kind:'palestra',tab:'play',zone:{sats,tipo,label},sat:sats.length===1?sats[0]:null,ps:null,slots,si:0,qn:0,hearts:P.R().palestra.cuori,
   ok:0,n:0,nonChoice:0,pres:new Set(),presAt:{},up:[],wrong:[],xp0:S.xp,screen:'q',cur:null};
- if(app.MOD.id!=='corpo'){onExit('corpo');return true;}
  renderLesson();return true;
 }
 // esce da un allenamento della Palestra: torna la lezione del percorso messa da parte (se c'era)
@@ -178,6 +210,8 @@ function options(slot){
  const fill=(right,pools,label)=>{const out=[right],seen=new Set([norm(label(right))]);
   for(const pool of pools)for(const id of shuffle(pool)){if(out.length>n)break;const k=norm(label(id));if(!seen.has(k)){seen.add(k);out.push(id);}}
   return shuffle(out).map(id=>({id,label:label(id)}));};
+ if(P.isNeuro(sid)){const f=P.NCAMPO[ps.tipo],ok=x=>x!==sid&&P.neuro(x)?.[f],all=Object.keys(app.LEZ.neuro||{}).filter(ok);
+  return fill(sid,[st(ps.tipo).filter(ok),satStruct('strutture',slot.sat||app.L.sat).filter(ok),all],lab);}
  if(ps.tipo==='ossa')return fill(sid,[st('ossa').filter(x=>x!==sid),P.bone(sid)?(app.MOD.byId[P.bone(sid).g]?.m||[]).filter(x=>x!==sid):[],app.MOD.B.map(b=>b.id).filter(x=>x!==sid)],lab);
  if(ps.tipo==='reperi'){const all=st('reperi').filter(x=>x!==sid),o=P.rep(sid).o;return fill(sid,[all.filter(x=>P.rep(x).o===o),all,Object.keys(app.LEZ.reperi).filter(x=>x!==sid)],lab);}
  if(ps.tipo==='muscoli')return fill(sid,[st('muscoli').filter(x=>x!==sid),app.MOD.M.map(m=>m.id).filter(x=>x!==sid)],lab);
@@ -192,6 +226,12 @@ const roleName=r=>r==='o'?'origine':'inserzione';
 // testo della domanda (e la figura da preparare)
 function prompt(q){
  const {sid,ps}=q.slot,I=info(sid),t=q.t;
+ if(P.isNeuro(sid)){
+  if(ps.tipo==='strutture'&&t==='tocco'){showNeuro(sid,false);return `Tocca sulla figura:<br><b>${esc(I.n)}</b>`;}
+  if(ps.tipo==='strutture'&&nfig(sid).length){showNeuro(sid,true);return t==='scelta'?'Come si chiama la struttura evidenziata sulla figura?':'Scrivi il nome della struttura evidenziata sulla figura.';}
+  const clue=ps.tipo==='strutture'?[['Che cosa fa',ntext(sid,'strutture')],['Dove si trova',nx(sid).d]]:[[NL[ps.tipo],ntext(sid,ps.tipo)]];
+  return `${t==='scelta'?'Di quale struttura si parla?':'Scrivi il nome della struttura.'}`+clue.filter(c=>c[1]).map(([a,b])=>`<div class="clue"><small>${esc(a)}</small><br>${esc(nmask(b,I.n))}</div>`).join('');
+ }
  if(ps.tipo==='ossa'){showBone(sid,t!=='tocco');
   return t==='tocco'?`Tocca sulla figura:<br><b>${esc(I.n)}</b>`:t==='scelta'?'Come si chiama l\'osso evidenziato sulla figura?':'Scrivi il nome dell\'osso evidenziato sulla figura.';}
  if(ps.tipo==='reperi'){const r=P.rep(sid);
@@ -216,13 +256,17 @@ function mask(d,names){
 }
 function accepted(q){
  const {sid,ps}=q.slot;
+ if(P.isNeuro(sid)){const n=info(sid).n;return [...alts(n),...(String(n).match(/\(([^)]+)\)/g)||[]).map(x=>norm(x.slice(1,-1)))].filter(Boolean);}
  if(ps.tipo==='connessioni'){const m=mu(sid);return [...goodBones(m,q.slot.role).flatMap(id=>[...alts(P.bone(id).n),...alts(P.bone(id).l)]),...alts(q.slot.role==='o'?m.ot:m.it)];}
  if(ps.tipo==='funzione'){const a=mu(sid).a;return app.MOD.M.filter(m=>m.a===a).flatMap(m=>[...alts(m.n),...alts(m.l)]);}
  const I=info(sid);return [...alts(I.n),...alts(I.l)];
 }
 // dati della domanda per l'etichetta di verifica e per «Segnala un errore»
 function dataItems(slot){
- const {sid,ps}=slot,v=P.voce(sid),I=info(sid),m=sid.startsWith('o.')||sid.startsWith('r.')?null:mu(sid);
+ const {sid,ps}=slot,v=P.voce(sid),I=info(sid);
+ if(P.isNeuro(sid)){const n=nx(sid),val={nome:n.n,dove:n.d,funzione:n.f,lesione:n.le,connessioni:n.c},lab={nome:'Nome',dove:'Dove si trova',funzione:'Funzione',lesione:'Lesione',connessioni:'Connessioni'};
+  return v?(P.NCAMPI[ps.tipo]||[]).map(c=>({id:v+'.'+c,label:lab[c],value:val[c]||''})):[];}
+ const m=sid.startsWith('o.')||sid.startsWith('r.')?null:mu(sid);
  const val={nome:I.n,latino:I.l,descrizione:I.d,azione:m?.a,origine:m?.ot,inserzione:m?.it};
  const lab={nome:'Nome',latino:'Nome latino',descrizione:'Descrizione',azione:'Azione',origine:'Origine',inserzione:'Inserzione'};
  return v?(P.CAMPI[ps.tipo]||[]).map(c=>({id:v+'.'+c,label:lab[c],value:val[c]||''})):[];
@@ -241,6 +285,7 @@ function headHtml(L){
 const title=L=>L.kind==='palestra'?'Palestra · '+esc(L.zone.label):L.kind==='esame'?'Esame · '+esc(L.pl.nome):L.kind==='ripasso'?(L.daily?'Ripasso del giorno':'Ripasso · '+esc(L.sat?.nome||'')):({lezione:'Lezione',prova:'Lo so già: mettimi alla prova',quiz:'Quiz finale',caso:'Caso clinico'}[L.kind])+' · '+esc(L.ps.nome);
 export function renderLesson(){
  const L=app.L;if(!L)return;
+ const md=needMod(L);if(md&&app.MODS[md]&&app.MOD.id!==md){onExit(md);return;} // useMod ridisegna la figura e torna qui
  if(L.hearts0==null)L.hearts0=L.hearts;
  clearMarks();
  if(L.screen==='intro')return intro(L);
@@ -248,10 +293,10 @@ export function renderLesson(){
  if(L.screen==='caso')return casoScreen(L);
  if(!L.cur||L.cur.slotI!==L.si){
   if(L.hearts0&&L.hearts<=0||L.si>=L.slots.length)return finish();
-  const slot=L.slots[L.si];if(slot.ps.tipo==='connessioni')slot.role=Math.random()<.5?'o':'i';
+  const slot=L.slots[L.si];if(conn(slot))slot.role=Math.random()<.5?'o':'i';
   const t=pickType(L,slot);
   if(t==='pres'){const k=P.key(slot.sid,slot.ps.aspetto);L.pres.add(k);L.presAt[k]=L.qn;L.cur={slotI:L.si,slot,t:'pres'};}
-  else L.cur={slotI:L.si,slot,t,opts:t==='scelta'?options(slot):null,right:slot.ps.tipo==='connessioni'?goodBones(mu(slot.sid),slot.role)[0]:slot.sid};
+  else L.cur={slotI:L.si,slot,t,opts:t==='scelta'?options(slot):null,right:conn(slot)?goodBones(mu(slot.sid),slot.role)[0]:slot.sid};
  }
  const q=L.cur;
  if(q.t==='pres')return presScreen(L,q);
@@ -277,6 +322,10 @@ function intro(L){
 }
 function presScreen(L,q){
  const {sid,ps}=q.slot,I=info(sid);
+ if(P.isNeuro(sid)){const n=nx(sid);showNeuro(sid,true);
+  const rows=ps.tipo==='strutture'?[['Dove si trova',n.d],['Che cosa fa',n.f]]:[[NL[ps.tipo],ntext(sid,ps.tipo)]];
+  $('panel').innerHTML=headHtml(L)+`<div class="q" id="lq" tabindex="-1"><small>Nuova struttura</small><br><b>${esc(I.n)}</b></div>`+rows.filter(r=>r[1]).map(([a,b])=>`<p><b>${esc(a)}</b>: ${esc(b)}</p>`).join('')+(nfig(sid).length?'<p class="mut">È evidenziata sulla figura.</p>':'')+`<button class="btn" data-l="next">Ho capito</button>`+foot(q.slot);
+  return focusQ();}
  if(ps.tipo==='ossa')showBone(sid,true);else if(ps.tipo==='reperi'&&P.rep(sid).o)showBone(P.rep(sid).o,true);else drawMuscle(mu(sid));
  const extra=ps.tipo==='reperi'&&P.rep(sid).o?`<br><small class="mut">Sull'osso evidenziato: ${esc(P.bone(P.rep(sid).o).n)}</small>`:'';
  const line=ps.tipo==='funzione'||ps.tipo==='muscoli'?`<b>Azione</b>: ${esc(mu(sid).a)}`:esc(first(I.d));
@@ -289,7 +338,7 @@ export function lessonTap(sid){
  const L=app.L;if(!L||!L.cur||L.cur.t!=='tocco'||L.cur.done)return;
  const q=L.cur,{ps}=q.slot,s=q.slot.sid;
  let ok;
- if(ps.tipo==='ossa')ok=sid===s;else if(ps.tipo==='reperi')ok=sid===P.rep(s).o;else ok=goodBones(mu(s),q.slot.role).includes(sid);
+ if(P.isNeuro(s))ok=nfig(s).includes(sid);else if(ps.tipo==='ossa')ok=sid===s;else if(ps.tipo==='reperi')ok=sid===P.rep(s).o;else ok=goodBones(mu(s),q.slot.role).includes(sid);
  q.picked=sid;answer(L,q,ok);
 }
 const examNeed=n=>Math.ceil(n*P.R().esame.soglia/P.R().esame.domande);
@@ -313,13 +362,18 @@ function answer(L,q,ok){
  live(ok?'Esatto.':(q.timeout?'Tempo scaduto. ':'Non è giusto. ')+'La risposta è '+rightName(q)+'.');
  feedback(L,q);
 }
-const rightName=q=>{const {sid,ps}=q.slot;if(ps.tipo==='connessioni')return bonesName(goodBones(mu(sid),q.slot.role));if(ps.tipo==='reperi'&&q.t==='tocco')return P.bone(P.rep(sid).o).n;return info(sid).n;};
+const rightName=q=>{const {sid,ps}=q.slot;if(conn(q.slot))return bonesName(goodBones(mu(sid),q.slot.role));if(ps.tipo==='reperi'&&q.t==='tocco')return P.bone(P.rep(sid).o).n;return info(sid).n;};
 function feedback(L,q){
- const {sid,ps}=q.slot,I=info(sid),ok=q.ok,last=(L.hearts0&&L.hearts<=0)||L.si>=L.slots.length;
+ const {sid,ps}=q.slot,I=info(sid),ok=q.ok,last=(L.hearts0&&L.hearts<=0)||L.si>=L.slots.length,neu=P.isNeuro(sid);
  const said=ok?'':q.timeout?'Tempo scaduto. ':null;
- const picked=q.picked?(q.t==='nome'?`«${esc(q.picked)}»`:esc(ps.tipo==='connessioni'||q.t==='tocco'?P.bone(q.picked)?.n||q.picked:info(q.picked).n)):'';
+ const picked=q.picked?(q.t==='nome'?`«${esc(q.picked)}»`:esc(neu?(q.t==='tocco'?app.MOD.byId[q.picked]?.n||q.picked:info(q.picked).n):conn(q.slot)||q.t==='tocco'?P.bone(q.picked)?.n||q.picked:info(q.picked).n)):'';
  let why='';
- if(ps.tipo==='ossa'){showBone(sid,false);mark(sid,'ok');if(!ok&&q.picked&&P.bone(q.picked))mark(q.picked,'bad');
+ if(neu){const n=nx(sid),ids=nfig(sid);
+  if(ids.length&&ps.tipo==='strutture'){showNeuro(sid,false);ids.forEach(id=>mark(id,'ok'));if(!ok&&q.t==='tocco'&&q.picked)mark(q.picked,'bad');}
+  const rows=ps.tipo==='strutture'?[['Dove si trova',n.d],['Che cosa fa',n.f]]:[[NL[ps.tipo],ntext(sid,ps.tipo)]];
+  const alt=!ok&&q.t==='scelta'&&P.neuro(q.picked)?`<p class="mut">${picked} invece: ${esc(first(ntext(q.picked,ps.tipo)||P.neuro(q.picked).f))}</p>`:'';
+  why=`<p>${said??`Hai indicato ${picked}. `}È <b>${esc(I.n)}</b>.</p>`+rows.filter(r=>r[1]).map(([a,b])=>`<p><b>${esc(a)}</b>: ${esc(b)}</p>`).join('')+alt;}
+ else if(ps.tipo==='ossa'){showBone(sid,false);mark(sid,'ok');if(!ok&&q.picked&&P.bone(q.picked))mark(q.picked,'bad');
   why=`<p>${said??`Hai indicato ${picked}. `}<b>${esc(I.n)}</b> <i>${esc(I.l)}</i> – ${esc(I.d)}</p>`;}
  else if(ps.tipo==='reperi'){const r=P.rep(sid);if(r.o){showBone(r.o,false);mark(r.o,'ok');}if(!ok&&q.t==='tocco'&&P.bone(q.picked))mark(q.picked,'bad');
   const alt=!ok&&q.t==='scelta'&&P.rep(q.picked)?`<p class="mut">${picked} invece: ${esc(first(P.rep(q.picked).d))}</p>`:'';
@@ -388,10 +442,11 @@ function endScreen(L){
 /* ---------- caso clinico del progetto (ipotesi prima di ogni indizio, si risponde con le opzioni del caso) ---------- */
 function casoScreen(L){
  const c=L.caso,sat=L.csat||L.sat,cases=c.clues,ex=L.kind==='esame',maxC=ex?Math.min(cases.length,P.R().esame.caso_indizio_max):cases.length;
- const m=c.mid?mu(c.mid):null;
+ const m=c.mid?mu(c.mid):null,nb=c.bid&&P.isNeuro(c.bid)?P.neuro(c.bid):null;
  if(L.stage==='h1'||L.stage==='h2'){
   if(!L.hq||L.hq.stage!==L.stage){
-   if(L.stage==='h1'){const others=shuffle(P.satelliti().filter(s=>s.id!==sat.id)).slice(0,3);L.hq={stage:'h1',q:'Quale distretto è coinvolto?',right:sat.nome,opts:shuffle([sat.nome,...others.map(s=>s.nome)])};}
+   if(L.stage==='h1'){const others=shuffle(P.satelliti(null,P.corsoOf(sat)).filter(s=>s.id!==sat.id)).slice(0,3);L.hq={stage:'h1',q:'Quale distretto è coinvolto?',right:sat.nome,opts:shuffle([sat.nome,...others.map(s=>s.nome)])};}
+   else if(nb){const a=first(nb.f),pool=shuffle(Object.values(app.LEZ.neuro).map(x=>first(x.f)).filter(x=>x&&x!==a)).filter((x,i,arr)=>arr.indexOf(x)===i).slice(0,3);L.hq={stage:'h2',q:'Quale funzione è compromessa?',right:a,opts:shuffle([a,...pool])};}
    else{const a=m?.a||c.a,pool=shuffle(app.MOD.M.filter(x=>x.a&&x.a!==a).map(x=>x.a)).filter((x,i,arr)=>arr.indexOf(x)===i).slice(0,3);L.hq={stage:'h2',q:'Quale funzione è compromessa?',right:a,opts:shuffle([a,...pool])};}
   }
   const h=L.hq;
@@ -416,7 +471,7 @@ function casoScreen(L){
 const shuffleOnce=L=>L.copts||(L.copts=shuffle(L.caso.opts));
 const cluesHtml=L=>L.caso.clues.slice(0,L.clues).map((x,i)=>`<div class="clue"><b>Indizio ${i+1}.</b> ${esc(x)}</div>`).join('');
 function casoFoot(L){
- const id='caso.corpo.'+L.caso.id,vf=P.verifica(['indizio_1','indizio_2','indizio_3','risposta','spiegazione'].map(c=>id+'.'+c));
+ const id='caso.'+(L.caso.src||'corpo')+'.'+L.caso.id,vf=P.verifica(['indizio_1','indizio_2','indizio_3','risposta','spiegazione'].map(c=>id+'.'+c));
  return `<div class="lfoot"><span class="vtag${vf.ok?' ok':''}">${esc(vf.txt)}</span><button class="lnk" data-l="report">⚑ Segnala un errore</button></div>`;
 }
 function casoHyp(i){const L=app.L,h=L.hq;L.hyp.push(h.opts[i]===h.right);live(h.opts[i]===h.right?'Ipotesi giusta.':'Ipotesi sbagliata: era '+h.right+'.');L.clues++;L.stage=L.stage==='h1'?'h2':'ans';L.hq=null;casoScreen(L);}
@@ -483,7 +538,7 @@ function examNext(L){
  L.gain=Math.max(0,S.xp-L.xp0);L.screen='end';endScreen(L);
 }
 function casoItems(L){
- const id='caso.corpo.'+L.caso.id,c=L.caso;
+ const id='caso.'+(L.caso.src||'corpo')+'.'+L.caso.id,c=L.caso;
  return [...c.clues.map((x,i)=>({id:id+'.indizio_'+(i+1),label:'Indizio '+(i+1),value:x})),{id:id+'.risposta',label:'Risposta giusta',value:c.a},{id:id+'.spiegazione',label:'Spiegazione',value:c.r}];
 }
 export function lessonSubmit(e){

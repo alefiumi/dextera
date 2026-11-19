@@ -244,6 +244,22 @@ def lezioni():
             voci[i] = src['id']
         elif i.startswith('o.'): voci[i] = 'osso.' + i[2:]
         else: voci[i] = 'muscolo.' + i
+    # corso di neurologia: testi delle voci (n.<voce>) e casi clinici del modulo neuro
+    neuro = {}
+    for co in M['corsi'][1:]:
+        for pl in co['pianeti']:
+            for s in pl['satelliti']:
+                for ps in s['passi']:
+                    if isinstance(ps['strutture'], list): usati |= {i for i in ps['strutture'] if i.startswith('n.')}
+    for v in carica('neuro'):
+        i = 'n.' + v['id'][6:]
+        if i not in usati: continue
+        n = {'n': val(v, 'nome'), 'd': val(v, 'dove') or '', 'f': val(v, 'funzione') or ''}
+        if val(v, 'lesione'): n['le'] = val(v, 'lesione')
+        if val(v, 'connessioni'): n['c'] = val(v, 'connessioni')
+        if v.get('figura'): n['fig'] = v['figura']
+        neuro[i] = n; voci[i] = v['id']
+    casi_neuro = [{**c, 'src': 'neuro'} for c in casi('neuro')]
     stati = {}
     for t in TIPI:
         for v in carica(t):
@@ -251,14 +267,14 @@ def lezioni():
                 if d['stato'] != 'da verificare':
                     q = (d.get('verifica') or {}).get('quando')
                     stati[v['id'] + '.' + c] = [d['stato'], q] if q else [d['stato']]
-    return scrivi_versionato(os.path.join(ROOT, 'content/lezioni.json'), {'voci': voci, 'reperi': reperi, 'stati': stati})
+    return scrivi_versionato(os.path.join(ROOT, 'content/lezioni.json'), {'voci': voci, 'reperi': reperi, 'stati': stati, 'neuro': neuro, 'casi_neuro': casi_neuro})
 
 def controlla_percorsi():
     """ogni nodo di content/percorsi/*.json esiste nella mappa, i passi sono del satellite, il caso esiste"""
     d = os.path.join(ROOT, 'content/percorsi')
     if not os.path.isdir(d): return
     M = json.load(open(os.path.join(ROOT, 'content/mappa.json'))); C = json.load(open(os.path.join(ROOT, 'content/corpo.json')))
-    casi = {c['id'] for c in C['cases']}; err = []; nodi = {}
+    casi = {c['id'] for c in C['cases']} | {v['caso'] for v in carica('casi') if v['modulo'] == 'neuro'}; err = []; nodi = {}
     for co in M['corsi']:
         nodi[co['id']] = 'corso'
         for pl in co['pianeti']:

@@ -1,7 +1,7 @@
 {
- "version": 2,
+ "version": 3,
  "formato": 1,
- "nota": "Percorso pubblicato (sezione 8 della specifica): quali nodi di content/mappa.json include, in che ordine consigliato e con quale caso clinico. È nel formato che produrrà il gestionale della fase 3 (una versione di releases con i nodi): fino ad allora si scrive a mano. caso null = il passo 6 è un quiz finale finché l'autore non abbina un caso al satellite. Nei pianeti esame.caso è il caso clinico dell'esame del pianeta (id di un caso di content/corpo.json): null = scelto dall'app tra i casi la cui risposta è un muscolo del pianeta, finché l'autore non lo sceglie.",
+ "nota": "Percorso pubblicato (sezione 8 della specifica): quali nodi di content/mappa.json include, in che ordine consigliato e con quale caso clinico. È nel formato che produrrà il gestionale della fase 3 (una versione di releases con i nodi): fino ad allora si scrive a mano. caso null = il passo 6 è un quiz finale finché l'autore non abbina un caso al satellite. Nei pianeti esame.caso è il caso clinico dell'esame del pianeta (id di un caso di content/corpo.json): null = scelto dall'app tra i casi la cui risposta è un muscolo del pianeta, finché l'autore non lo sceglie. Dal rilascio 2 della neurologia contiene anche il corso «neurologia» (i suoi casi sono quelli del modulo neuro di testi/casi.json, in content/lezioni.json → casi_neuro).",
  "id": "base",
  "nome": "Percorso base",
  "corso": "muscolo-scheletrico",
@@ -308,6 +308,324 @@
     "visceri-testa.6"
    ],
    "caso": null
+  },
+  {
+   "id": "neurologia",
+   "tipo": "corso",
+   "genitore": null,
+   "ordine": 2
+  },
+  {
+   "id": "neuro-basi",
+   "tipo": "pianeta",
+   "genitore": "neurologia",
+   "ordine": 1,
+   "esame": {
+    "caso": null
+   }
+  },
+  {
+   "id": "neuro-encefalo",
+   "tipo": "pianeta",
+   "genitore": "neurologia",
+   "ordine": 2,
+   "esame": {
+    "caso": null
+   }
+  },
+  {
+   "id": "neuro-corteccia",
+   "tipo": "pianeta",
+   "genitore": "neurologia",
+   "ordine": 3,
+   "esame": {
+    "caso": null
+   }
+  },
+  {
+   "id": "neuro-midollo",
+   "tipo": "pianeta",
+   "genitore": "neurologia",
+   "ordine": 4,
+   "esame": {
+    "caso": null
+   }
+  },
+  {
+   "id": "n-neurone",
+   "tipo": "satellite",
+   "genitore": "neuro-basi",
+   "ordine": 1,
+   "passi": [
+    "n-neurone.1",
+    "n-neurone.2",
+    "n-neurone.3",
+    "n-neurone.4",
+    "n-neurone.6"
+   ],
+   "caso": "n1"
+  },
+  {
+   "id": "n-potenziale",
+   "tipo": "satellite",
+   "genitore": "neuro-basi",
+   "ordine": 2,
+   "passi": [
+    "n-potenziale.1",
+    "n-potenziale.2",
+    "n-potenziale.3",
+    "n-potenziale.6"
+   ],
+   "caso": null
+  },
+  {
+   "id": "n-sinapsi",
+   "tipo": "satellite",
+   "genitore": "neuro-basi",
+   "ordine": 3,
+   "passi": [
+    "n-sinapsi.1",
+    "n-sinapsi.2",
+    "n-sinapsi.3",
+    "n-sinapsi.6"
+   ],
+   "caso": null
+  },
+  {
+   "id": "n-riflessi",
+   "tipo": "satellite",
+   "genitore": "neuro-basi",
+   "ordine": 4,
+   "passi": [
+    "n-riflessi.1",
+    "n-riflessi.2",
+    "n-riflessi.3",
+    "n-riflessi.6"
+   ],
+   "caso": null
+  },
+  {
+   "id": "n-sostanze",
+   "tipo": "satellite",
+   "genitore": "neuro-basi",
+   "ordine": 5,
+   "passi": [
+    "n-sostanze.1",
+    "n-sostanze.2",
+    "n-sostanze.3",
+    "n-sostanze.6"
+   ],
+   "caso": null
+  },
+  {
+   "id": "n-encefalo",
+   "tipo": "satellite",
+   "genitore": "neuro-encefalo",
+   "ordine": 6,
+   "passi": [
+    "n-encefalo.1",
+    "n-encefalo.2",
+    "n-encefalo.3",
+    "n-encefalo.6"
+   ],
+   "caso": null
+  },
+  {
+   "id": "n-tronco",
+   "tipo": "satellite",
+   "genitore": "neuro-encefalo",
+   "ordine": 7,
+   "passi": [
+    "n-tronco.1",
+    "n-tronco.2",
+    "n-tronco.3",
+    "n-tronco.4",
+    "n-tronco.6"
+   ],
+   "caso": null
+  },
+  {
+   "id": "n-cervelletto",
+   "tipo": "satellite",
+   "genitore": "neuro-encefalo",
+   "ordine": 8,
+   "passi": [
+    "n-cervelletto.1",
+    "n-cervelletto.2",
+    "n-cervelletto.3",
+    "n-cervelletto.4",
+    "n-cervelletto.6"
+   ],
+   "caso": null
+  },
+  {
+   "id": "n-limbico",
+   "tipo": "satellite",
+   "genitore": "neuro-encefalo",
+   "ordine": 9,
+   "passi": [
+    "n-limbico.1",
+    "n-limbico.2",
+    "n-limbico.3",
+    "n-limbico.4",
+    "n-limbico.6"
+   ],
+   "caso": "n12"
+  },
+  {
+   "id": "n-protezione",
+   "tipo": "satellite",
+   "genitore": "neuro-encefalo",
+   "ordine": 10,
+   "passi": [
+    "n-protezione.1",
+    "n-protezione.2",
+    "n-protezione.3",
+    "n-protezione.4",
+    "n-protezione.6"
+   ],
+   "caso": "n2"
+  },
+  {
+   "id": "n-lobi",
+   "tipo": "satellite",
+   "genitore": "neuro-corteccia",
+   "ordine": 11,
+   "passi": [
+    "n-lobi.1",
+    "n-lobi.2",
+    "n-lobi.3",
+    "n-lobi.6"
+   ],
+   "caso": "n14"
+  },
+  {
+   "id": "n-motorio",
+   "tipo": "satellite",
+   "genitore": "neuro-corteccia",
+   "ordine": 12,
+   "passi": [
+    "n-motorio.1",
+    "n-motorio.2",
+    "n-motorio.3",
+    "n-motorio.4",
+    "n-motorio.5",
+    "n-motorio.6"
+   ],
+   "caso": "n10"
+  },
+  {
+   "id": "n-esecutivo",
+   "tipo": "satellite",
+   "genitore": "neuro-corteccia",
+   "ordine": 13,
+   "passi": [
+    "n-esecutivo.1",
+    "n-esecutivo.2",
+    "n-esecutivo.3",
+    "n-esecutivo.4",
+    "n-esecutivo.6"
+   ],
+   "caso": "n3"
+  },
+  {
+   "id": "n-linguaggio",
+   "tipo": "satellite",
+   "genitore": "neuro-corteccia",
+   "ordine": 14,
+   "passi": [
+    "n-linguaggio.1",
+    "n-linguaggio.2",
+    "n-linguaggio.3",
+    "n-linguaggio.4",
+    "n-linguaggio.5",
+    "n-linguaggio.6"
+   ],
+   "caso": "n6"
+  },
+  {
+   "id": "n-parietale",
+   "tipo": "satellite",
+   "genitore": "neuro-corteccia",
+   "ordine": 15,
+   "passi": [
+    "n-parietale.1",
+    "n-parietale.2",
+    "n-parietale.3",
+    "n-parietale.4",
+    "n-parietale.6"
+   ],
+   "caso": "n9"
+  },
+  {
+   "id": "n-sensi",
+   "tipo": "satellite",
+   "genitore": "neuro-corteccia",
+   "ordine": 16,
+   "passi": [
+    "n-sensi.1",
+    "n-sensi.2",
+    "n-sensi.3",
+    "n-sensi.4",
+    "n-sensi.6"
+   ],
+   "caso": null
+  },
+  {
+   "id": "n-midollo",
+   "tipo": "satellite",
+   "genitore": "neuro-midollo",
+   "ordine": 17,
+   "passi": [
+    "n-midollo.1",
+    "n-midollo.2",
+    "n-midollo.3",
+    "n-midollo.6"
+   ],
+   "caso": null
+  },
+  {
+   "id": "n-vie",
+   "tipo": "satellite",
+   "genitore": "neuro-midollo",
+   "ordine": 18,
+   "passi": [
+    "n-vie.1",
+    "n-vie.2",
+    "n-vie.3",
+    "n-vie.4",
+    "n-vie.5",
+    "n-vie.6"
+   ],
+   "caso": null
+  },
+  {
+   "id": "n-nervi",
+   "tipo": "satellite",
+   "genitore": "neuro-midollo",
+   "ordine": 19,
+   "passi": [
+    "n-nervi.1",
+    "n-nervi.2",
+    "n-nervi.3",
+    "n-nervi.4",
+    "n-nervi.6"
+   ],
+   "caso": null
+  },
+  {
+   "id": "n-autonomo",
+   "tipo": "satellite",
+   "genitore": "neuro-midollo",
+   "ordine": 20,
+   "passi": [
+    "n-autonomo.1",
+    "n-autonomo.2",
+    "n-autonomo.3",
+    "n-autonomo.5",
+    "n-autonomo.6"
+   ],
+   "caso": "n13"
   }
  ]
 }

@@ -50,7 +50,7 @@ export function setTab(t){
  document.querySelectorAll('body>nav button').forEach(b=>{b.classList.toggle('on',b.dataset.t===t);b.setAttribute('aria-selected',b.dataset.t===t);});
  if(t!=='prog')$('pw').setAttribute('aria-labelledby','tab-'+t);
  $('me').classList.toggle('on',t==='prog');
- $('asw').hidden=t!=='atlas';$('asw').querySelectorAll('[data-av]').forEach(b=>b.classList.toggle('on',b.dataset.av===app.av));
+ $('asw').hidden=t!=='atlas';$('asw').querySelectorAll('[data-av]').forEach(b=>b.setAttribute('aria-pressed',b.dataset.av===app.av));
  const a3=t==='atlas'&&app.av==='3d';showAtlas(a3);if(a3)return;
  clearGhosts();clearMarks();baseView();resetZoom(false);refreshMastery();({path:renderPath,atlas:renderExplore,play:renderMenu,prog:renderProg,soc:renderSocial})[t]();if(t==='soc')loadSocial();
 }

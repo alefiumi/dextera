@@ -391,6 +391,9 @@ descrizioni; quelle con fonte Z-Anatomy dicono da quale vaso nasce o dove sbocca
   Palestra e Flotta con lo stesso stile (19/11/2026, v0.69.0): testata in un riquadro, giochi della Palestra in riquadri a due colonne
   divisi in sezioni 2D e 3D (`renderMenu` in `game.js`), Flotta a riquadri con classifica a barre, interruttore Tutti/Amici e l'anteprima
   «In arrivo» delle casate Osteon, Myon, Neuron, Cor (`renderSocial` in `social.js`).
+  Atlante nello stesso stile (19/11/2026, v0.70.0): scelta 2D/3D come interruttore `.seg3` (`#asw`, `aria-pressed`); scheda 2D con
+  etichetta piccola e titolo (`.atl` in `explore.js`), legenda della maestria con i pallini del Percorso, riquadro «Usala come un'app»;
+  nell'atlante 3D stessi colori dell'app (`--on-acc`), barra a pulsanti più alti, etichetta sopra ogni titolo, home con sei riquadri (`.hub`).
   Nel sistema ogni pianeta ha intorno le lune dei suoi satelliti (colore dello stato, `moons()`); nell'universo ogni corso è un piccolo
   sistema, gli altri tre corsi «in arrivo». Riquadro dell'universo «Cosa studi?» con la scelta del percorso (`PERCORSI` in `path.js`: solo
   «Percorso completo» attivo, Fisioterapia, Medicina e MCB «in arrivo», fase 6). Intestazione: livello e titolo su due righe.

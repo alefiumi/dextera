@@ -374,3 +374,19 @@ button.mode.tile:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
 .casate li{display:flex;align-items:center;gap:8px;padding:10px;border-radius:12px;background:var(--bg);border:1px solid var(--line);border-left:4px solid var(--c);font-weight:700}
 .soq{width:100%;font:inherit;font-size:16px;padding:10px 12px;min-height:44px;border:1px solid var(--line);border-radius:12px;background:var(--bg);color:var(--ink)}
 .pg #panel>.fleet{max-width:720px}
+/* Atlante (scheda 🦴): stesso stile di Percorso, Palestra e Flotta */
+#asw.seg3{margin:6px auto 2px;width:calc(100% - 28px);max-width:360px;padding:3px}
+#asw.seg3 button{min-height:38px;font-size:14px}
+.atl h2{font-size:20px;line-height:1.2;margin:2px 0 4px}
+.atl .lat{font-style:italic;color:var(--mut);font-size:14px;margin-bottom:6px}
+.atl>p{margin:8px 0}
+.atl .tip{margin:10px 0}
+.aleg{margin-top:4px}.aleg .mdot{width:14px;height:14px}
+.ainst{margin:12px 0 6px;background:var(--bg)}
+.ainst p{margin:4px 0 8px}.ainst .btn{background:var(--acc);color:var(--on-acc);border-color:var(--acc);font-weight:600}
+.ainst .lnk{display:block;margin-top:6px}
+.atl .sub{margin-top:14px}
+.ncl{list-style:none;padding:0;margin:8px 0}
+.ncl li{padding:8px 0;border-bottom:1px solid var(--line)}
+.ncl .mut{font-size:14px;margin-top:2px}
+.ntg{font-size:12px;font-weight:600;color:var(--acc);border:1px solid currentColor;border-radius:8px;padding:0 6px;margin-left:4px;white-space:nowrap}

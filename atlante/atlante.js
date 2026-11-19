@@ -413,12 +413,12 @@ function panel(){
  if(GAME){p.innerHTML=gamePanel();return;}
  if(S.combo){
   const c=COMBO[S.combo];
-  h=`<div class="h">${c.n} <i>lato ${sideName(S.side)}</i></div><div class="mut"><i>${c.la}</i></div><p>${c.t}</p>
+  h=`<div class="kick">Gruppo di muscoli</div><div class="h">${c.n} <i>lato ${sideName(S.side)}</i></div><div class="mut"><i>${c.la}</i></div><p>${c.t}</p>
    <div class="chips">${c.mus.map(r=>chip('',`data-mu="${r}"`,DATA.mus[r].n.replace(/^Muscol[oi] /,''))).join('')}</div>`+musTools()+
    `<div class="chips"><button class="chip" data-side="${S.side==='r'?'l':'r'}">Lato ${S.side==='r'?'sinistro':'destro'}</button><button class="chip" data-go="home">Chiudi</button></div>`+AI;
  }else if(S.mus){
   const m=DATA.mus[S.mus],c=m.card,has=k=>m[k].some(n=>sideOf(n)===S.side);
-  h=`<div class="h">${m.n} <i>${sideName(S.side)}</i></div><div class="mut"><i>${m.la}</i></div>`+
+  h=`<div class="kick">Muscolo</div><div class="h">${m.n} <i>${sideName(S.side)}</i></div><div class="mut"><i>${m.la}</i></div>`+
    (m.parts.length>1?`<div class="row"><b>Parti</b>: ${m.parts.map(itOf).join(' · ')}</div>`:'')+
    `<div class="row"><span class="tg o">ORIGINE</span> ${c?c.ot:has('o')?'area blu sul modello':'non indicata nella fonte'}</div>
     <div class="row"><span class="tg i">INSERZIONE</span> ${c?c.it:has('e')?'area arancione sul modello':'non indicata nella fonte'}</div>`+
@@ -429,24 +429,24 @@ function panel(){
  }else if(S.lm){
   const l=S.lm;
   const t=descOf(l.b),mus=musclesAt(l);
-  h=`<div class="h">${itOf(l.b)}</div><div class="mut"><i>${laOf(l.b)}</i> · ${l.b}</div><div class="row">Su: <b>${itOf(baseOf(l.parent))}</b> <i>${sideName(sideOf(l.parent))}</i></div>`+
+  h=`<div class="kick">Repere</div><div class="h">${itOf(l.b)}</div><div class="mut"><i>${laOf(l.b)}</i> · ${l.b}</div><div class="row">Su: <b>${itOf(baseOf(l.parent))}</b> <i>${sideName(sideOf(l.parent))}</i></div>`+
    (t?`<p>${t}</p>`:'<p class="mut">La descrizione di questo repere non è ancora scritta.</p>')+
    (mus.length?`<div class="sub">Muscoli con origine o inserzione qui vicino</div><div class="chips">${mus.map(([r,k])=>chip(k==='o'?'o':'i',`data-mu="${r}"`,DATA.mus[r].n.replace(/^Muscol[oi] /,''),k==='o'?'origine':'inserzione')).join('')}</div>`:'')+
    (DATA.objs[l.parent]?'':'<p class="mut">La forma di questa parte non è nel modello (licenza non commerciale nella fonte): resta solo il punto.</p>')+
    `<div class="chips">${DATA.objs[l.parent]?`<button class="chip" data-part="${l.parent}">Vai all'osso</button>`:''}<button class="chip" data-go="home">Chiudi</button></div>`+(t?AI:'')+FONTE;
  }else if(S.part){
   const u=S.part.userData,ls=u.layer==='ossa'?(lmByParent.get(u.name)||[]):[],t=descOf(u.base),brain=u.layer==='encefalo'||u.layer==='meningi';
-  h=`<div class="h">${itOf(u.base)} <i>${sideName(u.side)}</i></div><div class="mut"><i>${laOf(u.base)}</i> · ${u.base}</div>
+  h=`<div class="kick">Atlante 3D</div><div class="h">${itOf(u.base)} <i>${sideName(u.side)}</i></div><div class="mut"><i>${laOf(u.base)}</i> · ${u.base}</div>
    <div class="row">${u.org?(u.org==='vene'&&/sinus/i.test(u.base)?'Seno venoso':ORGN[u.org]):TIPO[u.layer]||''}${u.g&&u.g!=='Cranial meninges'&&!u.org?' · '+itOf(u.g):''}${u.layer==='inserzioni'?' · '+(u.kind==='o'?'origine':'inserzione'):''}${brain&&u.st>=0?' · strato: '+ST[u.st].n.toLowerCase():''}</div>`+
    (t?`<p>${t}</p>`:'')+
    (ls.length?`<div class="sub">Reperi su questa parte (${ls.length})</div><div class="chips">${ls.map(l=>chip('',`data-lm="${l.id}"`,itOf(l.b))).join('')}</div>`:'')+
    `<div class="chips">${musOf(S.part)?`<button class="chip on" data-mu="${musOf(S.part)}">Scheda del muscolo</button>`:''}${brain?'<button class="chip on" data-go="brain">🧠 Sezioni e strati</button>':''}${u.org?`<button class="chip on" data-sys="${sysOf(u.org)}">${SYS[sysOf(u.org)].ic} ${SYS[sysOf(u.org)].n}</button>`:''}<button class="chip" data-hide="1">Nascondi</button><button class="chip" data-go="layers">Strati</button><button class="chip" data-go="home">Chiudi</button></div>`+(t?AI:'')+FONTE;
  }else if(S.list==='brain'){
   const on=(v,attr,txt)=>`<button class="chip${v?' on':''}" ${attr}>${txt}</button>`;
-  h=`<div class="h">Encefalo: sezioni e strati</div>${S.loading?'<p class="mut">Carico encefalo e meningi…</p>':''}
+  h=`<div class="kick">Atlante 3D · sezioni e strati</div><div class="h">🧠 Encefalo</div>${S.loading?'<p class="mut">Carico encefalo e meningi…</p>':''}
    <div class="sub">Sezione sui piani anatomici</div><div class="chips">${on(!S.cut.ax,'data-cut="none"','Nessuna')}${Object.entries(AX).map(([k,a])=>on(S.cut.ax===k,`data-cut="${k}"`,a.it)).join('')}</div>`+
-   (S.cut.ax?`<input type="range" id="cutr" min="0" max="1000" value="${Math.round(S.cut.t*1000)}" style="width:100%"><div class="mut">${S.cut.ax==='axial'?'Sposta il piano dal basso in alto':S.cut.ax==='coronal'?'Sposta il piano da dietro in avanti':'Sposta il piano da destra a sinistra'}. Si vede la parte ${S.cut.ax==='axial'?'inferiore, dall\'alto':S.cut.ax==='coronal'?'posteriore, da davanti':'sinistra, dal lato destro'}.</div>`:'')+
-   `<div class="sub">Scomposizione: togli uno strato alla volta</div><input type="range" id="levr" min="0" max="${ST.length-1}" step="1" value="${S.lev}" style="width:100%">
+   (S.cut.ax?`<input type="range" id="cutr" aria-label="Posizione del piano di taglio" min="0" max="1000" value="${Math.round(S.cut.t*1000)}" style="width:100%"><div class="mut">${S.cut.ax==='axial'?'Sposta il piano dal basso in alto':S.cut.ax==='coronal'?'Sposta il piano da dietro in avanti':'Sposta il piano da destra a sinistra'}. Si vede la parte ${S.cut.ax==='axial'?'inferiore, dall\'alto':S.cut.ax==='coronal'?'posteriore, da davanti':'sinistra, dal lato destro'}.</div>`:'')+
+   `<div class="sub">Scomposizione: togli uno strato alla volta</div><input type="range" id="levr" aria-label="Strati dell'encefalo da togliere" min="0" max="${ST.length-1}" step="1" value="${S.lev}" style="width:100%">
    <div class="chips"><button class="chip" data-levd="-1">− Rimetti</button><button class="chip" data-levd="1">Togli +</button></div>
    <div id="levt" class="row">${levText()}</div>
    <div class="chips">${ST.map((s,i)=>chip(i===S.lev?'on':'',`data-lev="${i}"`,`${i+1}. ${s.n}`)).join('')}</div>
@@ -455,17 +455,17 @@ function panel(){
  }else if(SYS[S.list]){
   const K=S.list,X=SYS[K],on=S.lay[K],b=(v,attr,txt)=>`<button class="chip${v?' on':''}" ${attr}>${txt}</button>`;
   const cur=Object.entries(X.P).find(([,l])=>Object.keys(X.L).every(k=>on[k]===l.includes(k)));
-  h=`<div class="h">${X.ic} ${X.n}</div>${S.loading?'<p class="mut">Carico il modello…</p>':''}
+  h=`<div class="kick">Atlante 3D · apparato</div><div class="h">${X.ic} ${X.n}</div>${S.loading?'<p class="mut">Carico il modello…</p>':''}
    <div class="sub">Viste pronte</div><div class="chips">${Object.keys(X.P).map(k=>b(cur&&cur[0]===k,`data-spre="${k}"`,X.PN[k])).join('')}</div>
    <div class="sub">Strati: accendi e spegni</div><div class="chips">${Object.entries(X.L).map(([k,l])=>b(on[k],`data-slay="${k}"`,l.n)).join('')}</div>
    <div class="mut">${Object.entries(X.L).filter(([k])=>on[k]).map(([,l])=>`<b>${l.n}</b>: ${l.t}`).join('<br>')}</div>
    <div class="sub">Sezione sui piani anatomici</div><div class="chips">${b(!S.cut.ax,'data-cut="none"','Nessuna')}${Object.entries(AX).map(([k,a])=>b(S.cut.ax===k,`data-cut="${k}"`,a.it)).join('')}</div>`+
-   (S.cut.ax?`<input type="range" id="cutr" min="0" max="1000" value="${Math.round(S.cut.t*1000)}" style="width:100%"><div class="mut">${S.cut.ax==='axial'?'Sposta il piano dal basso in alto':S.cut.ax==='coronal'?'Sposta il piano da dietro in avanti':'Sposta il piano da destra a sinistra'}.${S.list==='cuore'?' Con la sezione coronale si vedono le camere e le valvole.':''}</div>`:'')+
+   (S.cut.ax?`<input type="range" id="cutr" aria-label="Posizione del piano di taglio" min="0" max="1000" value="${Math.round(S.cut.t*1000)}" style="width:100%"><div class="mut">${S.cut.ax==='axial'?'Sposta il piano dal basso in alto':S.cut.ax==='coronal'?'Sposta il piano da dietro in avanti':'Sposta il piano da destra a sinistra'}.${S.list==='cuore'?' Con la sezione coronale si vedono le camere e le valvole.':''}</div>`:'')+
    `<p class="note">${X.note}</p>
    <div class="chips">${soloBtn(K,X.n.toLowerCase())}${Object.entries(SYS).filter(([k])=>k!==K).map(([k,x])=>`<button class="chip${S.on[k]?' on':''}" data-sys="${k}">${S.on[k]?'Insieme a: ':'Aggiungi '}${x.ic} ${x.n}</button>`).join('')}<button class="chip" data-sysoff="1">Esci da ${X.n.toLowerCase()}</button><button class="chip" data-go="layers">Strati</button><button class="chip" data-go="home">Chiudi</button></div>`;
  }else if(S.list==='layers'){
   const on=(v,attr,txt)=>`<button class="chip${v?' on':''}" ${attr}>${txt}</button>`,lay=k=>on(V[k],`data-layer="${k}"`,LAYERS[k].n);
-  h=`<div class="h">Strati</div>${S.loading?'<p class="mut">Carico lo strato…</p>':''}
+  h=`<div class="kick">Atlante 3D</div><div class="h">🧩 Strati</div>${S.loading?'<p class="mut">Carico lo strato…</p>':''}
    <div class="sub">Ossa</div><div class="chips">${on(S.bones==='on','data-bones="on"','Visibili')}${on(S.bones==='ghost','data-bones="ghost"','Trasparenti')}${on(S.bones==='off','data-bones="off"','Nascoste')}${on(S.allLm,'data-lmt="1"','Tutti i reperi')}</div>
    <div class="sub">Apparato locomotore</div><div class="chips">${lay('muscoli')}${lay('fasce')}${lay('legamenti')}${lay('inserzioni')}</div>
    <div class="sub">Sistema nervoso</div><div class="chips">${lay('encefalo')}${lay('midollo')}${lay('nervi')}${lay('meningi')}${lay('sensi')}<button class="chip" data-go="brain">🧠 Sezioni e strati</button></div>
@@ -475,7 +475,7 @@ function panel(){
  }else if(S.list==='muscles'){
   const q=S.q.toLowerCase(),all=Object.entries(DATA.mus).filter(([r,m])=>!q||m.n.toLowerCase().includes(q)||r.includes(q)).sort((a,b)=>a[1].n.localeCompare(b[1].n));
   const gs=[...new Set(all.map(([,m])=>m.g))].sort((a,b)=>itOf(a).localeCompare(itOf(b)));
-  h=`<div class="h">Muscoli (${all.length})</div><input id="q" placeholder="Cerca un muscolo…" value="${S.q}">`+
+  h=`<div class="kick">Atlante 3D · ${all.length} muscoli</div><div class="h">💪 Muscoli</div><input id="q" placeholder="Cerca un muscolo…" value="${S.q}">`+
    gs.map(g=>`<div class="sub">${itOf(g)||'Altri'}</div><div class="chips">${all.filter(([,m])=>m.g===g).map(([r,m])=>chip('',`data-mu="${r}"`,m.n.replace(/^Muscol[oi] /,''))).join('')}</div>`).join('')+
    `<p class="note">Testi di origine, inserzione, azione e innervazione scritti dall'AI: da verificare su un atlante.</p><div class="chips"><button class="chip" data-go="home">Chiudi</button></div>`;
  }else if(S.list==='search'){
@@ -497,12 +497,12 @@ function panel(){
    for(const [k,c] of Object.entries(COMBO))if((has(c.n)||has(c.la))&&!seenT.has('#'+k))res.push([c.n,'gruppo di muscoli',`data-combo="${k}"`]);
    res.sort((a,b)=>a[0].length-b[0].length);res.unshift(...top);
   }
-  h=`<div class="h">Cerca</div><input id="q" placeholder="Nome di un osso, muscolo, nervo, repere…" value="${S.q}">
+  h=`<div class="kick">Atlante 3D</div><div class="h">🔎 Cerca</div><input id="q" placeholder="Nome di un osso, muscolo, nervo, repere…" value="${S.q}">
    <div class="chips">${res.slice(0,40).map(r=>chip('',r[2],r[0],r[1])).join('')}</div>${q.length>1&&!res.length?'<p class="mut">Nessun risultato.</p>':''}
    <div class="chips"><button class="chip" data-go="home">Chiudi</button></div>`;
  }else{
-  h=`<div class="h">Atlante 3D</div><p class="mut">Tocca una parte per vederne il nome. Un dito ruota, due dita ingrandiscono e spostano, doppio tocco avvicina.</p>
-   <div class="chips"><button class="chip" data-go="layers">🧩 Strati</button><button class="chip" data-go="muscles">💪 Muscoli</button><button class="chip" data-go="brain">🧠 Encefalo</button><button class="chip" data-sys="cuore">🫀 Cuore e vasi</button><button class="chip" data-sys="polmoni">🫁 Polmoni</button><button class="chip" data-go="search">🔎 Cerca</button></div>`+cutHtml('body')+FONTE;
+  h=`<div class="kick">Atlante 3D</div><div class="h">Il corpo in 3D</div><p class="mut">Tocca una parte per vederne il nome. Un dito ruota, due dita ingrandiscono e spostano, doppio tocco avvicina.</p>
+   <div class="chips hub"><button class="chip" data-go="layers">🧩 Strati</button><button class="chip" data-go="muscles">💪 Muscoli</button><button class="chip" data-go="brain">🧠 Encefalo</button><button class="chip" data-sys="cuore">🫀 Cuore e vasi</button><button class="chip" data-sys="polmoni">🫁 Polmoni</button><button class="chip" data-go="search">🔎 Cerca</button></div>`+cutHtml('body')+FONTE;
  }
  const keep=document.activeElement&&document.activeElement.id==='q';
  p.innerHTML=h;if(!keep)p.scrollTop=0;
@@ -515,7 +515,7 @@ const soloBtn=(k,n)=>`<button class="chip${S.solo===k?' on':''}" data-solo="${k}
 function cutHtml(on){
  const cur=S.cutOn===on?S.cut.ax:null,b=(v,attr,txt)=>`<button class="chip${v?' on':''}" ${attr}>${txt}</button>`;
  return `<div class="sub">Sezione del corpo intero</div><div class="chips">${b(!cur,'data-cutb="none"','Nessuna')}${Object.entries(AX).map(([k,a])=>b(cur===k,`data-cutb="${k}"`,a.it)).join('')}</div>`+
-  (cur?`<input type="range" id="cutr" min="0" max="1000" value="${Math.round(S.cut.t*1000)}" style="width:100%"><div class="mut">${cur==='axial'?'Sposta il piano dal basso in alto: si vede la parte inferiore, dall\'alto':cur==='coronal'?'Sposta il piano da dietro in avanti: si vede la parte posteriore, da davanti':'Sposta il piano da destra a sinistra: si vede la metà sinistra dal lato destro'}. Accendi gli strati (muscoli, visceri, encefalo…) per vederli tagliati.</div>`:'');
+  (cur?`<input type="range" id="cutr" aria-label="Posizione del piano di taglio" min="0" max="1000" value="${Math.round(S.cut.t*1000)}" style="width:100%"><div class="mut">${cur==='axial'?'Sposta il piano dal basso in alto: si vede la parte inferiore, dall\'alto':cur==='coronal'?'Sposta il piano da dietro in avanti: si vede la parte posteriore, da davanti':'Sposta il piano da destra a sinistra: si vede la metà sinistra dal lato destro'}. Accendi gli strati (muscoli, visceri, encefalo…) per vederli tagliati.</div>`:'');
 }
 let bodyB=null;const bodyBox=()=>bodyB||(bodyB=boxOf(meshes.filter(m=>m.userData.layer==='ossa')));
 function levText(){return `<b>Strato più esterno visibile: ${ST[S.lev].n}</b><br><span class="mut">${ST[S.lev].t}</span>`;}

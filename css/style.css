@@ -464,3 +464,11 @@ button.mode.tile:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
 .pfe .showsel label.chip{display:inline-flex;align-items:center;gap:6px;margin:0;font-weight:600;min-height:40px}
 .showsel input{width:18px;height:18px;margin:0}
 .banopts input,.showsel input{padding:0}
+/* logo della schermata di avvio: mentre si prepara (c'è .spin) il satellite giallo gira intorno al pianeta */
+.glogo{display:block;margin:0 auto;border-radius:20px;box-shadow:0 0 0 6px #ffffff14,0 8px 30px #6d7cff55}
+.glogo .lgm-go{display:none}
+.gbox:has(.spin) .glogo .lgm-go{display:inline}
+.gbox:has(.spin) .glogo .lgm-st{display:none}
+.gbox .spin{display:none}
+.gbox .gst{margin-top:18px}
+@media (prefers-reduced-motion:reduce){.gbox:has(.spin) .glogo .lgm-go{display:none}.gbox:has(.spin) .glogo .lgm-st{display:inline}}

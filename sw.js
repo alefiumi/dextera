@@ -16,7 +16,7 @@
 //   .X  → +1 per ogni commit che cambia un file dell'app (correzioni e ritocchi).
 // È anche il nome della cache: cambiandola il browser riscarica l'app. L'app la legge dal nome della cache (install.js).
 const APP_STAGE = 'alpha';
-const APP_VERSION = '0.75.3';
+const APP_VERSION = '0.75.4';
 const APP_CACHE = 'dextera-app-' + APP_VERSION;
 const CONTENT_PREFIX = 'dextera-content-';
 const MODEL_VERSION = '1';

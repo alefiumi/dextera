@@ -467,7 +467,7 @@ button.mode.tile:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
 /* logo della schermata di avvio: mentre si prepara (#gate.busy, messo da gate.js quando in #gbody c'è .spin) il satellite giallo
    gira sull'orbita (animazione CSS: due copie, dietro e davanti al pianeta) e il logo sta al centro dello schermo */
 .glogo{display:block;margin:0 auto;border-radius:20px;box-shadow:0 0 0 6px #ffffff14,0 8px 30px #6d7cff55}
-.glogo .lgm-go{display:none;animation:lgorb 2.6s linear infinite}
+.glogo .lgm-go{display:none;animation:lgorb 1s linear infinite}
 #gate.busy .glogo .lgm-go{display:inline}
 #gate.busy .glogo .lgm-st{display:none}
 .gbox .spin{display:none}
@@ -475,7 +475,7 @@ button.mode.tile:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
 #gate.busy{align-items:center;padding-top:16px;padding-bottom:16px}
 #gate.busy .gbox{padding-top:118px} /* tanto spazio sopra quanto testo sotto: il logo sta al centro */
 /* è un indicatore di caricamento (come la rotellina di iOS): gira anche con «riduci movimento», solo più piano */
-@media (prefers-reduced-motion:reduce){.glogo .lgm-go{animation-duration:5s}}
+@media (prefers-reduced-motion:reduce){.glogo .lgm-go{animation-duration:1s}}
 @keyframes lgorb{0.0%{transform:translate(446.0px,256.0px)} 2.778%{transform:translate(443.1px,266.8px)} 5.556%{transform:translate(434.5px,277.2px)} 8.333%{transform:translate(420.5px,287.0px)} 11.111%{transform:translate(401.5px,295.9px)} 13.889%{transform:translate(378.1px,303.5px)} 16.667%{transform:translate(351.0px,309.7px)} 19.444%{transform:translate(321.0px,314.3px)} 22.222%{transform:translate(289.0px,317.1px)} 25.0%{transform:translate(256.0px,318.0px)} 27.778%{transform:translate(223.0px,317.1px)} 30.556%{transform:translate(191.0px,314.3px)} 33.333%{transform:translate(161.0px,309.7px)} 36.111%{transform:translate(133.9px,303.5px)} 38.889%{transform:translate(110.5px,295.9px)} 41.667%{transform:translate(91.5px,287.0px)} 44.444%{transform:translate(77.5px,277.2px)} 47.222%{transform:translate(68.9px,266.8px)} 50.0%{transform:translate(66.0px,256.0px)} 52.778%{transform:translate(68.9px,245.2px)} 55.556%{transform:translate(77.5px,234.8px)} 58.333%{transform:translate(91.5px,225.0px)} 61.111%{transform:translate(110.5px,216.1px)} 63.889%{transform:translate(133.9px,208.5px)} 66.667%{transform:translate(161.0px,202.3px)} 69.444%{transform:translate(191.0px,197.7px)} 72.222%{transform:translate(223.0px,194.9px)} 75.0%{transform:translate(256.0px,194.0px)} 77.778%{transform:translate(289.0px,194.9px)} 80.556%{transform:translate(321.0px,197.7px)} 83.333%{transform:translate(351.0px,202.3px)} 86.111%{transform:translate(378.1px,208.5px)} 88.889%{transform:translate(401.5px,216.1px)} 91.667%{transform:translate(420.5px,225.0px)} 94.444%{transform:translate(434.5px,234.8px)} 97.222%{transform:translate(443.1px,245.2px)} 100.0%{transform:translate(446.0px,256.0px)}}
 .gver{margin:6px 0 0;font-size:12px;color:#aab3e6;letter-spacing:.04em;font-variant-numeric:tabular-nums}
 #gate:not(.busy) .gver{display:none}

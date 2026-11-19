@@ -408,7 +408,7 @@ descrizioni; quelle con fonte Z-Anatomy dicono da quale vaso nasce o dove sbocca
   In v0.75.0 era animateMotion (SMIL) mostrato con `:has()` e su iPhone non girava. Avvio: `#gate.busy` (messo da `wireGate()` con un
   MutationObserver quando in `#gbody` c'è `.spin`) fa girare il satellite e mette il logo al centro dello schermo. Atlante 3D: logo al centro
   mentre si carica il modello (`#msg`) e in un riquadro sopra il modello mentre si carica uno strato (`#busy`, segue `S.loading` in `panel()`).
-  Con «riduci movimento» gira più piano (5 s): è un indicatore di caricamento; in v0.75.2 stava fermo e sull'iPhone dell'autore non girava.
+  Un giro al secondo, anche con «riduci movimento» (scelta dell'autore): è un indicatore di caricamento; in v0.75.2 stava fermo e sull'iPhone dell'autore non girava.
   Sotto la scritta di caricamento la versione («alpha v0.75.2», `#gver`, da `appVersion()`; solo durante il caricamento e se la copia c'è già).
   Copertina del profilo (19/11/2026, v0.73.0): sfondo da una galleria di sei (`BANNERS` in `progress.js`: notte, aurora, tramonto,
   oceano, foresta, sole) con sopra fino a 3 badge guadagnati in vetrina, scelti in «Modifica profilo»; foto sovrapposta al bordo.

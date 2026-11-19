@@ -60,7 +60,11 @@ function stars(w,h,n,seed=7){let x=seed,o='';const r=()=>(x=(x*16807)%2147483647
 // un colore per pianeta (P.planetIdx: posizione tra tutti i pianeti di tutti i corsi); niente oro (satelliti accesi) né grigio (da iniziare)
 const PC=[['#93c5fd','#2563eb'],['#f9a8d4','#db2777'],['#6ee7b7','#059669'],['#fdba74','#ea580c'],
  ['#c4b5fd','#7c3aed'],['#67e8f9','#0891b2'],['#fca5a5','#dc2626'],['#bef264','#65a30d'],['#a5b4fc','#4338ca'],['#5eead4','#0d9488']];
-const DEFS=`<defs><radialGradient id="gsun" cx=".38" cy=".35" r=".7"><stop offset="0" stop-color="#fff3c4"/><stop offset=".55" stop-color="#f6b93b"/><stop offset="1" stop-color="#e07b12"/></radialGradient>
+// sole di ogni corso nel colore del suo satellite nel logo di avvio (COLORI in logo.js, stessa posizione in mappa.json): corpo giallo,
+// neurologia viola, poi rosso, azzurro, verde
+const SUNS=[['#fff3c4','#f6b93b','#e07b12'],['#ede9fe','#a78bfa','#6d28d9'],['#fee2e2','#f87171','#b91c1c'],['#dbeafe','#60a5fa','#1d4ed8'],['#d1fae5','#34d399','#047857']];
+const sunIdx=c=>Math.max(0,app.MAPPA.corsi.indexOf(c))%SUNS.length;
+const DEFS=`<defs>${SUNS.map(([a,b,c],i)=>`<radialGradient id="gsun${i}" cx=".38" cy=".35" r=".7"><stop offset="0" stop-color="${a}"/><stop offset=".55" stop-color="${b}"/><stop offset="1" stop-color="${c}"/></radialGradient><radialGradient id="ghs${i}"><stop offset=".55" stop-color="${b}" stop-opacity=".35"/><stop offset="1" stop-color="${b}" stop-opacity="0"/></radialGradient>`).join('')}
  <radialGradient id="ghalo"><stop offset=".55" stop-color="#f6b93b" stop-opacity=".35"/><stop offset="1" stop-color="#f6b93b" stop-opacity="0"/></radialGradient>
  <radialGradient id="glit" cx=".38" cy=".35" r=".7"><stop offset="0" stop-color="#fff3c4"/><stop offset="1" stop-color="#f0b429"/></radialGradient>
  <radialGradient id="goff" cx=".38" cy=".35" r=".7"><stop offset="0" stop-color="#6b7499"/><stop offset="1" stop-color="#363d5e"/></radialGradient>
@@ -80,7 +84,7 @@ function planetBody(pl,x,y,r){
 }
 // testo della luce di un pianeta per le etichette e il lettore di schermo
 const glowTxt=g=>g.st==='corso'?`${P.PSTATI.corso} · ${Math.round(g.p*100)}%`:P.PSTATI[g.st];
-const sun=(x,y,r)=>`<circle cx="${x}" cy="${y}" r="${r*1.9}" fill="url(#ghalo)"/><circle cx="${x}" cy="${y}" r="${r}" fill="url(#gsun)"/>`;
+const sun=(x,y,r,c)=>{const i=sunIdx(c);return `<circle cx="${x}" cy="${y}" r="${r*1.9}" fill="url(#ghs${i})"/><circle cx="${x}" cy="${y}" r="${r}" fill="url(#gsun${i})"/>`;};
 
 export function renderPath(){
  if(!P.ready()){$('panel').innerHTML=`<div class="path"><div class="h">Il tuo percorso</div><p class="mut">I contenuti del percorso non sono ancora su questo telefono: apri l'app una volta con la connessione.</p></div>`;return;}
@@ -173,7 +177,7 @@ function universeSvg(){
  const sys=(c,[X,Y])=>{const pl=P.pianeti(c),ss=P.satelliti(null,c),lit=ss.filter(s=>P.lit(s)).length;
   return `<a href="#" data-p="corso" data-id="${esc(c.id)}" role="button" aria-label="${esc(c.nome)}: ${pl.length} pianeti, ${ss.length} satelliti, ${lit} accesi${c===C?', aperto':''}"${c===C?' aria-current="true"':''}>
   <circle cx="${X}" cy="${Y}" r="66" class="hit"/>${pl.map((p,i)=>{const r=34+i*10,a=(-110+i*95)*Math.PI/180,x=X+r*Math.cos(a),y=Y+r*Math.sin(a);return `<circle cx="${X}" cy="${Y}" r="${r}" class="orbit"/>${planetBody(p,+x.toFixed(1),+y.toFixed(1),6)}`;}).join('')}
-  ${sun(X,Y,20)}${svgText(X,Y+82,c.nome,'lab',20)}<text x="${X}" y="${Y+82+14*lines(c.nome,20).length}" text-anchor="middle" class="wd">${pl.length} pianeti · ${ss.length} satelliti</text></a>`;};
+  ${sun(X,Y,20,c)}${svgText(X,Y+82,c.nome,'lab',20)}<text x="${X}" y="${Y+82+14*lines(c.nome,20).length}" text-anchor="middle" class="wd">${pl.length} pianeti · ${ss.length} satelliti</text></a>`;};
  return `${svgOpen(390,'Universo dei corsi')}<g class="enter">
   ${CS.slice(0,4).map((c,i)=>sys(c,POS[i])).join('')}
   ${altri.map(([t,c,x,y])=>`<g class="off" aria-hidden="true">${mini(x,y,3)}<circle cx="${x}" cy="${y}" r="17" fill="${c}" opacity=".5"/>${svgText(x,y+70,t,'lab dim',16)}<text x="${x}" y="${y+84}" text-anchor="middle" class="wd">in arrivo</text></g>`).join('')}
@@ -190,7 +194,7 @@ function systemSvg(g){
   return `<a href="#" data-p="planet" data-id="${esc(p.id)}" role="button" aria-label="${esc(p.nome)}: ${glowTxt(gl)}, ${ss.length} satelliti, ${lit} accesi${orb>lit?`, ${orb-lit} in orbita`:''}${p===gp?', consigliato':''}">
    <circle cx="${x}" cy="${y}" r="38" class="hit"/>${planetBody(p,x,y,16)}${moons(x,y,ss)}${p===gp?`<text x="${x+10}" y="${y-8}" class="star" aria-hidden="true">★</text>`:''}
    ${svgText(x,ty,p.nome,'lab',14)}<text x="${x}" y="${wy}" text-anchor="middle" class="wd">${wd}</text></a>`;}).join('');
- return `${svgOpen(440,'Sistema: '+P.corso().nome)}<g class="enter">${orbits}${sun(cx,cy,22)}${bodies}</g><text x="12" y="432" class="wd">Tocca un pianeta</text></svg>`;
+ return `${svgOpen(440,'Sistema: '+P.corso().nome)}<g class="enter">${orbits}${sun(cx,cy,22,P.corso())}${bodies}</g><text x="12" y="432" class="wd">Tocca un pianeta</text></svg>`;
 }
 // satelliti dello stesso pianeta che condividono strutture (linee sulla mappa)
 function shared(a,b){const set=x=>new Set(P.passi(x).flatMap(ps=>Array.isArray(ps.strutture)?ps.strutture:[]));const A=set(a);for(const id of set(b))if(A.has(id))return true;return false;}

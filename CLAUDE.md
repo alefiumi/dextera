@@ -499,6 +499,8 @@ descrizioni; quelle con fonte Z-Anatomy dicono da quale vaso nasce o dove sbocca
   scritto anche a parole (etichette, `aria-label`, riga `.glow` nel riquadro del pianeta, Elenco). Pianeti dell'universo, del sistema e del pianeta aperto.
   Colore: ogni pianeta ha il suo, diverso da quelli di tutti i corsi (`PC` in `path.js`, 10 colori; indice `P.planetIdx(pl)` = posizione
   tra tutti i pianeti dei corsi, v0.84.1): prima dipendeva dalla posizione nel corso e i due corsi avevano gli stessi 4 colori.
+  Sole: ogni corso ha il sole del colore del suo satellite nel logo di avvio (`SUNS` in `path.js`, stessa posizione in `mappa.json` di
+  `COLORI` in `logo.js`: corpo giallo, neurologia viola, v0.84.2). I pianeti «Da iniziare» restano grigi in ogni corso.
 - Logo della schermata di avvio (`js/logo.js`, chiamato da `wireGate()`): ogni corso iniziato è un satellite sull'orbita del logo nel suo
   colore (`COLORI`: il primo è il giallo di sempre e c'è anche prima di cominciare); un corso completato (tutti i pianeti con l'esame
   superato) ha un anello. Stato in `S.logo` [{id, st}], calcolato da `logoTick()` in `percorso.js` prima di ogni salvataggio per tutti

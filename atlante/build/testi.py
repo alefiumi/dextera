@@ -20,9 +20,9 @@ import json, re, os, sys, subprocess, tempfile
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.normpath(os.path.join(HERE, '..', '..'))
 TESTI = os.path.join(ROOT, 'testi')
-TIPI = ['muscoli', 'ossa', 'reperi', 'encefalo', 'torace', 'nervi-cranici', 'gruppi', 'casi']
+TIPI = ['muscoli', 'ossa', 'reperi', 'encefalo', 'torace', 'nervi-cranici', 'gruppi', 'casi', 'neuro']
 STATI = ['da verificare', 'verificato', 'corretto', 'segnalato']
-FONTI = ['Z-Anatomy', 'TA2', 'AI', 'docente']
+FONTI = ['Z-Anatomy', 'TA2', 'AI', 'docente', 'lezione']   # lezione: materiale del corso (guida e slide del docente)
 
 _cache = {}
 def carica(tipo):
@@ -258,9 +258,9 @@ def controlla_percorsi():
     d = os.path.join(ROOT, 'content/percorsi')
     if not os.path.isdir(d): return
     M = json.load(open(os.path.join(ROOT, 'content/mappa.json'))); C = json.load(open(os.path.join(ROOT, 'content/corpo.json')))
-    casi = {c['id'] for c in C['cases']}; err = []
+    casi = {c['id'] for c in C['cases']}; err = []; nodi = {}
     for co in M['corsi']:
-        nodi = {co['id']: 'corso'}
+        nodi[co['id']] = 'corso'
         for pl in co['pianeti']:
             nodi[pl['id']] = 'pianeta'
             for s in pl['satelliti']: nodi[s['id']] = {ps['id'] for ps in s['passi']}
@@ -306,6 +306,21 @@ def controlla_mappa():
                 ids = ps['strutture'] if isinstance(ps['strutture'], list) else []
                 usati |= set(ids); err += [f"{ps['id']}: {i}" for i in ids if i not in ok]
     manca = sorted(({m['id'] for m in C['muscles']} | {i for g in C['groups'] for i in g['m']}) - usati)
+    # corso di neurologia: strutture n.<voce di testi/neuro.json>, figure del cervello 2D esistenti, casi del modulo neuro
+    B = json.load(open(os.path.join(ROOT, 'content/cervello.json')))
+    fig = {s['id'] for s in B['structures']} | {'g:' + g['id'] for g in B['groups']}
+    nv = {v['id'][6:]: v for v in carica('neuro')}; nc = {v['caso']: v for v in carica('casi') if v['modulo'] == 'neuro'}; nu = set()
+    for co in M['corsi'][1:]:
+        if co['id'] != 'neurologia': continue
+        for pl in co['pianeti']:
+            for s in pl['satelliti']:
+                for ps in s['passi']:
+                    ids = ps['strutture'] if isinstance(ps['strutture'], list) else []
+                    nu |= {i[2:] for i in ids}; err += [f"{ps['id']}: {i}" for i in ids if not i.startswith('n.') or i[2:] not in nv]
+                    err += [f"{ps['id']}: caso {c}" for c in ps.get('casi', []) if c not in nc]
+    err += [f"{v['id']}: figura {f}" for v in nv.values() for f in v.get('figura', []) if f not in fig]
+    err += [f"caso.neuro.{k}: struttura {v['struttura']}" for k, v in nc.items() if v['struttura'][2:] not in nv]
+    manca += sorted('neuro.' + k for k in set(nv) - nu)
     if err or manca: raise SystemExit('content/mappa.json non valido:\n  ' + '\n  '.join((err + ['non in nessun satellite: ' + i for i in manca])[:30]))
     print('content/mappa.json: id validi')
 

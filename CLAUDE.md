@@ -500,6 +500,23 @@ descrizioni; quelle con fonte Z-Anatomy dicono da quale vaso nasce o dove sbocca
   Solo la schermata di avvio: i logo di caricamento dell'atlante 3D e l'icona dell'app restano quelli di sempre.
 - Prova: `luce.mjs` (copia nelle note delle sessioni, Chrome headless, tutto offline).
 
+## Corso di neurologia (contenuti, primo rilascio, 19/11/2026)
+- Materiale dell'autore: guida «Guida Didattica Integrata di Neuroanatomia e Neurologia Clinica» (riassunto fatto da un'AI sulle
+  registrazioni Neurologia_0001–0005 del Dott. Andrea Benevento) e `SNC.pptx` (28 slide). Non sono nel repository; arriverà altro materiale.
+- Scelte dell'autore (19/11/2026): 4 pianeti (Basi del sistema nervoso, Encefalo, Corteccia e funzioni, Midollo e sistema periferico),
+  20 satelliti; passi `strutture`, `dove`, `funzione`, `lesione`, `connessioni`, `progetto` (caso clinico; senza casi = quiz finale);
+  gli errori della guida si correggono con la versione dei libri e si segnalano; prima i contenuti, poi il corso giocabile.
+- `testi/neuro.json` (117 voci, campi nome, dove, funzione, lesione, connessioni): id `neuro.<slug del nome>`, `satellite`, `lezione`
+  (dove se ne parla nel corso), `figura` (id del cervello 2D `b.*` o gruppi `g:<gruppo>`, per il tocco), `ref` (parte del modello 3D).
+  Fonte nuova `lezione` (materiale del corso, in `FONTI` di `testi.py` e `revisione.js`); dove l'AI ha corretto o aggiunto, fonte `AI` e
+  nel dato `nota` con quello che diceva la guida (la pagina di revisione la mostra). Tutto «da verificare».
+- 14 casi in `testi/casi.json` (modulo `neuro`, `struttura` = `n.<voce>`): per ora non vanno in nessun modulo 2D.
+- `content/mappa.json`: secondo corso `neurologia` (modulo `cervello`), strutture `n.<voce>`, passi con `casi` e `senza_figura`
+  (strutture senza figura: domande a scelta). Scritto una volta da uno script (copia `neuro_genera.py` nelle note delle sessioni), poi
+  si corregge a mano; `testi.py` controlla id, figure e casi e che ogni voce stia in un satellite.
+- L'app non usa ancora il corso: il percorso legge solo il corso di `content/percorsi/base.json`. Il secondo rilascio (corso giocabile:
+  percorso con più corsi, lezioni sul cervello 2D, Palestra ed esame) è da fare.
+
 ## Mappa del percorso (`content/mappa.json`)
 Corso → 4 pianeti → 17 satelliti (con `ordine` della specifica) → 6 passi (`ossa`, `reperi`, `muscoli`, `connessioni`, `funzione`,
 `progetto`). Ogni passo ha `strutture` (id di `content/corpo.json`: `o.<osso>` e muscoli; reperi `r.<slug del nome inglese>`), `aspetto`,

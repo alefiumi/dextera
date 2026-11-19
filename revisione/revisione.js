@@ -2,9 +2,9 @@
    mostra ogni dato con fonte e stato, diviso per satellite; il docente segna Giusto/Sbagliato e scrive la correzione.
    Le risposte restano in questo browser (localStorage, chiave dextera-revisione) e si esportano in CSV per
    atlante/build/importa_revisione.py. Nessun account, nessun invio in rete. */
-const TIPI=['ossa','reperi','muscoli','encefalo','nervi-cranici','torace','gruppi','casi','correzioni'];
+const TIPI=['ossa','reperi','muscoli','encefalo','nervi-cranici','torace','gruppi','casi','neuro','correzioni'];
 const STATI=['da verificare','verificato','corretto','segnalato'];
-const FONTI=['Z-Anatomy','TA2','AI','docente'];
+const FONTI=['Z-Anatomy','TA2','AI','docente','lezione'];   // lezione: materiale del corso (guida e slide del docente)
 const SEP=' | ';           // valori che sono elenchi (opzioni dei casi, membri dei gruppi)
 const KEY='dextera-revisione';
 const PAG=40;              // voci mostrate per volta
@@ -29,11 +29,12 @@ async function carica(){
  // satelliti e strutture di ogni satellite
  const dove={};  // id di content → satelliti
  const add=(id,s)=>{(dove[id]??=new Set()).add(s);};
- for(const pl of mappa.corsi[0].pianeti)for(const s of pl.satelliti){
-  SAT.push({id:s.id,nome:s.nome,pianeta:pl.nome,ordine:s.ordine});
-  for(const p of s.passi)if(Array.isArray(p.strutture))p.strutture.forEach(id=>add(id,s.id));
-  for(const g of s.ossa)add('g.'+g,s.id);
- }
+ // tutti i corsi: il primo con i nomi dei pianeti, gli altri con il nome del corso davanti (es. «Neurologia · Encefalo»)
+ mappa.corsi.forEach((co,ci)=>{for(const pl of co.pianeti)for(const s of pl.satelliti){
+  SAT.push({id:s.id,nome:s.nome,pianeta:(ci?co.nome+' · ':'')+pl.nome,ordine:s.ordine});
+  for(const p of s.passi){if(Array.isArray(p.strutture))p.strutture.forEach(id=>add(id,s.id));(p.casi||[]).forEach(c=>add('caso.neuro.'+c,s.id));}
+  for(const g of s.ossa||[])add('g.'+g,s.id);
+ }});
  SAT_BY=Object.fromEntries(SAT.map(s=>[s.id,s]));
  const satOf=ids=>[...new Set(ids.flatMap(id=>[...(dove[id]||[])]))];
  files.forEach((F,i)=>{
@@ -44,6 +45,8 @@ async function carica(){
    if(tipo==='ossa'){sats=satOf(['o.'+v.id.slice(5)]);atl=v.ref;}
    else if(tipo==='reperi'){sats=satOf(['r.'+v.id.slice(7)]);if(!sats.length)sats=satOf(['o.'+slug(v.osso||'')]);atl=v.ref;}
    else if(tipo==='muscoli'){sats=satOf([slug(v.ref)]);atl=v.ref;}
+   else if(tipo==='neuro'){sats=satOf(['n.'+v.id.slice(6)]);atl=v.ref||null;}
+   else if(tipo==='casi'&&v.modulo==='neuro'){sats=satOf([v.id]);nome='Caso clinico '+v.caso+' ('+(v.dati.risposta?.valore||'')+')';}
    else if(tipo==='casi'){sats=v.modulo==='corpo'&&v.muscolo?satOf([slug(v.muscolo)]):[];if(!sats.length&&v.modulo!=='corpo')sez=['cuore','polmoni'].includes(v.modulo)?'tor':'enc';nome='Caso clinico '+v.caso+(v.muscolo?' ('+v.muscolo+')':'');}
    else if(tipo==='gruppi'){const [,k,r]=v.id.split('.');if(k==='ossa')sats=satOf(['g.'+r]);else if(k==='encefalo'||k==='strato-encefalo')sez='enc';else if(/^(strato-)?(cuore|polmoni)$/.test(k))sez='tor';}
    else if(tipo==='torace'){sez='tor';atl=v.ref;}
@@ -51,11 +54,11 @@ async function carica(){
    else if(tipo==='correzioni'){sez='corr';nome=(TIPO_IT[v.tipo]||v.tipo)+(v.muscolo?': '+v.muscolo:v.cerca?': «'+v.cerca+'»':v.parte?': '+v.parte:'');
     if(v.muscolo){sats=satOf([slug(v.muscolo)]);atl=v.muscolo;}}
    if(!sats.length&&!sez)sez='altro';
-   const voce={id:v.id,tipo,nome,ref:v.ref,atl,sats,sez,campi:F.campi||{motivo:'Motivo'},dati:[]};
+   const voce={id:v.id,tipo,nome,ref:v.ref,atl,sats,sez,lez:v.lezione||'',campi:F.campi||{motivo:'Motivo'},dati:[]};
    const dati=v.dati?Object.entries(v.dati):[['motivo',{valore:v.motivo,fonte:v.fonte,stato:v.stato,verifica:v.verifica}]];
    for(const [c,d] of dati){
     const id=v.dati?v.id+'.'+c:v.id;
-    const x={id,voce,campo:c,etichetta:(F.campi||{})[c]||(c==='motivo'?'Motivo':c),valore:testo(d.valore),lista:Array.isArray(d.valore),fonte:d.fonte,stato:d.stato,verifica:d.verifica};
+    const x={id,voce,campo:c,etichetta:(F.campi||{})[c]||(c==='motivo'?'Motivo':c),valore:testo(d.valore),lista:Array.isArray(d.valore),fonte:d.fonte,stato:d.stato,verifica:d.verifica,nota:d.nota||''};
     voce.dati.push(x);DATI.push(x);
    }
    VOCI.push(voce);
@@ -99,7 +102,7 @@ function datoHtml(x){
  return `<div class="dato ${r.e==='giusto'?'ok':r.e==='sbagliato'?'no':''}" data-id="${esc(x.id)}">
   <div class="k">${esc(x.etichetta)}</div>
   <div class="v"><div class="t"><span class="print-box"></span>${esc(x.valore)||'<i class="mut">(vuoto)</i>'}</div>
-   <div class="tags"><span class="tag">fonte: ${esc(x.fonte)}</span><span class="tag s-${slug(x.stato)}">${esc(x.stato)}${ver}</span>
+   ${x.nota?`<p class="nota">ℹ️ ${esc(x.nota)}</p>`:''}<div class="tags"><span class="tag">fonte: ${esc(x.fonte)}</span><span class="tag s-${slug(x.stato)}">${esc(x.stato)}${ver}</span>
     <span class="esito"><button class="ok" data-e="giusto" aria-pressed="${r.e==='giusto'}">Giusto</button><button class="no" data-e="sbagliato" aria-pressed="${r.e==='sbagliato'}">Sbagliato</button></span></div>
    <div class="corr">${r.e==='sbagliato'?corrHtml(x,r):''}</div></div></div>`;
 }
@@ -107,7 +110,7 @@ const corrHtml=(x,r)=>`<textarea data-k="c" aria-label="Correzione" placeholder=
  <textarea data-k="n" aria-label="Nota" placeholder="Nota o fonte (atlante, pagina…), facoltativa">${esc(r.n??'')}</textarea>`;
 function voceHtml({voce,dati}){
  const link=voce.atl?`<a class="noprint small" href="../atlante/index.html?vedi=${encodeURIComponent(voce.atl)}" target="_blank" rel="noopener">Vedi nell'atlante</a>`:'';
- return `<article class="voce"><header><div><h3>${esc(voce.nome)}</h3><code>${esc(voce.id)}</code></div>${link}</header>${dati.map(datoHtml).join('')}</article>`;
+ return `<article class="voce"><header><div><h3>${esc(voce.nome)}</h3><code>${esc(voce.id)}</code>${voce.lez?`<small class="mut"> · nel corso: ${esc(voce.lez)}</small>`:''}</div>${link}</header>${dati.map(datoHtml).join('')}</article>`;
 }
 function disegna(){
  const f=filtri();try{sessionStorage.setItem(KEY+'-filtri',JSON.stringify({...f,q:$('f-q').value}));}catch(e){}

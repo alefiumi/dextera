@@ -1,5 +1,5 @@
 {
- "version": 2,
+ "version": 3,
  "tipo": "casi",
  "nota": "Casi clinici dei moduli 2D e dei giochi 3D. muscolo / struttura: la risposta giusta sulla figura.",
  "campi": {"indizio_1": "Indizio 1", "indizio_2": "Indizio 2", "indizio_3": "Indizio 3", "risposta": "Risposta giusta", "opzioni": "Opzioni", "spiegazione": "Spiegazione"},
@@ -363,6 +363,118 @@
    "risposta": {"valore": "Bronco segmentario superiore del polmone destro (BVI)", "fonte": "AI", "stato": "da verificare", "verifica": null},
    "opzioni": {"valore": ["Bronco segmentario superiore del polmone destro (BVI)", "Bronco lobare medio", "Bronco segmentario apicale del polmone destro (BI)", "Bronco principale sinistro"], "fonte": "AI", "stato": "da verificare", "verifica": null},
    "spiegazione": {"valore": "Da supini il materiale inalato scende nel bronco segmentario superiore del lobo inferiore (BVI), il più posteriore: polmonite ab ingestis. Da seduti va invece nei segmenti basali.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "caso.neuro.n1", "modulo": "neuro", "caso": "n1", "struttura": "n.guaina-mielinica", "satellite": "n-neurone", "lezione": "Neurologia_0001", "dati": {
+   "indizio_1": {"valore": "Donna di 32 anni: da mesi si stanca molto presto e sente gli arti deboli.", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "indizio_2": {"valore": "Racconta che il movimento parte qualche istante dopo averlo pensato.", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "indizio_3": {"valore": "La malattia è autoimmune e colpisce un rivestimento degli assoni del sistema nervoso centrale.", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "risposta": {"valore": "Guaina mielinica", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "opzioni": {"valore": ["Guaina mielinica", "Nodi di Ranvier", "Dendriti", "Corpo cellulare (soma)"], "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "spiegazione": {"valore": "Sclerosi multipla: gli anticorpi distruggono la guaina mielinica, la conduzione rallenta o si blocca. Attenzione ai carichi: la fatica arriva presto.", "fonte": "AI", "stato": "da verificare", "verifica": null, "nota": "Nella guida la sclerosi multipla colpisce anche il nervo frenico: non riportato (il frenico è periferico)."}
+  }},
+  {"id": "caso.neuro.n2", "modulo": "neuro", "caso": "n2", "struttura": "n.liquor-liquido-cerebrospinale", "satellite": "n-protezione", "lezione": "Neurologia_0001", "dati": {
+   "indizio_1": {"valore": "Uomo di 25 anni dopo un incidente d'auto con forte frenata: la TAC non mostra fratture.", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "indizio_2": {"valore": "Ha però deficit cognitivi e motori importanti.", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "indizio_3": {"valore": "Il sistema che fa galleggiare il cervello non è riuscito a evitare l'urto contro il cranio.", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "risposta": {"valore": "Liquor (liquido cerebrospinale)", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "opzioni": {"valore": ["Liquor (liquido cerebrospinale)", "Dura madre", "Ventricoli cerebrali", "Pia madre"], "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "spiegazione": {"valore": "Danno assonale diffuso: nella decelerazione il cervello urta il cranio e gli assoni si stirano e si rompono, anche senza fratture.", "fonte": "lezione", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "caso.neuro.n3", "modulo": "neuro", "caso": "n3", "struttura": "n.corteccia-prefrontale-dorsolaterale", "satellite": "n-esecutivo", "lezione": "Neurologia_0001", "dati": {
+   "indizio_1": {"valore": "Uomo rianimato dopo circa 3 minuti senza ossigeno: si muove bene.", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "indizio_2": {"valore": "Dimentica le consegne appena date, è impulsivo e non riesce a pianificare la giornata.", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "indizio_3": {"valore": "La parte colpita è molto sensibile alla mancanza di ossigeno e serve alla memoria di lavoro.", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "risposta": {"valore": "Corteccia prefrontale dorsolaterale", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "opzioni": {"valore": ["Corteccia prefrontale dorsolaterale", "Corteccia motoria primaria (M1, area 4)", "Cervelletto", "Corteccia visiva primaria (area 17)"], "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "spiegazione": {"valore": "Ipossia breve: soffrono per prime la corteccia prefrontale e l'ippocampo, con sindrome disesecutiva. Oltre circa 4 minuti senza ossigeno il danno ai neuroni diventa irreversibile.", "fonte": "lezione", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "caso.neuro.n4", "modulo": "neuro", "caso": "n4", "struttura": "n.corteccia-orbitofrontale", "satellite": "n-esecutivo", "lezione": "Neurologia_0002", "dati": {
+   "indizio_1": {"valore": "Operaio tranquillo e rispettato: dopo un incidente sul lavoro una barra di ferro gli attraversa il cranio.", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "indizio_2": {"valore": "Sopravvive, ma diventa irrispettoso, impulsivo e aggressivo; ha anche la palpebra sinistra cadente.", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "indizio_3": {"valore": "La lesione è nella parte del lobo frontale sopra le orbite.", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "risposta": {"valore": "Corteccia orbitofrontale", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "opzioni": {"valore": ["Corteccia orbitofrontale", "Area di Broca", "Ippocampo", "Corteccia somatosensoriale primaria (aree 3, 1, 2)"], "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "spiegazione": {"valore": "Caso di Phineas Gage: lesione della corteccia orbitofrontale con cambio di personalità; la palpebra cadente indica un danno al nervo oculomotore (III).", "fonte": "lezione", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "caso.neuro.n5", "modulo": "neuro", "caso": "n5", "struttura": "n.corteccia-orbitofrontale", "satellite": "n-esecutivo", "lezione": "Neurologia_0002", "dati": {
+   "indizio_1": {"valore": "Uomo di 52 anni: la famiglia nota battute fuori luogo, aggressività e perdita delle regole sociali.", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "indizio_2": {"valore": "La memoria è ancora buona e si orienta bene; ride della sua diagnosi.", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "indizio_3": {"valore": "La malattia degenera lobi frontali e temporali.", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "risposta": {"valore": "Corteccia orbitofrontale", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "opzioni": {"valore": ["Corteccia orbitofrontale", "Ippocampo", "Cervelletto", "Corteccia visiva primaria (area 17)"], "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "spiegazione": {"valore": "Demenza frontotemporale, variante comportamentale: esordisce con il cambio di comportamento, non con la perdita di memoria come l'Alzheimer.", "fonte": "lezione", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "caso.neuro.n6", "modulo": "neuro", "caso": "n6", "struttura": "n.area-di-broca", "satellite": "n-linguaggio", "lezione": "Neurologia_0002", "dati": {
+   "indizio_1": {"valore": "Paziente dopo un ictus a sinistra: parla pochissimo, con grande fatica, a parole singole.", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "indizio_2": {"valore": "Capisce bene quello che gli si chiede ed è molto frustrato.", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "indizio_3": {"valore": "La lesione è nel giro frontale inferiore sinistro.", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "risposta": {"valore": "Area di Broca", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "opzioni": {"valore": ["Area di Broca", "Area di Wernicke", "Fascicolo arcuato", "Corteccia uditiva primaria (aree 41 e 42)"], "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "spiegazione": {"valore": "Afasia di Broca: deficit di produzione con comprensione conservata e consapevolezza; di solito buona adesione alla riabilitazione.", "fonte": "lezione", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "caso.neuro.n7", "modulo": "neuro", "caso": "n7", "struttura": "n.area-di-wernicke", "satellite": "n-linguaggio", "lezione": "Neurologia_0002", "dati": {
+   "indizio_1": {"valore": "Paziente dopo un ictus: parla molto e fluente, ma le frasi non hanno senso e sono piene di parole sbagliate.", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "indizio_2": {"valore": "Non esegue le consegne e pensa di parlare benissimo.", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "indizio_3": {"valore": "La lesione è nella parte posteriore del giro temporale superiore sinistro.", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "risposta": {"valore": "Area di Wernicke", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "opzioni": {"valore": ["Area di Wernicke", "Area di Broca", "Fascicolo arcuato", "Corteccia motoria primaria (M1, area 4)"], "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "spiegazione": {"valore": "Afasia di Wernicke: deficit di comprensione con anosognosia; il rapporto con il terapista è difficile perché il paziente non capisce le consegne.", "fonte": "lezione", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "caso.neuro.n8", "modulo": "neuro", "caso": "n8", "struttura": "n.fascicolo-arcuato", "satellite": "n-linguaggio", "lezione": "Neurologia_0003", "dati": {
+   "indizio_1": {"valore": "Paziente che parla spontaneamente e capisce bene.", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "indizio_2": {"valore": "Quando gli si chiede di ripetere una frase non ci riesce.", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "indizio_3": {"valore": "La lesione è in un fascio di sostanza bianca dell'emisfero sinistro.", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "risposta": {"valore": "Fascicolo arcuato", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "opzioni": {"valore": ["Fascicolo arcuato", "Area di Broca", "Area di Wernicke", "Corpo calloso"], "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "spiegazione": {"valore": "Afasia di conduzione: lesione del fascicolo arcuato, che collega Wernicke a Broca; manca la ripetizione.", "fonte": "lezione", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "caso.neuro.n9", "modulo": "neuro", "caso": "n9", "struttura": "n.corteccia-parietale-posteriore-destra", "satellite": "n-parietale", "lezione": "Neurologia_0005", "dati": {
+   "indizio_1": {"valore": "Paziente dopo un ictus: mangia solo dal lato destro del piatto e si veste solo a destra.", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "indizio_2": {"valore": "La vista è normale: vede ma non presta attenzione alla sinistra.", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "indizio_3": {"valore": "La lesione è nel lobo parietale di un emisfero.", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "risposta": {"valore": "Corteccia parietale posteriore destra", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "opzioni": {"valore": ["Corteccia parietale posteriore destra", "Corteccia visiva primaria (area 17)", "Area di Broca", "Cervelletto"], "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "spiegazione": {"valore": "Neglect: lesione parietale destra; è un disturbo dell'attenzione e della rappresentazione dello spazio, non della vista (non è un'emianopsia).", "fonte": "lezione", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "caso.neuro.n10", "modulo": "neuro", "caso": "n10", "struttura": "n.corteccia-motoria-primaria-m1-area-4", "satellite": "n-motorio", "lezione": "Neurologia_0001", "dati": {
+   "indizio_1": {"valore": "Paziente con un ictus nell'emisfero sinistro: non muove il braccio destro.", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "indizio_2": {"valore": "Dopo qualche settimana riesce a fare movimenti grossolani ma deboli.", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "indizio_3": {"valore": "La zona lesa sta davanti al solco centrale.", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "risposta": {"valore": "Corteccia motoria primaria (M1, area 4)", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "opzioni": {"valore": ["Corteccia motoria primaria (M1, area 4)", "Cervelletto", "Corteccia somatosensoriale primaria (aree 3, 1, 2)", "Area di Broca"], "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "spiegazione": {"valore": "Lesione della corteccia motoria primaria e delle sue vie: plegia (forza assente) che diventa paresi (forza ridotta) nella metà opposta del corpo.", "fonte": "lezione", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "caso.neuro.n11", "modulo": "neuro", "caso": "n11", "struttura": "n.area-motoria-supplementare-sma", "satellite": "n-motorio", "lezione": "Neurologia_0004", "dati": {
+   "indizio_1": {"valore": "Paziente che racconta: «la mia mano sinistra fa cose da sola».", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "indizio_2": {"valore": "La mano afferra oggetti e disturba l'altra mano senza che lui lo voglia.", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "indizio_3": {"valore": "La lesione è sulla faccia interna del lobo frontale, in un'area che frena gli automatismi.", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "risposta": {"valore": "Area motoria supplementare (SMA)", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "opzioni": {"valore": ["Area motoria supplementare (SMA)", "Corteccia premotoria (area 6)", "Cervelletto", "Gangli della base"], "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "spiegazione": {"valore": "Sindrome della mano aliena: lesione di un lato dell'area motoria supplementare. Se la lesione è dei due lati: dipendenza dall'ambiente.", "fonte": "lezione", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "caso.neuro.n12", "modulo": "neuro", "caso": "n12", "struttura": "n.amigdala", "satellite": "n-limbico", "lezione": "Neurologia_0003", "dati": {
+   "indizio_1": {"valore": "Ragazza di 22 anni: all'improvviso cuore a mille, fiato corto, sudore e paura di morire.", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "indizio_2": {"valore": "Gli esami del cuore sono normali.", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "indizio_3": {"valore": "Si attiva troppo una struttura del lobo temporale che innesca la paura, e la corteccia prefrontale non riesce a frenarla.", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "risposta": {"valore": "Amigdala", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "opzioni": {"valore": ["Amigdala", "Ippocampo", "Talamo", "Cervelletto"], "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "spiegazione": {"valore": "Attacco di panico: iperattivazione dell'amigdala con risposta del simpatico, senza il freno della corteccia prefrontale dorsolaterale.", "fonte": "lezione", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "caso.neuro.n13", "modulo": "neuro", "caso": "n13", "struttura": "n.nervo-vago-x", "satellite": "n-autonomo", "lezione": "Neurologia_0004", "dati": {
+   "indizio_1": {"valore": "Calciatore con una distorsione alla caviglia molto dolorosa.", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "indizio_2": {"valore": "Diventa pallido, la pressione crolla e sviene; sdraiato si riprende in poco tempo.", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "indizio_3": {"valore": "Il dolore ha attivato in modo riflesso il principale nervo del parasimpatico.", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "risposta": {"valore": "Nervo vago (X)", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "opzioni": {"valore": ["Nervo vago (X)", "Nervo frenico", "Nervo oculomotore (III)", "Simpatico (ortosimpatico)"], "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "spiegazione": {"valore": "Sincope vasovagale: il vago provoca vasodilatazione e calo della pressione, il cervello riceve meno sangue e si perde coscienza; da sdraiati il flusso torna.", "fonte": "lezione", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "caso.neuro.n14", "modulo": "neuro", "caso": "n14", "struttura": "n.lobo-frontale", "satellite": "n-lobi", "lezione": "Neurologia_0004", "dati": {
+   "indizio_1": {"valore": "Ragazzo che cade a terra con contrazioni di tutto il corpo e i denti serrati.", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "indizio_2": {"valore": "Dopo un paio di minuti le contrazioni finiscono e resta confuso.", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "indizio_3": {"valore": "È una scarica elettrica improvvisa di molti neuroni della corteccia cerebrale.", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "risposta": {"valore": "Lobo frontale", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "opzioni": {"valore": ["Lobo frontale", "Cervelletto", "Midollo spinale", "Talamo"], "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "spiegazione": {"valore": "Crisi epilettica tonico-clonica: scarica anomala dei neuroni della corteccia. Durante la crisi non si mette niente in bocca (il massetere stringe fortissimo): si protegge la testa e dopo la crisi si mette la persona in posizione laterale di sicurezza.", "fonte": "AI", "stato": "da verificare", "verifica": null, "nota": "Risposta scelta dall'AI: la crisi riguarda la corteccia in generale; nella lezione la parte sulla lingua che «non può ribaltarsi» non è stata riportata (in una persona incosciente la lingua rilassata può chiudere le vie aeree)."}
   }}
  ]
 }

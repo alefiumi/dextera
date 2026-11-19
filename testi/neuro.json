@@ -1,0 +1,635 @@
+{
+ "version": 1,
+ "tipo": "neuro",
+ "nota": "Corso di neurologia (Dott. Andrea Benevento): strutture e concetti dei satelliti del corso. Fonte «lezione»: guida e slide del corso (SNC.pptx), riscritte in breve; fonte «AI»: aggiunte o correzioni dell'AI, con la nota che riporta cosa diceva la guida. «figura»: id del cervello 2D (b.*) o gruppi (g:…) da toccare; «ref»: parte del modello 3D; «lezione»: dove se ne parla nel corso.",
+ "campi": {"nome": "Nome", "dove": "Dove si trova", "funzione": "Funzione", "lesione": "Se è danneggiata", "connessioni": "Connessioni e vie"},
+ "voci": [
+  {"id": "neuro.neurone", "satellite": "n-neurone", "lezione": "Neurologia_0001; SNC.pptx slide 6", "dati": {
+   "nome": {"valore": "Neurone", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "dove": {"valore": "In tutto il sistema nervoso, centrale e periferico.", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "funzione": {"valore": "Cellula che riceve, integra e trasmette segnali elettrici: è l'unità funzionale del sistema nervoso. È fatto di corpo cellulare (soma), dendriti e assone.", "fonte": "lezione", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "neuro.corpo-cellulare-soma", "satellite": "n-neurone", "lezione": "Neurologia_0001; SNC.pptx slide 6", "dati": {
+   "nome": {"valore": "Corpo cellulare (soma)", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "dove": {"valore": "Al centro del neurone; contiene il nucleo, il nucleolo e il citosol.", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "funzione": {"valore": "Centro metabolico del neurone: produce le proteine e i neurotrasmettitori e integra i segnali che arrivano dai dendriti.", "fonte": "lezione", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "neuro.dendriti", "satellite": "n-neurone", "lezione": "Neurologia_0001; SNC.pptx slide 6", "dati": {
+   "nome": {"valore": "Dendriti", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "dove": {"valore": "Prolungamenti ramificati che partono dal corpo cellulare.", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "funzione": {"valore": "Ricevono i segnali dagli altri neuroni attraverso i recettori e li portano verso il corpo cellulare.", "fonte": "lezione", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "neuro.cono-d-emergenza", "satellite": "n-neurone", "lezione": "Neurologia_0001; SNC.pptx slide 7", "dati": {
+   "nome": {"valore": "Cono d'emergenza", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "dove": {"valore": "Alla base dell'assone, dove l'assone nasce dal corpo cellulare.", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "funzione": {"valore": "Zona di innesco: se i segnali che arrivano la portano alla soglia, qui nasce il potenziale d'azione.", "fonte": "lezione", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "neuro.assone", "satellite": "n-neurone", "lezione": "Neurologia_0001; SNC.pptx slide 6", "dati": {
+   "nome": {"valore": "Assone", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "dove": {"valore": "Prolungamento unico che parte dal cono d'emergenza e arriva ai terminali sinaptici.", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "funzione": {"valore": "Conduce il potenziale d'azione dal corpo cellulare verso il neurone o il muscolo successivo.", "fonte": "lezione", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "neuro.guaina-mielinica", "satellite": "n-neurone", "lezione": "Neurologia_0001; SNC.pptx slide 6", "dati": {
+   "nome": {"valore": "Guaina mielinica", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "dove": {"valore": "Rivestimento a manicotti intorno a molti assoni.", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "funzione": {"valore": "Isola l'assone: il segnale non si disperde e la conduzione diventa saltatoria, molto più veloce e con meno energia.", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "lesione": {"valore": "Se la mielina si danneggia, come nella sclerosi multipla, la conduzione rallenta o si blocca: debolezza, faticabilità, disturbi della sensibilità e della vista.", "fonte": "AI", "stato": "da verificare", "verifica": null, "nota": "La guida aggiunge che la sclerosi multipla colpisce il nervo frenico: il frenico è un nervo periferico, la sclerosi multipla danneggia la mielina del sistema nervoso centrale."}
+  }},
+  {"id": "neuro.nodi-di-ranvier", "satellite": "n-neurone", "lezione": "Neurologia_0001; SNC.pptx slide 6", "dati": {
+   "nome": {"valore": "Nodi di Ranvier", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "dove": {"valore": "Brevi tratti di assone scoperti, tra un manicotto di mielina e il successivo.", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "funzione": {"valore": "Qui il potenziale d'azione si rigenera e salta da un nodo all'altro (conduzione saltatoria).", "fonte": "lezione", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "neuro.terminale-presinaptico", "satellite": "n-neurone", "lezione": "Neurologia_0001; SNC.pptx slide 6 e 8", "dati": {
+   "nome": {"valore": "Terminale presinaptico", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "dove": {"valore": "All'estremità dell'assone (bottoni sinaptici).", "fonte": "AI", "stato": "da verificare", "verifica": null, "nota": "Nella lezione è chiamato anche «cono di Hodgkin»: il termine non si trova nei testi di anatomia."},
+   "funzione": {"valore": "Contiene le vescicole con i neurotrasmettitori, che libera nella sinapsi quando arriva il potenziale d'azione.", "fonte": "lezione", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "neuro.potenziale-di-riposo", "satellite": "n-potenziale", "lezione": "Neurologia_0001; SNC.pptx slide 7", "dati": {
+   "nome": {"valore": "Potenziale di riposo", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "dove": {"valore": "Sulla membrana del neurone a riposo.", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "funzione": {"valore": "Differenza di carica tra dentro e fuori il neurone, circa −70 mV: dentro è negativo. È mantenuta dalla diversa concentrazione degli ioni (sodio fuori, potassio dentro) e dalla pompa sodio-potassio.", "fonte": "lezione", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "neuro.pompa-sodio-potassio", "satellite": "n-potenziale", "lezione": "Neurologia_0001", "dati": {
+   "nome": {"valore": "Pompa sodio-potassio", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "dove": {"valore": "Nella membrana del neurone.", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "funzione": {"valore": "Usa ATP per portare fuori 3 ioni sodio e dentro 2 ioni potassio: mantiene il potenziale di riposo.", "fonte": "lezione", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "neuro.soglia", "satellite": "n-potenziale", "lezione": "Neurologia_0001; SNC.pptx slide 7", "dati": {
+   "nome": {"valore": "Soglia", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "dove": {"valore": "Al cono d'emergenza.", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "funzione": {"valore": "Valore (circa −50 mV) che la membrana deve raggiungere perché parta il potenziale d'azione: sotto soglia non parte niente, sopra parte sempre intero (tutto o nulla).", "fonte": "lezione", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "neuro.potenziale-d-azione", "satellite": "n-potenziale", "lezione": "Neurologia_0001; SNC.pptx slide 7", "dati": {
+   "nome": {"valore": "Potenziale d'azione", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "dove": {"valore": "Nasce al cono d'emergenza e corre lungo l'assone.", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "funzione": {"valore": "Impulso elettrico del neurone: si aprono i canali del sodio, il sodio entra e la membrana sale fino a circa +35 mV (depolarizzazione); poi il potassio esce e la membrana torna negativa (ripolarizzazione).", "fonte": "AI", "stato": "da verificare", "verifica": null, "nota": "La guida dice che entrano sodio, potassio e calcio: nel potenziale d'azione il sodio entra e il potassio esce."}
+  }},
+  {"id": "neuro.conduzione-saltatoria", "satellite": "n-potenziale", "lezione": "Neurologia_0001", "dati": {
+   "nome": {"valore": "Conduzione saltatoria", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "dove": {"valore": "Negli assoni con la mielina.", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "funzione": {"valore": "Il potenziale d'azione salta da un nodo di Ranvier al successivo: più veloce e con meno energia della conduzione continua.", "fonte": "lezione", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "neuro.velocita-di-conduzione", "satellite": "n-potenziale", "lezione": "Neurologia_0001; SNC.pptx slide 7", "dati": {
+   "nome": {"valore": "Velocità di conduzione", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "dove": {"valore": "Lungo l'assone.", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "funzione": {"valore": "Dipende dal diametro della fibra e dalla mielina: le fibre grandi e mieliniche A-alfa arrivano a circa 120 m/s.", "fonte": "lezione", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "neuro.sinapsi", "satellite": "n-sinapsi", "lezione": "Neurologia_0001; SNC.pptx slide 8", "dati": {
+   "nome": {"valore": "Sinapsi", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "dove": {"valore": "Punto di contatto tra il terminale di un neurone e la cellula successiva (neurone, muscolo o ghiandola).", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "funzione": {"valore": "Trasmette il segnale da una cellula all'altra, quasi sempre con un messaggero chimico (il neurotrasmettitore).", "fonte": "lezione", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "neuro.spazio-sinaptico", "satellite": "n-sinapsi", "lezione": "Neurologia_0001; SNC.pptx slide 8", "dati": {
+   "nome": {"valore": "Spazio sinaptico", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "dove": {"valore": "Piccola fessura tra la membrana presinaptica e quella postsinaptica.", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "funzione": {"valore": "Qui viene liberato il neurotrasmettitore, che lo attraversa e si lega ai recettori della cellula dopo.", "fonte": "lezione", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "neuro.calcio-nel-terminale", "satellite": "n-sinapsi", "lezione": "Neurologia_0001; SNC.pptx slide 8", "dati": {
+   "nome": {"valore": "Calcio nel terminale", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "dove": {"valore": "Nel terminale presinaptico.", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "funzione": {"valore": "Quando arriva il potenziale d'azione si aprono canali del calcio; il calcio che entra fa fondere le vescicole con la membrana e il neurotrasmettitore esce per esocitosi.", "fonte": "AI", "stato": "da verificare", "verifica": null, "nota": "La guida dice che il calcio «contrae» la vescicola per le sue proprietà contrattili: il calcio attiva le proteine che fanno fondere la vescicola con la membrana."}
+  }},
+  {"id": "neuro.ricaptazione", "satellite": "n-sinapsi", "lezione": "Neurologia_0001; SNC.pptx slide 8 e 9", "dati": {
+   "nome": {"valore": "Ricaptazione", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "dove": {"valore": "Trasportatori sulla membrana del terminale presinaptico (per la serotonina il SERT).", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "funzione": {"valore": "Riportano il neurotrasmettitore dentro il terminale e chiudono il segnale; molti farmaci antidepressivi la bloccano per lasciare più serotonina nella sinapsi.", "fonte": "lezione", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "neuro.monoamino-ossidasi-mao", "satellite": "n-sinapsi", "lezione": "Neurologia_0001; SNC.pptx slide 8 e 9", "dati": {
+   "nome": {"valore": "Monoamino ossidasi (MAO)", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "dove": {"valore": "Enzimi del terminale presinaptico.", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "funzione": {"valore": "Degradano i neurotrasmettitori come serotonina, noradrenalina e dopamina; i farmaci che bloccano le MAO ne lasciano di più.", "fonte": "lezione", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "neuro.giunzione-neuromuscolare", "satellite": "n-sinapsi", "lezione": "SNC.pptx slide 10", "dati": {
+   "nome": {"valore": "Giunzione neuromuscolare", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "dove": {"valore": "Dove l'assone del motoneurone tocca una fibra muscolare.", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "funzione": {"valore": "È la sinapsi tra nervo e muscolo: il motoneurone libera acetilcolina e la fibra muscolare si contrae.", "fonte": "AI", "stato": "da verificare", "verifica": null, "nota": "Il neurotrasmettitore (acetilcolina) è aggiunto dall'AI."}
+  }},
+  {"id": "neuro.neuroni-sensoriali", "satellite": "n-riflessi", "lezione": "Neurologia_0001; SNC.pptx slide 10", "dati": {
+   "nome": {"valore": "Neuroni sensoriali", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "dove": {"valore": "Dai recettori del corpo verso il sistema nervoso centrale (afferenti).", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "funzione": {"valore": "Portano le informazioni di meccanocettori, nocicettori, termocettori e propriocettori.", "fonte": "lezione", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "neuro.interneuroni", "satellite": "n-riflessi", "lezione": "Neurologia_0001; SNC.pptx slide 10", "dati": {
+   "nome": {"valore": "Interneuroni", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "dove": {"valore": "Dentro il sistema nervoso centrale, tra neuroni sensoriali e motori.", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "funzione": {"valore": "Ricevono dai neuroni sensoriali e trasmettono ai neuroni motori: collegano ed elaborano.", "fonte": "lezione", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "neuro.motoneuroni", "satellite": "n-riflessi", "lezione": "Neurologia_0001; SNC.pptx slide 10", "dati": {
+   "nome": {"valore": "Motoneuroni", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "dove": {"valore": "Dal sistema nervoso centrale ai muscoli (efferenti); nel midollo stanno nel corno anteriore.", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "funzione": {"valore": "Portano il comando motorio ai muscoli effettori.", "fonte": "lezione", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "neuro.riflesso-miotatico", "satellite": "n-riflessi", "lezione": "SNC.pptx slide 10", "dati": {
+   "nome": {"valore": "Riflesso miotatico", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "dove": {"valore": "Arco tra muscolo e midollo spinale, senza passare dalla corteccia.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "funzione": {"valore": "Quando un muscolo viene stirato il fuso neuromuscolare lo segnala al midollo, che fa contrarre lo stesso muscolo (es. riflesso rotuleo); intanto l'antagonista viene inibito.", "fonte": "AI", "stato": "da verificare", "verifica": null, "nota": "La slide nomina solo il riflesso miotatico: la descrizione è dell'AI."}
+  }},
+  {"id": "neuro.organi-tendinei-del-golgi", "satellite": "n-riflessi", "lezione": "Neurologia_0001", "dati": {
+   "nome": {"valore": "Organi tendinei del Golgi", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "dove": {"valore": "Al passaggio tra muscolo e tendine.", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "funzione": {"valore": "Propriocettori che misurano la tensione del muscolo.", "fonte": "lezione", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "neuro.riflesso-miotatico-inverso", "satellite": "n-riflessi", "lezione": "Neurologia_0001", "dati": {
+   "nome": {"valore": "Riflesso miotatico inverso", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "dove": {"valore": "Arco spinale: non sale alla corteccia.", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "funzione": {"valore": "Con una tensione troppo alta gli organi tendinei del Golgi attivano nel midollo un interneurone inibitorio: il muscolo in tensione si rilascia (e l'antagonista viene facilitato). Protegge muscolo e tendine.", "fonte": "AI", "stato": "da verificare", "verifica": null, "nota": "La guida dice che un interneurone eccitatorio fa contrarre l'antagonista: nei testi il riflesso agisce soprattutto inibendo il muscolo in tensione."}
+  }},
+  {"id": "neuro.sostanza-grigia", "satellite": "n-sostanze", "lezione": "Neurologia_0002; SNC.pptx slide 11", "dati": {
+   "nome": {"valore": "Sostanza grigia", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "dove": {"valore": "Nell'encefalo fuori (corteccia) e nei nuclei profondi; nel midollo dentro, a forma di farfalla.", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "funzione": {"valore": "È fatta dai corpi cellulari e dai dendriti: elabora le informazioni.", "fonte": "lezione", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "neuro.sostanza-bianca", "satellite": "n-sostanze", "lezione": "Neurologia_0002; SNC.pptx slide 11", "ref": "White matter of telencephalon", "figura": ["b.white-matter-of-telencephalon"], "dati": {
+   "nome": {"valore": "Sostanza bianca", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "dove": {"valore": "Nell'encefalo dentro, sotto la corteccia; nel midollo fuori, intorno alla sostanza grigia.", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "funzione": {"valore": "È fatta da fasci di assoni con la mielina (che le dà il colore bianco): trasporta le informazioni tra zone lontane.", "fonte": "lezione", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "neuro.corpo-calloso", "satellite": "n-sostanze", "lezione": "SNC.pptx slide 11", "ref": "Corpus callosum", "figura": ["b.corpus-callosum"], "dati": {
+   "nome": {"valore": "Corpo calloso", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "dove": {"valore": "In profondità tra i due emisferi, sul fondo della scissura interemisferica.", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "funzione": {"valore": "Grande fascio di sostanza bianca che collega i due emisferi.", "fonte": "lezione", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "neuro.sistema-nervoso-centrale", "satellite": "n-encefalo", "lezione": "Neurologia_0001; SNC.pptx slide 2", "dati": {
+   "nome": {"valore": "Sistema nervoso centrale", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "dove": {"valore": "Nel cranio e nel canale vertebrale.", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "funzione": {"valore": "È formato da encefalo e midollo spinale: riceve, elabora e comanda.", "fonte": "lezione", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "neuro.encefalo", "satellite": "n-encefalo", "lezione": "Neurologia_0001; SNC.pptx slide 3", "dati": {
+   "nome": {"valore": "Encefalo", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "dove": {"valore": "Nella cavità cranica.", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "funzione": {"valore": "Comprende cervello, cervelletto e tronco dell'encefalo. Il docente insiste: encefalo e cervello non sono la stessa cosa.", "fonte": "lezione", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "neuro.cervello", "satellite": "n-encefalo", "lezione": "Neurologia_0001", "dati": {
+   "nome": {"valore": "Cervello", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "dove": {"valore": "Parte dell'encefalo: telencefalo più diencefalo.", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "funzione": {"valore": "È solo una parte dell'encefalo; è un organo, non un muscolo.", "fonte": "lezione", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "neuro.telencefalo", "satellite": "n-encefalo", "lezione": "Neurologia_0001", "figura": ["g:frontale", "g:parietale", "g:temporale", "g:occipitale"], "dati": {
+   "nome": {"valore": "Telencefalo", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "dove": {"valore": "Parte più grande e più in alto del cervello: i due emisferi.", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "funzione": {"valore": "Comprende la corteccia cerebrale, la sostanza bianca sotto e i nuclei profondi.", "fonte": "lezione", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "neuro.diencefalo", "satellite": "n-encefalo", "lezione": "Neurologia_0001", "figura": ["g:diencefalo"], "dati": {
+   "nome": {"valore": "Diencefalo", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "dove": {"valore": "Al centro del cervello, tra telencefalo e tronco dell'encefalo.", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "funzione": {"valore": "Comprende talamo e ipotalamo.", "fonte": "lezione", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "neuro.tronco-dell-encefalo", "satellite": "n-tronco", "lezione": "Neurologia_0001; SNC.pptx slide 15", "figura": ["g:tronco"], "dati": {
+   "nome": {"valore": "Tronco dell'encefalo", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "dove": {"valore": "Tra diencefalo e midollo spinale, davanti al cervelletto; è lungo circa 7–8 cm.", "fonte": "AI", "stato": "da verificare", "verifica": null, "nota": "La guida dice 15–20 cm: nei testi il tronco è lungo circa 7–8 cm."},
+   "funzione": {"valore": "Governa funzioni vitali come respiro, battito e pressione; vi passano le grandi vie tra cervello e midollo e vi nascono 10 delle 12 paia di nervi cranici (dal III al XII).", "fonte": "AI", "stato": "da verificare", "verifica": null, "nota": "La guida dice 11 paia: dal tronco nascono i nervi dal III al XII, cioè 10 paia (I e II no)."},
+   "lesione": {"valore": "Il danno ai centri del bulbo e del ponte può portare a morte per arresto del respiro o del cuore, o a quadri gravissimi come la sindrome locked-in.", "fonte": "lezione", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "neuro.mesencefalo", "satellite": "n-tronco", "lezione": "Neurologia_0001; SNC.pptx slide 15", "ref": "Midbrain", "figura": ["b.midbrain"], "dati": {
+   "nome": {"valore": "Mesencefalo", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "dove": {"valore": "Parte più alta del tronco, sotto il diencefalo.", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "funzione": {"valore": "Contiene i collicoli, il nucleo rosso, la sostanza nera e il grigio periacqueduttale.", "fonte": "lezione", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "neuro.collicoli-superiori-e-inferiori", "satellite": "n-tronco", "lezione": "SNC.pptx slide 15", "ref": "Superior colliculus", "dati": {
+   "nome": {"valore": "Collicoli superiori e inferiori", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "dove": {"valore": "Sul tetto (dietro) del mesencefalo: due superiori e due inferiori.", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "funzione": {"valore": "I superiori servono all'orientamento visivo e a integrare i sensi; gli inferiori all'analisi uditiva.", "fonte": "lezione", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "neuro.nucleo-rosso", "satellite": "n-tronco", "lezione": "SNC.pptx slide 15", "ref": "Red nucleus", "dati": {
+   "nome": {"valore": "Nucleo rosso", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "dove": {"valore": "Nel tegmento del mesencefalo.", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "funzione": {"valore": "Nucleo motorio: partecipa al controllo dei movimenti.", "fonte": "lezione", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "neuro.sostanza-nera", "satellite": "n-tronco", "lezione": "SNC.pptx slide 15", "dati": {
+   "nome": {"valore": "Sostanza nera", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "dove": {"valore": "Nella parte anteriore del mesencefalo.", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "funzione": {"valore": "Contiene neuroni che producono dopamina, collegati ai gangli della base.", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "lesione": {"valore": "La perdita dei suoi neuroni a dopamina causa la malattia di Parkinson: lentezza, rigidità, tremore a riposo.", "fonte": "AI", "stato": "da verificare", "verifica": null, "nota": "Collegamento con il Parkinson aggiunto dall'AI."}
+  }},
+  {"id": "neuro.grigio-periacqueduttale", "satellite": "n-tronco", "lezione": "SNC.pptx slide 15", "ref": "Aqueduct of midbrain", "dati": {
+   "nome": {"valore": "Grigio periacqueduttale", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "dove": {"valore": "Intorno all'acquedotto del mesencefalo.", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "funzione": {"valore": "Centro dell'analgesia endogena: può ridurre il dolore attivando vie discendenti.", "fonte": "lezione", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "neuro.ponte", "satellite": "n-tronco", "lezione": "Neurologia_0001; SNC.pptx slide 15", "ref": "Pons", "figura": ["b.pons"], "dati": {
+   "nome": {"valore": "Ponte", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "dove": {"valore": "Parte di mezzo del tronco, tra mesencefalo e bulbo, davanti al cervelletto.", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "funzione": {"valore": "Punto di sinapsi delle vie motorie che vanno dalla corteccia al cervelletto; partecipa al controllo del respiro.", "fonte": "lezione", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "neuro.bulbo-midollo-allungato", "satellite": "n-tronco", "lezione": "Neurologia_0001; SNC.pptx slide 15", "ref": "Medulla oblongata", "figura": ["b.medulla-oblongata"], "dati": {
+   "nome": {"valore": "Bulbo (midollo allungato)", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "dove": {"valore": "Parte più bassa del tronco, continua con il midollo spinale.", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "funzione": {"valore": "Collega tronco e midollo; ospita i centri del respiro e del battito; qui si incrociano le vie motorie (decussazione delle piramidi).", "fonte": "lezione", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "neuro.piramidi-del-bulbo", "satellite": "n-tronco", "lezione": "Neurologia_0005; SNC.pptx slide 23", "ref": "Pyramid of medulla oblongata", "dati": {
+   "nome": {"valore": "Piramidi del bulbo", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "dove": {"valore": "Sulla faccia anteriore del bulbo.", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "funzione": {"valore": "Vi passa il fascio cortico-spinale; nella loro parte bassa la maggior parte delle fibre si incrocia: per questo un emisfero comanda la metà opposta del corpo.", "fonte": "lezione", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "neuro.nuclei-vestibolari", "satellite": "n-tronco", "lezione": "SNC.pptx slide 16", "ref": "Vestibular nuclei", "dati": {
+   "nome": {"valore": "Nuclei vestibolari", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "dove": {"valore": "Nel tronco, tra ponte e bulbo.", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "funzione": {"valore": "Ricevono le informazioni sull'equilibrio e le mandano al cervelletto.", "fonte": "lezione", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "neuro.cervelletto", "satellite": "n-cervelletto", "lezione": "Neurologia_0001; Neurologia_0004; SNC.pptx slide 16", "figura": ["g:cerebello"], "dati": {
+   "nome": {"valore": "Cervelletto", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "dove": {"valore": "Nella fossa cranica posteriore, dietro il tronco e sotto il lobo occipitale.", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "funzione": {"valore": "Pianifica e coordina i movimenti e li corregge mentre avvengono (correzione online); integra equilibrio (nuclei vestibolari), propriocezione (midollo) e comandi della corteccia motoria.", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "lesione": {"valore": "Atassia: movimenti scoordinati, dismetria (si sbaglia la misura del movimento) e perdita dell'equilibrio.", "fonte": "lezione", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "neuro.lobo-flocculonodulare", "satellite": "n-cervelletto", "lezione": "Neurologia_0001", "ref": "Flocculus", "figura": ["b.flocculus", "b.nodule-of-vermis"], "dati": {
+   "nome": {"valore": "Lobo flocculonodulare", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "dove": {"valore": "Nella parte anteriore e inferiore del cervelletto (flocculo e nodulo).", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "funzione": {"valore": "È la parte più antica del cervelletto (archicervelletto): serve all'equilibrio.", "fonte": "lezione", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "neuro.cellule-di-purkinje", "satellite": "n-cervelletto", "lezione": "Neurologia_0001", "dati": {
+   "nome": {"valore": "Cellule di Purkinje", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "dove": {"valore": "Nella corteccia del cervelletto.", "fonte": "AI", "stato": "da verificare", "verifica": null, "nota": "La guida le descrive «lungo il cuore e il cervelletto»: stanno solo nella corteccia del cervelletto."},
+   "funzione": {"valore": "Grandi neuroni con un albero di dendriti enorme: sono l'unica uscita della corteccia del cervelletto e inibiscono i nuclei profondi.", "fonte": "AI", "stato": "da verificare", "verifica": null, "nota": "Ruolo di uscita inibitoria aggiunto dall'AI."}
+  }},
+  {"id": "neuro.oliva-bulbare", "satellite": "n-cervelletto", "lezione": "Neurologia_0004", "ref": "Olive", "dati": {
+   "nome": {"valore": "Oliva bulbare", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "dove": {"valore": "Rilievo sulla faccia laterale del bulbo (nucleo olivare inferiore).", "fonte": "AI", "stato": "da verificare", "verifica": null, "nota": "La guida la mette nel cervelletto: il nucleo olivare sta nel bulbo e manda fibre al cervelletto."},
+   "funzione": {"valore": "Manda al cervelletto i segnali di errore che servono a correggere il movimento in tempo reale.", "fonte": "lezione", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "neuro.talamo", "satellite": "n-limbico", "lezione": "Neurologia_0001; SNC.pptx slide 14", "ref": "Thalamus", "figura": ["b.thalamus"], "dati": {
+   "nome": {"valore": "Talamo", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "dove": {"valore": "Al centro del diencefalo, ai lati del terzo ventricolo.", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "funzione": {"valore": "Stazione di smistamento: riceve le informazioni sensoriali e le manda alla corteccia.", "fonte": "lezione", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "neuro.ipotalamo", "satellite": "n-limbico", "lezione": "Neurologia_0001; SNC.pptx slide 14", "ref": "Hypothalamus", "figura": ["b.hypothalamus"], "dati": {
+   "nome": {"valore": "Ipotalamo", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "dove": {"valore": "Sotto il talamo, sopra l'ipofisi.", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "funzione": {"valore": "Regola l'omeostasi (temperatura, fame, sete), l'orologio biologico e la secrezione degli ormoni attraverso l'ipofisi.", "fonte": "lezione", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "neuro.sistema-limbico", "satellite": "n-limbico", "lezione": "Neurologia_0001", "figura": ["g:limbico"], "dati": {
+   "nome": {"valore": "Sistema limbico", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "dove": {"valore": "Strutture profonde sul lato interno degli emisferi.", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "funzione": {"valore": "Insieme di strutture (amigdala, ippocampo, giro del cingolo, con talamo e ipotalamo) per le emozioni e la memoria.", "fonte": "lezione", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "neuro.amigdala", "satellite": "n-limbico", "lezione": "Neurologia_0003; SNC.pptx slide 14", "ref": "Amygdaloid body", "dati": {
+   "nome": {"valore": "Amigdala", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "dove": {"valore": "In profondità nel lobo temporale, davanti all'ippocampo.", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "funzione": {"valore": "Innesca le risposte di paura, ansia e stress e attiva il simpatico per la reazione di attacco o fuga.", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "lesione": {"valore": "Se manca il controllo della corteccia prefrontale su di lei, possono comparire ansia e attacchi di panico; se è danneggiata, si riduce la percezione del pericolo.", "fonte": "lezione", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "neuro.ippocampo", "satellite": "n-limbico", "lezione": "Neurologia_0002; SNC.pptx slide 14", "ref": "Hippocampus", "figura": ["b.hippocampus"], "dati": {
+   "nome": {"valore": "Ippocampo", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "dove": {"valore": "Nella parte mediale del lobo temporale.", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "funzione": {"valore": "Forma e consolida la memoria a lungo termine.", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "lesione": {"valore": "È molto sensibile alla mancanza di ossigeno: dopo un'ipossia breve possono restare disturbi della memoria.", "fonte": "lezione", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "neuro.corteccia-cingolata-anteriore", "satellite": "n-limbico", "lezione": "Neurologia_0003; SNC.pptx slide 14", "figura": ["b.cingulate-gyrus-and-sulcus-middle-anterior-part"], "dati": {
+   "nome": {"valore": "Corteccia cingolata anteriore", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "dove": {"valore": "Sulla faccia interna del lobo frontale, nella parte anteriore del giro del cingolo.", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "funzione": {"valore": "Controllo cognitivo: inibisce le risposte che interferiscono e regola le risposte agli stimoli emotivi.", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "lesione": {"valore": "Difficoltà a frenare risposte impulsive di attacco, fuga o blocco (freezing).", "fonte": "lezione", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "neuro.meningi", "satellite": "n-protezione", "lezione": "Neurologia_0001; SNC.pptx slide 18", "dati": {
+   "nome": {"valore": "Meningi", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "dove": {"valore": "Avvolgono encefalo e midollo spinale.", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "funzione": {"valore": "Tre membrane di protezione: dura madre, aracnoide e pia madre, dall'esterno all'interno.", "fonte": "lezione", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "neuro.dura-madre", "satellite": "n-protezione", "lezione": "Neurologia_0001", "ref": "Spinal dura", "dati": {
+   "nome": {"valore": "Dura madre", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "dove": {"valore": "La meninge più esterna; nel cranio aderisce all'osso.", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "funzione": {"valore": "Membrana spessa e resistente di collagene: protegge meccanicamente.", "fonte": "lezione", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "neuro.spazio-subdurale", "satellite": "n-protezione", "lezione": "Neurologia_0001", "dati": {
+   "nome": {"valore": "Spazio subdurale", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "dove": {"valore": "Tra dura madre e aracnoide.", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "funzione": {"valore": "Normalmente è solo virtuale; lo attraversano le vene «a ponte» che vanno ai seni della dura madre.", "fonte": "AI", "stato": "da verificare", "verifica": null, "nota": "La guida dice che è molto vascolarizzato: è uno spazio virtuale attraversato dalle vene a ponte."},
+   "lesione": {"valore": "Nel trauma cranico la rottura delle vene a ponte riempie lo spazio di sangue (ematoma subdurale), che comprime il cervello.", "fonte": "AI", "stato": "da verificare", "verifica": null, "nota": "La guida dice che è la sede dell'80–90% delle emorragie da trauma cranico: il numero non è verificato."}
+  }},
+  {"id": "neuro.aracnoide", "satellite": "n-protezione", "lezione": "Neurologia_0001", "dati": {
+   "nome": {"valore": "Aracnoide", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "dove": {"valore": "La meninge di mezzo, tra dura e pia madre.", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "funzione": {"valore": "Membrana sottile con trabecole a «zampa di ragno» che la legano alla pia madre.", "fonte": "lezione", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "neuro.spazio-subaracnoideo", "satellite": "n-protezione", "lezione": "Neurologia_0001; SNC.pptx slide 5", "dati": {
+   "nome": {"valore": "Spazio subaracnoideo", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "dove": {"valore": "Tra aracnoide e pia madre.", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "funzione": {"valore": "Contiene il liquor e i vasi; il liquor vi circola intorno a encefalo e midollo.", "fonte": "lezione", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "neuro.pia-madre", "satellite": "n-protezione", "lezione": "Neurologia_0001", "dati": {
+   "nome": {"valore": "Pia madre", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "dove": {"valore": "La meninge più interna, attaccata alla superficie dell'encefalo e del midollo.", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "funzione": {"valore": "Membrana sottilissima che segue tutti i solchi e porta i piccoli vasi.", "fonte": "AI", "stato": "da verificare", "verifica": null, "nota": "La guida dice che è di collagene di tipo 2: il dato non è verificato."}
+  }},
+  {"id": "neuro.liquor-liquido-cerebrospinale", "satellite": "n-protezione", "lezione": "Neurologia_0001; SNC.pptx slide 5", "dati": {
+   "nome": {"valore": "Liquor (liquido cerebrospinale)", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "dove": {"valore": "Nei ventricoli e nello spazio subaracnoideo; lo producono i plessi corioidei dei ventricoli.", "fonte": "AI", "stato": "da verificare", "verifica": null, "nota": "Produzione nei plessi corioidei aggiunta dall'AI."},
+   "funzione": {"valore": "Fa galleggiare l'encefalo (che pesa circa 1,3–1,4 kg) riducendone molto il peso, lo protegge dagli urti e partecipa agli scambi di nutrienti.", "fonte": "AI", "stato": "da verificare", "verifica": null, "nota": "La guida dice che l'encefalo pesa 1,7 kg: nei testi il peso medio è circa 1,3–1,4 kg."},
+   "lesione": {"valore": "Nel trauma senza fratture (es. colpo di frusta) il cervello può urtare contro il cranio: gli assoni si stirano e si rompono (danno assonale diffuso).", "fonte": "lezione", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "neuro.ventricoli-cerebrali", "satellite": "n-protezione", "lezione": "Neurologia_0001; SNC.pptx slide 5 e 11", "figura": ["g:ventricoli"], "dati": {
+   "nome": {"valore": "Ventricoli cerebrali", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "dove": {"valore": "Cavità dentro l'encefalo: due ventricoli laterali, il terzo e il quarto, uniti dall'acquedotto.", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "funzione": {"valore": "Contengono il liquor, che qui viene prodotto e circola.", "fonte": "lezione", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "neuro.barriera-ematoencefalica", "satellite": "n-protezione", "lezione": "Neurologia_0001; SNC.pptx slide 5", "dati": {
+   "nome": {"valore": "Barriera ematoencefalica", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "dove": {"valore": "Nella parete dei capillari del cervello: cellule dei capillari unite strettamente, circondate dai piedi degli astrociti.", "fonte": "AI", "stato": "da verificare", "verifica": null, "nota": "La guida la attribuisce agli astrociti e al doppio strato fosfolipidico: nei testi la barriera è data soprattutto dalle cellule dei capillari unite da giunzioni strette; gli astrociti la sostengono."},
+   "funzione": {"valore": "Filtra ciò che passa dal sangue al cervello: passano liberamente gas come ossigeno e anidride carbonica e piccole molecole che si sciolgono nei grassi; glucosio e altre sostanze solo con trasportatori.", "fonte": "AI", "stato": "da verificare", "verifica": null, "nota": "La guida dice che passano liberamente anche gli ioni: gli ioni passano solo attraverso canali e trasportatori."}
+  }},
+  {"id": "neuro.lobo-frontale", "satellite": "n-lobi", "lezione": "Neurologia_0002; SNC.pptx slide 12", "figura": ["g:frontale"], "dati": {
+   "nome": {"valore": "Lobo frontale", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "dove": {"valore": "Parte anteriore dell'emisfero, davanti al solco centrale e sopra il solco laterale.", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "funzione": {"valore": "Movimento volontario, funzioni esecutive (decidere, pianificare, memoria di lavoro), comportamento sociale e produzione del linguaggio.", "fonte": "lezione", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "neuro.lobo-parietale", "satellite": "n-lobi", "lezione": "Neurologia_0002; Neurologia_0005", "figura": ["g:parietale"], "dati": {
+   "nome": {"valore": "Lobo parietale", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "dove": {"valore": "Dietro il solco centrale, sopra il solco laterale, davanti al lobo occipitale.", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "funzione": {"valore": "Sensibilità del corpo, orientamento nello spazio e schema corporeo.", "fonte": "lezione", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "neuro.lobo-temporale", "satellite": "n-lobi", "lezione": "Neurologia_0002", "figura": ["g:temporale"], "dati": {
+   "nome": {"valore": "Lobo temporale", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "dove": {"valore": "Sotto il solco laterale (di Silvio).", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "funzione": {"valore": "Udito, comprensione del linguaggio (area di Wernicke) e memoria (ippocampo).", "fonte": "lezione", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "neuro.lobo-occipitale", "satellite": "n-lobi", "lezione": "Neurologia_0002", "figura": ["g:occipitale"], "dati": {
+   "nome": {"valore": "Lobo occipitale", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "dove": {"valore": "Parte posteriore dell'emisfero, dietro il solco parieto-occipitale.", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "funzione": {"valore": "Vista: corteccia visiva primaria e aree visive associative.", "fonte": "lezione", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "neuro.solco-centrale-di-rolando", "satellite": "n-lobi", "lezione": "Neurologia_0002; SNC.pptx slide 12", "ref": "Central sulcus", "figura": ["b.central-sulcus"], "dati": {
+   "nome": {"valore": "Solco centrale (di Rolando)", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "dove": {"valore": "Sulla faccia laterale dell'emisfero, dall'alto verso il basso e in avanti.", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "funzione": {"valore": "Punto di riferimento: separa il lobo frontale dal parietale, cioè il giro precentrale (motorio) dal postcentrale (sensitivo).", "fonte": "lezione", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "neuro.solco-laterale-di-silvio", "satellite": "n-lobi", "lezione": "Neurologia_0002; SNC.pptx slide 12", "figura": ["g:solcolaterale"], "dati": {
+   "nome": {"valore": "Solco laterale (di Silvio)", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "dove": {"valore": "Sulla faccia laterale dell'emisfero.", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "funzione": {"valore": "Separa il lobo temporale dal frontale e dal parietale; intorno stanno le aree del linguaggio.", "fonte": "lezione", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "neuro.solco-parieto-occipitale", "satellite": "n-lobi", "lezione": "Neurologia_0002", "ref": "Parieto-occipital sulcus", "figura": ["b.parieto-occipital-sulcus"], "dati": {
+   "nome": {"valore": "Solco parieto-occipitale", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "dove": {"valore": "Sulla faccia mediale dell'emisfero.", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "funzione": {"valore": "Separa il lobo parietale dall'occipitale.", "fonte": "AI", "stato": "da verificare", "verifica": null, "nota": "La guida attribuisce questa separazione al solco intraparietale, che invece divide il lobulo parietale superiore dall'inferiore."}
+  }},
+  {"id": "neuro.scissura-calcarina", "satellite": "n-lobi", "lezione": "Neurologia_0002", "ref": "Calcarine sulcus", "figura": ["b.calcarine-sulcus"], "dati": {
+   "nome": {"valore": "Scissura calcarina", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "dove": {"valore": "Sulla faccia mediale del lobo occipitale.", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "funzione": {"valore": "Intorno a lei sta la corteccia visiva primaria (area 17).", "fonte": "lezione", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "neuro.aree-di-brodmann", "satellite": "n-lobi", "lezione": "Neurologia_0002", "dati": {
+   "nome": {"valore": "Aree di Brodmann", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "dove": {"valore": "Su tutta la corteccia cerebrale.", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "funzione": {"valore": "Mappa della corteccia in 52 aree, divise da Brodmann in base all'aspetto delle cellule al microscopio; si usano ancora per indicare le aree funzionali (es. area 4 motoria).", "fonte": "lezione", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "neuro.giro-precentrale", "satellite": "n-motorio", "lezione": "Neurologia_0003; SNC.pptx slide 12", "ref": "Precentral gyrus", "figura": ["b.precentral-gyrus"], "dati": {
+   "nome": {"valore": "Giro precentrale", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "dove": {"valore": "Nel lobo frontale, subito davanti al solco centrale.", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "funzione": {"valore": "Sede della corteccia motoria primaria (area 4).", "fonte": "lezione", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "neuro.corteccia-motoria-primaria-m1-area-4", "satellite": "n-motorio", "lezione": "Neurologia_0001; Neurologia_0003; Neurologia_0004; SNC.pptx slide 12-13", "ref": "Precentral gyrus", "figura": ["b.precentral-gyrus"], "dati": {
+   "nome": {"valore": "Corteccia motoria primaria (M1, area 4)", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "dove": {"valore": "Nel giro precentrale; ogni parte del corpo ha la sua zona (rappresentazione somatotopica).", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "funzione": {"valore": "Esegue i movimenti volontari: dal suo V strato partono le fibre del fascio cortico-spinale verso i motoneuroni.", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "lesione": {"valore": "Paresi (forza ridotta) o plegia (forza assente) nella metà opposta del corpo, nelle parti che corrispondono alla zona lesa.", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "connessioni": {"valore": "Manda il fascio cortico-spinale al midollo; si incrocia nelle piramidi del bulbo.", "fonte": "lezione", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "neuro.corteccia-premotoria-area-6", "satellite": "n-motorio", "lezione": "Neurologia_0003; Neurologia_0004; SNC.pptx slide 12", "figura": ["b.middle-frontal-gyrus"], "dati": {
+   "nome": {"valore": "Corteccia premotoria (area 6)", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "dove": {"valore": "Nel lobo frontale, davanti alla corteccia motoria primaria.", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "funzione": {"valore": "Programma i movimenti, usa i ritorni sensoriali e codifica le affordance (come si può usare un oggetto); contiene i neuroni specchio (Rizzolatti).", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "lesione": {"valore": "Difficoltà a programmare e organizzare il movimento (aprassia).", "fonte": "lezione", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "neuro.area-motoria-supplementare-sma", "satellite": "n-motorio", "lezione": "Neurologia_0003; Neurologia_0004", "figura": ["b.superior-frontal-gyrus"], "dati": {
+   "nome": {"valore": "Area motoria supplementare (SMA)", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "dove": {"valore": "Nella parte mediale dell'area 6, sulla faccia interna del lobo frontale.", "fonte": "AI", "stato": "da verificare", "verifica": null, "nota": "Nella lezione registrata è attribuita all'area 12 di Brodmann, nelle slide all'area 6: nei testi è la parte mediale dell'area 6."},
+   "funzione": {"valore": "Organizza le sequenze di movimenti complessi e con due mani e frena gli automatismi motori.", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "lesione": {"valore": "Lesione di un lato: sindrome della mano aliena (la mano opposta si muove da sola). Lesione dei due lati: dipendenza dall'ambiente (si usano tutti gli oggetti che si vedono).", "fonte": "lezione", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "neuro.gangli-della-base", "satellite": "n-motorio", "lezione": "Neurologia_0004", "ref": "Caudate nucleus", "dati": {
+   "nome": {"valore": "Gangli della base", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "dove": {"valore": "Nuclei di sostanza grigia in profondità nell'emisfero (nucleo caudato, putamen, globo pallido), collegati alla sostanza nera.", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "funzione": {"valore": "Scelgono e avviano i movimenti, li rendono automatici e li conservano nella memoria procedurale.", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "lesione": {"valore": "Disturbi del movimento: lentezza e rigidità (Parkinson) o movimenti involontari.", "fonte": "AI", "stato": "da verificare", "verifica": null, "nota": "Esempi di lesione aggiunti dall'AI."}
+  }},
+  {"id": "neuro.corteccia-prefrontale-dorsolaterale", "satellite": "n-esecutivo", "lezione": "Neurologia_0002; Neurologia_0003", "figura": ["b.middle-frontal-gyrus", "b.superior-frontal-gyrus"], "dati": {
+   "nome": {"valore": "Corteccia prefrontale dorsolaterale", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "dove": {"valore": "Parte anteriore e laterale del lobo frontale (aree 9 e 46).", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "funzione": {"valore": "Funzioni esecutive: memoria di lavoro, risolvere problemi, pianificare, cambiare strategia; controlla dall'alto l'amigdala.", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "lesione": {"valore": "Sindrome disesecutiva: non si riesce a pianificare, si dimenticano le consegne, si perde flessibilità; più ansia per il minore controllo sull'amigdala.", "fonte": "lezione", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "neuro.corteccia-orbitofrontale", "satellite": "n-esecutivo", "lezione": "Neurologia_0002", "figura": ["b.orbital-gyri"], "dati": {
+   "nome": {"valore": "Corteccia orbitofrontale", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "dove": {"valore": "Sulla faccia inferiore del lobo frontale, sopra le orbite (aree 11 e 47).", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "funzione": {"valore": "Regola il comportamento sociale, la moralità, l'empatia e la fiducia.", "fonte": "AI", "stato": "da verificare", "verifica": null, "nota": "La guida aggiunge che ha la massima innervazione da ossitocina: il dato non è verificato."},
+   "lesione": {"valore": "Cambio di personalità: impulsività, aggressività, disinibizione, comportamento sociale inadatto (caso Phineas Gage, demenza frontotemporale).", "fonte": "lezione", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "neuro.area-di-broca", "satellite": "n-linguaggio", "lezione": "Neurologia_0002; Neurologia_0003; SNC.pptx slide 12", "figura": ["g:broca"], "dati": {
+   "nome": {"valore": "Area di Broca", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "dove": {"valore": "Nel giro frontale inferiore sinistro, nella sua parte posteriore (area 44).", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "funzione": {"valore": "Contiene i programmi motori delle parole e li manda alla corteccia motoria per articolarle.", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "lesione": {"valore": "Afasia di Broca: parla poco e con fatica, in stile telegrafico, ma capisce; è consapevole del problema.", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "connessioni": {"valore": "Collegata all'area di Wernicke dal fascicolo arcuato.", "fonte": "lezione", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "neuro.area-di-wernicke", "satellite": "n-linguaggio", "lezione": "Neurologia_0002; Neurologia_0003; SNC.pptx slide 12", "figura": ["g:wernicke"], "dati": {
+   "nome": {"valore": "Area di Wernicke", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "dove": {"valore": "Nella parte posteriore del giro temporale superiore sinistro (area 22).", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "funzione": {"valore": "Contiene la rappresentazione uditiva delle parole: serve a capire il linguaggio parlato e scritto.", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "lesione": {"valore": "Afasia di Wernicke: parla fluente ma senza senso, con parole sbagliate (parafasie), non capisce e non si accorge del problema (anosognosia).", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "connessioni": {"valore": "Collegata all'area di Broca dal fascicolo arcuato.", "fonte": "lezione", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "neuro.fascicolo-arcuato", "satellite": "n-linguaggio", "lezione": "Neurologia_0003", "dati": {
+   "nome": {"valore": "Fascicolo arcuato", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "dove": {"valore": "Fascio di sostanza bianca dell'emisfero sinistro che gira intorno al fondo del solco laterale.", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "funzione": {"valore": "Collega l'area di Wernicke all'area di Broca: porta ciò che si sente al programma per dirlo.", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "lesione": {"valore": "Afasia di conduzione: parla e capisce, ma non riesce a ripetere parole o frasi.", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "connessioni": {"valore": "Da Wernicke (giro temporale superiore) a Broca (giro frontale inferiore), dentro lo stesso emisfero.", "fonte": "lezione", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "neuro.lateralizzazione-del-linguaggio", "satellite": "n-linguaggio", "lezione": "Neurologia_0002; Neurologia_0003", "dati": {
+   "nome": {"valore": "Lateralizzazione del linguaggio", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "dove": {"valore": "Di solito nell'emisfero sinistro.", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "funzione": {"valore": "Il linguaggio sta a sinistra nel 95% dei destrimani e nella maggior parte dei mancini (circa 70%).", "fonte": "AI", "stato": "da verificare", "verifica": null, "nota": "La guida dice 80–85% dei mancini: nei testi di solito circa 70%."}
+  }},
+  {"id": "neuro.giro-postcentrale", "satellite": "n-parietale", "lezione": "Neurologia_0005; SNC.pptx slide 12", "ref": "Postcentral gyrus", "figura": ["b.postcentral-gyrus"], "dati": {
+   "nome": {"valore": "Giro postcentrale", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "dove": {"valore": "Nel lobo parietale, subito dietro il solco centrale.", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "funzione": {"valore": "Sede della corteccia somatosensoriale primaria (aree 3, 1, 2).", "fonte": "lezione", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "neuro.corteccia-somatosensoriale-primaria-aree-3-1-2", "satellite": "n-parietale", "lezione": "Neurologia_0005; SNC.pptx slide 12", "ref": "Postcentral gyrus", "figura": ["b.postcentral-gyrus"], "dati": {
+   "nome": {"valore": "Corteccia somatosensoriale primaria (aree 3, 1, 2)", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "dove": {"valore": "Nel giro postcentrale, con una zona per ogni parte del corpo.", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "funzione": {"valore": "Riceve la sensibilità del corpo: tatto, propriocezione, temperatura, dolore e sensazioni dagli organi.", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "lesione": {"valore": "Sensibilità ridotta o assente nella metà opposta del corpo; non si riconoscono gli oggetti al tatto (astereognosia).", "fonte": "lezione", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "neuro.area-associativa-somatosensoriale-aree-5-e-7", "satellite": "n-parietale", "lezione": "SNC.pptx slide 12", "ref": "Superior parietal lobule", "figura": ["b.superior-parietal-lobule"], "dati": {
+   "nome": {"valore": "Area associativa somatosensoriale (aree 5 e 7)", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "dove": {"valore": "Dietro la corteccia somatosensoriale primaria, nel lobulo parietale superiore.", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "funzione": {"valore": "Mette insieme tatto e propriocezione: riconoscere un oggetto al tatto, sapere dove sono le parti del corpo.", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "lesione": {"valore": "Astereognosia: non si riconosce al tatto un oggetto messo in mano a occhi chiusi.", "fonte": "lezione", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "neuro.area-del-gusto-area-43", "satellite": "n-parietale", "lezione": "SNC.pptx slide 12", "figura": ["b.insula-subcentral-gyrus-and-ant-and-post-sulci"], "dati": {
+   "nome": {"valore": "Area del gusto (area 43)", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "dove": {"valore": "In basso nel giro postcentrale, verso l'insula (opercolo).", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "funzione": {"valore": "Percezione e analisi del gusto.", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "lesione": {"valore": "Perdita o riduzione del gusto.", "fonte": "lezione", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "neuro.corteccia-parietale-posteriore-destra", "satellite": "n-parietale", "lezione": "Neurologia_0005", "figura": ["b.supramarginal-gyrus", "b.angular-gyrus"], "dati": {
+   "nome": {"valore": "Corteccia parietale posteriore destra", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "dove": {"valore": "Nel lobo parietale destro, soprattutto nel lobulo parietale inferiore.", "fonte": "AI", "stato": "da verificare", "verifica": null, "nota": "La guida indica le aree 5 e 7: nei testi il neglect nasce soprattutto dal lobulo parietale inferiore destro e dalla giunzione temporo-parietale."},
+   "funzione": {"valore": "Rappresenta lo spazio, dirige l'attenzione nello spazio e costruisce lo schema corporeo.", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "lesione": {"valore": "Neglect (negligenza spaziale): il paziente ignora la metà sinistra dello spazio e del corpo pur vedendola; somatoparafrenia (non riconosce come suo un arto).", "fonte": "lezione", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "neuro.giunzione-temporo-parieto-occipitale", "satellite": "n-parietale", "lezione": "Neurologia_0005", "ref": "Angular gyrus", "figura": ["b.angular-gyrus"], "dati": {
+   "nome": {"valore": "Giunzione temporo-parieto-occipitale", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "dove": {"valore": "Dove si incontrano lobo temporale, parietale e occipitale.", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "funzione": {"valore": "Unisce vista, udito e sensibilità del corpo per distinguere il proprio corpo dal mondo esterno.", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "lesione": {"valore": "Esperienza fuori dal corpo (OBE): la persona si sente o si vede fuori dal proprio corpo.", "fonte": "lezione", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "neuro.corteccia-uditiva-primaria-aree-41-e-42", "satellite": "n-sensi", "lezione": "SNC.pptx slide 12", "ref": "Transverse temporal gyri", "figura": ["b.transverse-temporal-gyri"], "dati": {
+   "nome": {"valore": "Corteccia uditiva primaria (aree 41 e 42)", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "dove": {"valore": "Nei giri temporali trasversi (di Heschl), nel lobo temporale dentro il solco laterale.", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "funzione": {"valore": "Prima analisi dei suoni, ordinati per frequenza.", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "lesione": {"valore": "Difficoltà a percepire i suoni (sordità centrale).", "fonte": "lezione", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "neuro.area-associativa-uditiva-area-22", "satellite": "n-sensi", "lezione": "SNC.pptx slide 12", "figura": ["b.superior-temporal-gyrus-lateral-part"], "dati": {
+   "nome": {"valore": "Area associativa uditiva (area 22)", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "dove": {"valore": "Intorno alla corteccia uditiva primaria, nel giro temporale superiore.", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "funzione": {"valore": "Interpreta suoni, timbri e rumori.", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "lesione": {"valore": "Agnosia uditiva: si sentono i suoni ma non si riconosce cosa sono.", "fonte": "lezione", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "neuro.corteccia-visiva-primaria-area-17", "satellite": "n-sensi", "lezione": "Neurologia_0002; SNC.pptx slide 12", "ref": "Calcarine sulcus", "figura": ["b.calcarine-sulcus", "b.cuneus", "b.lingual-gyrus"], "dati": {
+   "nome": {"valore": "Corteccia visiva primaria (area 17)", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "dove": {"valore": "Nel lobo occipitale, intorno alla scissura calcarina.", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "funzione": {"valore": "Prima analisi delle immagini che arrivano dalla retina.", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "lesione": {"valore": "Cecità corticale o perdita di una parte del campo visivo (emianopsia).", "fonte": "lezione", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "neuro.area-associativa-visiva-aree-18-e-19", "satellite": "n-sensi", "lezione": "SNC.pptx slide 12", "figura": ["b.lateral-occipital-gyrus-middle-occipital-gyrus", "b.superior-occipital-gyri"], "dati": {
+   "nome": {"valore": "Area associativa visiva (aree 18 e 19)", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "dove": {"valore": "Intorno alla corteccia visiva primaria.", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "funzione": {"valore": "Analizza forma, colore e movimento e riconosce gli oggetti.", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "lesione": {"valore": "Agnosia visiva: si vede ma non si riconosce l'oggetto o il volto (prosopagnosia).", "fonte": "lezione", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "neuro.midollo-spinale", "satellite": "n-midollo", "lezione": "Neurologia_0001; SNC.pptx slide 17-18", "ref": "White matter of spinal cord", "dati": {
+   "nome": {"valore": "Midollo spinale", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "dove": {"valore": "Nei due terzi superiori del canale vertebrale; finisce intorno a L1–L2.", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "funzione": {"valore": "Collega l'encefalo al corpo e organizza i riflessi; ha quattro porzioni (cervicale, toracica, lombare, sacrale) più il cono finale.", "fonte": "lezione", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "neuro.nervi-spinali", "satellite": "n-midollo", "lezione": "SNC.pptx slide 18 e 20", "ref": "Anterior root of spinal nerve", "dati": {
+   "nome": {"valore": "Nervi spinali", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "dove": {"valore": "Escono dai forami intervertebrali.", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "funzione": {"valore": "Sono 31 paia: 8 cervicali, 12 toracici, 5 lombari, 5 sacrali, 1 coccigeo.", "fonte": "lezione", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "neuro.cono-midollare-e-filo-terminale", "satellite": "n-midollo", "lezione": "SNC.pptx slide 18", "dati": {
+   "nome": {"valore": "Cono midollare e filo terminale", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "dove": {"valore": "All'estremità inferiore del midollo.", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "funzione": {"valore": "Il midollo finisce a cono; il filo terminale lo ancora al coccige (legamento coccigeo).", "fonte": "lezione", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "neuro.cauda-equina", "satellite": "n-midollo", "lezione": "SNC.pptx slide 18 e 20", "ref": "Cauda equina", "dati": {
+   "nome": {"valore": "Cauda equina", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "dove": {"valore": "Nel terzo inferiore del canale vertebrale, da L2 in giù.", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "funzione": {"valore": "Fascio di radici dei nervi spinali lombari e sacrali, diretto a bacino e arti inferiori.", "fonte": "lezione", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "neuro.mielomero", "satellite": "n-midollo", "lezione": "SNC.pptx slide 20", "dati": {
+   "nome": {"valore": "Mielomero", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "dove": {"valore": "Ogni livello del midollo da cui esce un paio di nervi spinali.", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "funzione": {"valore": "Non corrisponde alla vertebra dello stesso numero: nello sviluppo la colonna cresce più del midollo, per questo i nervi più bassi scendono a formare la cauda equina.", "fonte": "lezione", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "neuro.radici-anteriori-e-posteriori", "satellite": "n-midollo", "lezione": "SNC.pptx slide 20", "ref": "Anterior root of spinal nerve", "dati": {
+   "nome": {"valore": "Radici anteriori e posteriori", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "dove": {"valore": "Escono dal midollo davanti e dietro e si uniscono nel nervo spinale.", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "funzione": {"valore": "Le radici posteriori portano dentro la sensibilità, quelle anteriori portano fuori i comandi motori.", "fonte": "AI", "stato": "da verificare", "verifica": null, "nota": "La slide dice solo che sono i punti di ingresso e di uscita: la divisione sensitiva e motoria è dell'AI."}
+  }},
+  {"id": "neuro.corno-posteriore", "satellite": "n-midollo", "lezione": "SNC.pptx slide 22", "ref": "Posterior horn of spinal cord", "dati": {
+   "nome": {"valore": "Corno posteriore", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "dove": {"valore": "Parte posteriore della sostanza grigia del midollo.", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "funzione": {"valore": "Qui arrivano le fibre sensitive dalle radici posteriori: elabora informazioni propriocettive, esterocettive e interocettive.", "fonte": "lezione", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "neuro.corno-laterale", "satellite": "n-midollo", "lezione": "SNC.pptx slide 22", "ref": "Intermediolateral nucleus", "dati": {
+   "nome": {"valore": "Corno laterale", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "dove": {"valore": "Tra corno anteriore e posteriore, nel midollo toracico e lombare alto.", "fonte": "AI", "stato": "da verificare", "verifica": null, "nota": "Livelli (circa T1–L2) aggiunti dall'AI."},
+   "funzione": {"valore": "Contiene i neuroni simpatici pregangliari.", "fonte": "lezione", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "neuro.corno-anteriore", "satellite": "n-midollo", "lezione": "SNC.pptx slide 22", "ref": "Anterior horn of spinal cord", "dati": {
+   "nome": {"valore": "Corno anteriore", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "dove": {"valore": "Parte anteriore della sostanza grigia del midollo.", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "funzione": {"valore": "Contiene i motoneuroni: nella parte mediale quelli dei muscoli del tronco, nella laterale quelli degli arti; al centro interneuroni tra livelli vicini.", "fonte": "lezione", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "neuro.cordoni-posteriori", "satellite": "n-vie", "lezione": "SNC.pptx slide 23", "ref": "Gracile fasciculus", "dati": {
+   "nome": {"valore": "Cordoni posteriori", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "dove": {"valore": "Nella sostanza bianca posteriore del midollo.", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "funzione": {"valore": "Via ascendente della sensibilità tattile fine e propriocettiva.", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "connessioni": {"valore": "Salgono dallo stesso lato fino al bulbo, dove si incrociano; poi talamo e corteccia somatosensoriale.", "fonte": "AI", "stato": "da verificare", "verifica": null, "nota": "Il percorso con l'incrocio nel bulbo è aggiunto dall'AI."}
+  }},
+  {"id": "neuro.fasci-spinotalamici", "satellite": "n-vie", "lezione": "SNC.pptx slide 23", "ref": "Lateral spinothalamic tract", "dati": {
+   "nome": {"valore": "Fasci spinotalamici", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "dove": {"valore": "Nella sostanza bianca anterolaterale del midollo.", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "funzione": {"valore": "Via ascendente della sensibilità termica e dolorifica (e del tatto grossolano).", "fonte": "AI", "stato": "da verificare", "verifica": null, "nota": "La slide dice che dolore e temperatura sono mediati dagli stessi recettori: sono recettori diversi (nocicettori e termocettori) che usano la stessa via."},
+   "connessioni": {"valore": "Si incrociano subito nel midollo e salgono dal lato opposto al talamo e poi alla corteccia.", "fonte": "AI", "stato": "da verificare", "verifica": null, "nota": "Il percorso è aggiunto dall'AI."}
+  }},
+  {"id": "neuro.fasci-spinocerebellari", "satellite": "n-vie", "lezione": "SNC.pptx slide 23", "ref": "Posterior spinocerebellar tract", "dati": {
+   "nome": {"valore": "Fasci spinocerebellari", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "dove": {"valore": "Nella parte laterale della sostanza bianca del midollo.", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "funzione": {"valore": "Portano al cervelletto la posizione degli arti per il controllo del movimento; non arrivano alla coscienza e non avviano movimenti volontari.", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "connessioni": {"valore": "Dal midollo direttamente al cervelletto.", "fonte": "lezione", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "neuro.fascio-cortico-spinale-laterale-crociato", "satellite": "n-vie", "lezione": "Neurologia_0005; SNC.pptx slide 23", "ref": "Lateral corticospinal tract", "dati": {
+   "nome": {"valore": "Fascio cortico-spinale laterale (crociato)", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "dove": {"valore": "Nella parte laterale della sostanza bianca del midollo.", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "funzione": {"valore": "Via motoria volontaria per i movimenti fini, soprattutto dei muscoli distali degli arti (mano, dita).", "fonte": "AI", "stato": "da verificare", "verifica": null, "nota": "La slide dice che è specializzato nei muscoli assiali: nei testi il fascio laterale serve soprattutto i muscoli distali degli arti; quello anteriore i muscoli assiali."},
+   "lesione": {"valore": "Paresi o plegia nella metà opposta del corpo se la lesione è sopra l'incrocio.", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "connessioni": {"valore": "Dalla corteccia motoria (M1) scende nel tronco, si incrocia nelle piramidi del bulbo e scende nel midollo del lato opposto fino ai motoneuroni.", "fonte": "lezione", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "neuro.fascio-cortico-spinale-anteriore-diretto", "satellite": "n-vie", "lezione": "SNC.pptx slide 23", "ref": "Anterior corticospinal tract", "dati": {
+   "nome": {"valore": "Fascio cortico-spinale anteriore (diretto)", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "dove": {"valore": "Nella parte anteriore della sostanza bianca del midollo.", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "funzione": {"valore": "Via motoria per i muscoli prossimali e del tronco.", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "connessioni": {"valore": "Non si incrocia nel bulbo: scende dallo stesso lato; molte fibre si incrociano poi nel midollo, al loro livello.", "fonte": "AI", "stato": "da verificare", "verifica": null, "nota": "L'incrocio a livello del midollo è aggiunto dall'AI."}
+  }},
+  {"id": "neuro.decussazione-delle-piramidi", "satellite": "n-vie", "lezione": "Neurologia_0005; SNC.pptx slide 23", "ref": "Pyramid of medulla oblongata", "dati": {
+   "nome": {"valore": "Decussazione delle piramidi", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "dove": {"valore": "Nella parte bassa del bulbo.", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "funzione": {"valore": "Punto dove si incrociano le fibre del fascio cortico-spinale: per questo una lesione di un emisfero dà sintomi motori nella metà opposta del corpo.", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "connessioni": {"valore": "Le fibre che si incrociano formano il fascio laterale; quelle che restano dallo stesso lato il fascio anteriore.", "fonte": "lezione", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "neuro.sistema-nervoso-periferico", "satellite": "n-nervi", "lezione": "SNC.pptx slide 24-26", "dati": {
+   "nome": {"valore": "Sistema nervoso periferico", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "dove": {"valore": "Fuori dall'encefalo e dal midollo: nervi cranici, nervi spinali e gangli.", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "funzione": {"valore": "Collega il sistema nervoso centrale al corpo; si divide in somatico (sensi e muscoli scheletrici, controllo volontario) e autonomo.", "fonte": "lezione", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "neuro.epinevrio-perinevrio-endonevrio", "satellite": "n-nervi", "lezione": "SNC.pptx slide 21", "dati": {
+   "nome": {"valore": "Epinevrio, perinevrio, endonevrio", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "dove": {"valore": "Strati di connettivo del nervo.", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "funzione": {"valore": "L'endonevrio avvolge ogni fibra, il perinevrio un fascicolo di fibre, l'epinevrio (connettivo denso) tutto il nervo con più fascicoli.", "fonte": "lezione", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "neuro.nervo-oculomotore-iii", "satellite": "n-nervi", "lezione": "Neurologia_0002", "ref": "Oculomotor nerve (III)", "dati": {
+   "nome": {"valore": "Nervo oculomotore (III)", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "dove": {"valore": "Nasce dal mesencefalo.", "fonte": "AI", "stato": "da verificare", "verifica": null, "nota": "L'origine è aggiunta dall'AI."},
+   "funzione": {"valore": "Muove gran parte dei muscoli dell'occhio, solleva la palpebra superiore e restringe la pupilla (parasimpatico).", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "lesione": {"valore": "Ptosi (palpebra che cade), occhio deviato in basso e in fuori, pupilla dilatata.", "fonte": "lezione", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "neuro.nervo-vago-x", "satellite": "n-nervi", "lezione": "Neurologia_0004", "ref": "Vagus nerve (X)", "dati": {
+   "nome": {"valore": "Nervo vago (X)", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "dove": {"valore": "Nasce dal bulbo e scende fino al torace e all'addome.", "fonte": "AI", "stato": "da verificare", "verifica": null, "nota": "Il percorso è aggiunto dall'AI."},
+   "funzione": {"valore": "Principale nervo del parasimpatico: rallenta il cuore, regola pressione e visceri.", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "lesione": {"valore": "Una sua attivazione improvvisa (es. dolore forte) causa la sincope vasovagale: la pressione crolla e si perde coscienza.", "fonte": "lezione", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "neuro.nervo-frenico", "satellite": "n-nervi", "lezione": "Neurologia_0001", "dati": {
+   "nome": {"valore": "Nervo frenico", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "dove": {"valore": "Nervo spinale delle radici C3–C5 (plesso cervicale).", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "funzione": {"valore": "Innerva il diaframma, il principale muscolo del respiro.", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "lesione": {"valore": "Il diaframma non si contrae: grave insufficienza respiratoria.", "fonte": "lezione", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "neuro.sistema-nervoso-autonomo", "satellite": "n-autonomo", "lezione": "SNC.pptx slide 27", "ref": "Ganglia of sympathetic trunk", "dati": {
+   "nome": {"valore": "Sistema nervoso autonomo", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "dove": {"valore": "Parte del sistema nervoso periferico.", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "funzione": {"valore": "Comanda muscoli lisci, organi interni, ghiandole e cuore; usa una catena di due neuroni (pregangliare e gangliare).", "fonte": "lezione", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "neuro.simpatico-ortosimpatico", "satellite": "n-autonomo", "lezione": "SNC.pptx slide 27-28", "ref": "Ganglia of sympathetic trunk", "dati": {
+   "nome": {"valore": "Simpatico (ortosimpatico)", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "dove": {"valore": "Neurone pregangliare nella colonna intermediolaterale del midollo; ganglio nella catena del simpatico, accanto alla colonna.", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "funzione": {"valore": "Attiva tutte le risorse per affrontare un pericolo: reazione di attacco o fuga (cuore veloce, respiro rapido, sudore).", "fonte": "lezione", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "neuro.parasimpatico", "satellite": "n-autonomo", "lezione": "SNC.pptx slide 27-28", "dati": {
+   "nome": {"valore": "Parasimpatico", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "dove": {"valore": "Neurone pregangliare nel tronco dell'encefalo e nel midollo sacrale; ganglio lungo i nervi, vicino o dentro gli organi.", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "funzione": {"valore": "Riporta l'equilibrio con l'effetto opposto al simpatico (riposo e digestione); molti organi ricevono tutti e due.", "fonte": "lezione", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "neuro.asse-dello-stress", "satellite": "n-autonomo", "lezione": "SNC.pptx slide 28", "dati": {
+   "nome": {"valore": "Asse dello stress", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "dove": {"valore": "Dal talamo e dall'amigdala all'ipotalamo (nucleo paraventricolare), all'ipofisi anteriore e alle ghiandole surrenali.", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "funzione": {"valore": "L'ipotalamo libera CRH, l'ipofisi ACTH e il surrene cortisolo; il cortisolo frena poi ipotalamo e ipofisi (feedback negativo).", "fonte": "lezione", "stato": "da verificare", "verifica": null},
+   "connessioni": {"valore": "Talamo → amigdala → ipotalamo → circolazione portale → ipofisi anteriore → surreni.", "fonte": "lezione", "stato": "da verificare", "verifica": null}
+  }}
+ ]
+}

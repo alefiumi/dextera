@@ -1,6 +1,6 @@
 {
- "version": 2,
- "nota": "Mappa delle competenze di Dextera (sezione 2 della specifica). Id delle strutture: ossa e muscoli come in content/corpo.json, reperi 'r.' + nome inglese di atlante/dati.json (lm) in minuscolo con i trattini. I reperi sono quelli visibili da fuori nel 3D (atlante/build/visibili.json); sulle ossa condivise tra più satelliti la divisione per posizione è in divisione_reperi, confermata dall'autore.",
+ "version": 3,
+ "nota": "Mappa delle competenze di Dextera (sezione 2 della specifica). Id delle strutture: ossa e muscoli come in content/corpo.json, reperi 'r.' + nome inglese di atlante/dati.json (lm) in minuscolo con i trattini. I reperi sono quelli visibili da fuori nel 3D (atlante/build/visibili.json); sulle ossa condivise tra più satelliti la divisione per posizione è in divisione_reperi, confermata dall'autore. Corso «neurologia» (dal corso del Dott. Benevento): strutture con id n.<voce di testi/neuro.json>; passi strutture, dove, funzione, lesione, connessioni e progetto (casi di testi/casi.json, modulo neuro).",
  "divisione_reperi": {
   "stato": "confermato",
   "proposta_il": "2026-11-18",
@@ -676,6 +676,297 @@
         {"id": "visceri-testa.4", "n": 4, "tipo": "connessioni", "nome": "Le connessioni", "aspetto": "oi", "domande": ["scelta", "tocco", "frase"], "giochi": ["musc", "bridge", "3d-oi", "3d-ponte"], "strutture": ["genioglossus", "superior-pharyngeal-constrictor"], "solo_2d": ["genioglossus", "superior-pharyngeal-constrictor"], "solo_3d": []},
         {"id": "visceri-testa.5", "n": 5, "tipo": "funzione", "nome": "La funzione", "aspetto": "fn", "domande": ["presentazione", "scelta", "frase"], "giochi": ["funzione"], "strutture": ["lateral-rectus", "superior-oblique", "inferior-oblique", "inferior-rectus", "levator-palpebrae-superioris", "medial-rectus", "superior-rectus", "hyoglossus", "genioglossus", "palatopharyngeus", "superior-pharyngeal-constrictor", "middle-pharyngeal-constrictor", "inferior-pharyngeal-constrictor", "stylopharyngeus", "cricothyroid", "thyro-arytenoid", "oblique-arytenoid", "transverse-arytenoid", "lateral-crico-arytenoid", "posterior-crico-arytenoid"], "non_3d": ["levator-palpebrae-superioris", "superior-rectus", "hyoglossus", "genioglossus", "palatopharyngeus", "superior-pharyngeal-constrictor", "middle-pharyngeal-constrictor", "inferior-pharyngeal-constrictor", "stylopharyngeus", "cricothyroid", "thyro-arytenoid", "oblique-arytenoid", "transverse-arytenoid", "lateral-crico-arytenoid", "posterior-crico-arytenoid"]},
         {"id": "visceri-testa.6", "n": 6, "tipo": "progetto", "nome": "Il progetto", "aspetto": null, "domande": ["caso"], "giochi": ["caso"], "strutture": "tutte"}
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "neurologia",
+   "nome": "Neurologia",
+   "modulo": "cervello",
+   "pianeti": [
+    {
+     "id": "neuro-basi",
+     "nome": "Basi del sistema nervoso",
+     "satelliti": [
+      {
+       "id": "n-neurone",
+       "nome": "Il neurone",
+       "ordine": 1,
+       "passi": [
+        {"id": "n-neurone.1", "n": 1, "tipo": "strutture", "nome": "Le strutture", "aspetto": "nome", "domande": ["presentazione", "scelta", "nome"], "giochi": [], "strutture": ["n.neurone", "n.corpo-cellulare-soma", "n.dendriti", "n.cono-d-emergenza", "n.assone", "n.guaina-mielinica", "n.nodi-di-ranvier", "n.terminale-presinaptico"], "senza_figura": ["n.neurone", "n.corpo-cellulare-soma", "n.dendriti", "n.cono-d-emergenza", "n.assone", "n.guaina-mielinica", "n.nodi-di-ranvier", "n.terminale-presinaptico"]},
+        {"id": "n-neurone.2", "n": 2, "tipo": "dove", "nome": "Dove si trova", "aspetto": "dove", "domande": ["scelta", "frase"], "giochi": [], "strutture": ["n.neurone", "n.corpo-cellulare-soma", "n.dendriti", "n.cono-d-emergenza", "n.assone", "n.guaina-mielinica", "n.nodi-di-ranvier", "n.terminale-presinaptico"]},
+        {"id": "n-neurone.3", "n": 3, "tipo": "funzione", "nome": "La funzione", "aspetto": "fn", "domande": ["scelta", "frase"], "giochi": [], "strutture": ["n.neurone", "n.corpo-cellulare-soma", "n.dendriti", "n.cono-d-emergenza", "n.assone", "n.guaina-mielinica", "n.nodi-di-ranvier", "n.terminale-presinaptico"]},
+        {"id": "n-neurone.4", "n": 4, "tipo": "lesione", "nome": "Se si danneggia", "aspetto": "lesione", "domande": ["scelta", "frase"], "giochi": [], "strutture": ["n.guaina-mielinica"]},
+        {"id": "n-neurone.5", "n": 5, "tipo": "connessioni", "nome": "Connessioni e vie", "aspetto": "vie", "domande": ["scelta", "frase"], "giochi": [], "strutture": [], "salta": true},
+        {"id": "n-neurone.6", "n": 6, "tipo": "progetto", "nome": "Il caso clinico", "aspetto": null, "domande": ["caso"], "giochi": ["caso"], "strutture": "tutte", "casi": ["n1"]}
+       ]
+      },
+      {
+       "id": "n-potenziale",
+       "nome": "Il potenziale d'azione",
+       "ordine": 2,
+       "passi": [
+        {"id": "n-potenziale.1", "n": 1, "tipo": "strutture", "nome": "Le strutture", "aspetto": "nome", "domande": ["presentazione", "scelta", "nome"], "giochi": [], "strutture": ["n.potenziale-di-riposo", "n.pompa-sodio-potassio", "n.soglia", "n.potenziale-d-azione", "n.conduzione-saltatoria", "n.velocita-di-conduzione"], "senza_figura": ["n.potenziale-di-riposo", "n.pompa-sodio-potassio", "n.soglia", "n.potenziale-d-azione", "n.conduzione-saltatoria", "n.velocita-di-conduzione"]},
+        {"id": "n-potenziale.2", "n": 2, "tipo": "dove", "nome": "Dove si trova", "aspetto": "dove", "domande": ["scelta", "frase"], "giochi": [], "strutture": ["n.potenziale-di-riposo", "n.pompa-sodio-potassio", "n.soglia", "n.potenziale-d-azione", "n.conduzione-saltatoria", "n.velocita-di-conduzione"]},
+        {"id": "n-potenziale.3", "n": 3, "tipo": "funzione", "nome": "La funzione", "aspetto": "fn", "domande": ["scelta", "frase"], "giochi": [], "strutture": ["n.potenziale-di-riposo", "n.pompa-sodio-potassio", "n.soglia", "n.potenziale-d-azione", "n.conduzione-saltatoria", "n.velocita-di-conduzione"]},
+        {"id": "n-potenziale.4", "n": 4, "tipo": "lesione", "nome": "Se si danneggia", "aspetto": "lesione", "domande": ["scelta", "frase"], "giochi": [], "strutture": [], "salta": true},
+        {"id": "n-potenziale.5", "n": 5, "tipo": "connessioni", "nome": "Connessioni e vie", "aspetto": "vie", "domande": ["scelta", "frase"], "giochi": [], "strutture": [], "salta": true},
+        {"id": "n-potenziale.6", "n": 6, "tipo": "progetto", "nome": "Il caso clinico", "aspetto": null, "domande": ["caso"], "giochi": ["caso"], "strutture": "tutte", "casi": []}
+       ]
+      },
+      {
+       "id": "n-sinapsi",
+       "nome": "Sinapsi e neurotrasmettitori",
+       "ordine": 3,
+       "passi": [
+        {"id": "n-sinapsi.1", "n": 1, "tipo": "strutture", "nome": "Le strutture", "aspetto": "nome", "domande": ["presentazione", "scelta", "nome"], "giochi": [], "strutture": ["n.sinapsi", "n.spazio-sinaptico", "n.calcio-nel-terminale", "n.ricaptazione", "n.monoamino-ossidasi-mao", "n.giunzione-neuromuscolare"], "senza_figura": ["n.sinapsi", "n.spazio-sinaptico", "n.calcio-nel-terminale", "n.ricaptazione", "n.monoamino-ossidasi-mao", "n.giunzione-neuromuscolare"]},
+        {"id": "n-sinapsi.2", "n": 2, "tipo": "dove", "nome": "Dove si trova", "aspetto": "dove", "domande": ["scelta", "frase"], "giochi": [], "strutture": ["n.sinapsi", "n.spazio-sinaptico", "n.calcio-nel-terminale", "n.ricaptazione", "n.monoamino-ossidasi-mao", "n.giunzione-neuromuscolare"]},
+        {"id": "n-sinapsi.3", "n": 3, "tipo": "funzione", "nome": "La funzione", "aspetto": "fn", "domande": ["scelta", "frase"], "giochi": [], "strutture": ["n.sinapsi", "n.spazio-sinaptico", "n.calcio-nel-terminale", "n.ricaptazione", "n.monoamino-ossidasi-mao", "n.giunzione-neuromuscolare"]},
+        {"id": "n-sinapsi.4", "n": 4, "tipo": "lesione", "nome": "Se si danneggia", "aspetto": "lesione", "domande": ["scelta", "frase"], "giochi": [], "strutture": [], "salta": true},
+        {"id": "n-sinapsi.5", "n": 5, "tipo": "connessioni", "nome": "Connessioni e vie", "aspetto": "vie", "domande": ["scelta", "frase"], "giochi": [], "strutture": [], "salta": true},
+        {"id": "n-sinapsi.6", "n": 6, "tipo": "progetto", "nome": "Il caso clinico", "aspetto": null, "domande": ["caso"], "giochi": ["caso"], "strutture": "tutte", "casi": []}
+       ]
+      },
+      {
+       "id": "n-riflessi",
+       "nome": "Tipi di neuroni e riflessi",
+       "ordine": 4,
+       "passi": [
+        {"id": "n-riflessi.1", "n": 1, "tipo": "strutture", "nome": "Le strutture", "aspetto": "nome", "domande": ["presentazione", "scelta", "nome"], "giochi": [], "strutture": ["n.neuroni-sensoriali", "n.interneuroni", "n.motoneuroni", "n.riflesso-miotatico", "n.organi-tendinei-del-golgi", "n.riflesso-miotatico-inverso"], "senza_figura": ["n.neuroni-sensoriali", "n.interneuroni", "n.motoneuroni", "n.riflesso-miotatico", "n.organi-tendinei-del-golgi", "n.riflesso-miotatico-inverso"]},
+        {"id": "n-riflessi.2", "n": 2, "tipo": "dove", "nome": "Dove si trova", "aspetto": "dove", "domande": ["scelta", "frase"], "giochi": [], "strutture": ["n.neuroni-sensoriali", "n.interneuroni", "n.motoneuroni", "n.riflesso-miotatico", "n.organi-tendinei-del-golgi", "n.riflesso-miotatico-inverso"]},
+        {"id": "n-riflessi.3", "n": 3, "tipo": "funzione", "nome": "La funzione", "aspetto": "fn", "domande": ["scelta", "frase"], "giochi": [], "strutture": ["n.neuroni-sensoriali", "n.interneuroni", "n.motoneuroni", "n.riflesso-miotatico", "n.organi-tendinei-del-golgi", "n.riflesso-miotatico-inverso"]},
+        {"id": "n-riflessi.4", "n": 4, "tipo": "lesione", "nome": "Se si danneggia", "aspetto": "lesione", "domande": ["scelta", "frase"], "giochi": [], "strutture": [], "salta": true},
+        {"id": "n-riflessi.5", "n": 5, "tipo": "connessioni", "nome": "Connessioni e vie", "aspetto": "vie", "domande": ["scelta", "frase"], "giochi": [], "strutture": [], "salta": true},
+        {"id": "n-riflessi.6", "n": 6, "tipo": "progetto", "nome": "Il caso clinico", "aspetto": null, "domande": ["caso"], "giochi": ["caso"], "strutture": "tutte", "casi": []}
+       ]
+      },
+      {
+       "id": "n-sostanze",
+       "nome": "Sostanza grigia e bianca",
+       "ordine": 5,
+       "passi": [
+        {"id": "n-sostanze.1", "n": 1, "tipo": "strutture", "nome": "Le strutture", "aspetto": "nome", "domande": ["presentazione", "scelta", "tocco", "nome"], "giochi": [], "strutture": ["n.sostanza-grigia", "n.sostanza-bianca", "n.corpo-calloso"], "senza_figura": ["n.sostanza-grigia"]},
+        {"id": "n-sostanze.2", "n": 2, "tipo": "dove", "nome": "Dove si trova", "aspetto": "dove", "domande": ["scelta", "frase"], "giochi": [], "strutture": ["n.sostanza-grigia", "n.sostanza-bianca", "n.corpo-calloso"]},
+        {"id": "n-sostanze.3", "n": 3, "tipo": "funzione", "nome": "La funzione", "aspetto": "fn", "domande": ["scelta", "frase"], "giochi": [], "strutture": ["n.sostanza-grigia", "n.sostanza-bianca", "n.corpo-calloso"]},
+        {"id": "n-sostanze.4", "n": 4, "tipo": "lesione", "nome": "Se si danneggia", "aspetto": "lesione", "domande": ["scelta", "frase"], "giochi": [], "strutture": [], "salta": true},
+        {"id": "n-sostanze.5", "n": 5, "tipo": "connessioni", "nome": "Connessioni e vie", "aspetto": "vie", "domande": ["scelta", "frase"], "giochi": [], "strutture": [], "salta": true},
+        {"id": "n-sostanze.6", "n": 6, "tipo": "progetto", "nome": "Il caso clinico", "aspetto": null, "domande": ["caso"], "giochi": ["caso"], "strutture": "tutte", "casi": []}
+       ]
+      }
+     ]
+    },
+    {
+     "id": "neuro-encefalo",
+     "nome": "Encefalo",
+     "satelliti": [
+      {
+       "id": "n-encefalo",
+       "nome": "Encefalo e cervello",
+       "ordine": 6,
+       "passi": [
+        {"id": "n-encefalo.1", "n": 1, "tipo": "strutture", "nome": "Le strutture", "aspetto": "nome", "domande": ["presentazione", "scelta", "tocco", "nome"], "giochi": [], "strutture": ["n.sistema-nervoso-centrale", "n.encefalo", "n.cervello", "n.telencefalo", "n.diencefalo"], "senza_figura": ["n.sistema-nervoso-centrale", "n.encefalo", "n.cervello"]},
+        {"id": "n-encefalo.2", "n": 2, "tipo": "dove", "nome": "Dove si trova", "aspetto": "dove", "domande": ["scelta", "frase"], "giochi": [], "strutture": ["n.sistema-nervoso-centrale", "n.encefalo", "n.cervello", "n.telencefalo", "n.diencefalo"]},
+        {"id": "n-encefalo.3", "n": 3, "tipo": "funzione", "nome": "La funzione", "aspetto": "fn", "domande": ["scelta", "frase"], "giochi": [], "strutture": ["n.sistema-nervoso-centrale", "n.encefalo", "n.cervello", "n.telencefalo", "n.diencefalo"]},
+        {"id": "n-encefalo.4", "n": 4, "tipo": "lesione", "nome": "Se si danneggia", "aspetto": "lesione", "domande": ["scelta", "frase"], "giochi": [], "strutture": [], "salta": true},
+        {"id": "n-encefalo.5", "n": 5, "tipo": "connessioni", "nome": "Connessioni e vie", "aspetto": "vie", "domande": ["scelta", "frase"], "giochi": [], "strutture": [], "salta": true},
+        {"id": "n-encefalo.6", "n": 6, "tipo": "progetto", "nome": "Il caso clinico", "aspetto": null, "domande": ["caso"], "giochi": ["caso"], "strutture": "tutte", "casi": []}
+       ]
+      },
+      {
+       "id": "n-tronco",
+       "nome": "Tronco dell'encefalo",
+       "ordine": 7,
+       "passi": [
+        {"id": "n-tronco.1", "n": 1, "tipo": "strutture", "nome": "Le strutture", "aspetto": "nome", "domande": ["presentazione", "scelta", "tocco", "nome"], "giochi": [], "strutture": ["n.tronco-dell-encefalo", "n.mesencefalo", "n.collicoli-superiori-e-inferiori", "n.nucleo-rosso", "n.sostanza-nera", "n.grigio-periacqueduttale", "n.ponte", "n.bulbo-midollo-allungato", "n.piramidi-del-bulbo", "n.nuclei-vestibolari"], "senza_figura": ["n.collicoli-superiori-e-inferiori", "n.nucleo-rosso", "n.sostanza-nera", "n.grigio-periacqueduttale", "n.piramidi-del-bulbo", "n.nuclei-vestibolari"]},
+        {"id": "n-tronco.2", "n": 2, "tipo": "dove", "nome": "Dove si trova", "aspetto": "dove", "domande": ["scelta", "frase"], "giochi": [], "strutture": ["n.tronco-dell-encefalo", "n.mesencefalo", "n.collicoli-superiori-e-inferiori", "n.nucleo-rosso", "n.sostanza-nera", "n.grigio-periacqueduttale", "n.ponte", "n.bulbo-midollo-allungato", "n.piramidi-del-bulbo", "n.nuclei-vestibolari"]},
+        {"id": "n-tronco.3", "n": 3, "tipo": "funzione", "nome": "La funzione", "aspetto": "fn", "domande": ["scelta", "frase"], "giochi": [], "strutture": ["n.tronco-dell-encefalo", "n.mesencefalo", "n.collicoli-superiori-e-inferiori", "n.nucleo-rosso", "n.sostanza-nera", "n.grigio-periacqueduttale", "n.ponte", "n.bulbo-midollo-allungato", "n.piramidi-del-bulbo", "n.nuclei-vestibolari"]},
+        {"id": "n-tronco.4", "n": 4, "tipo": "lesione", "nome": "Se si danneggia", "aspetto": "lesione", "domande": ["scelta", "frase"], "giochi": [], "strutture": ["n.tronco-dell-encefalo", "n.sostanza-nera"]},
+        {"id": "n-tronco.5", "n": 5, "tipo": "connessioni", "nome": "Connessioni e vie", "aspetto": "vie", "domande": ["scelta", "frase"], "giochi": [], "strutture": [], "salta": true},
+        {"id": "n-tronco.6", "n": 6, "tipo": "progetto", "nome": "Il caso clinico", "aspetto": null, "domande": ["caso"], "giochi": ["caso"], "strutture": "tutte", "casi": []}
+       ]
+      },
+      {
+       "id": "n-cervelletto",
+       "nome": "Cervelletto",
+       "ordine": 8,
+       "passi": [
+        {"id": "n-cervelletto.1", "n": 1, "tipo": "strutture", "nome": "Le strutture", "aspetto": "nome", "domande": ["presentazione", "scelta", "tocco", "nome"], "giochi": [], "strutture": ["n.cervelletto", "n.lobo-flocculonodulare", "n.cellule-di-purkinje", "n.oliva-bulbare"], "senza_figura": ["n.cellule-di-purkinje", "n.oliva-bulbare"]},
+        {"id": "n-cervelletto.2", "n": 2, "tipo": "dove", "nome": "Dove si trova", "aspetto": "dove", "domande": ["scelta", "frase"], "giochi": [], "strutture": ["n.cervelletto", "n.lobo-flocculonodulare", "n.cellule-di-purkinje", "n.oliva-bulbare"]},
+        {"id": "n-cervelletto.3", "n": 3, "tipo": "funzione", "nome": "La funzione", "aspetto": "fn", "domande": ["scelta", "frase"], "giochi": [], "strutture": ["n.cervelletto", "n.lobo-flocculonodulare", "n.cellule-di-purkinje", "n.oliva-bulbare"]},
+        {"id": "n-cervelletto.4", "n": 4, "tipo": "lesione", "nome": "Se si danneggia", "aspetto": "lesione", "domande": ["scelta", "frase"], "giochi": [], "strutture": ["n.cervelletto"]},
+        {"id": "n-cervelletto.5", "n": 5, "tipo": "connessioni", "nome": "Connessioni e vie", "aspetto": "vie", "domande": ["scelta", "frase"], "giochi": [], "strutture": [], "salta": true},
+        {"id": "n-cervelletto.6", "n": 6, "tipo": "progetto", "nome": "Il caso clinico", "aspetto": null, "domande": ["caso"], "giochi": ["caso"], "strutture": "tutte", "casi": []}
+       ]
+      },
+      {
+       "id": "n-limbico",
+       "nome": "Diencefalo e sistema limbico",
+       "ordine": 9,
+       "passi": [
+        {"id": "n-limbico.1", "n": 1, "tipo": "strutture", "nome": "Le strutture", "aspetto": "nome", "domande": ["presentazione", "scelta", "tocco", "nome"], "giochi": [], "strutture": ["n.talamo", "n.ipotalamo", "n.sistema-limbico", "n.amigdala", "n.ippocampo", "n.corteccia-cingolata-anteriore"], "senza_figura": ["n.amigdala"]},
+        {"id": "n-limbico.2", "n": 2, "tipo": "dove", "nome": "Dove si trova", "aspetto": "dove", "domande": ["scelta", "frase"], "giochi": [], "strutture": ["n.talamo", "n.ipotalamo", "n.sistema-limbico", "n.amigdala", "n.ippocampo", "n.corteccia-cingolata-anteriore"]},
+        {"id": "n-limbico.3", "n": 3, "tipo": "funzione", "nome": "La funzione", "aspetto": "fn", "domande": ["scelta", "frase"], "giochi": [], "strutture": ["n.talamo", "n.ipotalamo", "n.sistema-limbico", "n.amigdala", "n.ippocampo", "n.corteccia-cingolata-anteriore"]},
+        {"id": "n-limbico.4", "n": 4, "tipo": "lesione", "nome": "Se si danneggia", "aspetto": "lesione", "domande": ["scelta", "frase"], "giochi": [], "strutture": ["n.amigdala", "n.ippocampo", "n.corteccia-cingolata-anteriore"]},
+        {"id": "n-limbico.5", "n": 5, "tipo": "connessioni", "nome": "Connessioni e vie", "aspetto": "vie", "domande": ["scelta", "frase"], "giochi": [], "strutture": [], "salta": true},
+        {"id": "n-limbico.6", "n": 6, "tipo": "progetto", "nome": "Il caso clinico", "aspetto": null, "domande": ["caso"], "giochi": ["caso"], "strutture": "tutte", "casi": ["n12"]}
+       ]
+      },
+      {
+       "id": "n-protezione",
+       "nome": "Meningi, liquor e barriera",
+       "ordine": 10,
+       "passi": [
+        {"id": "n-protezione.1", "n": 1, "tipo": "strutture", "nome": "Le strutture", "aspetto": "nome", "domande": ["presentazione", "scelta", "tocco", "nome"], "giochi": [], "strutture": ["n.meningi", "n.dura-madre", "n.spazio-subdurale", "n.aracnoide", "n.spazio-subaracnoideo", "n.pia-madre", "n.liquor-liquido-cerebrospinale", "n.ventricoli-cerebrali", "n.barriera-ematoencefalica"], "senza_figura": ["n.meningi", "n.dura-madre", "n.spazio-subdurale", "n.aracnoide", "n.spazio-subaracnoideo", "n.pia-madre", "n.liquor-liquido-cerebrospinale", "n.barriera-ematoencefalica"]},
+        {"id": "n-protezione.2", "n": 2, "tipo": "dove", "nome": "Dove si trova", "aspetto": "dove", "domande": ["scelta", "frase"], "giochi": [], "strutture": ["n.meningi", "n.dura-madre", "n.spazio-subdurale", "n.aracnoide", "n.spazio-subaracnoideo", "n.pia-madre", "n.liquor-liquido-cerebrospinale", "n.ventricoli-cerebrali", "n.barriera-ematoencefalica"]},
+        {"id": "n-protezione.3", "n": 3, "tipo": "funzione", "nome": "La funzione", "aspetto": "fn", "domande": ["scelta", "frase"], "giochi": [], "strutture": ["n.meningi", "n.dura-madre", "n.spazio-subdurale", "n.aracnoide", "n.spazio-subaracnoideo", "n.pia-madre", "n.liquor-liquido-cerebrospinale", "n.ventricoli-cerebrali", "n.barriera-ematoencefalica"]},
+        {"id": "n-protezione.4", "n": 4, "tipo": "lesione", "nome": "Se si danneggia", "aspetto": "lesione", "domande": ["scelta", "frase"], "giochi": [], "strutture": ["n.spazio-subdurale", "n.liquor-liquido-cerebrospinale"]},
+        {"id": "n-protezione.5", "n": 5, "tipo": "connessioni", "nome": "Connessioni e vie", "aspetto": "vie", "domande": ["scelta", "frase"], "giochi": [], "strutture": [], "salta": true},
+        {"id": "n-protezione.6", "n": 6, "tipo": "progetto", "nome": "Il caso clinico", "aspetto": null, "domande": ["caso"], "giochi": ["caso"], "strutture": "tutte", "casi": ["n2"]}
+       ]
+      }
+     ]
+    },
+    {
+     "id": "neuro-corteccia",
+     "nome": "Corteccia e funzioni",
+     "satelliti": [
+      {
+       "id": "n-lobi",
+       "nome": "Lobi e solchi",
+       "ordine": 11,
+       "passi": [
+        {"id": "n-lobi.1", "n": 1, "tipo": "strutture", "nome": "Le strutture", "aspetto": "nome", "domande": ["presentazione", "scelta", "tocco", "nome"], "giochi": [], "strutture": ["n.lobo-frontale", "n.lobo-parietale", "n.lobo-temporale", "n.lobo-occipitale", "n.solco-centrale-di-rolando", "n.solco-laterale-di-silvio", "n.solco-parieto-occipitale", "n.scissura-calcarina", "n.aree-di-brodmann"], "senza_figura": ["n.aree-di-brodmann"]},
+        {"id": "n-lobi.2", "n": 2, "tipo": "dove", "nome": "Dove si trova", "aspetto": "dove", "domande": ["scelta", "frase"], "giochi": [], "strutture": ["n.lobo-frontale", "n.lobo-parietale", "n.lobo-temporale", "n.lobo-occipitale", "n.solco-centrale-di-rolando", "n.solco-laterale-di-silvio", "n.solco-parieto-occipitale", "n.scissura-calcarina", "n.aree-di-brodmann"]},
+        {"id": "n-lobi.3", "n": 3, "tipo": "funzione", "nome": "La funzione", "aspetto": "fn", "domande": ["scelta", "frase"], "giochi": [], "strutture": ["n.lobo-frontale", "n.lobo-parietale", "n.lobo-temporale", "n.lobo-occipitale", "n.solco-centrale-di-rolando", "n.solco-laterale-di-silvio", "n.solco-parieto-occipitale", "n.scissura-calcarina", "n.aree-di-brodmann"]},
+        {"id": "n-lobi.4", "n": 4, "tipo": "lesione", "nome": "Se si danneggia", "aspetto": "lesione", "domande": ["scelta", "frase"], "giochi": [], "strutture": [], "salta": true},
+        {"id": "n-lobi.5", "n": 5, "tipo": "connessioni", "nome": "Connessioni e vie", "aspetto": "vie", "domande": ["scelta", "frase"], "giochi": [], "strutture": [], "salta": true},
+        {"id": "n-lobi.6", "n": 6, "tipo": "progetto", "nome": "Il caso clinico", "aspetto": null, "domande": ["caso"], "giochi": ["caso"], "strutture": "tutte", "casi": ["n14"]}
+       ]
+      },
+      {
+       "id": "n-motorio",
+       "nome": "Lobo frontale: il movimento",
+       "ordine": 12,
+       "passi": [
+        {"id": "n-motorio.1", "n": 1, "tipo": "strutture", "nome": "Le strutture", "aspetto": "nome", "domande": ["presentazione", "scelta", "tocco", "nome"], "giochi": [], "strutture": ["n.giro-precentrale", "n.corteccia-motoria-primaria-m1-area-4", "n.corteccia-premotoria-area-6", "n.area-motoria-supplementare-sma", "n.gangli-della-base"], "senza_figura": ["n.gangli-della-base"]},
+        {"id": "n-motorio.2", "n": 2, "tipo": "dove", "nome": "Dove si trova", "aspetto": "dove", "domande": ["scelta", "frase"], "giochi": [], "strutture": ["n.giro-precentrale", "n.corteccia-motoria-primaria-m1-area-4", "n.corteccia-premotoria-area-6", "n.area-motoria-supplementare-sma", "n.gangli-della-base"]},
+        {"id": "n-motorio.3", "n": 3, "tipo": "funzione", "nome": "La funzione", "aspetto": "fn", "domande": ["scelta", "frase"], "giochi": [], "strutture": ["n.giro-precentrale", "n.corteccia-motoria-primaria-m1-area-4", "n.corteccia-premotoria-area-6", "n.area-motoria-supplementare-sma", "n.gangli-della-base"]},
+        {"id": "n-motorio.4", "n": 4, "tipo": "lesione", "nome": "Se si danneggia", "aspetto": "lesione", "domande": ["scelta", "frase"], "giochi": [], "strutture": ["n.corteccia-motoria-primaria-m1-area-4", "n.corteccia-premotoria-area-6", "n.area-motoria-supplementare-sma", "n.gangli-della-base"]},
+        {"id": "n-motorio.5", "n": 5, "tipo": "connessioni", "nome": "Connessioni e vie", "aspetto": "vie", "domande": ["scelta", "frase"], "giochi": [], "strutture": ["n.corteccia-motoria-primaria-m1-area-4"]},
+        {"id": "n-motorio.6", "n": 6, "tipo": "progetto", "nome": "Il caso clinico", "aspetto": null, "domande": ["caso"], "giochi": ["caso"], "strutture": "tutte", "casi": ["n10", "n11"]}
+       ]
+      },
+      {
+       "id": "n-esecutivo",
+       "nome": "Lobo frontale: le funzioni esecutive",
+       "ordine": 13,
+       "passi": [
+        {"id": "n-esecutivo.1", "n": 1, "tipo": "strutture", "nome": "Le strutture", "aspetto": "nome", "domande": ["presentazione", "scelta", "tocco", "nome"], "giochi": [], "strutture": ["n.corteccia-prefrontale-dorsolaterale", "n.corteccia-orbitofrontale"], "senza_figura": []},
+        {"id": "n-esecutivo.2", "n": 2, "tipo": "dove", "nome": "Dove si trova", "aspetto": "dove", "domande": ["scelta", "frase"], "giochi": [], "strutture": ["n.corteccia-prefrontale-dorsolaterale", "n.corteccia-orbitofrontale"]},
+        {"id": "n-esecutivo.3", "n": 3, "tipo": "funzione", "nome": "La funzione", "aspetto": "fn", "domande": ["scelta", "frase"], "giochi": [], "strutture": ["n.corteccia-prefrontale-dorsolaterale", "n.corteccia-orbitofrontale"]},
+        {"id": "n-esecutivo.4", "n": 4, "tipo": "lesione", "nome": "Se si danneggia", "aspetto": "lesione", "domande": ["scelta", "frase"], "giochi": [], "strutture": ["n.corteccia-prefrontale-dorsolaterale", "n.corteccia-orbitofrontale"]},
+        {"id": "n-esecutivo.5", "n": 5, "tipo": "connessioni", "nome": "Connessioni e vie", "aspetto": "vie", "domande": ["scelta", "frase"], "giochi": [], "strutture": [], "salta": true},
+        {"id": "n-esecutivo.6", "n": 6, "tipo": "progetto", "nome": "Il caso clinico", "aspetto": null, "domande": ["caso"], "giochi": ["caso"], "strutture": "tutte", "casi": ["n3", "n4", "n5"]}
+       ]
+      },
+      {
+       "id": "n-linguaggio",
+       "nome": "Il linguaggio",
+       "ordine": 14,
+       "passi": [
+        {"id": "n-linguaggio.1", "n": 1, "tipo": "strutture", "nome": "Le strutture", "aspetto": "nome", "domande": ["presentazione", "scelta", "tocco", "nome"], "giochi": [], "strutture": ["n.area-di-broca", "n.area-di-wernicke", "n.fascicolo-arcuato", "n.lateralizzazione-del-linguaggio"], "senza_figura": ["n.fascicolo-arcuato", "n.lateralizzazione-del-linguaggio"]},
+        {"id": "n-linguaggio.2", "n": 2, "tipo": "dove", "nome": "Dove si trova", "aspetto": "dove", "domande": ["scelta", "frase"], "giochi": [], "strutture": ["n.area-di-broca", "n.area-di-wernicke", "n.fascicolo-arcuato", "n.lateralizzazione-del-linguaggio"]},
+        {"id": "n-linguaggio.3", "n": 3, "tipo": "funzione", "nome": "La funzione", "aspetto": "fn", "domande": ["scelta", "frase"], "giochi": [], "strutture": ["n.area-di-broca", "n.area-di-wernicke", "n.fascicolo-arcuato", "n.lateralizzazione-del-linguaggio"]},
+        {"id": "n-linguaggio.4", "n": 4, "tipo": "lesione", "nome": "Se si danneggia", "aspetto": "lesione", "domande": ["scelta", "frase"], "giochi": [], "strutture": ["n.area-di-broca", "n.area-di-wernicke", "n.fascicolo-arcuato"]},
+        {"id": "n-linguaggio.5", "n": 5, "tipo": "connessioni", "nome": "Connessioni e vie", "aspetto": "vie", "domande": ["scelta", "frase"], "giochi": [], "strutture": ["n.area-di-broca", "n.area-di-wernicke", "n.fascicolo-arcuato"]},
+        {"id": "n-linguaggio.6", "n": 6, "tipo": "progetto", "nome": "Il caso clinico", "aspetto": null, "domande": ["caso"], "giochi": ["caso"], "strutture": "tutte", "casi": ["n6", "n7", "n8"]}
+       ]
+      },
+      {
+       "id": "n-parietale",
+       "nome": "Lobo parietale",
+       "ordine": 15,
+       "passi": [
+        {"id": "n-parietale.1", "n": 1, "tipo": "strutture", "nome": "Le strutture", "aspetto": "nome", "domande": ["presentazione", "scelta", "tocco", "nome"], "giochi": [], "strutture": ["n.giro-postcentrale", "n.corteccia-somatosensoriale-primaria-aree-3-1-2", "n.area-associativa-somatosensoriale-aree-5-e-7", "n.area-del-gusto-area-43", "n.corteccia-parietale-posteriore-destra", "n.giunzione-temporo-parieto-occipitale"], "senza_figura": []},
+        {"id": "n-parietale.2", "n": 2, "tipo": "dove", "nome": "Dove si trova", "aspetto": "dove", "domande": ["scelta", "frase"], "giochi": [], "strutture": ["n.giro-postcentrale", "n.corteccia-somatosensoriale-primaria-aree-3-1-2", "n.area-associativa-somatosensoriale-aree-5-e-7", "n.area-del-gusto-area-43", "n.corteccia-parietale-posteriore-destra", "n.giunzione-temporo-parieto-occipitale"]},
+        {"id": "n-parietale.3", "n": 3, "tipo": "funzione", "nome": "La funzione", "aspetto": "fn", "domande": ["scelta", "frase"], "giochi": [], "strutture": ["n.giro-postcentrale", "n.corteccia-somatosensoriale-primaria-aree-3-1-2", "n.area-associativa-somatosensoriale-aree-5-e-7", "n.area-del-gusto-area-43", "n.corteccia-parietale-posteriore-destra", "n.giunzione-temporo-parieto-occipitale"]},
+        {"id": "n-parietale.4", "n": 4, "tipo": "lesione", "nome": "Se si danneggia", "aspetto": "lesione", "domande": ["scelta", "frase"], "giochi": [], "strutture": ["n.corteccia-somatosensoriale-primaria-aree-3-1-2", "n.area-associativa-somatosensoriale-aree-5-e-7", "n.area-del-gusto-area-43", "n.corteccia-parietale-posteriore-destra", "n.giunzione-temporo-parieto-occipitale"]},
+        {"id": "n-parietale.5", "n": 5, "tipo": "connessioni", "nome": "Connessioni e vie", "aspetto": "vie", "domande": ["scelta", "frase"], "giochi": [], "strutture": [], "salta": true},
+        {"id": "n-parietale.6", "n": 6, "tipo": "progetto", "nome": "Il caso clinico", "aspetto": null, "domande": ["caso"], "giochi": ["caso"], "strutture": "tutte", "casi": ["n9"]}
+       ]
+      },
+      {
+       "id": "n-sensi",
+       "nome": "Lobi temporale e occipitale",
+       "ordine": 16,
+       "passi": [
+        {"id": "n-sensi.1", "n": 1, "tipo": "strutture", "nome": "Le strutture", "aspetto": "nome", "domande": ["presentazione", "scelta", "tocco", "nome"], "giochi": [], "strutture": ["n.corteccia-uditiva-primaria-aree-41-e-42", "n.area-associativa-uditiva-area-22", "n.corteccia-visiva-primaria-area-17", "n.area-associativa-visiva-aree-18-e-19"], "senza_figura": []},
+        {"id": "n-sensi.2", "n": 2, "tipo": "dove", "nome": "Dove si trova", "aspetto": "dove", "domande": ["scelta", "frase"], "giochi": [], "strutture": ["n.corteccia-uditiva-primaria-aree-41-e-42", "n.area-associativa-uditiva-area-22", "n.corteccia-visiva-primaria-area-17", "n.area-associativa-visiva-aree-18-e-19"]},
+        {"id": "n-sensi.3", "n": 3, "tipo": "funzione", "nome": "La funzione", "aspetto": "fn", "domande": ["scelta", "frase"], "giochi": [], "strutture": ["n.corteccia-uditiva-primaria-aree-41-e-42", "n.area-associativa-uditiva-area-22", "n.corteccia-visiva-primaria-area-17", "n.area-associativa-visiva-aree-18-e-19"]},
+        {"id": "n-sensi.4", "n": 4, "tipo": "lesione", "nome": "Se si danneggia", "aspetto": "lesione", "domande": ["scelta", "frase"], "giochi": [], "strutture": ["n.corteccia-uditiva-primaria-aree-41-e-42", "n.area-associativa-uditiva-area-22", "n.corteccia-visiva-primaria-area-17", "n.area-associativa-visiva-aree-18-e-19"]},
+        {"id": "n-sensi.5", "n": 5, "tipo": "connessioni", "nome": "Connessioni e vie", "aspetto": "vie", "domande": ["scelta", "frase"], "giochi": [], "strutture": [], "salta": true},
+        {"id": "n-sensi.6", "n": 6, "tipo": "progetto", "nome": "Il caso clinico", "aspetto": null, "domande": ["caso"], "giochi": ["caso"], "strutture": "tutte", "casi": []}
+       ]
+      }
+     ]
+    },
+    {
+     "id": "neuro-midollo",
+     "nome": "Midollo e sistema periferico",
+     "satelliti": [
+      {
+       "id": "n-midollo",
+       "nome": "Midollo spinale",
+       "ordine": 17,
+       "passi": [
+        {"id": "n-midollo.1", "n": 1, "tipo": "strutture", "nome": "Le strutture", "aspetto": "nome", "domande": ["presentazione", "scelta", "nome"], "giochi": [], "strutture": ["n.midollo-spinale", "n.nervi-spinali", "n.cono-midollare-e-filo-terminale", "n.cauda-equina", "n.mielomero", "n.radici-anteriori-e-posteriori", "n.corno-posteriore", "n.corno-laterale", "n.corno-anteriore"], "senza_figura": ["n.midollo-spinale", "n.nervi-spinali", "n.cono-midollare-e-filo-terminale", "n.cauda-equina", "n.mielomero", "n.radici-anteriori-e-posteriori", "n.corno-posteriore", "n.corno-laterale", "n.corno-anteriore"]},
+        {"id": "n-midollo.2", "n": 2, "tipo": "dove", "nome": "Dove si trova", "aspetto": "dove", "domande": ["scelta", "frase"], "giochi": [], "strutture": ["n.midollo-spinale", "n.nervi-spinali", "n.cono-midollare-e-filo-terminale", "n.cauda-equina", "n.mielomero", "n.radici-anteriori-e-posteriori", "n.corno-posteriore", "n.corno-laterale", "n.corno-anteriore"]},
+        {"id": "n-midollo.3", "n": 3, "tipo": "funzione", "nome": "La funzione", "aspetto": "fn", "domande": ["scelta", "frase"], "giochi": [], "strutture": ["n.midollo-spinale", "n.nervi-spinali", "n.cono-midollare-e-filo-terminale", "n.cauda-equina", "n.mielomero", "n.radici-anteriori-e-posteriori", "n.corno-posteriore", "n.corno-laterale", "n.corno-anteriore"]},
+        {"id": "n-midollo.4", "n": 4, "tipo": "lesione", "nome": "Se si danneggia", "aspetto": "lesione", "domande": ["scelta", "frase"], "giochi": [], "strutture": [], "salta": true},
+        {"id": "n-midollo.5", "n": 5, "tipo": "connessioni", "nome": "Connessioni e vie", "aspetto": "vie", "domande": ["scelta", "frase"], "giochi": [], "strutture": [], "salta": true},
+        {"id": "n-midollo.6", "n": 6, "tipo": "progetto", "nome": "Il caso clinico", "aspetto": null, "domande": ["caso"], "giochi": ["caso"], "strutture": "tutte", "casi": []}
+       ]
+      },
+      {
+       "id": "n-vie",
+       "nome": "Vie ascendenti e discendenti",
+       "ordine": 18,
+       "passi": [
+        {"id": "n-vie.1", "n": 1, "tipo": "strutture", "nome": "Le strutture", "aspetto": "nome", "domande": ["presentazione", "scelta", "nome"], "giochi": [], "strutture": ["n.cordoni-posteriori", "n.fasci-spinotalamici", "n.fasci-spinocerebellari", "n.fascio-cortico-spinale-laterale-crociato", "n.fascio-cortico-spinale-anteriore-diretto", "n.decussazione-delle-piramidi"], "senza_figura": ["n.cordoni-posteriori", "n.fasci-spinotalamici", "n.fasci-spinocerebellari", "n.fascio-cortico-spinale-laterale-crociato", "n.fascio-cortico-spinale-anteriore-diretto", "n.decussazione-delle-piramidi"]},
+        {"id": "n-vie.2", "n": 2, "tipo": "dove", "nome": "Dove si trova", "aspetto": "dove", "domande": ["scelta", "frase"], "giochi": [], "strutture": ["n.cordoni-posteriori", "n.fasci-spinotalamici", "n.fasci-spinocerebellari", "n.fascio-cortico-spinale-laterale-crociato", "n.fascio-cortico-spinale-anteriore-diretto", "n.decussazione-delle-piramidi"]},
+        {"id": "n-vie.3", "n": 3, "tipo": "funzione", "nome": "La funzione", "aspetto": "fn", "domande": ["scelta", "frase"], "giochi": [], "strutture": ["n.cordoni-posteriori", "n.fasci-spinotalamici", "n.fasci-spinocerebellari", "n.fascio-cortico-spinale-laterale-crociato", "n.fascio-cortico-spinale-anteriore-diretto", "n.decussazione-delle-piramidi"]},
+        {"id": "n-vie.4", "n": 4, "tipo": "lesione", "nome": "Se si danneggia", "aspetto": "lesione", "domande": ["scelta", "frase"], "giochi": [], "strutture": ["n.fascio-cortico-spinale-laterale-crociato"]},
+        {"id": "n-vie.5", "n": 5, "tipo": "connessioni", "nome": "Connessioni e vie", "aspetto": "vie", "domande": ["scelta", "frase"], "giochi": [], "strutture": ["n.cordoni-posteriori", "n.fasci-spinotalamici", "n.fasci-spinocerebellari", "n.fascio-cortico-spinale-laterale-crociato", "n.fascio-cortico-spinale-anteriore-diretto", "n.decussazione-delle-piramidi"]},
+        {"id": "n-vie.6", "n": 6, "tipo": "progetto", "nome": "Il caso clinico", "aspetto": null, "domande": ["caso"], "giochi": ["caso"], "strutture": "tutte", "casi": []}
+       ]
+      },
+      {
+       "id": "n-nervi",
+       "nome": "Nervi e sistema periferico",
+       "ordine": 19,
+       "passi": [
+        {"id": "n-nervi.1", "n": 1, "tipo": "strutture", "nome": "Le strutture", "aspetto": "nome", "domande": ["presentazione", "scelta", "nome"], "giochi": [], "strutture": ["n.sistema-nervoso-periferico", "n.epinevrio-perinevrio-endonevrio", "n.nervo-oculomotore-iii", "n.nervo-vago-x", "n.nervo-frenico"], "senza_figura": ["n.sistema-nervoso-periferico", "n.epinevrio-perinevrio-endonevrio", "n.nervo-oculomotore-iii", "n.nervo-vago-x", "n.nervo-frenico"]},
+        {"id": "n-nervi.2", "n": 2, "tipo": "dove", "nome": "Dove si trova", "aspetto": "dove", "domande": ["scelta", "frase"], "giochi": [], "strutture": ["n.sistema-nervoso-periferico", "n.epinevrio-perinevrio-endonevrio", "n.nervo-oculomotore-iii", "n.nervo-vago-x", "n.nervo-frenico"]},
+        {"id": "n-nervi.3", "n": 3, "tipo": "funzione", "nome": "La funzione", "aspetto": "fn", "domande": ["scelta", "frase"], "giochi": [], "strutture": ["n.sistema-nervoso-periferico", "n.epinevrio-perinevrio-endonevrio", "n.nervo-oculomotore-iii", "n.nervo-vago-x", "n.nervo-frenico"]},
+        {"id": "n-nervi.4", "n": 4, "tipo": "lesione", "nome": "Se si danneggia", "aspetto": "lesione", "domande": ["scelta", "frase"], "giochi": [], "strutture": ["n.nervo-oculomotore-iii", "n.nervo-vago-x", "n.nervo-frenico"]},
+        {"id": "n-nervi.5", "n": 5, "tipo": "connessioni", "nome": "Connessioni e vie", "aspetto": "vie", "domande": ["scelta", "frase"], "giochi": [], "strutture": [], "salta": true},
+        {"id": "n-nervi.6", "n": 6, "tipo": "progetto", "nome": "Il caso clinico", "aspetto": null, "domande": ["caso"], "giochi": ["caso"], "strutture": "tutte", "casi": []}
+       ]
+      },
+      {
+       "id": "n-autonomo",
+       "nome": "Sistema nervoso autonomo",
+       "ordine": 20,
+       "passi": [
+        {"id": "n-autonomo.1", "n": 1, "tipo": "strutture", "nome": "Le strutture", "aspetto": "nome", "domande": ["presentazione", "scelta", "nome"], "giochi": [], "strutture": ["n.sistema-nervoso-autonomo", "n.simpatico-ortosimpatico", "n.parasimpatico", "n.asse-dello-stress"], "senza_figura": ["n.sistema-nervoso-autonomo", "n.simpatico-ortosimpatico", "n.parasimpatico", "n.asse-dello-stress"]},
+        {"id": "n-autonomo.2", "n": 2, "tipo": "dove", "nome": "Dove si trova", "aspetto": "dove", "domande": ["scelta", "frase"], "giochi": [], "strutture": ["n.sistema-nervoso-autonomo", "n.simpatico-ortosimpatico", "n.parasimpatico", "n.asse-dello-stress"]},
+        {"id": "n-autonomo.3", "n": 3, "tipo": "funzione", "nome": "La funzione", "aspetto": "fn", "domande": ["scelta", "frase"], "giochi": [], "strutture": ["n.sistema-nervoso-autonomo", "n.simpatico-ortosimpatico", "n.parasimpatico", "n.asse-dello-stress"]},
+        {"id": "n-autonomo.4", "n": 4, "tipo": "lesione", "nome": "Se si danneggia", "aspetto": "lesione", "domande": ["scelta", "frase"], "giochi": [], "strutture": [], "salta": true},
+        {"id": "n-autonomo.5", "n": 5, "tipo": "connessioni", "nome": "Connessioni e vie", "aspetto": "vie", "domande": ["scelta", "frase"], "giochi": [], "strutture": ["n.asse-dello-stress"]},
+        {"id": "n-autonomo.6", "n": 6, "tipo": "progetto", "nome": "Il caso clinico", "aspetto": null, "domande": ["caso"], "giochi": ["caso"], "strutture": "tutte", "casi": ["n13"]}
        ]
       }
      ]

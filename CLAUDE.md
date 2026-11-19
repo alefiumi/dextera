@@ -741,6 +741,10 @@ descrizioni; quelle con fonte Z-Anatomy dicono da quale vaso nasce o dove sbocca
   `content/index.json` ha `app_min`: un service worker più vecchio non scarica quei contenuti (`tooNew()` in `sw.js`), li scarica la
   versione nuova all'installazione. Quando i contenuti richiedono codice nuovo, alza `app_min` alla versione che li capisce.
   Prova: `fix891.mjs` nelle note delle sessioni.
+- Materie del Test UCBM visibili (v0.89.2, chiesto dall'autore): con il percorso UCBM il riquadro «Cosa studi?» (prima apertura e universo)
+  ha «Le materie del test»: Biologia, Chimica e Fisica (20 + 20 + 20 domande), ognuna apribile con gli argomenti (`materieHtml()` in `path.js`,
+  `arrivoDi(pid)` in `percorso.js`) e la fonte (`fonte` del corso in `mappa.json`: Allegato B del bando UCBM 2026/27, copia del testo in
+  `ucbm-allegato-b-programmi.txt` nelle note delle sessioni); sopra i corsi una riga dice che l'anatomia è la parte di Biologia già da studiare.
 
 ## Mappa del percorso (`content/mappa.json`)
 Corso → 4 pianeti → 17 satelliti (con `ordine` della specifica) → 6 passi (`ossa`, `reperi`, `muscoli`, `connessioni`, `funzione`,

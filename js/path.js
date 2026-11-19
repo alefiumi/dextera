@@ -193,9 +193,18 @@ function studioForm(pid,sel,first){
  const cat=P.percorsiCat(),cs=P.corsiDi(pid),on=c=>!sel.length||sel.includes(c.id);
  return `<fieldset class="pstudio"><legend class="kick">Percorso</legend>${cat.map(x=>`<label class="popt${x.ok?'':' off'}"><input type="radio" name="spercorso" data-p="spercorso" value="${esc(x.id)}"${x.id===pid?' checked':''}${x.ok?'':' disabled'}>
    <span><b>${esc(x.nome)}</b>${x.bozza?' <small class="tag">bozza</small>':''}${x.ok?'':' <small class="mut">in arrivo</small>'}</span></label>`).join('')}</fieldset>
-  <fieldset class="pstudio"><legend class="kick">I tuoi corsi</legend>${cs.map(c=>`<label class="popt"><input type="checkbox" data-p="scorso" value="${esc(c.id)}"${on(c)?' checked':''}>
+  ${materieHtml(pid)}<fieldset class="pstudio"><legend class="kick">I tuoi corsi</legend>${P.arrivoDi(pid).length?'<p class="mut">Già da studiare: l\'anatomia, che nel programma del test sta in Biologia («Anatomia e fisiologia dell\'uomo»).</p>':''}${cs.map(c=>`<label class="popt"><input type="checkbox" data-p="scorso" value="${esc(c.id)}"${on(c)?' checked':''}>
    <span>${icoOf(c)} <b>${esc(c.nome)}</b> <small class="mut">${P.pianeti(c).length||c.pianeti.length} pianeti</small></span></label>`).join('')}
-   ${P.corsiArrivo().length&&pid===P.percorsoId()?`<p class="mut">In arrivo in questo percorso: ${P.corsiArrivo().map(c=>esc(c.nome)).join(', ')} (si vede sulla mappa, le domande arriveranno).</p>`:''}</fieldset>`;
+</fieldset>`;
+}
+// materie di un corso «in arrivo» del percorso (Test UCBM): un riquadro apribile per materia con gli argomenti del programma
+const MICO={'ucbm-biologia':'🧬','ucbm-chimica':'⚗️','ucbm-fisica':'🧲'};
+function materieHtml(pid){
+ return P.arrivoDi(pid).map(c=>`<fieldset class="pstudio materie"><legend class="kick">Le materie del test</legend>
+  <p class="mut">${c.pianeti.map(pl=>esc(pl.nome)).join(', ')}${c.pianeti.every(pl=>pl.domande_test)?`: ${c.pianeti.map(pl=>pl.domande_test).join(' + ')} domande`:''}. Tocca una materia per vedere gli argomenti. Le domande arriveranno.</p>
+  ${c.pianeti.map(pl=>`<details class="mat"><summary><span>${MICO[pl.id]||'🪐'} <b>${esc(pl.nome)}</b> <small class="mut">${pl.domande_test?pl.domande_test+' domande · ':''}${pl.satelliti.length} argomenti</small></span></summary>
+   <ul class="sl arr">${pl.satelliti.map(s=>`<li><b>${esc(s.nome)}</b>${s.programma?`<br><small class="mut">${esc(s.programma)}</small>`:''}</li>`).join('')}</ul></details>`).join('')}
+  ${c.fonte?`<p class="mut"><small>${esc(c.fonte)}</small></p>`:''}</fieldset>`).join('');
 }
 function studioScreen(){
  const d=draft||(draft={percorso:'base',corsi:[]});

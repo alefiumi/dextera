@@ -1,5 +1,5 @@
 {
- "version": 4,
+ "version": 5,
  "nota": "Mappa delle competenze di Dextera (sezione 2 della specifica). Id delle strutture: ossa e muscoli come in content/corpo.json, reperi 'r.' + nome inglese di atlante/dati.json (lm) in minuscolo con i trattini. I reperi sono quelli visibili da fuori nel 3D (atlante/build/visibili.json); sulle ossa condivise tra più satelliti la divisione per posizione è in divisione_reperi, confermata dall'autore. Corso «neurologia» (dal corso del Dott. Benevento): strutture con id n.<voce di testi/neuro.json>; passi strutture, dove, funzione, lesione, connessioni e progetto (casi di testi/casi.json, modulo neuro).",
  "divisione_reperi": {
   "stato": "confermato",
@@ -1178,7 +1178,7 @@
    "nome": "Test d'ingresso UCBM",
    "modulo": null,
    "in_arrivo": true,
-   "nota": "Struttura dal programma del bando (Allegato B, Medicina e Odontoiatria 2026/27): 60 domande, 20 per materia. Senza domande finché non si scrivono i contenuti.",
+   "nota": "Struttura dal programma del bando (Allegato B, Medicina e Odontoiatria 2026/27): 60 domande, 20 per materia. Senza domande finché non si scrivono i contenuti.", "fonte": "Programma: Allegato B del bando di ammissione a Medicina e Odontoiatria dell'Università Campus Bio-Medico di Roma, 2026/27 (riassunto per argomenti).",
    "pianeti": [
     {
      "id": "ucbm-biologia",

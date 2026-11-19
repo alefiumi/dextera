@@ -327,6 +327,10 @@ header{grid-area:h}#asw{grid-area:s}#fig{grid-area:f}#pw{grid-area:p}#atlas{grid
 .tag{display:inline-block;padding:1px 6px;border-radius:6px;background:var(--line);color:var(--ink);font-size:11px}
 .pv-studio{display:block;max-width:640px;margin:0 auto}
 .studio .btn{margin-top:8px}
+.mat{border:1px solid var(--line);border-radius:10px;margin-top:6px;padding:0 10px}
+.mat summary{min-height:44px;display:flex;align-items:center;gap:8px;cursor:pointer;list-style-position:inside}
+.mat summary::-webkit-details-marker{display:none}.mat summary::after{content:'▾';margin-left:auto;color:var(--mut)}.mat[open] summary::after{content:'▴'}
+.mat summary span{min-width:0;overflow-wrap:anywhere}.mat summary:focus-visible{outline:2px solid var(--acc);outline-offset:2px;border-radius:8px}
 .sl.arr li{padding:6px 0;border-bottom:1px solid var(--line)}.sl.arr li:last-child{border-bottom:0}
 /* computer e tablet in orizzontale: mappa a sinistra (ferma, alta quanto lo schermo), riquadri a destra */
 @media (min-width:900px) and (min-aspect-ratio:5/4){

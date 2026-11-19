@@ -46,6 +46,8 @@ export const percorsiCat=()=>(app.PCAT||[{id:'base',nome:'Percorso completo'}]).
 // corsi giocabili di un percorso qualsiasi (per la scelta, prima di aprirlo)
 export function corsiDi(pid){const P0=app.PERCORSI?.[pid];if(!P0)return [];const ns=new Map(P0.nodi.map(n=>[n.id,n]));
  return app.MAPPA.corsi.filter(c=>ns.has(c.id)&&!c.in_arrivo).sort((a,b)=>(ns.get(a.id).ordine??99)-(ns.get(b.id).ordine??99));}
+// corsi «in arrivo» di un percorso (il Test UCBM): si mostrano con il programma, senza domande
+export function arrivoDi(pid){const P0=app.PERCORSI?.[pid];if(!P0)return [];const ids=new Set(P0.nodi.map(n=>n.id));return app.MAPPA.corsi.filter(c=>c.in_arrivo&&ids.has(c.id));}
 // un satellite è «intero» nel percorso se ne ha tutti i passi. I percorsi parziali (la bozza UCBM: solo il passo Ossa del corpo) non
 // scrivono in path_progress il satellite acceso né l'esame del pianeta, che varrebbero anche nel percorso completo: li tengono sul
 // telefono in S.path.loc {'<percorso>:<nodo>': data}

@@ -402,7 +402,10 @@ function finish(){
  const completed=L.si>=L.slots.length&&!(L.hearts0&&L.hearts<=0);
  L.stars=completed?stars:0;L.msg='';L.next=null;
  if(L.kind==='ripasso'){
-  if(L.daily&&completed){if(S.day&&S.day.d===P.today())S.day.rip=true;else S.day={d:P.today(),xp:0,goal:false,rip:true};}
+  if(L.daily&&completed){
+   const st=S.stats||(S.stats={}),first=!(S.day&&S.day.d===P.today()&&S.day.rip); // badge «Ripasso costante»: un Ripasso del giorno al giorno
+   if(first)st.ripgiorni=(st.ripgiorni||0)+1;
+   if(S.day&&S.day.d===P.today())S.day.rip=true;else S.day={d:P.today(),xp:0,goal:false,rip:true};}
   L.msg=L.rv?`${L.rv} ${L.rv===1?'struttura ripassata':'strutture ripassate'} in tempo: +${L.rv*P.R().ripasso.xp_puntuale} XP.`:'';
   if(L.daily&&completed)L.msg+=(L.msg?' ':'')+'Il ripasso di oggi vale per la serie.';
  }
@@ -412,6 +415,7 @@ function finish(){
  else if(L.kind==='prova'){
   P.setProva(L.ps.id);const wrong=[...new Set(L.wrong)];
   if(acc>=Rg.prova.soglia){
+   const st=S.stats||(S.stats={});st.prove=(st.prove||0)+1; // badge «Lo sapevo già»
    if(!['fatto','acceso'].includes(P.node(L.ps.id)?.stato)){P.setNode(L.ps.id,{stato:'fatto',stelle:stars,fatto_il:now});P.gain(Rg.xp.passo_fatto,true,[P.planetOf(L.sat)?.id]);L.msg=`🎉 Passo fatto con la prova! +${Rg.xp.passo_fatto} XP`;}
    P.setPrio(L.ps.id,wrong);if(wrong.length)L.next={kind:'lezione',pool:wrong,label:'Lezione sulle sbagliate'};
   }else{P.setPrio(L.ps.id,wrong);L.msg='Le prossime lezioni partono dalle strutture sbagliate.';}

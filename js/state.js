@@ -55,12 +55,13 @@ export const ymd=d=>d.getFullYear()+'-'+(d.getMonth()+1)+'-'+d.getDate();
 // La serie si calcola prima di ogni salvataggio (dayTick in percorso.js): un giorno vale con almeno 30 XP (sezione 6).
 // Resta per i giochi che la chiamavano a ogni risposta.
 export function touchStreak(){}
-const TITLES=['Matricola','Tirocinante','Studente di fisio','Terapista junior','Terapista esperto','Maestro di anatomia'];
+export const TITLES=['Matricola','Tirocinante','Studente di fisio','Terapista junior','Terapista esperto','Maestro di anatomia'];
 export const level=()=>{const L=Math.floor(Math.sqrt(S.xp/30))+1;return {L,title:TITLES[Math.min(TITLES.length-1,L-1)]};};
 // foto (o iniziale) in alto a sinistra: apre il Profilo
 function meBtn(){const b=$('me'),p=S.prof||{},src=p.avatar||'';if(b.dataset.src===src+'|'+(p.name||''))return;b.dataset.src=src+'|'+(p.name||'');
  b.replaceChildren();if(src){const i=document.createElement('img');i.src=src;i.alt='';b.append(i);}else b.textContent=((p.name||'').trim().charAt(0)||'👤').toUpperCase();}
-export function head(){meBtn();const {L,title}=level(),a=30*(L-1)**2,b=30*L**2;
+// titolo nell'intestazione: quello scelto nel profilo (fase 5, S.prof.titolo {id, t}: i titoli non si perdono), altrimenti quello del livello
+export function head(){meBtn();const {L}=level(),title=(S.prof&&S.prof.titolo&&S.prof.titolo.t)||level().title,a=30*(L-1)**2,b=30*L**2;
  {const e=$('lv'),b=document.createElement('b'),t=document.createElement('small');b.textContent='Liv. '+L;t.textContent=title;e.replaceChildren(b,t);e.title='Livello '+L+' · '+title;}
  $('xpb').style.width=((S.xp-a)/(b-a)*100)+'%';$('st').textContent='🔥 '+S.streak+'  ⭐ '+S.xp;}
 // dopo ogni risposta dei giochi: il ripasso (percorso.js) la conta come richiamo

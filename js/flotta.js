@@ -7,7 +7,9 @@
      la settimana prima resta in S.fleet.wkp finché non è inviata. Il contributo di ciascuno lo vede solo lui.
    - Casata (S.fleet.casata, cambiata = data dell'ultimo cambio), risposte alle sfide in coda (S.fleet.ans), premi d'equipaggio
      già dati (S.fleet.premi {'<equipaggio>:<lunedì>': 1}), pianeti degli equipaggi (S.fleet.crewPl {id: pianeta}).
-   Si inviano con syncFlotta() (account.js); finché sul server manca il file SQL restano qui. */
+   Si inviano con syncFlotta() (account.js); finché sul server manca il file SQL restano qui.
+   - Stagioni vinte (badge «Vincitore di stagione», fase 5): S.fleet.vinte {'AAAA-MM': casata}, quando la casata vincitrice di una
+     stagione chiusa (seasons.vincitore) ha ricevuto dei punti da questa persona in quel mese (fleet_days, casata decisa dal server). */
 import {app,S} from './state.js';
 
 export const FR=()=>{const r=app.REGOLE?.flotta||{};return {tetto_giorno:300,pianeta_scelto:2,giorni:40,invio_giorni:34,...r,
@@ -94,4 +96,17 @@ export async function syncFlotta(sb,uid,full){
   }
  }
  keep();
+}
+
+// ritorna null (niente di nuovo), false (guardate, nessuna vinta) o true (vinta almeno una)
+// stagioni chiuse vinte: si guarda una volta per stagione (anche persa: S.fleet.viste) nei propri giorni di quel mese
+export async function checkWins(sb,uid,seasons){
+ const f=F(),seen=f.viste||(f.viste={}),todo=(seasons||[]).filter(x=>x.vincitore&&!seen[x.stagione]);
+ if(!todo.length)return null; // niente di nuovo da guardare
+ const from=todo.map(x=>x.stagione).sort()[0]+'-01';
+ const {data,error}=await sb.from('fleet_days').select('giorno,constellation_id,punti').eq('user_id',uid).gte('giorno',from);
+ if(error)throw error;
+ let won=false;
+ for(const x of todo){seen[x.stagione]=1;if((data||[]).some(d=>String(d.giorno).startsWith(x.stagione)&&d.constellation_id===x.vincitore&&d.punti>0)){(f.vinte||(f.vinte={}))[x.stagione]=x.vincitore;won=true;}}
+ return won;
 }

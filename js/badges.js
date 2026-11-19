@@ -1,7 +1,10 @@
 /* Badge e traguardi: calcolati sul dispositivo dopo ogni salvataggio, anche senza account.
    S.badges = {id: data ISO dell'assegnazione}. Con l'account si inviano a badge_assertions (vedi account.js).
-   Gli id e i testi devono restare uguali a quelli in supabase/migrations/*_profilo_badge.sql (badge_classes). */
+   Gli id e i testi devono restare uguali a quelli in supabase/migrations/*_profilo_badge.sql (badge_classes); gli 8 della fase 5
+   (f5: true) in supabase/migrations/20261124090000_dextera_badge.sql: finché quel file non è applicato restano sul telefono.
+   title: il badge dà anche un titolo da scegliere nel profilo (vedi titoli() in progress.js). */
 import {S} from './state.js';
+import * as P from './percorso.js';
 
 const mastered=()=>Object.values(S.mastery).filter(v=>v>=3).length;
 const st=()=>S.stats||{};
@@ -28,6 +31,22 @@ export const BADGES=[
  ['casi5','🩺','Occhio clinico','Finisci 5 casi clinici',()=>(st().modes||{})['case']>=5],
  ['moduli','🗺️','Giramondo','Gioca in tutti i moduli: corpo, cervello e 3D',()=>{const m=st().mods||{};return m.corpo&&m['3d']&&(m.cervello||(m.lat&&m.sag));}]
 ].map(([id,icon,name,desc,test])=>({id,icon,name,desc,test}));
+// fase 5 (sezione 6 della specifica): badge del percorso e della Flotta. I conti del percorso servono i contenuti (P.ready()).
+const sats=()=>P.corsi().flatMap(c=>P.satelliti(null,c));
+const pls=()=>P.corsi().flatMap(c=>P.pianeti(c));
+const RIP=()=>P.R()?.badge?.ripassi_del_giorno||10;
+export const BADGES5=[
+ ['sat1','🛰️','Primo satellite acceso','Accendi il tuo primo satellite',()=>P.ready()&&sats().some(P.lit)],
+ ['sapevo','💡','Lo sapevo già','Supera una prova «Lo so già»',()=>st().prove>=1],
+ ['pianeta1','🪐','Primo pianeta','Supera l\'esame di un pianeta',()=>P.ready()&&pls().some(P.examPassed)],
+ ['corso1','☀️','Primo corso','Completa un corso: tutti i suoi pianeti con l\'esame superato',()=>P.ready()&&P.corsi().some(c=>{const L=P.pianeti(c);return L.length&&L.every(P.examPassed);}),'Esperto di un corso intero'],
+ ['sistema','✨','Sistema completo','Rendi brillanti tutti i satelliti di un pianeta',()=>P.ready()&&pls().some(p=>{const L=P.satelliti(p);return L.length&&L.every(s=>P.look(s)==='brillante');}),'Mente brillante'],
+ ['costante','🔁','Ripasso costante','Finisci 10 Ripassi del giorno',()=>(st().ripgiorni||0)>=RIP(),'Studente costante'],
+ ['stagione','🏆','Vincitore di stagione','Porta punti alla casata che vince una stagione',()=>Object.keys(S.fleet?.vinte||{}).length>0,'Campione di stagione'],
+ ['equipaggio','🤝','Obiettivo d\'equipaggio','Raggiungi con il tuo equipaggio l\'obiettivo della settimana',()=>Object.keys(S.fleet?.premi||{}).length>0,'Spirito d\'equipaggio']
+].map(([id,icon,name,desc,test,title])=>({id,icon,name,desc,test,title,f5:true}));
+BADGES.push(...BADGES5);
+export const NEW_BADGES=new Set(BADGES5.map(b=>b.id));
 
 // assegna i badge nuovi; restituisce quelli appena guadagnati
 export function checkBadges(){

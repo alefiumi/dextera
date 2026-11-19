@@ -5,6 +5,7 @@
      i punti della stagione (mese), il pianeta scelto (punti doppi) e l'albo delle stagioni chiuse.
    - Equipaggi: da 2 a 10 amici con un codice d'invito, l'obiettivo della settimana su un pianeta e le sfide di 5 strutture.
    - Tutti: la classifica generale per XP (come in BodyMania).
+   Fase 5: negli amici «Profilo» apre la scheda dell'amico (copertina, badge in vetrina e titolo, tabella dextera_profili).
    Serve l'account e, per vedere i dati degli altri, la rete; l'ultima copia resta sul dispositivo (dextera-social).
    I conti (punti, contributi, risposte) si fanno sul telefono in flotta.js e partono con la sincronizzazione (account.js). */
 import {$,toast} from './util.js';
@@ -13,12 +14,13 @@ import {account as A,configured,esc,online} from './account.js';
 import * as P from './percorso.js';
 import * as FL from './flotta.js';
 import {startChallenge,structName} from './lezione.js';
+import {BADGES} from './badges.js';
 
 const KEY='dextera-social';
-const SO={tab:'friends',all:[],rank:null,friends:[],rel:{fr:[],inc:[],out:[]},at:0,fleet:null,done:{},loading:false,err:'',ferr:'',found:null,q:'',chg:false,pick:null,pk:null,sel:[]};
-try{Object.assign(SO,JSON.parse(localStorage.getItem(KEY)||'{}'),{loading:false,err:'',ferr:'',found:null,q:'',chg:false,pick:null,pk:null,sel:[]});}catch(e){}
+const SO={tab:'friends',all:[],rank:null,friends:[],rel:{fr:[],inc:[],out:[]},cards:{},card:null,at:0,fleet:null,done:{},loading:false,err:'',ferr:'',found:null,q:'',chg:false,pick:null,pk:null,sel:[]};
+try{Object.assign(SO,JSON.parse(localStorage.getItem(KEY)||'{}'),{loading:false,err:'',ferr:'',found:null,q:'',chg:false,pick:null,pk:null,sel:[],card:null});}catch(e){}
 if(!['friends','houses','crews','all'].includes(SO.tab))SO.tab='friends';
-const keep=()=>{try{const {tab,all,rank,friends,rel,at,uid,fleet,done}=SO;localStorage.setItem(KEY,JSON.stringify({tab,all,rank,friends,rel,at,uid,fleet,done}));}catch(e){}};
+const keep=()=>{try{const {tab,all,rank,friends,rel,at,uid,fleet,done,cards}=SO;localStorage.setItem(KEY,JSON.stringify({tab,all,rank,friends,rel,at,uid,fleet,done,cards}));}catch(e){}};
 let isOpen=()=>false,NAV={};
 export const setSocialOpen=f=>{isOpen=f;};
 export const setSocialNav=o=>{NAV=o;}; // {useMod, setTab} da ui.js: per giocare una sfida nella scheda Palestra
@@ -57,6 +59,9 @@ export async function loadSocial(){
   Object.assign(SO,{uid,all:mine(all.data),rank,friends:mine(fr.data),at:Date.now(),
    rel:{fr:rel.data.filter(f=>f.status==='accepted').map(person),inc:rel.data.filter(f=>f.status==='pending'&&f.friend_id===uid).map(person),
     out:rel.data.filter(f=>f.status==='pending'&&f.user_id===uid).map(person)}});
+  // copertine, vetrine e titoli degli amici (fase 5): se sul server manca la tabella resta tutto com'era
+  const fids=SO.rel.fr.map(p=>p.id);
+  if(fids.length){const r=await sb.from('dextera_profili').select('user_id,copertina,vetrina,titolo').in('user_id',fids);SO.cards=r.error?{}:Object.fromEntries((r.data||[]).map(x=>[x.user_id,x]));}else SO.cards={};
   keep();
  }catch(e){SO.err=/relation|does not exist|schema cache/i.test(e.message||'')?'Sul server mancano le classifiche: va applicato il file supabase/migrations/20261118090000_amici_classifiche.sql.':'Non riesco a leggere la classifica: riprova tra poco.';}
  // Flotta: se sul server manca il suo file SQL il resto della scheda funziona lo stesso
@@ -89,6 +94,8 @@ async function loadFleet(sb,uid){
  const f=FL.F(),pl=Object.fromEntries(crews.map(c=>[c.id,c.pianeta||null]));
  if(JSON.stringify(pl)!==JSON.stringify(f.crewPl)){f.crewPl=pl;if(Object.keys(f.wk.pl||{}).length)f.wk.u=1;save();}
  rewards(crews);
+ // badge «Vincitore di stagione»: stagioni chiuse in cui si sono portati punti alla casata vincitrice
+ try{const w=await FL.checkWins(sb,uid,SO.fleet.ss);if(w)toast('🏆 La tua casata ha vinto la stagione!');if(w!==null)save();}catch(e){}
  keep();
 }
 // obiettivo dell'equipaggio raggiunto nella settimana: +50 XP a testa (una volta per equipaggio e settimana)
@@ -175,7 +182,15 @@ function friendsHtml(fresh,fl){
  return (R.inc.length?card('Richieste ricevute','',R.inc.map(p=>person(p,`<button class="chip on" data-so="acc" data-id="${esc(p.id)}">Accetta</button><button class="chip" data-so="del" data-id="${esc(p.id)}">Rifiuta</button>`)).join('')):'')+rank+
   card('Aggiungi un amico','',`<input id="soq" class="soq" placeholder="Nome utente…" autocomplete="off" autocapitalize="none" aria-label="Cerca per nome utente" value="${esc(SO.q)}"${online()?'':' disabled'}><div id="sres" aria-live="polite">${resHtml()}</div>`)+
   (R.out.length?card('Richieste inviate','',R.out.map(p=>person(p,`<span class="mut">in attesa</span><button class="chip" data-so="del" data-id="${esc(p.id)}">Annulla</button>`)).join('')):'')+
-  (R.fr.length?card(`I tuoi amici (${R.fr.length})`,'',R.fr.map(p=>person(p,`<button class="chip" data-so="rm" data-id="${esc(p.id)}" data-n="${esc(p.username)}">Togli</button>`)).join('')):'');
+  (R.fr.length?card(`I tuoi amici (${R.fr.length})`,'',R.fr.map(p=>person(p,`<button class="chip" data-so="card" data-id="${esc(p.id)}" aria-expanded="${SO.card===p.id}">Profilo</button><button class="chip" data-so="rm" data-id="${esc(p.id)}" data-n="${esc(p.username)}">Togli</button>`)+(SO.card===p.id?friendCard(p):'')).join('')):'');
+}
+// scheda di un amico: copertina, foto, nome, titolo e badge in vetrina (quelli che ha scelto di mostrare)
+const BANS=['notte','aurora','tramonto','oceano','foresta','sole'];
+function friendCard(p){
+ const c=SO.cards[p.id]||{},b=BANS.includes(c.copertina)?c.copertina:'notte',show=(c.vetrina||[]).map(id=>BADGES.find(x=>x.id===id)).filter(Boolean);
+ return `<div class="fcard"><div class="pfban ban-${b}">${show.length?`<ul class="vetrina" aria-label="Badge in vetrina">${show.map(x=>`<li title="${esc(x.name)}"><span aria-hidden="true">${x.icon}</span><span class="sr">${esc(x.name)}</span></li>`).join('')}</ul>`:''}</div>
+  <div class="fci">${av(p.avatar,p.username)}<div><b>${esc(p.username)}</b><div class="mut">${c.titolo?'🎖️ '+esc(c.titolo):'Nessun titolo scelto'}</div></div></div>
+  ${show.length?`<p class="mut">In vetrina: ${show.map(x=>esc(x.name)).join(', ')}</p>`:SO.cards[p.id]?'':'<p class="mut">Non ha ancora scelto copertina e badge da mostrare.</p>'}</div>`;
 }
 function resHtml(){
  if(!SO.found)return '';
@@ -328,6 +343,7 @@ export function wireSocial(panel){
   if(u!==undefined&&u!==''&&!UUID.test(u))return;
   if(k==='tab'){SO.tab=b.dataset.v;SO.pick=null;SO.chg=false;SO.pk=null;keep();renderSocial();loadSocial();}
   else if(k==='pick'){SO.pick=SO.pick===id?null:id;renderSocial();}
+  else if(k==='card'){SO.card=SO.card===id?null:id;renderSocial();panel.querySelector(`[data-so=card][data-id="${id}"]`)?.focus();}
   else if(k==='ask')act(()=>sb.from('friendships').insert({user_id:uid,friend_id:id}),'Richiesta inviata.');
   else if(k==='acc')act(()=>sb.from('friendships').update({status:'accepted'}).eq('user_id',id).eq('friend_id',uid),'Ora siete amici.');
   else if(k==='del')act(()=>sb.from('friendships').delete().or(pair(uid,id)));

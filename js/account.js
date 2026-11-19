@@ -5,6 +5,7 @@
 import {S,save,head,onSave,queue,resetLocal} from './state.js';
 import {reports,setFlagged,flaggedAge} from './segnala.js';
 import {syncFlotta,missing as fleetMissing,SQL_FILE as FLEET_SQL} from './flotta.js';
+import {NEW_BADGES} from './badges.js';
 import {SUPABASE_URL,SUPABASE_KEY} from './config.js';
 
 export const configured=!!(SUPABASE_URL&&SUPABASE_KEY);
@@ -163,7 +164,7 @@ export async function myData(){
  const out={app:'Dextera',creato_il:new Date().toISOString(),dispositivo:{progressi:S,partite_da_inviare:queue.all(),segnalazioni_da_inviare:reports.all()}};
  if(A.user&&A.sb&&online()){
   const sb=A.sb,uid=A.user.id;
-  const [p,g,m,b,f,pp,ds,er,rv,cm,fd,cw,ca]=await Promise.all([ownProfile(sb,uid),sb.from('game_results').select('*').eq('user_id',uid).order('played_at'),
+  const [p,g,m,b,f,pp,ds,er,rv,cm,fd,cw,ca,dp]=await Promise.all([ownProfile(sb,uid),sb.from('game_results').select('*').eq('user_id',uid).order('played_at'),
    sb.from('mastery').select('item_id,level,updated_at'),sb.from('badge_assertions').select('badge_id,issued_at').eq('user_id',uid),
    sb.from('friendships').select('user_id,friend_id,status,created_at'),
    sb.from('path_progress').select('node_id,stato,stelle,fatto_il,aggiornato_il').eq('user_id',uid),
@@ -172,10 +173,11 @@ export async function myData(){
    sb.from('constellation_members').select('constellation_id,precedente,cambiata_il,entrata_il').eq('user_id',uid),
    sb.from('fleet_days').select('giorno,constellation_id,xp,punti').eq('user_id',uid).order('giorno'),
    sb.from('crew_weeks').select('crew_id,settimana,pianeta,contributi').eq('user_id',uid),
-   sb.from('crew_challenge_answers').select('challenge_id,giuste,risposto_il').eq('user_id',uid)]);
+   sb.from('crew_challenge_answers').select('challenge_id,giuste,risposto_il').eq('user_id',uid),
+   sb.from('dextera_profili').select('copertina,vetrina,titolo,aggiornato_il').eq('user_id',uid)]);
   out.account={email:A.user.email,registrato_il:A.user.created_at,ultimo_accesso:A.user.last_sign_in_at,consenso_privacy:A.user.user_metadata||{},
    profilo:p.data,partite:g.data,maestria:m.data,badge:b.data,amicizie:f.data,percorso:pp.data,impostazioni:ds.data,segnalazioni:er.data,ripasso:rv.data,
-   flotta:{casata:cm.data,giorni:fd.data,contributi_equipaggi:cw.data,risposte_sfide:ca.data}};
+   flotta:{casata:cm.data,giorni:fd.data,contributi_equipaggi:cw.data,risposte_sfide:ca.data},copertina_e_titolo:dp.data};
  }else if(A.user)out.account={email:A.user.email,nota:'Senza connessione: qui ci sono solo i dati del dispositivo.'};
  return out;
 }
@@ -275,13 +277,18 @@ export async function sync(full){
    if(e5)throw e5;
    const sent=new Set(q.map(r=>r.id));queue.set(queue.all().filter(r=>!sent.has(r.id)));
   }
-  // badge: se sul server manca l'elenco (secondo file SQL non ancora applicato) restano solo qui, senza bloccare il resto
+  // badge: se sul server manca l'elenco (secondo file SQL non ancora applicato) restano solo qui, senza bloccare il resto.
+  // Quelli della fase 5 partono a parte: finché manca il loro file SQL (righe di badge_classes) non bloccano gli altri.
   const nb=Object.entries(S.badges).filter(([id])=>!sentBadges.has(id));
-  if(nb.length){
-   const {error:e6}=await sb.from('badge_assertions').upsert(nb.map(([badge_id,issued_at])=>({user_id:uid,badge_id,issued_at})),{onConflict:'user_id,badge_id',ignoreDuplicates:true});
-   if(e6)A.warn='I badge restano solo su questo dispositivo: sul server manca l\'elenco (file supabase/migrations/20261117120000_profilo_badge.sql).';
-   else nb.forEach(([id])=>sentBadges.add(id));
+  for(const part of [nb.filter(([id])=>!NEW_BADGES.has(id)),nb.filter(([id])=>NEW_BADGES.has(id))]){
+   if(!part.length)continue;const f5=NEW_BADGES.has(part[0][0]);
+   const {error:e6}=await sb.from('badge_assertions').upsert(part.map(([badge_id,issued_at])=>({user_id:uid,badge_id,issued_at})),{onConflict:'user_id,badge_id',ignoreDuplicates:true});
+   if(e6){A.warn=f5?BADGE_WARN:'I badge restano solo su questo dispositivo: sul server manca l\'elenco (file supabase/migrations/20261117120000_profilo_badge.sql).';if(f5)A.badgeMissing=BADGE_WARN;}
+   else{part.forEach(([id])=>sentBadges.add(id));if(f5){A.badgeMissing='';if(A.warn===BADGE_WARN)A.warn='';}}
   }
+  // copertina, vetrina e titolo (fase 5): tabella dextera_profili, li vedono gli amici; stessa regola, con il file dei badge
+  try{await syncCard(sb,uid,full);A.cardMissing=false;if(/^Copertina/.test(A.warn||''))A.warn='';}catch(e){A.cardMissing=/dextera_profili|schema cache|does not exist|PGRST205|42P01/i.test((e.message||'')+(e.code||''));
+   A.warn=A.cardMissing?'Copertina, badge in vetrina e titolo restano su questo telefono (gli amici non li vedono) finché sul server non c\'è il file '+BADGE_SQL+'.':'Copertina e titolo non sincronizzati: riprovo più tardi.';}
   // percorso, impostazioni e segnalazioni (fase 1): se sul server mancano le tabelle restano in coda qui, senza bloccare il resto
   try{await syncPercorso(sb,uid,full);}catch(e){A.warn=/path_progress|dextera_settings|error_report|schema cache|does not exist|PGRST205|42P01/i.test((e.message||'')+(e.code||''))
    ?'Percorso e segnalazioni restano su questo telefono finché sul server non c\'è il file supabase/migrations/20261121090000_dextera_percorso.sql.':'Percorso non sincronizzato: riprovo più tardi.';}
@@ -294,6 +301,28 @@ export async function sync(full){
   A.lastSync=new Date();A.err='';markDirty(false);
  }catch(e){A.err='Sincronizzazione non riuscita: riprovo più tardi. ('+(e.message||e)+')';}
  A.syncing=false;onChange();
+}
+
+// Copertina, badge in vetrina e titolo scelto (fase 5) in dextera_profili: si leggono da sé e dagli amici accettati.
+// All'accesso vince la modifica più recente (S.prof.ct contro aggiornato_il); poi si invia quando cambia (S.prof.cu).
+export const BADGE_SQL='supabase/migrations/20261124090000_dextera_badge.sql';
+const BADGE_WARN='I badge nuovi del percorso e della Flotta restano su questo telefono finché sul server non c\'è il file '+BADGE_SQL+'.';
+async function syncCard(sb,uid,full){
+ const p=S.prof;
+ if(full){
+  const {data,error}=await sb.from('dextera_profili').select('copertina,vetrina,titolo,titolo_id,aggiornato_il').eq('user_id',uid).maybeSingle();
+  if(error)throw error;
+  if(data&&Date.parse(data.aggiornato_il)>(p.ct||0)){
+   Object.assign(p,{banner:data.copertina||'notte',show:data.vetrina||[],titolo:data.titolo?{id:data.titolo_id||'',t:data.titolo}:null,ct:Date.parse(data.aggiornato_il)});delete p.cu;
+   try{localStorage.setItem('dextera-v1',JSON.stringify(S));}catch(e){}head();return;
+  }
+  if(!data&&(p.banner||(p.show||[]).length||p.titolo))p.cu=1; // fatti prima della fase 5: si mandano la prima volta
+ }
+ if(!p.cu)return;
+ const ct=p.ct||Date.now(),row={user_id:uid,copertina:p.banner||'notte',vetrina:(p.show||[]).slice(0,3),titolo:p.titolo?.t||null,titolo_id:p.titolo?.id||null,aggiornato_il:new Date(ct).toISOString()};
+ const {error}=await sb.from('dextera_profili').upsert(row,{onConflict:'user_id'});
+ if(error)throw error;
+ if((p.ct||0)===ct||!p.ct){delete p.cu;p.ct=ct;try{localStorage.setItem('dextera-v1',JSON.stringify(S));}catch(e){}}
 }
 
 // Percorso (fase 1): stato dei nodi in path_progress, obiettivo e scudi in dextera_settings, segnalazioni in error_reports,

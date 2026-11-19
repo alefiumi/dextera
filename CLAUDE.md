@@ -39,6 +39,7 @@ Dove questo file e la specifica differiscono, vale la specifica.
 - Fase 2 – Ripasso ed esame (SQL: review_items), in tre rilasci scelti dall'autore il 19/11/2026: 1) ripasso, luce dei satelliti,
   data d'esame (v0.76.0, vedi «Ripasso»); 2) esame del pianeta (v0.77.0, vedi «Esame del pianeta»); 3) Palestra con la figura per zone (v0.78.0, vedi «Palestra per zone»). Fasi 3–7: vedi la specifica.
 - Fase 4 – Flotta (SQL: costellazioni, stagioni, equipaggi): v0.85.0, vedi «Flotta». File SQL da applicare dall'autore.
+- Fase 5 – Profilo e competenze (SQL: righe in badge_classes, dextera_profili): v0.86.0, vedi «Profilo e competenze». File SQL da applicare dall'autore.
 - Corso di neurologia: contenuti (primo rilascio) e corso giocabile (v0.81.0, vedi «Corso di neurologia giocabile»), Palestra sul cervello (v0.82.0), gioco 3D (v0.83.0).
 - GitHub Pages attivo (ramo `main`, cartella radice): online su `alefiumi.github.io/dextera`.
 
@@ -220,7 +221,7 @@ Contenuto del gioco:
   presentazione; statistiche, badge, riquadro Account (sincronizza, cambia password, esci) e maestria, con la scelta tra corpo
   e cervello (toccando una voce si apre nell'Atlante 2D nel suo modulo).
   Profilo locale in `S.prof`; funziona anche senza account.
-- Badge (`js/badges.js`): 20, calcolati sul dispositivo dopo ogni `save()` (avviso "Nuovo badge"); `S.badges` {id: data},
+- Badge (`js/badges.js`): 28 (20 di BodyMania e 8 della fase 5, vedi «Profilo e competenze»), calcolati sul dispositivo dopo ogni `save()` (avviso "Nuovo badge"); `S.badges` {id: data},
   statistiche delle partite in `S.stats` (aggiornate da `queue.add`). Con l'account vanno in `badge_assertions`.
   Gli id e i testi devono coincidere con `badge_classes` nel secondo file SQL (`20261117120000_profilo_badge.sql`,
   che aggiunge anche le colonne avatar, role, bio, profile_at e la foto nella classifica).
@@ -423,7 +424,7 @@ descrizioni; quelle con fonte Z-Anatomy dicono da quale vaso nasce o dove sbocca
   Sotto la scritta di caricamento la versione («alpha v0.75.2», `#gver`, da `appVersion()`; solo durante il caricamento e se la copia c'è già).
   Copertina del profilo (19/11/2026, v0.73.0): sfondo da una galleria di sei (`BANNERS` in `progress.js`: notte, aurora, tramonto,
   oceano, foresta, sole) con sopra fino a 3 badge guadagnati in vetrina, scelti in «Modifica profilo»; foto sovrapposta al bordo.
-  Per ora solo sul dispositivo (`S.prof.banner`, `S.prof.show`): sul server e visibile agli amici con la fase 5 (serve SQL nuovo).
+  Dalla fase 5 (v0.86.0) sul server con il titolo scelto (`dextera_profili`) e visibili agli amici nella Flotta.
   Spazi nei riquadri: regola unica in fondo a `style.css` (`.card>.kick+…`), così righe e campi non toccano l'etichetta.
   Nel sistema ogni pianeta ha intorno le lune dei suoi satelliti (colore dello stato, `moons()`); nell'universo ogni corso è un piccolo
   sistema, gli altri tre corsi «in arrivo». Riquadro dell'universo «Cosa studi?» con la scelta del percorso (`PERCORSI` in `path.js`: solo
@@ -640,6 +641,45 @@ descrizioni; quelle con fonte Z-Anatomy dicono da quale vaso nasce o dove sbocca
   SQL (avvisi, punti in coda), con il file (casata, invio dei giorni, classifica della settimana, pianeta doppio, tetto di 300, cambio di
   casata una volta), equipaggi (crea, codice sbagliato, entra, premio una volta, contributo inviato, sfida con 5 strutture, risposta giocata
   nella Palestra e inviata, esci), offline, dati e cache di BodyMania intatti.
+
+## Profilo e competenze (fase 5, v0.86.0)
+- Decisioni dell'autore (19/11/2026): radar con due viste (per passo e per regione); sagoma = figura 2D a satelliti; titoli da livelli,
+  esami e badge; copertina, vetrina e titolo visibili agli amici.
+- `js/competenze.js` (numeri in `regole.json` → `profilo` e `badge`):
+  - **Radar** (`radar(c, modo)`, `radarSvg()`): «Per passo» un asse per tipo di passo del corso (corpo: Ossa, Reperi, Muscoli, Connessioni,
+    Funzione, Casi clinici; neurologia: Strutture, Posizione, Funzione, Lesioni, Connessioni, Casi clinici), «Per regione» un asse per pianeta.
+    Valore = maestria media (0–3 → 0–100%) di tutte le strutture usabili del corso per quell'aspetto, anche non iniziate; i casi clinici = quota
+    dei satelliti con il passo progetto fatto. Percentuali scritte sulle etichette e nell'`aria-label`.
+  - **Sagoma** (`sagoma(c)`): la figura 2D del corso (corpo: viste `a` e `p`; neurologia: cervello `ls` e `m`, `profilo.viste`), ogni parte del
+    colore della maestria (corpo: chiave dell'osso, la stessa del percorso; cervello: la più alta tra le voci `n.` del corso che usano quella
+    parte). Sopra ogni zona il simbolo dello stato del satellite (`sym()` esportato da `path.js`), al centro delle sue ossa nella vista in cui si
+    vedono di più (`min_vis`), spostato di lato se tocca un altro simbolo. Simboli = pulsanti (Invio e Spazio); tocco su un osso → la zona di
+    `satsOf()`; elenco «Stato dei satelliti» sotto. Corso scelto e vista del radar in `dextera-profilo` (solo comodità).
+  - **Titoli** (`titoli()`, `titolo()`): titoli dei livelli raggiunti (`TITLES`, ora esportato da `state.js`), «Esperto di …» degli esami superati,
+    `title` di alcuni badge (Primo corso, Sistema completo, Ripasso costante, Vincitore di stagione, Obiettivo d'equipaggio). Scelto in «Modifica
+    profilo» (`select name="titolo"`), in `S.prof.titolo {id, t}`; si vede sotto il nome e nell'intestazione (`head()`; i titoli non si perdono).
+- Profilo (`progress.js`): riquadri Sagoma (`.pfs`) e Competenze (`.pfc`); sul telefono dopo i numeri, sul computer nelle due colonne.
+- **8 badge nuovi** (`BADGES5` in `badges.js`, `f5: true`, `NEW_BADGES`): `sat1` primo satellite acceso, `sapevo` prova «Lo so già» superata
+  (`S.stats.prove`, contata in `finish()` di `lezione.js`), `pianeta1`, `corso1` (tutti i pianeti di un corso con l'esame), `sistema` (tutti i
+  satelliti di un pianeta brillanti), `costante` (10 Ripassi del giorno, `S.stats.ripgiorni`: uno al giorno), `stagione` (`S.fleet.vinte`:
+  `checkWins()` in `flotta.js`, chiamata da `loadFleet`, guarda una volta ogni stagione chiusa di `seasons` se in quel mese si sono portati punti
+  alla casata vincitrice in `fleet_days`; `S.fleet.viste`), `equipaggio` (un premio in `S.fleet.premi`). Non retroattivi per prove e ripassi
+  fatti prima della v0.86.0.
+- Sincronizzazione (`account.js`): i badge della fase 5 partono in un invio a parte, così finché manca il loro file SQL non bloccano gli altri
+  (avviso nel profilo, `A.badgeMissing`). Copertina, vetrina e titolo in `dextera_profili` (`syncCard()`: all'accesso vince la modifica più
+  recente, `S.prof.ct` contro `aggiornato_il`; poi si invia quando `S.prof.cu`; senza tabella restano sul telefono, `A.cardMissing`).
+  «Scarica i miei dati» ha `copertina_e_titolo`.
+- Flotta: negli amici il pulsante «Profilo» apre la scheda dell'amico (copertina, foto, titolo, badge in vetrina; `friendCard()` in `social.js`,
+  `SO.cards` da `dextera_profili`, copia offline in `dextera-social`).
+- SQL: `supabase/migrations/20261124090000_dextera_badge.sql` (da applicare dall'autore; prima si pubblica l'app): 8 righe in `badge_classes`
+  (stessi id e testi di `BADGES5`) e la tabella `dextera_profili` (copertina tra le 6 della galleria, vetrina di al massimo 3, titolo e id del
+  titolo; la leggono sé e gli amici accettati, la scrive solo sé; il trigger `private.dextera_profilo()` toglie dalla vetrina i badge che la
+  persona non ha in `badge_assertions` e riporta a oggi una data nel futuro; nessun `update` senza `where`). Provato con PGlite: 28 prove
+  (`badge_rls.mjs` nelle note delle sessioni). `privacy.html`: una riga nuova (copertina, vetrina e titolo, visibili agli amici).
+- Prova: `profilo.mjs` (note delle sessioni, Chrome headless con un finto Supabase): sagoma, radar nelle due viste, tocco e Invio sui satelliti,
+  i badge (anche giocando prova e Ripasso del giorno), titoli, invio con e senza il file SQL, scheda dell'amica, stagione vinta, neurologia,
+  niente scorrimento di lato, offline, dati di BodyMania intatti. `flotta.mjs` passa (salvo il controllo sulla versione 0.85.0).
+- Non fatto in questo rilascio (sezione 7 della specifica): costellazione, equipaggio, date d'esame e obiettivo giornaliero dentro il Profilo.
 
 ## Mappa del percorso (`content/mappa.json`)
 Corso → 4 pianeti → 17 satelliti (con `ordine` della specifica) → 6 passi (`ossa`, `reperi`, `muscoli`, `connessioni`, `funzione`,

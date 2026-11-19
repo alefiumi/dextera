@@ -415,7 +415,7 @@ button.zchip:hover{border-color:var(--acc)}
 .ntg{font-size:12px;font-weight:600;color:var(--acc);border:1px solid currentColor;border-radius:8px;padding:0 6px;margin-left:4px;white-space:nowrap}
 /* Profilo (dalla foto in alto): stesso stile a riquadri */
 .prof{display:grid;gap:12px}
-.pcol{display:contents}.pfhero{order:1}.prof .stats{order:2}.pfb{order:3}.pfside{order:4}.pfm{order:5}
+.pcol{display:contents}.pfhero{order:1}.prof .stats{order:2}.pfs{order:3}.pfc{order:4}.pfb{order:5}.pfside{order:6}.pfm{order:7}
 .pg #panel>.prof{max-width:980px}
 .pfhero h2{margin:2px 0 2px;overflow-wrap:anywhere}
 .pfhero .pf{margin:0}
@@ -475,7 +475,7 @@ button.zchip:hover{border-color:var(--acc)}
 .banhint{position:absolute;right:10px;bottom:10px;font:inherit;font-size:13px;font-weight:600;color:#fff;background:#0006;border:1px solid #fff6;border-radius:12px;padding:8px 12px;min-height:40px;cursor:pointer}
 .pfhero>.pf{margin-top:-34px;align-items:flex-end}
 .pfhero>.pf .av{width:84px;height:84px;border:4px solid var(--card);box-sizing:content-box;position:relative}
-.pfhero>.pf .pfi{padding-bottom:2px}
+.pfhero>.pf .pfi{padding-bottom:2px;margin-top:38px} /* il testo resta sotto la copertina anche con la riga del titolo */
 .pfhero.edit>.kick{margin-top:12px}
 .bansel,.showsel{border:0;padding:0;margin:12px 0 0;min-width:0}
 .bansel legend,.showsel legend{font-size:12px;font-weight:700;color:var(--mut);padding:0;margin-bottom:6px}
@@ -533,3 +533,24 @@ input.code{font-size:20px;text-transform:uppercase}
 .pk{display:flex;align-items:center;gap:10px;min-height:44px;padding:2px 4px}
 .pk input{width:22px;height:22px;flex:none}
 .sofm .btn{margin-top:10px}.cfoot{margin-top:10px}
+/* Profilo e competenze (fase 5): titolo scelto, sagoma colorata con la maestria e i satelliti, radar, scheda di un amico */
+.ptit{font-weight:700;color:var(--acc);font-size:15px;margin:0 0 2px}
+.pfs .chips,.pfc .chips{margin:10px 0 0}.pfc .seg3{margin-top:10px}
+.sagw{margin-top:10px;background:var(--bg);border-radius:14px;padding:6px}
+.sag{display:block;width:100%;max-height:420px}
+.sag .bone .f{stroke-width:.4}
+.sag .zs{cursor:pointer}.sag .zbg{fill:#121833;stroke:#fff;stroke-width:1.5}
+.sag .zs:focus{outline:none}.sag .zs:focus-visible .zbg{stroke:var(--acc);stroke-width:4}
+.pfs .aleg{margin:10px 0 0}
+.sats{margin-top:8px}.sats summary{min-height:44px;display:flex;align-items:center;cursor:pointer;font-weight:600}
+.sats ul{list-style:none;margin:0;padding:0}.sats li:last-child .srow{border-bottom:0}
+.radar{display:block;width:100%;max-width:420px;margin:8px auto 0}
+.radar .rg{fill:none;stroke:var(--line);stroke-width:1}.radar .ra{stroke:var(--line);stroke-width:1}
+.radar .rv{fill:color-mix(in srgb,var(--acc) 28%,transparent);stroke:var(--acc);stroke-width:2;stroke-linejoin:round}
+.radar .rd{fill:var(--acc)}
+.radar .rl{font:600 10px system-ui,sans-serif;fill:var(--ink)}.radar .rp{font-weight:800;fill:var(--acc)}
+.fcard{margin:4px 0 10px;border:1px solid var(--line);border-radius:16px;overflow:hidden;background:var(--bg)}
+.fcard .pfban{margin:0;border-radius:0;height:90px}
+.fcard .vetrina li{width:38px;height:38px;font-size:20px}
+.fci{display:flex;align-items:center;gap:10px;padding:10px 12px 4px}.fci .sav{width:40px;height:40px}
+.fcard>.mut{margin:0;padding:0 12px 10px;font-size:14px}

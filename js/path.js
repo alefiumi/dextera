@@ -36,7 +36,7 @@ const neuroC=c=>c.modulo==='cervello';
 // pieno con i raggi (brillante)
 const RAYS=(cx,cy,r)=>[0,45,90,135,180,225,270,315].map(a=>{const c=Math.cos(a*Math.PI/180),s=Math.sin(a*Math.PI/180);return `<line x1="${(cx+c*(r+2)).toFixed(1)}" y1="${(cy+s*(r+2)).toFixed(1)}" x2="${(cx+c*(r+5)).toFixed(1)}" y2="${(cy+s*(r+5)).toFixed(1)}"/>`;}).join('');
 const CLOCK=(cx,cy,r)=>`<path class="clk" d="M${cx} ${cy-r*.6}V${cy}l${r*.45} ${r*.3}" fill="none"/>`;
-function sym(st,r=9,cx=0,cy=0){
+export function sym(st,r=9,cx=0,cy=0){
  if(st==='brillante')return `<g class="rays">${RAYS(cx,cy,r-3)}</g><circle class="sy acc" cx="${cx}" cy="${cy}" r="${r-3}"/>`;
  if(st==='ripassare')return `<circle class="sy rip" cx="${cx}" cy="${cy}" r="${r}"/>${CLOCK(cx,cy,r)}`;
  if(st==='acceso')return `<circle class="sy acc" cx="${cx}" cy="${cy}" r="${r}"/>`;

@@ -630,6 +630,8 @@ descrizioni; quelle con fonte Z-Anatomy dicono da quale vaso nasce o dove sbocca
   `membri_ids` tenuto dai trigger e usato dalle regole di accesso, al massimo 10 membri e 3 equipaggi a testa; se esce il capo lo diventa il
   vice o il primo entrato; senza membri si scioglie), `crew_members` (si entra solo con il codice), `crew_weeks`, `crew_challenges` (10 al
   giorno per equipaggio), `crew_challenge_answers`. Le modifiche interne dei trigger passano con `set_config('dextera.interno')`.
+  Su Supabase l'estensione safeupdate rifiuta gli `update` senza `where`, anche nei trigger (PGlite no): ogni update ha un `where`
+  (in v0.85.0 `private.casata_conta()` non l'aveva e la Flotta non si apriva; corretto dall'autore il 19/11/2026).
   Errori con `hint` `dextera_*`, tradotti in `HINTS` di `social.js`. Provato con PGlite: 82 prove (`flotta_rls.mjs` nelle note delle
   sessioni). Cancellazione dell'account: durante i 30 giorni la persona resta negli equipaggi (la funzione di BodyMania non cambia);
   dopo, la cascata la toglie e il capo passa a un altro.

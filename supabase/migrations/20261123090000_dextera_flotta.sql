@@ -112,7 +112,9 @@ end $$;
 create or replace function private.casata_conta() returns trigger
 language plpgsql security definer set search_path = '' as $$
 begin
-  update public.constellations k set membri = (select count(*) from public.constellation_members m where m.constellation_id = k.id);
+  -- il where serve: su Supabase l'estensione safeupdate rifiuta gli update senza where (anche nei trigger)
+  update public.constellations k set membri = (select count(*) from public.constellation_members m where m.constellation_id = k.id)
+    where k.id is not null;
   return null;
 end $$;
 revoke all on function private.casata_ingresso(), private.casata_cambio(), private.casata_conta() from public, anon, authenticated;

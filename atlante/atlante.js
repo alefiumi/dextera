@@ -118,8 +118,20 @@ function loadFile(file){
   FILES[file].loaded=true;wakeHook();
   if(FILES.encefalo&&FILES.encefalo.loaded&&FILES.meningi&&FILES.meningi.loaded)makeShells();
   ok();
- },undefined,ko))};
+ },undefined,e=>{
+  // non scaricato (di solito: senza rete e strato non ancora salvato sul dispositivo). Si dimentica il tentativo,
+  // così con la rete si riprova; intanto si avvisa invece di restare su «Carico…».
+  delete FILES[file];S.loading=false;loadFail(file);ko(e);
+ }))};
  return FILES[file].promise;
+}
+function loadFail(file){
+ let m=$('lfail');if(!m){m=document.createElement('div');m.id='lfail';m.setAttribute('role','status');$('view').appendChild(m);}
+ const off=!navigator.onLine;
+ m.textContent=off?'Questo strato non è ancora salvato sul dispositivo: serve la connessione una volta. L\'app lo salva da sola appena torna la rete.'
+  :'Non riesco a caricare questo strato: riprova tra poco.';
+ m.hidden=false;clearTimeout(loadFail.t);loadFail.t=setTimeout(()=>{m.hidden=true;},7000);
+ panel();
 }
 
 /* ---------- reperi: punta della linea di richiamo dell'etichetta nella fonte ---------- */
@@ -546,11 +558,11 @@ function musclesAt(l){
 }
 function showLandmark(l,fly=true){
  S.mus=S.combo=null;S.part=null;S.lm=l;S.list=null;refresh();if(fly)flyTo(l.p.clone().addScaledVector(l.d,0.3),l.p.clone());
- if(!FILES.inserzioni||!FILES.inserzioni.loaded)loadFile('inserzioni').then(()=>{if(S.lm===l)refresh();});
+ if(!FILES.inserzioni||!FILES.inserzioni.loaded)loadFile('inserzioni').then(()=>{if(S.lm===l)refresh();},()=>{});
 }
 async function showMuscle(root,side=S.side,fly=true,combo=null){
  S.mus=combo?null:root;S.combo=combo;S.side=side;S.part=null;S.lm=null;S.list=null;
- if(!FILES.muscoli||!FILES.muscoli.loaded||!FILES.inserzioni||!FILES.inserzioni.loaded){S.loading=true;panel();await Promise.all([loadFile('muscoli'),loadFile('inserzioni')]);S.loading=false;}
+ if(!FILES.muscoli||!FILES.muscoli.loaded||!FILES.inserzioni||!FILES.inserzioni.loaded){S.loading=true;panel();try{await Promise.all([loadFile('muscoli'),loadFile('inserzioni')]);}catch(e){return;}S.loading=false;}
  refresh();
  if(!fly)return;
  let list=meshes.filter(m=>inFocus(m));
@@ -566,7 +578,7 @@ const showCombo=(k,side=S.side,fly=true)=>showMuscle(null,side,fly,k);
 async function openBrain(){
  S.mus=S.combo=S.lm=S.part=null;S.list='brain';if(S.solo&&S.solo!=='brain')S.solo=null;
  if(S.cutOn!=='brain'){S.cut.ax=null;S.cutOn='brain';}
- if(!FILES.encefalo||!FILES.encefalo.loaded||!FILES.meningi||!FILES.meningi.loaded){S.loading=true;panel();await Promise.all([loadFile('encefalo'),loadFile('meningi')]);S.loading=false;}
+ if(!FILES.encefalo||!FILES.encefalo.loaded||!FILES.meningi||!FILES.meningi.loaded){S.loading=true;panel();try{await Promise.all([loadFile('encefalo'),loadFile('meningi')]);}catch(e){return;}S.loading=false;}
  if(!brainBox)brainBox=boxOf(meshes.filter(m=>m.userData.layer==='encefalo'&&m.userData.st===2));
  const first=!V.encefalo;V.encefalo=true;V.meningi=true;if(S.bones==='on')S.bones='ghost';
  refresh();
@@ -623,7 +635,7 @@ async function findPart(name){
  const k=DATA.objs[name][0];
  // un muscolo cercato si apre da solo, con origine e inserzione: lo strato dei muscoli lo accende l'utente
  if(k==='muscoli'){const r=rootOf(baseOf(name));if(DATA.mus[r]){showMuscle(r,sideOf(name)||S.side);return;}}
- await loadFile(LAYERS[k].file);
+ try{await loadFile(LAYERS[k].file);}catch(e){return;}
  if(k!=='ossa'&&!V[k]){V[k]=true;if(INSIDE.includes(k)&&S.bones==='on')S.bones='ghost';}
  const m=byName.get(name);if(m){m.userData.hidden=false;if(m.userData.st>=0&&m.userData.st<S.lev)S.lev=m.userData.st;selectPart(m,true);}
 }
@@ -802,7 +814,10 @@ async function startGame(set,extra){
  S.mus=S.combo=S.lm=S.part=null;S.list=null;S.cut.ax=null;S.lev=0;S.mv='both';
  for(const k in V)V[k]=false;S.bones='on';S.allLm=false;S.on={cuore:false,polmoni:false};S.solo=null;meshes.forEach(m=>m.userData.hidden=false);
  S.loading=true;refresh();
- GAME.pool=await poolOf(set);
+ try{GAME.pool=await poolOf(set);
+ if(set==='oi'||set==='ponte')await Promise.all([loadFile('muscoli'),loadFile('inserzioni')]);
+ if(set==='nervi')await Promise.all([loadFile('encefalo'),loadFile('nervi')]);}
+ catch(e){GAME=null;document.body.classList.remove('game');S.loading=false;refresh();return;} // strato mancante offline: avviso in loadFail
  if(set==='muscoli')V.muscoli=true;
  if(set==='reperi')S.allLm=true;
  if(set==='caso')V.muscoli=true;
@@ -1010,8 +1025,8 @@ window.addEventListener('storage',e=>{if(e.key===THEME_KEY)setTheme(e.newValue,f
 sysDark.addEventListener('change',themeBtn);themeBtn();
 
 /* ---------- copia offline degli strati ---------- */
-// Il service worker dell'app salva ogni strato la prima volta che si apre con la rete; qui si vede quanti
-// sono già salvati e si possono scaricare tutti insieme.
+// Il service worker dell'app salva tutti gli strati da solo, in sottofondo, appena c'è la rete (fillModels in sw.js);
+// qui si vede quanti sono già salvati e si può chiedere di scaricarli subito.
 const OFF={files:[...new Set(Object.values(LAYERS).map(l=>l.file))],saved:null,busy:false,err:false};
 const offUrl=f=>new URL(f+'.glb',location.href).href;
 const hasSW=()=>'caches' in window&&navigator.serviceWorker&&navigator.serviceWorker.controller;

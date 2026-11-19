@@ -30,12 +30,16 @@ const HOW={
  'android-edge':['Android · Edge','Tocca il menu <b>…</b>, poi <b>Aggiungi al telefono</b>.']
 };
 
-// Pronta offline = il service worker controlla la pagina e le copie di app e contenuti ci sono.
-export async function offlineReady(){
- if(!('serviceWorker' in navigator)||!window.caches||!navigator.serviceWorker.controller)return false;
- const k=await caches.keys();
- return k.some(x=>x.startsWith('dextera-app-'))&&k.some(x=>x.startsWith('dextera-content-'));
+// Pronta offline = il service worker controlla la pagina e le copie di app e contenuti ci sono; models = ci sono anche
+// tutti gli strati dell'atlante 3D (segno scritto da fillModels() in sw.js quando li ha salvati tutti).
+export async function offlineState(){
+ if(!('serviceWorker' in navigator)||!window.caches||!navigator.serviceWorker.controller)return {app:false,models:false};
+ const k=await caches.keys(),app=k.some(x=>x.startsWith('dextera-app-'))&&k.some(x=>x.startsWith('dextera-content-'));
+ const mc=k.find(x=>x.startsWith('dextera-3d-'));
+ const models=!!mc&&!!(await (await caches.open(mc)).match(new URL('atlante/.offline-completo',location.href).href));
+ return {app,models};
 }
+export async function offlineReady(){const o=await offlineState();return o.app&&o.models;}
 
 // versione dell'app («alpha v0.68.1»), letta dal nome della cache dell'app (la scrive sw.js): c'è anche offline
 export async function appVersion(){
@@ -45,8 +49,9 @@ export async function appVersion(){
 export async function fillVersion(root=document){const v=await appVersion();root.querySelectorAll('[data-appv]').forEach(e=>{e.textContent=v?`Dextera alpha ${v}`:'Dextera alpha';});}
 export async function showInstall(){
  const p=platform(),me=HOW[p],inst=isStandalone();
- const ready=await offlineReady();
- const status=ready?'<p class="tip">✅ <b>Pronta anche senza connessione</b> su questo dispositivo.</p>'
+ const o=await offlineState(),ready=o.app&&o.models;
+ const status=ready?'<p class="tip">✅ <b>Pronta anche senza connessione</b> su questo dispositivo, compreso tutto l\'atlante 3D.</p>'
+  :o.app?'<p class="tip">⏳ <b>App pronta offline; sto salvando l\'atlante 3D</b> (encefalo, muscoli, vasi…, circa 7 MB). Tieni l\'app aperta con la connessione per un minuto.</p>'
   :'serviceWorker' in navigator?'<p class="tip">⏳ <b>Non ancora pronta offline.</b> Tieni l\'app aperta con la connessione per qualche secondo, finché compare il messaggio "Pronta".</p>'
   :'<p class="tip">⚠️ Questo browser non permette l\'uso offline.</p>';
  const others=Object.entries(HOW).filter(([k])=>k!==p).map(([,v])=>`<p><b>${v[0]}</b>: ${v[1]}</p>`).join('');
@@ -110,8 +115,8 @@ export async function promptInstall(){
 export async function refreshOfflineBadge(){
  const b=$('off');if(!b)return;
  if(!('serviceWorker' in navigator)||location.protocol==='file:'){b.hidden=true;return;}
- const ok=await offlineReady();
+ const o=await offlineState(),ok=o.app&&o.models;
  b.hidden=false;b.className=ok?'ok':'wait';b.textContent=ok?'✓':'⏳';
- b.title=ok?'Disponibile offline':'Copia offline in preparazione';
+ b.title=ok?'Disponibile offline':o.app?'Salvo l\'atlante 3D per l\'uso offline':'Copia offline in preparazione';
  b.setAttribute('aria-label',b.title);
 }

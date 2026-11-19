@@ -7,7 +7,8 @@
      se la versione è cambiata si scarica l'intero set in una cache nuova e lo si usa dall'avvio successivo.
    - Atlante 3D (atlante/): pagina, codice e dati vanno con l'app (APP_FILES). Motore three.js e modelli .glb
      stanno in una cache a parte (MODEL_CACHE), che non si riscarica a ogni nuova versione dell'app: all'installazione
-     si salva la base (motore e scheletro), ogni altro strato la prima volta che viene richiesto con la rete.
+     si salva la base (motore e scheletro); poi, appena c'è rete, tutti gli altri strati uno alla volta in sottofondo
+     (fillModels), così l'atlante 3D funziona tutto anche offline. Quando sono tutti salvati si scrive il segno MODEL_DONE.
      Quando cambi un file in atlante/vendor/ o un .glb, aumenta MODEL_VERSION. */
 // Versione dell'app (numerazione classica, MAGGIORE.MINORE.CORREZIONE, fase «alpha»):
 //   0   → 1 quando l'app esce dalla prova (rilascio pubblico, fase 7);
@@ -15,7 +16,7 @@
 //   .X  → +1 per ogni commit che cambia un file dell'app (correzioni e ritocchi).
 // È anche il nome della cache: cambiandola il browser riscarica l'app. L'app la legge dal nome della cache (install.js).
 const APP_STAGE = 'alpha';
-const APP_VERSION = '0.73.0';
+const APP_VERSION = '0.74.0';
 const APP_CACHE = 'dextera-app-' + APP_VERSION;
 const CONTENT_PREFIX = 'dextera-content-';
 const MODEL_VERSION = '1';
@@ -35,6 +36,10 @@ const MODEL_BASE = [
   'atlante/vendor/addons/utils/BufferGeometryUtils.js', 'atlante/vendor/addons/utils/SkeletonUtils.js',
   'atlante/ossa.glb'
 ];
+// tutti gli strati dell'atlante (circa 7 MB oltre alla base): si scaricano in sottofondo, vedi fillModels()
+const MODEL_LAYERS = ['muscoli', 'legamenti', 'inserzioni', 'encefalo', 'meningi', 'midollo', 'nervi', 'sensi', 'vasi', 'visceri']
+  .map(f => 'atlante/' + f + '.glb');
+const MODEL_DONE = 'atlante/.offline-completo'; // segno nella cache dei modelli: c'è tutto (lo legge install.js)
 const isModel = rel => rel.startsWith('atlante/vendor/') || (rel.startsWith('atlante/') && rel.endsWith('.glb'));
 const abs = p => new URL(p, self.registration.scope).href;
 
@@ -69,6 +74,26 @@ const fetchIndex = async () => {
   if (!r.ok) throw new Error('content/index.json: HTTP ' + r.status);
   return r.json();
 };
+// Scarica gli strati 3D che mancano, uno alla volta (non occupa tutte le connessioni). Senza rete si ferma e
+// riprova al prossimo avvio. Gli strati già in cache non si riscaricano.
+let filling = null;
+function fillModels() {
+  return filling ||= (async () => {
+    try {
+      const cache = await caches.open(MODEL_CACHE);
+      if (await cache.match(abs(MODEL_DONE))) return;
+      for (const f of [...MODEL_BASE, ...MODEL_LAYERS]) {
+        if (await cache.match(abs(f))) continue;
+        const r = await fetch(abs(f), {cache: 'reload'});
+        if (!r.ok) throw new Error(f + ': HTTP ' + r.status);
+        await cache.put(abs(f), new Response(await r.blob(), {headers: r.headers}));
+      }
+      await cache.put(abs(MODEL_DONE), new Response('1'));
+      for (const c of await self.clients.matchAll()) c.postMessage({type: 'models-ready'});
+    } catch (e) { /* offline: si riprova al prossimo avvio con la rete */ }
+    finally { filling = null; }
+  })();
+}
 let checking = null;
 // Controllo delle versioni (solo con rete). Se scarica un set nuovo, avvisa le pagine aperte.
 function checkContent() {
@@ -114,7 +139,7 @@ self.addEventListener('fetch', e => {
   if (req.method !== 'GET' || !req.url.startsWith(self.registration.scope)) return;
   const rel = new URL(req.url).pathname.slice(new URL(self.registration.scope).pathname.length);
   if (rel.startsWith('content/')) {
-    if (rel === 'content/index.json') e.waitUntil(checkContent());
+    if (rel === 'content/index.json') { e.waitUntil(checkContent()); e.waitUntil(fillModels()); }
     e.respondWith((async () => {
       const n = await contentCacheName(new URL(req.url).searchParams.get('v'));
       const hit = n && await (await caches.open(n)).match(req, {ignoreSearch: true});
@@ -129,7 +154,7 @@ self.addEventListener('fetch', e => {
       const hit = await cache.match(req, {ignoreSearch: true});
       if (hit) return hit;
       const r = await fetch(req);
-      if (r.ok) await cache.put(req, r.clone());
+      if (r.ok) await cache.put(new URL(req.url).origin + new URL(req.url).pathname, r.clone());
       return r;
     })());
     return;

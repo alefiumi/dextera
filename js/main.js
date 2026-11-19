@@ -3,7 +3,7 @@ import {$,toast} from './util.js';
 import {app,S,head,save,onSave} from './state.js';
 import {loadContent} from './content.js';
 import {useMod} from './ui.js';
-import {isStandalone,offlineReady,refreshOfflineBadge} from './install.js';
+import {isStandalone,offlineReady,offlineState,refreshOfflineBadge} from './install.js';
 import {addAccountListener,wireAccount} from './account.js';
 import {refreshProg,wireProfile} from './progress.js';
 import {boot,wireGate,openLogin} from './gate.js';
@@ -41,17 +41,19 @@ if('serviceWorker' in navigator&&location.protocol!=='file:'){
  const hadController=!!navigator.serviceWorker.controller;
  navigator.serviceWorker.addEventListener('message',e=>{
   if(e.data&&e.data.type==='content-updated'&&$('gate').hidden)toast('Contenuti aggiornati: li vedrai alla prossima apertura dell\'app.');
+  if(e.data&&e.data.type==='models-ready'){toast('✅ Atlante 3D salvato: encefalo, muscoli e tutti gli strati funzionano anche senza connessione.');refreshOfflineBadge();}
  });
  // Prima presa di controllo = app e contenuti sono stati copiati sul dispositivo.
  navigator.serviceWorker.addEventListener('controllerchange',()=>{
-  if(!hadController)toast('✅ Pronta: da ora l\'app funziona anche senza connessione.');
+  if(!hadController)toast('✅ Pronta: da ora l\'app funziona anche senza connessione. Sto salvando anche l\'atlante 3D.');
   refreshOfflineBadge();
  });
  refreshOfflineBadge();
  // toccando la spunta si vede lo stato, senza lasciare la schermata in cui si è
- $('off').addEventListener('click',async()=>toast(await offlineReady()
+ $('off').addEventListener('click',async()=>{const o=await offlineState();toast(o.app&&o.models
   ?'✅ Disponibile offline: puoi giocare anche senza connessione. I progressi restano salvati sul dispositivo.'
-  :'⏳ Copia offline in preparazione: tieni l\'app aperta con la connessione qualche secondo.'));
+  :o.app?'⏳ L\'app funziona già offline; sto salvando l\'atlante 3D (circa 7 MB): tieni l\'app aperta con la connessione.'
+  :'⏳ Copia offline in preparazione: tieni l\'app aperta con la connessione qualche secondo.');});
  navigator.serviceWorker.register('sw.js').catch(e=>console.warn('Service worker non registrato',e));
  // Nell'app installata chiede al sistema di non cancellare la copia locale per liberare spazio.
  if(isStandalone())navigator.storage?.persist?.().catch(()=>{});

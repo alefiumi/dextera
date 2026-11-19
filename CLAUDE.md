@@ -234,7 +234,11 @@ memoria (nascosta non disegna). Dentro l'iframe la pagina toglie la propria inte
 
 Offline (in `sw.js`): pagina, `atlante.js` e `dati.json` stanno in `APP_FILES`; motore three.js e modelli `.glb` in una
 cache a parte (`MODEL_CACHE`, versione `MODEL_VERSION`, da aumentare quando cambi `vendor/` o un `.glb`). All'installazione
-si salva la base (motore e `ossa.glb`, circa 3 MB in più), ogni altro strato la prima volta che si apre con la rete.
+si salva la base (motore e `ossa.glb`, circa 3 MB in più); poi, a ogni avvio con la rete finché manca qualcosa, il service worker
+scarica in sottofondo tutti gli altri strati, uno alla volta (`fillModels()` in `sw.js`, circa 7 MB; dal 19/11/2026, v0.74.0: prima si salvavano
+solo aprendoli con la rete e offline l'encefalo non si apriva). Finiti tutti scrive il segno `atlante/.offline-completo` nella cache dei modelli:
+la spunta verde (`offlineState()` in `install.js`) compare solo con app, contenuti e tutto il 3D; avviso «Atlante 3D salvato» (`models-ready`).
+Se offline manca uno strato, l'atlante avvisa (`loadFail()`, `#lfail`) invece di restare su «Carico…» e riprova con la rete.
 Nel pannello Strati si vede quanti strati sono salvati e c'è "Scarica tutto per offline".
 
 Fonte: **Z-Anatomy** (CC BY-SA 4.0, derivato da BodyParts3D), scelto al posto di BodyParts3D perché ha nello

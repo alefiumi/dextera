@@ -1,7 +1,7 @@
 {
- "version": 1,
+ "version": 2,
  "formato": 1,
- "nota": "Percorso pubblicato (sezione 8 della specifica): quali nodi di content/mappa.json include, in che ordine consigliato e con quale caso clinico. È nel formato che produrrà il gestionale della fase 3 (una versione di releases con i nodi): fino ad allora si scrive a mano. caso null = il passo 6 è un quiz finale finché l'autore non abbina un caso al satellite.",
+ "nota": "Percorso pubblicato (sezione 8 della specifica): quali nodi di content/mappa.json include, in che ordine consigliato e con quale caso clinico. È nel formato che produrrà il gestionale della fase 3 (una versione di releases con i nodi): fino ad allora si scrive a mano. caso null = il passo 6 è un quiz finale finché l'autore non abbina un caso al satellite. Nei pianeti esame.caso è il caso clinico dell'esame del pianeta (id di un caso di content/corpo.json): null = scelto dall'app tra i casi la cui risposta è un muscolo del pianeta, finché l'autore non lo sceglie.",
  "id": "base",
  "nome": "Percorso base",
  "corso": "muscolo-scheletrico",
@@ -25,25 +25,37 @@
    "id": "arto-inferiore",
    "tipo": "pianeta",
    "genitore": "muscolo-scheletrico",
-   "ordine": 1
+   "ordine": 1,
+   "esame": {
+    "caso": null
+   }
   },
   {
    "id": "colonna-tronco",
    "tipo": "pianeta",
    "genitore": "muscolo-scheletrico",
-   "ordine": 2
+   "ordine": 2,
+   "esame": {
+    "caso": null
+   }
   },
   {
    "id": "arto-superiore",
    "tipo": "pianeta",
    "genitore": "muscolo-scheletrico",
-   "ordine": 3
+   "ordine": 3,
+   "esame": {
+    "caso": null
+   }
   },
   {
    "id": "testa-collo",
    "tipo": "pianeta",
    "genitore": "muscolo-scheletrico",
-   "ordine": 4
+   "ordine": 4,
+   "esame": {
+    "caso": null
+   }
   },
   {
    "id": "piede",

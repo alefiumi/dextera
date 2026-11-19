@@ -63,4 +63,6 @@ function meBtn(){const b=$('me'),p=S.prof||{},src=p.avatar||'';if(b.dataset.src=
 export function head(){meBtn();const {L,title}=level(),a=30*(L-1)**2,b=30*L**2;
  {const e=$('lv'),b=document.createElement('b'),t=document.createElement('small');b.textContent='Liv. '+L;t.textContent=title;e.replaceChildren(b,t);e.title='Livello '+L+' · '+title;}
  $('xpb').style.width=((S.xp-a)/(b-a)*100)+'%';$('st').textContent='🔥 '+S.streak+'  ⭐ '+S.xp;}
-export const bump=(id,d)=>{if(!id)return;S.mastery[id]=Math.max(0,Math.min(3,(S.mastery[id]||0)+d));};
+// dopo ogni risposta dei giochi: il ripasso (percorso.js) la conta come richiamo
+const bumpHooks=[];export const onBump=f=>{bumpHooks.push(f);};
+export const bump=(id,d)=>{if(!id)return;S.mastery[id]=Math.max(0,Math.min(3,(S.mastery[id]||0)+d));bumpHooks.forEach(f=>f(id,d));};

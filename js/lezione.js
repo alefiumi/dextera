@@ -86,12 +86,21 @@ export function startLesson(sat,ps,kind='lezione',pool){
  if(app.MOD.id!=='corpo'){onExit('corpo');return true;} // useMod('corpo') ridisegna la figura e torna qui (renderLesson)
  renderLesson();return true;
 }
+// Ripasso (fase 2, sezione 5): domande di richiamo (tocco o nome, mai a scelta), senza cuori. daily = «Ripasso del giorno»
+// (finirlo vale un giorno di serie), altrimenti «Ripassa questo satellite» (sat). +2 XP per ogni ripasso fatto in tempo.
+export function startReview(slots,{daily=false,sat=null}={}){
+ const L={kind:'ripasso',daily,sat,ps:null,slots:shuffle(slots),si:0,qn:0,hearts:0,ok:0,n:0,nonChoice:0,pres:new Set(),presAt:{},up:[],wrong:[],xp0:S.xp,screen:'q',cur:null,rv:0};
+ if(!L.slots.length)return false;
+ app.L=L;if(sat)P.setLast(sat.id);
+ if(app.MOD.id!=='corpo'){onExit('corpo');return true;}
+ renderLesson();return true;
+}
 export const quitLesson=()=>{app.L=null;clearMarks();baseView();onExit();};
 
 /* ---------- tipo della domanda, scelto al momento ---------- */
 function pickType(L,slot){
  const {sid,ps}=slot,k=P.key(sid,ps.aspetto),m=P.mastery(k),tc=canTap(ps,sid),Rl=P.R().lezione;
- if(L.kind==='prova')return tc&&Math.random()<.5?'tocco':'nome';
+ if(L.kind==='prova'||L.kind==='ripasso')return tc&&Math.random()<.5?'tocco':'nome';
  if(m===0&&!L.pres.has(k))return 'pres';
  let t=m===0?'scelta':m===1?(tc?'tocco':'nome'):'nome';
  const justPres=L.pres.has(k)&&L.qn-L.presAt[k]<Rl.dopo_presentazione_min;
@@ -104,7 +113,7 @@ function pickType(L,slot){
 
 /* ---------- domande: testo, opzioni, controllo ---------- */
 const mu=sid=>P.muscle(sid);
-function satStruct(tipo){const ps=P.passi(app.L.sat).find(p=>p.tipo===tipo);return ps?P.usable(ps):[];}
+function satStruct(tipo){const ps=app.L.sat&&P.passi(app.L.sat).find(p=>p.tipo===tipo);return ps?P.usable(ps):[];}
 function options(slot){
  const {sid,ps}=slot,n=P.R().lezione.opzioni-1,lab=id=>info(id).n;
  const fill=(right,pools,label)=>{const out=[right],seen=new Set([norm(label(right))]);
@@ -116,7 +125,7 @@ function options(slot){
  if(ps.tipo==='funzione'){const a=mu(sid).a,ok=x=>x!==sid&&mu(x)?.a&&mu(x).a!==a;return fill(sid,[satStruct('funzione').filter(ok),app.MOD.M.map(m=>m.id).filter(ok)],lab);}
  // connessioni: ossa di origine o inserzione
  const m=mu(sid),good=goodBones(m,slot.role),bad=x=>!good.includes(x);
- const satBones=P.passi(app.L.sat).find(p=>p.tipo==='ossa');
+ const satBones=app.L.sat&&P.passi(app.L.sat).find(p=>p.tipo==='ossa');
  return fill(good[0],[(satBones?P.usable(satBones):[]).filter(bad),app.MOD.B.map(b=>b.id).filter(bad)],id=>P.bone(id).n);
 }
 const goodBones=(m,role)=>[m[role],...(m[role+'a']||[])].filter(Boolean);
@@ -170,7 +179,7 @@ function headHtml(L){
  return `<div class="lh"><button class="lx" data-l="quit" aria-label="Esci dalla lezione">✕</button>
   <div class="lbar" role="progressbar" aria-label="Avanzamento" aria-valuemin="0" aria-valuemax="${tot}" aria-valuenow="${done}"><i style="width:${done/tot*100}%"></i></div>${h}</div>`;
 }
-const title=L=>({lezione:'Lezione',prova:'Lo so già: mettimi alla prova',quiz:'Quiz finale',caso:'Caso clinico'}[L.kind])+' · '+esc(L.ps.nome);
+const title=L=>L.kind==='ripasso'?(L.daily?'Ripasso del giorno':'Ripasso · '+esc(L.sat?.nome||'')):({lezione:'Lezione',prova:'Lo so già: mettimi alla prova',quiz:'Quiz finale',caso:'Caso clinico'}[L.kind])+' · '+esc(L.ps.nome);
 export function renderLesson(){
  const L=app.L;if(!L)return;
  if(L.hearts0==null)L.hearts0=L.hearts;
@@ -227,8 +236,10 @@ function answer(L,q,ok){
  let nm=ok?(m<cap?m+1:m):Math.max(0,m+M.errore);
  if(L.kind==='prova'&&ok)nm=Math.max(nm,M.passo_fatto);
  S.mastery[k]=nm;(S.seen||(S.seen={}))[k]=Date.now();
+ // ripasso: una risposta di richiamo giusta su una struttura che scade entro 1 giorno la porta all'intervallo successivo
+ if(P.reviewAnswer(k,ok,q.t!=='scelta')&&L.kind==='ripasso'){L.rv++;P.gain(P.R().ripasso.xp_puntuale,false);}
  const mmax=S.mmax||(S.mmax={}),reached=mmax[k]??m;
- if(ok){S.ok++;L.ok++;P.gain(m>=M.max?X.giusta_gia_3:X.giusta,false);}else{S.ko++;if(L.kind!=='prova')L.hearts--;L.wrong.push(sid);}
+ if(ok){S.ok++;L.ok++;P.gain(m>=M.max?X.giusta_gia_3:X.giusta,false);}else{S.ko++;if(L.hearts0)L.hearts--;L.wrong.push(sid);}
  if(nm>reached){mmax[k]=nm;P.gain(X.livello_nuovo,true);}
  if(nm>m)L.up.push({k,sid,nm});
  if(q.t!=='scelta')L.nonChoice++;
@@ -261,7 +272,12 @@ function finish(){
  const L=app.L,Rg=P.R(),acc=L.n?L.ok/L.n:0,stars=acc>=Rg.stelle.tre?3:acc>=Rg.stelle.due?2:1,now=new Date().toISOString();
  const completed=L.si>=L.slots.length&&!(L.hearts0&&L.hearts<=0);
  L.stars=completed?stars:0;L.msg='';L.next=null;
- if(L.kind==='lezione'){if(completed){P.gain(Rg.xp.lezione_con_cuori,false);P.setNode(L.ps.id,{stato:'iniziato',stelle:stars});}}
+ if(L.kind==='ripasso'){
+  if(L.daily&&completed){if(S.day&&S.day.d===P.today())S.day.rip=true;else S.day={d:P.today(),xp:0,goal:false,rip:true};}
+  L.msg=L.rv?`${L.rv} ${L.rv===1?'struttura ripassata':'strutture ripassate'} in tempo: +${L.rv*P.R().ripasso.xp_puntuale} XP.`:'';
+  if(L.daily&&completed)L.msg+=(L.msg?' ':'')+'Il ripasso di oggi vale per la serie.';
+ }
+ else if(L.kind==='lezione'){if(completed){P.gain(Rg.xp.lezione_con_cuori,false);P.setNode(L.ps.id,{stato:'iniziato',stelle:stars});}}
  else if(L.kind==='prova'){
   P.setProva(L.ps.id);const wrong=[...new Set(L.wrong)];
   if(acc>=Rg.prova.soglia){
@@ -278,17 +294,18 @@ function finish(){
  L.gain=Math.max(0,S.xp-L.xp0);L.screen='end';endScreen(L);
 }
 function endScreen(L){
- const day=S.day||{xp:0},g=P.goal(),pct=Math.min(1,(day.xp||0)/g),done=['fatto','acceso'].includes(P.node(L.ps.id)?.stato);
+ const day=S.day||{xp:0},g=P.goal(),pct=Math.min(1,(day.xp||0)/g),done=!!L.ps&&['fatto','acceso'].includes(P.node(L.ps.id)?.stato);
  const ups=L.up.filter((u,i,a)=>a.findIndex(x=>x.k===u.k)===i).map(u=>{const lv=P.mastery(u.k);return `<li><span class="mdot m${lv}" aria-hidden="true">${lv}</span> ${esc(info(u.sid).n)} <small class="mut">maestria ${lv}</small></li>`;}).join('');
  const rw=(L.rewards||[]).map(r=>`<p class="party">${r.t==='satellite'?`🌟 ${esc(r.sat.nome)} acceso! +${r.xp} XP`:`🎉 ${esc(r.ps.nome)} (${esc(r.sat.nome)}): passo fatto! +${r.xp} XP`}</p>`).join('');
- const nextStep=P.passi(L.sat).find(p=>!P.stepDone(p));
+ const nextStep=L.ps&&P.passi(L.sat).find(p=>!P.stepDone(p));
  const ring=`<div class="ring" role="img" aria-label="Obiettivo del giorno: ${day.xp||0} XP su ${g}"><svg viewBox="0 0 36 36" aria-hidden="true"><circle cx="18" cy="18" r="15" class="rb"/><circle cx="18" cy="18" r="15" class="rf" stroke-dasharray="${(pct*94.2).toFixed(1)} 94.2"/></svg><span>${day.xp||0}/${g}</span></div>`;
- const stars=L.kind==='prova'?'':`<div class="big" aria-label="${L.stars} stelle su 3">${'⭐'.repeat(L.stars)}${'☆'.repeat(3-L.stars)}</div>`;
+ const stars=L.kind==='prova'||L.kind==='ripasso'?'':`<div class="big" aria-label="${L.stars} stelle su 3">${'⭐'.repeat(L.stars)}${'☆'.repeat(3-L.stars)}</div>`;
  const btns=(L.next?`<button class="btn" data-l="again" data-k="${L.next.kind}">${esc(L.next.label)}</button>`:'')+
   (done&&nextStep&&nextStep.id!==L.ps.id?`<button class="btn" data-l="step" data-id="${esc(nextStep.id)}">Prossimo passo</button>`:'')+
   (!done&&L.kind==='lezione'?`<button class="btn" data-l="again" data-k="lezione">Ancora una lezione</button>`:'')+
   (L.kind==='quiz'&&!done?`<button class="btn" data-l="again" data-k="quiz">Riprova</button>`:'')+
-  `<button class="btn alt" data-l="quit">Torna al satellite</button>`;
+  (L.kind==='ripasso'&&L.daily&&P.moreAvail()?`<button class="btn" data-l="more">Altre ${Math.min(P.R().ripasso.altre,P.moreAvail())}</button>`:'')+
+  `<button class="btn alt" data-l="quit">${L.kind==='ripasso'&&!L.sat?'Torna al percorso':'Torna al satellite'}</button>`;
  $('panel').innerHTML=`<div class="res"><div class="h" id="lq" tabindex="-1">${title(L)}</div>${stars}<p>${L.ok}/${L.n} giuste · <b>+${L.gain} XP</b>${L.hearts0&&L.hearts<=0?' · cuori finiti':''}</p>
   ${L.msg?`<p>${esc(L.msg)}</p>`:''}${rw}${done&&!rw&&L.kind==='lezione'?'<p class="party">✅ Passo fatto</p>':''}
   ${ups?`<div class="sub">Strutture salite di livello</div><ul class="ups">${ups}</ul>`:''}
@@ -359,6 +376,7 @@ export function lessonClick(e){
  if(a==='go'){L.screen='q';renderLesson();}
  else if(a==='next'){if(L.cur&&L.cur.t==='pres'){L.cur=null;}renderLesson();}
  else if(a==='opt'&&L.cur&&!L.cur.done){const q=L.cur,id=b.dataset.id;q.picked=id;answer(L,q,id===q.right);}
+ else if(a==='more'){const add=P.moreDaily();save();if(!startReview(P.slotsOf(add),{daily:true}))quitLesson();}
  else if(a==='again'){const k=b.dataset.k;startLesson(L.sat,L.ps,k,k==='lezione'&&L.next?.pool?L.next.pool:undefined);}
  else if(a==='step'){const ps=P.passi(L.sat).find(p=>p.id===b.dataset.id);app.L=null;onExit(null,{sat:L.sat,ps});}
  return true;

@@ -35,7 +35,10 @@ Dove questo file e la specifica differiscono, vale la specifica.
 ## Fasi (sezione 9 della specifica)
 - **Fase 0 – Fondazione e contenuti verificabili** (in corso, niente SQL): nome, icone e manifest; chiavi e cache
   `dextera-`; barra a 4 schede; testi in `testi/`; `content/mappa.json`; pagina `revisione/`.
-- Fase 1 – Percorso minimo (SQL: path_progress, dextera_settings, error_reports): online e SQL applicato il 18/11/2026. Fasi 2–7: vedi la specifica.
+- Fase 1 – Percorso minimo (SQL: path_progress, dextera_settings, error_reports): online e SQL applicato il 18/11/2026.
+- Fase 2 – Ripasso ed esame (SQL: review_items), in tre rilasci scelti dall'autore il 19/11/2026: 1) ripasso, luce dei satelliti,
+  data d'esame (v0.76.0, vedi «Ripasso»); 2) esame del pianeta (60 secondi a domanda, caso scelto in automatico finché l'autore non lo
+  sceglie in `esame.caso` del percorso pubblicato); 3) Palestra con la figura per zone. Fasi 3–7: vedi la specifica.
 - GitHub Pages attivo (ramo `main`, cartella radice): online su `alefiumi.github.io/dextera`.
 
 ## Situazione al 20/11/2026
@@ -420,6 +423,27 @@ descrizioni; quelle con fonte Z-Anatomy dicono da quale vaso nasce o dove sbocca
   Pulsante Indietro (‹, `.pback`) prima delle briciole: sale di un livello. Nel satellite sul telefono restano Indietro e briciole (ferme in
   alto mentre si scorrono i passi); nell'app installata su iPhone non c'è un tasto Indietro del browser.
 - Sincronizzazione in `syncPercorso()` di `account.js`; senza tabelle i dati restano in coda (avviso nel profilo).
+
+## Ripasso (fase 2, primo rilascio, v0.76.0)
+- Regole in `js/percorso.js` (sezione «ripasso a intervalli»), numeri in `regole.json` → `ripasso` (e `esame` per il secondo rilascio).
+  Una chiave della maestria del percorso (`o.`/`r.`/`m.`/`oi.`/`fn.`) entra nel calendario a maestria 2 (`ensureRev()` prima di ogni
+  `save()`), torna dopo 1, 3, 7, 14, 30, 60 giorni (`S.rev {chiave: {i, due 'AAAA-MM-GG', t, u}}`). Risposta di richiamo giusta su una
+  struttura che scade entro 1 giorno → intervallo successivo (`reviewAnswer()`: dalla lezione in `answer()` di `lezione.js`, risposte a
+  scelta escluse, e dai giochi della Palestra con `onBump` in `state.js`); sbagliata → 1 giorno (la maestria scende dove si gioca).
+- Ripasso del giorno (`daily()`, `S.revDay`): scelti una volta al giorno al massimo 10, i più in ritardo; i rimandati non contano come
+  scaduti per la luce. Scheda in cima al Percorso con la stella guida quando c'è da ripassare (`ripHtml()` in `path.js`, prima di
+  Continua); lezione `kind:'ripasso'` (`startReview()` in `lezione.js`: tocco o nome, senza cuori, +2 XP per ripasso fatto); finirlo vale un
+  giorno di serie (`S.day.rip` in `dayTick`); «Altre 10» (`moreDaily()`). «Ripassa questo satellite» (`satReview()`, 5 domande).
+- Luce del satellite (`light()`, `look()`): quota delle sue strutture non scadute; sotto il 70% «Da ripassare» (pieno arancio con
+  l'orologio), acceso con tutto a 30 giorni o più «Brillante» (pieno dorato con i raggi). `satState()` resta nuovo/orbita/acceso;
+  `look()` è solo per il disegno, i conteggi usano `lit()`.
+- Data d'esame per pianeta (riquadro sotto il pianeta, `setExam()`): in `S.set.date_esame` → `dextera_settings.date_esame`; gli intervalli
+  delle sue strutture si accorciano a metà dei giorni che mancano (almeno 2 ripassi prima), quelle che scadono più tardi si avvicinano subito.
+- Caso dell'esame: `esame.caso` nei nodi pianeta di `content/percorsi/base.json` (formato del gestionale); null = in automatico i casi la cui
+  risposta è un muscolo del pianeta (`esameCasi()`).
+- SQL: `supabase/migrations/20261122090000_dextera_ripasso.sql` (review_items con RLS; vince il ripasso più recente, `ripassato_il`, con un
+  trigger), provato con PGlite (20 prove). Da applicare dall'autore DOPO aver pubblicato l'app; senza la tabella il calendario resta sul
+  telefono (avviso nel profilo). Sincronizzazione in `syncRipasso()` di `account.js`; «Scarica i miei dati» include `ripasso`.
 
 ## Mappa del percorso (`content/mappa.json`)
 Corso → 4 pianeti → 17 satelliti (con `ordine` della specifica) → 6 passi (`ossa`, `reperi`, `muscoli`, `connessioni`, `funzione`,

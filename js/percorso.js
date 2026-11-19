@@ -6,8 +6,10 @@
    - S.path: nodes {id: {stato, stelle, fatto_il, u}} (u = da inviare a path_progress), last (ultimo satellite usato),
      prova {passo: giorno dell'ultima prova «Lo so già»}, prio {passo: strutture sbagliate nella prova, da cui partono le lezioni}.
    - S.mmax {chiave: livello più alto raggiunto} per il +5 XP della prima volta; S.seen {chiave: ms} per le più vecchie.
-   - Giorno, obiettivo e serie: S.day {d, xp, goal}, S.lastXp, S.shields, S.set {obiettivo, t, u} (va in dextera_settings). */
-import {app,S,onBeforeSave,ymd} from './state.js';
+   - Giorno, obiettivo e serie: S.day {d, xp, goal, rip}, S.lastXp, S.shields, S.set {obiettivo, date_esame, t, u} (va in dextera_settings).
+   - Ripasso (fase 2, sezione 5): S.rev {chiave: {i, due, t, u}} (i = indice dell'intervallo, due = giorno 'AAAA-MM-GG' in cui torna,
+     t = ms dell'ultimo ripasso, u = da inviare a review_items); S.revDay {d, keys} = ripassi scelti per oggi (al massimo 10, i più in ritardo). */
+import {app,S,onBeforeSave,onBump,ymd} from './state.js';
 import {flaggedIds} from './segnala.js';
 
 export const R=()=>app.REGOLE;
@@ -32,6 +34,13 @@ export const planetOf=sat=>pianeti().find(p=>p.satelliti.includes(sat));
 // passi del satellite inclusi nel percorso (i passi 'salta' della mappa non ci sono)
 export const passi=sat=>{const inc=pnode(sat.id)?.passi;return sat.passi.filter(ps=>!ps.salta&&(!inc||inc.includes(ps.id)));};
 export const casoOf=sat=>{const c=pnode(sat.id)?.caso;return c?corpo().CASES.find(x=>x.id===c)||null:null;};
+// caso clinico dell'esame del pianeta (fase 2): quello scelto nel percorso pubblicato (esame.caso, dal gestionale), altrimenti
+// in automatico i casi la cui risposta è un muscolo del pianeta
+export function esameCasi(pl){
+ const c=pnode(pl.id)?.esame?.caso;if(c){const x=corpo().CASES.find(k=>k.id===c);if(x)return [x];}
+ const ms=new Set(pl.satelliti.flatMap(s=>s.passi.flatMap(ps=>Array.isArray(ps.strutture)?ps.strutture:[])));
+ return corpo().CASES.filter(k=>k.mid&&ms.has(k.mid));
+}
 
 /* ---------- strutture, chiavi e dati ---------- */
 export const bone=id=>corpo().byId[id];
@@ -102,7 +111,18 @@ export function satState(sat){
  if(node(sat.id)?.stato==='acceso'||passi(sat).every(stepDone))return 'acceso';
  return passi(sat).some(stepDone)?'orbita':'nuovo';
 }
-export const STATI={nuovo:'Da iniziare',orbita:'In orbita',acceso:'Acceso'};
+export const STATI={nuovo:'Da iniziare',orbita:'In orbita',acceso:'Acceso',ripassare:'Da ripassare',brillante:'Brillante'};
+export const lit=sat=>satState(sat)==='acceso';
+// aspetto sulla mappa: un satellite acceso può essere «da ripassare» (luce sotto il 70%) o «brillante» (tutto a 30 giorni o più)
+export function look(sat){
+ const st=satState(sat);if(st!=='acceso')return st;
+ const ks=satKeys(sat);if(!ks.length)return st;
+ const od=overdue(),n=ks.filter(k=>od.has(k)).length,Rr=R().ripasso;
+ if(1-n/ks.length<Rr.luce_min)return 'ripassare';
+ if(!n&&ks.every(k=>RV()[k]&&INT()[RV()[k].i]>=Rr.brillante_giorni))return 'brillante';
+ return st;
+}
+export const light=sat=>{const ks=satKeys(sat);if(!ks.length)return 1;const od=overdue();return 1-ks.filter(k=>od.has(k)).length/ks.length;};
 // Controlla i passi che sono diventati fatti (anche con la Palestra) e dà gli XP di progresso una volta sola. Ritorna i premi.
 export function checkProgress(){
  if(!ready())return [];
@@ -122,6 +142,7 @@ export function gain(n,progress){S.xp+=n;if(progress)S.pxp=(S.pxp||0)+n;}
 
 /* ---------- stella guida e «Continua» ---------- */
 // prossimo passo consigliato: l'ultimo satellite usato se non è acceso, altrimenti il primo non acceso nell'ordine del percorso
+// (con dei ripassi da fare oggi la stella guida va prima sul «Ripasso del giorno»: lo decide path.js con dailyLeft())
 export function guide(){
  const L=satelliti();const last=satById(P().last);
  const sat=(last&&satState(last)!=='acceso')?last:L.find(s=>satState(s)!=='acceso')||L[0];
@@ -147,7 +168,7 @@ function dayTick(){
  const dx=S.xp-S.lastXp;if(dx>0)S.day.xp+=dx;S.lastXp=S.xp;
  if(!Rg)return;
  if(!S.day.goal&&S.day.xp>=goal()){S.day.goal=true;S.xp+=Rg.xp.obiettivo;S.lastXp=S.xp;S.day.xp+=Rg.xp.obiettivo;}
- if(S.day.xp>=Rg.serie.xp_giorno&&S.last!==t){
+ if((S.day.xp>=Rg.serie.xp_giorno||S.day.rip)&&S.last!==t){
   const gap=S.last?dayNum(t)-dayNum(S.last)-1:0,sh=S.shields||0;
   if(S.last&&gap===0)S.streak=(S.streak||0)+1;
   else if(S.last&&gap>0&&gap<=sh){S.shields=sh-gap;S.streak=(S.streak||0)+1;S.set={...(S.set||{}),t:Date.now(),u:1};}
@@ -156,4 +177,93 @@ function dayTick(){
   if(S.streak%Rg.serie.scudo_ogni===0&&(S.shields||0)<Rg.serie.scudi_max){S.shields=(S.shields||0)+1;S.set={...(S.set||{}),t:Date.now(),u:1};}
  }
 }
-onBeforeSave(dayTick);
+onBeforeSave(()=>{ensureRev();dayTick();});
+
+/* ---------- ripasso a intervalli (sezione 5) ----------
+   Una struttura entra nel calendario quando arriva a maestria 2 (nell'aspetto del passo: 'o.femur', 'm.…', 'oi.…', 'fn.…').
+   Intervalli 1, 3, 7, 14, 30, 60 giorni (poi resta a 60). Una risposta di richiamo giusta (lezione, Palestra, prova, ripasso)
+   vale come ripasso se la struttura scade entro 1 giorno: passa all'intervallo successivo. Una risposta sbagliata la riporta a
+   1 giorno (la maestria scende di 1 dove si gioca). Con una data d'esame sul pianeta gli intervalli si accorciano: ogni struttura
+   ha almeno 2 ripassi prima della data. Numeri in regole.json, «ripasso». */
+const RV=()=>S.rev||(S.rev={});
+const INT=()=>R()?.ripasso?.intervalli||[1,3,7,14,30,60];
+const tdn=()=>dayNum(today());
+const isoDay=n=>new Date(n*864e5).toISOString().slice(0,10);
+export const dueDay=r=>dayNum(r.due);
+let KI=null,KIm=null,KIp=null;
+// indice delle chiavi del percorso: chiave → {sid, ps, sat, pls (id dei pianeti)}; satellite → chiavi
+function kidx(){
+ if(KI&&KIm===app.MAPPA&&KIp===app.PERCORSO)return KI;
+ KI={k:new Map(),s:new Map()};KIm=app.MAPPA;KIp=app.PERCORSO;
+ for(const p of pianeti())for(const sat of satelliti(p)){
+  const ks=[];
+  for(const ps of passi(sat)){if(ps.tipo==='progetto'||!Array.isArray(ps.strutture))continue;
+   for(const sid of ps.strutture){const k=key(sid,ps.aspetto);ks.push([k,sid,ps]);
+    const e=KI.k.get(k);if(e)e.pls.add(p.id);else KI.k.set(k,{sid,ps,sat,pls:new Set([p.id])});}}
+  KI.s.set(sat.id,ks);
+ }
+ return KI;
+}
+// chiavi di un satellite con dati usabili (le strutture con un dato segnalato non contano)
+export function satKeys(sat){const L=kidx().s.get(sat.id)||[],seen=new Set();
+ return L.filter(([k,sid,ps])=>!seen.has(k)&&seen.add(k)&&usable({...ps,strutture:[sid]}).length).map(x=>x[0]);}
+export const revEntry=k=>kidx().k.get(k)||null;
+export const rev=k=>RV()[k]||null;
+// date d'esame per pianeta {id: 'AAAA-MM-GG'}, giorni che mancano all'esame più vicino dei pianeti della chiave (null = nessuno)
+export const exams=()=>(S.set&&S.set.date_esame)||{};
+function examLeft(k){
+ const e=revEntry(k);if(!e)return null;const t=tdn();let best=null;
+ for(const p of e.pls){const d=exams()[p];if(!d)continue;const left=dayNum(d)-t;if(left>0&&(best===null||left<best))best=left;}
+ return best;
+}
+// giorni fino al prossimo ripasso con l'intervallo i, accorciati se c'è un esame: almeno 2 ripassi prima della data
+function nextGap(k,i){const n=INT()[Math.min(i,INT().length-1)],left=examLeft(k);return left===null?n:Math.max(1,Math.min(n,Math.floor(left/2)));}
+const stamp=r=>{r.t=Date.now();r.u=1;};
+// nuove strutture a maestria 2 → nel calendario, tornano domani
+function ensureRev(){
+ if(!ready())return;const t=tdn(),min=R().ripasso?.da_maestria??2;
+ for(const [k] of kidx().k)if(!RV()[k]&&mastery(k)>=min){const r={i:0,due:isoDay(t+nextGap(k,0))};stamp(r);RV()[k]=r;}
+}
+// risposta su una struttura: true se vale come ripasso fatto (per i +2 XP del ripasso)
+export function reviewAnswer(k,ok,recall=true){
+ if(!ready())return false;const r=RV()[k];if(!r)return false;const t=tdn();
+ if(!ok){r.i=0;r.due=isoDay(t+1);stamp(r);return false;}
+ if(!recall||dueDay(r)>t+(R().ripasso?.entro_giorni??1))return false;
+ r.i=Math.min(r.i+1,INT().length-1);r.due=isoDay(t+nextGap(k,r.i));stamp(r);
+ return true;
+}
+// giochi della Palestra (Trova, Ricomponi…): ogni risposta conta come richiamo sulla chiave della struttura
+onBump((id,d)=>{if(d)reviewAnswer(id,d>0,true);});
+// chiavi scadute (oggi o prima) e usabili, le più in ritardo prima, a parità quelle con maestria più bassa
+function dueKeys(excl){
+ const t=tdn(),out=[];
+ for(const [k,r] of Object.entries(RV())){if(excl.has(k)||dueDay(r)>t)continue;const e=revEntry(k);if(!e||!usable({...e.ps,strutture:[e.sid]}).length)continue;out.push(k);}
+ return out.sort((a,b)=>dueDay(RV()[a])-dueDay(RV()[b])||mastery(a)-mastery(b));
+}
+// ripassi di oggi: scelti una volta al giorno (al massimo 10); quelli rimandati non contano come scaduti per la luce
+export function daily(){
+ const t=today();
+ if(!S.revDay||S.revDay.d!==t)S.revDay={d:t,keys:dueKeys(new Set()).slice(0,R().ripasso.al_giorno)};
+ return S.revDay;
+}
+const overdue=()=>{const t=tdn();return new Set(daily().keys.filter(k=>RV()[k]&&dueDay(RV()[k])<=t));};
+export const dailyLeft=()=>[...overdue()];
+// «Altre 10»: aggiunge ai ripassi di oggi le prossime scadute
+export function moreDaily(){const d=daily(),add=dueKeys(new Set(d.keys)).slice(0,R().ripasso.altre);d.keys.push(...add);return add;}
+export const moreAvail=()=>dueKeys(new Set(daily().keys)).length;
+// posti {sid, ps} per una lezione di ripasso
+export const slotsOf=ks=>ks.map(k=>revEntry(k)).filter(Boolean).map(e=>({sid:e.sid,ps:e.ps}));
+// «Ripassa questo satellite»: le sue strutture già nel calendario, prima le scadute, poi le più deboli, poi quelle che scadono prima
+export function satReview(sat){
+ const t=tdn(),ks=satKeys(sat).filter(k=>RV()[k]);
+ const od=k=>dueDay(RV()[k])<=t?0:1;
+ return ks.sort((a,b)=>od(a)-od(b)||mastery(a)-mastery(b)||dueDay(RV()[a])-dueDay(RV()[b])).slice(0,R().ripasso.satellite);
+}
+// data d'esame di un pianeta ('' = nessuna): le strutture del pianeta che scadono troppo tardi si avvicinano subito
+export function setExam(pid,d){
+ const de={...exams()};if(d)de[pid]=d;else delete de[pid];
+ S.set={...(S.set||{}),date_esame:de,t:Date.now(),u:1};
+ if(!d)return;const t=tdn();
+ for(const [k,r] of Object.entries(RV())){const left=examLeft(k);if(left===null)continue;const lim=t+Math.max(1,Math.floor(left/2));if(dueDay(r)>lim){r.due=isoDay(lim);stamp(r);}}
+}
+export const daysTo=d=>dayNum(d)-tdn();

@@ -252,6 +252,11 @@ header{grid-area:h}#asw{grid-area:s}#fig{grid-area:f}#pw{grid-area:p}#atlas{grid
 .cont .ct{flex:1;min-width:0;display:flex;flex-direction:column}
 .cont .cs{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em}.cont b{font-size:16px;line-height:1.25}.cont small{font-size:13px}
 .cont .cg{flex:none;font-size:26px;line-height:1;opacity:.8}
+.path .cont.quiet{background:var(--card);color:var(--ink);border:1px solid var(--line)}.cont.quiet .ci{background:var(--bg)}
+.path .cont:disabled{cursor:default;opacity:1}.cont:disabled .cg{visibility:hidden}
+.srev{display:flex;flex-direction:column;gap:4px;margin:10px 0 2px}.srev .btn{margin:0}
+.exd{display:flex;flex-direction:column;gap:4px}
+.exd input{font:inherit;font-size:16px;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:12px;min-height:44px;padding:0 10px}
 .dayrow{display:flex;align-items:center;gap:10px;margin:0;padding:8px 12px;font-size:14px;background:var(--card);border:1px solid var(--line);border-radius:14px}
 .dst{display:flex;flex-direction:column;line-height:1.25}.dst b{font-size:13px}
 .res .dayrow{justify-content:center;background:none;border:0;padding:0}
@@ -278,6 +283,9 @@ header{grid-area:h}#asw{grid-area:s}#fig{grid-area:f}#pw{grid-area:p}#atlas{grid
 .map .star,.path .star{fill:#fde047;color:#b45309;font-size:16px}
 .map .star{font-size:18px}
 .sy.nuovo{fill:#4a5275;stroke:#9aa5cf}.sy.orb{fill:#121833;stroke:#5eead4}.sy.acc{fill:#f0c75e;stroke:#f0c75e}
+/* ripasso (fase 2): da ripassare = pieno arancio spento con l'orologio; brillante = pieno dorato con i raggi */
+.sy.rip{fill:#d9822b;stroke:#f3b46b;stroke-width:1.5}.clk{stroke:#121833;stroke-width:2;stroke-linecap:round}
+.rays line{stroke:#fde68a;stroke-width:1.6;stroke-linecap:round}.rays.big line{stroke-width:2.4}
 .si{flex:none;background:#121833;border-radius:50%}
 .map .enter{animation:orbIn .6s ease-out;transform-origin:180px 200px}
 @keyframes orbIn{from{opacity:0;transform:rotate(-12deg) scale(.96)}to{opacity:1;transform:none}}

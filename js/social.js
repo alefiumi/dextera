@@ -228,6 +228,33 @@ function housesHtml(fl){
  return mine+season+albo;
 }
 
+/* ---------- riquadro Flotta nel Profilo (sezione 7 della specifica: costellazione ed equipaggio) ----------
+   Dall'ultima copia della scheda Flotta (SO.fleet, in dextera-social: si vede anche offline) e dai conti del telefono (flotta.js). */
+export function fleetCard(){
+ const kick='<div class="kick">Flotta</div>';
+ if(!configured)return '';
+ if(!A.user)return `<div class="card pfl">${kick}<h2>Casata ed equipaggi</h2><p class="mut">Con un account entri in una delle quattro casate e puoi unirti a un equipaggio di amici.</p></div>`;
+ const fl=SO.fleet&&SO.fleet.uid===A.user.id?SO.fleet:null,f=FL.F(),my=fl?.k.find(k=>k.id===f.casata);
+ const open=(v,t)=>`<button class="chip" data-pf="flotta" data-v="${v}">${t}</button>`;
+ if(!fl||!my)return `<div class="card pfl">${kick}<h2>Casata ed equipaggi</h2><p class="mut">${A.fleetMissing?'Casate ed equipaggi arrivano quando sul server c\'è il file della Flotta. Intanto i tuoi punti si contano su questo telefono.':'Apri la scheda Flotta con la connessione per vedere la tua casata.'}</p><div class="chips">${open('houses','🚀 Apri la Flotta')}</div></div>`;
+ const sc=fl.sc.map(r=>({id:r.constellation_id,p:+r.punti||0})).sort((a,b)=>b.p-a.p),pos=sc.findIndex(r=>r.id===my.id),mp=sc.find(r=>r.id===my.id)?.p||0;
+ const E=FL.FR().equipaggio,w=FL.monday();
+ const crews=fl.crews.map(c=>{const n=(c.membri_ids||[]).length,goal=n*E.per_membro,tot=c.settimana===w?c.contributi:0,pl=planetById(c.pianeta),role=c.capo===A.user.id?' · 👑 capo':c.vice===A.user.id?' · ⭐ vice':'';
+  const g=pl&&n>=E.min?`<div class="gbar" role="progressbar" aria-label="Obiettivo di ${esc(c.nome)}" aria-valuemin="0" aria-valuemax="${goal}" aria-valuenow="${Math.min(tot,goal)}"><i style="width:${(Math.min(1,tot/goal)*100).toFixed(1)}%"></i></div><small class="mut">${tot}/${goal} contributi su ${esc(pl.nome)}${tot>=goal?' · 🏅 obiettivo raggiunto':''} · il tuo: ${FL.myContrib(c.pianeta)}</small>`
+   :`<small class="mut">${pl?'Serve almeno un altro membro':'Pianeta dell\'obiettivo da scegliere'}</small>`;
+  return `<li><b>${esc(c.nome)}</b> <small class="mut">${n} ${n===1?'membro':'membri'}${role}</small>${g}</li>`;}).join('');
+ return `<div class="card pfl">${kick}<div class="house pfhouse" style="--c:${esc(my.colore)}"><div class="hhead"><span class="hsym" aria-hidden="true">${esc(my.simbolo)}</span><div><div class="mut">La tua casata</div><h2>${esc(my.nome)}</h2>
+  <p class="mut">${mp?`${pos+1}ª nella stagione di ${esc(monthName().split(' ')[0].toLowerCase())} · ${fmt(mp)} punti`:'Stagione appena cominciata'}</p></div></div>
+  <div class="hnums"><div><b>${FL.todayPoints()}</b><small>tuoi punti oggi</small></div><div><b>${fmt(FL.seasonPoints())}</b><small>tuoi punti questo mese</small></div></div></div>
+  <div class="sub">Equipaggi</div>${crews?`<ul class="pcrews">${crews}</ul>`:'<p class="mut">Non sei ancora in un equipaggio.</p>'}
+  <div class="chips">${open('houses','🚀 Casate')}${open('crews','👥 Equipaggi')}</div>${SO.at?`<p class="note">Aggiornato ${esc(hm(fl.at||SO.at))}</p>`:''}</div>`;
+}
+// dal Profilo: con la rete rilegge la Flotta (al massimo ogni 10 minuti, anche se il tentativo non riesce), poi ridisegna
+let ptry=0;
+export function refreshFleet(cb){if(!A.user||!online()||SO.loading||Date.now()-ptry<6e5||Date.now()-(SO.fleet?.at||0)<6e5)return;ptry=Date.now();loadSocial().then(cb,()=>{});}
+// dal Profilo: apre la Flotta sulla vista scelta
+export function openFleet(v){SO.tab=['friends','houses','crews','all'].includes(v)?v:'houses';SO.pick=null;SO.chg=false;SO.pk=null;keep();document.querySelector('body>nav button[data-t="soc"]')?.click();}
+
 /* ---------- Equipaggi ---------- */
 const who=(fl,id)=>fl.prof[id]?.username||'(senza nome)';
 const KINDS=['ossa','reperi','muscoli','strutture'];

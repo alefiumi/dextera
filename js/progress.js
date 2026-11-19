@@ -1,5 +1,5 @@
 /* Scheda Profilo: foto, nome, ruolo e presentazione (modificabili), titolo scelto, statistiche, sagoma e radar delle competenze
-   (fase 5, js/competenze.js), badge, account, maestria. */
+   (fase 5, js/competenze.js), casata ed equipaggi (fleetCard in social.js), badge, account, maestria. */
 import {$,toast} from './util.js';
 import {app,S,level,items} from './state.js';
 import {account as A,accountHtml,saveProfile,NAME_RE,NAME_RULE,esc,myData,deleteAccount,CONTATTO,online} from './account.js';
@@ -7,6 +7,7 @@ import {BADGES} from './badges.js';
 import {fillVersion} from './install.js';
 import * as P from './percorso.js';
 import {openSat} from './path.js';
+import {fleetCard,openFleet,refreshFleet} from './social.js';
 import {radar,radarSvg,sagoma,hasSagoma,satList,titoli,titolo,vetrinaMax} from './competenze.js';
 
 let editing=false,draft=null,pmod=null; // pmod: modulo di cui si guarda la maestria (corpo o cervello)
@@ -55,8 +56,9 @@ export function renderProg(){
   <div class="pbar" aria-hidden="true"><i style="width:${IL.length?Math.round(mastered/IL.length*100):0}%"></i></div>${seg}<div class="mrows">${rows}</div></div>`;
  // due colonne sul computer; sul telefono una sola nell'ordine profilo, numeri, badge, account e privacy, maestria (order in style.css)
  const [sag,comp]=compHtml();
- $('panel').innerHTML=`<div class="prof"><div class="pcol">${hero}${sag}${badges}</div><div class="pcol">${stats}${comp}<div class="pfside">${accountHtml()}${privacyHtml()}</div>${mast}</div></div>`;
+ $('panel').innerHTML=`<div class="prof"><div class="pcol">${hero}${sag}${badges}</div><div class="pcol">${stats}${fleetCard()}${comp}<div class="pfside">${accountHtml()}${privacyHtml()}</div>${mast}</div></div>`;
  fillVersion($('panel'));
+ refreshFleet(()=>{if(app.tab==='prog'&&!editing)renderProg();});
 }
 
 // Sagoma e radar delle competenze (fase 5): corso scelto qui (all'inizio quello del percorso), radar per passo o per regione
@@ -141,6 +143,7 @@ export function wireProfile(panel){
   else if(k==='cancel'){editing=false;A.err='';renderProg();}
   else if(k==='nophoto'){formVals();draft.avatar='';renderProg();}
   else if(k==='mod'){pmod=b.dataset.v;renderProg();}
+  else if(k==='flotta')openFleet(b.dataset.v);
   else if(k==='pc'){PS.c=b.dataset.v;keepPS();renderProg();}
   else if(k==='rm'){PS.r=b.dataset.v==='regioni'?'regioni':'passi';keepPS();renderProg();panel.querySelector(`[data-pf=rm][data-v=${PS.r}]`)?.focus();}
   else if(k==='sat'){if(P.satById(b.dataset.id))openSat(b.dataset.id);}

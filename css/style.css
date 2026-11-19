@@ -415,7 +415,7 @@ button.zchip:hover{border-color:var(--acc)}
 .ntg{font-size:12px;font-weight:600;color:var(--acc);border:1px solid currentColor;border-radius:8px;padding:0 6px;margin-left:4px;white-space:nowrap}
 /* Profilo (dalla foto in alto): stesso stile a riquadri */
 .prof{display:grid;gap:12px}
-.pcol{display:contents}.pfhero{order:1}.prof .stats{order:2}.pfs{order:3}.pfc{order:4}.pfb{order:5}.pfside{order:6}.pfm{order:7}
+.pcol{display:contents}.pfhero{order:1}.prof .stats{order:2}.pfs{order:3}.pfl{order:4}.pfc{order:5}.pfb{order:6}.pfside{order:7}.pfm{order:8}
 .pg #panel>.prof{max-width:980px}
 .pfhero h2{margin:2px 0 2px;overflow-wrap:anywhere}
 .pfhero .pf{margin:0}
@@ -554,3 +554,9 @@ input.code{font-size:20px;text-transform:uppercase}
 .fcard .vetrina li{width:38px;height:38px;font-size:20px}
 .fci{display:flex;align-items:center;gap:10px;padding:10px 12px 4px}.fci .sav{width:40px;height:40px}
 .fcard>.mut{margin:0;padding:0 12px 10px;font-size:14px}
+/* casata ed equipaggi nel Profilo */
+.pfhouse{border-top:0;border-left:4px solid var(--c);padding-left:12px;margin-top:10px}.pfhouse h2{margin:0}
+.pfhouse .hnums{margin:12px 0 0}
+.pcrews{list-style:none;margin:6px 0 0;padding:0}.pcrews li{padding:8px 0;border-bottom:1px solid var(--line)}.pcrews li:last-child{border-bottom:0}
+.pcrews .gbar{margin:6px 0 4px}
+.pfl .chips{margin-top:10px}

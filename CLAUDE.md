@@ -39,7 +39,7 @@ Dove questo file e la specifica differiscono, vale la specifica.
 - Fase 2 – Ripasso ed esame (SQL: review_items), in tre rilasci scelti dall'autore il 19/11/2026: 1) ripasso, luce dei satelliti,
   data d'esame (v0.76.0, vedi «Ripasso»); 2) esame del pianeta (v0.77.0, vedi «Esame del pianeta»); 3) Palestra con la figura per zone (v0.78.0, vedi «Palestra per zone»). Fasi 3–7: vedi la specifica.
 - Fase 4 – Flotta (SQL: costellazioni, stagioni, equipaggi): v0.85.0, vedi «Flotta». File SQL da applicare dall'autore.
-- Fase 5 – Profilo e competenze (SQL: righe in badge_classes, dextera_profili): v0.86.0, vedi «Profilo e competenze». Online e SQL applicato il 19/11/2026.
+- Fase 5 – Profilo e competenze (SQL: righe in badge_classes, dextera_profili): v0.86.0, vedi «Profilo e competenze». Online e SQL applicato il 19/11/2026. Casata ed equipaggi nel Profilo: v0.87.0.
 - Corso di neurologia: contenuti (primo rilascio) e corso giocabile (v0.81.0, vedi «Corso di neurologia giocabile»), Palestra sul cervello (v0.82.0), gioco 3D (v0.83.0).
 - GitHub Pages attivo (ramo `main`, cartella radice): online su `alefiumi.github.io/dextera`.
 
@@ -679,7 +679,12 @@ descrizioni; quelle con fonte Z-Anatomy dicono da quale vaso nasce o dove sbocca
 - Prova: `profilo.mjs` (note delle sessioni, Chrome headless con un finto Supabase): sagoma, radar nelle due viste, tocco e Invio sui satelliti,
   i badge (anche giocando prova e Ripasso del giorno), titoli, invio con e senza il file SQL, scheda dell'amica, stagione vinta, neurologia,
   niente scorrimento di lato, offline, dati di BodyMania intatti. `flotta.mjs` passa (salvo il controllo sulla versione 0.85.0).
-- Non fatto in questo rilascio (sezione 7 della specifica): costellazione, equipaggio, date d'esame e obiettivo giornaliero dentro il Profilo.
+- Casata ed equipaggi nel Profilo (v0.87.0, riquadro «Flotta», `.pfl`, dopo i numeri): `fleetCard()` in `social.js` dall'ultima copia della
+  Flotta (`SO.fleet` in `dextera-social`, quindi anche offline) e dai conti del telefono: casata con simbolo e colore, posto nella stagione e punti
+  della casata, tuoi punti di oggi e del mese; ogni equipaggio con membri, ruolo (capo o vice), barra dell'obiettivo della settimana e il tuo
+  contributo. «Casate» ed «Equipaggi» aprono la Flotta sulla vista giusta (`openFleet()`). Aprendo il Profilo con la rete la Flotta si rilegge
+  (`refreshFleet()`, al massimo ogni 10 minuti). Senza account: invito ad accedere; senza il file SQL della Flotta: avviso.
+- Non ancora nel Profilo (sezione 7 della specifica): date d'esame per pianeta e obiettivo giornaliero (stanno nella scheda Percorso).
 
 ## Mappa del percorso (`content/mappa.json`)
 Corso → 4 pianeti → 17 satelliti (con `ordine` della specifica) → 6 passi (`ossa`, `reperi`, `muscoli`, `connessioni`, `funzione`,

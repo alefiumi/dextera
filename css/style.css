@@ -390,3 +390,31 @@ button.mode.tile:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
 .ncl li{padding:8px 0;border-bottom:1px solid var(--line)}
 .ncl .mut{font-size:14px;margin-top:2px}
 .ntg{font-size:12px;font-weight:600;color:var(--acc);border:1px solid currentColor;border-radius:8px;padding:0 6px;margin-left:4px;white-space:nowrap}
+/* Profilo (dalla foto in alto): stesso stile a riquadri */
+.prof{display:grid;gap:12px}
+.pcol{display:contents}.pfhero{order:1}.prof .stats{order:2}.pfb{order:3}.pfside{order:4}.pfm{order:5}
+.pg #panel>.prof{max-width:980px}
+.pfhero h2{margin:2px 0 2px;overflow-wrap:anywhere}
+.pfhero .pf{margin:0}
+.pfhero .bio{margin:10px 0 0}
+.pflv{display:flex;flex-wrap:wrap;justify-content:space-between;gap:2px 10px;margin-top:12px;font-size:14px}.pflv span{color:var(--mut)}
+.pfhero .pbar{margin-top:6px}
+.pfhero .pfe{margin-top:6px}.pfhero .pfe .pf{margin-top:6px}
+.pfbtn{display:flex;gap:8px}.pfbtn .btn{flex:1;margin-right:0}
+.prof .stats{grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin:0}
+.prof .stats .card{padding:10px 4px;text-align:center;border-radius:14px}
+.prof .stats i{display:block;font-style:normal;font-size:18px}
+.prof .stats b{font-size:20px;line-height:1.2}
+.prof .stats span{display:block;font-size:11px;line-height:1.2}
+.pfb .bdg{margin:12px 0 0}
+.pfside{display:grid;gap:12px;align-content:start}
+.pfside .acc{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:14px 16px;margin:0;box-shadow:0 1px 3px #0000000d}
+.pfside .acc>.sub:first-child{margin-top:0;font-size:11px;letter-spacing:.08em}
+.pfm .pmods{margin:12px 0 6px}
+.pfm .row{padding:10px 0}.pfm .row:last-child{border-bottom:0}
+.dots .off{color:var(--line)}
+.pfside a{color:var(--acc);font-weight:600}
+@media (min-width:900px) and (min-aspect-ratio:5/4){
+ .prof{grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);align-items:start}
+ .prof .pcol{display:grid;gap:12px;align-content:start}.prof .pcol>*{order:0}
+}

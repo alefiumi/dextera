@@ -11,24 +11,31 @@ const avatar=(src,name,cls='av')=>src?`<img class="${cls}" src="${esc(src)}" alt
 const day=iso=>new Date(iso).toLocaleDateString('it',{day:'numeric',month:'short',year:'numeric'});
 
 export function renderProg(){
- const p=S.prof,{L,title}=level(),B=app.B,tot=S.ok+S.ko,st=S.stats||{};
+ const p=S.prof,{L,title}=level(),tot=S.ok+S.ko,st=S.stats||{};
  const name=p.name||(A.user?'':'Ospite'),got=BADGES.filter(b=>S.badges[b.id]);
- const card=editing?editHtml():`<div class="pf">${avatar(p.avatar,name)}<div class="pfi"><div class="h">${esc(name)||'<span class="mut">Senza nome</span>'}</div>
-   <div class="mut">Liv. ${L} · ${title}${p.role?' · '+esc(p.role):''}</div>${p.bio?`<p class="bio">${esc(p.bio)}</p>`:''}
-   <button class="chip" data-pf="edit">✏️ Modifica profilo</button></div></div>`;
- const stat=(v,l)=>`<div><b>${v}</b><span>${l}</span></div>`;
- const stats=`<div class="stats">${stat(S.xp,'XP')}${stat(S.streak,'giorni di fila')}${stat(tot?Math.round(S.ok/tot*100)+'%':'–','precisione')}${stat(st.games||0,'partite')}</div>`;
- const badges=`<div class="sub">Badge e traguardi · ${got.length}/${BADGES.length}</div><div class="bdg">`+
-  BADGES.map(b=>{const d=S.badges[b.id];return `<div class="b${d?'':' lock'}" title="${esc(b.desc)}"><i>${b.icon}</i><b>${esc(b.name)}</b><small>${d?day(d):esc(b.desc)}</small></div>`;}).join('')+'</div>';
+ const lo=30*(L-1)**2,hi=30*L**2,pct=Math.round((S.xp-lo)/(hi-lo)*100);
+ const hero=editing?`<div class="card pfhero"><div class="kick">Modifica profilo</div>${editHtml()}</div>`:
+  `<div class="card pfhero"><div class="pf">${avatar(p.avatar,name)}<div class="pfi"><div class="kick">Profilo</div><h2>${esc(name)||'<span class="mut">Senza nome</span>'}</h2>
+   <div class="mut">${p.role?esc(p.role):A.user?'':'Senza account: i progressi restano su questo dispositivo'}</div></div></div>${p.bio?`<p class="bio">${esc(p.bio)}</p>`:''}
+   <div class="pflv"><b>Liv. ${L} · ${title}</b><span>${S.xp-lo}/${hi-lo} XP al livello ${L+1}</span></div>
+   <div class="pbar" role="progressbar" aria-label="Avanzamento del livello" aria-valuemin="0" aria-valuemax="100" aria-valuenow="${pct}"><i style="width:${pct}%"></i></div>
+   <button class="btn alt wide" data-pf="edit">✏️ Modifica profilo</button></div>`;
+ const stat=(i,v,l)=>`<div class="card"><i aria-hidden="true">${i}</i><b>${v}</b><span>${l}</span></div>`;
+ const stats=`<div class="stats">${stat('⚡',S.xp,'XP')}${stat('🔥',S.streak,'giorni di fila')}${stat('🎯',tot?Math.round(S.ok/tot*100)+'%':'–','precisione')}${stat('🎮',st.games||0,'partite')}</div>`;
+ const badges=`<div class="card pfb"><div class="kick">Badge e traguardi</div><h2>${got.length} su ${BADGES.length}</h2>
+  <div class="pbar" aria-hidden="true"><i style="width:${Math.round(got.length/BADGES.length*100)}%"></i></div><div class="bdg">`+
+  BADGES.map(b=>{const d=S.badges[b.id];return `<div class="b${d?'':' lock'}" title="${esc(b.desc)}"><i>${b.icon}</i><b>${esc(b.name)}</b><small>${d?day(d):esc(b.desc)}</small></div>`;}).join('')+'</div></div>';
  // maestria del modulo scelto qui (all'inizio quello aperto), singole o gruppi come nella figura
  const M=app.MODS[pmod]||app.MOD;pmod=M.id;
  const IL=(app.grp?M.GR:M.B).filter(b=>!b.area),mastered=IL.filter(b=>(S.mastery[b.id]||0)>=3).length;
  // in ordine di gruppo (dalla testa ai piedi per le ossa, per lobo nel cervello)
  const ord=Object.fromEntries(M.GR.map((g,i)=>[g.id,i]));
- const rows=IL.slice().sort((a,b)=>(ord[a.group?a.id:a.g]??99)-(ord[b.group?b.id:b.g]??99)).map(b=>{const m=S.mastery[b.id]||0;return `<div class="row" data-id="${b.id}" data-mod="${M.id}"><span>${b.n}</span><span class="dots">${'●'.repeat(m)}<span style="color:var(--line)">${'●'.repeat(3-m)}</span></span></div>`;}).join('');
- const seg=`<div class="chips seg">`+Object.values(app.MODS).map(x=>`<button class="chip${x.id===M.id?' on':''}" data-pf="mod" data-v="${x.id}">${esc(x.label)}</button>`).join('')+'</div>';
- $('panel').innerHTML=card+stats+badges+accountHtml()+privacyHtml()+
-  `<div class="sub">Maestria</div>${seg}<p class="mut">${mastered}/${IL.length} ${app.grp?'gruppi':'strutture'} padroneggiat${app.grp?'i':'e'}. ${tot?'':'Gioca un round per iniziare a riempire i progressi.'}</p>${rows}`;
+ const rows=IL.slice().sort((a,b)=>(ord[a.group?a.id:a.g]??99)-(ord[b.group?b.id:b.g]??99)).map(b=>{const m=S.mastery[b.id]||0;return `<div class="row" data-id="${b.id}" data-mod="${M.id}"><span>${b.n}</span><span class="dots" aria-label="maestria ${m} su 3">${'●'.repeat(m)}<span class="off">${'●'.repeat(3-m)}</span></span></div>`;}).join('');
+ const seg=`<div class="chips pmods" role="group" aria-label="Modulo">`+Object.values(app.MODS).map(x=>`<button class="chip${x.id===M.id?' on':''}" aria-pressed="${x.id===M.id}" data-pf="mod" data-v="${x.id}">${esc(x.label)}</button>`).join('')+'</div>';
+ const mast=`<div class="card pfm"><div class="kick">Maestria</div><h2>${mastered} su ${IL.length} ${app.grp?'gruppi':'strutture'}</h2><p class="mut">${app.grp?'Gruppi padroneggiati':'Strutture padroneggiate'}. ${tot?'Tocca una voce per aprirla nell\'Atlante.':'Gioca un round per iniziare a riempire i progressi.'}</p>
+  <div class="pbar" aria-hidden="true"><i style="width:${IL.length?Math.round(mastered/IL.length*100):0}%"></i></div>${seg}<div class="mrows">${rows}</div></div>`;
+ // due colonne sul computer; sul telefono una sola nell'ordine profilo, numeri, badge, account e privacy, maestria (order in style.css)
+ $('panel').innerHTML=`<div class="prof"><div class="pcol">${hero}${badges}</div><div class="pcol">${stats}<div class="pfside">${accountHtml()}${privacyHtml()}</div>${mast}</div></div>`;
  fillVersion($('panel'));
 }
 
@@ -64,7 +71,7 @@ function editHtml(){
   <datalist id="roles">${ROLES.map(r=>`<option value="${r}">`).join('')}</datalist>
   <label>Presentazione<textarea name="bio" maxlength="160" rows="2" placeholder="Due righe su di te (facoltativo)">${esc(d.bio)}</textarea></label>
   ${A.err?`<p class="err">${esc(A.err)}</p>`:''}
-  <button class="btn"${A.busy?' disabled':''}>${A.busy?'Salvo…':'Salva'}</button><button type="button" class="btn alt" data-pf="cancel">Annulla</button>
+  <div class="pfbtn"><button class="btn"${A.busy?' disabled':''}>${A.busy?'Salvo…':'Salva'}</button><button type="button" class="btn alt" data-pf="cancel">Annulla</button></div>
   ${login?'':'<p class="note">Senza account il profilo resta su questo dispositivo.</p>'}</form>`;
 }
 

@@ -20,7 +20,7 @@ const MX=()=>P.R()?.maestria?.max||3;
 const avg=ks=>ks.length?ks.reduce((a,k)=>a+P.mastery(k),0)/ks.length/MX():0;
 
 /* ---------- radar ---------- */
-export const ASSI={ossa:'Ossa',reperi:'Reperi',muscoli:'Muscoli',connessioni:'Connessioni',funzione:'Funzione',strutture:'Strutture',dove:'Posizione',lesione:'Lesioni',progetto:'Casi clinici'};
+export const ASSI={ossa:'Ossa',reperi:'Reperi',muscoli:'Muscoli',connessioni:'Connessioni',funzione:'Funzione',strutture:'Strutture',dove:'Posizione',lesione:'Lesioni',descrizione:'Descrizione',progetto:'Casi clinici'};
 // assi del radar del corso c: [{id, n, v (0–1)}]
 export function radar(c,modo){
  if(modo==='regioni')return P.pianeti(c).map(pl=>({id:pl.id,n:pl.nome,v:avg([...new Set(P.satelliti(pl).flatMap(P.satKeys))])}));

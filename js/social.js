@@ -350,7 +350,7 @@ function play(id){
  const fl=SO.fleet,ch=fl&&fl.ch.find(x=>x.id===id);if(!ch||!P.ready())return;
  const slots=P.slotsOf(ch.strutture);
  if(!slots.length){toast('Le strutture di questa sfida non ci sono in questa versione dell\'app: aggiornala e riprova.');return;}
- const mod=P.isNeuro(slots[0].sid)?'cervello':'corpo';
+ const mod=P.isNeuro(slots[0].sid)?'cervello':P.isTor(slots[0].sid)?P.torMod(slots[0].sid):'corpo';
  if(app.MOD.id!==mod&&NAV.useMod)NAV.useMod(mod);
  const ok=startChallenge(slots,{label:'di '+who(fl,ch.autore),back:()=>NAV.setTab&&NAV.setTab('soc'),
   done:(g)=>{g=Math.max(0,Math.min(5,g|0));FL.F().ans.push({challenge_id:id,giuste:g});SO.done[id]=g;keep();save();}});

@@ -40,24 +40,40 @@ function nmask(t,name){
  t=String(t||'');for(const n of ns.filter(x=>x&&x.length>3))t=t.replace(new RegExp(n.replace(/[.*+?^${}()|[\]\\]/g,'\\$&'),'gi'),'___');
  return t;
 }
+/* ---------- cuore e vasi, respiratorio (fase 6): strutture dei moduli 2D cuore ('c.') e polmoni ('p.') ----------
+   Passi: «Le strutture» (presentazione, scelta sulla struttura evidenziata, tocco, nome) e «Riconosci dalla descrizione» (il testo di
+   testi/torace.json senza il nome), poi il caso clinico del loro modulo. */
+const tx=sid=>P.tor(sid)||{};
+// vista in cui la struttura si vede di più (resta quella aperta se va bene)
+function torView(sid){const b=tx(sid),vis=b.vis||{},ok=v=>b.s&&b.s[v]&&(vis[v]??1)>=.25;
+ if(ok(app.view))return app.view;return app.MOD.views.filter(v=>b.s&&b.s[v]).sort((a,c)=>(vis[c]??1)-(vis[a]??1))[0]||app.view;}
+function showTor(sid,hl){
+ if(app.MOD.id!==P.torMod(sid))return;
+ const v=torView(sid);if(v!==app.view)setView(v,true);
+ if(!hl)return resetZoom();
+ mark(sid,'sel');setTimeout(()=>focusItem(sid,24),30);
+}
+const torTap=sid=>app.MOD.id===P.torMod(sid)&&app.MOD.views.some(v=>visibleIn(sid,v));
 const conn=slot=>slot.ps.tipo==='connessioni'&&!P.isNeuro(slot.sid);
 // figura che serve alla domanda in corso (il corso di neurologia usa il cervello)
-const modOf=sid=>sid&&P.isNeuro(sid)?'cervello':'corpo';
+const modOf=sid=>sid&&P.isNeuro(sid)?'cervello':sid&&P.isTor(sid)?P.torMod(sid):'corpo';
+const casoMod=c=>c?.src==='neuro'?'cervello':c?.src==='cuore'||c?.src==='polmoni'?c.src:'corpo';
 export const lessonMod=L=>needMod(L)||modOf(L.slots[0]?.sid);
 function needMod(L){
  if(L.screen==='end')return null;
- if(L.screen==='caso')return L.caso?.src==='neuro'?'cervello':'corpo';
+ if(L.screen==='caso')return casoMod(L.caso);
  const sl=L.slots[Math.min(L.si,L.slots.length-1)];return sl?modOf(sl.sid):null;
 }
 
 /* ---------- strutture: nomi, testi, figura ---------- */
 const info=sid=>{
  if(P.isNeuro(sid)){const n=nx(sid);return {n:n.n||sid,l:'',d:n.f||''};}
+ if(P.isTor(sid)){const t=tx(sid);return {n:clean(t.n||sid),l:clean(t.l||''),d:t.f||''};}
  if(sid.startsWith('o.')){const b=P.bone(sid);return {n:b.n,l:b.l,d:b.f||''};}
  if(sid.startsWith('r.')){const r=P.rep(sid);return {n:clean(r.n),l:clean(r.l),d:r.d};}
  const m=P.muscle(sid);return {n:m.n,l:m.l,d:m.a};
 };
-const canTap=(ps,sid)=>P.isNeuro(sid)?ps.tipo==='strutture'&&nfig(sid).length>0:ps.tipo==='ossa'||ps.tipo==='connessioni'||(ps.tipo==='reperi'&&!!P.rep(sid).o);
+const canTap=(ps,sid)=>P.isTor(sid)?ps.tipo==='strutture'&&torTap(sid):P.isNeuro(sid)?ps.tipo==='strutture'&&nfig(sid).length>0:ps.tipo==='ossa'||ps.tipo==='connessioni'||(ps.tipo==='reperi'&&!!P.rep(sid).o);
 // vista in cui un osso si vede: la vista di zona del suo gruppo (mano, piede, cranio) o una vista del corpo in cui è visibile
 function boneView(id){
  const b=P.bone(id),g=b&&app.MOD.byId[b.g];
@@ -218,6 +234,8 @@ function options(slot){
  const fill=(right,pools,label)=>{const out=[right],seen=new Set([norm(label(right))]);
   for(const pool of pools)for(const id of shuffle(pool)){if(out.length>n)break;const k=norm(label(id));if(!seen.has(k)){seen.add(k);out.push(id);}}
   return shuffle(out).map(id=>({id,label:label(id)}));};
+ if(P.isTor(sid)){const M=app.MODS[P.torMod(sid)],ok=x=>x!==sid&&(ps.tipo!=='descrizione'||M.byId[x]?.f);
+  return fill(sid,[st(ps.tipo).filter(ok),M.B.filter(b=>b.g===tx(sid).g).map(b=>b.id).filter(ok),M.B.map(b=>b.id).filter(ok)],lab);}
  if(P.isNeuro(sid)){const f=P.NCAMPO[ps.tipo],ok=x=>x!==sid&&P.neuro(x)?.[f],all=Object.keys(app.LEZ.neuro||{}).filter(ok);
   return fill(sid,[st(ps.tipo).filter(ok),satStruct('strutture',slot.sat||app.L.sat).filter(ok),all],lab);}
  if(ps.tipo==='ossa')return fill(sid,[st('ossa').filter(x=>x!==sid),P.bone(sid)?(app.MOD.byId[P.bone(sid).g]?.m||[]).filter(x=>x!==sid):[],app.MOD.B.map(b=>b.id).filter(x=>x!==sid)],lab);
@@ -234,6 +252,11 @@ const roleName=r=>r==='o'?'origine':'inserzione';
 // testo della domanda (e la figura da preparare)
 function prompt(q){
  const {sid,ps}=q.slot,I=info(sid),t=q.t;
+ if(P.isTor(sid)){
+  if(ps.tipo==='descrizione'){showTor(sid,false);return `${t==='scelta'?'Di quale struttura si parla?':'Scrivi il nome della struttura descritta.'}<div class="clue">${esc(nmask(I.d,I.n))}</div>`;}
+  if(t==='tocco'){showTor(sid,false);return `Tocca sulla figura:<br><b>${esc(I.n)}</b>`;}
+  showTor(sid,true);return t==='scelta'?'Come si chiama la struttura evidenziata sulla figura?':'Scrivi il nome della struttura evidenziata sulla figura.';
+ }
  if(P.isNeuro(sid)){
   if(ps.tipo==='strutture'&&t==='tocco'){showNeuro(sid,false);return `Tocca sulla figura:<br><b>${esc(I.n)}</b>`;}
   if(ps.tipo==='strutture'&&nfig(sid).length){showNeuro(sid,true);return t==='scelta'?'Come si chiama la struttura evidenziata sulla figura?':'Scrivi il nome della struttura evidenziata sulla figura.';}
@@ -272,6 +295,7 @@ function accepted(q){
 // dati della domanda per l'etichetta di verifica e per «Segnala un errore»
 function dataItems(slot){
  const {sid,ps}=slot,v=P.voce(sid),I=info(sid);
+ if(P.isTor(sid)){const val={nome:I.n,descrizione:I.d},lab={nome:'Nome',descrizione:'Descrizione'};return v?(P.TCAMPI[ps.tipo]||[]).map(c=>({id:v+'.'+c,label:lab[c],value:val[c]||''})):[];}
  if(P.isNeuro(sid)){const n=nx(sid),val={nome:n.n,dove:n.d,funzione:n.f,lesione:n.le,connessioni:n.c},lab={nome:'Nome',dove:'Dove si trova',funzione:'Funzione',lesione:'Lesione',connessioni:'Connessioni'};
   return v?(P.NCAMPI[ps.tipo]||[]).map(c=>({id:v+'.'+c,label:lab[c],value:val[c]||''})):[];}
  const m=sid.startsWith('o.')||sid.startsWith('r.')?null:mu(sid);
@@ -324,12 +348,15 @@ function intro(L){
  const n=L.slots.length,E=P.R().esame;
  const txt=L.kind==='esame'?`${n} domande sui satelliti di ${L.pl.nome}, con ${E.secondi} secondi per ognuna: il tempo rimasto si vede in alto e allo scadere la risposta conta come sbagliata. Niente aiuti e niente cuori. ${L.caso?'Poi un caso clinico, senza tempo: risolvilo entro il '+E.caso_indizio_max+'° indizio con al massimo '+(E.caso_errori_max===1?'un errore':E.caso_errori_max+' errori')+'. ':''}Per superarlo servono almeno ${examNeed(n)} risposte giuste${L.caso?' e il caso risolto':''}: diventi «${P.expertTitle(L.pl)}» e guadagni ${E.xp} XP. A ogni tentativo le domande cambiano.`
   :L.kind==='prova'?`Una domanda di richiamo per ogni struttura (${n}), da toccare sulla figura o da scrivere, senza cuori. Le strutture che indovini salgono a maestria 2. Con almeno il ${Math.round(P.R().prova.soglia*100)}% di risposte giuste il passo è fatto. Un tentativo al giorno.`
-  :`${n} domande dai passi 1–5 del satellite, con ${L.hearts} cuori. Con almeno l'${Math.round(P.R().progetto.quiz_soglia*100)}% di risposte giuste il satellite si accende. Il caso clinico di questo satellite non è ancora stato scritto: per ora il progetto è questo quiz.`;
+  :`${n} domande dagli altri passi del satellite, con ${L.hearts} cuori. Con almeno l'${Math.round(P.R().progetto.quiz_soglia*100)}% di risposte giuste il satellite si accende. Il caso clinico di questo satellite non è ancora stato scritto: per ora il progetto è questo quiz.`;
  $('panel').innerHTML=headHtml(L)+`<div class="q" id="lq" tabindex="-1"><small>${title(L)}</small></div><p>${txt}</p><button class="btn" data-l="go">Inizia</button>`;
  focusQ();
 }
 function presScreen(L,q){
  const {sid,ps}=q.slot,I=info(sid);
+ if(P.isTor(sid)){showTor(sid,true);
+  $('panel').innerHTML=headHtml(L)+`<div class="q" id="lq" tabindex="-1"><small>Nuova struttura</small><br><b>${esc(I.n)}</b>${I.l?` <i>${esc(I.l)}</i>`:''}</div><p>${esc(I.d)}</p><p class="mut">È evidenziata sulla figura.</p><button class="btn" data-l="next">Ho capito</button>`+foot(q.slot);
+  return focusQ();}
  if(P.isNeuro(sid)){const n=nx(sid);showNeuro(sid,true);
   const rows=ps.tipo==='strutture'?[['Dove si trova',n.d],['Che cosa fa',n.f]]:[[NL[ps.tipo],ntext(sid,ps.tipo)]];
   $('panel').innerHTML=headHtml(L)+`<div class="q" id="lq" tabindex="-1"><small>Nuova struttura</small><br><b>${esc(I.n)}</b></div>`+rows.filter(r=>r[1]).map(([a,b])=>`<p><b>${esc(a)}</b>: ${esc(b)}</p>`).join('')+(nfig(sid).length?'<p class="mut">È evidenziata sulla figura.</p>':'')+`<button class="btn" data-l="next">Ho capito</button>`+foot(q.slot);
@@ -346,7 +373,7 @@ export function lessonTap(sid){
  const L=app.L;if(!L||!L.cur||L.cur.t!=='tocco'||L.cur.done)return;
  const q=L.cur,{ps}=q.slot,s=q.slot.sid;
  let ok;
- if(P.isNeuro(s))ok=nfig(s).includes(sid);else if(ps.tipo==='ossa')ok=sid===s;else if(ps.tipo==='reperi')ok=sid===P.rep(s).o;else ok=goodBones(mu(s),q.slot.role).includes(sid);
+ if(P.isTor(s))ok=sid===s;else if(P.isNeuro(s))ok=nfig(s).includes(sid);else if(ps.tipo==='ossa')ok=sid===s;else if(ps.tipo==='reperi')ok=sid===P.rep(s).o;else ok=goodBones(mu(s),q.slot.role).includes(sid);
  q.picked=sid;answer(L,q,ok);
 }
 const examNeed=n=>Math.ceil(n*P.R().esame.soglia/P.R().esame.domande);
@@ -376,7 +403,10 @@ function feedback(L,q){
  const said=ok?'':q.timeout?'Tempo scaduto. ':null;
  const picked=q.picked?(q.t==='nome'?`«${esc(q.picked)}»`:esc(neu?(q.t==='tocco'?app.MOD.byId[q.picked]?.n||q.picked:info(q.picked).n):conn(q.slot)||q.t==='tocco'?P.bone(q.picked)?.n||q.picked:info(q.picked).n)):'';
  let why='';
- if(neu){const n=nx(sid),ids=nfig(sid);
+ if(P.isTor(sid)){showTor(sid,false);mark(sid,'ok');if(!ok&&q.t==='tocco'&&q.picked&&app.MOD.byId[q.picked])mark(q.picked,'bad');
+  const pk=q.picked?(q.t==='nome'?`«${esc(q.picked)}»`:esc(app.MOD.byId[q.picked]?.n?clean(app.MOD.byId[q.picked].n):info(q.picked).n)):'';
+  why=`<p>${said??`Hai indicato ${pk}. `}È <b>${esc(I.n)}</b>${I.l?` <i>${esc(I.l)}</i>`:''}.</p><p>${esc(I.d)}</p>`;}
+ else if(neu){const n=nx(sid),ids=nfig(sid);
   if(ids.length&&ps.tipo==='strutture'){showNeuro(sid,false);ids.forEach(id=>mark(id,'ok'));if(!ok&&q.t==='tocco'&&q.picked)mark(q.picked,'bad');}
   const rows=ps.tipo==='strutture'?[['Dove si trova',n.d],['Che cosa fa',n.f]]:[[NL[ps.tipo],ntext(sid,ps.tipo)]];
   const alt=!ok&&q.t==='scelta'&&P.neuro(q.picked)?`<p class="mut">${picked} invece: ${esc(first(ntext(q.picked,ps.tipo)||P.neuro(q.picked).f))}</p>`:'';
@@ -487,7 +517,9 @@ function casoFoot(L){
  const id='caso.'+(L.caso.src||'corpo')+'.'+L.caso.id,vf=P.verifica(['indizio_1','indizio_2','indizio_3','risposta','spiegazione'].map(c=>id+'.'+c));
  return `<div class="lfoot"><span class="vtag${vf.ok?' ok':''}">${esc(vf.txt)}</span><button class="lnk" data-l="report">⚑ Segnala un errore</button></div>`;
 }
-function casoHyp(i){const L=app.L,h=L.hq;L.hyp.push(h.opts[i]===h.right);live(h.opts[i]===h.right?'Ipotesi giusta.':'Ipotesi sbagliata: era '+h.right+'.');L.clues++;L.stage=L.stage==='h1'?'h2':'ans';L.hq=null;casoScreen(L);}
+// casi di cuore e polmoni: una sola ipotesi (il distretto), poi gli indizi e la risposta
+const torCase=c=>c?.src==='cuore'||c?.src==='polmoni';
+function casoHyp(i){const L=app.L,h=L.hq;L.hyp.push(h.opts[i]===h.right);live(h.opts[i]===h.right?'Ipotesi giusta.':'Ipotesi sbagliata: era '+h.right+'.');L.clues++;L.stage=L.stage==='h1'&&!torCase(L.caso)?'h2':'ans';L.hq=null;casoScreen(L);}
 function casoAns(i){
  const L=app.L,o=shuffleOnce(L)[i],ok=o===L.caso.a;
  if(L.kind==='esame'){

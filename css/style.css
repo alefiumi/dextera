@@ -316,9 +316,22 @@ header{grid-area:h}#asw{grid-area:s}#fig{grid-area:f}#pw{grid-area:p}#atlas{grid
 .step .sb .btn:disabled{opacity:.55}
 .gloss{margin:2px 0 8px;font-size:14px}.gloss summary{min-height:44px;display:flex;align-items:center;cursor:pointer;font-weight:600}
 .gloss dt{font-weight:700;margin-top:6px}.gloss dd{margin:0;color:var(--mut)}
+/* «Cosa studi?» (fase 6): scelta del percorso e dei corsi; corso in arrivo con il programma */
+.pstudio{border:0;margin:10px 0;padding:0;min-width:0}
+.pstudio legend{padding:0;margin-bottom:4px}
+.popt{display:flex;align-items:center;gap:10px;min-height:44px;padding:6px 8px;border-radius:10px;border:1px solid var(--line);margin-top:6px;cursor:pointer}
+.popt input{flex:none;width:22px;height:22px;margin:0;accent-color:var(--acc)}
+.popt span{min-width:0;overflow-wrap:anywhere}.popt small{font-weight:400}
+.popt.off{cursor:default;background:var(--bg)}.popt.off b{color:var(--mut)}
+.popt:focus-within{outline:2px solid var(--acc);outline-offset:1px}
+.tag{display:inline-block;padding:1px 6px;border-radius:6px;background:var(--line);color:var(--ink);font-size:11px}
+.pv-studio{display:block;max-width:640px;margin:0 auto}
+.studio .btn{margin-top:8px}
+.sl.arr li{padding:6px 0;border-bottom:1px solid var(--line)}.sl.arr li:last-child{border-bottom:0}
 /* computer e tablet in orizzontale: mappa a sinistra (ferma, alta quanto lo schermo), riquadri a destra */
 @media (min-width:900px) and (min-aspect-ratio:5/4){
 .pg #panel>.path{max-width:1280px}
+.pg #panel>.path.pv-studio{display:block;max-width:640px}
 .path{display:grid;grid-template-columns:minmax(0,1fr) minmax(360px,420px);gap:20px;align-items:start;padding:4px 8px}
 .pmain{position:sticky;top:0;display:flex;flex-direction:column;gap:8px}
 .pmain .map{max-width:none;width:100%;height:calc(var(--app-h,100svh) - 190px);max-height:none;aspect-ratio:auto}

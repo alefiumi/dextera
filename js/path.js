@@ -32,6 +32,13 @@ const PROB={ossa:'Riconoscerle sulla figura',reperi:'Riconoscerli e trovare il l
 // passi del corso di neurologia
 const PROBN={strutture:'Riconoscerle e sapere che cosa sono',dove:'Dove si trovano',funzione:'Che cosa fanno',lesione:'Che cosa succede se si danneggiano',connessioni:'Con che cosa sono collegate',progetto:'Il caso clinico'};
 const neuroC=c=>c.modulo==='cervello';
+// passi dei corsi di cuore e vasi e del respiratorio (fase 6)
+const PROBT={strutture:'Riconoscerle sulla figura',descrizione:'Riconoscerle da come sono fatte e da cosa fanno',progetto:'Il caso clinico'};
+const probOf=c=>c.modulo==='cervello'?PROBN:c.modulo==='cuore'||c.modulo==='polmoni'?PROBT:PROB;
+const ICO={corpo:'🦴',cervello:'🧠',cuore:'🫀',polmoni:'🫁'};
+export const icoOf=c=>ICO[c?.modulo]||'🎓';
+// nome del percorso aperto (catalogo di index.json)
+const pName=()=>(P.percorsiCat().find(x=>x.id===P.percorsoId())||{nome:app.PERCORSO?.nome||'Percorso completo'}).nome;
 // simboli degli stati (oltre al colore e alla parola): cerchio vuoto, anello, pieno; pieno con l'orologio (da ripassare),
 // pieno con i raggi (brillante)
 const RAYS=(cx,cy,r)=>[0,45,90,135,180,225,270,315].map(a=>{const c=Math.cos(a*Math.PI/180),s=Math.sin(a*Math.PI/180);return `<line x1="${(cx+c*(r+2)).toFixed(1)}" y1="${(cy+s*(r+2)).toFixed(1)}" x2="${(cx+c*(r+5)).toFixed(1)}" y2="${(cy+s*(r+5)).toFixed(1)}"/>`;}).join('');
@@ -96,6 +103,7 @@ const sun=(x,y,r,c)=>{const i=sunIdx(c);return `<circle cx="${x}" cy="${y}" r="$
 export function renderPath(){
  if(!P.ready()){$('panel').innerHTML=`<div class="path"><div class="h">Il tuo percorso</div><p class="mut">I contenuti del percorso non sono ancora su questo telefono: apri l'app una volta con la connessione.</p></div>`;return;}
  if(app.L){renderLesson();return;} // renderLesson cambia figura se la domanda è di un altro corso
+ if(!S.studio)return studioScreen(); // «Cosa studi?» alla prima apertura (fase 6)
  const rw=P.checkProgress();if(rw.length){save();head();toast(rw.map(r=>r.t==='satellite'?`🌟 ${r.sat.nome} acceso! +${r.xp} XP`:`🎉 ${r.ps.nome} (${r.sat.nome}) fatto! +${r.xp} XP`).join(' · '));}
  // il corso aperto segue il satellite (aperto dalla Palestra, dal ripasso o da un altro corso)
  const sat0=ui.lvl==='satellite'&&ui.s&&P.satById(ui.s);if(sat0&&P.corsoOf(sat0)!==P.corso()){ui.c=P.corsoOf(sat0).id;P.setCorso(ui.c);keep();}
@@ -148,12 +156,11 @@ function infoHtml(g,pl){
    ${pbar(pl_lit,L.length)}<p class="pn">${pl_lit} accesi su ${L.length}</p>${glowHtml(pl)}
    <ul class="sl">${L.map(s=>srow(s,g)).join('')}</ul>${legend()}</div>${examCard(pl)}<div class="card info">${examHtml(pl)}</div>`;
  }
- if(ui.lvl==='universo')return `<div class="card info"><div class="kick">Universo</div><h2>Cosa studi?</h2>
-  <p class="mut">Ogni percorso è lo stesso universo visto con lenti diverse: i progressi valgono in tutti. Ogni corso è un sistema solare: i pianeti sono le grandi parti della materia, i satelliti gli argomenti da studiare.</p>
-  <div class="corsi">${P.corsi().map(c=>{const ss=P.satelliti(null,c),n=ss.filter(s=>P.lit(s)).length;return `<button class="srow" data-p="corso" data-id="${esc(c.id)}"${c===C?' aria-current="true"':''}><span class="sn">${neuroC(c)?'🧠':'🦴'} ${esc(c.nome)}</span><small>${P.pianeti(c).length} pianeti · ${n} satelliti accesi su ${ss.length}</small></button>`;}).join('')}</div>
-  <label class="psel"><span class="kick">Percorso</span><select data-p="percorso">${PERCORSI.map(([id,n])=>`<option value="${id}"${id===(app.PERCORSO.id||'base')?' selected':id!=='base'?' disabled':''}>${esc(n)}${id!=='base'?' (in arrivo)':''}</option>`).join('')}</select></label>
+ if(ui.lvl==='universo')return (ui.arr?arrivoHtml(ui.arr):'')+`<div class="card info"><div class="kick">Universo</div><h2>Cosa studi?</h2>
+  <p class="mut">Ogni percorso è lo stesso universo visto con lenti diverse: i progressi valgono in tutti. Ogni corso è un sistema solare: i pianeti sono le grandi parti della materia, i satelliti gli argomenti da studiare. I corsi che segni vengono prima e da loro partono Continua e il Ripasso del giorno.</p>
+  ${studioForm(P.percorsoId(),S.studio?.corsi||[],false)}
   ${pbar(lit,all.length)}<p class="pn">${esc(C.nome)}: ${lit} satelliti accesi su ${all.length}</p></div>`;
- return `<div class="card info"><div class="kick">Sistema · ${esc((PERCORSI.find(x=>x[0]===(app.PERCORSO.id||'base'))||PERCORSI[0])[1])}</div><h2>${esc(C.nome)}</h2>
+ return `<div class="card info"><div class="kick">Sistema · ${esc(pName())}</div><h2>${esc(C.nome)}</h2>
   <p class="mut">${P.pianeti().length} pianeti e ${all.length} satelliti, tutti aperti: parti ${neuroC(C)?'dall\'argomento':'dalla regione'} che stai studiando a lezione. Tocca un pianeta per vedere i suoi satelliti.</p>${P.corsi().length>1?`<button class="lnk" data-p="lvl" data-lvl="universo">Cambia corso</button>`:''}
   ${pbar(lit,all.length)}<p class="pn">${lit} satelliti accesi su ${all.length}</p>${legend()}</div>`;
 }
@@ -172,23 +179,46 @@ function moons(x,y,ss,rr=29){
  return ss.map((s,k)=>{const a=(-90+k*360/ss.length)*Math.PI/180,mx=x+rr*Math.cos(a),my=y+rr*Math.sin(a),st=P.look(s);
   return st==='ripassare'?`<circle cx="${mx.toFixed(1)}" cy="${my.toFixed(1)}" r="4.5" class="sy rip"/>`:st==='acceso'||st==='brillante'?`<circle cx="${mx.toFixed(1)}" cy="${my.toFixed(1)}" r="4.5" fill="url(#glit)"/>`:st==='orbita'?`<circle cx="${mx.toFixed(1)}" cy="${my.toFixed(1)}" r="3.5" class="sy orb" stroke-width="2.2"/>`:`<circle cx="${mx.toFixed(1)}" cy="${my.toFixed(1)}" r="4" class="moon"/>`;}).join('');
 }
-// percorsi della specifica (fase 6): stesso universo visto con lenti diverse; per ora c'è solo il percorso completo
-const PERCORSI=[['base','Percorso completo'],['fisioterapia','Fisioterapia'],['medicina','Medicina'],['mcb','MCB']];
+/* ---------- «Cosa studi?» (fase 6) ----------
+   Scelta del percorso (catalogo di index.json: quelli senza file sono «in arrivo») e dei corsi. Alla prima apertura del Percorso a tutto
+   schermo (studioScreen), poi nel riquadro dell'universo, dove ogni modifica vale subito. Salvata in S.studio → tabella dextera_studio. */
+let draft=null; // scelta in corso nella schermata della prima apertura {percorso, corsi}
+function studioForm(pid,sel,first){
+ const cat=P.percorsiCat(),cs=P.corsiDi(pid),on=c=>!sel.length||sel.includes(c.id);
+ return `<fieldset class="pstudio"><legend class="kick">Percorso</legend>${cat.map(x=>`<label class="popt${x.ok?'':' off'}"><input type="radio" name="spercorso" data-p="spercorso" value="${esc(x.id)}"${x.id===pid?' checked':''}${x.ok?'':' disabled'}>
+   <span><b>${esc(x.nome)}</b>${x.bozza?' <small class="tag">bozza</small>':''}${x.ok?'':' <small class="mut">in arrivo</small>'}</span></label>`).join('')}</fieldset>
+  <fieldset class="pstudio"><legend class="kick">I tuoi corsi</legend>${cs.map(c=>`<label class="popt"><input type="checkbox" data-p="scorso" value="${esc(c.id)}"${on(c)?' checked':''}>
+   <span>${icoOf(c)} <b>${esc(c.nome)}</b> <small class="mut">${P.pianeti(c).length||c.pianeti.length} pianeti</small></span></label>`).join('')}
+   ${P.corsiArrivo().length&&pid===P.percorsoId()?`<p class="mut">In arrivo in questo percorso: ${P.corsiArrivo().map(c=>esc(c.nome)).join(', ')} (si vede sulla mappa, le domande arriveranno).</p>`:''}</fieldset>`;
+}
+function studioScreen(){
+ const d=draft||(draft={percorso:'base',corsi:[]});
+ $('panel').innerHTML=`<div class="path pv-studio"><div class="card info studio"><div class="kick">Benvenuto nel percorso</div><h2 id="sth" tabindex="-1">Cosa studi?</h2>
+  <p class="mut">Scegli il percorso e i corsi che ti interessano: vengono prima sulla mappa e da loro partono Continua, la stella guida e il Ripasso del giorno. Gli altri corsi restano aperti e i progressi valgono ovunque. Puoi cambiare quando vuoi dall'universo.</p>
+  ${studioForm(d.percorso,d.corsi,true)}
+  <button class="btn" data-p="sgo">Inizia</button><button class="btn alt" data-p="sskip">Decidi dopo</button></div></div>`;
+ try{$('sth').focus({preventScroll:true});}catch(e){}
+}
+// riquadro di un corso «in arrivo» (test UCBM): pianeti e satelliti con il programma, senza domande
+function arrivoHtml(id){
+ const c=P.corsiArrivo().find(x=>x.id===id);if(!c)return '';
+ return `<div class="card info arrivo"><div class="kick">In arrivo · ${esc(pName())}</div><h2>${esc(c.nome)}</h2>${c.nota?`<p class="mut">${esc(c.nota)}</p>`:''}
+  ${c.pianeti.map(pl=>`<h3 class="lp">🪐 ${esc(pl.nome)}${pl.domande_test?` <span class="mut">· ${pl.domande_test} domande nel test</span>`:''}</h3><ul class="sl arr">${pl.satelliti.map(s=>`<li><b>${esc(s.nome)}</b>${s.programma?`<br><small class="mut">${esc(s.programma)}</small>`:''}</li>`).join('')}</ul>`).join('')}
+  <button class="lnk" data-p="arrx">Chiudi</button></div>`;
+}
 function universeSvg(){
- const C=P.corso(),CS=P.corsi();
- // ogni corso è un piccolo sistema: il sole e i suoi pianeti (con le lune dei satelliti); gli altri corsi (fase 6) spenti
- const mini=(x,y,k,col)=>[...Array(k)].map((_,i)=>{const r=30+i*9,a=(-60+i*97)*Math.PI/180;return `<circle cx="${x}" cy="${y}" r="${r}" class="orbit"/><circle cx="${(x+r*Math.cos(a)).toFixed(1)}" cy="${(y+r*Math.sin(a)).toFixed(1)}" r="4.5" fill="${col?col[i%col.length]:'#7d86ad'}"/>`;}).join('');
- // posti fissi: i corsi del percorso pubblicato per primi, poi quelli in arrivo
- const POS=[[92,98],[268,98],[92,272],[268,272]];
- const altri=[['Cuore e vasi','#f87171'],['Respiratorio','#60a5fa']].slice(0,Math.max(0,4-CS.length)).map(([t,c],i)=>[t,c,...POS[CS.length+i]]);
+ const C=P.corso(),CS=P.corsi(),mine=CS.filter(P.isMine),rest=CS.filter(c=>!P.isMine(c)),AR=P.corsiArrivo();
+ // ogni corso è un piccolo sistema (sole, pianeti, lune dei satelliti), due per riga: prima i corsi scelti, poi gli altri, poi quelli in arrivo
+ const L=[...mine,...rest,...AR],rows=Math.ceil(L.length/2),H=Math.max(390,rows*176+64),pos=i=>[i%2?268:92,98+Math.floor(i/2)*176];
  const sys=(c,[X,Y])=>{const pl=P.pianeti(c),ss=P.satelliti(null,c),lit=ss.filter(s=>P.lit(s)).length;
-  return `<a href="#" data-p="corso" data-id="${esc(c.id)}" role="button" aria-label="${esc(c.nome)}: ${pl.length} pianeti, ${ss.length} satelliti, ${lit} accesi${c===C?', aperto':''}"${c===C?' aria-current="true"':''}>
+  return `<a href="#" data-p="corso" data-id="${esc(c.id)}" role="button" aria-label="${esc(c.nome)}: ${pl.length} pianeti, ${ss.length} satelliti, ${lit} accesi${c===C?', aperto':''}${P.isMine(c)&&S.studio?.corsi?.length?', tra i tuoi corsi':''}"${c===C?' aria-current="true"':''}>
   <circle cx="${X}" cy="${Y}" r="66" class="hit"/>${pl.map((p,i)=>{const r=34+i*10,a=(-110+i*95)*Math.PI/180,x=X+r*Math.cos(a),y=Y+r*Math.sin(a);return `<circle cx="${X}" cy="${Y}" r="${r}" class="orbit"/>${planetBody(p,+x.toFixed(1),+y.toFixed(1),6)}`;}).join('')}
-  ${sun(X,Y,20,c)}${svgText(X,Y+82,c.nome,'lab',20)}<text x="${X}" y="${Y+82+14*lines(c.nome,20).length}" text-anchor="middle" class="wd">${pl.length} pianeti · ${ss.length} satelliti</text></a>`;};
- return `${svgOpen(390,'Universo dei corsi')}<g class="enter">
-  ${CS.slice(0,4).map((c,i)=>sys(c,POS[i])).join('')}
-  ${altri.map(([t,c,x,y])=>`<g class="off" aria-hidden="true">${mini(x,y,3)}<circle cx="${x}" cy="${y}" r="17" fill="${c}" opacity=".5"/>${svgText(x,y+70,t,'lab dim',16)}<text x="${x}" y="${y+84}" text-anchor="middle" class="wd">in arrivo</text></g>`).join('')}
-  </g><text x="12" y="382" class="wd">Tocca un corso</text></svg>`;
+  ${sun(X,Y,20,c)}${svgText(X,Y+82,c.nome,P.isMine(c)?'lab':'lab dim',20)}<text x="${X}" y="${Y+82+14*lines(c.nome,20).length}" text-anchor="middle" class="wd">${pl.length} pianeti · ${ss.length} satelliti</text></a>`;};
+ // corso in arrivo: pianeti spenti (senza luce: non ha passi), si tocca per vedere il programma
+ const arr=(c,[X,Y])=>`<a href="#" data-p="arrivo" data-id="${esc(c.id)}" role="button" aria-label="${esc(c.nome)}: in arrivo, ${c.pianeti.length} pianeti. Tocca per vedere il programma"${ui.arr===c.id?' aria-current="true"':''}>
+  <circle cx="${X}" cy="${Y}" r="66" class="hit"/>${c.pianeti.map((p,i)=>{const r=34+i*10,a=(-110+i*95)*Math.PI/180;return `<circle cx="${X}" cy="${Y}" r="${r}" class="orbit"/><circle cx="${(X+r*Math.cos(a)).toFixed(1)}" cy="${(Y+r*Math.sin(a)).toFixed(1)}" r="5" fill="#7d86ad" opacity=".75"/>`;}).join('')}
+  ${sun(X,Y,17,c)}<circle cx="${X}" cy="${Y}" r="17" fill="#05071a" opacity=".35"/>${svgText(X,Y+82,c.nome,'lab dim',20)}<text x="${X}" y="${Y+82+14*lines(c.nome,20).length}" text-anchor="middle" class="wd">in arrivo</text></a>`;
+ return `${svgOpen(H,'Universo dei corsi')}<g class="enter">${L.map((c,i)=>c.in_arrivo?arr(c,pos(i)):sys(c,pos(i))).join('')}</g><text x="12" y="${H-8}" class="wd">Tocca un corso</text></svg>`;
 }
 function systemSvg(g){
  // posizioni fisse; ogni pianeta ha intorno le lune dei suoi satelliti. Etichette sopra i pianeti della metà alta, sotto gli altri
@@ -231,13 +261,13 @@ function listHtml(g){
  return P.pianeti().map(p=>`<h3 class="lp">🪐 ${esc(p.nome)} <span class="mut">· ${esc(glowTxt(P.planetGlow(p)))}</span>${P.examPassed(p)?` <span class="mut">· 🏅 ${esc(P.expertTitle(p))}</span>`:''}</h3><ul class="sl">`+P.satelliti(p).map(s=>srow(s,g)).join('')+'</ul>').join('');
 }
 function satHtml(sat,g){
- const st=P.look(sat),L=P.passi(sat),caso=P.casoOf(sat),pl=P.planetOf(sat),PR=neuroC(P.corsoOf(sat))?PROBN:PROB;
+ const st=P.look(sat),L=P.passi(sat),caso=P.casoOf(sat),pl=P.planetOf(sat),PR=probOf(P.corsoOf(sat));
  const steps=L.map((ps,i)=>{
   const open=P.stepOpen(sat,ps),done=P.stepDone(ps),nd=P.node(ps.id),use=P.usable(ps),stars=nd?.stelle||0,isG=ps===g.ps&&sat===g.sat;
   const prev=L.slice(0,i).filter(p=>!P.stepDone(p)).pop();
   let state=done?'Fatto':open?'Da fare':'Bloccato',act='';
   if(ps.tipo==='progetto'){
-   act=open?`<button class="btn" data-p="go" data-id="${esc(ps.id)}" data-k="${caso?'caso':'quiz'}">${done?'Rifai':'Inizia'} ${caso?'il caso clinico':'il quiz finale'}</button>`:`<p class="mut">Si apre dopo i passi 1–5.</p>`;
+   act=open?`<button class="btn" data-p="go" data-id="${esc(ps.id)}" data-k="${caso?'caso':'quiz'}">${done?'Rifai':'Inizia'} ${caso?'il caso clinico':'il quiz finale'}</button>`:`<p class="mut">Si apre dopo i passi 1–${L.length-1}.</p>`;
   }else if(!use.length){act=`<p class="mut">Nessuna domanda disponibile ora (dati in verifica).</p>`;}
   else{
    const pv=P.provaOggi(ps.id);
@@ -245,7 +275,7 @@ function satHtml(sat,g){
     (done?'':`<button class="btn alt" data-p="go" data-id="${esc(ps.id)}" data-k="prova"${pv?' disabled':''}>Lo so già: mettimi alla prova</button>${pv?'<small class="mut">Prova già fatta oggi: riprova domani.</small>':''}`);
   }
   // corso del corpo: ossa, reperi e muscoli si toccano anche sul modello 3D (la maestria è la stessa della lezione)
-  const n3=open&&P.T3D[ps.tipo]&&!neuroC(P.corsoOf(sat))?P.corpo3d([sat],ps.tipo).length:0;
+  const n3=open&&P.T3D[ps.tipo]&&P.corsoOf(sat).modulo==='corpo'?P.corpo3d([sat],ps.tipo).length:0;
   if(n3)act+=`<button class="btn alt" data-p="3d" data-id="${esc(ps.id)}">🧊 Tocca sul modello 3D</button>`;
   const pct=ps.tipo==='progetto'?'':` · ${Math.round(P.stepPct(ps)*use.length)}/${use.length} a maestria 2`;
   return `<li class="step ${i%2?'zr':'zl'}${done?' done':''}${open?' open':' lock'}${isG?' guide':''}"><div class="sc" aria-hidden="true">${done?'✓':open?ps.n:'🔒'}</div>
@@ -271,7 +301,7 @@ function examCard(pl){
  if(miss)return `<div class="card info exam">${head}<p class="pn">Esame: ${miss===1?'manca 1 satellite':`mancano ${miss} satelliti`}</p>
   <p class="mut">Si apre quando tutti i satelliti di ${esc(pl.nome)} sono accesi. Superato, diventi «${esc(T)}».</p></div>`;
  const tries=last&&last.n?`<p class="mut">Tentativi: ${last.n}${last.best!=null?` · miglior punteggio ${last.best}/${E.domande}`:''}</p>`:'';
- if(pass)return `<div class="card info exam done">${head}<p class="title">🏅 <b>${esc(T)}</b></p><p class="mut">Esame superato${P.node(pl.id)?.fatto_il?' il '+esc(P.itDate(P.node(pl.id).fatto_il)):''}. Puoi rifarlo per allenarti: il titolo e gli XP restano quelli.</p>
+ if(pass)return `<div class="card info exam done">${head}<p class="title">🏅 <b>${esc(T)}</b></p><p class="mut">Esame superato${P.examDate(pl)?' il '+esc(P.itDate(P.examDate(pl))):''}. Puoi rifarlo per allenarti: il titolo e gli XP restano quelli.</p>
   ${tries}<button class="btn alt" data-p="esame">Rifai l'esame</button></div>`;
  return `<div class="card info exam">${head}<h2>Pronto per l'esame</h2>
   <p class="mut">${E.domande} domande, ${E.secondi} secondi ciascuna, senza aiuti né cuori, poi un caso clinico senza tempo. Con almeno ${E.soglia} giuste e il caso risolto diventi «${esc(T)}» (+${E.xp} XP).</p>
@@ -301,13 +331,16 @@ function glossary(){
 /* ---------- clic e scelte ---------- */
 export function pathClick(e){
  if(app.L){const f=e.target.closest('form');if(!f)lessonClick(e);return;}
- const b=e.target.closest('[data-p]');if(!b||b.tagName==='SELECT')return;
+ const b=e.target.closest('[data-p]');if(!b||b.tagName==='SELECT'||b.tagName==='INPUT')return;
  e.preventDefault();
  const a=b.dataset.p;
  if(a==='mode'){ui.mode=b.dataset.v;}
  else if(a==='lvl'){ui.lvl=b.dataset.lvl;if(ui.lvl==='pianeta')ui.p=b.dataset.id;}
  else if(a==='planet'){ui.lvl='pianeta';ui.p=b.dataset.id;}
- else if(a==='corso'){ui.c=b.dataset.id;P.setCorso(ui.c);ui.lvl='sistema';}
+ else if(a==='corso'){ui.c=b.dataset.id;P.setCorso(ui.c);ui.lvl='sistema';ui.arr='';}
+ else if(a==='arrivo'){ui.arr=ui.arr===b.dataset.id?'':b.dataset.id;}
+ else if(a==='arrx'){ui.arr='';}
+ else if(a==='sgo'||a==='sskip'){const d=draft||{percorso:'base',corsi:[]};P.setStudio(a==='sgo'?d.percorso:'base',a==='sgo'?d.corsi:[]);draft=null;ui.lvl='universo';ui.c='';P.setCorso('');save();keep();renderPath();return;}
  else if(a==='sat'){ui.lvl='satellite';ui.s=b.dataset.id;P.setLast(ui.s);save();}
  else if(a==='cont'){const g=P.guide();ui.lvl='satellite';ui.s=g.sat.id;keep();if(P.stepOpen(g.sat,g.ps)&&(g.ps.tipo!=='progetto'||P.passi(g.sat).slice(0,-1).every(P.stepDone)))return go(g.sat,g.ps,g.ps.tipo==='progetto'?(P.casoOf(g.sat)?'caso':'quiz'):'lezione');}
  else if(a==='rip'){let ks=P.dailyLeft();if(!ks.length){ks=P.moreDaily();save();}keep();if(!startReview(P.slotsOf(ks),{daily:true})){toast('Niente da ripassare adesso.');renderPath();return;}return hooks.setTab('path');}
@@ -324,6 +357,17 @@ function go(sat,ps,kind){
  hooks.setTab('path');
 }
 export function pathChange(e){
+ // «Cosa studi?»: nella prima apertura cambia la bozza, nell'universo vale subito
+ const sp=e.target.closest('input[data-p=spercorso]'),sc=e.target.closest('input[data-p=scorso]');
+ if(sp||sc){
+  const box=e.target.closest('.card'),ids=[...box.querySelectorAll('input[data-p=scorso]')],pid=box.querySelector('input[data-p=spercorso]:checked')?.value||'base';
+  let sel=ids.filter(x=>x.checked).map(x=>x.value);if(sel.length===ids.length)sel=[];
+  if(sp){const ok=new Set(P.corsiDi(pid).map(c=>c.id));sel=sel.filter(x=>ok.has(x));}
+  if(sc&&!ids.some(x=>x.checked)){sc.checked=true;toast('Tieni almeno un corso.');return;}
+  if(!S.studio){draft={percorso:pid,corsi:sel};studioScreen();return;}
+  P.setStudio(pid,sel);if(sp){ui.c='';P.setCorso('');}save();keep();renderPath();toast(sp?'Percorso: '+pName():'Corsi aggiornati');
+  return;
+ }
  const x=e.target.closest('input[data-p=exam]');
  if(x){const v=/^\d{4}-\d{2}-\d{2}$/.test(x.value)&&P.daysTo(x.value)>0?x.value:'';P.setExam(x.dataset.id,v);save();renderPath();toast(v?'Data dell\'esame salvata':'Data dell\'esame tolta');return;}
  const s=e.target.closest('select[data-p=goal]');if(!s)return;

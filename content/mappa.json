@@ -1,5 +1,5 @@
 {
- "version": 3,
+ "version": 4,
  "nota": "Mappa delle competenze di Dextera (sezione 2 della specifica). Id delle strutture: ossa e muscoli come in content/corpo.json, reperi 'r.' + nome inglese di atlante/dati.json (lm) in minuscolo con i trattini. I reperi sono quelli visibili da fuori nel 3D (atlante/build/visibili.json); sulle ossa condivise tra più satelliti la divisione per posizione è in divisione_reperi, confermata dall'autore. Corso «neurologia» (dal corso del Dott. Benevento): strutture con id n.<voce di testi/neuro.json>; passi strutture, dove, funzione, lesione, connessioni e progetto (casi di testi/casi.json, modulo neuro).",
  "divisione_reperi": {
   "stato": "confermato",
@@ -969,6 +969,262 @@
         {"id": "n-autonomo.6", "n": 6, "tipo": "progetto", "nome": "Il caso clinico", "aspetto": null, "domande": ["caso"], "giochi": ["caso"], "strutture": "tutte", "casi": ["n13"]}
        ]
       }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "cuore-vasi",
+   "nome": "Cuore e vasi",
+   "modulo": "cuore",
+   "pianeti": [
+    {
+     "id": "cv-cuore",
+     "nome": "Cuore",
+     "satelliti": [
+      {
+       "id": "cv-camere",
+       "nome": "Camere del cuore",
+       "ordine": 1,
+       "passi": [
+        {"id": "cv-camere.1", "n": 1, "tipo": "strutture", "nome": "Le strutture", "aspetto": "nome", "domande": ["presentazione", "scelta", "tocco", "nome"], "giochi": [], "strutture": ["c.right-atrium", "c.right-ventricle", "c.left-atrium", "c.left-ventricle"]},
+        {"id": "cv-camere.2", "n": 2, "tipo": "descrizione", "nome": "Riconosci dalla descrizione", "aspetto": "desc", "domande": ["scelta", "nome"], "giochi": [], "strutture": ["c.right-atrium", "c.right-ventricle", "c.left-atrium", "c.left-ventricle"]},
+        {"id": "cv-camere.3", "n": 3, "tipo": "progetto", "nome": "Caso clinico", "aspetto": "caso", "domande": ["caso"], "giochi": [], "strutture": [], "casi": ["t7", "t5"]}
+       ]
+      },
+      {
+       "id": "cv-coronarie",
+       "nome": "Coronarie e vene del cuore",
+       "ordine": 2,
+       "passi": [
+        {"id": "cv-coronarie.1", "n": 1, "tipo": "strutture", "nome": "Le strutture", "aspetto": "nome", "domande": ["presentazione", "scelta", "tocco", "nome"], "giochi": [], "strutture": ["c.anterior-interventricular-artery", "c.circumflex-artery-of-heart", "c.left-coronary-artery", "c.right-coronary-artery", "c.right-inferolateral-branch-of-right-coronary-artery", "c.coronary-sinus", "c.great-cardiac-vein", "c.inferior-vein-of-left-ventricle", "c.inferior-vein-of-left-ventricle-posterior", "c.middle-cardiac-vein"]},
+        {"id": "cv-coronarie.2", "n": 2, "tipo": "descrizione", "nome": "Riconosci dalla descrizione", "aspetto": "desc", "domande": ["scelta", "nome"], "giochi": [], "strutture": ["c.anterior-interventricular-artery", "c.circumflex-artery-of-heart", "c.left-coronary-artery", "c.right-coronary-artery", "c.right-inferolateral-branch-of-right-coronary-artery", "c.coronary-sinus", "c.great-cardiac-vein", "c.inferior-vein-of-left-ventricle", "c.inferior-vein-of-left-ventricle-posterior", "c.middle-cardiac-vein"]},
+        {"id": "cv-coronarie.3", "n": 3, "tipo": "progetto", "nome": "Caso clinico", "aspetto": "caso", "domande": ["caso"], "giochi": [], "strutture": [], "casi": ["t1"]}
+       ]
+      }
+     ]
+    },
+    {
+     "id": "cv-grandi-vasi",
+     "nome": "Grandi vasi",
+     "satelliti": [
+      {
+       "id": "cv-aorta",
+       "nome": "Aorta e rami dell'arco",
+       "ordine": 3,
+       "passi": [
+        {"id": "cv-aorta.1", "n": 1, "tipo": "strutture", "nome": "Le strutture", "aspetto": "nome", "domande": ["presentazione", "scelta", "tocco", "nome"], "giochi": [], "strutture": ["c.abdominal-aorta", "c.aortic-arch", "c.ascending-aorta", "c.brachiocephalic-trunk", "c.left-common-carotid-artery", "c.left-subclavian-artery", "c.thoracic-aorta"]},
+        {"id": "cv-aorta.2", "n": 2, "tipo": "descrizione", "nome": "Riconosci dalla descrizione", "aspetto": "desc", "domande": ["scelta", "nome"], "giochi": [], "strutture": ["c.abdominal-aorta", "c.aortic-arch", "c.ascending-aorta", "c.brachiocephalic-trunk", "c.left-common-carotid-artery", "c.left-subclavian-artery", "c.thoracic-aorta"]},
+        {"id": "cv-aorta.3", "n": 3, "tipo": "progetto", "nome": "Caso clinico", "aspetto": "caso", "domande": ["caso"], "giochi": [], "strutture": [], "casi": ["t6"]}
+       ]
+      },
+      {
+       "id": "cv-vene-cave",
+       "nome": "Vene cave e azygos",
+       "ordine": 4,
+       "passi": [
+        {"id": "cv-vene-cave.1", "n": 1, "tipo": "strutture", "nome": "Le strutture", "aspetto": "nome", "domande": ["presentazione", "scelta", "tocco", "nome"], "giochi": [], "strutture": ["c.azygos-vein", "c.inferior-vena-cava-abdominal-part", "c.inferior-vena-cava-thoracic-part", "c.left-brachiocephalic-vein", "c.right-brachiocephalic-vein", "c.superior-vena-cava"]},
+        {"id": "cv-vene-cave.2", "n": 2, "tipo": "descrizione", "nome": "Riconosci dalla descrizione", "aspetto": "desc", "domande": ["scelta", "nome"], "giochi": [], "strutture": ["c.azygos-vein", "c.inferior-vena-cava-abdominal-part", "c.inferior-vena-cava-thoracic-part", "c.left-brachiocephalic-vein", "c.right-brachiocephalic-vein", "c.superior-vena-cava"]},
+        {"id": "cv-vene-cave.3", "n": 3, "tipo": "progetto", "nome": "Quiz finale", "aspetto": "caso", "domande": ["quiz"], "giochi": [], "strutture": [], "casi": []}
+       ]
+      },
+      {
+       "id": "cv-circolo-polmonare",
+       "nome": "Circolo polmonare",
+       "ordine": 5,
+       "passi": [
+        {"id": "cv-circolo-polmonare.1", "n": 1, "tipo": "strutture", "nome": "Le strutture", "aspetto": "nome", "domande": ["presentazione", "scelta", "tocco", "nome"], "giochi": [], "strutture": ["c.bifurcation-of-pulmonary-trunk", "c.left-pulmonary-artery", "c.pulmonary-trunk", "c.right-pulmonary-artery", "c.left-inferior-pulmonary-vein", "c.left-superior-pulmonary-vein", "c.right-inferior-pulmonary-vein", "c.right-superior-pulmonary-vein"]},
+        {"id": "cv-circolo-polmonare.2", "n": 2, "tipo": "descrizione", "nome": "Riconosci dalla descrizione", "aspetto": "desc", "domande": ["scelta", "nome"], "giochi": [], "strutture": ["c.bifurcation-of-pulmonary-trunk", "c.left-pulmonary-artery", "c.pulmonary-trunk", "c.right-pulmonary-artery", "c.left-inferior-pulmonary-vein", "c.left-superior-pulmonary-vein", "c.right-inferior-pulmonary-vein", "c.right-superior-pulmonary-vein"]},
+        {"id": "cv-circolo-polmonare.3", "n": 3, "tipo": "progetto", "nome": "Caso clinico", "aspetto": "caso", "domande": ["caso"], "giochi": [], "strutture": [], "casi": ["t4"]}
+       ]
+      }
+     ]
+    },
+    {
+     "id": "cv-vasi-corpo",
+     "nome": "Vasi del corpo",
+     "satelliti": [
+      {
+       "id": "cv-vasi-testa",
+       "nome": "Vasi di testa e collo",
+       "ordine": 6,
+       "passi": [
+        {"id": "cv-vasi-testa.1", "n": 1, "tipo": "strutture", "nome": "Le strutture", "aspetto": "nome", "domande": ["presentazione", "scelta", "tocco", "nome"], "giochi": [], "strutture": ["c.anterior-communicating-artery", "c.basilar-artery", "c.branch-to-angular-gyrus", "c.external-carotid-artery", "c.internal-carotid-artery", "c.right-common-carotid-artery", "c.vertebral-artery", "c.anterior-intercavernous-sinus", "c.external-jugular-vein", "c.inferior-ophthalmic-vein", "c.inferior-petrosal-sinus", "c.internal-jugular-vein", "c.posterior-intercavernous-sinus", "c.sigmoid-sinus", "c.superior-ophthalmic-vein"]},
+        {"id": "cv-vasi-testa.2", "n": 2, "tipo": "descrizione", "nome": "Riconosci dalla descrizione", "aspetto": "desc", "domande": ["scelta", "nome"], "giochi": [], "strutture": ["c.anterior-communicating-artery", "c.basilar-artery", "c.branch-to-angular-gyrus", "c.external-carotid-artery", "c.internal-carotid-artery", "c.right-common-carotid-artery", "c.vertebral-artery", "c.anterior-intercavernous-sinus", "c.external-jugular-vein", "c.inferior-ophthalmic-vein", "c.inferior-petrosal-sinus", "c.internal-jugular-vein", "c.posterior-intercavernous-sinus", "c.sigmoid-sinus", "c.superior-ophthalmic-vein"]},
+        {"id": "cv-vasi-testa.3", "n": 3, "tipo": "progetto", "nome": "Quiz finale", "aspetto": "caso", "domande": ["quiz"], "giochi": [], "strutture": [], "casi": []}
+       ]
+      },
+      {
+       "id": "cv-vasi-arto-sup",
+       "nome": "Vasi dell'arto superiore",
+       "ordine": 7,
+       "passi": [
+        {"id": "cv-vasi-arto-sup.1", "n": 1, "tipo": "strutture", "nome": "Le strutture", "aspetto": "nome", "domande": ["presentazione", "scelta", "tocco", "nome"], "giochi": [], "strutture": ["c.axillary-artery", "c.brachial-artery", "c.radial-artery", "c.right-subclavian-artery", "c.ulnar-artery", "c.basilic-vein", "c.cephalic-vein", "c.left-subclavian-vein", "c.median-cubital-vein", "c.right-subclavian-vein"]},
+        {"id": "cv-vasi-arto-sup.2", "n": 2, "tipo": "descrizione", "nome": "Riconosci dalla descrizione", "aspetto": "desc", "domande": ["scelta", "nome"], "giochi": [], "strutture": ["c.axillary-artery", "c.brachial-artery", "c.radial-artery", "c.right-subclavian-artery", "c.ulnar-artery", "c.basilic-vein", "c.cephalic-vein", "c.left-subclavian-vein", "c.median-cubital-vein", "c.right-subclavian-vein"]},
+        {"id": "cv-vasi-arto-sup.3", "n": 3, "tipo": "progetto", "nome": "Quiz finale", "aspetto": "caso", "domande": ["quiz"], "giochi": [], "strutture": [], "casi": []}
+       ]
+      },
+      {
+       "id": "cv-vasi-tronco",
+       "nome": "Vasi del tronco",
+       "ordine": 8,
+       "passi": [
+        {"id": "cv-vasi-tronco.1", "n": 1, "tipo": "strutture", "nome": "Le strutture", "aspetto": "nome", "domande": ["presentazione", "scelta", "tocco", "nome"], "giochi": [], "strutture": ["c.coeliac-trunk", "c.common-iliac-artery", "c.external-iliac-artery", "c.inferior-mesenteric-artery", "c.internal-iliac-artery", "c.left-renal-artery", "c.median-sacral-artery", "c.right-renal-artery", "c.superior-mesenteric-artery", "c.common-iliac-vein", "c.hepatic-portal-vein", "c.splenic-vein", "c.superior-mesenteric-vein"]},
+        {"id": "cv-vasi-tronco.2", "n": 2, "tipo": "descrizione", "nome": "Riconosci dalla descrizione", "aspetto": "desc", "domande": ["scelta", "nome"], "giochi": [], "strutture": ["c.coeliac-trunk", "c.common-iliac-artery", "c.external-iliac-artery", "c.inferior-mesenteric-artery", "c.internal-iliac-artery", "c.left-renal-artery", "c.median-sacral-artery", "c.right-renal-artery", "c.superior-mesenteric-artery", "c.common-iliac-vein", "c.hepatic-portal-vein", "c.splenic-vein", "c.superior-mesenteric-vein"]},
+        {"id": "cv-vasi-tronco.3", "n": 3, "tipo": "progetto", "nome": "Quiz finale", "aspetto": "caso", "domande": ["quiz"], "giochi": [], "strutture": [], "casi": []}
+       ]
+      },
+      {
+       "id": "cv-vasi-arto-inf",
+       "nome": "Vasi dell'arto inferiore",
+       "ordine": 9,
+       "passi": [
+        {"id": "cv-vasi-arto-inf.1", "n": 1, "tipo": "strutture", "nome": "Le strutture", "aspetto": "nome", "domande": ["presentazione", "scelta", "tocco", "nome"], "giochi": [], "strutture": ["c.anterior-tibial-artery", "c.deep-femoral-artery", "c.dorsalis-pedis-artery", "c.femoral-artery", "c.fibular-artery", "c.popliteal-artery", "c.posterior-tibial-artery", "c.femoral-vein", "c.great-saphenous-vein", "c.popliteal-vein", "c.small-saphenous-vein"]},
+        {"id": "cv-vasi-arto-inf.2", "n": 2, "tipo": "descrizione", "nome": "Riconosci dalla descrizione", "aspetto": "desc", "domande": ["scelta", "nome"], "giochi": [], "strutture": ["c.anterior-tibial-artery", "c.deep-femoral-artery", "c.dorsalis-pedis-artery", "c.femoral-artery", "c.fibular-artery", "c.popliteal-artery", "c.posterior-tibial-artery", "c.femoral-vein", "c.great-saphenous-vein", "c.popliteal-vein", "c.small-saphenous-vein"]},
+        {"id": "cv-vasi-arto-inf.3", "n": 3, "tipo": "progetto", "nome": "Quiz finale", "aspetto": "caso", "domande": ["quiz"], "giochi": [], "strutture": [], "casi": []}
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "respiratorio",
+   "nome": "Apparato respiratorio",
+   "modulo": "polmoni",
+   "pianeti": [
+    {
+     "id": "re-polmoni",
+     "nome": "Polmoni",
+     "satelliti": [
+      {
+       "id": "re-lobi",
+       "nome": "Lobi dei polmoni",
+       "ordine": 1,
+       "passi": [
+        {"id": "re-lobi.1", "n": 1, "tipo": "strutture", "nome": "Le strutture", "aspetto": "nome", "domande": ["presentazione", "scelta", "tocco", "nome"], "giochi": [], "strutture": ["p.inferior-lobe-of-right-lung", "p.middle-lobe-of-right-lung", "p.superior-lobe-of-right-lung", "p.inferior-lobe-of-left-lung", "p.superior-lobe-of-left-lung"]},
+        {"id": "re-lobi.2", "n": 2, "tipo": "descrizione", "nome": "Riconosci dalla descrizione", "aspetto": "desc", "domande": ["scelta", "nome"], "giochi": [], "strutture": ["p.inferior-lobe-of-right-lung", "p.middle-lobe-of-right-lung", "p.superior-lobe-of-right-lung", "p.inferior-lobe-of-left-lung", "p.superior-lobe-of-left-lung"]},
+        {"id": "re-lobi.3", "n": 3, "tipo": "progetto", "nome": "Caso clinico", "aspetto": "caso", "domande": ["caso"], "giochi": [], "strutture": [], "casi": ["t3", "t8"]}
+       ]
+      }
+     ]
+    },
+    {
+     "id": "re-vie-aeree",
+     "nome": "Vie aeree",
+     "satelliti": [
+      {
+       "id": "re-bronchi",
+       "nome": "Trachea e bronchi",
+       "ordine": 2,
+       "passi": [
+        {"id": "re-bronchi.1", "n": 1, "tipo": "strutture", "nome": "Le strutture", "aspetto": "nome", "domande": ["presentazione", "scelta", "tocco", "nome"], "giochi": [], "strutture": ["p.intermediate-bronchus", "p.left-inferior-lobar-bronchus", "p.left-main-bronchus", "p.left-superior-lobar-bronchus", "p.middle-lobar-bronchus", "p.right-inferior-lobar-bronchus", "p.right-main-bronchus", "p.right-superior-lobar-bronchus", "p.trachea"]},
+        {"id": "re-bronchi.2", "n": 2, "tipo": "descrizione", "nome": "Riconosci dalla descrizione", "aspetto": "desc", "domande": ["scelta", "nome"], "giochi": [], "strutture": ["p.intermediate-bronchus", "p.left-inferior-lobar-bronchus", "p.left-main-bronchus", "p.left-superior-lobar-bronchus", "p.middle-lobar-bronchus", "p.right-inferior-lobar-bronchus", "p.right-main-bronchus", "p.right-superior-lobar-bronchus", "p.trachea"]},
+        {"id": "re-bronchi.3", "n": 3, "tipo": "progetto", "nome": "Caso clinico", "aspetto": "caso", "domande": ["caso"], "giochi": [], "strutture": [], "casi": ["t2"]}
+       ]
+      },
+      {
+       "id": "re-segmentari-dx",
+       "nome": "Bronchi segmentari del polmone destro",
+       "ordine": 3,
+       "passi": [
+        {"id": "re-segmentari-dx.1", "n": 1, "tipo": "strutture", "nome": "Le strutture", "aspetto": "nome", "domande": ["presentazione", "scelta", "tocco", "nome"], "giochi": [], "strutture": ["p.anterior-basal-segmental-bronchus-of-right-lung-bviii", "p.anterior-segmental-bronchus-of-right-lung-biii", "p.apical-segmental-bronchus-of-right-lung-bi", "p.lateral-basal-segmental-bronchus-of-right-lung-bix", "p.lateral-segmental-bronchus-of-right-lung-biv", "p.medial-basal-segmental-bronchus-of-right-lung-bvii", "p.medial-segmental-bronchus-of-right-lung-bv", "p.posterior-basal-segmental-bronchus-of-right-lung-bx", "p.posterior-segmental-bronchus-of-right-lung-bii", "p.superior-segmental-bronchus-of-right-lung-bvi"]},
+        {"id": "re-segmentari-dx.2", "n": 2, "tipo": "descrizione", "nome": "Riconosci dalla descrizione", "aspetto": "desc", "domande": ["scelta", "nome"], "giochi": [], "strutture": ["p.anterior-basal-segmental-bronchus-of-right-lung-bviii", "p.anterior-segmental-bronchus-of-right-lung-biii", "p.apical-segmental-bronchus-of-right-lung-bi", "p.lateral-basal-segmental-bronchus-of-right-lung-bix", "p.lateral-segmental-bronchus-of-right-lung-biv", "p.medial-basal-segmental-bronchus-of-right-lung-bvii", "p.medial-segmental-bronchus-of-right-lung-bv", "p.posterior-basal-segmental-bronchus-of-right-lung-bx", "p.posterior-segmental-bronchus-of-right-lung-bii", "p.superior-segmental-bronchus-of-right-lung-bvi"]},
+        {"id": "re-segmentari-dx.3", "n": 3, "tipo": "progetto", "nome": "Caso clinico", "aspetto": "caso", "domande": ["caso"], "giochi": [], "strutture": [], "casi": ["t9"]}
+       ]
+      },
+      {
+       "id": "re-segmentari-sx",
+       "nome": "Bronchi segmentari del polmone sinistro",
+       "ordine": 4,
+       "passi": [
+        {"id": "re-segmentari-sx.1", "n": 1, "tipo": "strutture", "nome": "Le strutture", "aspetto": "nome", "domande": ["presentazione", "scelta", "tocco", "nome"], "giochi": [], "strutture": ["p.anteromedial-basal-segmental-bronchus-of-left-lung", "p.anterior-basal-segmental-bronchus-of-left-lung-bviii", "p.anterior-segmental-bronchus-of-left-lung-biii", "p.apicoposterior-segmental-bronchus-of-left-lung-bi-bii", "p.inferior-lingular-segmental-bronchus-of-left-lung-bv", "p.lateral-basal-segmental-bronchus-of-left-lung-bix", "p.medial-basal-segmental-bronchus-of-left-lung-bvii", "p.posterior-basal-segmental-bronchus-of-left-lung-bx", "p.superior-lingular-segmental-bronchus-of-left-lung-biv", "p.superior-segmental-bronchus-of-left-lung-bvi"]},
+        {"id": "re-segmentari-sx.2", "n": 2, "tipo": "descrizione", "nome": "Riconosci dalla descrizione", "aspetto": "desc", "domande": ["scelta", "nome"], "giochi": [], "strutture": ["p.anteromedial-basal-segmental-bronchus-of-left-lung", "p.anterior-basal-segmental-bronchus-of-left-lung-bviii", "p.anterior-segmental-bronchus-of-left-lung-biii", "p.apicoposterior-segmental-bronchus-of-left-lung-bi-bii", "p.inferior-lingular-segmental-bronchus-of-left-lung-bv", "p.lateral-basal-segmental-bronchus-of-left-lung-bix", "p.medial-basal-segmental-bronchus-of-left-lung-bvii", "p.posterior-basal-segmental-bronchus-of-left-lung-bx", "p.superior-lingular-segmental-bronchus-of-left-lung-biv", "p.superior-segmental-bronchus-of-left-lung-bvi"]},
+        {"id": "re-segmentari-sx.3", "n": 3, "tipo": "progetto", "nome": "Quiz finale", "aspetto": "caso", "domande": ["quiz"], "giochi": [], "strutture": [], "casi": []}
+       ]
+      }
+     ]
+    },
+    {
+     "id": "re-vasi",
+     "nome": "Vasi polmonari",
+     "satelliti": [
+      {
+       "id": "re-arterie",
+       "nome": "Arterie polmonari",
+       "ordine": 5,
+       "passi": [
+        {"id": "re-arterie.1", "n": 1, "tipo": "strutture", "nome": "Le strutture", "aspetto": "nome", "domande": ["presentazione", "scelta", "tocco", "nome"], "giochi": [], "strutture": ["p.anterior-basal-segmental-artery-of-left-lung", "p.anterior-basal-segmental-artery-of-right-lung", "p.anterior-segmental-artery-of-left-lung", "p.anterior-segmental-artery-of-right-lung", "p.apical-segmental-artery-of-left-lung", "p.apical-segmental-artery-of-right-lung", "p.bifurcation-of-pulmonary-trunk", "p.inferior-lingular-artery-of-left-lung", "p.inferior-lobar-artery-of-right-lung", "p.lateral-basal-segmental-artery-of-left-lung", "p.lateral-basal-segmental-artery-of-right-lung", "p.lateral-segmental-artery-of-right-lung", "p.left-pulmonary-artery", "p.medial-basal-segmental-artery-of-left-lung", "p.medial-basal-segmental-artery-of-right-lung", "p.medial-segmental-artery-of-right-lung", "p.middle-lobar-artery-of-right-lung", "p.posterior-basal-segmental-artery-of-left-lung", "p.posterior-basal-segmental-artery-of-right-lung", "p.posterior-segmental-artery-of-left-lung", "p.posterior-segmental-artery-of-right-lung", "p.pulmonary-trunk", "p.right-pulmonary-artery", "p.superior-lingular-artery-of-left-lung", "p.superior-lobar-artery-of-right-lung", "p.superior-segmental-artery-of-left-lung", "p.superior-segmental-artery-of-right-lung"]},
+        {"id": "re-arterie.2", "n": 2, "tipo": "descrizione", "nome": "Riconosci dalla descrizione", "aspetto": "desc", "domande": ["scelta", "nome"], "giochi": [], "strutture": ["p.anterior-basal-segmental-artery-of-left-lung", "p.anterior-basal-segmental-artery-of-right-lung", "p.anterior-segmental-artery-of-left-lung", "p.anterior-segmental-artery-of-right-lung", "p.apical-segmental-artery-of-left-lung", "p.apical-segmental-artery-of-right-lung", "p.bifurcation-of-pulmonary-trunk", "p.inferior-lingular-artery-of-left-lung", "p.inferior-lobar-artery-of-right-lung", "p.lateral-basal-segmental-artery-of-left-lung", "p.lateral-basal-segmental-artery-of-right-lung", "p.lateral-segmental-artery-of-right-lung", "p.left-pulmonary-artery", "p.medial-basal-segmental-artery-of-left-lung", "p.medial-basal-segmental-artery-of-right-lung", "p.medial-segmental-artery-of-right-lung", "p.middle-lobar-artery-of-right-lung", "p.posterior-basal-segmental-artery-of-left-lung", "p.posterior-basal-segmental-artery-of-right-lung", "p.posterior-segmental-artery-of-left-lung", "p.posterior-segmental-artery-of-right-lung", "p.pulmonary-trunk", "p.right-pulmonary-artery", "p.superior-lingular-artery-of-left-lung", "p.superior-lobar-artery-of-right-lung", "p.superior-segmental-artery-of-left-lung", "p.superior-segmental-artery-of-right-lung"]},
+        {"id": "re-arterie.3", "n": 3, "tipo": "progetto", "nome": "Quiz finale", "aspetto": "caso", "domande": ["quiz"], "giochi": [], "strutture": [], "casi": []}
+       ]
+      },
+      {
+       "id": "re-vene",
+       "nome": "Vene polmonari",
+       "ordine": 6,
+       "passi": [
+        {"id": "re-vene.1", "n": 1, "tipo": "strutture", "nome": "Le strutture", "aspetto": "nome", "domande": ["presentazione", "scelta", "tocco", "nome"], "giochi": [], "strutture": ["p.anterior-vein-of-left-lung", "p.anterior-vein-of-right-lung", "p.apical-vein-of-right-lung", "p.apicoposterior-vein-of-left-lung", "p.inferior-basal-vein-of-left-lung", "p.inferior-basal-vein-of-right-lung", "p.inferior-lingular-vein-of-left-lung", "p.lateral-vein-of-right-lung", "p.left-inferior-pulmonary-vein", "p.left-superior-pulmonary-vein", "p.lingular-vein-of-left-lung", "p.medial-vein-of-right-lung", "p.posterior-vein-of-right-lung", "p.right-inferior-pulmonary-vein", "p.right-superior-pulmonary-vein", "p.superior-basal-vein-of-left-lung", "p.superior-basal-vein-of-right-lung", "p.superior-lingular-vein-of-left-lung", "p.superior-vein-of-left-lung", "p.superior-vein-of-right-lung"]},
+        {"id": "re-vene.2", "n": 2, "tipo": "descrizione", "nome": "Riconosci dalla descrizione", "aspetto": "desc", "domande": ["scelta", "nome"], "giochi": [], "strutture": ["p.anterior-vein-of-left-lung", "p.anterior-vein-of-right-lung", "p.apical-vein-of-right-lung", "p.apicoposterior-vein-of-left-lung", "p.inferior-basal-vein-of-left-lung", "p.inferior-basal-vein-of-right-lung", "p.inferior-lingular-vein-of-left-lung", "p.lateral-vein-of-right-lung", "p.left-inferior-pulmonary-vein", "p.left-superior-pulmonary-vein", "p.lingular-vein-of-left-lung", "p.medial-vein-of-right-lung", "p.posterior-vein-of-right-lung", "p.right-inferior-pulmonary-vein", "p.right-superior-pulmonary-vein", "p.superior-basal-vein-of-left-lung", "p.superior-basal-vein-of-right-lung", "p.superior-lingular-vein-of-left-lung", "p.superior-vein-of-left-lung", "p.superior-vein-of-right-lung"]},
+        {"id": "re-vene.3", "n": 3, "tipo": "progetto", "nome": "Quiz finale", "aspetto": "caso", "domande": ["quiz"], "giochi": [], "strutture": [], "casi": []}
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "ucbm",
+   "nome": "Test d'ingresso UCBM",
+   "modulo": null,
+   "in_arrivo": true,
+   "nota": "Struttura dal programma del bando (Allegato B, Medicina e Odontoiatria 2026/27): 60 domande, 20 per materia. Senza domande finché non si scrivono i contenuti.",
+   "pianeti": [
+    {
+     "id": "ucbm-biologia",
+     "nome": "Biologia",
+     "domande_test": 20,
+     "satelliti": [
+      {"id": "ucbm-bio-chimica", "nome": "La chimica dei viventi", "ordine": 1, "programma": "Acqua, carboidrati, lipidi, proteine, acidi nucleici.", "passi": []},
+      {"id": "ucbm-bio-cellula", "nome": "La cellula", "ordine": 2, "programma": "Procarioti ed eucarioti, organuli, cellula animale e vegetale, teoria endosimbiontica.", "passi": []},
+      {"id": "ucbm-bio-genetica", "nome": "Genetica", "ordine": 3, "programma": "Mendel, cromosomi e genoma, codice genetico, replicazione, trascrizione e traduzione, malattie ereditarie.", "passi": []},
+      {"id": "ucbm-bio-divisione", "nome": "Mitosi, meiosi e sviluppo", "ordine": 4, "programma": "Ciclo cellulare, mitosi e meiosi, gametogenesi, fecondazione, segmentazione e gastrulazione.", "passi": []},
+      {"id": "ucbm-bio-anatomia", "nome": "Anatomia e fisiologia dell'uomo", "ordine": 5, "programma": "Tessuti, sistemi e apparati, omeostasi. Scheletro, cuore e vasi, respiratorio e sistema nervoso si studiano già nei corsi di anatomia di questo percorso.", "passi": []},
+      {"id": "ucbm-bio-energia", "nome": "Bioenergetica", "ordine": 6, "programma": "ATP, fotosintesi, respirazione, glicolisi, fermentazione, enzimi.", "passi": []},
+      {"id": "ucbm-bio-biotech", "nome": "Biotecnologie", "ordine": 7, "programma": "Biotecnologie tradizionali e DNA ricombinante, applicazioni in medicina, agricoltura e ambiente.", "passi": []},
+      {"id": "ucbm-bio-evoluzione", "nome": "Biodiversità ed evoluzione", "ordine": 8, "programma": "Bacteria, Archaea, Eukarya, virus; mutazioni, selezione naturale, speciazione.", "passi": []},
+      {"id": "ucbm-bio-ecologia", "nome": "Ecologia", "ordine": 9, "programma": "Popolazioni, comunità, ecosistemi, catene trofiche, interazioni tra organismi.", "passi": []}
+     ]
+    },
+    {
+     "id": "ucbm-chimica",
+     "nome": "Chimica",
+     "domande_test": 20,
+     "satelliti": [
+      {"id": "ucbm-chi-materia", "nome": "La materia", "ordine": 10, "programma": "Stati della materia, miscele, leggi fondamentali della chimica, leggi dei gas.", "passi": []},
+      {"id": "ucbm-chi-atomo", "nome": "Atomo e tavola periodica", "ordine": 11, "programma": "Modelli atomici, numeri quantici, configurazione elettronica, proprietà periodiche.", "passi": []},
+      {"id": "ucbm-chi-legame", "nome": "Il legame chimico", "ordine": 12, "programma": "Legame ionico, covalente e metallico, Lewis, VSEPR, forze intermolecolari.", "passi": []},
+      {"id": "ucbm-chi-stechiometria", "nome": "Stechiometria", "ordine": 13, "programma": "Bilanciamento, mole e costante di Avogadro, rapporti di massa.", "passi": []},
+      {"id": "ucbm-chi-reazioni", "nome": "Reazioni ed equilibrio", "ordine": 14, "programma": "Reazioni eso- ed endotermiche, equilibrio chimico, velocità di reazione.", "passi": []},
+      {"id": "ucbm-chi-composti", "nome": "Composti e nomenclatura", "ordine": 15, "programma": "Nomenclatura IUPAC e tradizionale, composti inorganici, metalli.", "passi": []},
+      {"id": "ucbm-chi-soluzioni", "nome": "Le soluzioni", "ordine": 16, "programma": "Solubilità, concentrazione, proprietà colligative.", "passi": []},
+      {"id": "ucbm-chi-acidi", "nome": "Acidi, basi e redox", "ordine": 17, "programma": "pH, indicatori, idrolisi, tamponi, ossidoriduzioni.", "passi": []},
+      {"id": "ucbm-chi-organica", "nome": "Chimica organica", "ordine": 18, "programma": "Idrocarburi, ibridazione, gruppi funzionali, isomeria, ammine e amminoacidi.", "passi": []},
+      {"id": "ucbm-chi-applicata", "nome": "Chimica applicata", "ordine": 19, "programma": "Chimica della vita quotidiana, etichette, ambiente, sicurezza.", "passi": []}
+     ]
+    },
+    {
+     "id": "ucbm-fisica",
+     "nome": "Fisica",
+     "domande_test": 20,
+     "satelliti": [
+      {"id": "ucbm-fis-misure", "nome": "Grandezze e misure", "ordine": 20, "programma": "Sistema Internazionale, notazione scientifica, vettori.", "passi": []},
+      {"id": "ucbm-fis-cinematica", "nome": "Cinematica", "ordine": 21, "programma": "Moto rettilineo, nel piano, circolare uniforme, armonico.", "passi": []},
+      {"id": "ucbm-fis-dinamica", "nome": "Dinamica", "ordine": 22, "programma": "Principi della dinamica, forze, quantità di moto, lavoro, energia, potenza.", "passi": []},
+      {"id": "ucbm-fis-fluidi", "nome": "Meccanica dei fluidi", "ordine": 23, "programma": "Pressione, Pascal, Stevino, Archimede, portata, Bernoulli, viscosità.", "passi": []},
+      {"id": "ucbm-fis-termo", "nome": "Termodinamica", "ordine": 24, "programma": "Temperatura, calore, cambiamenti di stato, gas perfetti, principi della termodinamica.", "passi": []},
+      {"id": "ucbm-fis-elettro", "nome": "Elettricità e magnetismo", "ordine": 25, "programma": "Coulomb, campo e potenziale, condensatori, circuiti, legge di Ohm, campo magnetico.", "passi": []},
+      {"id": "ucbm-fis-ottica", "nome": "Ottica", "ordine": 26, "programma": "Riflessione, rifrazione, lenti, interferenza, microscopi, spettro elettromagnetico.", "passi": []}
      ]
     }
    ]

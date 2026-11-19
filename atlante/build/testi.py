@@ -261,6 +261,15 @@ def lezioni():
         if v.get('ref'): n['ref'] = v['ref']
         neuro[i] = n; voci[i] = v['id']
     casi_neuro = [{**c, 'src': 'neuro'} for c in casi('neuro')]
+    # corsi di cuore e vasi e del respiratorio (fase 6): strutture c.<slug> e p.<slug> dei moduli 2D, testi in testi/torace.json
+    tor = {v['id'][7:]: v for v in carica('torace')}
+    for co in M['corsi']:
+        if co.get('modulo') not in ('cuore', 'polmoni'): continue
+        for pl in co['pianeti']:
+            for s in pl['satelliti']:
+                for ps in s['passi']:
+                    for i in ps['strutture'] if isinstance(ps['strutture'], list) else []:
+                        if i[2:] in tor: voci[i] = 'torace.' + i[2:]
     stati = {}
     for t in TIPI:
         for v in carica(t):
@@ -275,7 +284,7 @@ def controlla_percorsi():
     d = os.path.join(ROOT, 'content/percorsi')
     if not os.path.isdir(d): return
     M = json.load(open(os.path.join(ROOT, 'content/mappa.json'))); C = json.load(open(os.path.join(ROOT, 'content/corpo.json')))
-    casi = {c['id'] for c in C['cases']} | {v['caso'] for v in carica('casi') if v['modulo'] == 'neuro'}; err = []; nodi = {}
+    casi = {c['id'] for c in C['cases']} | {v['caso'] for v in carica('casi') if v['modulo'] in ('neuro', 'cuore', 'polmoni')}; err = []; nodi = {}
     for co in M['corsi']:
         nodi[co['id']] = 'corso'
         for pl in co['pianeti']:
@@ -338,6 +347,22 @@ def controlla_mappa():
     err += [f"{v['id']}: figura {f}" for v in nv.values() for f in v.get('figura', []) if f not in fig]
     err += [f"caso.neuro.{k}: struttura {v['struttura']}" for k, v in nc.items() if v['struttura'][2:] not in nv]
     manca += sorted('neuro.' + k for k in set(nv) - nu)
+    # cuore e vasi, respiratorio (fase 6): strutture dei moduli 2D con la voce in testi/torace.json, casi del loro modulo;
+    # corsi «in arrivo» (test UCBM): solo la struttura, senza passi
+    tor = {v['id'][7:] for v in carica('torace')}
+    for co in M['corsi']:
+        if co.get('in_arrivo'):
+            err += [f"{s['id']}: un corso in arrivo non ha passi" for pl in co['pianeti'] for s in pl['satelliti'] if s['passi']]
+            continue
+        if co.get('modulo') not in ('cuore', 'polmoni'): continue
+        X = json.load(open(os.path.join(ROOT, f"content/{co['modulo']}.json")))
+        sid = {s['id'] for s in X['structures']}; cs = {c['id'] for c in X['cases']}
+        for pl in co['pianeti']:
+            for s in pl['satelliti']:
+                for ps in s['passi']:
+                    ids = ps['strutture'] if isinstance(ps['strutture'], list) else []
+                    err += [f"{ps['id']}: {i}" for i in ids if i not in sid or i[2:] not in tor]
+                    err += [f"{ps['id']}: caso {c}" for c in ps.get('casi', []) if c not in cs]
     if err or manca: raise SystemExit('content/mappa.json non valido:\n  ' + '\n  '.join((err + ['non in nessun satellite: ' + i for i in manca])[:30]))
     print('content/mappa.json: id validi')
 

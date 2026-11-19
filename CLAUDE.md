@@ -40,6 +40,7 @@ Dove questo file e la specifica differiscono, vale la specifica.
   data d'esame (v0.76.0, vedi «Ripasso»); 2) esame del pianeta (v0.77.0, vedi «Esame del pianeta»); 3) Palestra con la figura per zone (v0.78.0, vedi «Palestra per zone»). Fasi 3–7: vedi la specifica.
 - Fase 4 – Flotta (SQL: costellazioni, stagioni, equipaggi): v0.85.0, vedi «Flotta». File SQL da applicare dall'autore.
 - Fase 5 – Profilo e competenze (SQL: righe in badge_classes, dextera_profili): v0.86.0, vedi «Profilo e competenze». Online e SQL applicato il 19/11/2026. Casata ed equipaggi nel Profilo: v0.87.0; obiettivo del giorno e date d'esame: v0.88.0.
+- Fase 6 – Altri corsi e percorsi (SQL: dextera_studio): v0.89.0, vedi «Altri corsi e percorsi». File SQL da applicare dall'autore.
 - Corso di neurologia: contenuti (primo rilascio) e corso giocabile (v0.81.0, vedi «Corso di neurologia giocabile»), Palestra sul cervello (v0.82.0), gioco 3D (v0.83.0).
 - GitHub Pages attivo (ramo `main`, cartella radice): online su `alefiumi.github.io/dextera`.
 
@@ -427,8 +428,7 @@ descrizioni; quelle con fonte Z-Anatomy dicono da quale vaso nasce o dove sbocca
   Dalla fase 5 (v0.86.0) sul server con il titolo scelto (`dextera_profili`) e visibili agli amici nella Flotta.
   Spazi nei riquadri: regola unica in fondo a `style.css` (`.card>.kick+…`), così righe e campi non toccano l'etichetta.
   Nel sistema ogni pianeta ha intorno le lune dei suoi satelliti (colore dello stato, `moons()`); nell'universo ogni corso è un piccolo
-  sistema, gli altri tre corsi «in arrivo». Riquadro dell'universo «Cosa studi?» con la scelta del percorso (`PERCORSI` in `path.js`: solo
-  «Percorso completo» attivo, Fisioterapia, Medicina e MCB «in arrivo», fase 6). Intestazione: livello e titolo su due righe.
+  sistema (dalla fase 6 cinque corsi e la scelta di «Cosa studi?»: vedi «Altri corsi e percorsi»). Intestazione: livello e titolo su due righe.
   Pulsante Indietro (‹, `.pback`) prima delle briciole: sale di un livello. Nel satellite sul telefono restano Indietro e briciole (ferme in
   alto mentre si scorrono i passi); nell'app installata su iPhone non c'è un tasto Indietro del browser.
 - Sincronizzazione in `syncPercorso()` di `account.js`; senza tabelle i dati restano in coda (avviso nel profilo).
@@ -689,6 +689,48 @@ descrizioni; quelle con fonte Z-Anatomy dicono da quale vaso nasce o dove sbocca
   pianeti dei corsi, divise per corso, in «Date degli esami» (chiusa se non ci sono date, aperta con il numero di date se ci sono), con «Togli»:
   sono le stesse del riquadro sotto il pianeta (`P.setExam`, `S.set.date_esame` → `dextera_settings`). Con questo il Profilo ha tutto quello
   che chiede la sezione 7 della specifica.
+
+## Altri corsi e percorsi (fase 6, v0.89.0)
+- Scelte dell'autore (19/11/2026): due corsi nuovi semplici, **Cuore e vasi** e **Apparato respiratorio**; «Cosa studi?» alla prima apertura
+  del Percorso, salvato sul server; il meccanismo dei percorsi più una bozza del **Test d'ingresso UCBM** (struttura di Biologia, Chimica e
+  Fisica «in arrivo» più una parte di anatomia già giocabile); nessuna migrazione dei dati di BodyMania per ora.
+- Corsi nuovi in `content/mappa.json` (v4; scritti una volta da `fase6_genera.py` nelle note delle sessioni, poi si correggono a mano):
+  `cuore-vasi` (modulo `cuore`: pianeti Cuore, Grandi vasi, Vasi del corpo; 9 satelliti) e `respiratorio` (modulo `polmoni`: Polmoni, Vie aeree,
+  Vasi polmonari; 6 satelliti). Tre passi per satellite: `strutture` (presentazione, scelta, tocco sulla figura del modulo, nome), `descrizione`
+  (riconoscere la struttura dal testo, nome nascosto con `nmask`) e `progetto` (caso di `testi/casi.json` del modulo, oppure quiz finale).
+  Si usano solo strutture con una descrizione scritta in `testi/torace.json`. Id delle strutture `c.<slug>` / `p.<slug>` (gli id dei moduli 2D);
+  chiavi di maestria e ripasso: `c.`/`p.` (nome e posizione) e `cd.`/`pd.` (descrizione). Dati per la verifica dalle voci `torace.<slug>`
+  (`content/lezioni.json` → `voci`). `testi.py` controlla che le strutture esistano nel modulo e in `torace.json` e che i casi siano del modulo.
+- `lezione.js` (sezione «cuore e polmoni»): `showTor()` evidenzia la struttura nella vista in cui si vede di più, tocco solo se visibile
+  (`torTap`); caso clinico con la sola ipotesi sul distretto (non ci sono funzioni come per i muscoli). Esame del pianeta, Ripasso del giorno,
+  radar del Profilo (asse «Descrizione») e sfide della Flotta funzionano anche sui corsi nuovi. Niente pulsante 3D né Palestra per zone.
+- Corsi «in arrivo» (`in_arrivo: true` in `mappa.json`, senza passi): non entrano in `corsi()`, sono in `corsiArrivo()`; nell'universo un
+  sistema spento che apre il programma (`arrivoHtml()` in `path.js`). Il Test UCBM ha 3 pianeti (Biologia 9, Chimica 10, Fisica 7 satelliti,
+  20 domande ciascuno nel test) con il testo del programma (`programma`); i contenuti si scriveranno più avanti.
+- **Percorsi**: elenco in `content/index.json` → `percorsi` (id, nome, `file`; senza file = «in arrivo»: Fisioterapia, Medicina, MCB; `bozza`).
+  Ogni file di `content/percorsi/` ha i nodi del gestionale e `corso` (il primo corso da aprire). `content.js` li carica tutti (`app.PERCORSI`,
+  `app.PCAT`, `app.PBASE` = base); `applyStudio()` in `percorso.js` mette in `app.PERCORSO` quello scelto. `content/percorsi/ucbm.json` (bozza):
+  Test UCBM, Cuore e vasi (Cuore e Grandi vasi), Respiratorio, Neurologia (Basi ed Encefalo) e muscolo-scheletrico con il **solo passo Ossa**.
+  Nei percorsi parziali satellite acceso ed esame superato non vanno in `path_progress` (sono gli stessi nodi del percorso completo, dove
+  servono tutti i passi): restano sul telefono in `S.path.loc {'<percorso>:<nodo>': data}` (`fullSat`/`fullPl`, `LOC` in `percorso.js`).
+  Maestria, ripasso e passi fatti sono in comune tra i percorsi.
+- **«Cosa studi?»** (`studioScreen()` in `path.js`): alla prima apertura del Percorso (`!S.studio`) a tutto schermo, percorso (radio) e corsi
+  (caselle; almeno uno), «Inizia» o «Decidi dopo»; poi lo stesso riquadro nell'universo, dove ogni cambio vale subito. `S.studio {percorso, corsi,
+  t, u}` (`setStudio()`; corsi vuoti = tutti). I corsi scelti vengono prima sulla mappa e da loro partono Continua e il Ripasso del giorno
+  (`isMine()`, `dueKeys`); gli altri restano aperti. Colori dei soli: cuore rosso, respiratorio blu, UCBM verde.
+- Sincronizzazione: `syncStudio()` in `account.js` (prima di `syncPercorso`): all'accesso vince la scelta più recente (`S.studio.t` contro
+  `aggiornato_il`), poi si invia quando `S.studio.u`. Senza la tabella la scelta resta sul telefono e il riquadro Account lo dice
+  (`A.studioMissing`, con il nome del file). «Scarica i miei dati» ha `cosa_studi`. `privacy.html`: una riga nuova.
+- SQL: `supabase/migrations/20261125090000_dextera_studio.sql` (da applicare dall'autore; prima si pubblica l'app): tabella `dextera_studio`
+  (user_id, percorso, corsi fino a 20 con id controllati, aggiornato_il), RLS con `(select auth.uid())`, la legge e la scrive solo la persona;
+  il trigger `private.dextera_studio()` toglie i corsi doppi e riporta a oggi una data nel futuro; nessun `update` senza `where`. Provato con
+  PGlite: 27 prove (`studio_rls.mjs` nelle note delle sessioni).
+- Prova: `fase6.mjs` (note delle sessioni, Chrome headless con un finto Supabase, 67 controlli): «Cosa studi?» alla prima apertura, scelta UCBM,
+  universo con 5 corsi, programma del Test UCBM, lezioni del cuore (presentazione, scelta, tocco, nome, tocco sbagliato), descrizione, caso,
+  satellite acceso, prova sui polmoni, esame del pianeta Cuore, neurologia in UCBM, percorso parziale (piede solo sul telefono), Ripasso del
+  giorno solo dei corsi scelti, cambio di percorso e di corsi dall'universo, radar con «Descrizione», invio con e senza il file SQL, offline,
+  niente scorrimento di lato, dati e cache di BodyMania intatti.
+- Testi di cuore, vasi e polmoni, casi e programma UCBM sono scritti dall'AI (da verificare); il Test UCBM è una bozza.
 
 ## Mappa del percorso (`content/mappa.json`)
 Corso → 4 pianeti → 17 satelliti (con `ordine` della specifica) → 6 passi (`ossa`, `reperi`, `muscoli`, `connessioni`, `funzione`,

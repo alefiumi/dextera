@@ -1,0 +1,786 @@
+{
+ "version": 1,
+ "formato": 1,
+ "nota": "Bozza (fase 6) del percorso per il test d'ingresso UCBM, da far rivedere a un docente. Stessa mappa degli altri percorsi: il corso «Test d'ingresso UCBM» (Biologia, Chimica, Fisica) è solo la struttura, in arrivo; si gioca già l'anatomia che il programma chiede: cuore e grandi vasi, apparato respiratorio, basi del sistema nervoso ed encefalo, le ossa dello scheletro (nel muscolo-scheletrico solo il passo Ossa di ogni satellite). I progressi valgono in tutti i percorsi.",
+ "id": "ucbm",
+ "nome": "Test d'ingresso UCBM",
+ "bozza": true,
+ "corso": "cuore-vasi",
+ "mappa": {
+  "file": "mappa.json",
+  "version": 4
+ },
+ "rilascio": {
+  "numero": 1,
+  "pubblicato_il": "2026-11-19",
+  "da": "a mano (fase 6, bozza)"
+ },
+ "nodi": [
+  {
+   "id": "ucbm",
+   "tipo": "corso",
+   "genitore": null,
+   "ordine": 1
+  },
+  {
+   "id": "ucbm-biologia",
+   "tipo": "pianeta",
+   "genitore": "ucbm",
+   "ordine": 1
+  },
+  {
+   "id": "ucbm-bio-chimica",
+   "tipo": "satellite",
+   "genitore": "ucbm-biologia",
+   "ordine": 1,
+   "passi": []
+  },
+  {
+   "id": "ucbm-bio-cellula",
+   "tipo": "satellite",
+   "genitore": "ucbm-biologia",
+   "ordine": 2,
+   "passi": []
+  },
+  {
+   "id": "ucbm-bio-genetica",
+   "tipo": "satellite",
+   "genitore": "ucbm-biologia",
+   "ordine": 3,
+   "passi": []
+  },
+  {
+   "id": "ucbm-bio-divisione",
+   "tipo": "satellite",
+   "genitore": "ucbm-biologia",
+   "ordine": 4,
+   "passi": []
+  },
+  {
+   "id": "ucbm-bio-anatomia",
+   "tipo": "satellite",
+   "genitore": "ucbm-biologia",
+   "ordine": 5,
+   "passi": []
+  },
+  {
+   "id": "ucbm-bio-energia",
+   "tipo": "satellite",
+   "genitore": "ucbm-biologia",
+   "ordine": 6,
+   "passi": []
+  },
+  {
+   "id": "ucbm-bio-biotech",
+   "tipo": "satellite",
+   "genitore": "ucbm-biologia",
+   "ordine": 7,
+   "passi": []
+  },
+  {
+   "id": "ucbm-bio-evoluzione",
+   "tipo": "satellite",
+   "genitore": "ucbm-biologia",
+   "ordine": 8,
+   "passi": []
+  },
+  {
+   "id": "ucbm-bio-ecologia",
+   "tipo": "satellite",
+   "genitore": "ucbm-biologia",
+   "ordine": 9,
+   "passi": []
+  },
+  {
+   "id": "ucbm-chimica",
+   "tipo": "pianeta",
+   "genitore": "ucbm",
+   "ordine": 2
+  },
+  {
+   "id": "ucbm-chi-materia",
+   "tipo": "satellite",
+   "genitore": "ucbm-chimica",
+   "ordine": 10,
+   "passi": []
+  },
+  {
+   "id": "ucbm-chi-atomo",
+   "tipo": "satellite",
+   "genitore": "ucbm-chimica",
+   "ordine": 11,
+   "passi": []
+  },
+  {
+   "id": "ucbm-chi-legame",
+   "tipo": "satellite",
+   "genitore": "ucbm-chimica",
+   "ordine": 12,
+   "passi": []
+  },
+  {
+   "id": "ucbm-chi-stechiometria",
+   "tipo": "satellite",
+   "genitore": "ucbm-chimica",
+   "ordine": 13,
+   "passi": []
+  },
+  {
+   "id": "ucbm-chi-reazioni",
+   "tipo": "satellite",
+   "genitore": "ucbm-chimica",
+   "ordine": 14,
+   "passi": []
+  },
+  {
+   "id": "ucbm-chi-composti",
+   "tipo": "satellite",
+   "genitore": "ucbm-chimica",
+   "ordine": 15,
+   "passi": []
+  },
+  {
+   "id": "ucbm-chi-soluzioni",
+   "tipo": "satellite",
+   "genitore": "ucbm-chimica",
+   "ordine": 16,
+   "passi": []
+  },
+  {
+   "id": "ucbm-chi-acidi",
+   "tipo": "satellite",
+   "genitore": "ucbm-chimica",
+   "ordine": 17,
+   "passi": []
+  },
+  {
+   "id": "ucbm-chi-organica",
+   "tipo": "satellite",
+   "genitore": "ucbm-chimica",
+   "ordine": 18,
+   "passi": []
+  },
+  {
+   "id": "ucbm-chi-applicata",
+   "tipo": "satellite",
+   "genitore": "ucbm-chimica",
+   "ordine": 19,
+   "passi": []
+  },
+  {
+   "id": "ucbm-fisica",
+   "tipo": "pianeta",
+   "genitore": "ucbm",
+   "ordine": 3
+  },
+  {
+   "id": "ucbm-fis-misure",
+   "tipo": "satellite",
+   "genitore": "ucbm-fisica",
+   "ordine": 20,
+   "passi": []
+  },
+  {
+   "id": "ucbm-fis-cinematica",
+   "tipo": "satellite",
+   "genitore": "ucbm-fisica",
+   "ordine": 21,
+   "passi": []
+  },
+  {
+   "id": "ucbm-fis-dinamica",
+   "tipo": "satellite",
+   "genitore": "ucbm-fisica",
+   "ordine": 22,
+   "passi": []
+  },
+  {
+   "id": "ucbm-fis-fluidi",
+   "tipo": "satellite",
+   "genitore": "ucbm-fisica",
+   "ordine": 23,
+   "passi": []
+  },
+  {
+   "id": "ucbm-fis-termo",
+   "tipo": "satellite",
+   "genitore": "ucbm-fisica",
+   "ordine": 24,
+   "passi": []
+  },
+  {
+   "id": "ucbm-fis-elettro",
+   "tipo": "satellite",
+   "genitore": "ucbm-fisica",
+   "ordine": 25,
+   "passi": []
+  },
+  {
+   "id": "ucbm-fis-ottica",
+   "tipo": "satellite",
+   "genitore": "ucbm-fisica",
+   "ordine": 26,
+   "passi": []
+  },
+  {
+   "id": "cuore-vasi",
+   "tipo": "corso",
+   "genitore": null,
+   "ordine": 2
+  },
+  {
+   "id": "cv-cuore",
+   "tipo": "pianeta",
+   "genitore": "cuore-vasi",
+   "ordine": 1,
+   "esame": {
+    "caso": null
+   }
+  },
+  {
+   "id": "cv-camere",
+   "tipo": "satellite",
+   "genitore": "cv-cuore",
+   "ordine": 1,
+   "passi": [
+    "cv-camere.1",
+    "cv-camere.2",
+    "cv-camere.3"
+   ],
+   "caso": "t7"
+  },
+  {
+   "id": "cv-coronarie",
+   "tipo": "satellite",
+   "genitore": "cv-cuore",
+   "ordine": 2,
+   "passi": [
+    "cv-coronarie.1",
+    "cv-coronarie.2",
+    "cv-coronarie.3"
+   ],
+   "caso": "t1"
+  },
+  {
+   "id": "cv-grandi-vasi",
+   "tipo": "pianeta",
+   "genitore": "cuore-vasi",
+   "ordine": 2,
+   "esame": {
+    "caso": null
+   }
+  },
+  {
+   "id": "cv-aorta",
+   "tipo": "satellite",
+   "genitore": "cv-grandi-vasi",
+   "ordine": 3,
+   "passi": [
+    "cv-aorta.1",
+    "cv-aorta.2",
+    "cv-aorta.3"
+   ],
+   "caso": "t6"
+  },
+  {
+   "id": "cv-vene-cave",
+   "tipo": "satellite",
+   "genitore": "cv-grandi-vasi",
+   "ordine": 4,
+   "passi": [
+    "cv-vene-cave.1",
+    "cv-vene-cave.2",
+    "cv-vene-cave.3"
+   ],
+   "caso": null
+  },
+  {
+   "id": "cv-circolo-polmonare",
+   "tipo": "satellite",
+   "genitore": "cv-grandi-vasi",
+   "ordine": 5,
+   "passi": [
+    "cv-circolo-polmonare.1",
+    "cv-circolo-polmonare.2",
+    "cv-circolo-polmonare.3"
+   ],
+   "caso": "t4"
+  },
+  {
+   "id": "respiratorio",
+   "tipo": "corso",
+   "genitore": null,
+   "ordine": 3
+  },
+  {
+   "id": "re-polmoni",
+   "tipo": "pianeta",
+   "genitore": "respiratorio",
+   "ordine": 1,
+   "esame": {
+    "caso": null
+   }
+  },
+  {
+   "id": "re-lobi",
+   "tipo": "satellite",
+   "genitore": "re-polmoni",
+   "ordine": 1,
+   "passi": [
+    "re-lobi.1",
+    "re-lobi.2",
+    "re-lobi.3"
+   ],
+   "caso": "t3"
+  },
+  {
+   "id": "re-vie-aeree",
+   "tipo": "pianeta",
+   "genitore": "respiratorio",
+   "ordine": 2,
+   "esame": {
+    "caso": null
+   }
+  },
+  {
+   "id": "re-bronchi",
+   "tipo": "satellite",
+   "genitore": "re-vie-aeree",
+   "ordine": 2,
+   "passi": [
+    "re-bronchi.1",
+    "re-bronchi.2",
+    "re-bronchi.3"
+   ],
+   "caso": "t2"
+  },
+  {
+   "id": "re-segmentari-dx",
+   "tipo": "satellite",
+   "genitore": "re-vie-aeree",
+   "ordine": 3,
+   "passi": [
+    "re-segmentari-dx.1",
+    "re-segmentari-dx.2",
+    "re-segmentari-dx.3"
+   ],
+   "caso": "t9"
+  },
+  {
+   "id": "re-segmentari-sx",
+   "tipo": "satellite",
+   "genitore": "re-vie-aeree",
+   "ordine": 4,
+   "passi": [
+    "re-segmentari-sx.1",
+    "re-segmentari-sx.2",
+    "re-segmentari-sx.3"
+   ],
+   "caso": null
+  },
+  {
+   "id": "re-vasi",
+   "tipo": "pianeta",
+   "genitore": "respiratorio",
+   "ordine": 3,
+   "esame": {
+    "caso": null
+   }
+  },
+  {
+   "id": "re-arterie",
+   "tipo": "satellite",
+   "genitore": "re-vasi",
+   "ordine": 5,
+   "passi": [
+    "re-arterie.1",
+    "re-arterie.2",
+    "re-arterie.3"
+   ],
+   "caso": null
+  },
+  {
+   "id": "re-vene",
+   "tipo": "satellite",
+   "genitore": "re-vasi",
+   "ordine": 6,
+   "passi": [
+    "re-vene.1",
+    "re-vene.2",
+    "re-vene.3"
+   ],
+   "caso": null
+  },
+  {
+   "id": "neurologia",
+   "tipo": "corso",
+   "genitore": null,
+   "ordine": 4
+  },
+  {
+   "id": "neuro-basi",
+   "tipo": "pianeta",
+   "genitore": "neurologia",
+   "ordine": 1,
+   "esame": {
+    "caso": null
+   }
+  },
+  {
+   "id": "n-neurone",
+   "tipo": "satellite",
+   "genitore": "neuro-basi",
+   "ordine": 1,
+   "passi": [
+    "n-neurone.1",
+    "n-neurone.2",
+    "n-neurone.3",
+    "n-neurone.4",
+    "n-neurone.6"
+   ],
+   "caso": "n1"
+  },
+  {
+   "id": "n-potenziale",
+   "tipo": "satellite",
+   "genitore": "neuro-basi",
+   "ordine": 2,
+   "passi": [
+    "n-potenziale.1",
+    "n-potenziale.2",
+    "n-potenziale.3",
+    "n-potenziale.6"
+   ],
+   "caso": null
+  },
+  {
+   "id": "n-sinapsi",
+   "tipo": "satellite",
+   "genitore": "neuro-basi",
+   "ordine": 3,
+   "passi": [
+    "n-sinapsi.1",
+    "n-sinapsi.2",
+    "n-sinapsi.3",
+    "n-sinapsi.6"
+   ],
+   "caso": null
+  },
+  {
+   "id": "n-riflessi",
+   "tipo": "satellite",
+   "genitore": "neuro-basi",
+   "ordine": 4,
+   "passi": [
+    "n-riflessi.1",
+    "n-riflessi.2",
+    "n-riflessi.3",
+    "n-riflessi.6"
+   ],
+   "caso": null
+  },
+  {
+   "id": "n-sostanze",
+   "tipo": "satellite",
+   "genitore": "neuro-basi",
+   "ordine": 5,
+   "passi": [
+    "n-sostanze.1",
+    "n-sostanze.2",
+    "n-sostanze.3",
+    "n-sostanze.6"
+   ],
+   "caso": null
+  },
+  {
+   "id": "neuro-encefalo",
+   "tipo": "pianeta",
+   "genitore": "neurologia",
+   "ordine": 2,
+   "esame": {
+    "caso": null
+   }
+  },
+  {
+   "id": "n-encefalo",
+   "tipo": "satellite",
+   "genitore": "neuro-encefalo",
+   "ordine": 6,
+   "passi": [
+    "n-encefalo.1",
+    "n-encefalo.2",
+    "n-encefalo.3",
+    "n-encefalo.6"
+   ],
+   "caso": null
+  },
+  {
+   "id": "n-tronco",
+   "tipo": "satellite",
+   "genitore": "neuro-encefalo",
+   "ordine": 7,
+   "passi": [
+    "n-tronco.1",
+    "n-tronco.2",
+    "n-tronco.3",
+    "n-tronco.4",
+    "n-tronco.6"
+   ],
+   "caso": null
+  },
+  {
+   "id": "n-cervelletto",
+   "tipo": "satellite",
+   "genitore": "neuro-encefalo",
+   "ordine": 8,
+   "passi": [
+    "n-cervelletto.1",
+    "n-cervelletto.2",
+    "n-cervelletto.3",
+    "n-cervelletto.4",
+    "n-cervelletto.6"
+   ],
+   "caso": null
+  },
+  {
+   "id": "n-limbico",
+   "tipo": "satellite",
+   "genitore": "neuro-encefalo",
+   "ordine": 9,
+   "passi": [
+    "n-limbico.1",
+    "n-limbico.2",
+    "n-limbico.3",
+    "n-limbico.4",
+    "n-limbico.6"
+   ],
+   "caso": "n12"
+  },
+  {
+   "id": "n-protezione",
+   "tipo": "satellite",
+   "genitore": "neuro-encefalo",
+   "ordine": 10,
+   "passi": [
+    "n-protezione.1",
+    "n-protezione.2",
+    "n-protezione.3",
+    "n-protezione.4",
+    "n-protezione.6"
+   ],
+   "caso": "n2"
+  },
+  {
+   "id": "muscolo-scheletrico",
+   "tipo": "corso",
+   "genitore": null,
+   "ordine": 5
+  },
+  {
+   "id": "arto-inferiore",
+   "tipo": "pianeta",
+   "genitore": "muscolo-scheletrico",
+   "ordine": 1,
+   "esame": {
+    "caso": null
+   }
+  },
+  {
+   "id": "piede",
+   "tipo": "satellite",
+   "genitore": "arto-inferiore",
+   "ordine": 1,
+   "passi": [
+    "piede.1"
+   ],
+   "caso": null
+  },
+  {
+   "id": "gamba",
+   "tipo": "satellite",
+   "genitore": "arto-inferiore",
+   "ordine": 2,
+   "passi": [
+    "gamba.1"
+   ],
+   "caso": null
+  },
+  {
+   "id": "ginocchio",
+   "tipo": "satellite",
+   "genitore": "arto-inferiore",
+   "ordine": 3,
+   "passi": [
+    "ginocchio.1"
+   ],
+   "caso": null
+  },
+  {
+   "id": "coscia",
+   "tipo": "satellite",
+   "genitore": "arto-inferiore",
+   "ordine": 4,
+   "passi": [
+    "coscia.1"
+   ],
+   "caso": null
+  },
+  {
+   "id": "anca",
+   "tipo": "satellite",
+   "genitore": "arto-inferiore",
+   "ordine": 5,
+   "passi": [
+    "anca.1"
+   ],
+   "caso": null
+  },
+  {
+   "id": "colonna-tronco",
+   "tipo": "pianeta",
+   "genitore": "muscolo-scheletrico",
+   "ordine": 2,
+   "esame": {
+    "caso": null
+   }
+  },
+  {
+   "id": "schiena",
+   "tipo": "satellite",
+   "genitore": "colonna-tronco",
+   "ordine": 6,
+   "passi": [
+    "schiena.1"
+   ],
+   "caso": null
+  },
+  {
+   "id": "colonna",
+   "tipo": "satellite",
+   "genitore": "colonna-tronco",
+   "ordine": 7,
+   "passi": [
+    "colonna.1"
+   ],
+   "caso": null
+  },
+  {
+   "id": "torace",
+   "tipo": "satellite",
+   "genitore": "colonna-tronco",
+   "ordine": 9,
+   "passi": [
+    "torace.1"
+   ],
+   "caso": null
+  },
+  {
+   "id": "addome",
+   "tipo": "satellite",
+   "genitore": "colonna-tronco",
+   "ordine": 10,
+   "passi": [
+    "addome.1"
+   ],
+   "caso": null
+  },
+  {
+   "id": "arto-superiore",
+   "tipo": "pianeta",
+   "genitore": "muscolo-scheletrico",
+   "ordine": 3,
+   "esame": {
+    "caso": null
+   }
+  },
+  {
+   "id": "spalla",
+   "tipo": "satellite",
+   "genitore": "arto-superiore",
+   "ordine": 8,
+   "passi": [
+    "spalla.1"
+   ],
+   "caso": null
+  },
+  {
+   "id": "braccio",
+   "tipo": "satellite",
+   "genitore": "arto-superiore",
+   "ordine": 11,
+   "passi": [
+    "braccio.1"
+   ],
+   "caso": null
+  },
+  {
+   "id": "avambraccio",
+   "tipo": "satellite",
+   "genitore": "arto-superiore",
+   "ordine": 12,
+   "passi": [
+    "avambraccio.1"
+   ],
+   "caso": null
+  },
+  {
+   "id": "mano",
+   "tipo": "satellite",
+   "genitore": "arto-superiore",
+   "ordine": 13,
+   "passi": [
+    "mano.1"
+   ],
+   "caso": null
+  },
+  {
+   "id": "testa-collo",
+   "tipo": "pianeta",
+   "genitore": "muscolo-scheletrico",
+   "ordine": 4,
+   "esame": {
+    "caso": null
+   }
+  },
+  {
+   "id": "collo",
+   "tipo": "satellite",
+   "genitore": "testa-collo",
+   "ordine": 14,
+   "passi": [
+    "collo.1"
+   ],
+   "caso": null
+  },
+  {
+   "id": "cranio",
+   "tipo": "satellite",
+   "genitore": "testa-collo",
+   "ordine": 15,
+   "passi": [
+    "cranio.1"
+   ],
+   "caso": null
+  },
+  {
+   "id": "faccia",
+   "tipo": "satellite",
+   "genitore": "testa-collo",
+   "ordine": 16,
+   "passi": [
+    "faccia.1"
+   ],
+   "caso": null
+  },
+  {
+   "id": "visceri-testa",
+   "tipo": "satellite",
+   "genitore": "testa-collo",
+   "ordine": 17,
+   "passi": [
+    "visceri-testa.1"
+   ],
+   "caso": null
+  }
+ ]
+}

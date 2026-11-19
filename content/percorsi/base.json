@@ -1,5 +1,5 @@
 {
- "version": 5,
+ "version": 6,
  "formato": 1,
  "nota": "Percorso pubblicato (sezione 8 della specifica): quali nodi di content/mappa.json include, in che ordine consigliato e con quale caso clinico. È nel formato che produrrà il gestionale della fase 3 (una versione di releases con i nodi): fino ad allora si scrive a mano. caso null = il passo 6 è un quiz finale finché il satellite non ha un caso (dal 19/11/2026 tutti i 17 satelliti del corpo hanno un caso, con la risposta tra le strutture del satellite; c22–c28 scritti per i 7 che non ne avevano). Nei pianeti esame.caso è il caso clinico dell'esame del pianeta (id di un caso di content/corpo.json): null = scelto dall'app tra i casi la cui risposta è un muscolo del pianeta, finché l'autore non lo sceglie. Dal rilascio 2 della neurologia contiene anche il corso «neurologia» (i suoi casi sono quelli del modulo neuro di testi/casi.json, in content/lezioni.json → casi_neuro).",
  "id": "base",
@@ -7,7 +7,7 @@
  "corso": "muscolo-scheletrico",
  "mappa": {
   "file": "mappa.json",
-  "version": 2
+  "version": 4
  },
  "rilascio": {
   "numero": 1,
@@ -626,6 +626,252 @@
     "n-autonomo.6"
    ],
    "caso": "n13"
+  },
+  {
+   "id": "cuore-vasi",
+   "tipo": "corso",
+   "genitore": null,
+   "ordine": 3
+  },
+  {
+   "id": "cv-cuore",
+   "tipo": "pianeta",
+   "genitore": "cuore-vasi",
+   "ordine": 1,
+   "esame": {
+    "caso": null
+   }
+  },
+  {
+   "id": "cv-camere",
+   "tipo": "satellite",
+   "genitore": "cv-cuore",
+   "ordine": 1,
+   "passi": [
+    "cv-camere.1",
+    "cv-camere.2",
+    "cv-camere.3"
+   ],
+   "caso": "t7"
+  },
+  {
+   "id": "cv-coronarie",
+   "tipo": "satellite",
+   "genitore": "cv-cuore",
+   "ordine": 2,
+   "passi": [
+    "cv-coronarie.1",
+    "cv-coronarie.2",
+    "cv-coronarie.3"
+   ],
+   "caso": "t1"
+  },
+  {
+   "id": "cv-grandi-vasi",
+   "tipo": "pianeta",
+   "genitore": "cuore-vasi",
+   "ordine": 2,
+   "esame": {
+    "caso": null
+   }
+  },
+  {
+   "id": "cv-aorta",
+   "tipo": "satellite",
+   "genitore": "cv-grandi-vasi",
+   "ordine": 3,
+   "passi": [
+    "cv-aorta.1",
+    "cv-aorta.2",
+    "cv-aorta.3"
+   ],
+   "caso": "t6"
+  },
+  {
+   "id": "cv-vene-cave",
+   "tipo": "satellite",
+   "genitore": "cv-grandi-vasi",
+   "ordine": 4,
+   "passi": [
+    "cv-vene-cave.1",
+    "cv-vene-cave.2",
+    "cv-vene-cave.3"
+   ],
+   "caso": null
+  },
+  {
+   "id": "cv-circolo-polmonare",
+   "tipo": "satellite",
+   "genitore": "cv-grandi-vasi",
+   "ordine": 5,
+   "passi": [
+    "cv-circolo-polmonare.1",
+    "cv-circolo-polmonare.2",
+    "cv-circolo-polmonare.3"
+   ],
+   "caso": "t4"
+  },
+  {
+   "id": "cv-vasi-corpo",
+   "tipo": "pianeta",
+   "genitore": "cuore-vasi",
+   "ordine": 3,
+   "esame": {
+    "caso": null
+   }
+  },
+  {
+   "id": "cv-vasi-testa",
+   "tipo": "satellite",
+   "genitore": "cv-vasi-corpo",
+   "ordine": 6,
+   "passi": [
+    "cv-vasi-testa.1",
+    "cv-vasi-testa.2",
+    "cv-vasi-testa.3"
+   ],
+   "caso": null
+  },
+  {
+   "id": "cv-vasi-arto-sup",
+   "tipo": "satellite",
+   "genitore": "cv-vasi-corpo",
+   "ordine": 7,
+   "passi": [
+    "cv-vasi-arto-sup.1",
+    "cv-vasi-arto-sup.2",
+    "cv-vasi-arto-sup.3"
+   ],
+   "caso": null
+  },
+  {
+   "id": "cv-vasi-tronco",
+   "tipo": "satellite",
+   "genitore": "cv-vasi-corpo",
+   "ordine": 8,
+   "passi": [
+    "cv-vasi-tronco.1",
+    "cv-vasi-tronco.2",
+    "cv-vasi-tronco.3"
+   ],
+   "caso": null
+  },
+  {
+   "id": "cv-vasi-arto-inf",
+   "tipo": "satellite",
+   "genitore": "cv-vasi-corpo",
+   "ordine": 9,
+   "passi": [
+    "cv-vasi-arto-inf.1",
+    "cv-vasi-arto-inf.2",
+    "cv-vasi-arto-inf.3"
+   ],
+   "caso": null
+  },
+  {
+   "id": "respiratorio",
+   "tipo": "corso",
+   "genitore": null,
+   "ordine": 4
+  },
+  {
+   "id": "re-polmoni",
+   "tipo": "pianeta",
+   "genitore": "respiratorio",
+   "ordine": 1,
+   "esame": {
+    "caso": null
+   }
+  },
+  {
+   "id": "re-lobi",
+   "tipo": "satellite",
+   "genitore": "re-polmoni",
+   "ordine": 1,
+   "passi": [
+    "re-lobi.1",
+    "re-lobi.2",
+    "re-lobi.3"
+   ],
+   "caso": "t3"
+  },
+  {
+   "id": "re-vie-aeree",
+   "tipo": "pianeta",
+   "genitore": "respiratorio",
+   "ordine": 2,
+   "esame": {
+    "caso": null
+   }
+  },
+  {
+   "id": "re-bronchi",
+   "tipo": "satellite",
+   "genitore": "re-vie-aeree",
+   "ordine": 2,
+   "passi": [
+    "re-bronchi.1",
+    "re-bronchi.2",
+    "re-bronchi.3"
+   ],
+   "caso": "t2"
+  },
+  {
+   "id": "re-segmentari-dx",
+   "tipo": "satellite",
+   "genitore": "re-vie-aeree",
+   "ordine": 3,
+   "passi": [
+    "re-segmentari-dx.1",
+    "re-segmentari-dx.2",
+    "re-segmentari-dx.3"
+   ],
+   "caso": "t9"
+  },
+  {
+   "id": "re-segmentari-sx",
+   "tipo": "satellite",
+   "genitore": "re-vie-aeree",
+   "ordine": 4,
+   "passi": [
+    "re-segmentari-sx.1",
+    "re-segmentari-sx.2",
+    "re-segmentari-sx.3"
+   ],
+   "caso": null
+  },
+  {
+   "id": "re-vasi",
+   "tipo": "pianeta",
+   "genitore": "respiratorio",
+   "ordine": 3,
+   "esame": {
+    "caso": null
+   }
+  },
+  {
+   "id": "re-arterie",
+   "tipo": "satellite",
+   "genitore": "re-vasi",
+   "ordine": 5,
+   "passi": [
+    "re-arterie.1",
+    "re-arterie.2",
+    "re-arterie.3"
+   ],
+   "caso": null
+  },
+  {
+   "id": "re-vene",
+   "tipo": "satellite",
+   "genitore": "re-vasi",
+   "ordine": 6,
+   "passi": [
+    "re-vene.1",
+    "re-vene.2",
+    "re-vene.3"
+   ],
+   "caso": null
   }
  ]
 }

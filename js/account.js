@@ -6,6 +6,7 @@ import {S,save,head,onSave,queue,resetLocal} from './state.js';
 import {reports,setFlagged,flaggedAge} from './segnala.js';
 import {syncFlotta,missing as fleetMissing,SQL_FILE as FLEET_SQL} from './flotta.js';
 import {NEW_BADGES} from './badges.js';
+import {applyStudio} from './percorso.js';
 import {SUPABASE_URL,SUPABASE_KEY} from './config.js';
 
 export const configured=!!(SUPABASE_URL&&SUPABASE_KEY);
@@ -175,9 +176,10 @@ export async function myData(){
    sb.from('crew_weeks').select('crew_id,settimana,pianeta,contributi').eq('user_id',uid),
    sb.from('crew_challenge_answers').select('challenge_id,giuste,risposto_il').eq('user_id',uid),
    sb.from('dextera_profili').select('copertina,vetrina,titolo,aggiornato_il').eq('user_id',uid)]);
+  const st=await sb.from('dextera_studio').select('percorso,corsi,aggiornato_il').eq('user_id',uid); // fase 6 (senza il file SQL: errore, campo vuoto)
   out.account={email:A.user.email,registrato_il:A.user.created_at,ultimo_accesso:A.user.last_sign_in_at,consenso_privacy:A.user.user_metadata||{},
    profilo:p.data,partite:g.data,maestria:m.data,badge:b.data,amicizie:f.data,percorso:pp.data,impostazioni:ds.data,segnalazioni:er.data,ripasso:rv.data,
-   flotta:{casata:cm.data,giorni:fd.data,contributi_equipaggi:cw.data,risposte_sfide:ca.data},copertina_e_titolo:dp.data};
+   flotta:{casata:cm.data,giorni:fd.data,contributi_equipaggi:cw.data,risposte_sfide:ca.data},copertina_e_titolo:dp.data,cosa_studi:st.data};
  }else if(A.user)out.account={email:A.user.email,nota:'Senza connessione: qui ci sono solo i dati del dispositivo.'};
  return out;
 }
@@ -289,6 +291,9 @@ export async function sync(full){
   // copertina, vetrina e titolo (fase 5): tabella dextera_profili, li vedono gli amici; stessa regola, con il file dei badge
   try{await syncCard(sb,uid,full);A.cardMissing=false;if(/^Copertina/.test(A.warn||''))A.warn='';}catch(e){A.cardMissing=/dextera_profili|schema cache|does not exist|PGRST205|42P01/i.test((e.message||'')+(e.code||''));
    A.warn=A.cardMissing?'Copertina, badge in vetrina e titolo restano su questo telefono (gli amici non li vedono) finché sul server non c\'è il file '+BADGE_SQL+'.':'Copertina e titolo non sincronizzati: riprovo più tardi.';}
+  // «Cosa studi?» (fase 6): tabella dextera_studio; senza il file SQL la scelta resta su questo telefono
+  try{await syncStudio(sb,uid,full);A.studioMissing='';}catch(e){const m=/dextera_studio|schema cache|does not exist|PGRST205|42P01/i.test((e.message||'')+(e.code||''));
+   A.studioMissing=m?'La scelta di «Cosa studi?» resta su questo telefono finché sul server non c\'è il file '+STUDIO_SQL+'.':'';if(!m)A.warn='Scelta dei corsi non sincronizzata: riprovo più tardi.';}
   // percorso, impostazioni e segnalazioni (fase 1): se sul server mancano le tabelle restano in coda qui, senza bloccare il resto
   try{await syncPercorso(sb,uid,full);}catch(e){A.warn=/path_progress|dextera_settings|error_report|schema cache|does not exist|PGRST205|42P01/i.test((e.message||'')+(e.code||''))
    ?'Percorso e segnalazioni restano su questo telefono finché sul server non c\'è il file supabase/migrations/20261121090000_dextera_percorso.sql.':'Percorso non sincronizzato: riprovo più tardi.';}
@@ -323,6 +328,27 @@ async function syncCard(sb,uid,full){
  const {error}=await sb.from('dextera_profili').upsert(row,{onConflict:'user_id'});
  if(error)throw error;
  if((p.ct||0)===ct||!p.ct){delete p.cu;p.ct=ct;try{localStorage.setItem('dextera-v1',JSON.stringify(S));}catch(e){}}
+}
+
+// «Cosa studi?» (fase 6): percorso e corsi scelti in dextera_studio, così valgono su tutti i dispositivi. All'accesso vince la scelta
+// più recente (S.studio.t contro aggiornato_il); poi si invia quando cambia (S.studio.u).
+export const STUDIO_SQL='supabase/migrations/20261125090000_dextera_studio.sql';
+const PID=/^[a-z0-9-]{1,40}$/;
+async function syncStudio(sb,uid,full){
+ const st=S.studio;
+ if(full){
+  const {data,error}=await sb.from('dextera_studio').select('percorso,corsi,aggiornato_il').eq('user_id',uid).maybeSingle();
+  if(error)throw error;
+  if(data&&PID.test(data.percorso||'')&&Date.parse(data.aggiornato_il)>(st?.t||0)){
+   S.studio={percorso:data.percorso,corsi:(data.corsi||[]).filter(x=>PID.test(x)),t:Date.parse(data.aggiornato_il)};applyStudio();
+   try{localStorage.setItem('dextera-v1',JSON.stringify(S));}catch(e){}return;
+  }
+ }
+ if(!st||!st.u)return;
+ const t=st.t||Date.now(),row={user_id:uid,percorso:PID.test(st.percorso||'')?st.percorso:'base',corsi:(st.corsi||[]).filter(x=>PID.test(x)).slice(0,20),aggiornato_il:new Date(t).toISOString()};
+ const {error}=await sb.from('dextera_studio').upsert(row,{onConflict:'user_id'});
+ if(error)throw error;
+ if(S.studio===st){delete st.u;try{localStorage.setItem('dextera-v1',JSON.stringify(S));}catch(e){}}
 }
 
 // Percorso (fase 1): stato dei nodi in path_progress, obiettivo e scudi in dextera_settings, segnalazioni in error_reports,
@@ -407,7 +433,7 @@ export const esc=t=>String(t??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;'
 const hm=d=>d.toLocaleTimeString('it',{hour:'2-digit',minute:'2-digit'});
 export function accountHtml(){
  if(!configured)return '';
- const note=(A.err?`<p class="err">${esc(A.err)}</p>`:'')+(A.msg?`<p class="okm">${esc(A.msg)}</p>`:'')+(A.warn?`<p class="note">${esc(A.warn)}</p>`:'');
+ const note=(A.err?`<p class="err">${esc(A.err)}</p>`:'')+(A.msg?`<p class="okm">${esc(A.msg)}</p>`:'')+(A.warn?`<p class="note">${esc(A.warn)}</p>`:'')+(A.studioMissing&&A.studioMissing!==A.warn?`<p class="note">${esc(A.studioMissing)}</p>`:'');
  const last=lastAccount();
  if(A.user){
   const pend=queue.all().length,dirty=last&&last.dirty;

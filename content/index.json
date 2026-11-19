@@ -1,5 +1,5 @@
 {
- "version": 25,
+ "version": 27,
  "modules": [
   "corpo",
   "cervello",
@@ -12,6 +12,32 @@
   "mappa.json",
   "lezioni.json",
   "regole.json",
-  "percorsi/base.json"
+  "percorsi/base.json",
+  "percorsi/ucbm.json"
+ ],
+ "percorsi": [
+  {
+   "id": "base",
+   "nome": "Percorso completo",
+   "file": "percorsi/base.json"
+  },
+  {
+   "id": "ucbm",
+   "nome": "Test d'ingresso UCBM",
+   "file": "percorsi/ucbm.json",
+   "bozza": true
+  },
+  {
+   "id": "fisioterapia",
+   "nome": "Fisioterapia"
+  },
+  {
+   "id": "medicina",
+   "nome": "Medicina"
+  },
+  {
+   "id": "mcb",
+   "nome": "MCB"
+  }
  ]
 }

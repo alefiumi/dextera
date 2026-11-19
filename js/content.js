@@ -13,6 +13,10 @@ export async function loadContent(){
  const has=f=>(idx.files||[]).includes(f),opt=f=>has(f)?get(f).catch(e=>{console.warn(e);return null;}):null;
  const [mods,nc,mappa,lez,regole,perc]=await Promise.all([Promise.all(idx.modules.map(id=>get(id+'.json'))),get(idx.nc),
   opt('mappa.json'),opt('lezioni.json'),opt('regole.json'),opt('percorsi/base.json')]);
+ // altri percorsi (fase 6): catalogo in index.json → percorsi [{id, nome, file?, bozza?}]; senza file = «in arrivo»
+ const CAT=(idx.percorsi||[{id:'base',nome:'Percorso completo',file:'percorsi/base.json'}]).filter(x=>x&&x.id);
+ const PERCORSI={};if(perc)PERCORSI[perc.id||'base']=perc;
+ await Promise.all(CAT.filter(x=>x.file&&x.file!=='percorsi/base.json').map(async x=>{const d=await opt(x.file);if(d)PERCORSI[x.id]=d;}));
  const MODS={};
  for(const m of mods){
   const GR=m.groups.map(g=>({...g,group:true}));
@@ -25,5 +29,5 @@ export async function loadContent(){
   const byId=Object.fromEntries([...B,...GR].map(x=>[x.id,x]));
   MODS[m.id]={id:m.id,label:m.label,B,GR,byId,M:m.muscles||[],CASES:m.cases,W:m.W,H:m.H,views:m.views||['a'],vnames:m.vnames||{},zviews:m.zviews||{},grpn:m.grpn,expl:m.expl,thin:m.thin||[]};
  }
- return {version:idx.version,MODS,NC:nc.items,MAPPA:mappa,LEZ:lez,REGOLE:regole,PERCORSO:perc};
+ return {version:idx.version,MODS,NC:nc.items,MAPPA:mappa,LEZ:lez,REGOLE:regole,PERCORSO:perc,PERCORSI,PCAT:CAT};
 }

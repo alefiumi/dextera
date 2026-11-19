@@ -23,11 +23,36 @@ export const today=()=>ymd(new Date());
    scheda Percorso (setCorso), il corso del percorso pubblicato (muscolo-scheletrico) se non se ne è scelto un altro.
    Calendario dei ripassi, passi fatti e stati valgono per tutti i corsi; Palestra per zone solo per il corso del corpo (corpoCorso). */
 const pnode=id=>app.PERCORSO.nodi.find(n=>n.id===id);
-export const corsi=()=>app.MAPPA.corsi.filter(c=>pnode(c.id)).sort((a,b)=>(pnode(a.id).ordine??99)-(pnode(b.id).ordine??99));
-export const corpoCorso=()=>app.MAPPA.corsi.find(c=>c.id===app.PERCORSO.corso)||app.MAPPA.corsi[0];
+const byOrd=(a,b)=>(pnode(a.id).ordine??99)-(pnode(b.id).ordine??99);
+// corsi giocabili del percorso aperto; i corsi «in arrivo» (fase 6: test UCBM) sono solo la struttura e non entrano nei conti
+export const corsi=()=>app.MAPPA.corsi.filter(c=>pnode(c.id)&&!c.in_arrivo).sort(byOrd);
+export const corsiArrivo=()=>app.MAPPA.corsi.filter(c=>pnode(c.id)&&c.in_arrivo).sort(byOrd);
+export const corpoCorso=()=>app.MAPPA.corsi.find(c=>c.modulo==='corpo')||app.MAPPA.corsi[0];
 let CUR='';
 export const setCorso=id=>{CUR=id||'';};
-export const corso=()=>app.MAPPA.corsi.find(c=>c.id===CUR&&pnode(c.id))||corpoCorso();
+// corso aperto: quello scelto nella scheda Percorso, altrimenti il primo dei corsi scelti in «Cosa studi?», poi quello del percorso
+export const corso=()=>{const L=corsi();return L.find(c=>c.id===CUR)||L.find(c=>isMine(c)&&S.studio?.corsi?.length)||L.find(c=>c.id===app.PERCORSO.corso)||L[0]||corpoCorso();};
+
+/* ---------- «Cosa studi?» e percorsi (fase 6) ----------
+   S.studio {percorso, corsi: [id], t, u} (u = da inviare alla tabella dextera_studio). Il percorso scelto (un file di content/percorsi/,
+   elencato in index.json → percorsi) diventa app.PERCORSO; i corsi scelti vengono prima nell'universo e da loro partono Continua,
+   stella guida e Ripasso del giorno. corsi vuoto = tutti. I progressi valgono in tutti i percorsi (stessi nodi e chiavi). */
+export const percorsoId=()=>app.PERCORSO?.id||'base';
+export function applyStudio(){const id=S.studio?.percorso;app.PERCORSO=(id&&app.PERCORSI?.[id])||app.PBASE||app.PERCORSO;}
+export function setStudio(percorso,ids){S.studio={percorso:percorso||'base',corsi:[...new Set(ids||[])],t:Date.now(),u:1};applyStudio();}
+export const isMine=c=>!S.studio?.corsi?.length||S.studio.corsi.includes(c.id);
+// percorsi del catalogo: {id, nome, file, bozza, ok (il file c'è sul telefono)}; senza file = «in arrivo»
+export const percorsiCat=()=>(app.PCAT||[{id:'base',nome:'Percorso completo'}]).map(x=>({...x,ok:!!app.PERCORSI?.[x.id]}));
+// corsi giocabili di un percorso qualsiasi (per la scelta, prima di aprirlo)
+export function corsiDi(pid){const P0=app.PERCORSI?.[pid];if(!P0)return [];const ns=new Map(P0.nodi.map(n=>[n.id,n]));
+ return app.MAPPA.corsi.filter(c=>ns.has(c.id)&&!c.in_arrivo).sort((a,b)=>(ns.get(a.id).ordine??99)-(ns.get(b.id).ordine??99));}
+// un satellite è «intero» nel percorso se ne ha tutti i passi. I percorsi parziali (la bozza UCBM: solo il passo Ossa del corpo) non
+// scrivono in path_progress il satellite acceso né l'esame del pianeta, che varrebbero anche nel percorso completo: li tengono sul
+// telefono in S.path.loc {'<percorso>:<nodo>': data}
+const fullSat=sat=>{const inc=pnode(sat.id)?.passi;return !inc||sat.passi.filter(p=>!p.salta).every(p=>inc.includes(p.id));};
+const fullPl=pl=>pl.satelliti.every(s=>pnode(s.id)&&fullSat(s));
+const LOC=()=>P().loc||(P().loc={});
+const lkey=id=>percorsoId()+':'+id;
 // pianeti e satelliti del percorso, nell'ordine consigliato (ordine del percorso pubblicato)
 export function pianeti(c=corso()){
  const ord=id=>pnode(id)?.ordine??99;
@@ -43,12 +68,19 @@ export const planetOf=sat=>allPl().find(p=>p.satelliti.includes(sat));
 export const corsoOf=x=>app.MAPPA.corsi.find(c=>c.pianeti.includes(x)||c.pianeti.some(p=>p.satelliti.includes(x)))||corpoCorso();
 // corso di neurologia: strutture 'n.<voce>' con i testi in app.LEZ.neuro e i casi in app.LEZ.casi_neuro
 export const isNeuro=sid=>String(sid).startsWith('n.');
+// corsi di cuore e vasi e del respiratorio (fase 6): strutture dei moduli 2D 'c.<slug>' (cuore) e 'p.<slug>' (polmoni), testi in
+// testi/torace.json (nome e descrizione, nel modulo: n, l, f)
+export const isTor=sid=>/^[cp]\./.test(String(sid));
+export const torMod=sid=>String(sid)[0]==='c'?'cuore':'polmoni';
+export const tor=sid=>app.MODS[torMod(sid)]?.byId[sid]||null;
 export const neuro=sid=>app.LEZ.neuro?.[sid]||null;
-const casesOf=c=>c.modulo==='corpo'?corpo().CASES:c.modulo==='cervello'?(app.LEZ.casi_neuro||[]):[];
+const TC={};
+const casesOf=c=>c.modulo==='corpo'?corpo().CASES:c.modulo==='cervello'?(app.LEZ.casi_neuro||[]):
+ app.MODS[c.modulo]?(TC[c.modulo]||(TC[c.modulo]=(app.MODS[c.modulo].CASES||[]).map(x=>({...x,src:c.modulo})))):[];
 const caseIn=(c,id)=>casesOf(c).find(x=>x.id===id)||null;
 export const caseAns=c=>c?.mid||c?.bid||null;
 // strutture del percorso che sono la risposta del caso: il muscolo, oppure le ossa del gruppo (bid: 'rotula' → o.patella, 'carpo' → le 8 ossa)
-const caseIds=c=>c?.mid?[c.mid]:c?.bid?(corpo().byId[c.bid]?.m||[c.bid]):caseAns(c)?[caseAns(c)]:[];
+const caseIds=c=>{if(c?.mid)return [c.mid];if(!c?.bid)return [];const M=app.MODS[c.src&&c.src!=='neuro'?c.src:'corpo'];return M?.byId[c.bid]?.m||[c.bid];};
 // strutture del cervello 2D di una voce di neurologia (id b.* o gruppi g:<gruppo>, che valgono per tutti i loro membri)
 // voci di neurologia da toccare sul modello 3D (con una parte del modello, ref) dei satelliti dati, o di tutto il corso:
 // le manda l'app all'atlante con il gioco 3D «Neurologia» (la maestria torna sulla chiave n.<voce>, come il tocco nel 2D)
@@ -92,6 +124,7 @@ export const rep=id=>app.LEZ.reperi[id];
 const NK={dove:'nd.',fn:'nf.',lesione:'nl.',vie:'nc.'};
 export function key(sid,asp){
  if(isNeuro(sid))return NK[asp]?NK[asp]+sid.slice(2):sid;
+ if(isTor(sid))return asp==='desc'?sid[0]+'d.'+sid.slice(2):sid; // 'c.x' nome e posizione, 'cd.x' riconosciuta dalla descrizione
  if(asp==='oi')return 'oi.'+sid;if(asp==='fn')return 'fn.'+sid;
  return sid.startsWith('o.')||sid.startsWith('r.')?sid:'m.'+sid;
 }
@@ -101,9 +134,10 @@ export const CAMPI={ossa:['nome','latino','descrizione'],reperi:['nome','latino'
  connessioni:['origine','inserzione'],funzione:['azione','nome']};
 export const NCAMPI={strutture:['nome','dove'],dove:['dove','nome'],funzione:['funzione','nome'],lesione:['lesione','nome'],connessioni:['connessioni','nome']};
 // campo del testo di neurologia per tipo di passo (n, d, f, le, c in content/lezioni.json)
+export const TCAMPI={strutture:['nome','descrizione'],descrizione:['descrizione','nome']};
 export const NCAMPO={strutture:'n',dove:'d',funzione:'f',lesione:'le',connessioni:'c'};
 export const voce=sid=>app.LEZ.voci[sid]||null;
-export const dataIds=(sid,tipo)=>{const v=voce(sid);return v?((isNeuro(sid)?NCAMPI:CAMPI)[tipo]||[]).map(c=>v+'.'+c):[];};
+export const dataIds=(sid,tipo)=>{const v=voce(sid);return v?((isNeuro(sid)?NCAMPI:isTor(sid)?TCAMPI:CAMPI)[tipo]||[]).map(c=>v+'.'+c):[];};
 const stato=d=>app.LEZ.stati[d]||['da verificare'];
 // «Verificato il …» solo se tutti i dati della domanda sono verificati o corretti da un docente; altrimenti «da verificare»
 export function verifica(ids){
@@ -123,6 +157,7 @@ export function usable(ps){
  if(!Array.isArray(ps.strutture))return [];
  return ps.strutture.filter(sid=>{
   if(isNeuro(sid)){const n=neuro(sid),f=NCAMPO[ps.tipo];return !!(n&&f&&n[f]);}
+  if(isTor(sid)){const t=tor(sid);return !!(t&&(ps.tipo!=='descrizione'||t.f));}
   if(ps.tipo==='ossa')return !!bone(sid);
   if(ps.tipo==='reperi')return !!rep(sid);
   const m=muscle(sid);if(!m)return false;
@@ -180,7 +215,8 @@ export function checkProgress(){
    if(ps.tipo==='progetto')continue;
    if(!dones.has(node(ps.id)?.stato)&&stepDone(ps)){setNode(ps.id,{stato:'fatto',fatto_il:now});gain(X.passo_fatto,true,[planetOf(sat)?.id]);out.push({t:'passo',sat,ps,xp:X.passo_fatto});}
   }
-  if(node(sat.id)?.stato!=='acceso'&&passi(sat).every(stepDone)){setNode(sat.id,{stato:'acceso',fatto_il:now});gain(X.satellite_acceso,true,[planetOf(sat)?.id]);out.push({t:'satellite',sat,xp:X.satellite_acceso});}
+  if(!fullSat(sat)){if(!LOC()[lkey(sat.id)]&&node(sat.id)?.stato!=='acceso'&&passi(sat).every(stepDone)){LOC()[lkey(sat.id)]=now;gain(X.satellite_acceso,true,[planetOf(sat)?.id]);out.push({t:'satellite',sat,xp:X.satellite_acceso});}}
+  else if(node(sat.id)?.stato!=='acceso'&&passi(sat).every(stepDone)){setNode(sat.id,{stato:'acceso',fatto_il:now});gain(X.satellite_acceso,true,[planetOf(sat)?.id]);out.push({t:'satellite',sat,xp:X.satellite_acceso});}
   else if(!node(sat.id)&&passi(sat).some(stepDone))setNode(sat.id,{stato:'iniziato'});
  }
  return out;
@@ -288,7 +324,7 @@ onBump((id,d)=>{if(d)reviewAnswer(id,d>0,true);});
 // chiavi scadute (oggi o prima) e usabili, le più in ritardo prima, a parità quelle con maestria più bassa
 function dueKeys(excl){
  const t=tdn(),out=[];
- for(const [k,r] of Object.entries(RV())){if(excl.has(k)||dueDay(r)>t)continue;const e=revEntry(k);if(!e||!usable({...e.ps,strutture:[e.sid]}).length)continue;out.push(k);}
+ for(const [k,r] of Object.entries(RV())){if(excl.has(k)||dueDay(r)>t)continue;const e=revEntry(k);if(!e||!isMine(corsoOf(e.sat))||!usable({...e.ps,strutture:[e.sid]}).length)continue;out.push(k);}
  return out.sort((a,b)=>dueDay(RV()[a])-dueDay(RV()[b])||mastery(a)-mastery(b));
 }
 // ripassi di oggi: scelti una volta al giorno (al massimo 10); quelli rimandati non contano come scaduti per la luce
@@ -327,7 +363,8 @@ export const daysTo=d=>dayNum(d)-tdn();
 const EX=()=>P().esami||(P().esami={});
 export const examMissing=pl=>satelliti(pl).filter(s=>!lit(s)).length;
 export const examOpen=pl=>satelliti(pl).length>0&&examMissing(pl)===0;
-export const examPassed=pl=>node(pl.id)?.stato==='acceso';
+export const examPassed=pl=>fullPl(pl)?node(pl.id)?.stato==='acceso':!!LOC()[lkey(pl.id)];
+export const examDate=pl=>fullPl(pl)?node(pl.id)?.fatto_il:LOC()[lkey(pl.id)];
 export const examLast=pl=>EX()[pl.id]||null;
 // «Esperto dell'arto inferiore», «Esperto della testa e collo», «Esperto del …»; un titolo scritto nella mappa (pl.titolo) vince
 export function expertTitle(pl){
@@ -364,7 +401,7 @@ export function examDone(pl,ok){const o=EX()[pl.id];if(o)o.best=Math.max(o.best|
 // superato: titolo e XP solo la prima volta (ritorna true se è la prima)
 export function examPass(pl,stelle){
  const first=!examPassed(pl);
- setNode(pl.id,{stato:'acceso',stelle,fatto_il:new Date().toISOString()});
+ if(fullPl(pl))setNode(pl.id,{stato:'acceso',stelle,fatto_il:new Date().toISOString()});else if(first)LOC()[lkey(pl.id)]=new Date().toISOString();
  if(first)gain(R().esame.xp,true,[pl.id]);
  return first;
 }
@@ -377,7 +414,7 @@ export function weakSats(pl,res){
 
 /* ---------- Palestra per zone (fase 2, terzo rilascio): una zona della figura è un satellite ----------
    Corso delle zone: quello della figura aperta (corpo → muscolo-scheletrico, cervello → neurologia); negli altri moduli niente zone. */
-export const zoneCorso=()=>{const m=app.MOD?.id;return m==='corpo'?corpoCorso():corsi().find(c=>c.modulo===m)||null;};
+export const zoneCorso=()=>{const m=app.MOD?.id;return m==='corpo'?corpoCorso():m==='cervello'?corsi().find(c=>c.modulo===m)||null:null;}; // cuore e polmoni: niente zone
 // nel corpo le strutture della figura sono gli id del passo; in neurologia le voci del passo «strutture» con le loro parti del cervello 2D
 const zoneIds=(ps)=>ps.strutture.flatMap(x=>isNeuro(x)?nfig(x):[x]);
 const zstep=c=>c&&c.modulo==='cervello'?'strutture':'ossa';

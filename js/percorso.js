@@ -37,6 +37,8 @@ export function satelliti(p,c){
  return (p?p.satelliti:pianeti(c).flatMap(x=>x.satelliti)).filter(s=>pnode(s.id)).slice().sort((a,b)=>ord(a.id)-ord(b.id));
 }
 const allPl=()=>corsi().flatMap(c=>pianeti(c));
+// colore del pianeta: la sua posizione tra tutti i pianeti di tutti i corsi, così ogni pianeta ha il suo colore in ogni vista
+export const planetIdx=pl=>Math.max(0,allPl().indexOf(pl));
 export const satById=id=>allPl().flatMap(p=>p.satelliti).find(s=>s.id===id);
 export const planetOf=sat=>allPl().find(p=>p.satelliti.includes(sat));
 export const corsoOf=x=>app.MAPPA.corsi.find(c=>c.pianeti.includes(x)||c.pianeti.some(p=>p.satelliti.includes(x)))||corpoCorso();

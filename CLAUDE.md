@@ -497,6 +497,8 @@ descrizioni; quelle con fonte Z-Anatomy dicono da quale vaso nasce o dove sbocca
   quando si avvicina il ripasso (`planetFresh()`: ogni struttura piena nella prima metà del suo intervallo, poi giù fino alla scadenza),
   mai sotto `min_esperto`; «Da ripassare» con l'orologio se un suo satellite lo è o la freschezza scende sotto 1 − `luce_min`. Lo stato è
   scritto anche a parole (etichette, `aria-label`, riga `.glow` nel riquadro del pianeta, Elenco). Pianeti dell'universo, del sistema e del pianeta aperto.
+  Colore: ogni pianeta ha il suo, diverso da quelli di tutti i corsi (`PC` in `path.js`, 10 colori; indice `P.planetIdx(pl)` = posizione
+  tra tutti i pianeti dei corsi, v0.84.1): prima dipendeva dalla posizione nel corso e i due corsi avevano gli stessi 4 colori.
 - Logo della schermata di avvio (`js/logo.js`, chiamato da `wireGate()`): ogni corso iniziato è un satellite sull'orbita del logo nel suo
   colore (`COLORI`: il primo è il giallo di sempre e c'è anche prima di cominciare); un corso completato (tutti i pianeti con l'esame
   superato) ha un anello. Stato in `S.logo` [{id, st}], calcolato da `logoTick()` in `percorso.js` prima di ogni salvataggio per tutti

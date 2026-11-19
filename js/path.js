@@ -57,7 +57,9 @@ function stars(w,h,n,seed=7){let x=seed,o='';const r=()=>(x=(x*16807)%2147483647
  for(let i=0;i<n;i++)o+=`<circle cx="${(r()*w*3-w).toFixed(1)}" cy="${(r()*h*1.6-h*.3).toFixed(1)}" r="${(r()*1.1+.3).toFixed(2)}" opacity="${(r()*.6+.25).toFixed(2)}"/>`;
  return `<g class="stars" aria-hidden="true">${o}</g>`;}
 // sfumature dei corpi celesti (luce dall'alto a sinistra) e alone
-const PC=[['#93c5fd','#2563eb'],['#f9a8d4','#db2777'],['#6ee7b7','#059669'],['#fdba74','#ea580c']];
+// un colore per pianeta (P.planetIdx: posizione tra tutti i pianeti di tutti i corsi); niente oro (satelliti accesi) né grigio (da iniziare)
+const PC=[['#93c5fd','#2563eb'],['#f9a8d4','#db2777'],['#6ee7b7','#059669'],['#fdba74','#ea580c'],
+ ['#c4b5fd','#7c3aed'],['#67e8f9','#0891b2'],['#fca5a5','#dc2626'],['#bef264','#65a30d'],['#a5b4fc','#4338ca'],['#5eead4','#0d9488']];
 const DEFS=`<defs><radialGradient id="gsun" cx=".38" cy=".35" r=".7"><stop offset="0" stop-color="#fff3c4"/><stop offset=".55" stop-color="#f6b93b"/><stop offset="1" stop-color="#e07b12"/></radialGradient>
  <radialGradient id="ghalo"><stop offset=".55" stop-color="#f6b93b" stop-opacity=".35"/><stop offset="1" stop-color="#f6b93b" stop-opacity="0"/></radialGradient>
  <radialGradient id="glit" cx=".38" cy=".35" r=".7"><stop offset="0" stop-color="#fff3c4"/><stop offset="1" stop-color="#f0b429"/></radialGradient>
@@ -66,10 +68,10 @@ const DEFS=`<defs><radialGradient id="gsun" cx=".38" cy=".35" r=".7"><stop offse
 const svgOpen=(h,label)=>`<svg class="map" viewBox="0 0 360 ${h}" role="group" aria-label="${esc(label)}">${DEFS}${stars(360,h,260)}`;
 // pianeta con la sua luce (planetGlow in percorso.js): da iniziare grigio con un velo scuro e senza alone; poi l'alone cresce e
 // il velo si toglie man mano che si avanza; dopo l'esame cala piano piano quando si avvicina il ripasso; orologio se da ripassare
-function planetBody(pl,x,y,r,i){
- const g=P.planetGlow(pl),v=g.v,f=n=>n.toFixed(2);
- const halo=v>0?`<circle cx="${x}" cy="${y}" r="${f(r*(1.35+.75*v))}" fill="url(#gh${i%4})" opacity="${f(.25+.75*v)}"/>`:'';
- const body=`<circle cx="${x}" cy="${y}" r="${r}" fill="${g.st==='nuovo'?'url(#goff)':`url(#gp${i%4})`}"${g.st==='nuovo'?' stroke="#7d86ad" stroke-width="1"':''}/>`;
+function planetBody(pl,x,y,r){
+ const g=P.planetGlow(pl),v=g.v,f=n=>n.toFixed(2),i=P.planetIdx(pl)%PC.length;
+ const halo=v>0?`<circle cx="${x}" cy="${y}" r="${f(r*(1.35+.75*v))}" fill="url(#gh${i})" opacity="${f(.25+.75*v)}"/>`:'';
+ const body=`<circle cx="${x}" cy="${y}" r="${r}" fill="${g.st==='nuovo'?'url(#goff)':`url(#gp${i})`}"${g.st==='nuovo'?' stroke="#7d86ad" stroke-width="1"':''}/>`;
  const veil=g.st==='nuovo'?.35:.6*(1-v),vl=veil>.01?`<circle cx="${x}" cy="${y}" r="${r}" fill="#05071a" opacity="${f(veil)}"/>`:'';
  const ring=g.st==='esperto'&&v>.9?`<circle cx="${x}" cy="${y}" r="${f(r+3)}" fill="none" stroke="#fde68a" stroke-opacity=".7" stroke-width="1.2"/>`:'';
  const cr=Math.max(5,r*.32),cx=f(x+r*.72),cy=f(y-r*.72);
@@ -170,7 +172,7 @@ function universeSvg(){
  const altri=[['Cuore e vasi','#f87171'],['Respiratorio','#60a5fa']].slice(0,Math.max(0,4-CS.length)).map(([t,c],i)=>[t,c,...POS[CS.length+i]]);
  const sys=(c,[X,Y])=>{const pl=P.pianeti(c),ss=P.satelliti(null,c),lit=ss.filter(s=>P.lit(s)).length;
   return `<a href="#" data-p="corso" data-id="${esc(c.id)}" role="button" aria-label="${esc(c.nome)}: ${pl.length} pianeti, ${ss.length} satelliti, ${lit} accesi${c===C?', aperto':''}"${c===C?' aria-current="true"':''}>
-  <circle cx="${X}" cy="${Y}" r="66" class="hit"/>${pl.map((p,i)=>{const r=34+i*10,a=(-110+i*95)*Math.PI/180,x=X+r*Math.cos(a),y=Y+r*Math.sin(a);return `<circle cx="${X}" cy="${Y}" r="${r}" class="orbit"/>${planetBody(p,+x.toFixed(1),+y.toFixed(1),6,i)}`;}).join('')}
+  <circle cx="${X}" cy="${Y}" r="66" class="hit"/>${pl.map((p,i)=>{const r=34+i*10,a=(-110+i*95)*Math.PI/180,x=X+r*Math.cos(a),y=Y+r*Math.sin(a);return `<circle cx="${X}" cy="${Y}" r="${r}" class="orbit"/>${planetBody(p,+x.toFixed(1),+y.toFixed(1),6)}`;}).join('')}
   ${sun(X,Y,20)}${svgText(X,Y+82,c.nome,'lab',20)}<text x="${X}" y="${Y+82+14*lines(c.nome,20).length}" text-anchor="middle" class="wd">${pl.length} pianeti · ${ss.length} satelliti</text></a>`;};
  return `${svgOpen(390,'Universo dei corsi')}<g class="enter">
   ${CS.slice(0,4).map((c,i)=>sys(c,POS[i])).join('')}
@@ -186,7 +188,7 @@ function systemSvg(g){
   const gl=P.planetGlow(p),wd=`${glowTxt(gl)} · ${lit}/${ss.length} accesi${rp?` · ${rp} da ripassare`:''}`;
   const ty=up?y-46-14*nl:y+48,wy=up?y-44:y+48+14*nl;
   return `<a href="#" data-p="planet" data-id="${esc(p.id)}" role="button" aria-label="${esc(p.nome)}: ${glowTxt(gl)}, ${ss.length} satelliti, ${lit} accesi${orb>lit?`, ${orb-lit} in orbita`:''}${p===gp?', consigliato':''}">
-   <circle cx="${x}" cy="${y}" r="38" class="hit"/>${planetBody(p,x,y,16,i)}${moons(x,y,ss)}${p===gp?`<text x="${x+10}" y="${y-8}" class="star" aria-hidden="true">★</text>`:''}
+   <circle cx="${x}" cy="${y}" r="38" class="hit"/>${planetBody(p,x,y,16)}${moons(x,y,ss)}${p===gp?`<text x="${x+10}" y="${y-8}" class="star" aria-hidden="true">★</text>`:''}
    ${svgText(x,ty,p.nome,'lab',14)}<text x="${x}" y="${wy}" text-anchor="middle" class="wd">${wd}</text></a>`;}).join('');
  return `${svgOpen(440,'Sistema: '+P.corso().nome)}<g class="enter">${orbits}${sun(cx,cy,22)}${bodies}</g><text x="12" y="432" class="wd">Tocca un pianeta</text></svg>`;
 }
@@ -202,7 +204,7 @@ function satBody(st,x,y,r,sel){
  return `${ring}<circle cx="${x}" cy="${y}" r="${r-2}" fill="url(#goff)" stroke="#9aa5cf" stroke-width="1.5"/>`;
 }
 function planetSvg(pl,g,selSat){
- const L=P.satelliti(pl),n=L.length,cx=180,cy=190,r=n>4?125:115,pi=P.pianeti().indexOf(pl);
+ const L=P.satelliti(pl),n=L.length,cx=180,cy=190,r=n>4?125:115;
  const pos=L.map((s,i)=>{const a=(-90+i*360/n)*Math.PI/180;return [cx+r*Math.cos(a),cy+r*Math.sin(a)];});
  const links=[];for(let i=0;i<n;i++)for(let j=i+1;j<n;j++)if(shared(L[i],L[j]))links.push(`<line x1="${pos[i][0]}" y1="${pos[i][1]}" x2="${pos[j][0]}" y2="${pos[j][1]}" class="link"/>`);
  const bodies=L.map((s,i)=>{const [x,y]=pos[i],st=P.look(s),done=P.passi(s).filter(P.stepDone).length,tot=P.passi(s).length;
@@ -210,7 +212,7 @@ function planetSvg(pl,g,selSat){
    <circle cx="${x}" cy="${y}" r="28" class="hit"/>${satBody(st,x,y,15,s===selSat)}${s===g.sat?`<text x="${x+14}" y="${y-13}" class="star" aria-hidden="true">★</text>`:''}
    ${svgText(x,y+32,s.nome,'lab',15)}<text x="${x}" y="${y+32+14*lines(s.nome,15).length}" text-anchor="middle" class="wd">${P.STATI[st]} · ${done}/${tot}</text></a>`;}).join('');
  return `${svgOpen(400,'Pianeta '+pl.nome)}<g class="enter"><circle cx="${cx}" cy="${cy}" r="${r}" class="orbit"/>${links.join('')}
-  ${planetBody(pl,cx,cy,34,pi)}${svgText(cx,cy+4-7*(lines(pl.nome,12).length-1),pl.nome,'lab in',12)}${bodies}</g><text x="12" y="390" class="wd">Tocca un satellite</text></svg>`;
+  ${planetBody(pl,cx,cy,34)}${svgText(cx,cy+4-7*(lines(pl.nome,12).length-1),pl.nome,'lab in',12)}${bodies}</g><text x="12" y="390" class="wd">Tocca un satellite</text></svg>`;
 }
 const srow=(s,g)=>{const st=P.look(s),done=P.passi(s).filter(P.stepDone).length,tot=P.passi(s).length;
  return `<li><button class="srow" data-p="sat" data-id="${esc(s.id)}">${symIcon(st)}<span class="sn">${esc(s.nome)}${s===g.sat?' <span class="star" aria-label="consigliato">★</span>':''}</span><small>${P.STATI[st]} · ${done}/${tot} passi</small></button></li>`;};

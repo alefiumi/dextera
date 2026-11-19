@@ -1,5 +1,5 @@
 {
- "version": 3,
+ "version": 4,
  "tipo": "casi",
  "nota": "Casi clinici dei moduli 2D e dei giochi 3D. muscolo / struttura: la risposta giusta sulla figura.",
  "campi": {"indizio_1": "Indizio 1", "indizio_2": "Indizio 2", "indizio_3": "Indizio 3", "risposta": "Risposta giusta", "opzioni": "Opzioni", "spiegazione": "Spiegazione"},
@@ -171,6 +171,62 @@
    "risposta": {"valore": "Tensore della fascia lata", "fonte": "AI", "stato": "da verificare", "verifica": null},
    "opzioni": {"valore": ["Tensore della fascia lata", "Sartorio", "Bicipite femorale", "Vasto laterale"], "fonte": "AI", "stato": "da verificare", "verifica": null},
    "spiegazione": {"valore": "Il tensore della fascia lata (con il grande gluteo) mette in tensione la bandelletta ileotibiale, coinvolta nella sindrome del corridore.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "caso.corpo.c22", "modulo": "corpo", "caso": "c22", "struttura": "o.second-metatarsal-bone", "dati": {
+   "indizio_1": {"valore": "Recluta di 20 anni: dopo una settimana di marce lunghe ha dolore al dorso dell'avampiede che peggiora camminando.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "indizio_2": {"valore": "La radiografia dei primi giorni è normale; dopo tre settimane si vede un callo osseo a metà di un osso lungo del piede.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "indizio_3": {"valore": "È il metatarsale più lungo e più fisso, incastrato tra i cuneiformi: è quello che si rompe più spesso per stress («frattura da marcia»).", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "risposta": {"valore": "Secondo osso metatarsale", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "opzioni": {"valore": ["Secondo osso metatarsale", "Quinto osso metatarsale", "Osso navicolare", "Calcagno"], "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "spiegazione": {"valore": "Frattura da stress (da marcia) del secondo metatarsale: carico ripetuto su un osso lungo e poco mobile. Riposo dal carico e ritorno graduale.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "caso.corpo.c23", "modulo": "corpo", "caso": "c23", "muscolo": "quadratus lumborum", "dati": {
+   "indizio_1": {"valore": "Impiegata di 40 anni: dolore lombare profondo su un lato dopo aver sollevato una cassa girandosi.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "indizio_2": {"valore": "Il dolore aumenta inclinando il tronco dal lato opposto e alzando l'anca dallo stesso lato; si sente un punto dolente tra la dodicesima costa e la cresta iliaca.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "indizio_3": {"valore": "Il muscolo va dalla cresta iliaca alla dodicesima costa e ai processi trasversi di L1–L4.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "risposta": {"valore": "Quadrato lombare", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "opzioni": {"valore": ["Quadrato lombare", "Lunghissimo del dorso", "Ileocostale dei lombi", "Dentato postero-inferiore"], "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "spiegazione": {"valore": "Il quadrato lombare inclina il tronco dal suo lato e solleva l'anca: contratto o sovraccaricato dà dolore lombare laterale. Il punto dolente è tra la dodicesima costa e la cresta iliaca.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "caso.corpo.c24", "modulo": "corpo", "caso": "c24", "muscolo": "multifidus lumborum", "dati": {
+   "indizio_1": {"valore": "Uomo di 45 anni con lombalgia che torna da mesi: si sente «instabile» quando si piega e si rialza.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "indizio_2": {"valore": "L'ecografia mostra un muscolo profondo più piccolo e infiltrato di grasso a livello L4–L5, dal lato del dolore.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "indizio_3": {"valore": "Il muscolo va dal sacro e dai processi mammillari ai processi spinosi di 2–4 vertebre sopra: è il più profondo e voluminoso della regione lombare.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "risposta": {"valore": "Multifido lombare", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "opzioni": {"valore": ["Multifido lombare", "Muscoli rotatori", "Muscoli interspinosi lombari", "Lunghissimo del dorso"], "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "spiegazione": {"valore": "Nella lombalgia cronica il multifido lombare si riduce (atrofia) e si riempie di grasso dal lato del dolore: dà stabilità ai segmenti e va riattivato con esercizi mirati.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "caso.corpo.c25", "modulo": "corpo", "caso": "c25", "muscolo": "diaphragm", "dati": {
+   "indizio_1": {"valore": "Uomo di 60 anni, dopo un intervento al cuore: fiato corto quando si sdraia.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "indizio_2": {"valore": "In inspirazione l'addome rientra invece di gonfiarsi; la radiografia mostra un emidiaframma più alto dell'altro.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "indizio_3": {"valore": "Il muscolo è innervato dal nervo frenico (C3–C5) e il suo tendine centrale è il centro frenico.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "risposta": {"valore": "Diaframma", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "opzioni": {"valore": ["Diaframma", "Muscoli intercostali esterni", "Trasverso del torace", "Grande pettorale"], "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "spiegazione": {"valore": "Paralisi del nervo frenico (es. dopo chirurgia cardiaca): il diaframma di quel lato non scende e sale passivamente in inspirazione, con respiro paradosso e fiato corto da sdraiati.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "caso.corpo.c26", "modulo": "corpo", "caso": "c26", "muscolo": "rectus abdominis", "dati": {
+   "indizio_1": {"valore": "Donna di 34 anni, quattro mesi dopo il secondo parto: «una pancia che non va via» e mal di schiena.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "indizio_2": {"valore": "Alzando la testa da sdraiata, lungo la linea mediana sopra l'ombelico compare una cresta allungata: tra i due ventri ci sono tre dita.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "indizio_3": {"valore": "Il muscolo va dalla cresta e dalla sinfisi pubica al processo xifoideo e alle cartilagini costali V–VII; le due metà sono unite dalla linea alba.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "risposta": {"valore": "Retto dell'addome", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "opzioni": {"valore": ["Retto dell'addome", "Obliquo addominale esterno", "Trasverso dell'addome", "Piramidale"], "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "spiegazione": {"valore": "Diastasi dei retti: i due retti dell'addome si allontanano perché la linea alba si allarga in gravidanza. Si misura in dita sopra e sotto l'ombelico; si riabilita con il lavoro del trasverso e del pavimento pelvico.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "caso.corpo.c27", "modulo": "corpo", "caso": "c27", "struttura": "o.mandible", "dati": {
+   "indizio_1": {"valore": "Ragazzo di 19 anni colpito al mento in una partita di calcio: dolore davanti all'orecchio e i denti «non combaciano più».", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "indizio_2": {"valore": "Apre la bocca a fatica e la deviazione è verso un lato; il labbro inferiore è intorpidito da un lato.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "indizio_3": {"valore": "È l'unico osso del cranio che si muove: il nervo alveolare inferiore lo percorre nel suo canale fino al forame mentale.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "risposta": {"valore": "Mandibola", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "opzioni": {"valore": ["Mandibola", "Mascella", "Osso zigomatico", "Osso temporale"], "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "spiegazione": {"valore": "Frattura della mandibola (spesso del condilo, dopo un colpo al mento): malocclusione, apertura limitata e deviata; l'intorpidimento del labbro indica il nervo alveolare inferiore.", "fonte": "AI", "stato": "da verificare", "verifica": null}
+  }},
+  {"id": "caso.corpo.c28", "modulo": "corpo", "caso": "c28", "muscolo": "lateral rectus", "dati": {
+   "indizio_1": {"valore": "Donna di 55 anni: da qualche giorno vede doppio, con le due immagini una accanto all'altra.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "indizio_2": {"valore": "Il doppio peggiora guardando verso destra; a riposo l'occhio destro è girato verso il naso.", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "indizio_3": {"valore": "Il muscolo che porta l'occhio verso l'esterno è innervato dal nervo abducente (VI).", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "risposta": {"valore": "Retto laterale del bulbo oculare", "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "opzioni": {"valore": ["Retto laterale del bulbo oculare", "Retto mediale", "Obliquo superiore", "Retto superiore"], "fonte": "AI", "stato": "da verificare", "verifica": null},
+   "spiegazione": {"valore": "Paralisi del nervo abducente (VI): il retto laterale non abduce l'occhio, che resta girato verso il naso; la diplopia orizzontale aumenta guardando dal lato colpito.", "fonte": "AI", "stato": "da verificare", "verifica": null}
   }},
   {"id": "caso.lat.l1", "modulo": "lat", "caso": "l1", "struttura": "broca", "dati": {
    "indizio_1": {"valore": "Uomo di 65 anni dopo un ictus: capisce quello che gli si dice ma parla a fatica, con frasi brevi e spezzate.", "fonte": "AI", "stato": "da verificare", "verifica": null},

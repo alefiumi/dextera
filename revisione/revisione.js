@@ -50,7 +50,10 @@ async function carica(){
    else if(tipo==='muscoli'){sats=satOf([slug(v.ref)]);atl=v.ref;}
    else if(tipo==='neuro'){sats=satOf(['n.'+v.id.slice(6)]);atl=v.ref||null;}
    else if(tipo==='casi'&&v.modulo==='neuro'){sats=satOf([v.id]);nome='Caso clinico '+v.caso+' ('+(v.dati.risposta?.valore||'')+')';}
-   else if(tipo==='casi'){sats=v.modulo==='corpo'&&v.muscolo?satOf([slug(v.muscolo)]):[];if(!sats.length&&v.modulo!=='corpo')sez=['cuore','polmoni'].includes(v.modulo)?'tor':'enc';nome='Caso clinico '+v.caso+(v.muscolo?' ('+v.muscolo+')':'');}
+   else if(tipo==='casi'){  // corpo: satelliti con la risposta (muscolo, osso o.<…> o gruppo di ossa del 2D come 'rotula', 'carpo')
+    const st=v.struttura||'';sats=v.modulo!=='corpo'?[]:v.muscolo?satOf([slug(v.muscolo)]):st?satOf([st.startsWith('o.')?st:'g.'+st]):[];
+    if(!sats.length&&v.modulo!=='corpo')sez=['cuore','polmoni'].includes(v.modulo)?'tor':'enc';
+    const ris=v.dati?.risposta?.valore;nome='Caso clinico '+v.caso+(ris?' ('+ris+')':v.muscolo?' ('+v.muscolo+')':'');}
    else if(tipo==='gruppi'){const [,k,r]=v.id.split('.');if(k==='ossa')sats=satOf(['g.'+r]);else if(k==='encefalo'||k==='strato-encefalo')sez='enc';else if(/^(strato-)?(cuore|polmoni)$/.test(k))sez='tor';}
    else if(tipo==='torace'){sez='tor';atl=v.ref;}
    else if(tipo==='encefalo'||tipo==='nervi-cranici'){sez='enc';if(tipo==='encefalo')atl=v.ref;if(tipo==='nervi-cranici')nome='Nervo '+v.numero+' – '+nome;}

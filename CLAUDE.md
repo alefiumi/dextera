@@ -342,7 +342,7 @@ indizi progressivi, si tocca il muscolo; casi di `content/corpo.json` mandati da
 un muscolo visibile da fuori) e **Nervi cranici** (`nervi`: encefalo e solo i 12 nervi cranici accesi, ossa trasparenti; si
 chiede il nome o la funzione da `nervi-cranici.json`, anche questi mandati dall'app; `crNum()` riconosce anche i rami di V,
 VII, VIII). Funzione → struttura resta solo 2D: in 3D più muscoli hanno la stessa azione e il tocco sarebbe ambiguo.
-I casi clinici del corpo sono 21 (12 nuovi, scritti dall'AI: da verificare; in `testi/casi.json`), validi anche nel 2D.
+I casi clinici del corpo sono 28 (12 scritti il 18/11 e 7 il 19/11/2026 dall'AI: da verificare; in `testi/casi.json`), validi anche nel 2D.
 Badge "Esploratore 3D": quattro sfide 3D diverse (testo aggiornato in `20261118150000_badge_3d.sql`, facoltativo).
 
 Requisiti dell'autore per il 3D (16/11/2026):
@@ -359,8 +359,10 @@ inserzione, azione, innervazione), `ossa.json` (159 del modello più denti e car
 `encefalo.json` (strutture di encefalo, midollo e meningi, 3D e 2D, area di Wernicke), `nervi-cranici.json`, `gruppi.json`
 (gruppi di ossa `gruppo.ossa.*`, lobi e aree del cervello `gruppo.encefalo.*`, gruppi dei moduli `gruppo.cuore.*` e `gruppo.polmoni.*`,
 gruppi di muscoli e strati dell'encefalo, del cuore e dei polmoni dell'atlante, descrizioni dei gruppi della fonte `gruppo.fonte.*` usate
-quando una struttura non ha la sua), `casi.json` (45 casi), `torace.json` (cuore, vasi, vie aeree e polmoni: nomi dove TA2 sbaglia e
+quando una struttura non ha la sua), `casi.json` (66 casi: 28 del corpo, 14 di neurologia, gli altri di cervello, cuore e polmoni), `torace.json` (cuore, vasi, vie aeree e polmoni: nomi dove TA2 sbaglia e
 descrizioni; quelle con fonte Z-Anatomy dicono da quale vaso nasce o dove sbocca un vaso secondo la gerarchia della fonte; `solo2d` = solo nel 2D).
+- Casi del corpo: `muscolo` (nome inglese della fonte) oppure `struttura` (osso `o.<slug>` o gruppo di ossa del 2D, es. `rotula`, `carpo`):
+  la pagina di revisione mette nel satellite giusto anche quelli con un osso (prima finivano in «Altri dati»).
 - Formato: `{"version","tipo","nota","campi":{campo: etichetta},"voci":[{"id","ref",…,"dati":{campo:{"valore","fonte","stato","verifica"}}}]}`.
   L'id di un dato è `<id della voce>.<campo>` (es. `muscolo.semitendinosus.origine`). Gli id delle voci usano il nome inglese
   della fonte come gli id di `content/` (`o.femur` → `osso.femur`, muscolo `semitendinosus`, `b.precentral-gyrus` → `encefalo.precentral-gyrus`):
@@ -387,8 +389,10 @@ descrizioni; quelle con fonte Z-Anatomy dicono da quale vaso nasce o dove sbocca
   maestria, prova «Lo so già», quiz finale, caso clinico con ipotesi), `js/path.js` (mappa SVG universo → sistema → pianeta → satellite,
   Elenco, Continua, glossario), `js/segnala.js` (coda `dextera-segnalazioni`, dati segnalati `dextera-segnalati`).
 - Dati: `content/regole.json` (numeri), `content/percorsi/base.json` (formato dei nodi del gestionale; `caso: null` = quiz finale finché
-  il satellite non ha un caso; abbinati il 19/11/2026, v4: gamba c3, ginocchio c8, coscia c6, anca c1, spalla c2, braccio c14, avambraccio c10,
-  mano c9, collo c13, faccia c20; senza un caso adatto piede, schiena, colonna, torace, addome, cranio, visceri della testa), `content/lezioni.json` (generato da `testi.py`: reperi, id delle voci, stati non «da verificare»).
+  il satellite non ha un caso; dal 19/11/2026 (v5) tutti i 17 satelliti del corpo hanno il loro: gamba c3, ginocchio c8, coscia c6, anca c1,
+  spalla c2, braccio c14, avambraccio c10, mano c9, collo c13, faccia c20, e i casi scritti apposta (dall'AI, da verificare) piede c22 (frattura
+  da marcia del secondo metatarsale), schiena c23 (quadrato lombare), colonna c24 (multifido lombare), torace c25 (diaframma, paralisi del
+  frenico), addome c26 (diastasi dei retti), cranio c27 (frattura della mandibola), visceri della testa c28 (retto laterale, paralisi del VI)), `content/lezioni.json` (generato da `testi.py`: reperi, id delle voci, stati non «da verificare»).
 - Nelle lezioni muscoli e reperi non si toccano nel 2D (muscoli: scelta e nome; reperi: tocco sull'osso). Tocco sul 3D: vedi «Corso del corpo sul modello 3D».
 - Casi con un osso per risposta (`bid`, gruppo del 2D: `rotula`, `carpo`): `caseIds()` in `percorso.js` li porta alle ossa del gruppo, così
   valgono per l'esame del pianeta (`esameCasi`) e per il distretto giusto (`caseSat`); prima finivano nel primo satellite del pianeta.

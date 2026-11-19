@@ -72,15 +72,16 @@ function renderLogin(){
  const why=reason==='dirty'?'<p class="tip">⚠️ Hai giocato senza connessione: i progressi sono salvati su questo dispositivo. Accedi per sincronizzarli con il tuo account.</p>'
   :reason==='expired'?'<p class="tip">La sessione è scaduta: accedi di nuovo per sincronizzare i progressi.</p>':'';
  const note=(A.err?`<p class="err">${esc(A.err)}</p>`:'')+(A.msg?`<p class="okm">${esc(A.msg)}</p>`:'');
- const title=v==='signup'?'Crea un account':v==='reset'?'Password dimenticata':'Accedi';
- box().innerHTML=`<div class="gform"><div class="h">${title}</div>${why}${note}
+ const title=v==='signup'?'Crea un account':v==='reset'?'Password dimenticata':'Entra nel tuo account';
+ const tabs=v==='reset'?'':`<div class="seg3 gtabs" role="group" aria-label="Accedi o registrati"><button type="button" data-g="login" aria-pressed="${v==='login'}">Accedi</button><button type="button" data-g="signup" aria-pressed="${v==='signup'}">Registrati</button></div>`;
+ box().innerHTML=`<div class="gform">${tabs}<div class="kick">${v==='signup'?'Nuovo account':v==='reset'?'Account':'Bentornato'}</div><h2>${title}</h2>${why}${note}
   <form data-g="${v}"><input name="e" type="email" placeholder="Email" autocomplete="email" value="${esc(last&&v!=='signup'?last.email:'')}" required>
   ${v!=='reset'?`<input name="p" type="password" placeholder="Password${v==='signup'?' (almeno 8 caratteri)':''}" autocomplete="${v==='signup'?'new-password':'current-password'}" minlength="${v==='signup'?8:6}" required>`:''}
   ${v==='signup'?'<label class="cons"><input type="checkbox" name="ok" required><span>Accetto i <a href="termini.html" target="_blank" rel="noopener">termini di servizio</a>, ho letto l\'<a href="privacy.html" target="_blank" rel="noopener">informativa sulla privacy</a> e ho almeno 14 anni.</span></label>':''}
   <button class="btn"${dis}>${A.busy?'Attendi…':v==='signup'?'Crea account':v==='login'?'Accedi':'Mandami il link'}</button></form>
   ${v==='login'?'<button class="lnk" data-g="reset">Password dimenticata?</button>':''}
   ${v!=='reset'?`<div class="or"><span>oppure</span></div><button class="btn alt wide" data-g="google"${dis}>Accedi con Google</button><p class="note">Continuando con Google accetti i <a href="termini.html" target="_blank" rel="noopener">termini di servizio</a>, dichiari di aver letto l'<a href="privacy.html" target="_blank" rel="noopener">informativa sulla privacy</a> e di avere almeno 14 anni.</p>`:''}
-  <p class="gsw">${v==='signup'?'Hai già un account? <button class="lnk" data-g="login">Accedi</button>':v==='login'?'Non hai un account? <button class="lnk" data-g="signup">Registrati</button>':'<button class="lnk" data-g="login">Torna all\'accesso</button>'}</p>
+  ${v==='reset'?'<p class="gsw"><button class="lnk" data-g="login">‹ Torna all\'accesso</button></p>':''}
   <button class="btn alt wide" data-g="guest">${fromApp?'Torna all\'app':'Continua senza account'}</button>
   <p class="note">${reason?'Continuando senza accedere i progressi restano su questo dispositivo: potrai sincronizzarli dal Profilo (la tua foto in alto).':'Senza account si gioca lo stesso e i progressi restano su questo dispositivo. Con l\'account li ritrovi ovunque e quelli già fatti qui si uniscono.'}</p></div>`;
 }
@@ -89,7 +90,7 @@ function renderLogin(){
 // Il link fa entrare nell'account: finché non si sceglie la password nuova (o si esce) l'app resta qui, a tutto schermo.
 function showRecovery(){
  mode='recovery';show();const err=A.err?`<p class="err">${esc(A.err)}</p>`:'';
- box().innerHTML=`<div class="gform"><div class="h">Scegli una nuova password</div>${err}
+ box().innerHTML=`<div class="gform"><div class="kick">Password</div><h2>Scegli una nuova password</h2>${err}
   <p class="mut">Per <b>${esc(A.user&&A.user.email||'')}</b>. Dopo il cambio si chiudono le sessioni aperte su altri dispositivi.</p>
   <form data-g="recover"><input name="p" type="password" placeholder="Nuova password (almeno 8 caratteri)" autocomplete="new-password" minlength="8" required>
   <input name="p2" type="password" placeholder="Ripeti la nuova password" autocomplete="new-password" minlength="8" required>
@@ -102,7 +103,7 @@ function showOwner(imp){
  mode='owner';ownImp=!!imp;show();const c=A.conflict,dis=A.busy?' disabled':'';
  const err=A.err?`<p class="err">${esc(A.err)}</p>`:'';
  if(imp){ // importazione: password da aggiungere (se manca) e, facoltativo, cancellazione del vecchio account
-  box().innerHTML=`<div class="gform"><div class="h">Importa i dati del telefono</div>${err}
+  box().innerHTML=`<div class="gform"><div class="kick">Progressi</div><h2>Importa i dati del telefono</h2>${err}
    <p class="mut">XP, maestria, badge e profilo di <b>${esc(c.email)}</b> passano a <b>${esc(c.me)}</b>.</p>
    <form data-g="own-import">
    ${hasPassword()?'':`<p class="mut">Scegli una password: potrai entrare sia con Google sia con <b>${esc(c.me)}</b> e questa password.</p>
@@ -113,7 +114,7 @@ function showOwner(imp){
    <button class="lnk" data-g="own-back">Indietro</button></div>`;
   return;
  }
- box().innerHTML=`<div class="gform"><div class="h">Su questo telefono ci sono altri progressi</div>${err}
+ box().innerHTML=`<div class="gform"><div class="kick">Progressi</div><h2>Su questo telefono ci sono altri progressi</h2>${err}
   <p>Ci sono i progressi di <b>${esc(c.email)}</b>. Stai entrando come <b>${esc(c.me)}</b>.</p>
   <button class="btn wide" data-g="own-imp">Importa i dati del telefono in questo account</button>
   <p class="note">Se sono tuoi. ${hasPassword()?'':'Potrai entrare con Google e anche con email e password. '}Puoi anche eliminare il vecchio account.</p>
@@ -126,7 +127,7 @@ function showOwner(imp){
 /* ---------- nome utente dopo la prima registrazione ---------- */
 function showName(){
  mode='name';show();
- box().innerHTML=`<div class="gform"><div class="h">Scegli il tuo nome</div><p class="mut">Lo vedranno gli amici nelle classifiche. ${NAME_RULE}</p>
+ box().innerHTML=`<div class="gform"><div class="kick">Ultimo passo</div><h2>Scegli il tuo nome</h2><p class="mut">Lo vedranno gli amici nelle classifiche. ${NAME_RULE}</p>
   ${A.err?`<p class="err">${esc(A.err)}</p>`:''}<form data-g="name"><input name="u" placeholder="Nome utente" autocomplete="username" maxlength="20" value="${esc(NAME_RE.test(S.prof.name||'')?S.prof.name:'')}" required><button class="btn"${A.busy?' disabled':''}>Salva</button></form>
   <button class="btn alt wide" data-g="later">Più tardi</button></div>`;
 }

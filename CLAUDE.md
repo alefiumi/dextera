@@ -44,7 +44,8 @@ Dove questo file e la specifica differiscono, vale la specifica.
 - Test UCBM, Biologia giocabile (nessun SQL): v0.90.0, vedi «Test UCBM». Chimica giocabile (solo contenuti); Fisica giocabile e simulazione completa: v0.90.1. Percorso UCBM con il solo Test e l'anatomia dentro Biologia (satelliti ospiti): v0.91.0, vedi «Satelliti ospiti».
 - Più percorsi (SQL: colonna percorso, dextera_percorsi_xp): v0.92.0, vedi «Più percorsi». Online e SQL applicato il 20/11/2026.
 - Casate su due livelli (SQL: dextera_casate, casate grandi e UCBM): v0.93.0, vedi «Casate su due livelli». Online e SQL applicato il 20/11/2026.
-- Voto di capo e vice, annunci, banner (SQL: dextera_gruppi): v0.94.0, vedi «Pagina dei gruppi». File SQL da applicare dall'autore dopo aver pubblicato l'app.
+- Voto di capo e vice, annunci, banner (SQL: dextera_gruppi): v0.94.0, vedi «Pagina dei gruppi». Online e SQL applicato il 20/11/2026; l'autore è amministratore (`dextera_admin`).
+  Supabase avvisa «tabelle senza RLS» e «operazioni distruttive»: falso allarme (RLS attivata in un ciclo `execute format`, i `drop … if exists` servono a rieseguire il file).
 - Corso di neurologia: contenuti (primo rilascio) e corso giocabile (v0.81.0, vedi «Corso di neurologia giocabile»), Palestra sul cervello (v0.82.0), gioco 3D (v0.83.0).
 - GitHub Pages attivo (ramo `main`, cartella radice): online su `alefiumi.github.io/dextera`.
 

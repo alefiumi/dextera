@@ -47,6 +47,7 @@ Dove questo file e la specifica differiscono, vale la specifica.
 - Voto di capo e vice, annunci, banner (SQL: dextera_gruppi): v0.94.0, vedi «Pagina dei gruppi». Online e SQL applicato il 20/11/2026; l'autore è amministratore (`dextera_admin`).
   Supabase avvisa «tabelle senza RLS» e «operazioni distruttive»: falso allarme (RLS attivata in un ciclo `execute format`, i `drop … if exists` servono a rieseguire il file).
 - Percorso MCB, primo rilascio (SQL: 4 righe in badge_classes, `20261129090000_dextera_mcb.sql`): v0.94.1, contenuti 34, vedi «Percorso MCB». Online e SQL applicato il 20/11/2026.
+- Percorso MCB, rilascio 2: Patologia e clinica, corso a quiz (nessun SQL): v0.95.0, contenuti 35, vedi «Percorso MCB». Non ancora online.
 - Corso di neurologia: contenuti (primo rilascio) e corso giocabile (v0.81.0, vedi «Corso di neurologia giocabile»), Palestra sul cervello (v0.82.0), gioco 3D (v0.83.0).
 - GitHub Pages attivo (ramo `main`, cartella radice): online su `alefiumi.github.io/dextera`.
 
@@ -903,7 +904,7 @@ può più nascondere con le segnalazioni).
 - Prova: `gruppi.mjs` (56 controlli, con e senza il file) nella cartella delle note di questa sessione; passano anche `percorsi.mjs`, `fase6d.mjs`,
   `flotta2.mjs`, `profilo2.mjs` e `casate2.mjs` (la copia di `casate.mjs` che legge la versione da `sw.js`).
 
-## Percorso MCB (v0.94.1, contenuti 34, `mcb.json` v1, file SQL `20261129090000_dextera_mcb.sql`)
+## Percorso MCB (v0.94.1–0.95.0, contenuti 35, `mcb.json` v2, file SQL `20261129090000_dextera_mcb.sql`)
 Sezione 2 «Percorso MCB» della specifica (Massaggiatore e Capo Bagnino, decisa il 20/11/2026). Rilascio 1: solo i 4 corsi che esistono già,
 con gli stessi nodi del percorso completo e meno satelliti o passi (maestria e progressi in comune); muscolo-scheletrico è il primo corso.
 - `content/percorsi/mcb.json` (bozza, scritto a mano come `base.json`): muscolo-scheletrico con i 17 satelliti e i loro passi (il cranio ha
@@ -918,10 +919,21 @@ con gli stessi nodi del percorso completo e meno satelliti o passi (maestria e p
 - `controlla_percorsi()` in `testi.py` controlla anche il catalogo di `index.json`: file esistente, stesso `id`, presente in `files`.
 - SQL: le 4 righe `sat1-mcb`, `pianeta1-mcb`, `corso1-mcb`, `sistema-mcb` in `badge_classes` (testi come `badgeById`, nome «MCB»). Si applica
   dopo aver pubblicato l'app; prima i badge MCB restano sul telefono. MCB per ora non ha casate sue: i punti vanno solo alla casata grande.
-- I 4 corsi nuovi a quiz (Scienze di base e fisiologia, Patologia e clinica, Idroterapia e terapie fisiche, Igiene, sicurezza e professione)
-  non ci sono ancora: i quesiti li scrive la chat dei contenuti; i rilasci seguono l'ordine della specifica.
-- Prova: `mcb.mjs` (32 controlli) nella cartella delle note di questa sessione; passano anche `fase6d.mjs` (71, la riga di MCB aggiornata),
-  `percorsi.mjs` (39) e `osp/prova.mjs` (13). `fase6c.mjs` ha 3 errori attesi (MCB non più «in arrivo» e i due controlli della v0.91).
+- **Rilascio 2 (v0.95.0): Patologia e clinica**, corso a quiz `mcb-patologia` (quinto corso di MCB, solo in MCB): 5 pianeti (Patologia generale,
+  Ortopedia e traumatologia, Reumatologia e sport, Dermatologia, Sicurezza del trattamento), 16 satelliti `mcb-pat-<argomento>`, 3 passi da 10
+  quesiti: Concetti, Applicazione, Quesiti d'esame (tipi `concetti`, `applicazione`, `test`: il passo 3 è solo a scelta e con il tempo, come
+  nel Test UCBM). Quesiti in `testi/mcb-patologia.json` (480, id `mcb.pat.<argomento>.<nn>`, chiave in app `q.mcb.pat.<argomento>.<nn>`),
+  scritti dall'AI a memoria su scelta dell'autore: tutti da verificare, per primo Edema e circolazione (sistema linfatico, senza fonte).
+- Corsi a quiz generali: in `mappa.json` un corso con `quiz: "<file>"` (anche `ucbm`: `ucbm.json`) prende quesiti e passi da quel file di
+  `content/`. `testi.py`: `quiz()` (prima `ucbm()`) controlla e scrive i file; `mcb()` fa un file per ogni `testi/mcb-<corso>.json` (MCB in TIPI).
+  `content.js` carica il file di ogni corso a quiz (`mergeQuiz`) e mette tutti i quesiti in `app.UCBM` (nome rimasto per compatibilità).
+  `isQuizC(c)` in `percorso.js`; in `path.js` le descrizioni dei passi MCB (`PROBM`). Simulazione e «materie del test» restano solo UCBM.
+  La pagina di revisione mostra anche `mcb-patologia` (passo 3 «Quesiti d'esame»).
+- Gli altri corsi a quiz (Idroterapia e terapie fisiche, Scienze di base e fisiologia, Igiene, sicurezza e professione) non ci sono ancora:
+  per ognuno servono `testi/mcb-<corso>.json`, il corso con `quiz` in `mappa.json` e i nodi in `mcb.json`.
+- Prova: `mcb.mjs` (41 controlli, con Patologia e clinica) nella cartella delle note di questa sessione; passano anche `fase6d.mjs` (71, la riga
+  di MCB aggiornata), `percorsi.mjs` (39) e `osp/prova.mjs` (13). `fase6c.mjs` ha 3 errori attesi (MCB non più «in arrivo» e i due controlli
+  della v0.91); `ucbm-fis/prova.mjs` ha 1 errore atteso (conta tutti i quesiti di `app.UCBM`, ora 1260 con quelli MCB).
 
 ## Mappa del percorso (`content/mappa.json`)
 Corso → 4 pianeti → 17 satelliti (con `ordine` della specifica) → 6 passi (`ossa`, `reperi`, `muscoli`, `connessioni`, `funzione`,

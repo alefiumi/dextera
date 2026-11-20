@@ -110,6 +110,8 @@ export const isTor=sid=>/^[cp]\./.test(String(sid));
 export const isQ=sid=>String(sid).startsWith('q.');
 export const qz=sid=>app.UCBM?.[sid]||null;
 export const isUcbm=c=>c?.id==='ucbm';
+// corso a quiz (Test UCBM, corsi del percorso MCB): satelliti con i soli quesiti, senza figura (mappa → corso → quiz)
+export const isQuizC=c=>!!c&&(!!c.quiz||isUcbm(c));
 export const torMod=sid=>String(sid)[0]==='c'?'cuore':'polmoni';
 export const tor=sid=>app.MODS[torMod(sid)]?.byId[sid]||null;
 export const neuro=sid=>app.LEZ.neuro?.[sid]||null;

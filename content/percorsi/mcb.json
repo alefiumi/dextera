@@ -1,19 +1,19 @@
 {
- "version": 1,
+ "version": 2,
  "formato": 1,
- "nota": "Bozza del percorso MCB (Massaggiatore e Capo Bagnino), sezione 2 «Percorso MCB» della specifica, decisa il 20/11/2026. Rilascio 1: solo i 4 corsi che esistono già, con gli stessi nodi del percorso completo e meno satelliti o passi (maestria e progressi in comune). Apparato muscolo-scheletrico: tutti i 17 satelliti con i 6 passi. Neurologia: Basi e Midollo e sistema periferico interi; Encefalo e Corteccia solo con i passi Le strutture, Dove si trova e La funzione (niente Se si danneggia né caso clinico). Cuore e vasi: tutti i satelliti tranne Coronarie e vene del cuore. Apparato respiratorio: Lobi dei polmoni e Trachea e bronchi. Nei satelliti con meno passi e nei pianeti con meno satelliti vale la regola dei percorsi parziali (satellite acceso ed esame del pianeta contano solo in questo percorso). I 4 corsi nuovi a quiz (Scienze di base e fisiologia, Patologia e clinica, Idroterapia e terapie fisiche, Igiene, sicurezza e professione) arrivano nei rilasci successivi, quando ci saranno i quesiti.",
+ "nota": "Bozza del percorso MCB (Massaggiatore e Capo Bagnino), sezione 2 «Percorso MCB» della specifica, decisa il 20/11/2026. Rilascio 1: solo i 4 corsi che esistono già, con gli stessi nodi del percorso completo e meno satelliti o passi (maestria e progressi in comune). Apparato muscolo-scheletrico: tutti i 17 satelliti con i 6 passi. Neurologia: Basi e Midollo e sistema periferico interi; Encefalo e Corteccia solo con i passi Le strutture, Dove si trova e La funzione (niente Se si danneggia né caso clinico). Cuore e vasi: tutti i satelliti tranne Coronarie e vene del cuore. Apparato respiratorio: Lobi dei polmoni e Trachea e bronchi. Nei satelliti con meno passi e nei pianeti con meno satelliti vale la regola dei percorsi parziali (satellite acceso ed esame del pianeta contano solo in questo percorso). Rilascio 2: Patologia e clinica, corso a quiz (5 pianeti, 16 satelliti, 3 passi da 10 quesiti: Concetti, Applicazione, Quesiti d'esame; quesiti in testi/mcb-patologia.json, scritti dall'AI a memoria e da verificare). Gli altri corsi a quiz (Idroterapia e terapie fisiche, Scienze di base e fisiologia, Igiene, sicurezza e professione) arrivano nei rilasci successivi.",
  "id": "mcb",
  "nome": "MCB",
  "bozza": true,
  "corso": "muscolo-scheletrico",
  "mappa": {
   "file": "mappa.json",
-  "version": 4
+  "version": 6
  },
  "rilascio": {
-  "numero": 1,
+  "numero": 2,
   "pubblicato_il": "2026-11-20",
-  "da": "a mano (bozza): i 4 corsi esistenti, in tutto o in parte"
+  "da": "a mano (bozza): i 4 corsi esistenti e Patologia e clinica (corso a quiz)"
  },
  "nodi": [
   {
@@ -782,6 +782,138 @@
     "re-bronchi.3"
    ],
    "caso": "t2"
+  },
+  {
+   "id": "mcb-patologia",
+   "tipo": "corso",
+   "genitore": null,
+   "ordine": 5
+  },
+  {
+   "id": "mcb-pat-generale",
+   "tipo": "pianeta",
+   "genitore": "mcb-patologia",
+   "ordine": 1
+  },
+  {
+   "id": "mcb-pat-ortopedia",
+   "tipo": "pianeta",
+   "genitore": "mcb-patologia",
+   "ordine": 2
+  },
+  {
+   "id": "mcb-pat-reumatologia",
+   "tipo": "pianeta",
+   "genitore": "mcb-patologia",
+   "ordine": 3
+  },
+  {
+   "id": "mcb-pat-dermatologia",
+   "tipo": "pianeta",
+   "genitore": "mcb-patologia",
+   "ordine": 4
+  },
+  {
+   "id": "mcb-pat-sicurezza",
+   "tipo": "pianeta",
+   "genitore": "mcb-patologia",
+   "ordine": 5
+  },
+  {
+   "id": "mcb-pat-infiammazione",
+   "tipo": "satellite",
+   "genitore": "mcb-pat-generale",
+   "ordine": 1
+  },
+  {
+   "id": "mcb-pat-edema",
+   "tipo": "satellite",
+   "genitore": "mcb-pat-generale",
+   "ordine": 2
+  },
+  {
+   "id": "mcb-pat-nervi",
+   "tipo": "satellite",
+   "genitore": "mcb-pat-generale",
+   "ordine": 3
+  },
+  {
+   "id": "mcb-pat-fratture",
+   "tipo": "satellite",
+   "genitore": "mcb-pat-ortopedia",
+   "ordine": 1
+  },
+  {
+   "id": "mcb-pat-distorsioni",
+   "tipo": "satellite",
+   "genitore": "mcb-pat-ortopedia",
+   "ordine": 2
+  },
+  {
+   "id": "mcb-pat-tendini",
+   "tipo": "satellite",
+   "genitore": "mcb-pat-ortopedia",
+   "ordine": 3
+  },
+  {
+   "id": "mcb-pat-colonna",
+   "tipo": "satellite",
+   "genitore": "mcb-pat-ortopedia",
+   "ordine": 4
+  },
+  {
+   "id": "mcb-pat-artrosi",
+   "tipo": "satellite",
+   "genitore": "mcb-pat-reumatologia",
+   "ordine": 1
+  },
+  {
+   "id": "mcb-pat-dolore",
+   "tipo": "satellite",
+   "genitore": "mcb-pat-reumatologia",
+   "ordine": 2
+  },
+  {
+   "id": "mcb-pat-sport",
+   "tipo": "satellite",
+   "genitore": "mcb-pat-reumatologia",
+   "ordine": 3
+  },
+  {
+   "id": "mcb-pat-pelle",
+   "tipo": "satellite",
+   "genitore": "mcb-pat-dermatologia",
+   "ordine": 1
+  },
+  {
+   "id": "mcb-pat-lesioni",
+   "tipo": "satellite",
+   "genitore": "mcb-pat-dermatologia",
+   "ordine": 2
+  },
+  {
+   "id": "mcb-pat-dermatosi",
+   "tipo": "satellite",
+   "genitore": "mcb-pat-dermatologia",
+   "ordine": 3
+  },
+  {
+   "id": "mcb-pat-controindicazioni",
+   "tipo": "satellite",
+   "genitore": "mcb-pat-sicurezza",
+   "ordine": 1
+  },
+  {
+   "id": "mcb-pat-farmaci",
+   "tipo": "satellite",
+   "genitore": "mcb-pat-sicurezza",
+   "ordine": 2
+  },
+  {
+   "id": "mcb-pat-referti",
+   "tipo": "satellite",
+   "genitore": "mcb-pat-sicurezza",
+   "ordine": 3
   }
  ]
 }

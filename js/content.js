@@ -11,9 +11,11 @@ export async function loadContent(){
  const get=f=>getRaw(f+'?v='+encodeURIComponent(idx.version));
  // file del percorso (fase 1): mappa delle competenze, dati delle lezioni, regole e percorso pubblicato (content/percorsi/)
  const has=f=>(idx.files||[]).includes(f),opt=f=>has(f)?get(f).catch(e=>{console.warn(e);return null;}):null;
- const [mods,nc,mappa,lez,regole,perc,ucbm]=await Promise.all([Promise.all(idx.modules.map(id=>get(id+'.json'))),get(idx.nc),
-  opt('mappa.json'),opt('lezioni.json'),opt('regole.json'),opt('percorsi/base.json'),opt('ucbm.json')]);
- if(mappa&&ucbm)mergeUcbm(mappa,ucbm);
+ const [mods,nc,mappa,lez,regole,perc]=await Promise.all([Promise.all(idx.modules.map(id=>get(id+'.json'))),get(idx.nc),
+  opt('mappa.json'),opt('lezioni.json'),opt('regole.json'),opt('percorsi/base.json')]);
+ // corsi a quiz (Test UCBM, corsi MCB): il file dei quesiti è in mappa → corso → quiz (senza: ucbm.json per il corso ucbm)
+ const QZ={};
+ if(mappa)await Promise.all(mappa.corsi.map(async c=>{const f=c.quiz||(c.id==='ucbm'?'ucbm.json':null);const d=f&&await opt(f);if(d){mergeQuiz(c,d);Object.assign(QZ,d.quesiti||{});}}));
  // altri percorsi (fase 6): catalogo in index.json → percorsi [{id, nome, file?, bozza?}]; senza file = «in arrivo»
  const CAT=(idx.percorsi||[{id:'base',nome:'Percorso completo',file:'percorsi/base.json'}]).filter(x=>x&&x.id);
  const PERCORSI={};if(perc)PERCORSI[perc.id||'base']=perc;
@@ -30,13 +32,12 @@ export async function loadContent(){
   const byId=Object.fromEntries([...B,...GR].map(x=>[x.id,x]));
   MODS[m.id]={id:m.id,label:m.label,B,GR,byId,M:m.muscles||[],CASES:m.cases,W:m.W,H:m.H,views:m.views||['a'],vnames:m.vnames||{},zviews:m.zviews||{},grpn:m.grpn,expl:m.expl,thin:m.thin||[]};
  }
- return {version:idx.version,UCBM:ucbm?.quesiti||{},MODS,NC:nc.items,MAPPA:mappa,LEZ:lez,REGOLE:regole,PERCORSO:perc,PERCORSI,PCAT:CAT};
+ return {version:idx.version,UCBM:QZ,MODS,NC:nc.items,MAPPA:mappa,LEZ:lez,REGOLE:regole,PERCORSO:perc,PERCORSI,PCAT:CAT};
 }
-// Test UCBM (fase 6): content/ucbm.json (generato da testi.py dai file testi/ucbm-*.json) ha i quesiti e i passi dei satelliti.
-// La mappa resta scritta a mano senza passi: qui i satelliti ricevono i loro passi; un pianeta senza passi resta «in arrivo»
-// (pl.in_arrivo) e il corso si apre appena una materia è pronta.
-function mergeUcbm(mappa,u){
- const c=mappa.corsi.find(x=>x.id==='ucbm');if(!c)return;
+// Corsi a quiz (Test UCBM, fase 6; corsi MCB): content/<quiz> (generato da testi.py da testi/ucbm-*.json, testi/mcb-*.json) ha i quesiti
+// e i passi dei satelliti. La mappa resta scritta a mano senza passi: qui i satelliti ricevono i loro passi; un pianeta senza passi resta
+// «in arrivo» (pl.in_arrivo) e il corso si apre appena un pianeta è pronto.
+function mergeQuiz(c,u){
  let any=false;
  for(const pl of c.pianeti){let has=false;for(const s of pl.satelliti){const ps=u.passi?.[s.id];if(ps&&ps.length){s.passi=ps;has=true;}}if(has)any=true;else pl.in_arrivo=true;}
  if(any)delete c.in_arrivo;

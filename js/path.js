@@ -39,7 +39,9 @@ const neuroC=c=>c.modulo==='cervello';
 const PROBT={strutture:'Riconoscerle sulla figura',descrizione:'Riconoscerle da come sono fatte e da cosa fanno',progetto:'Il caso clinico'};
 // passi del test d'ingresso UCBM (fase 6)
 const PROBQ={concetti:'Le idee chiave: prima una spiegazione, poi le domande',applicazione:'Problemi ed esercizi, anche con i calcoli',test:'Quesiti misti come quelli del test, con il tempo'};
-const probOf=c=>P.isUcbm(c)?PROBQ:c.modulo==='cervello'?PROBN:c.modulo==='cuore'||c.modulo==='polmoni'?PROBT:PROB;
+// passi dei corsi a quiz del percorso MCB (Patologia e clinica…)
+const PROBM={concetti:'Le idee chiave: prima una spiegazione, poi le domande',applicazione:'Casi pratici del massaggiatore',test:'Quesiti come quelli dell\'esame, con il tempo'};
+const probOf=c=>P.isUcbm(c)?PROBQ:P.isQuizC(c)?PROBM:c.modulo==='cervello'?PROBN:c.modulo==='cuore'||c.modulo==='polmoni'?PROBT:PROB;
 const ICO={corpo:'🦴',cervello:'🧠',cuore:'🫀',polmoni:'🫁'};
 export const icoOf=c=>ICO[c?.modulo]||'🎓';
 // test UCBM: riquadro della simulazione (sempre aperta) e materie ancora in arrivo, nel sistema del corso
@@ -185,7 +187,7 @@ function infoHtml(g,pl){
   ${studioForm(P.percorsoId(),S.studio?.corsi||[],false)}
   ${pbar(lit,all.length)}<p class="pn">${esc(C.nome)}: ${lit} satelliti accesi su ${all.length}</p></div>`;
  return `<div class="card info"><div class="kick">Sistema · ${esc(pName())}</div><h2>${esc(C.nome)}</h2>
-  <p class="mut">${P.pianeti().length} pianeti e ${all.length} satelliti, tutti aperti: parti ${neuroC(C)||P.isUcbm(C)?'dall\'argomento':'dalla regione'} che stai studiando a lezione. Tocca un pianeta per vedere i suoi satelliti.</p>${P.corsi().length>1?`<button class="lnk" data-p="lvl" data-lvl="universo">Cambia corso</button>`:''}
+  <p class="mut">${P.pianeti().length} pianeti e ${all.length} satelliti, tutti aperti: parti ${neuroC(C)||P.isQuizC(C)?'dall\'argomento':'dalla regione'} che stai studiando a lezione. Tocca un pianeta per vedere i suoi satelliti.</p>${P.corsi().length>1?`<button class="lnk" data-p="lvl" data-lvl="universo">Cambia corso</button>`:''}
   ${pbar(lit,all.length)}<p class="pn">${lit} satelliti accesi su ${all.length}</p>${legend()}</div>${simCard(C)}`;
 }
 // riga sulla luce del pianeta nel suo riquadro: a parole cosa dice il disegno

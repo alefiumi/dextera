@@ -2,9 +2,11 @@
    mostra ogni dato con fonte e stato, diviso per satellite; il docente segna Giusto/Sbagliato e scrive la correzione.
    Le risposte restano in questo browser (localStorage, chiave dextera-revisione) e si esportano in CSV per
    atlante/build/importa_revisione.py. Nessun account, nessun invio in rete. */
-const TIPI=['ossa','reperi','muscoli','encefalo','nervi-cranici','torace','gruppi','casi','neuro','correzioni','ucbm-biologia','ucbm-chimica','ucbm-fisica'];
+const TIPI=['ossa','reperi','muscoli','encefalo','nervi-cranici','torace','gruppi','casi','neuro','correzioni','ucbm-biologia','ucbm-chimica','ucbm-fisica','mcb-patologia'];
 // test d'ingresso UCBM (fase 6): quesiti per materia (testi/ucbm-<materia>.json); ogni voce è un quesito, mostrato anche come lo vede lo studente
 const PASSO_Q={1:'Concetti',2:'Applicazione',3:'Quesiti del test'};
+// corsi a quiz del percorso MCB (testi/mcb-<corso>.json): stesso formato, il passo 3 si chiama «Quesiti d'esame»
+const isQz=t=>/^(ucbm|mcb)-/.test(t),passoQ=(t,n)=>n===3&&t.startsWith('mcb-')?'Quesiti d\'esame':PASSO_Q[n]||'';
 const STATI=['da verificare','verificato','corretto','segnalato'];
 const FONTI=['Z-Anatomy','TA2','AI','docente','lezione'];   // lezione: materiale del corso (guida e slide del docente)
 const SEP=' | ';           // valori che sono elenchi (opzioni dei casi, membri dei gruppi)
@@ -59,12 +61,12 @@ async function carica(){
    else if(tipo==='gruppi'){const [,k,r]=v.id.split('.');if(k==='ossa')sats=satOf(['g.'+r]);else if(k==='encefalo'||k==='strato-encefalo')sez='enc';else if(/^(strato-)?(cuore|polmoni)$/.test(k))sez='tor';}
    else if(tipo==='torace'){sez='tor';atl=v.ref;}
    else if(tipo==='encefalo'||tipo==='nervi-cranici'){sez='enc';if(tipo==='encefalo')atl=v.ref;if(tipo==='nervi-cranici')nome='Nervo '+v.numero+' – '+nome;}
-   else if(tipo.startsWith('ucbm-')){sats=[v.sat];const d=String(v.dati?.domanda?.valore||'');nome=`Quesito ${+v.id.split('.').pop()} · ${PASSO_Q[v.passo]||''}: ${d.length>80?d.slice(0,78)+'…':d}`;}
+   else if(isQz(tipo)){sats=[v.sat];const d=String(v.dati?.domanda?.valore||'');nome=`Quesito ${+v.id.split('.').pop()} · ${passoQ(tipo,v.passo)}: ${d.length>80?d.slice(0,78)+'…':d}`;}
    else if(tipo==='correzioni'){sez='corr';nome=(TIPO_IT[v.tipo]||v.tipo)+(v.muscolo?': '+v.muscolo:v.cerca?': «'+v.cerca+'»':v.parte?': '+v.parte:'');
     if(v.muscolo){sats=satOf([slug(v.muscolo)]);atl=v.muscolo;}}
    if(!sats.length&&!sez)sez='altro';
    const voce={id:v.id,tipo,nome,ref:v.ref,atl,sats,sez,lez:v.lezione||'',campi:F.campi||{motivo:'Motivo'},dati:[]};
-   if(tipo.startsWith('ucbm-'))voce.quiz={passo:v.passo,unita:v.unita||''};
+   if(isQz(tipo))voce.quiz={passo:v.passo,nome:passoQ(tipo,v.passo),unita:v.unita||''};
    if(tipo==='casi'&&v.modulo==='neuro')voce.caso={n:+String(v.caso).replace(/\D/g,''),struttura:v.struttura,snome:NOMEN[v.struttura]||'',sat:v.satellite};
    const dati=v.dati?Object.entries(v.dati):[['motivo',{valore:v.motivo,fonte:v.fonte,stato:v.stato,verifica:v.verifica}]];
    for(const [c,d] of dati){
@@ -154,7 +156,7 @@ function quizHtml(voce){
  if(opz.length!==5)avv.push(`Le opzioni sono ${opz.length}: servono 5.`);
  if(new Set(opz.map(norm)).size<opz.length)avv.push('Ci sono opzioni ripetute.');
  const par=t=>String(t).split(/\n+/).filter(Boolean).map(x=>`<p class="small">${esc(x)}</p>`).join('');
- return `<div class="caso"><details open><summary class="small"><b>Come lo vede lo studente</b> · passo ${voce.quiz.passo} (${esc(PASSO_Q[voce.quiz.passo]||'')})</summary>
+ return `<div class="caso"><details open><summary class="small"><b>Come lo vede lo studente</b> · passo ${voce.quiz.passo} (${esc(voce.quiz.nome||'')})</summary>
   ${val('concetto')?`<p class="small mut">Prima della domanda, il concetto:</p>${par(val('concetto'))}`:''}
   <p class="small"><b>${esc(val('domanda'))}</b></p>
   <ul class="opz">${opz.map((o,i)=>i===0?`<li class="giusta"><span aria-hidden="true">✓</span> ${esc(o)} <span class="sr">(risposta giusta)</span></li>`:`<li>${esc(o)}</li>`).join('')}</ul>

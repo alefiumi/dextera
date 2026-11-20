@@ -6,7 +6,7 @@ import {$,toast} from './util.js';
 import {installHint,appVersion} from './install.js';
 import {S} from './state.js';
 import {drawLogo} from './logo.js';
-import {account as A,configured,startAccount,addAccountListener,lastAccount,signIn,signUp,google,resetPw,setView,saveProfile,NAME_RE,NAME_RULE,esc,resolveOwner,signOut,hasPassword,importDevice,recoverPassword,online,checkNet} from './account.js';
+import {account as A,configured,startAccount,addAccountListener,lastAccount,signIn,signUp,google,resetPw,resendConfirm,setView,saveProfile,NAME_RE,NAME_RULE,esc,resolveOwner,signOut,hasPassword,importDevice,recoverPassword,online,checkNet} from './account.js';
 
 const GUEST='dextera-guest'; // "Continua senza account" scelto: agli avvii successivi non si chiede più
 let mode='boot',reason='',fromApp=false,ownImp=false,delOld=false;
@@ -81,6 +81,7 @@ function renderLogin(){
   ${v==='signup'?'<label class="cons"><input type="checkbox" name="ok" required><span>Accetto i <a href="termini.html" target="_blank" rel="noopener">termini di servizio</a>, ho letto l\'<a href="privacy.html" target="_blank" rel="noopener">informativa sulla privacy</a> e ho almeno 14 anni.</span></label>':''}
   <button class="btn"${dis}>${A.busy?'Attendi…':v==='signup'?'Crea account':v==='login'?'Accedi':'Mandami il link'}</button></form>
   ${v==='login'?'<button class="lnk" data-g="reset">Password dimenticata?</button>':''}
+  ${v==='login'&&A.unconfirmed?`<button class="lnk" data-g="resend"${dis}>Non trovi l'email di conferma? Rimandala</button>`:''}
   ${v!=='reset'?`<div class="or"><span>oppure</span></div><button class="btn alt wide" data-g="google"${dis}>Accedi con Google</button><p class="note">Continuando con Google accetti i <a href="termini.html" target="_blank" rel="noopener">termini di servizio</a>, dichiari di aver letto l'<a href="privacy.html" target="_blank" rel="noopener">informativa sulla privacy</a> e di avere almeno 14 anni.</p>`:''}
   ${v==='reset'?'<p class="gsw"><button class="lnk" data-g="login">‹ Torna all\'accesso</button></p>':''}
   <button class="btn alt wide" data-g="guest">${fromApp?'Torna all\'app':'Continua senza account'}</button>
@@ -158,6 +159,8 @@ export function wireGate(){
  $('gate').addEventListener('click',e=>{
   const b=e.target.closest('button[data-g]');if(!b||b.closest('form'))return;const k=b.dataset.g;
   if(k==='google')google();
+  // l'email scritta nel campo (se l'utente l'ha corretta) o quella dell'ultimo tentativo
+  else if(k==='resend'){const i=box().querySelector('input[name=e]');resendConfirm((i&&i.value.trim())||A.unconfirmed);}
   else if(k==='own-fresh'){box().innerHTML='<div class="spin"></div><p class="gst">Sincronizzo…</p>';resolveOwner('fresh');}
   else if(k==='own-imp'){A.err='';showOwner(true);}
   else if(k==='rec-out'){A.recovery=false;mode='login';signOut().then(()=>{A.msg='';openLogin('');});}

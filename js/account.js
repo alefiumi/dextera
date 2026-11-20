@@ -90,13 +90,22 @@ const ERR={'Invalid login credentials':'Email o password sbagliate.','User is ba
  'User already registered':'Questa email è già registrata: accedi.','Password should be at least 6 characters.':'La password deve avere almeno 6 caratteri.'};
 const it=e=>ERR[e&&e.message]||(!online()?'Serve la connessione.':/fetch|network|load failed/i.test(e&&e.message||'')?'Server non raggiungibile: riprova tra poco.':(e&&e.message)||'Errore');
 async function run(f){A.busy=true;A.err='';A.msg='';onChange();try{await f();}catch(e){A.err=it(e);}A.busy=false;onChange();}
-export const signIn=(email,pw)=>run(async()=>{const {error}=await (await client()).auth.signInWithPassword({email,password:pw});if(error)throw error;A.view='';});
+// A.unconfirmed: email registrata ma non ancora confermata; nella vista Accedi compare "Rimanda l'email di conferma"
+export const signIn=(email,pw)=>run(async()=>{const {error}=await (await client()).auth.signInWithPassword({email,password:pw});
+ if(error){if(error.code==='email_not_confirmed'||error.message==='Email not confirmed')A.unconfirmed=email;throw error;}A.unconfirmed='';A.view='';});
+// nuova email di conferma per chi l'ha persa o cancellata (Supabase accetta una richiesta al minuto per indirizzo)
+export const resendConfirm=email=>run(async()=>{
+ if(!email)throw new Error('Scrivi la tua email.');
+ const {error}=await (await client()).auth.resend({type:'signup',email,options:{emailRedirectTo:location.origin+location.pathname}});
+ if(error)throw /after \d+ seconds|rate limit/i.test(error.message||'')?new Error('Hai già chiesto un\'email da poco: riprova tra un minuto.'):error;
+ A.unconfirmed=email;A.msg='Ti abbiamo rimandato l\'email di conferma a '+email+': tocca il link, poi accedi qui. Se non la trovi, guarda nello spam.';A.view='login';
+});
 // versione dell'informativa sulla privacy accettata alla registrazione (resta nei metadati dell'utente su Supabase)
 export const PRIVACY_V='2026-11-19',TERMS_V='2026-11-19'; // versioni di informativa e termini accettati
 export const signUp=(email,pw)=>run(async()=>{
  const {data,error}=await (await client()).auth.signUp({email,password:pw,options:{emailRedirectTo:location.origin+location.pathname,
   data:{privacy_v:PRIVACY_V,terms_v:TERMS_V,privacy_at:new Date().toISOString()}}});if(error)throw error;
- if(!data.session)A.msg='Ti abbiamo mandato un\'email: tocca il link per confermare, poi accedi qui.';A.view=data.session?'':'login';
+ if(!data.session){A.msg='Ti abbiamo mandato un\'email: tocca il link per confermare, poi accedi qui.';A.unconfirmed=email;}A.view=data.session?'':'login';
 });
 // prompt=select_account: Google mostra sempre l'elenco degli account invece di rientrare da solo nell'ultimo usato
 export const google=()=>run(async()=>{const {error}=await (await client()).auth.signInWithOAuth({provider:'google',options:{redirectTo:location.origin+location.pathname,queryParams:{prompt:'select_account'}}});if(error)throw error;});

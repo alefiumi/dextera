@@ -179,9 +179,11 @@ export async function myData(){
   const st=await sb.from('dextera_studio').select('percorso,corsi,aggiornato_il').eq('user_id',uid); // fase 6 (senza il file SQL: errore, campo vuoto)
   const xp=await sb.from('dextera_percorsi_xp').select('percorso,xp,aggiornato_il').eq('user_id',uid); // più percorsi (stessa regola)
   const dc=await sb.from('dextera_casate').select('ambito,constellation_id,precedente,cambiata_il,entrata_il').eq('user_id',uid); // casate su due livelli
+  const gr=await sb.rpc('dextera_miei_gruppi'); // v0.94.0: voti, eletti, annunci, banner caricati, segnalazioni fatte (senza il file: errore, campo vuoto)
+  const ci=await sb.from('dextera_profili').select('copertina_img').eq('user_id',uid).maybeSingle();
   out.account={email:A.user.email,registrato_il:A.user.created_at,ultimo_accesso:A.user.last_sign_in_at,consenso_privacy:A.user.user_metadata||{},
    profilo:p.data,partite:g.data,maestria:m.data,badge:b.data,amicizie:f.data,percorso:pp.data,impostazioni:ds.data,segnalazioni:er.data,ripasso:rv.data,
-   flotta:{casata:cm.data,casata_grande_e_altri_percorsi:dc.data,giorni:fd.data,contributi_equipaggi:cw.data,risposte_sfide:ca.data},copertina_e_titolo:dp.data,cosa_studi:st.data,xp_per_percorso:xp.data};
+   flotta:{casata:cm.data,casata_grande_e_altri_percorsi:dc.data,giorni:fd.data,contributi_equipaggi:cw.data,risposte_sfide:ca.data},copertina_e_titolo:dp.data,foto_di_copertina:ci.error?null:ci.data?.copertina_img||null,gruppi:gr.error?null:gr.data,cosa_studi:st.data,xp_per_percorso:xp.data};
  }else if(A.user)out.account={email:A.user.email,nota:'Senza connessione: qui ci sono solo i dati del dispositivo.'};
  return out;
 }
@@ -333,21 +335,33 @@ export async function sync(full){
 // All'accesso vince la modifica più recente (S.prof.ct contro aggiornato_il); poi si invia quando cambia (S.prof.cu).
 export const BADGE_SQL='supabase/migrations/20261124090000_dextera_badge.sql';
 const BADGE_WARN='I badge nuovi del percorso e della Flotta restano su questo telefono finché sul server non c\'è il file '+BADGE_SQL+'.';
+// v0.94.0: con il file dei gruppi anche la foto di copertina caricata (copertina_img; S.prof.bimg). Senza la colonna si manda il resto
+// e la foto resta qui (S.prof.bu = da mandare quando arriva il file). Una foto nascosta da un amministratore torna vuota dal server.
+let CIMG=null; // la colonna copertina_img c'è? (null = non ancora provato)
+const noCol=e=>/copertina_img|42703|PGRST204/i.test((e.message||'')+' '+(e.code||''));
 async function syncCard(sb,uid,full){
  const p=S.prof;
  if(full){
-  const {data,error}=await sb.from('dextera_profili').select('copertina,vetrina,titolo,titolo_id,aggiornato_il').eq('user_id',uid).maybeSingle();
+  CIMG=null; // a ogni sincronizzazione completa si riprova (il file può essere arrivato nel frattempo)
+  let r=CIMG===false?{error:{message:'copertina_img'}}:await sb.from('dextera_profili').select('copertina,copertina_img,vetrina,titolo,titolo_id,aggiornato_il').eq('user_id',uid).maybeSingle();
+  if(r.error&&noCol(r.error)){CIMG=false;r=await sb.from('dextera_profili').select('copertina,vetrina,titolo,titolo_id,aggiornato_il').eq('user_id',uid).maybeSingle();}
+  else if(!r.error)CIMG=true;
+  const {data,error}=r;
   if(error)throw error;
   if(data&&Date.parse(data.aggiornato_il)>(p.ct||0)){
    Object.assign(p,{banner:data.copertina||'notte',show:data.vetrina||[],titolo:data.titolo?{id:data.titolo_id||'',t:data.titolo}:null,ct:Date.parse(data.aggiornato_il)});delete p.cu;
+   if(CIMG){p.bimg=data.copertina_img||'';delete p.bu;}
    try{localStorage.setItem('dextera-v1',JSON.stringify(S));}catch(e){}head();return;
   }
-  if(!data&&(p.banner||(p.show||[]).length||p.titolo))p.cu=1; // fatti prima della fase 5: si mandano la prima volta
+  if(!data&&(p.banner||(p.show||[]).length||p.titolo||p.bimg))p.cu=1; // fatti prima della fase 5: si mandano la prima volta
  }
- if(!p.cu)return;
+ if(!p.cu&&!(p.bu&&CIMG!==false))return;
  const ct=p.ct||Date.now(),row={user_id:uid,copertina:p.banner||'notte',vetrina:(p.show||[]).slice(0,3),titolo:p.titolo?.t||null,titolo_id:p.titolo?.id||null,aggiornato_il:new Date(ct).toISOString()};
- const {error}=await sb.from('dextera_profili').upsert(row,{onConflict:'user_id'});
+ let error=null;
+ if(CIMG!==false){({error}=await sb.from('dextera_profili').upsert({...row,copertina_img:p.bimg||null},{onConflict:'user_id'}));if(error&&noCol(error))CIMG=false;else if(!error)CIMG=true;}
+ if(CIMG===false)({error}=await sb.from('dextera_profili').upsert(row,{onConflict:'user_id'}));
  if(error)throw error;
+ if(CIMG===false&&p.bimg)p.bu=1;else delete p.bu;
  if((p.ct||0)===ct||!p.ct){delete p.cu;p.ct=ct;try{localStorage.setItem('dextera-v1',JSON.stringify(S));}catch(e){}}
 }
 

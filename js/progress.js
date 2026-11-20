@@ -8,6 +8,7 @@ import {fillVersion} from './install.js';
 import * as P from './percorso.js';
 import {openSat} from './path.js';
 import {fleetCard,openFleet,refreshFleet} from './social.js';
+import {GALLERIA,galleryHtml,banId,safeImg,shrinkBanner,adminCard,GR,GR_SQL} from './gruppi.js';
 import {radar,radarSvg,sagoma,hasSagoma,satList,titoli,titolo,vetrinaMax} from './competenze.js';
 
 let editing=false,draft=null,pmod=null; // pmod: modulo di cui si guarda la maestria (corpo o cervello)
@@ -16,15 +17,17 @@ const avatar=(src,name,cls='av')=>src?`<img class="${cls}" src="${esc(src)}" alt
 // copertina del profilo (come la foto di copertina di Facebook): sfondi della galleria, sopra i badge scelti da mostrare.
 // Con l'account vanno sul server con il titolo scelto (tabella dextera_profili, fase 5) e li vedono gli amici nella Flotta.
 // S.prof.ct = ultima modifica di copertina, vetrina o titolo; S.prof.cu = da inviare.
-export const BANNERS=[['notte','Notte stellata'],['aurora','Aurora'],['tramonto','Tramonto'],['oceano','Oceano'],['foresta','Foresta'],['sole','Sole']];
+// v0.94.0: 12 sfondi (GALLERIA di gruppi.js, tre si sbloccano col livello) e, a scelta, una foto di copertina caricata (S.prof.bimg, 960×320 JPEG):
+// la vedono gli amici (dextera_profili.copertina_img, con il file dei gruppi) e la possono segnalare.
+export const BANNERS=GALLERIA;
 let SHOW_MAX=3;
 // scelte della scheda: corso di sagoma e radar, vista del radar (passi o regioni); solo comodità del dispositivo
 const PS={c:'',r:'passi'};
 try{Object.assign(PS,JSON.parse(localStorage.getItem('dextera-profilo')||'{}'));}catch(e){}
 const keepPS=()=>{try{localStorage.setItem('dextera-profilo',JSON.stringify(PS));}catch(e){}};
 const banner=(p,got)=>{
- const b=BANNERS.some(x=>x[0]===p.banner)?p.banner:'notte',show=(p.show||[]).map(id=>got.find(x=>x.id===id)).filter(Boolean);
- return `<div class="pfban ban-${b}">`+(show.length?`<ul class="vetrina" aria-label="Badge in vetrina">${show.map(x=>`<li title="${esc(x.name)}"><span aria-hidden="true">${x.icon}</span><span class="sr">${esc(x.name)}</span></li>`).join('')}</ul>`
+ const b=banId(p.banner),show=(p.show||[]).map(id=>got.find(x=>x.id===id)).filter(Boolean),img=safeImg(p.bimg);
+ return `<div class="pfban ban-${b}">`+(img?`<img src="${esc(img)}" alt="La tua foto di copertina">`:'')+(show.length?`<ul class="vetrina" aria-label="Badge in vetrina">${show.map(x=>`<li title="${esc(x.name)}"><span aria-hidden="true">${x.icon}</span><span class="sr">${esc(x.name)}</span></li>`).join('')}</ul>`
   :got.length&&!editing?'<button class="banhint" data-pf="edit">🏅 Scegli i badge da mostrare</button>':'')+'</div>';
 };
 const day=iso=>new Date(iso).toLocaleDateString('it',{day:'numeric',month:'short',year:'numeric'});
@@ -34,7 +37,7 @@ export function renderProg(){
  const p=S.prof,{L,title}=level(),tot=S.ok+S.ko,st=S.stats||{};
  const name=p.name||(A.user?'':'Ospite'),BADGES=badgeList(),got=BADGES.filter(b=>S.badges[b.id]);
  const lo=30*(L-1)**2,hi=30*L**2,pct=Math.round((S.xp-lo)/(hi-lo)*100);
- const hero=editing?`<div class="card pfhero edit">${banner({...p,banner:draft.banner,show:draft.show},got)}<div class="kick">Modifica profilo</div>${editHtml(got)}</div>`:
+ const hero=editing?`<div class="card pfhero edit">${banner({...p,banner:draft.banner,show:draft.show,bimg:draft.bimg},got)}<div class="kick">Modifica profilo</div>${editHtml(got)}</div>`:
   `<div class="card pfhero">${banner(p,got)}<div class="pf">${avatar(p.avatar,name)}<div class="pfi"><div class="kick">Profilo</div><h2>${esc(name)||'<span class="mut">Senza nome</span>'}</h2>
    <div class="ptit"><span aria-hidden="true">🎖️</span> ${esc(titolo())}</div><div class="mut">${p.role?esc(p.role):A.user?'':'Senza account: i progressi restano su questo dispositivo'}</div></div></div>${p.bio?`<p class="bio">${esc(p.bio)}</p>`:''}
    <div class="pflv"><b>Liv. ${L} · ${title}</b><span>${S.xp-lo}/${hi-lo} XP al livello ${L+1}</span></div>
@@ -56,7 +59,7 @@ export function renderProg(){
   <div class="pbar" aria-hidden="true"><i style="width:${IL.length?Math.round(mastered/IL.length*100):0}%"></i></div>${seg}<div class="mrows">${rows}</div></div>`;
  // due colonne sul computer; sul telefono una sola nell'ordine profilo, numeri, badge, account e privacy, maestria (order in style.css)
  const [sag,comp]=compHtml();
- $('panel').innerHTML=`<div class="prof"><div class="pcol">${hero}${sag}${badges}</div><div class="pcol">${stats}${pathsHtml()}${studyHtml()}${fleetCard()}${comp}<div class="pfside">${accountHtml()}${privacyHtml()}</div>${mast}</div></div>`;
+ $('panel').innerHTML=`<div class="prof"><div class="pcol">${hero}${sag}${badges}</div><div class="pcol">${stats}${pathsHtml()}${studyHtml()}${fleetCard()}${comp}<div class="pfside">${adminCard()}${accountHtml()}${privacyHtml()}</div>${mast}</div></div>`;
  fillVersion($('panel'));
  refreshFleet(()=>{if(app.tab==='prog'&&!editing)renderProg();});
 }
@@ -143,7 +146,9 @@ function editHtml(got){
   <label>Presentazione<textarea name="bio" maxlength="160" rows="2" placeholder="Due righe su di te (facoltativo)">${esc(d.bio)}</textarea></label>
   <label>Titolo<select name="titolo">${tsel(d.titolo)}</select></label>
   <p class="note">Compare sotto il tuo nome e nell'intestazione. Altri titoli arrivano con i livelli, gli esami dei pianeti e alcuni badge.</p>
-  <fieldset class="bansel"><legend>Copertina</legend><div class="banopts">${BANNERS.map(([id,n])=>`<label class="ban-${id}"><input type="radio" name="ban" value="${id}"${d.banner===id?' checked':''}><span class="sr">${n}</span></label>`).join('')}</div></fieldset>
+  <fieldset class="bansel"><legend>Copertina</legend>${galleryHtml('ban',d.banner,level().L)}
+   <div class="chips"><label class="chip">🖼️ ${d.bimg?'Cambia foto di copertina':'Carica una foto di copertina'}<input type="file" accept="image/*" data-pf="cover" hidden></label>${d.bimg?'<button type="button" class="chip" data-pf="nocover">Togli la foto</button>':''}</div>
+   ${d.bimg?`<p class="note">${A.user?(GR.ok===false?'La foto resta su questo telefono finché sul server non c\'è il file '+GR_SQL+'.':'La vedono i tuoi amici e la possono segnalare: con 2 segnalazioni si nasconde finché un amministratore non la controlla.'):'Senza account la foto resta su questo dispositivo.'} Usa solo foto tue o libere.</p>`:''}</fieldset>
   <fieldset class="showsel"><legend>Badge in vetrina (fino a ${SHOW_MAX})</legend>${got.length?`<div class="chips">${got.map(b=>`<label class="chip"><input type="checkbox" name="show" value="${b.id}"${d.show.includes(b.id)?' checked':''}> ${b.icon} ${esc(b.name)}</label>`).join('')}</div>`:'<p class="note">Quando guadagni un badge puoi metterlo qui, sulla copertina.</p>'}</fieldset>
   ${A.err?`<p class="err">${esc(A.err)}</p>`:''}
   <div class="pfbtn"><button class="btn"${A.busy?' disabled':''}>${A.busy?'Salvo…':'Salva'}</button><button type="button" class="btn alt" data-pf="cancel">Annulla</button></div>
@@ -170,9 +175,10 @@ const formVals=()=>{const f=$('panel').querySelector('form.pfe');if(f){draft.nam
 export function wireProfile(panel){
  panel.addEventListener('click',e=>{
   const b=e.target.closest('[data-pf]');if(!b||b.tagName==='FORM'||b.tagName==='INPUT')return;const k=b.dataset.pf;
-  if(k==='edit'){editing=true;A.err='';A.msg='';draft={name:S.prof.name||'',role:S.prof.role||'',bio:S.prof.bio||'',avatar:S.prof.avatar||'',banner:S.prof.banner||'notte',show:(S.prof.show||[]).slice(),titolo:S.prof.titolo||null};renderProg();}
+  if(k==='edit'){editing=true;A.err='';A.msg='';draft={name:S.prof.name||'',role:S.prof.role||'',bio:S.prof.bio||'',avatar:S.prof.avatar||'',bimg:safeImg(S.prof.bimg),banner:S.prof.banner||'notte',show:(S.prof.show||[]).slice(),titolo:S.prof.titolo||null};renderProg();}
   else if(k==='cancel'){editing=false;A.err='';renderProg();}
   else if(k==='nophoto'){formVals();draft.avatar='';renderProg();}
+  else if(k==='nocover'){formVals();draft.bimg='';renderProg();}
   else if(k==='mod'){pmod=b.dataset.v;renderProg();}
   else if(k==='flotta')openFleet(b.dataset.v);
   else if(k==='goal'){P.setGoal(+b.dataset.v);save();renderProg();panel.querySelector(`[data-pf=goal][data-v="${+b.dataset.v}"]`)?.focus();}
@@ -199,13 +205,15 @@ export function wireProfile(panel){
    if(on.length>SHOW_MAX){e.target.checked=false;toast('Al massimo '+SHOW_MAX+' badge in vetrina.');return;}
    const id=e.target.name+':'+e.target.value;formVals();renderProg();$('panel').querySelector(`input[name=${id.split(':')[0]}][value="${id.split(':')[1]}"]`)?.focus();return;
   }
+  const cv=e.target.closest('input[data-pf="cover"]');
+  if(cv&&cv.files[0]){formVals();try{draft.bimg=await shrinkBanner(cv.files[0]);}catch(x){toast(x.message);}renderProg();return;}
   const i=e.target.closest('input[data-pf="photo"]');if(!i||!i.files[0])return;
   formVals();try{draft.avatar=await shrink(i.files[0]);}catch(x){toast(x.message);}renderProg();
  });
  panel.addEventListener('submit',async e=>{
   const f=e.target.closest('form[data-pf="save"]');if(!f)return;e.preventDefault();formVals();
   // copertina, vetrina o titolo cambiati: da inviare a dextera_profili (li vedono gli amici)
-  const card=x=>JSON.stringify([x.banner||'notte',x.show||[],(x.titolo&&x.titolo.id)||'']);
+  const card=x=>JSON.stringify([x.banner||'notte',x.show||[],(x.titolo&&x.titolo.id)||'',x.bimg||'']);
   if(card(draft)!==card(S.prof)){draft.ct=Date.now();draft.cu=1;}
   if(A.user&&!NAME_RE.test(draft.name)){A.err=NAME_RULE;renderProg();return;}
   await saveProfile({...draft});

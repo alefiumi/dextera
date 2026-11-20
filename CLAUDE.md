@@ -44,6 +44,7 @@ Dove questo file e la specifica differiscono, vale la specifica.
 - Test UCBM, Biologia giocabile (nessun SQL): v0.90.0, vedi «Test UCBM». Chimica giocabile (solo contenuti); Fisica giocabile e simulazione completa: v0.90.1. Percorso UCBM con il solo Test e l'anatomia dentro Biologia (satelliti ospiti): v0.91.0, vedi «Satelliti ospiti».
 - Più percorsi (SQL: colonna percorso, dextera_percorsi_xp): v0.92.0, vedi «Più percorsi». Online e SQL applicato il 20/11/2026.
 - Casate su due livelli (SQL: dextera_casate, casate grandi e UCBM): v0.93.0, vedi «Casate su due livelli». Online e SQL applicato il 20/11/2026.
+- Voto di capo e vice, annunci, banner (SQL: dextera_gruppi): v0.94.0, vedi «Pagina dei gruppi». File SQL da applicare dall'autore dopo aver pubblicato l'app.
 - Corso di neurologia: contenuti (primo rilascio) e corso giocabile (v0.81.0, vedi «Corso di neurologia giocabile»), Palestra sul cervello (v0.82.0), gioco 3D (v0.83.0).
 - GitHub Pages attivo (ramo `main`, cartella radice): online su `alefiumi.github.io/dextera`.
 
@@ -604,7 +605,7 @@ descrizioni; quelle con fonte Z-Anatomy dicono da quale vaso nasce o dove sbocca
 - Decisioni dell'autore (19/11/2026): casate Osteon 🦴 (oro), Myon 💪 (rosso), Neuron 🧠 (viola), Cor 🫀 (blu); si cambia casata al
   massimo una volta per stagione (mese, ora italiana) e i punti già fatti restano alla casata di prima; vince la stagione la casata con
   più **punti totali**; in questo rilascio solo il nucleo. Rimandati: voto di capo e vice delle casate, annunci, banner caricati
-  (Storage), tabellone delle azioni, segnalazioni dei contenuti, membro migliore della settimana, badge «Vincitore di stagione» e
+  (fatti nella v0.94.0, vedi «Pagina dei gruppi»), tabellone delle azioni, segnalazioni dei contenuti, membro migliore della settimana, badge «Vincitore di stagione» e
   «Obiettivo d'equipaggio» (fase 5).
 - Conti sul telefono (`js/flotta.js`, numeri in `regole.json` → `flotta`): `gain(n, true, pls)` in `percorso.js` (XP di progresso:
   passo fatto, satellite acceso, livello nuovo, ripasso in tempo, che ora conta come progresso come dice la specifica, esame) chiama
@@ -863,6 +864,42 @@ Nomi, simboli e colori stanno in `constellations` (colonna `ambito`: `app`, `bas
   riga della casata del percorso. «Scarica i miei dati» ha `casata_grande_e_altri_percorsi`; riga di `privacy.html` aggiornata.
 - Prova: `casate.mjs` (29 controlli, con e senza il file) nelle note delle sessioni; passano anche `percorsi.mjs`, `fase6d.mjs`, `flotta2.mjs`,
   `profilo2.mjs` e `osp/prova.mjs`.
+
+## Pagina dei gruppi (v0.94.0, file SQL `20261128090000_dextera_gruppi.sql`)
+Decisioni dell'autore (19/11 e 20/11/2026): si vota in ogni casata (casata grande e casata del percorso); immagini nel database come le foto
+del profilo (non Storage); immagini caricate per i gruppi e per la copertina del profilo; **2 segnalazioni** di persone diverse nascondono
+un contenuto finché un amministratore non decide: «rimuovi» (per sempre, non si può rimettere uguale) o «approva» (torna visibile e non si
+può più nascondere con le segnalazioni).
+- **Voto**: dal 1° al 7 del mese (ora italiana; una riga di `dextera_voto_finestre` cambia le date; il primo voto si apre quando si applica il
+  file e dura 7 giorni). Si vota un membro della propria casata con nome e punti negli ultimi 35 giorni (`private.candidati`), non se stessi;
+  si cambia o si ritira fino alla chiusura. Chiude `private.chiudi_voti_scaduti()` (pg_cron ogni notte alle 00:40 UTC e alla prima apertura
+  della Flotta dopo la fine): contano i voti di chi è ancora nella casata per chi è ancora nella casata; più voti = capo, secondo = vice, a
+  parità `random()` (`parita = true`, l'app mostra la moneta 🪙, solo effetto grafico). Nessun voto = nessun capo. Capo e vice restano fino al
+  voto successivo (`private.capi`) e perdono il ruolo se escono dalla casata. Equipaggi come prima (capo chi crea, vice nominato).
+- **Bacheca** (`dextera_bacheche`, una riga per casata o equipaggio): annuncio (al massimo 280 caratteri, solo testo) e banner (id della
+  galleria + `banner_img` facoltativa). Li cambiano capo e vice (`private.puo_gestire`); li leggono solo i membri. Annunci e immagini di account
+  cancellati si tolgono nella chiusura notturna (FK `set null` e la lettura li ignora già).
+- **Segnalazioni**: `dextera_moderazione` (una riga per contenuto e impronta md5: `segnalato` → `nascosto` con la copia in `contenuto` →
+  `rimosso`/`approvato`), `dextera_segnalazioni` (chi e perché, cancellate alla decisione). Un contenuto nascosto o rimosso non si può
+  rimettere uguale (`private.bloccato`, hint `dextera_rimosso`); per la copertina il trigger `copertina_controllo` lo toglie in silenzio e
+  rende il server la modifica più recente. Amministratori in `dextera_admin` (`select admin.aggiungi_admin('email')` dallo SQL Editor):
+  vedono nel Profilo il riquadro «Controllo dei contenuti» (`dextera_moderazione()`, `dextera_modera()`); dallo SQL Editor
+  `admin.segnalazioni_flotta` e `dextera_modera_admin(id, azione)`.
+- **SQL**: tabelle nuove con RLS e nessun permesso diretto: tutto passa da funzioni `security definer` (`dextera_gruppi()` dà in una volta
+  casate dell'utente con capi, voto e bacheca, bacheche degli equipaggi, nomi e se è amministratore; `dextera_vota`, `dextera_annuncio`,
+  `dextera_banner`, `dextera_segnala`, `dextera_miei_gruppi` per «Scarica i miei dati»). `dextera_profili`: colonna `copertina_img`, il controllo
+  su `copertina` ora accetta ogni id `^[a-z]{1,20}$`. Immagini `data:image/(jpeg|webp);base64` fino a 120 000 caratteri. Provato con PGlite:
+  77 prove (`gruppi_rls.mjs` nelle note delle sessioni). Si applica **dopo** aver pubblicato la 0.94.0 (le app di prima non usano niente di questo file).
+- **App**: `js/gruppi.js` (stato `GR` in `dextera-gruppi`, si vede anche offline; uscendo si cancella). Flotta (`social.js`): `houseTop()` nelle
+  card della casata grande e del percorso (banner, capi, presentazione degli eletti ricordata in `GR.seen`, annuncio con «Segnala», voto con
+  l'elenco dei candidati, «✏️ Annuncio e banner» per capo e vice), `crewTop()` negli equipaggi, `profileLine()` nel riquadro Flotta del Profilo,
+  `adminCard()` nel Profilo. Galleria di 12 sfondi (`GALLERIA`; per il profilo galassia, cometa ed eclissi si sbloccano ai livelli 5, 10, 15).
+  Immagini caricate: ritaglio 3:1, 960×320 JPEG sotto ~80 000 caratteri (`shrinkBanner`). Copertina del profilo caricata in `S.prof.bimg`,
+  inviata con `syncCard` (senza la colonna resta qui, `S.prof.bu`); quella degli amici si scarica solo aprendo la loro scheda (`coverOf`).
+  Senza il file: `GR.ok = false`, avviso nella scheda Casate (`missingNote`), tutto il resto come la 0.93. «Scarica i miei dati» ha `gruppi` e
+  `foto_di_copertina`. `privacy.html`: tre righe nuove (voto, annunci e banner, segnalazioni) e la copertina caricata; `termini.html`: annunci e banner nelle regole.
+- Prova: `gruppi.mjs` (56 controlli, con e senza il file) nella cartella delle note di questa sessione; passano anche `percorsi.mjs`, `fase6d.mjs`,
+  `flotta2.mjs`, `profilo2.mjs` e `casate2.mjs` (la copia di `casate.mjs` che legge la versione da `sw.js`).
 
 ## Mappa del percorso (`content/mappa.json`)
 Corso → 4 pianeti → 17 satelliti (con `ordine` della specifica) → 6 passi (`ossa`, `reperi`, `muscoli`, `connessioni`, `funzione`,

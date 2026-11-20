@@ -18,10 +18,11 @@ import * as P from './percorso.js';
 import * as FL from './flotta.js';
 import {startChallenge,structName} from './lezione.js';
 import {badgeById} from './badges.js';
+import * as G from './gruppi.js';
 
 const KEY='dextera-social';
-const SO={tab:'friends',all:[],rank:null,friends:[],rel:{fr:[],inc:[],out:[]},cards:{},card:null,at:0,fleet:null,done:{},loading:false,err:'',ferr:'',found:null,q:'',chg:false,pick:null,pk:null,sel:[]};
-try{Object.assign(SO,JSON.parse(localStorage.getItem(KEY)||'{}'),{loading:false,err:'',ferr:'',found:null,q:'',chg:false,pick:null,pk:null,sel:[],card:null});}catch(e){}
+const SO={cimg:{},tab:'friends',all:[],rank:null,friends:[],rel:{fr:[],inc:[],out:[]},cards:{},card:null,at:0,fleet:null,done:{},loading:false,err:'',ferr:'',found:null,q:'',chg:false,pick:null,pk:null,sel:[]};
+try{Object.assign(SO,JSON.parse(localStorage.getItem(KEY)||'{}'),{cimg:{},loading:false,err:'',ferr:'',found:null,q:'',chg:false,pick:null,pk:null,sel:[],card:null});}catch(e){}
 if(!['friends','houses','crews','all'].includes(SO.tab))SO.tab='friends';
 const keep=()=>{try{const {tab,all,rank,friends,rel,at,uid,fleet,done,cards}=SO;localStorage.setItem(KEY,JSON.stringify({tab,all,rank,friends,rel,at,uid,fleet,done,cards}));}catch(e){}};
 let isOpen=()=>false,NAV={};
@@ -77,6 +78,7 @@ async function loadFleet(sb,uid){
  await FL.ensureCasata(sb,uid);
  const px=await FL.probePx(sb).catch(()=>false); // con il file dei percorsi: punti delle casate ed equipaggi per percorso
  const cx=!!(await FL.ensureCasate(sb,uid).catch(()=>null)); // con il file delle casate su due livelli
+ if(cx)await G.loadGruppi(sb,uid).catch(()=>{}); // v0.94.0: capi, voto, annunci e banner (con il file dei gruppi)
  const [k,sc,ss,wk,cr]=await Promise.all([
   sb.from('constellations').select('id,nome,simbolo,colore,ordine,membri'+(cx?',ambito':'')).order('ordine'),
   sb.from('season_scores').select(px?'constellation_id,punti,membri_attivi,percorso':'constellation_id,punti,membri_attivi').eq('stagione',FL.season()),
@@ -190,12 +192,13 @@ function friendsHtml(fresh,fl){
   (R.fr.length?card(`I tuoi amici (${R.fr.length})`,'',R.fr.map(p=>person(p,`<button class="chip" data-so="card" data-id="${esc(p.id)}" aria-expanded="${SO.card===p.id}">Profilo</button><button class="chip" data-so="rm" data-id="${esc(p.id)}" data-n="${esc(p.username)}">Togli</button>`)+(SO.card===p.id?friendCard(p):'')).join('')):'');
 }
 // scheda di un amico: copertina, foto, nome, titolo e badge in vetrina (quelli che ha scelto di mostrare)
-const BANS=['notte','aurora','tramonto','oceano','foresta','sole'];
+// v0.94.0: la copertina caricata (pesante) si scarica solo quando si apre la scheda dell'amico, e si può segnalare
 function friendCard(p){
- const c=SO.cards[p.id]||{},b=BANS.includes(c.copertina)?c.copertina:'notte',show=(c.vetrina||[]).map(badgeById).filter(Boolean);
- return `<div class="fcard"><div class="pfban ban-${b}">${show.length?`<ul class="vetrina" aria-label="Badge in vetrina">${show.map(x=>`<li title="${esc(x.name)}"><span aria-hidden="true">${x.icon}</span><span class="sr">${esc(x.name)}</span></li>`).join('')}</ul>`:''}</div>
+ const c=SO.cards[p.id]||{},b=G.banId(c.copertina),show=(c.vetrina||[]).map(badgeById).filter(Boolean),img=G.safeImg(SO.cimg[p.id]);
+ return `<div class="fcard"><div class="pfban ban-${b}">${img?`<img src="${esc(img)}" alt="Copertina di ${esc(p.username)}">`:''}${show.length?`<ul class="vetrina" aria-label="Badge in vetrina">${show.map(x=>`<li title="${esc(x.name)}"><span aria-hidden="true">${x.icon}</span><span class="sr">${esc(x.name)}</span></li>`).join('')}</ul>`:''}</div>
   <div class="fci">${av(p.avatar,p.username)}<div><b>${esc(p.username)}</b><div class="mut">${c.titolo?'🎖️ '+esc(c.titolo):'Nessun titolo scelto'}</div></div></div>
-  ${show.length?`<p class="mut">In vetrina: ${show.map(x=>esc(x.name)).join(', ')}</p>`:SO.cards[p.id]?'':'<p class="mut">Non ha ancora scelto copertina e badge da mostrare.</p>'}</div>`;
+  ${show.length?`<p class="mut">In vetrina: ${show.map(x=>esc(x.name)).join(', ')}</p>`:SO.cards[p.id]?'':'<p class="mut">Non ha ancora scelto copertina e badge da mostrare.</p>'}
+  ${img?`<button class="linkb fcrep" data-so="crep" data-id="${esc(p.id)}">Segnala la copertina</button>`:''}</div>`;
 }
 function resHtml(){
  if(!SO.found)return '';
@@ -262,7 +265,7 @@ function houses2Html(fl){
  const now=new Date(),next=new Date(now.getFullYear(),now.getMonth()+1,1),last=new Date(next-864e5);
  const nextTxt=next.toLocaleDateString('it',{day:'numeric',month:'long'}),lastTxt=last.toLocaleDateString('it',{day:'numeric',month:'long'});
  const pl=S.set&&S.set.pianeta,opts=planetOptions(pl,'Nessuno'),mon=esc(monthName().split(' ')[0].toLowerCase());
- const mine=`<div class="card house" style="--c:${esc(my.colore)}"><div class="hhead"><span class="hsym" aria-hidden="true">${esc(my.simbolo)}</span><div><div class="kick">La tua casata grande</div><h3>${esc(my.nome)}</h3><p class="mut">${fmt(my.membri)} ${my.membri===1?'membro':'membri'} · raccoglie i punti di tutti i percorsi</p></div></div>
+ const mine=`<div class="card house" style="--c:${esc(my.colore)}"><div class="hhead"><span class="hsym" aria-hidden="true">${esc(my.simbolo)}</span><div><div class="kick">La tua casata grande</div><h3>${esc(my.nome)}</h3><p class="mut">${fmt(my.membri)} ${my.membri===1?'membro':'membri'} · raccoglie i punti di tutti i percorsi</p></div></div>${G.houseTop(my)}
   <div class="hnums"><div><b>${FL.todayPoints()}</b><small>punti oggi (al massimo ${Rf.tetto_giorno} per percorso)</small></div><div><b>${fmt(FL.seasonPoints())}</b><small>tuoi punti a ${mon}</small></div></div>
   ${opts?`<label class="fl" for="sopl">Pianeta che stai studiando</label><select id="sopl" class="soq" data-so="pl">${opts}</select><p class="mut">Lì i tuoi punti valgono doppio; il tetto di ${Rf.tetto_giorno} al giorno resta.</p>`:''}
   ${changeHtml(M,my,'app',nextTxt)}</div>`;
@@ -274,14 +277,14 @@ function houses2Html(fl){
  if(!PK.length)camp=card('Casata del percorso','',`<p class="mut">Il percorso ${esc(pname(pid))} non ha ancora casate sue: i punti che fai qui vanno alla tua casata grande.</p>`);
  else if(!pm)camp=card('Casata del percorso','',`<p class="mut">Casata del percorso ${esc(pname(pid))} non ancora assegnata: serve la connessione.</p>`);
  else{const pr=rankOf(PK,scOf(fl,pid)),pt=Math.max(1,...pr.map(r=>r.p)),hp=hrowOf(pm.id);
-  camp=`<div class="card house" style="--c:${esc(pm.colore)}"><div class="hhead"><span class="hsym" aria-hidden="true">${esc(pm.simbolo)}</span><div><div class="kick">Casata del percorso · ${esc(pname(pid))}</div><h3>${esc(pm.nome)}</h3><p class="mut">${fmt(pm.membri)} ${pm.membri===1?'membro':'membri'}</p></div></div>
+  camp=`<div class="card house" style="--c:${esc(pm.colore)}"><div class="hhead"><span class="hsym" aria-hidden="true">${esc(pm.simbolo)}</span><div><div class="kick">Casata del percorso · ${esc(pname(pid))}</div><h3>${esc(pm.nome)}</h3><p class="mut">${fmt(pm.membri)} ${pm.membri===1?'membro':'membri'}</p></div></div>${G.houseTop(pm)}
    <div class="hnums"><div><b>${FL.todayPoints(pid)}</b><small>punti oggi in questo percorso</small></div><div><b>${fmt(FL.seasonPoints(pid))}</b><small>tuoi punti a ${mon}</small></div></div>
    <div class="sub">Campionato del percorso</div>${pr.map((r,i)=>hp(r,i,pt)).join('')}
    ${changeHtml(PK,pm,pid,nextTxt)}</div>`;}
  const kn=id=>fl.k.find(k=>k.id===id);
  const albo=fl.ss.length?card('Albo delle stagioni','',`<ul class="albo">${fl.ss.map(s=>{const w=kn(s.vincitore),pts=(s.classifica||[]).find(x=>x.casata===s.vincitore)?.punti,pw=kn(s.percorsi?.[pid]?.vincitore);
   return `<li><span>${esc(monthName(s.stagione))}</span><b>${w?`🏆 <span aria-hidden="true">${esc(w.simbolo)}</span> ${esc(w.nome)}${pts!=null?` · ${fmt(pts)} punti`:''}`:'nessun punto'}</b>${pw?`<small class="mut">${esc(pname(pid))}: <span aria-hidden="true">${esc(pw.simbolo)}</span> ${esc(pw.nome)}</small>`:''}</li>`;}).join('')}</ul>`):'';
- return mine+season+camp+albo;
+ return G.missingNote()+mine+season+camp+albo;
 }
 
 /* ---------- riquadro Flotta nel Profilo (sezione 7 della specifica: costellazione ed equipaggio) ----------
@@ -305,7 +308,7 @@ export function fleetCard(){
   return `<li><b>${esc(c.nome)}</b> <small class="mut">${n} ${n===1?'membro':'membri'}${role}</small>${g}</li>`;}).join('');
  return `<div class="card pfl">${kick}<div class="house pfhouse" style="--c:${esc(my.colore)}"><div class="hhead"><span class="hsym" aria-hidden="true">${esc(my.simbolo)}</span><div><div class="mut">${fl.cx?'La tua casata grande':'La tua casata'}</div><h2>${esc(my.nome)}</h2>
   <p class="mut">${mp?`${pos+1}ª nella stagione di ${esc(monthName().split(' ')[0].toLowerCase())} · ${fmt(mp)} punti`:'Stagione appena cominciata'}</p></div></div>
-  <div class="hnums"><div><b>${FL.todayPoints()}</b><small>tuoi punti oggi</small></div><div><b>${fmt(FL.seasonPoints())}</b><small>tuoi punti questo mese</small></div></div>${pline}</div>
+  <div class="hnums"><div><b>${FL.todayPoints()}</b><small>tuoi punti oggi</small></div><div><b>${fmt(FL.seasonPoints())}</b><small>tuoi punti questo mese</small></div></div>${pline}${fl.cx?G.profileLine(my.id):''}</div>
   <div class="sub">Equipaggi</div>${crews?`<ul class="pcrews">${crews}</ul>`:'<p class="mut">Non sei ancora in un equipaggio.</p>'}
   <div class="chips">${open('houses','🚀 Casate')}${open('crews','👥 Equipaggi')}</div>${SO.at?`<p class="note">Aggiornato ${esc(hm(fl.at||SO.at))}</p>`:''}</div>`;
 }
@@ -353,7 +356,7 @@ function crewHtml(fl,c){
    ${done?`<p class="party">🏅 Obiettivo raggiunto: +${E.xp} XP a testa.</p>`:''}<p class="mut">${E.per_membro} contributi per membro. Il tuo contributo: <b>${mineN}</b> (lo vedi solo tu). Un contributo è una struttura di ${esc(pl.nome)} che porti a maestria 2 o che ripassi in tempo. Si azzera lunedì.</p></div>`;}
  const share=typeof navigator!=='undefined'&&navigator.share?`<button class="chip" data-so="share" data-c="${esc(c.codice)}" data-n="${esc(c.nome)}">Condividi</button>`:'';
  const code=`<div class="ccode"><span class="mut">Codice d'invito</span><b class="code" aria-label="Codice d'invito: ${esc(c.codice.split('').join(' '))}">${esc(c.codice)}</b><button class="chip" data-so="copy" data-c="${esc(c.codice)}">Copia</button>${share}</div>`;
- return `<div class="card crew"><div class="kick">Equipaggio · ${n} ${n===1?'membro':'membri'}</div><h3>${esc(c.nome)}</h3>${code}
+ return `<div class="card crew"><div class="kick">Equipaggio · ${n} ${n===1?'membro':'membri'}</div><h3>${esc(c.nome)}</h3>${G.crewTop(c)}${code}
   <div class="sub">Obiettivo della settimana</div>${goalH}${plSel}
   <div class="sub">Sfide</div>${SO.pk===c.id?pickerHtml(c,pl):challengesHtml(fl,c,pl,n)}
   <div class="sub">Membri</div>${members}
@@ -417,6 +420,12 @@ function play(id){
   done:(g)=>{g=Math.max(0,Math.min(5,g|0));FL.F().ans.push({challenge_id:id,giuste:g});SO.done[id]=g;keep();save();}});
  if(ok&&NAV.setTab)NAV.setTab('play');
 }
+// copertina caricata di un amico (solo con il file dei gruppi; resta in memoria finché la scheda è aperta)
+async function coverOf(id){
+ if(!A.sb||!online()||G.GR.ok!==true||id in SO.cimg)return;
+ const {data,error}=await A.sb.from('dextera_profili').select('copertina_img').eq('user_id',id).maybeSingle();
+ if(error)return;SO.cimg[id]=data?.copertina_img||'';if(SO.card===id)renderSocial();
+}
 async function copy(t){try{await navigator.clipboard.writeText(t);toast('Codice copiato: '+t);}catch(e){toast('Codice: '+t);}}
 // gli id finiscono in un filtro di PostgREST: si accettano solo UUID, così un valore manomesso non cambia il filtro
 const UUID=/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
@@ -431,7 +440,8 @@ export function wireSocial(panel){
   if(u!==undefined&&u!==''&&!UUID.test(u))return;
   if(k==='tab'){SO.tab=b.dataset.v;SO.pick=null;SO.chg=false;SO.pk=null;keep();renderSocial();loadSocial();}
   else if(k==='pick'){SO.pick=SO.pick===id?null:id;renderSocial();}
-  else if(k==='card'){SO.card=SO.card===id?null:id;renderSocial();panel.querySelector(`[data-so=card][data-id="${id}"]`)?.focus();}
+  else if(k==='card'){SO.card=SO.card===id?null:id;renderSocial();panel.querySelector(`[data-so=card][data-id="${id}"]`)?.focus();if(SO.card)coverOf(id);}
+  else if(k==='crep')G.report('copertina',{u:id}).then(r=>{if(r==='nascosto'){delete SO.cimg[id];renderSocial();}});
   else if(k==='ask')act(()=>sb.from('friendships').insert({user_id:uid,friend_id:id}),'Richiesta inviata.');
   else if(k==='acc')act(()=>sb.from('friendships').update({status:'accepted'}).eq('user_id',id).eq('friend_id',uid),'Ora siete amici.');
   else if(k==='del')act(()=>sb.from('friendships').delete().or(pair(uid,id)));
@@ -482,6 +492,6 @@ let lastUid=null;
 export function socialAccountChanged(){
  const u=A.user&&A.user.id;
  if(u!==lastUid){lastUid=u;if(u&&A.sb)loadSocial();else navDot();}
- if(!u&&SO.uid){SO.all=[];SO.friends=[];SO.rel={fr:[],inc:[],out:[]};SO.uid=null;SO.fleet=null;SO.done={};keep();}
+ if(!u&&SO.uid){SO.all=[];SO.friends=[];SO.rel={fr:[],inc:[],out:[]};SO.uid=null;SO.fleet=null;SO.done={};SO.cimg={};keep();G.clearGruppi();}
  if(isOpen())renderSocial();
 }

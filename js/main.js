@@ -9,7 +9,8 @@ import {refreshProg,wireProfile} from './progress.js';
 import {boot,wireGate,openLogin} from './gate.js';
 import {checkBadges} from './badges.js';
 import {applyStudio,repairTor} from './percorso.js';
-import {wireSocial,socialAccountChanged} from './social.js';
+import {wireSocial,socialAccountChanged,renderSocial} from './social.js';
+import {wireGruppi,setGruppiHooks} from './gruppi.js';
 
 /* ---------- sfondo chiaro o scuro ---------- */
 // Senza scelta segue il sistema; il pulsante salva la scelta (anche l'atlante 3D la legge, vedi atlante.js).
@@ -69,6 +70,8 @@ onSave(()=>{head();const f=checkBadges();if(f.length){save();toast('🏅 Nuovo b
 // l'app si prepara sotto la schermata di avvio, che intanto controlla aggiornamenti, sincronizzazione e accesso
 wireGate();wireAccount($('panel'),()=>openLogin('',true));wireProfile($('panel'));addAccountListener(refreshProg);addAccountListener(head);
 wireSocial($('panel'));addAccountListener(socialAccountChanged);
+// voto, annunci, banner e controllo dei contenuti (gruppi.js): si ridisegna la scheda aperta (Flotta o Profilo)
+wireGruppi($('panel'));setGruppiHooks({redraw:()=>{if(app.tab==='soc')renderSocial();else if(app.tab==='prog')refreshProg();}});
 boot();
 try{
  const c=await loadContent();

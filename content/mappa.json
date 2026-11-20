@@ -1,5 +1,5 @@
 {
- "version": 6,
+ "version": 7,
  "nota": "Mappa delle competenze di Dextera (sezione 2 della specifica). Id delle strutture: ossa e muscoli come in content/corpo.json, reperi 'r.' + nome inglese di atlante/dati.json (lm) in minuscolo con i trattini. I reperi sono quelli visibili da fuori nel 3D (atlante/build/visibili.json); sulle ossa condivise tra più satelliti la divisione per posizione è in divisione_reperi, confermata dall'autore. Corso «neurologia» (dal corso del Dott. Benevento): strutture con id n.<voce di testi/neuro.json>; passi strutture, dove, funzione, lesione, connessioni e progetto (casi di testi/casi.json, modulo neuro).",
  "divisione_reperi": {
   "stato": "confermato",
@@ -1248,40 +1248,56 @@
      ]
     },
     {
+     "id": "mcb-pat-organi",
+     "nome": "Patologia degli organi",
+     "satelliti": [
+      {"id": "mcb-pat-cuore", "nome": "Malattie cardiovascolari", "ordine": 4, "passi": []},
+      {"id": "mcb-pat-respiro", "nome": "Malattie respiratorie", "ordine": 5, "passi": []},
+      {"id": "mcb-pat-digerente", "nome": "Apparato digerente, fegato e colecisti", "ordine": 6, "passi": []},
+      {"id": "mcb-pat-urinario", "nome": "Apparato urinario e rene", "ordine": 7, "passi": []},
+      {"id": "mcb-pat-sincope", "nome": "Sincope", "ordine": 8, "passi": []}
+     ]
+    },
+    {
      "id": "mcb-pat-ortopedia",
      "nome": "Ortopedia e traumatologia",
      "satelliti": [
-      {"id": "mcb-pat-fratture", "nome": "Fratture", "ordine": 4, "passi": []},
-      {"id": "mcb-pat-distorsioni", "nome": "Distorsioni e lussazioni", "ordine": 5, "passi": []},
-      {"id": "mcb-pat-tendini", "nome": "Lesioni di muscoli e tendini", "ordine": 6, "passi": []},
-      {"id": "mcb-pat-colonna", "nome": "Colonna e postura", "ordine": 7, "passi": []}
+      {"id": "mcb-pat-fratture", "nome": "Fratture", "ordine": 9, "passi": []},
+      {"id": "mcb-pat-distorsioni", "nome": "Distorsioni e lussazioni", "ordine": 10, "passi": []},
+      {"id": "mcb-pat-tendini", "nome": "Lesioni di muscoli e tendini", "ordine": 11, "passi": []},
+      {"id": "mcb-pat-colonna", "nome": "Colonna e postura", "ordine": 12, "passi": []},
+      {"id": "mcb-pat-osteoporosi", "nome": "Osteoporosi e processi degenerativi", "ordine": 13, "passi": []},
+      {"id": "mcb-pat-infanzia", "nome": "Malattie dell'infanzia e dell'adolescenza", "ordine": 14, "passi": []}
      ]
     },
     {
      "id": "mcb-pat-reumatologia",
      "nome": "Reumatologia e sport",
      "satelliti": [
-      {"id": "mcb-pat-artrosi", "nome": "Artrosi e artriti", "ordine": 8, "passi": []},
-      {"id": "mcb-pat-dolore", "nome": "Dolore cronico", "ordine": 9, "passi": []},
-      {"id": "mcb-pat-sport", "nome": "Medicina dello sport", "ordine": 10, "passi": []}
+      {"id": "mcb-pat-artrosi", "nome": "Artrosi e artriti", "ordine": 15, "passi": []},
+      {"id": "mcb-pat-dolore", "nome": "Dolore cronico", "ordine": 16, "passi": []},
+      {"id": "mcb-pat-sport", "nome": "Medicina dello sport", "ordine": 17, "passi": []}
      ]
     },
     {
      "id": "mcb-pat-dermatologia",
      "nome": "Dermatologia",
      "satelliti": [
-      {"id": "mcb-pat-pelle", "nome": "Pelle e annessi", "ordine": 11, "passi": []},
-      {"id": "mcb-pat-lesioni", "nome": "Lesioni elementari", "ordine": 12, "passi": []},
-      {"id": "mcb-pat-dermatosi", "nome": "Malattie della pelle importanti per il massaggio", "ordine": 13, "passi": []}
+      {"id": "mcb-pat-pelle", "nome": "Pelle e annessi", "ordine": 18, "passi": []},
+      {"id": "mcb-pat-lesioni", "nome": "Lesioni elementari", "ordine": 19, "passi": []},
+      {"id": "mcb-pat-dermatosi", "nome": "Malattie della pelle importanti per il massaggio", "ordine": 20, "passi": []}
      ]
     },
     {
      "id": "mcb-pat-sicurezza",
      "nome": "Sicurezza del trattamento",
      "satelliti": [
-      {"id": "mcb-pat-controindicazioni", "nome": "Controindicazioni al massaggio", "ordine": 14, "passi": []},
-      {"id": "mcb-pat-farmaci", "nome": "Farmaci da conoscere", "ordine": 15, "passi": []},
-      {"id": "mcb-pat-referti", "nome": "Referti e prescrizione", "ordine": 16, "passi": []}
+      {"id": "mcb-pat-controindicazioni", "nome": "Controindicazioni al massaggio", "ordine": 21, "passi": []},
+      {"id": "mcb-pat-semeiotica", "nome": "Semeiotica ed esami strumentali", "ordine": 22, "passi": []},
+      {"id": "mcb-pat-farmacologia", "nome": "Farmacologia generale", "ordine": 23, "passi": []},
+      {"id": "mcb-pat-antibiotici", "nome": "Antibiotici", "ordine": 24, "passi": []},
+      {"id": "mcb-pat-cortisonici", "nome": "Corticosteroidi", "ordine": 25, "passi": []},
+      {"id": "mcb-pat-miorilassanti", "nome": "Miorilassanti", "ordine": 26, "passi": []}
      ]
     }
    ]

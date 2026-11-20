@@ -1,19 +1,19 @@
 {
- "version": 3,
+ "version": 4,
  "formato": 1,
- "nota": "Bozza del percorso MCB (Massaggiatore e Capo Bagnino), sezione 2 «Percorso MCB» della specifica, decisa il 20/11/2026. Rilascio 1: solo i 4 corsi che esistono già, con gli stessi nodi del percorso completo e meno satelliti o passi (maestria e progressi in comune). Apparato muscolo-scheletrico: tutti i 17 satelliti con i 6 passi. Neurologia: Basi e Midollo e sistema periferico interi; Encefalo e Corteccia solo con i passi Le strutture, Dove si trova e La funzione (niente Se si danneggia né caso clinico). Cuore e vasi e Apparato respiratorio: interi, come nel percorso completo (unione con il programma della scuola dell'autore, 20/11/2026). Nei satelliti con meno passi e nei pianeti con meno satelliti vale la regola dei percorsi parziali (satellite acceso ed esame del pianeta contano solo in questo percorso). Rilascio 2: Patologia e clinica, corso a quiz (5 pianeti, 16 satelliti, 3 passi da 10 quesiti: Concetti, Applicazione, Quesiti d'esame; quesiti in testi/mcb-patologia.json, scritti dall'AI a memoria e da verificare). Gli altri corsi a quiz (Idroterapia e terapie fisiche, Scienze di base e fisiologia, Igiene, sicurezza e professione) arrivano nei rilasci successivi.",
+ "nota": "Bozza del percorso MCB (Massaggiatore e Capo Bagnino), sezione 2 «Percorso MCB» della specifica, decisa il 20/11/2026. Rilascio 1: solo i 4 corsi che esistono già, con gli stessi nodi del percorso completo e meno satelliti o passi (maestria e progressi in comune). Apparato muscolo-scheletrico: tutti i 17 satelliti con i 6 passi. Neurologia: Basi e Midollo e sistema periferico interi; Encefalo e Corteccia solo con i passi Le strutture, Dove si trova e La funzione (niente Se si danneggia né caso clinico). Cuore e vasi e Apparato respiratorio: interi, come nel percorso completo (unione con il programma della scuola dell'autore, 20/11/2026). Nei satelliti con meno passi e nei pianeti con meno satelliti vale la regola dei percorsi parziali (satellite acceso ed esame del pianeta contano solo in questo percorso). Rilascio 2: Patologia e clinica, corso a quiz (dal rilascio 3, unione con il programma della scuola dell'autore: 6 pianeti, 26 satelliti, con Patologia degli organi; 3 passi da 10 quesiti: Concetti, Applicazione, Quesiti d'esame; quesiti in testi/mcb-patologia.json, da verificare, i nuovi scritti dai PDF delle lezioni dell'autore). Gli altri corsi a quiz (Idroterapia e terapie fisiche, Scienze di base e fisiologia, Igiene, sicurezza e professione) arrivano nei rilasci successivi.",
  "id": "mcb",
  "nome": "MCB",
  "bozza": true,
  "corso": "muscolo-scheletrico",
  "mappa": {
   "file": "mappa.json",
-  "version": 6
+  "version": 7
  },
  "rilascio": {
-  "numero": 2,
+  "numero": 3,
   "pubblicato_il": "2026-11-20",
-  "da": "a mano (bozza): i 4 corsi esistenti e Patologia e clinica (corso a quiz)"
+  "da": "a mano (bozza): Patologia e clinica unita al programma della scuola dell'autore (6 pianeti, 26 satelliti)"
  },
  "nodi": [
   {
@@ -865,28 +865,34 @@
    "ordine": 1
   },
   {
-   "id": "mcb-pat-ortopedia",
+   "id": "mcb-pat-organi",
    "tipo": "pianeta",
    "genitore": "mcb-patologia",
    "ordine": 2
   },
   {
-   "id": "mcb-pat-reumatologia",
+   "id": "mcb-pat-ortopedia",
    "tipo": "pianeta",
    "genitore": "mcb-patologia",
    "ordine": 3
   },
   {
-   "id": "mcb-pat-dermatologia",
+   "id": "mcb-pat-reumatologia",
    "tipo": "pianeta",
    "genitore": "mcb-patologia",
    "ordine": 4
   },
   {
-   "id": "mcb-pat-sicurezza",
+   "id": "mcb-pat-dermatologia",
    "tipo": "pianeta",
    "genitore": "mcb-patologia",
    "ordine": 5
+  },
+  {
+   "id": "mcb-pat-sicurezza",
+   "tipo": "pianeta",
+   "genitore": "mcb-patologia",
+   "ordine": 6
   },
   {
    "id": "mcb-pat-infiammazione",
@@ -905,6 +911,36 @@
    "tipo": "satellite",
    "genitore": "mcb-pat-generale",
    "ordine": 3
+  },
+  {
+   "id": "mcb-pat-cuore",
+   "tipo": "satellite",
+   "genitore": "mcb-pat-organi",
+   "ordine": 1
+  },
+  {
+   "id": "mcb-pat-respiro",
+   "tipo": "satellite",
+   "genitore": "mcb-pat-organi",
+   "ordine": 2
+  },
+  {
+   "id": "mcb-pat-digerente",
+   "tipo": "satellite",
+   "genitore": "mcb-pat-organi",
+   "ordine": 3
+  },
+  {
+   "id": "mcb-pat-urinario",
+   "tipo": "satellite",
+   "genitore": "mcb-pat-organi",
+   "ordine": 4
+  },
+  {
+   "id": "mcb-pat-sincope",
+   "tipo": "satellite",
+   "genitore": "mcb-pat-organi",
+   "ordine": 5
   },
   {
    "id": "mcb-pat-fratture",
@@ -929,6 +965,18 @@
    "tipo": "satellite",
    "genitore": "mcb-pat-ortopedia",
    "ordine": 4
+  },
+  {
+   "id": "mcb-pat-osteoporosi",
+   "tipo": "satellite",
+   "genitore": "mcb-pat-ortopedia",
+   "ordine": 5
+  },
+  {
+   "id": "mcb-pat-infanzia",
+   "tipo": "satellite",
+   "genitore": "mcb-pat-ortopedia",
+   "ordine": 6
   },
   {
    "id": "mcb-pat-artrosi",
@@ -973,16 +1021,34 @@
    "ordine": 1
   },
   {
-   "id": "mcb-pat-farmaci",
+   "id": "mcb-pat-semeiotica",
    "tipo": "satellite",
    "genitore": "mcb-pat-sicurezza",
    "ordine": 2
   },
   {
-   "id": "mcb-pat-referti",
+   "id": "mcb-pat-farmacologia",
    "tipo": "satellite",
    "genitore": "mcb-pat-sicurezza",
    "ordine": 3
+  },
+  {
+   "id": "mcb-pat-antibiotici",
+   "tipo": "satellite",
+   "genitore": "mcb-pat-sicurezza",
+   "ordine": 4
+  },
+  {
+   "id": "mcb-pat-cortisonici",
+   "tipo": "satellite",
+   "genitore": "mcb-pat-sicurezza",
+   "ordine": 5
+  },
+  {
+   "id": "mcb-pat-miorilassanti",
+   "tipo": "satellite",
+   "genitore": "mcb-pat-sicurezza",
+   "ordine": 6
   }
  ]
 }

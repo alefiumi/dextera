@@ -1,5 +1,5 @@
 {
- "version": 8,
+ "version": 9,
  "nota": "Mappa delle competenze di Dextera (sezione 2 della specifica). Id delle strutture: ossa e muscoli come in content/corpo.json, reperi 'r.' + nome inglese di atlante/dati.json (lm) in minuscolo con i trattini. I reperi sono quelli visibili da fuori nel 3D (atlante/build/visibili.json); sulle ossa condivise tra più satelliti la divisione per posizione è in divisione_reperi, confermata dall'autore. Corso «neurologia» (dal corso del Dott. Benevento): strutture con id n.<voce di testi/neuro.json>; passi strutture, dove, funzione, lesione, connessioni e progetto (casi di testi/casi.json, modulo neuro).",
  "divisione_reperi": {
   "stato": "confermato",
@@ -1341,6 +1341,49 @@
       {"id": "mcb-ter-crenoterapia", "nome": "Crenoterapia e balneoterapia", "ordine": 13, "passi": []},
       {"id": "mcb-ter-idrokinesi", "nome": "Principi di idrokinesiterapia", "ordine": 14, "passi": []},
       {"id": "mcb-ter-stabilimento", "nome": "Lo stabilimento e il capo bagnino", "ordine": 15, "passi": []}
+     ]
+    }
+   ]
+  },
+  {
+   "id": "mcb-scienze",
+   "nome": "Scienze di base e fisiologia",
+   "modulo": null,
+   "in_arrivo": true,
+   "quiz": "mcb-scienze.json",
+   "nota": "Percorso MCB, rilascio 4 (sezione 2 della specifica, con l'unione al programma della scuola dell'autore): corso a quiz con 3 passi da 10 quesiti (Concetti, Applicazione, Quesiti d'esame). I passi arrivano da content/mcb-scienze.json, generato da testi.py da testi/mcb-scienze.json (quesiti dai PDF delle lezioni dell'autore e dall'AI: da verificare).",
+   "pianeti": [
+    {
+     "id": "mcb-sci-biologia",
+     "nome": "Biologia di base",
+     "satelliti": [
+      {"id": "mcb-sci-chimica", "nome": "Chimica dei viventi", "ordine": 1, "passi": []},
+      {"id": "mcb-sci-cellula", "nome": "La cellula", "ordine": 2, "passi": []},
+      {"id": "mcb-sci-tessuti", "nome": "I tessuti", "ordine": 3, "passi": []}
+     ]
+    },
+    {
+     "id": "mcb-sci-fisica",
+     "nome": "Fisica per l'MCB",
+     "satelliti": [
+      {"id": "mcb-sci-leve", "nome": "Forze e leve", "ordine": 4, "passi": []},
+      {"id": "mcb-sci-fluidi", "nome": "Fluidi e pressione", "ordine": 5, "passi": []},
+      {"id": "mcb-sci-calore", "nome": "Calore e temperatura", "ordine": 6, "passi": []},
+      {"id": "mcb-sci-elettricita", "nome": "Elettricità e corpo", "ordine": 7, "passi": []}
+     ]
+    },
+    {
+     "id": "mcb-sci-fisiologia",
+     "nome": "Fisiologia",
+     "satelliti": [
+      {"id": "mcb-sci-muscolo", "nome": "Muscolo e contrazione", "ordine": 8, "passi": []},
+      {"id": "mcb-sci-articolazioni", "nome": "Articolazioni e movimento", "ordine": 9, "passi": []},
+      {"id": "mcb-sci-circolazione", "nome": "Circolazione e linfa", "ordine": 10, "passi": []},
+      {"id": "mcb-sci-respirazione", "nome": "Respirazione", "ordine": 11, "passi": []},
+      {"id": "mcb-sci-pelle", "nome": "Pelle e termoregolazione", "ordine": 12, "passi": []},
+      {"id": "mcb-sci-dolore", "nome": "Dolore", "ordine": 13, "passi": []},
+      {"id": "mcb-sci-digestione", "nome": "Digestione e nutrizione", "ordine": 14, "passi": []},
+      {"id": "mcb-sci-endocrino", "nome": "Sistema endocrino", "ordine": 15, "passi": []}
      ]
     }
    ]

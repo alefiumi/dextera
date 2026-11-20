@@ -46,6 +46,7 @@ Dove questo file e la specifica differiscono, vale la specifica.
 - Casate su due livelli (SQL: dextera_casate, casate grandi e UCBM): v0.93.0, vedi «Casate su due livelli». Online e SQL applicato il 20/11/2026.
 - Voto di capo e vice, annunci, banner (SQL: dextera_gruppi): v0.94.0, vedi «Pagina dei gruppi». Online e SQL applicato il 20/11/2026; l'autore è amministratore (`dextera_admin`).
   Supabase avvisa «tabelle senza RLS» e «operazioni distruttive»: falso allarme (RLS attivata in un ciclo `execute format`, i `drop … if exists` servono a rieseguire il file).
+- Percorso MCB, primo rilascio (SQL: 4 righe in badge_classes, `20261129090000_dextera_mcb.sql`): v0.94.1, contenuti 34, vedi «Percorso MCB». Non ancora online.
 - Corso di neurologia: contenuti (primo rilascio) e corso giocabile (v0.81.0, vedi «Corso di neurologia giocabile»), Palestra sul cervello (v0.82.0), gioco 3D (v0.83.0).
 - GitHub Pages attivo (ramo `main`, cartella radice): online su `alefiumi.github.io/dextera`.
 
@@ -712,7 +713,7 @@ descrizioni; quelle con fonte Z-Anatomy dicono da quale vaso nasce o dove sbocca
 - Corsi «in arrivo» (`in_arrivo: true` in `mappa.json`, senza passi): non entrano in `corsi()`, sono in `corsiArrivo()`; nell'universo un
   sistema spento che apre il programma (`arrivoHtml()` in `path.js`). Il Test UCBM ha 3 pianeti (Biologia 9, Chimica 10, Fisica 7 satelliti,
   20 domande ciascuno nel test) con il testo del programma (`programma`); i contenuti si scriveranno più avanti.
-- **Percorsi**: elenco in `content/index.json` → `percorsi` (id, nome, `file`; senza file = «in arrivo»: Fisioterapia, Medicina, MCB; `bozza`).
+- **Percorsi**: elenco in `content/index.json` → `percorsi` (id, nome, `file`; senza file = «in arrivo»: Fisioterapia, Medicina; `bozza`; MCB giocabile dalla v0.94.1).
   Ogni file di `content/percorsi/` ha i nodi del gestionale e `corso` (il primo corso da aprire). `content.js` li carica tutti (`app.PERCORSI`,
   `app.PCAT`, `app.PBASE` = base); `applyStudio()` in `percorso.js` mette in `app.PERCORSO` quello scelto. `content/percorsi/ucbm.json` (bozza):
   da v0.91.0 il solo corso Test UCBM; l'anatomia (cuore, respiratorio, neurologia, ossa) sta dentro Biologia come satelliti ospiti (vedi «Satelliti ospiti»).
@@ -901,6 +902,26 @@ può più nascondere con le segnalazioni).
   `foto_di_copertina`. `privacy.html`: tre righe nuove (voto, annunci e banner, segnalazioni) e la copertina caricata; `termini.html`: annunci e banner nelle regole.
 - Prova: `gruppi.mjs` (56 controlli, con e senza il file) nella cartella delle note di questa sessione; passano anche `percorsi.mjs`, `fase6d.mjs`,
   `flotta2.mjs`, `profilo2.mjs` e `casate2.mjs` (la copia di `casate.mjs` che legge la versione da `sw.js`).
+
+## Percorso MCB (v0.94.1, contenuti 34, `mcb.json` v1, file SQL `20261129090000_dextera_mcb.sql`)
+Sezione 2 «Percorso MCB» della specifica (Massaggiatore e Capo Bagnino, decisa il 20/11/2026). Rilascio 1: solo i 4 corsi che esistono già,
+con gli stessi nodi del percorso completo e meno satelliti o passi (maestria e progressi in comune); muscolo-scheletrico è il primo corso.
+- `content/percorsi/mcb.json` (bozza, scritto a mano come `base.json`): muscolo-scheletrico con i 17 satelliti e i loro passi (il cranio ha
+  1, 2 e 6 come nel completo); neurologia con Basi e Midollo e sistema periferico interi, Encefalo e Corteccia solo con i passi 1–3 (strutture,
+  dove si trova, funzione; niente «Se si danneggia» né caso clinico, `caso` null); Cuore e vasi senza `cv-coronarie`; Respiratorio con
+  `re-lobi` e `re-bronchi` (pianeta `re-vasi` fuori). In `index.json` → `percorsi` MCB ha `file` e `bozza: true`, ed è in `files`.
+- Regola dei percorsi parziali (già della v0.92.0): i satelliti di Encefalo e Corteccia e i pianeti con meno satelliti (Cuore, Vie aeree,
+  Encefalo, Corteccia) accendono il satellite e superano l'esame solo in MCB (`S.path.pp.mcb`, colonna `percorso` di `path_progress`).
+  Pianeti interi in MCB: i 4 del corpo, Basi, Midollo, Grandi vasi, Vasi del corpo, Polmoni.
+- `esameCasi()` sceglie il caso automatico dell'esame solo tra i satelliti del percorso (in MCB niente caso delle coronarie nell'esame del
+  Cuore); nel completo non cambia nulla. «Cosa studi?» conta i pianeti di ogni corso nel percorso che si sta scegliendo (`withPercorso`).
+- `controlla_percorsi()` in `testi.py` controlla anche il catalogo di `index.json`: file esistente, stesso `id`, presente in `files`.
+- SQL: le 4 righe `sat1-mcb`, `pianeta1-mcb`, `corso1-mcb`, `sistema-mcb` in `badge_classes` (testi come `badgeById`, nome «MCB»). Si applica
+  dopo aver pubblicato l'app; prima i badge MCB restano sul telefono. MCB per ora non ha casate sue: i punti vanno solo alla casata grande.
+- I 4 corsi nuovi a quiz (Scienze di base e fisiologia, Patologia e clinica, Idroterapia e terapie fisiche, Igiene, sicurezza e professione)
+  non ci sono ancora: i quesiti li scrive la chat dei contenuti; i rilasci seguono l'ordine della specifica.
+- Prova: `mcb.mjs` (32 controlli) nella cartella delle note di questa sessione; passano anche `fase6d.mjs` (71, la riga di MCB aggiornata),
+  `percorsi.mjs` (39) e `osp/prova.mjs` (13). `fase6c.mjs` ha 3 errori attesi (MCB non più «in arrivo» e i due controlli della v0.91).
 
 ## Mappa del percorso (`content/mappa.json`)
 Corso → 4 pianeti → 17 satelliti (con `ordine` della specifica) → 6 passi (`ossa`, `reperi`, `muscoli`, `connessioni`, `funzione`,

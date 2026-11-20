@@ -1,5 +1,5 @@
 {
- "version": 33,
+ "version": 34,
  "app_min": "0.91.0",
  "modules": [
   "corpo",
@@ -15,6 +15,7 @@
   "regole.json",
   "percorsi/base.json",
   "percorsi/ucbm.json",
+  "percorsi/mcb.json",
   "ucbm.json"
  ],
  "percorsi": [
@@ -39,7 +40,9 @@
   },
   {
    "id": "mcb",
-   "nome": "MCB"
+   "nome": "MCB",
+   "file": "percorsi/mcb.json",
+   "bozza": true
   }
  ]
 }

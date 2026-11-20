@@ -344,6 +344,14 @@ def controlla_percorsi():
                 # satellite ospite: sta dentro un satellite di questo percorso (Test UCBM: l'anatomia in «Anatomia e fisiologia»)
                 h = n.get('ospite_di')
                 if h and (h == n['id'] or not any(m['id'] == h and m['tipo'] == 'satellite' and not m.get('ospite_di') for m in P['nodi'])): err.append(f"{f}: ospite_di {h} di {n['id']}")
+    # catalogo in content/index.json → percorsi: ogni file esiste, ha lo stesso id ed è in files (si scarica per l'uso offline)
+    I = json.load(open(os.path.join(ROOT, 'content/index.json')))
+    for x in I.get('percorsi', []):
+        f = x.get('file')
+        if not f: continue
+        if not os.path.exists(os.path.join(ROOT, 'content', f)): err.append(f"index.json: {x['id']} senza il file {f}"); continue
+        if json.load(open(os.path.join(ROOT, 'content', f))).get('id') != x['id']: err.append(f"index.json: {f} ha un id diverso da {x['id']}")
+        if f not in I.get('files', []): err.append(f"index.json: {f} manca in files")
     if err: raise SystemExit('content/percorsi non valido:\n  ' + '\n  '.join(err[:30]))
     print('content/percorsi: nodi validi')
 

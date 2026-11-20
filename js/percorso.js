@@ -147,10 +147,11 @@ export function nfig(sid){
 export const passi=sat=>{const inc=pnode(sat.id)?.passi;return sat.passi.filter(ps=>!ps.salta&&(!inc||inc.includes(ps.id)));};
 export const casoOf=sat=>{const c=pnode(sat.id)?.caso;return c?caseIn(corsoOf(sat),c):null;};
 // caso clinico dell'esame del pianeta (fase 2): quello scelto nel percorso pubblicato (esame.caso, dal gestionale), altrimenti
-// in automatico i casi la cui risposta è un muscolo (o una struttura del corso di neurologia) del pianeta
+// in automatico i casi la cui risposta è un muscolo (o una struttura del corso di neurologia) del pianeta, contando solo i satelliti
+// del percorso (MCB: in Cuore niente casi sulle coronarie)
 export function esameCasi(pl){
  const co=corsoOf(pl),c=pnode(pl.id)?.esame?.caso;if(c){const x=caseIn(co,c);if(x)return [x];}
- const ms=new Set(pl.satelliti.flatMap(s=>s.passi.flatMap(ps=>Array.isArray(ps.strutture)?ps.strutture:[])));
+ const ms=new Set(satelliti(pl).flatMap(s=>s.passi.flatMap(ps=>Array.isArray(ps.strutture)?ps.strutture:[])));
  return casesOf(co).filter(k=>caseIds(k).some(id=>ms.has(id)));
 }
 

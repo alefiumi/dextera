@@ -212,7 +212,7 @@ function studioForm(pid,sel,first){
  return `<fieldset class="pstudio"><legend class="kick">Percorso</legend>${cat.map(x=>`<label class="popt${x.ok?'':' off'}"><input type="radio" name="spercorso" data-p="spercorso" value="${esc(x.id)}"${x.id===pid?' checked':''}${x.ok?'':' disabled'}>
    <span><b>${esc(x.nome)}</b>${x.bozza?' <small class="tag">bozza</small>':''}${x.ok?'':' <small class="mut">in arrivo</small>'}</span></label>`).join('')}</fieldset>
   ${materieHtml(pid)}<fieldset class="pstudio"><legend class="kick">I tuoi corsi</legend>${testDi(pid).length?'<p class="mut">L\'anatomia che il test chiede è dentro Biologia, nell\'argomento «Anatomia e fisiologia»: si studia sulle figure dei corsi di anatomia.</p>':''}${cs.map(c=>`<label class="popt"><input type="checkbox" data-p="scorso" value="${esc(c.id)}"${on(c)?' checked':''}>
-   <span>${icoOf(c)} <b>${esc(c.nome)}</b> <small class="mut">${P.pianeti(c).length||c.pianeti.length} pianeti</small></span></label>`).join('')}
+   <span>${icoOf(c)} <b>${esc(c.nome)}</b> <small class="mut">${P.withPercorso(pid,()=>P.pianeti(c).length)||c.pianeti.length} pianeti</small></span></label>`).join('')}
 </fieldset>`;
 }
 // materie del corso del test d'ingresso del percorso (Test UCBM), in arrivo o già in parte giocabile: un riquadro apribile per materia

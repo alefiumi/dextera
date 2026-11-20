@@ -43,7 +43,7 @@ Dove questo file e la specifica differiscono, vale la specifica.
 - Fase 6 – Altri corsi e percorsi (SQL: dextera_studio): v0.89.0 (correzione v0.89.1), vedi «Altri corsi e percorsi». Online e SQL applicato il 19/11/2026.
 - Test UCBM, Biologia giocabile (nessun SQL): v0.90.0, vedi «Test UCBM». Chimica giocabile (solo contenuti); Fisica giocabile e simulazione completa: v0.90.1. Percorso UCBM con il solo Test e l'anatomia dentro Biologia (satelliti ospiti): v0.91.0, vedi «Satelliti ospiti».
 - Più percorsi (SQL: colonna percorso, dextera_percorsi_xp): v0.92.0, vedi «Più percorsi». Online e SQL applicato il 20/11/2026.
-- Casate su due livelli (SQL: dextera_casate, casate grandi e UCBM): v0.93.0, vedi «Casate su due livelli». File SQL da applicare dall'autore dopo la pubblicazione.
+- Casate su due livelli (SQL: dextera_casate, casate grandi e UCBM): v0.93.0, vedi «Casate su due livelli». Online e SQL applicato il 20/11/2026.
 - Corso di neurologia: contenuti (primo rilascio) e corso giocabile (v0.81.0, vedi «Corso di neurologia giocabile»), Palestra sul cervello (v0.82.0), gioco 3D (v0.83.0).
 - GitHub Pages attivo (ramo `main`, cartella radice): online su `alefiumi.github.io/dextera`.
 

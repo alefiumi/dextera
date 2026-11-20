@@ -3,6 +3,9 @@
      di amicizia e ricerca per nome utente. Se sul server manca il file della Flotta: la classifica tra amici per XP totali.
    - Casate: le 4 casate (Osteon, Myon, Neuron, Cor), la propria (assegnata dal server, si cambia una volta per stagione),
      i punti della stagione (mese), il pianeta scelto (punti doppi) e l'albo delle stagioni chiuse.
+     Dalla v0.93.0, con il file 20261127090000_dextera_casate.sql, due livelli: la casata grande (Nova, Pulsar, Quasar, Nebula: la
+     stagione la vince una di queste) e la casata del percorso aperto (Osteon… nel percorso completo, Bios, Alchemia, Physis in UCBM),
+     ciascuna con la sua classifica e il suo cambio. Senza il file la vista resta quella della 0.92.
    - Equipaggi: da 2 a 10 amici con un codice d'invito, l'obiettivo della settimana su un pianeta e le sfide di 5 strutture.
    - Tutti: la classifica generale per XP (come in BodyMania).
    Fase 5: negli amici «Profilo» apre la scheda dell'amico (copertina, badge in vetrina e titolo, tabella dextera_profili).
@@ -73,10 +76,11 @@ export async function loadSocial(){
 async function loadFleet(sb,uid){
  await FL.ensureCasata(sb,uid);
  const px=await FL.probePx(sb).catch(()=>false); // con il file dei percorsi: punti delle casate ed equipaggi per percorso
+ const cx=!!(await FL.ensureCasate(sb,uid).catch(()=>null)); // con il file delle casate su due livelli
  const [k,sc,ss,wk,cr]=await Promise.all([
-  sb.from('constellations').select('id,nome,simbolo,colore,ordine,membri').order('ordine'),
+  sb.from('constellations').select('id,nome,simbolo,colore,ordine,membri'+(cx?',ambito':'')).order('ordine'),
   sb.from('season_scores').select(px?'constellation_id,punti,membri_attivi,percorso':'constellation_id,punti,membri_attivi').eq('stagione',FL.season()),
-  sb.from('seasons').select('stagione,vincitore,classifica').order('stagione',{ascending:false}).limit(6),
+  sb.from('seasons').select('stagione,vincitore,classifica'+(cx?',percorsi':'')).order('stagione',{ascending:false}).limit(6),
   sb.from('dextera_classifica_settimana').select('id,username,avatar,xp').order('xp',{ascending:false}).limit(200),
   sb.from('crews').select('id,nome,codice,capo,vice,pianeta,membri_ids,settimana,contributi,creato_il'+(px?',percorso':'')).order('creato_il')]);
  for(const r of [k,sc,ss,wk,cr])if(r.error)throw r.error;
@@ -89,7 +93,7 @@ async function loadFleet(sb,uid){
  const chs=ch.data||[];
  const an=chs.length?await sb.from('crew_challenge_answers').select('challenge_id,user_id,giuste').in('challenge_id',chs.map(c=>c.id)):{data:[]};
  if(an.error)throw an.error;
- SO.fleet={uid,k:k.data||[],sc:sc.data||[],ss:ss.data||[],week:wk.data||[],crews,prof:Object.fromEntries((pp.data||[]).map(p=>[p.id,p])),ch:chs,ans:an.data||[],at:Date.now()};
+ SO.fleet={uid,cx,k:k.data||[],sc:sc.data||[],ss:ss.data||[],week:wk.data||[],crews,prof:Object.fromEntries((pp.data||[]).map(p=>[p.id,p])),ch:chs,ans:an.data||[],at:Date.now()};
  for(const a of SO.fleet.ans)if(a.user_id===uid)delete SO.done[a.challenge_id]; // già sul server
  // pianeti degli equipaggi: i contributi della settimana si mandano per ogni equipaggio; se ne cambia uno si rimandano
  const f=FL.F(),pl=Object.fromEntries(crews.map(c=>[c.id,c.pianeta||null]));
@@ -135,8 +139,8 @@ const monthName=(s=FL.season())=>{const [y,m]=s.split('-').map(Number);const t=n
 
 // testata della scheda e anteprima delle casate (senza account o finché sul server manca il file della Flotta)
 const HEAD=`<div class="card ghead"><div class="kick">Flotta</div><h2>Amici, casate ed equipaggi</h2><p class="mut">Sfida gli amici ogni settimana, porta punti alla tua casata e raggiungi l'obiettivo con il tuo equipaggio.</p></div>`;
-const CASATE=[['Osteon','#f0c75e','🦴'],['Myon','#f87171','💪'],['Neuron','#a78bfa','🧠'],['Cor','#60a5fa','🫀']];
-const preview=t=>`<div class="card soon"><div class="kick">${t}</div><h3>Casate ed equipaggi</h3><p class="mut">Quattro casate in gara ogni mese: ogni XP di progresso vale un punto per la tua. E piccoli equipaggi di amici con il loro obiettivo della settimana e le sfide.</p>
+const CASATE=[['Nova','#f59e0b','🌟'],['Pulsar','#22d3ee','💫'],['Quasar','#8b5cf6','🌀'],['Nebula','#ec4899','🌌']];
+const preview=t=>`<div class="card soon"><div class="kick">${t}</div><h3>Casate ed equipaggi</h3><p class="mut">Quattro casate in gara ogni mese, e in ogni percorso le sue: ogni XP di progresso vale un punto per le tue. E piccoli equipaggi di amici con il loro obiettivo della settimana e le sfide.</p>
  <ul class="casate">${CASATE.map(([n,c,i])=>`<li style="--c:${c}"><span aria-hidden="true">${i}</span>${n}</li>`).join('')}</ul></div>`;
 const MISSING=`<p class="note">⚠️ Sul server manca il file ${FL.SQL_FILE}: casate, equipaggi e la classifica della settimana arrivano quando viene applicato. Intanto i tuoi punti si contano su questo telefono.</p>`;
 
@@ -216,8 +220,11 @@ function planetOptions(sel,none){
  const by=new Map();for(const {p,c} of L){if(!by.has(c))by.set(c,[]);by.get(c).push(p);}
  return `<option value="">${esc(none)}</option>`+[...by].map(([c,ps])=>`<optgroup label="${esc(c.nome)}">${ps.map(p=>`<option value="${esc(p.id)}"${p.id===sel?' selected':''}>${esc(p.nome)}</option>`).join('')}</optgroup>`).join('');
 }
+// casate di un ambito ('base' = percorso completo, 'app' = casate grandi, altrimenti l'id del percorso)
+const ofAmb=(fl,a)=>fl.k.filter(k=>(k.ambito||'base')===a);
 function housesHtml(fl){
- const f=FL.F(),K=fl.k,my=K.find(k=>k.id===f.casata),Rf=FL.FR();
+ if(fl.cx)return houses2Html(fl);
+ const f=FL.F(),K=ofAmb(fl,'base'),my=K.find(k=>k.id===f.casata),Rf=FL.FR();
  if(!my)return card('La tua casata','','<p class="mut">Casata non ancora assegnata: serve la connessione.</p>');
  const now=new Date(),next=new Date(now.getFullYear(),now.getMonth()+1,1),last=new Date(next-864e5);
  const nextTxt=next.toLocaleDateString('it',{day:'numeric',month:'long'}),lastTxt=last.toLocaleDateString('it',{day:'numeric',month:'long'});
@@ -241,25 +248,64 @@ function housesHtml(fl){
   return `<li><span>${esc(monthName(s.stagione))}</span><b>${w?`🏆 <span aria-hidden="true">${esc(w.simbolo)}</span> ${esc(w.nome)}${pts!=null?` · ${fmt(pts)} punti`:''}`:'nessun punto'}</b></li>`;}).join('')}</ul>`):'';
  return mine+season+camp+albo;
 }
+// v0.93.0: casata grande (con la stagione e l'albo) e casata del percorso aperto, ognuna con la sua classifica e il suo cambio
+const hrowOf=(my,MEDs=MED)=>(r,i,tp)=>`<div class="lb hrow${r.k.id===my?' me':''}" style="--c:${esc(r.k.colore)}"><span class="pos">${r.p?(i<3?MEDs[i]:i+1):'–'}</span><span class="hsym s" aria-hidden="true">${esc(r.k.simbolo)}</span><span class="nm">${esc(r.k.nome)}${r.k.id===my?' <small>(la tua)</small>':''}<small class="hm">${r.a} ${r.a===1?'membro attivo':'membri attivi'}</small></span><b>${fmt(r.p)} punti</b><i class="lbbar" style="width:calc((100% - 44px) * ${Math.max(.02,r.p/tp).toFixed(3)})" aria-hidden="true"></i></div>`;
+const rankOf=(K,list)=>{const sc=Object.fromEntries(list.map(r=>[r.constellation_id,r]));return K.map(k=>({k,p:+(sc[k.id]?.punti||0),a:sc[k.id]?.membri_attivi||0})).sort((a,b)=>b.p-a.p||a.k.ordine-b.k.ordine);};
+function changeHtml(K,my,amb,nextTxt){
+ if(!FL.canChange(amb))return `<p class="mut">Hai già cambiato questa casata nella stagione: potrai cambiarla di nuovo dal ${esc(nextTxt)}.</p>`;
+ if(SO.chg!==amb)return `<button class="chip" data-so="chg" data-a="${esc(amb)}">Cambia casata</button>`;
+ return `<div class="sub">Passa a un'altra casata</div><p class="mut">Si può cambiare una volta per stagione; i punti già fatti restano a ${esc(my.nome)}.</p><div class="chips">${K.filter(k=>k.id!==my.id).map(k=>`<button class="chip hchip" style="--c:${esc(k.colore)}" data-so="house" data-a="${esc(amb)}" data-h="${esc(k.id)}"><span aria-hidden="true">${esc(k.simbolo)}</span> ${esc(k.nome)}</button>`).join('')}<button class="chip" data-so="chg" data-a="${esc(amb)}">Annulla</button></div>`;
+}
+function houses2Html(fl){
+ const f=FL.F(),Rf=FL.FR(),pid=FL.pid(),M=ofAmb(fl,'app'),my=M.find(k=>k.id===FL.myCasata('app'));
+ if(!my)return card('La tua casata','','<p class="mut">Casata non ancora assegnata: serve la connessione.</p>');
+ const now=new Date(),next=new Date(now.getFullYear(),now.getMonth()+1,1),last=new Date(next-864e5);
+ const nextTxt=next.toLocaleDateString('it',{day:'numeric',month:'long'}),lastTxt=last.toLocaleDateString('it',{day:'numeric',month:'long'});
+ const pl=S.set&&S.set.pianeta,opts=planetOptions(pl,'Nessuno'),mon=esc(monthName().split(' ')[0].toLowerCase());
+ const mine=`<div class="card house" style="--c:${esc(my.colore)}"><div class="hhead"><span class="hsym" aria-hidden="true">${esc(my.simbolo)}</span><div><div class="kick">La tua casata grande</div><h3>${esc(my.nome)}</h3><p class="mut">${fmt(my.membri)} ${my.membri===1?'membro':'membri'} · raccoglie i punti di tutti i percorsi</p></div></div>
+  <div class="hnums"><div><b>${FL.todayPoints()}</b><small>punti oggi (al massimo ${Rf.tetto_giorno} per percorso)</small></div><div><b>${fmt(FL.seasonPoints())}</b><small>tuoi punti a ${mon}</small></div></div>
+  ${opts?`<label class="fl" for="sopl">Pianeta che stai studiando</label><select id="sopl" class="soq" data-so="pl">${opts}</select><p class="mut">Lì i tuoi punti valgono doppio; il tetto di ${Rf.tetto_giorno} al giorno resta.</p>`:''}
+  ${changeHtml(M,my,'app',nextTxt)}</div>`;
+ const rows=rankOf(M,scOf(fl,'app')),top=Math.max(1,...rows.map(r=>r.p)),hr=hrowOf(my.id);
+ const season=card('Stagione di '+esc(monthName()),'',`<p class="mut">Finisce il ${esc(lastTxt)}: vince la casata grande con più punti. Ogni XP di progresso di un membro vale un punto, al massimo ${Rf.tetto_giorno} al giorno a testa in ogni percorso.</p>`+
+  rows.map((r,i)=>hr(r,i,top)).join('')+'<p class="note">Ogni punto vale due volte: per la tua casata grande e per la casata del percorso in cui lo fai.</p>');
+ // casata del percorso aperto
+ const PK=ofAmb(fl,pid),pm=PK.find(k=>k.id===FL.myCasata(pid));let camp='';
+ if(!PK.length)camp=card('Casata del percorso','',`<p class="mut">Il percorso ${esc(pname(pid))} non ha ancora casate sue: i punti che fai qui vanno alla tua casata grande.</p>`);
+ else if(!pm)camp=card('Casata del percorso','',`<p class="mut">Casata del percorso ${esc(pname(pid))} non ancora assegnata: serve la connessione.</p>`);
+ else{const pr=rankOf(PK,scOf(fl,pid)),pt=Math.max(1,...pr.map(r=>r.p)),hp=hrowOf(pm.id);
+  camp=`<div class="card house" style="--c:${esc(pm.colore)}"><div class="hhead"><span class="hsym" aria-hidden="true">${esc(pm.simbolo)}</span><div><div class="kick">Casata del percorso · ${esc(pname(pid))}</div><h3>${esc(pm.nome)}</h3><p class="mut">${fmt(pm.membri)} ${pm.membri===1?'membro':'membri'}</p></div></div>
+   <div class="hnums"><div><b>${FL.todayPoints(pid)}</b><small>punti oggi in questo percorso</small></div><div><b>${fmt(FL.seasonPoints(pid))}</b><small>tuoi punti a ${mon}</small></div></div>
+   <div class="sub">Campionato del percorso</div>${pr.map((r,i)=>hp(r,i,pt)).join('')}
+   ${changeHtml(PK,pm,pid,nextTxt)}</div>`;}
+ const kn=id=>fl.k.find(k=>k.id===id);
+ const albo=fl.ss.length?card('Albo delle stagioni','',`<ul class="albo">${fl.ss.map(s=>{const w=kn(s.vincitore),pts=(s.classifica||[]).find(x=>x.casata===s.vincitore)?.punti,pw=kn(s.percorsi?.[pid]?.vincitore);
+  return `<li><span>${esc(monthName(s.stagione))}</span><b>${w?`🏆 <span aria-hidden="true">${esc(w.simbolo)}</span> ${esc(w.nome)}${pts!=null?` · ${fmt(pts)} punti`:''}`:'nessun punto'}</b>${pw?`<small class="mut">${esc(pname(pid))}: <span aria-hidden="true">${esc(pw.simbolo)}</span> ${esc(pw.nome)}</small>`:''}</li>`;}).join('')}</ul>`):'';
+ return mine+season+camp+albo;
+}
 
 /* ---------- riquadro Flotta nel Profilo (sezione 7 della specifica: costellazione ed equipaggio) ----------
    Dall'ultima copia della scheda Flotta (SO.fleet, in dextera-social: si vede anche offline) e dai conti del telefono (flotta.js). */
 export function fleetCard(){
  const kick='<div class="kick">Flotta</div>';
  if(!configured)return '';
- if(!A.user)return `<div class="card pfl">${kick}<h2>Casata ed equipaggi</h2><p class="mut">Con un account entri in una delle quattro casate e puoi unirti a un equipaggio di amici.</p></div>`;
- const fl=SO.fleet&&SO.fleet.uid===A.user.id?SO.fleet:null,f=FL.F(),my=fl?.k.find(k=>k.id===f.casata);
+ if(!A.user)return `<div class="card pfl">${kick}<h2>Casata ed equipaggi</h2><p class="mut">Con un account entri in una casata grande, in quella del tuo percorso, e puoi unirti a un equipaggio di amici.</p></div>`;
+ const fl=SO.fleet&&SO.fleet.uid===A.user.id?SO.fleet:null,f=FL.F(),my=fl?.k.find(k=>k.id===(fl.cx?FL.myCasata('app'):f.casata));
  const open=(v,t)=>`<button class="chip" data-pf="flotta" data-v="${v}">${t}</button>`;
  if(!fl||!my)return `<div class="card pfl">${kick}<h2>Casata ed equipaggi</h2><p class="mut">${A.fleetMissing?'Casate ed equipaggi arrivano quando sul server c\'è il file della Flotta. Intanto i tuoi punti si contano su questo telefono.':'Apri la scheda Flotta con la connessione per vedere la tua casata.'}</p><div class="chips">${open('houses','🚀 Apri la Flotta')}</div></div>`;
- const sc=scTot(fl).map(r=>({id:r.constellation_id,p:+r.punti||0})).sort((a,b)=>b.p-a.p),pos=sc.findIndex(r=>r.id===my.id),mp=sc.find(r=>r.id===my.id)?.p||0;
+ const sc=(fl.cx?scOf(fl,'app'):scTot(fl)).map(r=>({id:r.constellation_id,p:+r.punti||0})).sort((a,b)=>b.p-a.p),pos=sc.findIndex(r=>r.id===my.id),mp=sc.find(r=>r.id===my.id)?.p||0;
+ // casata del percorso aperto (v0.93.0) e la sua posizione nel campionato del percorso
+ const pid=FL.pid(),pm=fl.cx?fl.k.find(k=>k.id===FL.myCasata(pid)&&k.ambito===pid):null;
+ const ps=pm?scOf(fl,pid).filter(r=>ofAmb(fl,pid).some(k=>k.id===r.constellation_id)).map(r=>({id:r.constellation_id,p:+r.punti||0})).sort((a,b)=>b.p-a.p):[],ppos=pm?ps.findIndex(r=>r.id===pm.id):-1;
+ const pline=pm?`<p class="pfpcas" style="--c:${esc(pm.colore)}"><span aria-hidden="true">${esc(pm.simbolo)}</span> Casata del percorso ${esc(pname(pid))}: <b>${esc(pm.nome)}</b>${ppos>=0&&ps[ppos].p?` · ${ppos+1}ª`:''}</p>`:'';
  const E=FL.FR().equipaggio,w=FL.monday();
  const crews=myCrews(fl).map(c=>{const n=(c.membri_ids||[]).length,goal=n*E.per_membro,tot=c.settimana===w?c.contributi:0,pl=planetById(c.pianeta),role=c.capo===A.user.id?' · 👑 capo':c.vice===A.user.id?' · ⭐ vice':'';
   const g=pl&&n>=E.min?`<div class="gbar" role="progressbar" aria-label="Obiettivo di ${esc(c.nome)}" aria-valuemin="0" aria-valuemax="${goal}" aria-valuenow="${Math.min(tot,goal)}"><i style="width:${(Math.min(1,tot/goal)*100).toFixed(1)}%"></i></div><small class="mut">${tot}/${goal} contributi su ${esc(pl.nome)}${tot>=goal?' · 🏅 obiettivo raggiunto':''} · il tuo: ${FL.myContrib(c.pianeta)}</small>`
    :`<small class="mut">${pl?'Serve almeno un altro membro':'Pianeta dell\'obiettivo da scegliere'}</small>`;
   return `<li><b>${esc(c.nome)}</b> <small class="mut">${n} ${n===1?'membro':'membri'}${role}</small>${g}</li>`;}).join('');
- return `<div class="card pfl">${kick}<div class="house pfhouse" style="--c:${esc(my.colore)}"><div class="hhead"><span class="hsym" aria-hidden="true">${esc(my.simbolo)}</span><div><div class="mut">La tua casata</div><h2>${esc(my.nome)}</h2>
+ return `<div class="card pfl">${kick}<div class="house pfhouse" style="--c:${esc(my.colore)}"><div class="hhead"><span class="hsym" aria-hidden="true">${esc(my.simbolo)}</span><div><div class="mut">${fl.cx?'La tua casata grande':'La tua casata'}</div><h2>${esc(my.nome)}</h2>
   <p class="mut">${mp?`${pos+1}ª nella stagione di ${esc(monthName().split(' ')[0].toLowerCase())} · ${fmt(mp)} punti`:'Stagione appena cominciata'}</p></div></div>
-  <div class="hnums"><div><b>${FL.todayPoints()}</b><small>tuoi punti oggi</small></div><div><b>${fmt(FL.seasonPoints())}</b><small>tuoi punti questo mese</small></div></div></div>
+  <div class="hnums"><div><b>${FL.todayPoints()}</b><small>tuoi punti oggi</small></div><div><b>${fmt(FL.seasonPoints())}</b><small>tuoi punti questo mese</small></div></div>${pline}</div>
   <div class="sub">Equipaggi</div>${crews?`<ul class="pcrews">${crews}</ul>`:'<p class="mut">Non sei ancora in un equipaggio.</p>'}
   <div class="chips">${open('houses','🚀 Casate')}${open('crews','👥 Equipaggi')}</div>${SO.at?`<p class="note">Aggiornato ${esc(hm(fl.at||SO.at))}</p>`:''}</div>`;
 }
@@ -349,7 +395,7 @@ async function search(q){
 }
 // messaggi per gli errori del server (hint dei trigger in 20261123090000_dextera_flotta.sql)
 const HINTS={dextera_codice:'Codice non valido: controllalo e riprova.',dextera_gia:'Sei già in questo equipaggio.',dextera_pieno:'Questo equipaggio è al completo (10 membri).',
- dextera_max_equipaggi:'Sei già in 3 equipaggi: è il massimo.',dextera_cambio:'Hai già cambiato casata in questa stagione.',dextera_vice:'Il vice deve essere un membro (e servono almeno 3 membri).',
+ dextera_max_equipaggi:'Sei già in 3 equipaggi: è il massimo.',dextera_cambio:'Hai già cambiato casata in questa stagione.',dextera_ambito:'Questa casata è di un altro percorso.',dextera_vice:'Il vice deve essere un membro (e servono almeno 3 membri).',
  dextera_capo:'Solo il capo nomina il vice.',dextera_sfide:'Troppe sfide oggi in questo equipaggio: riprova domani.'};
 async function act(f,okMsg){
  if(!online()){toast('Serve la connessione.');return false;}
@@ -391,10 +437,12 @@ export function wireSocial(panel){
   else if(k==='del')act(()=>sb.from('friendships').delete().or(pair(uid,id)));
   else if(k==='rm'&&confirm(`Togliere ${b.dataset.n} dagli amici?`))act(()=>sb.from('friendships').delete().or(pair(uid,id)),'Amicizia tolta.');
   // casate
-  else if(k==='chg'){SO.chg=!SO.chg;renderSocial();}
-  else if(k==='house'){const h=SO.fleet?.k.find(x=>x.id===b.dataset.h);if(!h)return;
+  else if(k==='chg'){const a=b.dataset.a||'base';SO.chg=SO.chg===a||SO.chg===true?false:(SO.fleet?.cx?a:true);renderSocial();}
+  else if(k==='house'){const a=SO.fleet?.cx&&b.dataset.a||'base',h=SO.fleet?.k.find(x=>x.id===b.dataset.h&&(!SO.fleet.cx||(x.ambito||'base')===a));if(!h)return;
    if(confirm(`Passare a ${h.nome}? Si può cambiare una volta per stagione; i punti già fatti restano alla casata di prima.`)){SO.chg=false;
-    act(()=>sb.from('constellation_members').update({constellation_id:h.id}).eq('user_id',uid),'Ora sei in '+h.nome+'!').then(()=>A.sb&&FL.ensureCasata(A.sb,uid).then(redraw,()=>{}));}}
+    const q=a==='base'?()=>sb.from('constellation_members').update({constellation_id:h.id}).eq('user_id',uid)
+     :()=>sb.from('dextera_casate').update({constellation_id:h.id}).eq('user_id',uid).eq('ambito',a);
+    act(q,'Ora sei in '+h.nome+'!').then(()=>A.sb&&(a==='base'?FL.ensureCasata(A.sb,uid):FL.ensureCasate(A.sb,uid)).then(redraw,()=>{}));}}
   // equipaggi
   else if(k==='copy')copy(b.dataset.c);
   else if(k==='share')navigator.share({title:'Dextera',text:`Entra nel mio equipaggio «${b.dataset.n}» su Dextera: apri la scheda Flotta → Equipaggi e scrivi il codice ${b.dataset.c}`}).catch(()=>{});

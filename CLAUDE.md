@@ -42,7 +42,8 @@ Dove questo file e la specifica differiscono, vale la specifica.
 - Fase 5 – Profilo e competenze (SQL: righe in badge_classes, dextera_profili): v0.86.0, vedi «Profilo e competenze». Online e SQL applicato il 19/11/2026. Casata ed equipaggi nel Profilo: v0.87.0; obiettivo del giorno e date d'esame: v0.88.0.
 - Fase 6 – Altri corsi e percorsi (SQL: dextera_studio): v0.89.0 (correzione v0.89.1), vedi «Altri corsi e percorsi». Online e SQL applicato il 19/11/2026.
 - Test UCBM, Biologia giocabile (nessun SQL): v0.90.0, vedi «Test UCBM». Chimica giocabile (solo contenuti); Fisica giocabile e simulazione completa: v0.90.1. Percorso UCBM con il solo Test e l'anatomia dentro Biologia (satelliti ospiti): v0.91.0, vedi «Satelliti ospiti».
-- Più percorsi (SQL: colonna percorso, dextera_percorsi_xp): v0.92.0, vedi «Più percorsi». File SQL da applicare dall'autore dopo la pubblicazione.
+- Più percorsi (SQL: colonna percorso, dextera_percorsi_xp): v0.92.0, vedi «Più percorsi». Online e SQL applicato il 20/11/2026.
+- Casate su due livelli (SQL: dextera_casate, casate grandi e UCBM): v0.93.0, vedi «Casate su due livelli». File SQL da applicare dall'autore dopo la pubblicazione.
 - Corso di neurologia: contenuti (primo rilascio) e corso giocabile (v0.81.0, vedi «Corso di neurologia giocabile»), Palestra sul cervello (v0.82.0), gioco 3D (v0.83.0).
 - GitHub Pages attivo (ramo `main`, cartella radice): online su `alefiumi.github.io/dextera`.
 
@@ -409,7 +410,7 @@ descrizioni; quelle con fonte Z-Anatomy dicono da quale vaso nasce o dove sbocca
   Computer in orizzontale: mappa a sinistra ferma e riquadri a destra (media query in fondo alla parte del Percorso di `style.css`).
   Palestra e Flotta con lo stesso stile (19/11/2026, v0.69.0): testata in un riquadro, giochi della Palestra in riquadri a due colonne
   divisi in sezioni 2D e 3D (`renderMenu` in `game.js`), Flotta a riquadri con classifica a barre, interruttore Tutti/Amici e l'anteprima
-  «In arrivo» delle casate Osteon, Myon, Neuron, Cor (`renderSocial` in `social.js`).
+  «In arrivo» delle casate (dalla v0.93.0 le casate grandi Nova, Pulsar, Quasar, Nebula; `renderSocial` in `social.js`).
   Atlante nello stesso stile (19/11/2026, v0.70.0): scelta 2D/3D come interruttore `.seg3` (`#asw`, `aria-pressed`); scheda 2D con
   etichetta piccola e titolo (`.atl` in `explore.js`), legenda della maestria con i pallini del Percorso, riquadro «Usala come un'app»;
   nell'atlante 3D stessi colori dell'app (`--on-acc`), barra a pulsanti più alti, etichetta sopra ogni titolo, home con sei riquadri (`.hub`).
@@ -802,9 +803,7 @@ proprio satellite i satelliti di altri corsi, senza aprire quei corsi sulla mapp
 Decisioni dell'autore del 19/11/2026 (sezione «Più percorsi» del documento delle decisioni): la parte di gioco si separa per percorso;
 maestria, ripasso e passi fatti restano in comune. Piano approvato il 20/11/2026: per percorso XP, campionato, equipaggi, titoli ed esami dei
 pianeti; unici per persona serie e scudi; badge di abitudine unici, badge di contenuto per percorso. Casate: per ora le 4 di prima, che sommano
-tutti i percorsi. **Ancora da decidere con l'autore**: casate su due livelli (macro casate dell'app e casate tematiche di ogni percorso), come i
-punti delle casate di percorso arrivano alla macro casata, nomi e numero delle casate tematiche (proposta: Osteon, Myon, Neuron, Cor diventano le
-casate del percorso completo, macro casate nuove con nomi scelti dall'autore, per UCBM una casata per materia).
+tutti i percorsi (fino alla v0.92; dalla v0.93.0 casate su due livelli, sezione qui sotto).
 - **XP per percorso**: `S.xpBy {percorso: XP}`. In `dayTick` (prima di ogni `save()`) gli XP arrivati da allora (`S.xp − S.lastXp`, quindi anche
   giochi della Palestra, premi d'equipaggio, obiettivo del giorno) vanno al percorso aperto (`xpTo`, `S.xpU` = da inviare). Gli XP di prima vanno
   al percorso base. `P.xpOf(id)`. Totale (`S.xp`, livello nell'intestazione) = tutti i percorsi; `levelOf(xp)` in `state.js`.
@@ -838,7 +837,32 @@ casate del percorso completo, macro casate nuove con nomi scelti dall'autore, pe
   Provato con PGlite: 39 prove (`percorsi_rls.mjs` nelle note delle sessioni). Senza il file l'app funziona come prima e il riquadro Account
   lo dice (`A.pxMissing`, `PX_WARN`). «Scarica i miei dati» ha `xp_per_percorso`; `privacy.html` una riga nuova.
 - Prova: `percorsi.mjs` (39 controlli) e `fase6d.mjs` (la copia di `fase6c.mjs` adattata, 71) nelle note delle sessioni; `osp/prova.mjs` passa.
-  `flotta.mjs` e `profilo.mjs` hanno gli stessi errori anche sulla v0.91 (prove vecchie: «Cosa studi?» alla prima apertura, versione).
+  `flotta.mjs` e `profilo.mjs` hanno gli stessi errori anche sulla v0.91 (prove vecchie: «Cosa studi?» alla prima apertura, versione):
+  le copie aggiornate sono `flotta2.mjs` e `profilo2.mjs` (v0.93.0).
+
+## Casate su due livelli (v0.93.0, file SQL `20261127090000_dextera_casate.sql`)
+Decisioni dell'autore del 20/11/2026: casate grandi dell'app, uguali per tutti, in stile spaziale (scelte dall'AI, si possono cambiare):
+**Nova** 🌟, **Pulsar** 💫, **Quasar** 🌀, **Nebula** 🌌. Casate di ogni percorso: nel completo Osteon, Myon, Neuron, Cor (quelle di prima);
+in UCBM una per materia: **Bios** 🧬 (biologia), **Alchemia** ⚗️ (chimica), **Physis** ⚛️ (fisica). Ogni punto vale per la casata del
+percorso in cui si gioca e per la casata grande; la stagione la vince una casata grande, e ogni percorso ha il suo campionato.
+Nomi, simboli e colori stanno in `constellations` (colonna `ambito`: `app`, `base`, id del percorso): si cambiano con un update, senza l'app.
+- **SQL**: `constellations.ambito` e `macro` (per le 4 di prima la casata grande in cui finisce chi c'era già: osteon→nova, cor→pulsar,
+  neuron→quasar, myon→nebula). `constellation_members` resta la casata del percorso completo (ingresso e cambio solo tra quelle `base`, hint
+  `dextera_ambito`). Tabella nuova `dextera_casate (user_id, ambito, constellation_id, precedente, cambiata_il, entrata_il)` per la casata grande
+  (`app`) e quelle degli altri percorsi: la sceglie il server (la meno numerosa; la grande di chi c'era già segue `macro`), cambio una volta per
+  stagione per ambito, la legge e la cambia solo la persona; un percorso senza casate dà l'hint `dextera_senza_casate`. `fleet_days.constellation_id`
+  = casata del percorso del giorno (vuota se il percorso non ne ha), `macro_id` = casata grande; le decide `private.casata_del_giorno()` (la assegna
+  se manca). `season_scores` ha righe con `percorso = 'app'` per le casate grandi. `seasons.vincitore` = casata grande, `seasons.percorsi`
+  `{percorso: {vincitore, classifica}}`. Il file riempie `macro_id` dei giorni di prima, sposta i giorni UCBM della 0.92 sulle casate UCBM e
+  riconta le stagioni degli ultimi due mesi. `app` è riservato: nessun percorso può chiamarsi così. Provato con PGlite: 44 prove (`casate_rls.mjs`).
+  Da applicare **dopo** aver pubblicato la 0.93.0 (una 0.92 dopo il file mostrerebbe tutte le 11 casate nel cambio).
+- **App**: `flotta.js` `CX.ok` / `probeCx(sb)` (il file c'è se si legge `dextera_casate`), `ensureCasate()` (casata grande e del percorso
+  aperto, in `S.fleet.casate {ambito: {id, cambiata}}`), `myCasata(a)`, `canChange(a)`; `checkWins` confronta anche `macro_id`. `social.js`:
+  con il file `houses2Html()` (casata grande con pianeta e cambio, stagione delle casate grandi, casata del percorso con il suo campionato e il
+  suo cambio, albo con il vincitore del percorso); senza il file la vista della 0.92 (`housesHtml`). Profilo (`fleetCard`): casata grande e
+  riga della casata del percorso. «Scarica i miei dati» ha `casata_grande_e_altri_percorsi`; riga di `privacy.html` aggiornata.
+- Prova: `casate.mjs` (29 controlli, con e senza il file) nelle note delle sessioni; passano anche `percorsi.mjs`, `fase6d.mjs`, `flotta2.mjs`,
+  `profilo2.mjs` e `osp/prova.mjs`.
 
 ## Mappa del percorso (`content/mappa.json`)
 Corso → 4 pianeti → 17 satelliti (con `ordine` della specifica) → 6 passi (`ossa`, `reperi`, `muscoli`, `connessioni`, `funzione`,

@@ -178,9 +178,10 @@ export async function myData(){
    sb.from('dextera_profili').select('copertina,vetrina,titolo,aggiornato_il').eq('user_id',uid)]);
   const st=await sb.from('dextera_studio').select('percorso,corsi,aggiornato_il').eq('user_id',uid); // fase 6 (senza il file SQL: errore, campo vuoto)
   const xp=await sb.from('dextera_percorsi_xp').select('percorso,xp,aggiornato_il').eq('user_id',uid); // più percorsi (stessa regola)
+  const dc=await sb.from('dextera_casate').select('ambito,constellation_id,precedente,cambiata_il,entrata_il').eq('user_id',uid); // casate su due livelli
   out.account={email:A.user.email,registrato_il:A.user.created_at,ultimo_accesso:A.user.last_sign_in_at,consenso_privacy:A.user.user_metadata||{},
    profilo:p.data,partite:g.data,maestria:m.data,badge:b.data,amicizie:f.data,percorso:pp.data,impostazioni:ds.data,segnalazioni:er.data,ripasso:rv.data,
-   flotta:{casata:cm.data,giorni:fd.data,contributi_equipaggi:cw.data,risposte_sfide:ca.data},copertina_e_titolo:dp.data,cosa_studi:st.data,xp_per_percorso:xp.data};
+   flotta:{casata:cm.data,casata_grande_e_altri_percorsi:dc.data,giorni:fd.data,contributi_equipaggi:cw.data,risposte_sfide:ca.data},copertina_e_titolo:dp.data,cosa_studi:st.data,xp_per_percorso:xp.data};
  }else if(A.user)out.account={email:A.user.email,nota:'Senza connessione: qui ci sono solo i dati del dispositivo.'};
  return out;
 }

@@ -12,7 +12,11 @@
      stagione chiusa (seasons.vincitore) ha ricevuto dei punti da questa persona in quel mese (fleet_days, casata decisa dal server).
    - Più percorsi (v0.92.0): ogni giorno ha anche p {'<percorso>': {xp, raw}}; il tetto di 300 punti vale per ogni percorso e sul server
      c'è una riga per giorno e percorso (fleet_days.percorso, file 20261126090000_dextera_percorsi.sql). Finché il file manca si invia
-     solo il percorso base e gli altri restano da inviare. I giorni di prima (senza p) sono del percorso base. */
+     solo il percorso base e gli altri restano da inviare. I giorni di prima (senza p) sono del percorso base.
+   - Casate su due livelli (v0.93.0, file 20261127090000_dextera_casate.sql): casata grande dell'app (Nova, Pulsar, Quasar, Nebula,
+     ambito 'app') e casata di ogni percorso (percorso completo: Osteon, Myon, Neuron, Cor in constellation_members, S.fleet.casata;
+     gli altri percorsi in dextera_casate). Ogni punto vale per la casata del percorso e per la casata grande: le decide il server
+     (fleet_days.constellation_id e macro_id). S.fleet.casate {ambito: {id, cambiata}}. Senza il file tutto resta come nella 0.92. */
 import {app,S} from './state.js';
 
 export const FR=()=>{const r=app.REGOLE?.flotta||{};return {tetto_giorno:300,pianeta_scelto:2,giorni:40,invio_giorni:34,...r,
@@ -70,8 +74,9 @@ export const myContrib=pl=>week().pl[pl]||0;
 export const todayPoints=p=>dayPoints(F().days[isoToday()],p);
 export const seasonPoints=p=>{const s=season();return Object.entries(F().days).filter(([d])=>d.startsWith(s)).reduce((a,[,x])=>a+dayPoints(x,p),0);};
 export const weekXp=()=>{const m=monday();return Object.entries(F().days).filter(([d])=>d>=m).reduce((a,[,x])=>a+(x.xp||0),0);};
-// la casata si cambia al massimo una volta per stagione (mese)
-export const canChange=()=>{const c=F().cambiata;return !c||season(new Date(c))!==season();};
+// la casata si cambia al massimo una volta per stagione (mese), per ogni ambito ('base' = percorso completo, 'app' = casata grande)
+export const myCasata=(a='base')=>a==='base'?F().casata:F().casate?.[a]?.id||null;
+export const canChange=(a='base')=>{const c=a==='base'?F().cambiata:F().casate?.[a]?.cambiata;return !c||season(new Date(c))!==season();};
 export const pending=()=>{const f=F();return Object.values(f.days).some(x=>x.u)||!!f.wk.u||!!(f.wkp&&f.wkp.u)||f.ans.length>0;};
 
 // errori del server che vogliono dire «manca il file SQL della Flotta»
@@ -87,10 +92,36 @@ export async function ensureCasata(sb,uid){
  const f=F();f.casata=data.constellation_id;f.cambiata=data.cambiata_il||null;keep();
  return data;
 }
+// il file SQL delle casate su due livelli c'è? (null = non ancora controllato)
+export const CX={ok:null,at:0};
+export const CX_SQL='supabase/migrations/20261127090000_dextera_casate.sql';
+export async function probeCx(sb,force){
+ if(CX.ok&&!force)return true;
+ if(CX.ok===false&&!force&&Date.now()-CX.at<6e4)return false;
+ const {error}=await sb.from('dextera_casate').select('ambito').limit(1);
+ if(error&&!/dextera_casate|schema cache|does not exist|PGRST205|42P01/i.test((error.message||'')+(error.code||'')))throw error;
+ CX.ok=!error;CX.at=Date.now();return CX.ok;
+}
+// casata grande e casata del percorso aperto (se non è il percorso completo): se mancano le assegna il server
+export async function ensureCasate(sb,uid){
+ if(!await probeCx(sb))return null;
+ const want=['app',...(pid()!=='base'?[pid()]:[])];
+ const get=()=>sb.from('dextera_casate').select('ambito,constellation_id,cambiata_il').eq('user_id',uid);
+ let {data,error}=await get();if(error)throw error;
+ const miss=want.filter(a=>!(data||[]).some(r=>r.ambito===a));
+ if(miss.length){
+  for(const a of miss){const r=await sb.from('dextera_casate').upsert({user_id:uid,ambito:a},{onConflict:'user_id,ambito',ignoreDuplicates:true});
+   if(r.error&&!/dextera_senza_casate/.test((r.error.hint||'')+(r.error.message||'')))throw r.error;} // percorso senza casate: niente
+  ({data,error}=await get());if(error)throw error;
+ }
+ const f=F();f.casate=Object.fromEntries((data||[]).map(r=>[r.ambito,{id:r.constellation_id,cambiata:r.cambiata_il||null}]));keep();
+ return f.casate;
+}
 // invio: casata (all'accesso), giorni, contributi della settimana sugli equipaggi, risposte alle sfide
 export async function syncFlotta(sb,uid,full){
  const f=F();
  if(full||!f.casata)await ensureCasata(sb,uid);
+ if(full||!f.casate?.app)await ensureCasate(sb,uid).catch(()=>{}); // casate su due livelli: se il file manca non blocca l'invio
  const from=back(FR().invio_giorni),days=Object.entries(f.days).filter(([d,x])=>x.u&&d>=from),px=await probePx(sb);
  if(days.length){
   const sent=days.map(([d,x])=>[d,x,JSON.stringify(x)]),row=(giorno,p,y)=>({user_id:uid,giorno,xp:Math.min(20000,Math.round(y.xp||0)),punti:points(y),...(px?{percorso:p}:{})});
@@ -122,13 +153,14 @@ export async function syncFlotta(sb,uid,full){
 
 // ritorna null (niente di nuovo), false (guardate, nessuna vinta) o true (vinta almeno una)
 // stagioni chiuse vinte: si guarda una volta per stagione (anche persa: S.fleet.viste) nei propri giorni di quel mese
+// con il file delle casate su due livelli vince la casata grande (macro_id); le stagioni di prima confrontano constellation_id
 export async function checkWins(sb,uid,seasons){
  const f=F(),seen=f.viste||(f.viste={}),todo=(seasons||[]).filter(x=>x.vincitore&&!seen[x.stagione]);
  if(!todo.length)return null; // niente di nuovo da guardare
  const from=todo.map(x=>x.stagione).sort()[0]+'-01';
- const {data,error}=await sb.from('fleet_days').select('giorno,constellation_id,punti').eq('user_id',uid).gte('giorno',from);
+ const {data,error}=await sb.from('fleet_days').select('giorno,constellation_id,punti'+(CX.ok?',macro_id':'')).eq('user_id',uid).gte('giorno',from);
  if(error)throw error;
  let won=false;
- for(const x of todo){seen[x.stagione]=1;if((data||[]).some(d=>String(d.giorno).startsWith(x.stagione)&&d.constellation_id===x.vincitore&&d.punti>0)){(f.vinte||(f.vinte={}))[x.stagione]=x.vincitore;won=true;}}
+ for(const x of todo){seen[x.stagione]=1;if((data||[]).some(d=>String(d.giorno).startsWith(x.stagione)&&(d.constellation_id===x.vincitore||d.macro_id===x.vincitore)&&d.punti>0)){(f.vinte||(f.vinte={}))[x.stagione]=x.vincitore;won=true;}}
  return won;
 }

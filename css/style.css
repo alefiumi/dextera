@@ -574,6 +574,8 @@ input.code{font-size:20px;text-transform:uppercase}
 /* casata ed equipaggi nel Profilo */
 .pfhouse{border-top:0;border-left:4px solid var(--c);padding-left:12px;margin-top:10px}.pfhouse h2{margin:0}
 .pfhouse .hnums{margin:12px 0 0}
+.pfpcas{margin:10px 0 0;padding-left:8px;border-left:3px solid var(--c)}
+.albo li small{flex-basis:100%}
 .pcrews{list-style:none;margin:6px 0 0;padding:0}.pcrews li{padding:8px 0;border-bottom:1px solid var(--line)}.pcrews li:last-child{border-bottom:0}
 .pcrews .gbar{margin:6px 0 4px}
 .pfl .chips{margin-top:10px}

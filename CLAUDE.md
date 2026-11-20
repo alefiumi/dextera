@@ -49,7 +49,8 @@ Dove questo file e la specifica differiscono, vale la specifica.
 - Percorso MCB, primo rilascio (SQL: 4 righe in badge_classes, `20261129090000_dextera_mcb.sql`): v0.94.1, contenuti 34, vedi «Percorso MCB». Online e SQL applicato il 20/11/2026.
 - Percorso MCB, rilascio 2: Patologia e clinica, corso a quiz (nessun SQL): v0.95.0, contenuti 35, vedi «Percorso MCB». Online il 20/11/2026.
 - Percorso MCB: Cuore e vasi e Respiratorio interi (solo contenuti, `mcb.json` v3, contenuti 36), dopo l'unione con il programma della scuola dell'autore (specifica, sezione 2). Online il 20/11/2026.
-- Percorso MCB: Patologia e clinica unita al programma della scuola, 6 pianeti e 26 satelliti (solo contenuti, `mcb.json` v4, `mappa.json` v7, contenuti 37). Non ancora online.
+- Percorso MCB: Patologia e clinica unita al programma della scuola, 6 pianeti e 26 satelliti (solo contenuti, `mcb.json` v4, `mappa.json` v7, contenuti 37). Online il 20/11/2026.
+- Percorso MCB, rilascio 3: Terapie fisiche e rieducazione, corso a quiz (solo contenuti, `mcb.json` v5, `mappa.json` v8, contenuti 38). Non ancora online.
 - Corso di neurologia: contenuti (primo rilascio) e corso giocabile (v0.81.0, vedi «Corso di neurologia giocabile»), Palestra sul cervello (v0.82.0), gioco 3D (v0.83.0).
 - GitHub Pages attivo (ramo `main`, cartella radice): online su `alefiumi.github.io/dextera`.
 
@@ -906,7 +907,7 @@ può più nascondere con le segnalazioni).
 - Prova: `gruppi.mjs` (56 controlli, con e senza il file) nella cartella delle note di questa sessione; passano anche `percorsi.mjs`, `fase6d.mjs`,
   `flotta2.mjs`, `profilo2.mjs` e `casate2.mjs` (la copia di `casate.mjs` che legge la versione da `sw.js`).
 
-## Percorso MCB (v0.94.1–0.95.0, contenuti 37, `mcb.json` v4, file SQL `20261129090000_dextera_mcb.sql`)
+## Percorso MCB (v0.94.1–0.95.0, contenuti 38, `mcb.json` v5, file SQL `20261129090000_dextera_mcb.sql`)
 Sezione 2 «Percorso MCB» della specifica (Massaggiatore e Capo Bagnino, decisa il 20/11/2026). Rilascio 1: solo i 4 corsi che esistono già,
 con gli stessi nodi del percorso completo e meno satelliti o passi (maestria e progressi in comune); muscolo-scheletrico è il primo corso.
 - `content/percorsi/mcb.json` (bozza, scritto a mano come `base.json`): muscolo-scheletrico con i 17 satelliti e i loro passi (il cranio ha
@@ -932,11 +933,14 @@ con gli stessi nodi del percorso completo e meno satelliti o passi (maestria e p
   `content.js` carica il file di ogni corso a quiz (`mergeQuiz`) e mette tutti i quesiti in `app.UCBM` (nome rimasto per compatibilità).
   `isQuizC(c)` in `percorso.js`; in `path.js` le descrizioni dei passi MCB (`PROBM`). Simulazione e «materie del test» restano solo UCBM.
   La pagina di revisione mostra anche `mcb-patologia` (passo 3 «Quesiti d'esame»).
-- Gli altri corsi a quiz (Idroterapia e terapie fisiche, Scienze di base e fisiologia, Igiene, sicurezza e professione) non ci sono ancora:
+- **Rilascio 3 (contenuti 38): Terapie fisiche e rieducazione**, corso a quiz `mcb-terapie` (sesto corso di MCB): 3 pianeti (Rieducazione,
+  Terapie fisiche, Acqua e terme), 15 satelliti `mcb-ter-<argomento>`, 450 quesiti in `testi/mcb-terapie.json` (id `mcb.ter.<argomento>.<nn>`,
+  da verificare), stessi passi di Patologia e clinica. `controlla_percorsi()` controlla anche che il file di ogni corso a quiz sia in `files`.
+- Gli altri corsi a quiz (Scienze di base e fisiologia, Igiene, sicurezza e professione, Altri apparati) non ci sono ancora:
   per ognuno servono `testi/mcb-<corso>.json`, il corso con `quiz` in `mappa.json` e i nodi in `mcb.json`.
 - Unione con il programma della scuola dell'autore (specifica, sezione 2, 20/11/2026; PDF delle lezioni in `~/Desktop/mcb`): altri satelliti
   in Terapie fisiche e rieducazione e negli altri corsi, corso Altri apparati; aspettano i quesiti della chat dei contenuti.
-- Prova: `mcb.mjs` (41 controlli, con Patologia e clinica) nella cartella delle note di questa sessione; passano anche `fase6d.mjs` (71, la riga
+- Prova: `mcb.mjs` (45 controlli, con Patologia e clinica e Terapie) nella cartella delle note di questa sessione; passano anche `fase6d.mjs` (71, la riga
   di MCB aggiornata), `percorsi.mjs` (39) e `osp/prova.mjs` (13). `fase6c.mjs` ha 3 errori attesi (MCB non più «in arrivo» e i due controlli
   della v0.91); `ucbm-fis/prova.mjs` ha 1 errore atteso (conta tutti i quesiti di `app.UCBM`, ora 1260 con quelli MCB).
 

@@ -1,5 +1,5 @@
 {
- "version": 7,
+ "version": 8,
  "nota": "Mappa delle competenze di Dextera (sezione 2 della specifica). Id delle strutture: ossa e muscoli come in content/corpo.json, reperi 'r.' + nome inglese di atlante/dati.json (lm) in minuscolo con i trattini. I reperi sono quelli visibili da fuori nel 3D (atlante/build/visibili.json); sulle ossa condivise tra più satelliti la divisione per posizione è in divisione_reperi, confermata dall'autore. Corso «neurologia» (dal corso del Dott. Benevento): strutture con id n.<voce di testi/neuro.json>; passi strutture, dove, funzione, lesione, connessioni e progetto (casi di testi/casi.json, modulo neuro).",
  "divisione_reperi": {
   "stato": "confermato",
@@ -1298,6 +1298,49 @@
       {"id": "mcb-pat-antibiotici", "nome": "Antibiotici", "ordine": 24, "passi": []},
       {"id": "mcb-pat-cortisonici", "nome": "Corticosteroidi", "ordine": 25, "passi": []},
       {"id": "mcb-pat-miorilassanti", "nome": "Miorilassanti", "ordine": 26, "passi": []}
+     ]
+    }
+   ]
+  },
+  {
+   "id": "mcb-terapie",
+   "nome": "Terapie fisiche e rieducazione",
+   "modulo": null,
+   "in_arrivo": true,
+   "quiz": "mcb-terapie.json",
+   "nota": "Percorso MCB, rilascio 3 (sezione 2 della specifica, con l'unione al programma della scuola dell'autore): corso a quiz con 3 passi da 10 quesiti (Concetti, Applicazione, Quesiti d'esame). I passi arrivano da content/mcb-terapie.json, generato da testi.py da testi/mcb-terapie.json (quesiti dai PDF delle lezioni dell'autore e dall'AI: da verificare).",
+   "pianeti": [
+    {
+     "id": "mcb-ter-rieducazione",
+     "nome": "Rieducazione",
+     "satelliti": [
+      {"id": "mcb-ter-caviglia", "nome": "Caviglia", "ordine": 1, "passi": []},
+      {"id": "mcb-ter-ginocchio", "nome": "Ginocchio e menisco", "ordine": 2, "passi": []},
+      {"id": "mcb-ter-anca", "nome": "Anca", "ordine": 3, "passi": []},
+      {"id": "mcb-ter-achillea", "nome": "Tendinopatia achillea e fascite plantare", "ordine": 4, "passi": []},
+      {"id": "mcb-ter-fibromialgia", "nome": "Fibromialgia", "ordine": 5, "passi": []},
+      {"id": "mcb-ter-cicatrici", "nome": "Cicatrici", "ordine": 6, "passi": []}
+     ]
+    },
+    {
+     "id": "mcb-ter-fisiche",
+     "nome": "Terapie fisiche",
+     "satelliti": [
+      {"id": "mcb-ter-caldofreddo", "nome": "Caldo e freddo", "ordine": 7, "passi": []},
+      {"id": "mcb-ter-elettroterapia", "nome": "Elettroterapia", "ordine": 8, "passi": []},
+      {"id": "mcb-ter-ultrasuoni", "nome": "Ultrasuoni, laser e onde d'urto", "ordine": 9, "passi": []},
+      {"id": "mcb-ter-tecar", "nome": "Tecar", "ordine": 10, "passi": []}
+     ]
+    },
+    {
+     "id": "mcb-ter-acqua-terme",
+     "nome": "Acqua e terme",
+     "satelliti": [
+      {"id": "mcb-ter-acqua", "nome": "L'acqua e il corpo", "ordine": 11, "passi": []},
+      {"id": "mcb-ter-minerali", "nome": "Acque minerali", "ordine": 12, "passi": []},
+      {"id": "mcb-ter-crenoterapia", "nome": "Crenoterapia e balneoterapia", "ordine": 13, "passi": []},
+      {"id": "mcb-ter-idrokinesi", "nome": "Principi di idrokinesiterapia", "ordine": 14, "passi": []},
+      {"id": "mcb-ter-stabilimento", "nome": "Lo stabilimento e il capo bagnino", "ordine": 15, "passi": []}
      ]
     }
    ]

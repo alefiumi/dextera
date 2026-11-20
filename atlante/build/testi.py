@@ -370,6 +370,8 @@ def controlla_percorsi():
         if not os.path.exists(os.path.join(ROOT, 'content', f)): err.append(f"index.json: {x['id']} senza il file {f}"); continue
         if json.load(open(os.path.join(ROOT, 'content', f))).get('id') != x['id']: err.append(f"index.json: {f} ha un id diverso da {x['id']}")
         if f not in I.get('files', []): err.append(f"index.json: {f} manca in files")
+    # corsi a quiz della mappa: il file dei quesiti dev'essere in files (l'app scarica solo quelli)
+    err += [f"index.json: {co['quiz']} (quesiti di {co['id']}) manca in files" for co in M['corsi'] if co.get('quiz') and co['quiz'] not in I.get('files', [])]
     if err: raise SystemExit('content/percorsi non valido:\n  ' + '\n  '.join(err[:30]))
     print('content/percorsi: nodi validi')
 

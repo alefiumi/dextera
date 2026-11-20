@@ -1,19 +1,19 @@
 {
- "version": 4,
+ "version": 5,
  "formato": 1,
- "nota": "Bozza del percorso MCB (Massaggiatore e Capo Bagnino), sezione 2 «Percorso MCB» della specifica, decisa il 20/11/2026. Rilascio 1: solo i 4 corsi che esistono già, con gli stessi nodi del percorso completo e meno satelliti o passi (maestria e progressi in comune). Apparato muscolo-scheletrico: tutti i 17 satelliti con i 6 passi. Neurologia: Basi e Midollo e sistema periferico interi; Encefalo e Corteccia solo con i passi Le strutture, Dove si trova e La funzione (niente Se si danneggia né caso clinico). Cuore e vasi e Apparato respiratorio: interi, come nel percorso completo (unione con il programma della scuola dell'autore, 20/11/2026). Nei satelliti con meno passi e nei pianeti con meno satelliti vale la regola dei percorsi parziali (satellite acceso ed esame del pianeta contano solo in questo percorso). Rilascio 2: Patologia e clinica, corso a quiz (dal rilascio 3, unione con il programma della scuola dell'autore: 6 pianeti, 26 satelliti, con Patologia degli organi; 3 passi da 10 quesiti: Concetti, Applicazione, Quesiti d'esame; quesiti in testi/mcb-patologia.json, da verificare, i nuovi scritti dai PDF delle lezioni dell'autore). Gli altri corsi a quiz (Idroterapia e terapie fisiche, Scienze di base e fisiologia, Igiene, sicurezza e professione) arrivano nei rilasci successivi.",
+ "nota": "Bozza del percorso MCB (Massaggiatore e Capo Bagnino), sezione 2 «Percorso MCB» della specifica, decisa il 20/11/2026. Rilascio 1: solo i 4 corsi che esistono già, con gli stessi nodi del percorso completo e meno satelliti o passi (maestria e progressi in comune). Apparato muscolo-scheletrico: tutti i 17 satelliti con i 6 passi. Neurologia: Basi e Midollo e sistema periferico interi; Encefalo e Corteccia solo con i passi Le strutture, Dove si trova e La funzione (niente Se si danneggia né caso clinico). Cuore e vasi e Apparato respiratorio: interi, come nel percorso completo (unione con il programma della scuola dell'autore, 20/11/2026). Nei satelliti con meno passi e nei pianeti con meno satelliti vale la regola dei percorsi parziali (satellite acceso ed esame del pianeta contano solo in questo percorso). Rilascio 2: Patologia e clinica, corso a quiz (dal rilascio 3, unione con il programma della scuola dell'autore: 6 pianeti, 26 satelliti, con Patologia degli organi; 3 passi da 10 quesiti: Concetti, Applicazione, Quesiti d'esame; quesiti in testi/mcb-patologia.json, da verificare, i nuovi scritti dai PDF delle lezioni dell'autore). Gli altri corsi a quiz (Idroterapia e terapie fisiche, Scienze di base e fisiologia, Igiene, sicurezza e professione) arrivano nei rilasci successivi. Rilascio 3 della specifica: Terapie fisiche e rieducazione, corso a quiz (3 pianeti: Rieducazione, Terapie fisiche, Acqua e terme; 15 satelliti; quesiti in testi/mcb-terapie.json, da verificare).",
  "id": "mcb",
  "nome": "MCB",
  "bozza": true,
  "corso": "muscolo-scheletrico",
  "mappa": {
   "file": "mappa.json",
-  "version": 7
+  "version": 8
  },
  "rilascio": {
-  "numero": 3,
+  "numero": 4,
   "pubblicato_il": "2026-11-20",
-  "da": "a mano (bozza): Patologia e clinica unita al programma della scuola dell'autore (6 pianeti, 26 satelliti)"
+  "da": "a mano (bozza): aggiunto il corso a quiz Terapie fisiche e rieducazione (3 pianeti, 15 satelliti)"
  },
  "nodi": [
   {
@@ -1049,6 +1049,120 @@
    "tipo": "satellite",
    "genitore": "mcb-pat-sicurezza",
    "ordine": 6
+  },
+  {
+   "id": "mcb-terapie",
+   "tipo": "corso",
+   "genitore": null,
+   "ordine": 6
+  },
+  {
+   "id": "mcb-ter-rieducazione",
+   "tipo": "pianeta",
+   "genitore": "mcb-terapie",
+   "ordine": 1
+  },
+  {
+   "id": "mcb-ter-fisiche",
+   "tipo": "pianeta",
+   "genitore": "mcb-terapie",
+   "ordine": 2
+  },
+  {
+   "id": "mcb-ter-acqua-terme",
+   "tipo": "pianeta",
+   "genitore": "mcb-terapie",
+   "ordine": 3
+  },
+  {
+   "id": "mcb-ter-caviglia",
+   "tipo": "satellite",
+   "genitore": "mcb-ter-rieducazione",
+   "ordine": 1
+  },
+  {
+   "id": "mcb-ter-ginocchio",
+   "tipo": "satellite",
+   "genitore": "mcb-ter-rieducazione",
+   "ordine": 2
+  },
+  {
+   "id": "mcb-ter-anca",
+   "tipo": "satellite",
+   "genitore": "mcb-ter-rieducazione",
+   "ordine": 3
+  },
+  {
+   "id": "mcb-ter-achillea",
+   "tipo": "satellite",
+   "genitore": "mcb-ter-rieducazione",
+   "ordine": 4
+  },
+  {
+   "id": "mcb-ter-fibromialgia",
+   "tipo": "satellite",
+   "genitore": "mcb-ter-rieducazione",
+   "ordine": 5
+  },
+  {
+   "id": "mcb-ter-cicatrici",
+   "tipo": "satellite",
+   "genitore": "mcb-ter-rieducazione",
+   "ordine": 6
+  },
+  {
+   "id": "mcb-ter-caldofreddo",
+   "tipo": "satellite",
+   "genitore": "mcb-ter-fisiche",
+   "ordine": 1
+  },
+  {
+   "id": "mcb-ter-elettroterapia",
+   "tipo": "satellite",
+   "genitore": "mcb-ter-fisiche",
+   "ordine": 2
+  },
+  {
+   "id": "mcb-ter-ultrasuoni",
+   "tipo": "satellite",
+   "genitore": "mcb-ter-fisiche",
+   "ordine": 3
+  },
+  {
+   "id": "mcb-ter-tecar",
+   "tipo": "satellite",
+   "genitore": "mcb-ter-fisiche",
+   "ordine": 4
+  },
+  {
+   "id": "mcb-ter-acqua",
+   "tipo": "satellite",
+   "genitore": "mcb-ter-acqua-terme",
+   "ordine": 1
+  },
+  {
+   "id": "mcb-ter-minerali",
+   "tipo": "satellite",
+   "genitore": "mcb-ter-acqua-terme",
+   "ordine": 2
+  },
+  {
+   "id": "mcb-ter-crenoterapia",
+   "tipo": "satellite",
+   "genitore": "mcb-ter-acqua-terme",
+   "ordine": 3
+  },
+  {
+   "id": "mcb-ter-idrokinesi",
+   "tipo": "satellite",
+   "genitore": "mcb-ter-acqua-terme",
+   "ordine": 4
+  },
+  {
+   "id": "mcb-ter-stabilimento",
+   "tipo": "satellite",
+   "genitore": "mcb-ter-acqua-terme",
+   "ordine": 5
   }
  ]
 }

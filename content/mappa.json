@@ -1,5 +1,5 @@
 {
- "version": 9,
+ "version": 10,
  "nota": "Mappa delle competenze di Dextera (sezione 2 della specifica). Id delle strutture: ossa e muscoli come in content/corpo.json, reperi 'r.' + nome inglese di atlante/dati.json (lm) in minuscolo con i trattini. I reperi sono quelli visibili da fuori nel 3D (atlante/build/visibili.json); sulle ossa condivise tra più satelliti la divisione per posizione è in divisione_reperi, confermata dall'autore. Corso «neurologia» (dal corso del Dott. Benevento): strutture con id n.<voce di testi/neuro.json>; passi strutture, dove, funzione, lesione, connessioni e progetto (casi di testi/casi.json, modulo neuro).",
  "divisione_reperi": {
   "stato": "confermato",
@@ -1384,6 +1384,44 @@
       {"id": "mcb-sci-dolore", "nome": "Dolore", "ordine": 13, "passi": []},
       {"id": "mcb-sci-digestione", "nome": "Digestione e nutrizione", "ordine": 14, "passi": []},
       {"id": "mcb-sci-endocrino", "nome": "Sistema endocrino", "ordine": 15, "passi": []}
+     ]
+    }
+   ]
+  },
+  {
+   "id": "mcb-igiene",
+   "nome": "Igiene, sicurezza e professione",
+   "modulo": null,
+   "in_arrivo": true,
+   "quiz": "mcb-igiene.json",
+   "nota": "Percorso MCB, rilascio 5 (sezione 2 della specifica, con l'unione al programma della scuola dell'autore): corso a quiz con 3 passi da 10 quesiti (Concetti, Applicazione, Quesiti d'esame). I passi arrivano da content/mcb-igiene.json, generato da testi.py da testi/mcb-igiene.json (quesiti dai PDF delle lezioni dell'autore e dall'AI: da verificare).",
+   "pianeti": [
+    {
+     "id": "mcb-igi-igiene",
+     "nome": "Igiene",
+     "satelliti": [
+      {"id": "mcb-igi-microrganismi", "nome": "Microrganismi e infezioni", "ordine": 1, "passi": []},
+      {"id": "mcb-igi-disinfezione", "nome": "Disinfezione e sterilizzazione", "ordine": 2, "passi": []},
+      {"id": "mcb-igi-lavoro", "nome": "Igiene del lavoro", "ordine": 3, "passi": []}
+     ]
+    },
+    {
+     "id": "mcb-igi-soccorso",
+     "nome": "Primo soccorso",
+     "satelliti": [
+      {"id": "mcb-igi-valutare", "nome": "Valutare l'emergenza", "ordine": 4, "passi": []},
+      {"id": "mcb-igi-rianimazione", "nome": "Rianimazione e defibrillatore", "ordine": 5, "passi": []},
+      {"id": "mcb-igi-emergenze", "nome": "Emergenze comuni", "ordine": 6, "passi": []}
+     ]
+    },
+    {
+     "id": "mcb-igi-professione",
+     "nome": "Professione",
+     "satelliti": [
+      {"id": "mcb-igi-diritto", "nome": "Diritto e responsabilità dell'MCB", "ordine": 7, "passi": []},
+      {"id": "mcb-igi-deontologia", "nome": "Deontologia e privacy", "ordine": 8, "passi": []},
+      {"id": "mcb-igi-psicologia", "nome": "Psicologia, comunicazione e ansia", "ordine": 9, "passi": []},
+      {"id": "mcb-igi-sicurezza", "nome": "Sicurezza sul lavoro", "ordine": 10, "passi": []}
      ]
     }
    ]

@@ -1,5 +1,5 @@
 {
- "version": 40,
+ "version": 42,
  "app_min": "0.91.0",
  "modules": [
   "corpo",
@@ -19,7 +19,8 @@
   "ucbm.json",
   "mcb-patologia.json",
   "mcb-terapie.json",
-  "mcb-scienze.json"
+  "mcb-scienze.json",
+  "mcb-igiene.json"
  ],
  "percorsi": [
   {

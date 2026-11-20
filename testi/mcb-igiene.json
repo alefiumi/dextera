@@ -1,0 +1,1621 @@
+{
+ "version": 1,
+ "tipo": "mcb-igiene",
+ "nota": "Percorso MCB, corso Igiene, sicurezza e professione (sezione 2 della specifica): 3 pianeti (Igiene, Primo soccorso, Professione), 10 satelliti, 3 passi da 10 quesiti come Patologia e clinica: passo 1 Concetti (con il concetto da presentare prima della domanda), 2 Applicazione (casi pratici), 3 Quesiti d'esame (solo scelta). opzioni: 5, la prima è quella giusta (nell'app si mescolano); scritta: risposte scritte accettate, solo dove la risposta è breve. Scritti il 20/11/2026: i dati presi dalle lezioni del corso dell'autore hanno fonte «lezione» e nella voce il campo «lezione» con file e pagina (o diapositiva); gli altri sono dell'AI (fonte «AI»). Diritto e responsabilità viene dalle due lezioni di diritto; Psicologia in gran parte dalla lezione sull'ansia (diapositive); Microrganismi in parte da Patologia generale e Antibiotici; Valutare l'emergenza in parte dalla lezione sulla sincope; Emergenze comuni ha qualche dato dalle lezioni su cuore, respiratorio ed endocrino. Disinfezione, Igiene del lavoro (piscine e mani), Rianimazione e defibrillatore, Deontologia e privacy e Sicurezza sul lavoro non hanno lezioni nella scuola dell'autore e sono quasi tutti dell'AI, sulle regole italiane ed europee (linee guida di rianimazione, legge 116/2021, GDPR, D.Lgs. 81/2008): valori come pH e cloro delle piscine vanno controllati sulle norme regionali in vigore. Tutto «da verificare» finché il docente non lo segna.",
+ "campi": {"concetto": "Concetto (spiegazione prima della domanda)", "domanda": "Domanda", "opzioni": "Opzioni (la prima è quella giusta)", "scritta": "Risposte scritte accettate", "spiegazione": "Spiegazione"},
+ "satelliti": [{"id": "mcb-igi-microrganismi", "nome": "Microrganismi e infezioni", "pianeta": "Igiene"}, {"id": "mcb-igi-disinfezione", "nome": "Disinfezione e sterilizzazione", "pianeta": "Igiene"}, {"id": "mcb-igi-lavoro", "nome": "Igiene del lavoro", "pianeta": "Igiene"}, {"id": "mcb-igi-valutare", "nome": "Valutare l'emergenza", "pianeta": "Primo soccorso"}, {"id": "mcb-igi-rianimazione", "nome": "Rianimazione e defibrillatore", "pianeta": "Primo soccorso"}, {"id": "mcb-igi-emergenze", "nome": "Emergenze comuni", "pianeta": "Primo soccorso"}, {"id": "mcb-igi-diritto", "nome": "Diritto e responsabilità dell'MCB", "pianeta": "Professione"}, {"id": "mcb-igi-deontologia", "nome": "Deontologia e privacy", "pianeta": "Professione"}, {"id": "mcb-igi-psicologia", "nome": "Psicologia, comunicazione e ansia", "pianeta": "Professione"}, {"id": "mcb-igi-sicurezza", "nome": "Sicurezza sul lavoro", "pianeta": "Professione"}],
+ "voci": [
+  {"id": "mcb.igi.microrganismi.01", "sat": "mcb-igi-microrganismi", "passo": 1, "lezione": "Patologia/MCB - Patologia Generale.pdf, p. 51", "dati": {
+   "concetto": {"valore": "I batteri sono organismi di una sola cellula, visibili al microscopio ottico, presenti normalmente su pelle e mucose. I virus sono molto più piccoli: si vedono solo al microscopio elettronico.", "fonte": "lezione", "stato": "da verificare"},
+   "domanda": {"valore": "Con quale microscopio si vedono i virus?", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["Solo con il microscopio elettronico", "A occhio nudo", "Con una lente d'ingrandimento", "Con il microscopio ottico, come i batteri", "Non si possono vedere in nessun modo"], "fonte": "lezione", "stato": "da verificare"},
+   "scritta": {"valore": ["elettronico", "microscopio elettronico"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "I virus si vedono solo in microscopia elettronica.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.microrganismi.02", "sat": "mcb-igi-microrganismi", "passo": 1, "lezione": "Patologia/MCB - Patologia Generale.pdf, p. 52", "dati": {
+   "concetto": {"valore": "I virus si riproducono solo dentro le cellule di un altro organismo: per questo si chiamano parassiti obbligati. Spesso, riproducendosi, uccidono la cellula ospite.", "fonte": "lezione", "stato": "da verificare"},
+   "domanda": {"valore": "Perché i virus si chiamano parassiti obbligati?", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["Perché si riproducono solo dentro un'altra cellula", "Perché vivono solo nell'acqua", "Perché mangiano i batteri", "Perché sono sempre innocui", "Perché si riproducono da soli all'aria"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Hanno bisogno della cellula ospite per replicarsi.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.microrganismi.03", "sat": "mcb-igi-microrganismi", "passo": 1, "lezione": "Patologia/MCB - Patologia Generale.pdf, p. 53", "dati": {
+   "concetto": {"valore": "Molte malattie comuni sono causate da virus: raffreddore, influenza, poliomielite, rabbia, AIDS. Un virus contiene un solo tipo di acido nucleico: DNA oppure RNA.", "fonte": "lezione", "stato": "da verificare"},
+   "domanda": {"valore": "Quale di queste malattie è causata da un virus?", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["Influenza", "Polmonite batterica", "Tetano", "Tubercolosi", "Scarlattina"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "L'influenza è virale.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.microrganismi.04", "sat": "mcb-igi-microrganismi", "passo": 1, "lezione": "Patologia/MCB - Patologia Generale.pdf, p. 54", "dati": {
+   "concetto": {"valore": "Le infezioni batteriche si curano con gli antibiotici. Gli antibiotici non funzionano sui virus. Usarli male fa crescere la resistenza dei batteri.", "fonte": "lezione", "stato": "da verificare"},
+   "domanda": {"valore": "Gli antibiotici funzionano contro i virus?", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["No, agiscono solo sui batteri", "Sì, su tutti i virus", "Solo sul raffreddore", "Solo se presi a dosi doppie", "Sì, se presi per un giorno"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Gli antibiotici non sono attivi sui virus.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.microrganismi.05", "sat": "mcb-igi-microrganismi", "passo": 1, "lezione": "Patologia/MCB - Patologia Generale.pdf, p. 55", "dati": {
+   "concetto": {"valore": "Contro i virus ci sono gli antivirali, che bloccano la replicazione del virus, e i vaccini, fatti con virus attenuati o inattivati (o con RNA messaggero), che prevengono l'infezione.", "fonte": "lezione", "stato": "da verificare"},
+   "domanda": {"valore": "A che cosa servono soprattutto i vaccini?", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["A prevenire l'infezione", "A curare un'infezione batterica già in corso", "A disinfettare le superfici", "A sostituire gli antibiotici", "A guarire le fratture"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "I vaccini sono preventivi.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.microrganismi.06", "sat": "mcb-igi-microrganismi", "passo": 1, "lezione": "Patologia/MCB - Patologia Generale.pdf, p. 56", "dati": {
+   "concetto": {"valore": "I virus si replicano molto in fretta e copiano il loro genoma con errori: sono le mutazioni. Una mutazione si diffonde se aiuta il virus a vivere e a trasmettersi.", "fonte": "lezione", "stato": "da verificare"},
+   "domanda": {"valore": "Che cos'è una mutazione virale?", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["Un errore nella copia del genoma del virus", "Un farmaco contro il virus", "Un tipo di vaccino", "Una cellula del sangue", "Un batterio che mangia il virus"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Errori di trascrizione del genoma.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.microrganismi.07", "sat": "mcb-igi-microrganismi", "passo": 1, "dati": {
+   "concetto": {"valore": "Un'infezione passa da una persona all'altra per contatto diretto (mani, pelle), per contatto indiretto (oggetti e superfici contaminate, come lettini e asciugamani), per goccioline del respiro o per via del sangue.", "fonte": "AI", "stato": "da verificare"},
+   "domanda": {"valore": "Come può passare un'infezione da un cliente all'altro su un lettino?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Per contatto indiretto, attraverso superfici e oggetti contaminati", "Solo per via del sangue", "Solo con la puntura di insetti", "In nessun modo", "Solo attraverso il cibo"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Contatto indiretto con superfici contaminate.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.microrganismi.08", "sat": "mcb-igi-microrganismi", "passo": 1, "dati": {
+   "concetto": {"valore": "I funghi (micosi) causano infezioni di pelle e unghie come il piede d'atleta, frequenti negli ambienti caldi e umidi come piscine, docce e spogliatoi.", "fonte": "AI", "stato": "da verificare"},
+   "domanda": {"valore": "Dove si prendono più facilmente le micosi del piede?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["In docce, piscine e spogliatoi umidi", "In montagna con la neve", "In un ufficio asciutto", "Al sole in spiaggia", "Leggendo un libro"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Ambienti caldi e umidi.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.microrganismi.09", "sat": "mcb-igi-microrganismi", "passo": 1, "lezione": "Farmacologia/MCB - Antibiotici.pdf, p. 2", "dati": {
+   "concetto": {"valore": "Un antibiotico è una sostanza di origine naturale (prodotta da batteri o funghi) che agisce contro i batteri; quando la molecola è prodotta per sintesi si parla di chemioterapico.", "fonte": "lezione", "stato": "da verificare"},
+   "domanda": {"valore": "Da che cosa sono prodotti in natura gli antibiotici?", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["Da batteri e funghi", "Dalle piante di mare", "Dai virus", "Dal sangue umano", "Dalle rocce"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Origine naturale: batteri, funghi, actinomiceti.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.microrganismi.10", "sat": "mcb-igi-microrganismi", "passo": 1, "lezione": "Farmacologia/MCB - Antibiotici.pdf, p. 21", "dati": {
+   "concetto": {"valore": "L'antibiotico-resistenza è la capacità dei batteri di essere o diventare resistenti agli antibiotici. È il problema maggiore della terapia antibiotica.", "fonte": "lezione", "stato": "da verificare"},
+   "domanda": {"valore": "Che cos'è l'antibiotico-resistenza?", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["La capacità dei batteri di non essere più uccisi dagli antibiotici", "Un'allergia ai virus", "La forza dei muscoli dopo la cura", "Un vaccino nuovo", "La resistenza della pelle al sole"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Batteri resistenti agli antibiotici.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.microrganismi.11", "sat": "mcb-igi-microrganismi", "passo": 2, "lezione": "Patologia/MCB - Patologia Generale.pdf, p. 54", "dati": {
+   "domanda": {"valore": "Un cliente ha il raffreddore e dice di prendere un antibiotico «per guarire prima». Che cosa è vero?", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["Il raffreddore è virale e l'antibiotico non serve", "L'antibiotico lo guarisce in un giorno", "Deve raddoppiare la dose", "Serve anche un disinfettante da bere", "È meglio prendere due antibiotici diversi"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Antibiotici inutili sui virus.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.microrganismi.12", "sat": "mcb-igi-microrganismi", "passo": 2, "lezione": "Farmacologia/MCB - Antibiotici.pdf, p. 21", "dati": {
+   "domanda": {"valore": "Perché è importante prendere gli antibiotici solo quando servono e per il tempo indicato dal medico?", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["Per non favorire la resistenza dei batteri", "Per far crescere i virus", "Per rinforzare i muscoli", "Per non rovinare i vaccini", "Non ha importanza"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "L'uso scorretto favorisce l'antibiotico-resistenza.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.microrganismi.13", "sat": "mcb-igi-microrganismi", "passo": 2, "dati": {
+   "domanda": {"valore": "Un cliente ha una piccola ferita infetta, arrossata e con pus, sulla gamba da trattare. Che cosa fai?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Non tocchi la zona e lo inviti dal medico", "Massaggi sopra con olio", "Spremi la ferita", "Copri e massaggi forte lì", "Fai finta di niente"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Una zona infetta non si tratta.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.microrganismi.14", "sat": "mcb-igi-microrganismi", "passo": 2, "dati": {
+   "domanda": {"valore": "Dopo un cliente con una micosi al piede, che cosa fai prima del cliente successivo?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Cambi la biancheria e disinfetti lettino e superfici", "Scuoti l'asciugamano e lo riusi", "Spruzzi profumo", "Nulla, i funghi non si trasmettono", "Lavi solo il pavimento la sera"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Biancheria pulita e disinfezione delle superfici.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.microrganismi.15", "sat": "mcb-igi-microrganismi", "passo": 2, "lezione": "Patologia/MCB - Patologia Generale.pdf, p. 55", "dati": {
+   "domanda": {"valore": "Un collega dice che il vaccino antinfluenzale cura l'influenza già in corso. È giusto?", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["No, il vaccino previene, non cura l'infezione in corso", "Sì, la guarisce in poche ore", "Sì, ma solo se è batterica", "Sì, sostituisce l'antivirale", "Sì, se fatto due volte"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Il vaccino è preventivo.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.microrganismi.16", "sat": "mcb-igi-microrganismi", "passo": 2, "lezione": "Patologia/MCB - Patologia Generale.pdf, p. 51", "dati": {
+   "domanda": {"valore": "Perché i batteri della nostra pelle non ci fanno di solito ammalare?", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["Perché sono la flora normale e vivono in equilibrio con noi", "Perché sono tutti morti", "Perché sono virus", "Perché la pelle non ha batteri", "Perché sono troppo grandi"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Flora batterica normale.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.microrganismi.17", "sat": "mcb-igi-microrganismi", "passo": 2, "lezione": "Farmacologia/MCB - Antibiotici.pdf, p. 40", "dati": {
+   "domanda": {"valore": "Un cliente in cura antibiotica ha disturbi intestinali. Quale può essere il motivo?", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["L'antibiotico altera la flora batterica dell'intestino", "Il massaggio di ieri", "Ha preso troppo sole", "Ha bevuto acqua", "Ha dormito troppo"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Effetto collaterale lieve: alterazione della flora.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.microrganismi.18", "sat": "mcb-igi-microrganismi", "passo": 2, "dati": {
+   "domanda": {"valore": "Che cosa riduce di più il rischio di passare germi tra un cliente e l'altro?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Lavarsi le mani prima e dopo ogni cliente", "Parlare meno", "Usare più olio", "Tenere la finestra chiusa", "Lavorare più in fretta"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "L'igiene delle mani è la misura principale.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.microrganismi.19", "sat": "mcb-igi-microrganismi", "passo": 2, "lezione": "Patologia/MCB - Patologia Generale.pdf, p. 64", "dati": {
+   "domanda": {"valore": "Quale malattia è stata eliminata nel mondo grazie alla vaccinazione?", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["Il vaiolo", "L'influenza", "Il raffreddore", "La tubercolosi", "Il tetano"], "fonte": "lezione", "stato": "da verificare"},
+   "scritta": {"valore": ["vaiolo"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Il vaiolo, con il programma globale dell'OMS.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.microrganismi.20", "sat": "mcb-igi-microrganismi", "passo": 2, "dati": {
+   "domanda": {"valore": "Un cliente ha la febbre e tosse forte ma vuole il massaggio. Che cosa fai?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Rimandi la seduta: con febbre e infezione in corso non si tratta", "Lo tratti con la mascherina", "Massaggi più forte per «buttare fuori» la febbre", "Fai una sauna", "Fai solo le gambe"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Febbre e infezioni in corso: controindicazione.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.microrganismi.21", "sat": "mcb-igi-microrganismi", "passo": 3, "lezione": "Patologia/MCB - Patologia Generale.pdf, p. 51", "dati": {
+   "domanda": {"valore": "I batteri sono:", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["Organismi unicellulari visibili al microscopio ottico", "Visibili solo al microscopio elettronico", "Parassiti obbligati delle cellule", "Sempre dannosi", "Fatti solo di RNA"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Unicellulari, microscopio ottico.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.microrganismi.22", "sat": "mcb-igi-microrganismi", "passo": 3, "lezione": "Patologia/MCB - Patologia Generale.pdf, p. 52", "dati": {
+   "domanda": {"valore": "I virus:", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["Si riproducono solo dentro altre cellule", "Vivono e si riproducono da soli", "Sono più grandi dei batteri", "Si curano con gli antibiotici", "Non mutano mai"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Parassiti obbligati.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.microrganismi.23", "sat": "mcb-igi-microrganismi", "passo": 3, "lezione": "Patologia/MCB - Patologia Generale.pdf, p. 53", "dati": {
+   "domanda": {"valore": "Un virus contiene:", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["Un solo acido nucleico: DNA o RNA", "Sia DNA sia RNA sempre", "Nessun acido nucleico", "Solo proteine e grassi", "Molte cellule"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Solo DNA o solo RNA.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.microrganismi.24", "sat": "mcb-igi-microrganismi", "passo": 3, "lezione": "Patologia/MCB - Patologia Generale.pdf, p. 54", "dati": {
+   "domanda": {"valore": "La terapia di base delle infezioni batteriche è:", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["La terapia antibiotica", "Il vaccino", "L'antivirale", "Il massaggio", "Il riposo soltanto"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Antibiotici.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.microrganismi.25", "sat": "mcb-igi-microrganismi", "passo": 3, "lezione": "Patologia/MCB - Patologia Generale.pdf, p. 55", "dati": {
+   "domanda": {"valore": "I vaccini sono generalmente composti da:", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["Virus attenuati o inattivati", "Antibiotici", "Disinfettanti", "Batteri vivi e virulenti", "Ormoni"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Attenuati o inattivati (o a RNA messaggero).", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.microrganismi.26", "sat": "mcb-igi-microrganismi", "passo": 3, "lezione": "Farmacologia/MCB - Antibiotici.pdf, p. 5", "dati": {
+   "domanda": {"valore": "I disinfettanti non si usano per curare le infezioni dentro il corpo perché:", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["Non hanno tossicità selettiva", "Sono troppo deboli", "Costano troppo", "Agiscono solo sui virus", "Si trovano solo in farmacia"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Sono tossici anche per le cellule dell'uomo.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.microrganismi.27", "sat": "mcb-igi-microrganismi", "passo": 3, "lezione": "Farmacologia/MCB - Antibiotici.pdf, p. 21", "dati": {
+   "domanda": {"valore": "L'antibiotico-resistenza è:", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["La capacità dei batteri di resistere agli antibiotici", "Un'allergia agli antibiotici", "L'effetto dei vaccini", "Una malattia dei virus", "La tolleranza al dolore"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Resistenza dei batteri.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.microrganismi.28", "sat": "mcb-igi-microrganismi", "passo": 3, "lezione": "Farmacologia/MCB - Antibiotici.pdf, p. 40", "dati": {
+   "domanda": {"valore": "Un effetto collaterale lieve degli antibiotici è:", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["L'alterazione della flora batterica", "La frattura delle ossa", "La perdita della vista", "L'aumento della statura", "La guarigione dei virus"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Alterazione della flora (intestinale).", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.microrganismi.29", "sat": "mcb-igi-microrganismi", "passo": 3, "dati": {
+   "domanda": {"valore": "Il piede d'atleta è un'infezione causata da:", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Funghi", "Virus", "Batteri del sangue", "Parassiti dell'intestino", "Pidocchi"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Micosi.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.microrganismi.30", "sat": "mcb-igi-microrganismi", "passo": 3, "dati": {
+   "domanda": {"valore": "La via di trasmissione attraverso lettini e asciugamani è:", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Il contatto indiretto", "La via del sangue", "La via aerea a lunga distanza", "La puntura di insetto", "La via materno-fetale"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Contatto indiretto.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.disinfezione.01", "sat": "mcb-igi-disinfezione", "passo": 1, "dati": {
+   "concetto": {"valore": "Pulire (detersione) vuol dire togliere sporco e materiale organico con acqua e detergente. Viene sempre prima della disinfezione, perché lo sporco protegge i germi dal disinfettante.", "fonte": "AI", "stato": "da verificare"},
+   "domanda": {"valore": "Che cosa si fa prima di disinfettare una superficie?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["La si pulisce con acqua e detergente", "La si asciuga col phon", "Niente, si disinfetta subito", "La si copre con un telo", "La si scalda"], "fonte": "AI", "stato": "da verificare"},
+   "scritta": {"valore": ["pulizia", "detersione", "la pulizia", "la detersione"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Prima la detersione, poi la disinfezione.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.disinfezione.02", "sat": "mcb-igi-disinfezione", "passo": 1, "dati": {
+   "concetto": {"valore": "La disinfezione elimina la maggior parte dei germi che causano malattie, ma non tutte le spore. La sterilizzazione elimina tutti i microrganismi, spore comprese.", "fonte": "AI", "stato": "da verificare"},
+   "domanda": {"valore": "Che differenza c'è tra disinfezione e sterilizzazione?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["La sterilizzazione elimina tutti i microrganismi, spore comprese", "Sono la stessa cosa", "La disinfezione elimina anche le spore", "La sterilizzazione è solo una pulizia con acqua", "La disinfezione si fa solo in ospedale"], "fonte": "AI", "stato": "da verificare"},
+   "scritta": {"valore": ["sterilizzazione"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Sterilizzazione = eliminazione totale.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.disinfezione.03", "sat": "mcb-igi-disinfezione", "passo": 1, "lezione": "Farmacologia/MCB - Antibiotici.pdf, p. 5", "dati": {
+   "concetto": {"valore": "I disinfettanti sono tossici per i germi ma anche per le cellule umane (non hanno tossicità selettiva): si usano su superfici e oggetti o sulla pelle integra, non si prendono per bocca.", "fonte": "lezione", "stato": "da verificare"},
+   "domanda": {"valore": "Perché i disinfettanti non si usano come medicine da prendere?", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["Perché sono tossici anche per le cellule umane", "Perché hanno un cattivo sapore", "Perché agiscono solo sui virus", "Perché costano troppo", "Perché sono troppo deboli"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Niente tossicità selettiva.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.disinfezione.04", "sat": "mcb-igi-disinfezione", "passo": 1, "dati": {
+   "concetto": {"valore": "Gli antisettici sono disinfettanti delicati adatti alla pelle e alle ferite (per esempio clorexidina, iodopovidone). Sulle superfici si usano prodotti più forti, come ipoclorito di sodio (candeggina) o alcol al 70%.", "fonte": "AI", "stato": "da verificare"},
+   "domanda": {"valore": "Quale prodotto è adatto alla pelle?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Un antisettico come la clorexidina", "La candeggina pura", "L'acido muriatico", "Il detersivo per pavimenti", "L'ammoniaca"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Antisettici per la cute.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.disinfezione.05", "sat": "mcb-igi-disinfezione", "passo": 1, "dati": {
+   "concetto": {"valore": "Ogni disinfettante funziona solo alla giusta concentrazione e con un tempo di contatto: va lasciato agire sulla superficie per il tempo scritto in etichetta, senza asciugarlo subito.", "fonte": "AI", "stato": "da verificare"},
+   "domanda": {"valore": "Che cosa vuol dire «tempo di contatto» di un disinfettante?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Il tempo che deve restare sulla superficie per funzionare", "Il tempo per comprarlo", "La data di scadenza", "Il tempo per asciugarlo col panno", "Il tempo di un massaggio"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Va lasciato agire.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.disinfezione.06", "sat": "mcb-igi-disinfezione", "passo": 1, "dati": {
+   "concetto": {"valore": "L'alcol è più efficace al 70% che puro: l'acqua aiuta a penetrare nei germi. Evapora in fretta e non agisce sulle spore.", "fonte": "AI", "stato": "da verificare"},
+   "domanda": {"valore": "Qual è la concentrazione di alcol più efficace come disinfettante?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Circa il 70%", "Il 100%", "Il 10%", "Il 30%", "L'1%"], "fonte": "AI", "stato": "da verificare"},
+   "scritta": {"valore": ["70", "70%"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Alcol al 70%.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.disinfezione.07", "sat": "mcb-igi-disinfezione", "passo": 1, "dati": {
+   "concetto": {"valore": "La sterilizzazione più comune per gli strumenti è l'autoclave: vapore acqueo sotto pressione a 121 °C o 134 °C. Il calore secco (stufa) richiede temperature più alte e tempi più lunghi.", "fonte": "AI", "stato": "da verificare"},
+   "domanda": {"valore": "Che cosa usa l'autoclave per sterilizzare?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Vapore acqueo sotto pressione", "Acqua fredda", "Raggi del sole", "Alcol e cotone", "Aria a temperatura ambiente"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Vapore sotto pressione.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.disinfezione.08", "sat": "mcb-igi-disinfezione", "passo": 1, "dati": {
+   "concetto": {"valore": "Il materiale monouso (lenzuolini di carta, guanti, garze) si usa una volta sola e si butta: non si lava e non si riusa.", "fonte": "AI", "stato": "da verificare"},
+   "domanda": {"valore": "Che cosa si fa con un lenzuolino di carta monouso dopo il cliente?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Si butta", "Si scuote e si riusa", "Si lava in lavatrice", "Si piega e si mette via", "Si disinfetta e si riusa"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Monouso = una volta sola.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.disinfezione.09", "sat": "mcb-igi-disinfezione", "passo": 1, "dati": {
+   "concetto": {"valore": "La biancheria in tessuto (asciugamani, teli) si cambia a ogni cliente e si lava ad alta temperatura (almeno 60 °C) con detersivo.", "fonte": "AI", "stato": "da verificare"},
+   "domanda": {"valore": "Ogni quanto si cambiano gli asciugamani del lettino?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["A ogni cliente", "Una volta alla settimana", "Una volta al giorno", "Solo se sono sporchi a vista", "Una volta al mese"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Biancheria pulita per ogni cliente.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.disinfezione.10", "sat": "mcb-igi-disinfezione", "passo": 1, "lezione": "Tecniche complementari/Chair Massage 2026.pdf, p. 21", "dati": {
+   "concetto": {"valore": "Anche nel massaggio sulla sedia, alla fine del trattamento si disinfetta la poltrona, ci si pulisce le mani e si scrivono gli appunti.", "fonte": "lezione", "stato": "da verificare"},
+   "domanda": {"valore": "Che cosa si fa alla fine di un massaggio sulla sedia, secondo la lezione?", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["Si disinfetta la poltrona e ci si pulisce le mani", "Si lascia la sedia com'è per il cliente dopo", "Si spruzza profumo", "Si fa subito il cliente seguente", "Si chiude lo studio"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Disinfezione della poltrona, mani pulite, appunti.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.disinfezione.11", "sat": "mcb-igi-disinfezione", "passo": 2, "dati": {
+   "domanda": {"valore": "Un lettino ha macchie di olio. Qual è l'ordine giusto?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Pulire con detergente, poi disinfettare", "Disinfettare sopra l'olio", "Asciugare con un panno e basta", "Coprire con un telo nuovo", "Disinfettare, poi pulire"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Detersione prima della disinfezione.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.disinfezione.12", "sat": "mcb-igi-disinfezione", "passo": 2, "dati": {
+   "domanda": {"valore": "Spruzzi il disinfettante sul lettino e lo asciughi subito con un panno. Che errore fai?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Non rispetti il tempo di contatto", "Usi troppo poco panno", "Nessun errore", "Disinfetti troppo", "Dovevi usare acqua calda"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Il disinfettante deve agire per il tempo indicato.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.disinfezione.13", "sat": "mcb-igi-disinfezione", "passo": 2, "dati": {
+   "domanda": {"valore": "Diluisci la candeggina più del necessario «così non puzza». Che cosa rischi?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Che non disinfetti abbastanza", "Che disinfetti il doppio", "Che diventi un antisettico per la pelle", "Niente", "Che sterilizzi"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Una concentrazione troppo bassa non è efficace.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.disinfezione.14", "sat": "mcb-igi-disinfezione", "passo": 2, "dati": {
+   "domanda": {"valore": "Le pinzette che usi per togliere una scheggia vanno:", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Pulite e poi sterilizzate, o usate monouso", "Lavate con acqua fredda e basta", "Riposte senza pulirle", "Asciugate con l'asciugamano del cliente", "Soffiate"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Strumenti che toccano la pelle lesa: sterili o monouso.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.disinfezione.15", "sat": "mcb-igi-disinfezione", "passo": 2, "dati": {
+   "domanda": {"valore": "Un collega mischia candeggina e ammoniaca per pulire meglio. Che cosa fai?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Lo fermi: insieme producono gas tossici", "Lo lasci fare, pulisce di più", "Aggiungi anche alcol", "Apri solo la finestra dopo", "Lo copi"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Mai mescolare prodotti chimici: gas tossici.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.disinfezione.16", "sat": "mcb-igi-disinfezione", "passo": 2, "dati": {
+   "domanda": {"valore": "Le mani del massaggiatore hanno un piccolo taglio. Che cosa fai prima di lavorare?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Disinfetti e copri il taglio, eventualmente con i guanti", "Lavori lo stesso senza coprirlo", "Ci metti l'olio sopra", "Lo ignori", "Usi la candeggina sul taglio"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Proteggere la ferita: per te e per il cliente.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.disinfezione.17", "sat": "mcb-igi-disinfezione", "passo": 2, "dati": {
+   "domanda": {"valore": "Quale prodotto scegli per disinfettare la pelle integra di un cliente prima di un bendaggio adesivo?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Un antisettico cutaneo", "La candeggina", "L'ammoniaca", "Il detersivo per piatti", "L'acido"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Antisettici per la cute.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.disinfezione.18", "sat": "mcb-igi-disinfezione", "passo": 2, "dati": {
+   "domanda": {"valore": "A che temperatura si lavano gli asciugamani dello studio?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Almeno 60 °C", "20 °C", "A freddo", "Non si lavano, si arieggiano", "10 °C"], "fonte": "AI", "stato": "da verificare"},
+   "scritta": {"valore": ["60", "60 °C", "60°C", "60 gradi"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Lavaggio ad alta temperatura.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.disinfezione.19", "sat": "mcb-igi-disinfezione", "passo": 2, "dati": {
+   "domanda": {"valore": "Un flacone di disinfettante è aperto da molto tempo e scaduto. Che cosa fai?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Lo butti e ne usi uno nuovo", "Lo usi lo stesso", "Lo allunghi con acqua", "Lo scaldi", "Lo mescoli con un altro"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Un prodotto scaduto può non funzionare.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.disinfezione.20", "sat": "mcb-igi-disinfezione", "passo": 2, "lezione": "Tecniche complementari/Chair Massage 2026.pdf, p. 21", "dati": {
+   "domanda": {"valore": "Dopo un massaggio sulla sedia arriva subito il cliente successivo. Che cosa fai prima?", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["Disinfetti la poltrona e le mani", "Lo fai sedere subito", "Cambi solo musica", "Spruzzi profumo sulla sedia", "Gli chiedi di pulirla lui"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Disinfezione tra un cliente e l'altro.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.disinfezione.21", "sat": "mcb-igi-disinfezione", "passo": 3, "dati": {
+   "domanda": {"valore": "La detersione:", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Toglie lo sporco e viene prima della disinfezione", "Elimina tutte le spore", "È una sterilizzazione", "Si fa dopo la disinfezione", "Non serve"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Precede la disinfezione.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.disinfezione.22", "sat": "mcb-igi-disinfezione", "passo": 3, "dati": {
+   "domanda": {"valore": "La sterilizzazione elimina:", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Tutti i microrganismi, spore comprese", "Solo lo sporco", "Solo i virus", "Solo i batteri in superficie", "Solo gli odori"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Eliminazione totale.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.disinfezione.23", "sat": "mcb-igi-disinfezione", "passo": 3, "lezione": "Farmacologia/MCB - Antibiotici.pdf, p. 5", "dati": {
+   "domanda": {"valore": "I disinfettanti non hanno:", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["Tossicità selettiva", "Odore", "Colore", "Effetto sui batteri", "Una data di scadenza"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Sono tossici anche per le cellule umane.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.disinfezione.24", "sat": "mcb-igi-disinfezione", "passo": 3, "dati": {
+   "domanda": {"valore": "Un esempio di antisettico per la pelle è:", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["La clorexidina", "L'ipoclorito di sodio concentrato", "L'acido muriatico", "La soda caustica", "L'ammoniaca"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Clorexidina.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.disinfezione.25", "sat": "mcb-igi-disinfezione", "passo": 3, "dati": {
+   "domanda": {"valore": "L'alcol è più efficace come disinfettante alla concentrazione di circa:", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["70%", "100%", "5%", "20%", "40%"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "70%.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.disinfezione.26", "sat": "mcb-igi-disinfezione", "passo": 3, "dati": {
+   "domanda": {"valore": "L'autoclave sterilizza con:", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Vapore sotto pressione", "Raggi ultravioletti del sole", "Alcol", "Acqua fredda", "Ghiaccio"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Vapore sotto pressione (121–134 °C).", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.disinfezione.27", "sat": "mcb-igi-disinfezione", "passo": 3, "dati": {
+   "domanda": {"valore": "Il materiale monouso:", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Si usa una sola volta e si butta", "Si lava e si riusa", "Si sterilizza e si riusa", "Si usa una settimana", "Si presta ai colleghi"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Una volta sola.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.disinfezione.28", "sat": "mcb-igi-disinfezione", "passo": 3, "dati": {
+   "domanda": {"valore": "Mescolare candeggina e ammoniaca:", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Produce gas tossici", "Pulisce meglio senza rischi", "Sterilizza", "Non fa nulla", "Profuma l'ambiente"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Mai mescolare.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.disinfezione.29", "sat": "mcb-igi-disinfezione", "passo": 3, "dati": {
+   "domanda": {"valore": "Perché un disinfettante funzioni bisogna rispettare:", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Concentrazione e tempo di contatto", "Solo il colore del flacone", "Solo il profumo", "La temperatura della stanza a 30 °C", "Il giorno della settimana"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Concentrazione e tempo di contatto.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.disinfezione.30", "sat": "mcb-igi-disinfezione", "passo": 3, "lezione": "Tecniche complementari/Chair Massage 2026.pdf, p. 21", "dati": {
+   "domanda": {"valore": "Alla fine del massaggio sulla sedia la lezione indica di:", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["Disinfettare la poltrona, pulire le mani e scrivere gli appunti", "Lasciare tutto com'è", "Fare subito un altro cliente", "Spegnere le luci", "Chiedere il pagamento prima di tutto"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Disinfezione, mani, appunti.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.lavoro.01", "sat": "mcb-igi-lavoro", "passo": 1, "dati": {
+   "concetto": {"valore": "Le mani si lavano prima e dopo ogni cliente: acqua e sapone per 40–60 secondi, strofinando palmi, dorso, tra le dita, pollici e unghie, poi si asciugano con carta monouso.", "fonte": "AI", "stato": "da verificare"},
+   "domanda": {"valore": "Quanto dura un lavaggio delle mani fatto bene con acqua e sapone?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["40–60 secondi", "5 secondi", "Mezzo minuto in tutto con l'asciugatura", "5 minuti", "Basta bagnarle"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "40–60 secondi.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.lavoro.02", "sat": "mcb-igi-lavoro", "passo": 1, "dati": {
+   "concetto": {"valore": "Il gel a base alcolica sostituisce il lavaggio quando le mani non sono sporche a vista: si strofina per 20–30 secondi fino a che è asciutto. Se le mani sono sporche serve acqua e sapone.", "fonte": "AI", "stato": "da verificare"},
+   "domanda": {"valore": "Quando non basta il gel alcolico?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Quando le mani sono sporche a vista", "Mai, basta sempre", "Quando fa freddo", "Quando le mani sono asciutte", "Dopo aver salutato il cliente"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Mani sporche: acqua e sapone.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.lavoro.03", "sat": "mcb-igi-lavoro", "passo": 1, "dati": {
+   "concetto": {"valore": "Prima di lavorare si tolgono anelli, braccialetti e orologio; le unghie sono corte e pulite, senza unghie finte: sotto gli oggetti e le unghie lunghe restano i germi e si può graffiare il cliente.", "fonte": "AI", "stato": "da verificare"},
+   "domanda": {"valore": "Perché si tolgono gli anelli prima del massaggio?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Perché sotto restano germi e possono graffiare il cliente", "Per non perderli", "Perché pesano", "Per moda", "Per scaldare le mani"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Igiene e sicurezza del cliente.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.lavoro.04", "sat": "mcb-igi-lavoro", "passo": 1, "dati": {
+   "concetto": {"valore": "Lo studio deve essere pulito, areato e luminoso; superfici lavabili; un cestino con coperchio a pedale; biancheria pulita separata da quella sporca.", "fonte": "AI", "stato": "da verificare"},
+   "domanda": {"valore": "Come si tiene la biancheria nello studio?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Pulita separata da quella sporca", "Tutta insieme in un cesto", "Sul pavimento", "Sul lettino del cliente seguente", "In macchina"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Separazione pulito/sporco.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.lavoro.05", "sat": "mcb-igi-lavoro", "passo": 1, "dati": {
+   "concetto": {"valore": "L'olio e la crema si prendono con un dosatore o versandoli dal flacone, senza infilare le dita nel barattolo: così il prodotto non si contamina.", "fonte": "AI", "stato": "da verificare"},
+   "domanda": {"valore": "Come si preleva la crema da massaggio in modo igienico?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Con un dosatore o una spatola, senza dita nel barattolo", "Con le dita dopo ogni cliente", "Soffiando nel barattolo", "Lasciando il barattolo aperto", "Con le mani del cliente"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Niente dita nel barattolo.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.lavoro.06", "sat": "mcb-igi-lavoro", "passo": 1, "dati": {
+   "concetto": {"valore": "In piscina l'acqua si disinfetta con il cloro. Il pH dell'acqua deve stare tra circa 6,5 e 7,5: fuori da questo intervallo il cloro funziona male e irrita occhi e pelle.", "fonte": "AI", "stato": "da verificare"},
+   "domanda": {"valore": "Tra quali valori deve stare il pH dell'acqua di piscina?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Circa 6,5–7,5", "2–3", "10–12", "Esattamente 0", "14"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "pH 6,5–7,5.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.lavoro.07", "sat": "mcb-igi-lavoro", "passo": 1, "dati": {
+   "concetto": {"valore": "Il cloro libero nell'acqua delle piscine pubbliche si tiene di solito intorno a 0,7–1,5 mg/l; il bagnino o il responsabile lo misura più volte al giorno.", "fonte": "AI", "stato": "da verificare"},
+   "domanda": {"valore": "Che cosa si misura nell'acqua della piscina per sapere se è disinfettata?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Il cloro libero e il pH", "Solo la temperatura dell'aria", "Il numero di bagnanti", "Il colore delle piastrelle", "La profondità"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Cloro libero e pH.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.lavoro.08", "sat": "mcb-igi-lavoro", "passo": 1, "dati": {
+   "concetto": {"valore": "L'odore forte di «cloro» in piscina in realtà viene dalle clorammine: si formano quando il cloro reagisce con sudore, urina e cosmetici dei bagnanti, e irritano occhi e vie respiratorie.", "fonte": "AI", "stato": "da verificare"},
+   "domanda": {"valore": "Da che cosa viene l'odore forte di «cloro» in piscina?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Dalle clorammine, cloro legato a sudore e urina", "Dal cloro troppo pulito", "Dalle piastrelle", "Dal sole", "Dall'acqua del rubinetto"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Clorammine.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.lavoro.09", "sat": "mcb-igi-lavoro", "passo": 1, "dati": {
+   "concetto": {"valore": "Per tenere pulita l'acqua i bagnanti fanno la doccia prima di entrare, passano dalla vasca lava-piedi e usano la cuffia; chi ha ferite aperte o infezioni non entra in vasca.", "fonte": "AI", "stato": "da verificare"},
+   "domanda": {"valore": "Perché si fa la doccia prima di entrare in piscina?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Per togliere sudore e sporco che consumano il cloro", "Per scaldarsi", "Per abbronzarsi", "Per far prima", "Per bagnare il costume"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Meno sporco in vasca, meno clorammine.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.lavoro.10", "sat": "mcb-igi-lavoro", "passo": 1, "dati": {
+   "concetto": {"valore": "Ai piedi negli spogliatoi e a bordo vasca si usano ciabatte, per evitare micosi e verruche (papilloma virus) che passano dai pavimenti bagnati.", "fonte": "AI", "stato": "da verificare"},
+   "domanda": {"valore": "Perché si usano le ciabatte a bordo vasca?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Per evitare micosi e verruche", "Per correre più veloce", "Per non bagnarsi", "Per moda", "Per non scivolare in acqua"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Prevenzione di micosi e verruche.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.lavoro.11", "sat": "mcb-igi-lavoro", "passo": 2, "dati": {
+   "domanda": {"valore": "Hai appena finito un massaggio con olio e le mani sono unte. Che cosa usi prima del cliente seguente?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Acqua e sapone", "Solo il gel alcolico", "Un asciugamano e basta", "Niente", "Il profumo"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Mani sporche o unte: acqua e sapone.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.lavoro.12", "sat": "mcb-igi-lavoro", "passo": 2, "dati": {
+   "domanda": {"valore": "Ti asciughi le mani dopo il lavaggio. Con che cosa?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Con carta monouso", "Con l'asciugamano del cliente", "Con un asciugamano usato da tutti tutta la settimana", "Sui pantaloni", "Non serve asciugarle"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Carta monouso.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.lavoro.13", "sat": "mcb-igi-lavoro", "passo": 2, "dati": {
+   "domanda": {"valore": "Un massaggiatore ha le unghie lunghe e smaltate. Che cosa gli dici?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Di tenerle corte e pulite per igiene e per non graffiare", "Va benissimo", "Di aggiungere unghie finte", "Di metterci olio", "Di usare guanti di lana"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Unghie corte e pulite.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.lavoro.14", "sat": "mcb-igi-lavoro", "passo": 2, "dati": {
+   "domanda": {"valore": "Il pH della piscina risulta 8,2. Che cosa succede?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Il cloro funziona male e l'acqua irrita: va corretto", "Va benissimo", "Il cloro funziona il doppio", "L'acqua diventa potabile", "Si deve svuotare la piscina subito"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "pH troppo alto: cloro poco efficace.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.lavoro.15", "sat": "mcb-igi-lavoro", "passo": 2, "dati": {
+   "domanda": {"valore": "I bagnanti si lamentano di occhi rossi e forte odore di cloro. Qual è la causa più probabile?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Troppe clorammine per sporco e poca areazione", "Il cloro è troppo pulito", "L'acqua è troppo fredda", "Il sole", "Le cuffie"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Clorammine.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.lavoro.16", "sat": "mcb-igi-lavoro", "passo": 2, "dati": {
+   "domanda": {"valore": "Un bambino con una ferita aperta vuole fare il bagno in piscina. Che cosa fai?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Gli dici di non entrare in vasca finché la ferita non è guarita", "Lo lasci entrare", "Gli metti un cerotto di carta e lo fai entrare", "Lo fai entrare per 5 minuti", "Lo mandi solo nella vasca piccola"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Ferite aperte: niente vasca.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.lavoro.17", "sat": "mcb-igi-lavoro", "passo": 2, "dati": {
+   "domanda": {"valore": "Un cliente arriva al massaggio con un'eruzione della pelle che non sai riconoscere. Che cosa fai?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Eviti la zona o rimandi, e lo inviti dal medico", "Massaggi sopra con forza", "Applichi la tua crema", "Fai finta di niente", "Gli dici che non è niente"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Nel dubbio non si tocca.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.lavoro.18", "sat": "mcb-igi-lavoro", "passo": 2, "dati": {
+   "domanda": {"valore": "Dove butti garze e cerotti usati?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["In un cestino con coperchio a pedale", "Sul pavimento", "In un cassetto", "Nel cestino aperto vicino al lettino", "Nel lavandino"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Cestino chiuso a pedale.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.lavoro.19", "sat": "mcb-igi-lavoro", "passo": 2, "dati": {
+   "domanda": {"valore": "Il barattolo di crema è aperto da settimane e ci hanno messo le dita tutti. Che cosa fai?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Lo butti e usi un dosatore", "Lo continui a usare", "Ci aggiungi acqua", "Lo scaldi", "Lo mescoli"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Prodotto contaminato.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.lavoro.20", "sat": "mcb-igi-lavoro", "passo": 2, "dati": {
+   "domanda": {"valore": "Ogni quanto si misura il cloro in una piscina pubblica?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Più volte al giorno", "Una volta al mese", "Una volta all'anno", "Mai", "Solo quando c'è odore"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Controlli frequenti.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.lavoro.21", "sat": "mcb-igi-lavoro", "passo": 3, "dati": {
+   "domanda": {"valore": "Il lavaggio corretto delle mani con acqua e sapone dura:", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["40–60 secondi", "5 secondi", "10 minuti", "1 secondo", "3 minuti"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "40–60 secondi.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.lavoro.22", "sat": "mcb-igi-lavoro", "passo": 3, "dati": {
+   "domanda": {"valore": "Il gel alcolico va strofinato:", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["20–30 secondi, fino ad asciugatura", "5 secondi", "3 minuti", "Solo sul palmo", "Poi va sciacquato"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "20–30 secondi.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.lavoro.23", "sat": "mcb-igi-lavoro", "passo": 3, "dati": {
+   "domanda": {"valore": "Il gel alcolico non basta quando:", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Le mani sono sporche a vista", "Le mani sono pulite", "Si saluta un cliente", "Si apre una porta", "Si legge"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Mani sporche: acqua e sapone.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.lavoro.24", "sat": "mcb-igi-lavoro", "passo": 3, "dati": {
+   "domanda": {"valore": "Il pH ottimale dell'acqua di piscina è circa:", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["6,5–7,5", "3–4", "9–10", "12", "1"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "6,5–7,5.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.lavoro.25", "sat": "mcb-igi-lavoro", "passo": 3, "dati": {
+   "domanda": {"valore": "Il cloro libero nelle piscine pubbliche si tiene circa a:", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["0,7–1,5 mg/l", "10–20 mg/l", "0 mg/l", "100 mg/l", "50 mg/l"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "0,7–1,5 mg/l.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.lavoro.26", "sat": "mcb-igi-lavoro", "passo": 3, "dati": {
+   "domanda": {"valore": "Le clorammine si formano dal cloro che reagisce con:", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Sudore, urina e cosmetici", "L'aria pulita", "Il sale da cucina", "La luce", "Le piastrelle"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Sostanze organiche dei bagnanti.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.lavoro.27", "sat": "mcb-igi-lavoro", "passo": 3, "dati": {
+   "domanda": {"valore": "A bordo vasca le ciabatte prevengono:", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Micosi e verruche", "Il raffreddore", "Le fratture", "L'insolazione", "L'asma"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Micosi e verruche.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.lavoro.28", "sat": "mcb-igi-lavoro", "passo": 3, "dati": {
+   "domanda": {"valore": "La crema da massaggio si preleva:", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Con un dosatore, senza dita nel barattolo", "Con le dita", "Con la bocca", "Con un panno usato", "Con le mani del cliente"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Dosatore.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.lavoro.29", "sat": "mcb-igi-lavoro", "passo": 3, "dati": {
+   "domanda": {"valore": "Prima del trattamento il massaggiatore:", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Toglie anelli e orologio", "Mette più anelli", "Indossa guanti di lana", "Si mette crema profumata sulle unghie", "Non si lava"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Via anelli e orologio.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.lavoro.30", "sat": "mcb-igi-lavoro", "passo": 3, "dati": {
+   "domanda": {"valore": "Chi ha una ferita aperta:", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Non entra in vasca", "Entra in vasca", "Entra solo con la cuffia", "Entra nella vasca idromassaggio", "Entra se l'acqua è calda"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Niente vasca.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.valutare.01", "sat": "mcb-igi-valutare", "passo": 1, "dati": {
+   "concetto": {"valore": "Prima di avvicinarti a una persona a terra controlla che la scena sia sicura per te e per gli altri (acqua, corrente elettrica, traffico). Un soccorritore ferito non aiuta nessuno.", "fonte": "AI", "stato": "da verificare"},
+   "domanda": {"valore": "Qual è la prima cosa da fare davanti a una persona a terra?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Controllare che la scena sia sicura", "Darle da bere", "Sollevarla subito in piedi", "Fare una foto", "Andare via"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Sicurezza della scena prima di tutto.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.valutare.02", "sat": "mcb-igi-valutare", "passo": 1, "dati": {
+   "concetto": {"valore": "Per capire se la persona è cosciente la chiami ad alta voce e la scuoti con delicatezza per le spalle. Se non risponde, chiedi aiuto e fai chiamare il 112.", "fonte": "AI", "stato": "da verificare"},
+   "domanda": {"valore": "Come controlli se una persona è cosciente?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["La chiami forte e la scuoti delicatamente per le spalle", "Le guardi le scarpe", "Le dai uno schiaffo forte", "Le versi acqua in faccia", "Aspetti che si muova da sola"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Stimolo verbale e scuotimento delle spalle.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.valutare.03", "sat": "mcb-igi-valutare", "passo": 1, "dati": {
+   "concetto": {"valore": "Il numero unico europeo di emergenza è il 112. Chi chiama dice dove si trova, che cosa è successo, quante persone sono coinvolte e come stanno, e non riattacca finché l'operatore non lo dice.", "fonte": "AI", "stato": "da verificare"},
+   "domanda": {"valore": "Qual è il numero unico europeo di emergenza?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["112", "911", "100", "999", "113 soltanto"], "fonte": "AI", "stato": "da verificare"},
+   "scritta": {"valore": ["112"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "112.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.valutare.04", "sat": "mcb-igi-valutare", "passo": 1, "dati": {
+   "concetto": {"valore": "Per vedere se una persona incosciente respira si aprono le vie aeree (testa indietro, mento in su) e si guarda, ascolta e sente il respiro per non più di 10 secondi.", "fonte": "AI", "stato": "da verificare"},
+   "domanda": {"valore": "Per quanto tempo al massimo si controlla il respiro?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["10 secondi", "1 minuto", "2 secondi", "5 minuti", "Finché arriva l'ambulanza"], "fonte": "AI", "stato": "da verificare"},
+   "scritta": {"valore": ["10", "10 secondi", "dieci secondi"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Al massimo 10 secondi.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.valutare.05", "sat": "mcb-igi-valutare", "passo": 1, "dati": {
+   "concetto": {"valore": "Il respiro agonico (boccheggi rari e rumorosi, gasping) non è un respiro normale: va considerato come assenza di respiro e si comincia la rianimazione.", "fonte": "AI", "stato": "da verificare"},
+   "domanda": {"valore": "Una persona incosciente fa boccheggi rari e rumorosi. Come lo consideri?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Come assenza di respiro normale: si inizia la rianimazione", "Come respiro normale", "Come sonno profondo", "Come un buon segno", "Come russare"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Il gasping è segno di arresto cardiaco.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.valutare.06", "sat": "mcb-igi-valutare", "passo": 1, "dati": {
+   "concetto": {"valore": "Una persona incosciente che respira normalmente, senza sospetto di trauma, si mette in posizione laterale di sicurezza: la lingua non chiude la gola e un eventuale vomito esce dalla bocca. Poi si controlla spesso il respiro.", "fonte": "AI", "stato": "da verificare"},
+   "domanda": {"valore": "In che posizione metti una persona incosciente che respira, senza traumi?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Posizione laterale di sicurezza", "Seduta", "In piedi", "Prona con la faccia a terra", "Supina con un cuscino alto sotto la testa"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Posizione laterale di sicurezza.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.valutare.07", "sat": "mcb-igi-valutare", "passo": 1, "dati": {
+   "concetto": {"valore": "Se c'è il sospetto di un trauma alla colonna (caduta dall'alto, tuffo in acqua bassa, incidente) la persona non si muove, salvo pericolo immediato: si tiene ferma la testa in linea con il corpo e si chiama il 112.", "fonte": "AI", "stato": "da verificare"},
+   "domanda": {"valore": "Un ragazzo si è tuffato in acqua bassa e non muove le gambe. Che cosa fai a riva?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Lo muovi il meno possibile, tieni la testa in linea e chiami il 112", "Lo fai alzare per vedere se cammina", "Gli giri forte la testa", "Lo fai sedere", "Gli massaggi la schiena"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Sospetto trauma spinale: immobilità e 112.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.valutare.08", "sat": "mcb-igi-valutare", "passo": 1, "lezione": "Patologia/MCB - Sincope.pdf, p. 2", "dati": {
+   "concetto": {"valore": "La sincope è una perdita di coscienza improvvisa e breve, che passa da sola in modo rapido e completo, con perdita del tono dei muscoli (la persona cade). È causata da un breve calo del sangue che arriva al cervello.", "fonte": "lezione", "stato": "da verificare"},
+   "domanda": {"valore": "Che cos'è la sincope?", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["Una breve perdita di coscienza per calo del sangue al cervello", "Una crisi d'asma", "Un attacco di fame", "Una frattura", "Un'infezione"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Perdita di coscienza transitoria da ipoperfusione cerebrale.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.valutare.09", "sat": "mcb-igi-valutare", "passo": 1, "lezione": "Patologia/MCB - Sincope.pdf, p. 7", "dati": {
+   "concetto": {"valore": "Capogiri e vertigini non sono sincope: non c'è perdita di coscienza. Nella vertigine c'è un senso di movimento dell'ambiente.", "fonte": "lezione", "stato": "da verificare"},
+   "domanda": {"valore": "Che cosa distingue un capogiro da una sincope?", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["Nel capogiro non si perde coscienza", "Nel capogiro si perde coscienza più a lungo", "Sono la stessa cosa", "Il capogiro dura ore senza coscienza", "Il capogiro dà sempre convulsioni"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Niente perdita di coscienza nel capogiro.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.valutare.10", "sat": "mcb-igi-valutare", "passo": 1, "lezione": "Patologia/MCB - Sincope.pdf, p. 25", "dati": {
+   "concetto": {"valore": "Una sincope vasovagale è suggerita da una perdita di coscienza dopo una vista, un odore o un suono sgradevole, o dopo molto tempo in piedi in un luogo caldo e affollato.", "fonte": "lezione", "stato": "da verificare"},
+   "domanda": {"valore": "Quale situazione fa pensare a una sincope vasovagale?", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["Molto tempo in piedi in un luogo caldo e affollato", "Una partita a scacchi", "Il sonno notturno", "Una doccia fredda breve", "Una lettura tranquilla"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Caldo, folla, ortostatismo prolungato.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.valutare.11", "sat": "mcb-igi-valutare", "passo": 2, "dati": {
+   "domanda": {"valore": "Un bagnante è a terra a bordo vasca, vicino a un cavo elettrico bagnato. Che cosa fai per prima cosa?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Ti assicuri che la corrente sia staccata prima di toccarlo", "Lo tocchi subito", "Gli versi acqua addosso", "Lo trascini sul cavo", "Aspetti che si alzi"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Sicurezza della scena.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.valutare.12", "sat": "mcb-igi-valutare", "passo": 2, "dati": {
+   "domanda": {"valore": "Chiami il 112 per un uomo svenuto in palestra. Che cosa dici per prima cosa?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Dove ti trovi e che cosa è successo", "Il tuo cognome e la tua età", "Che hai fretta", "Il prezzo dell'abbonamento", "Niente, riattacchi"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Luogo e accaduto.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.valutare.13", "sat": "mcb-igi-valutare", "passo": 2, "dati": {
+   "domanda": {"valore": "Una persona non risponde e non respira normalmente. Che cosa fai?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Fai chiamare il 112, chiedi un defibrillatore e cominci le compressioni toraciche", "La metti in posizione laterale", "Le dai da bere", "Aspetti 5 minuti", "Le alzi le braccia"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Arresto cardiaco: 112, DAE, RCP.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.valutare.14", "sat": "mcb-igi-valutare", "passo": 2, "dati": {
+   "domanda": {"valore": "Una signora svenuta respira normalmente e non ha traumi. Che cosa fai mentre arriva l'aiuto?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["La metti in posizione laterale di sicurezza e controlli il respiro", "La fai alzare subito", "Le dai un caffè", "La lasci supina senza controllarla", "La scuoti forte continuamente"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Posizione laterale e sorveglianza.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.valutare.15", "sat": "mcb-igi-valutare", "passo": 2, "lezione": "Patologia/MCB - Sincope.pdf, p. 48", "dati": {
+   "domanda": {"valore": "Un cliente sviene sul lettino ma respira. Secondo la lezione, quale posizione favorisce il sangue al cervello?", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["Sdraiato con le gambe sollevate", "Seduto con la testa in alto", "In piedi", "Prono con la testa giù dal lettino senza controllo", "Seduto sulle ginocchia"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Posizione che aumenta il flusso al cervello.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.valutare.16", "sat": "mcb-igi-valutare", "passo": 2, "lezione": "Patologia/MCB - Sincope.pdf, p. 48", "dati": {
+   "domanda": {"valore": "Il cliente svenuto non si è ancora ripreso del tutto. Che cosa NON fai?", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["Dargli da bere", "Girargli la testa di lato", "Tenerlo sdraiato", "Osservarlo", "Chiamare aiuto se non si riprende"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Niente per bocca finché non è cosciente.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.valutare.17", "sat": "mcb-igi-valutare", "passo": 2, "lezione": "Patologia/MCB - Sincope.pdf, p. 48", "dati": {
+   "domanda": {"valore": "Il cliente si è ripreso dallo svenimento e vuole alzarsi subito. Che cosa fai?", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["Lo fai alzare solo quando la debolezza è passata e lo osservi qualche minuto", "Lo fai alzare di colpo", "Gli fai fare subito le scale", "Lo mandi via subito", "Gli fai fare una corsa"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Alzarsi lentamente e restare sotto osservazione.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.valutare.18", "sat": "mcb-igi-valutare", "passo": 2, "lezione": "Patologia/MCB - Sincope.pdf, p. 8", "dati": {
+   "domanda": {"valore": "Durante la perdita di coscienza la persona fa molti scatti ritmici e prima aveva avvertito una «aura». A che cosa fa pensare?", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["A una crisi epilettica", "A una sincope vasovagale tipica", "A un crampo", "A un capogiro", "Al sonno"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Aura e movimenti ritmici fanno pensare all'epilessia.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.valutare.19", "sat": "mcb-igi-valutare", "passo": 2, "lezione": "Patologia/MCB - Sincope.pdf, p. 10", "dati": {
+   "domanda": {"valore": "Un atleta sviene durante lo sforzo, non dopo. Perché è importante chiamare il medico?", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["Perché può esserci una causa cardiaca", "Perché ha fame", "Perché è stanco e basta", "Perché ha caldo", "Non è importante"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Le sincopi cardiache sono le più pericolose.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.valutare.20", "sat": "mcb-igi-valutare", "passo": 2, "dati": {
+   "domanda": {"valore": "Trovi una persona a terra dopo una caduta dalla scala. Respira e si lamenta del collo. Che cosa fai?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Non la muovi, le tieni ferma la testa e chiami il 112", "La metti seduta", "La giri in posizione laterale subito", "Le massaggi il collo", "La fai camminare"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Sospetto trauma: immobilità.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.valutare.21", "sat": "mcb-igi-valutare", "passo": 3, "dati": {
+   "domanda": {"valore": "Prima di soccorrere una persona bisogna:", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Valutare la sicurezza della scena", "Darle da bere", "Spostarla sempre", "Fotografarla", "Chiamare un parente"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Sicurezza della scena.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.valutare.22", "sat": "mcb-igi-valutare", "passo": 3, "dati": {
+   "domanda": {"valore": "Il numero unico europeo per le emergenze è:", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["112", "118 in tutta Europa", "911", "101", "999"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "112.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.valutare.23", "sat": "mcb-igi-valutare", "passo": 3, "dati": {
+   "domanda": {"valore": "Il respiro si valuta per non più di:", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["10 secondi", "30 secondi", "1 minuto", "2 minuti", "5 secondi soltanto se si è stanchi"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "10 secondi.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.valutare.24", "sat": "mcb-igi-valutare", "passo": 3, "dati": {
+   "domanda": {"valore": "Il respiro agonico (gasping):", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Va considerato assenza di respiro normale", "È un respiro normale", "Indica che la persona dorme", "Non richiede intervento", "È tipico dello sport"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Si inizia la RCP.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.valutare.25", "sat": "mcb-igi-valutare", "passo": 3, "dati": {
+   "domanda": {"valore": "Una persona incosciente che respira e senza traumi va messa:", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["In posizione laterale di sicurezza", "Seduta", "In piedi", "Con le braccia in alto", "Prona"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Posizione laterale di sicurezza.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.valutare.26", "sat": "mcb-igi-valutare", "passo": 3, "dati": {
+   "domanda": {"valore": "Con sospetto trauma della colonna:", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Non si muove la persona salvo pericolo immediato", "Si fa camminare", "Si mette seduta", "Si gira la testa", "Si solleva per le braccia"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Immobilità.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.valutare.27", "sat": "mcb-igi-valutare", "passo": 3, "lezione": "Patologia/MCB - Sincope.pdf, p. 2", "dati": {
+   "domanda": {"valore": "La sincope è dovuta a:", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["Un brusco e breve calo del flusso di sangue al cervello", "Un'infezione dei polmoni", "Una frattura", "Un eccesso di zuccheri", "Un'allergia alla pelle"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Ipoperfusione cerebrale transitoria.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.valutare.28", "sat": "mcb-igi-valutare", "passo": 3, "lezione": "Patologia/MCB - Sincope.pdf, p. 7", "dati": {
+   "domanda": {"valore": "Nel capogiro e nella vertigine:", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["Non c'è perdita di coscienza", "C'è sempre perdita di coscienza", "C'è febbre alta", "Ci sono sempre convulsioni", "C'è arresto cardiaco"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Niente perdita di coscienza.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.valutare.29", "sat": "mcb-igi-valutare", "passo": 3, "lezione": "Patologia/MCB - Sincope.pdf, p. 10", "dati": {
+   "domanda": {"valore": "Tra le cause di sincope neuromediate c'è la forma:", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["Vasovagale", "Da frattura", "Da infezione", "Da allergia", "Da carenza di vitamina D"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Vasovagale.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.valutare.30", "sat": "mcb-igi-valutare", "passo": 3, "lezione": "Patologia/MCB - Sincope.pdf, p. 48", "dati": {
+   "domanda": {"valore": "Fino a che la persona svenuta non ha ripreso coscienza:", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["Non le si dà nulla per bocca", "Le si dà acqua", "Le si dà zucchero", "Le si fa un caffè", "La si fa alzare"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Niente per bocca.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.rianimazione.01", "sat": "mcb-igi-rianimazione", "passo": 1, "dati": {
+   "concetto": {"valore": "Nell'arresto cardiaco il cuore non pompa più sangue: la persona è incosciente e non respira normalmente. Ogni minuto senza rianimazione riduce molto la probabilità di sopravvivere.", "fonte": "AI", "stato": "da verificare"},
+   "domanda": {"valore": "Come si riconosce un arresto cardiaco?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Persona incosciente che non respira normalmente", "Persona che parla ma ha freddo", "Persona che tossisce forte", "Persona che ha solo un crampo", "Persona con il naso chiuso"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Incoscienza e respiro assente o anomalo.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.rianimazione.02", "sat": "mcb-igi-rianimazione", "passo": 1, "dati": {
+   "concetto": {"valore": "Le compressioni toraciche si fanno al centro del torace, sulla metà inferiore dello sterno, con le braccia tese e il palmo di una mano sopra l'altra.", "fonte": "AI", "stato": "da verificare"},
+   "domanda": {"valore": "Dove si mettono le mani per le compressioni toraciche?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Al centro del torace, sulla metà inferiore dello sterno", "Sulla pancia", "Sul collo", "Sul lato sinistro sotto l'ascella", "Sulla spalla"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Metà inferiore dello sterno.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.rianimazione.03", "sat": "mcb-igi-rianimazione", "passo": 1, "dati": {
+   "concetto": {"valore": "Nell'adulto si comprime a una frequenza di 100–120 compressioni al minuto, abbassando il torace di 5–6 cm e lasciandolo risalire del tutto dopo ogni compressione.", "fonte": "AI", "stato": "da verificare"},
+   "domanda": {"valore": "A che frequenza si fanno le compressioni toraciche nell'adulto?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["100–120 al minuto", "30 al minuto", "60 al minuto", "200 al minuto", "10 al minuto"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "100–120/min.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.rianimazione.04", "sat": "mcb-igi-rianimazione", "passo": 1, "dati": {
+   "concetto": {"valore": "La profondità delle compressioni nell'adulto è di 5–6 cm: meno non fa circolare il sangue, di più aumenta il rischio di lesioni.", "fonte": "AI", "stato": "da verificare"},
+   "domanda": {"valore": "Di quanti centimetri si abbassa il torace dell'adulto a ogni compressione?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["5–6 cm", "1 cm", "10–12 cm", "2 cm", "15 cm"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "5–6 cm.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.rianimazione.05", "sat": "mcb-igi-rianimazione", "passo": 1, "dati": {
+   "concetto": {"valore": "Chi è addestrato alterna 30 compressioni e 2 ventilazioni (30:2). Chi non sa o non vuole fare le ventilazioni fa solo compressioni continue.", "fonte": "AI", "stato": "da verificare"},
+   "domanda": {"valore": "Qual è il rapporto tra compressioni e ventilazioni nell'adulto?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["30:2", "15:1", "5:1", "2:30", "100:1"], "fonte": "AI", "stato": "da verificare"},
+   "scritta": {"valore": ["30:2", "30 a 2"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "30 compressioni e 2 ventilazioni.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.rianimazione.06", "sat": "mcb-igi-rianimazione", "passo": 1, "dati": {
+   "concetto": {"valore": "Il DAE (defibrillatore automatico esterno) analizza da solo il ritmo del cuore e dice a voce che cosa fare. Si accende appena arriva e si seguono le istruzioni.", "fonte": "AI", "stato": "da verificare"},
+   "domanda": {"valore": "Che cosa fa il DAE?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Analizza il ritmo del cuore e, se serve, dà la scarica", "Misura la febbre", "Fa le ventilazioni", "Pompa sangue al posto del cuore", "Misura gli zuccheri"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Analisi del ritmo e scarica se indicata.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.rianimazione.07", "sat": "mcb-igi-rianimazione", "passo": 1, "dati": {
+   "concetto": {"valore": "Le piastre del DAE si attaccano sul torace nudo e asciutto: una sotto la clavicola destra, l'altra sul fianco sinistro sotto l'ascella. Durante l'analisi e la scarica nessuno tocca la persona.", "fonte": "AI", "stato": "da verificare"},
+   "domanda": {"valore": "Che cosa si fa durante l'analisi e la scarica del DAE?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Nessuno tocca la persona", "Si continuano le compressioni", "Si tiene la mano della persona", "Si bagna il torace", "Si solleva la persona"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Nessun contatto durante analisi e scarica.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.rianimazione.08", "sat": "mcb-igi-rianimazione", "passo": 1, "dati": {
+   "concetto": {"valore": "Nell'annegato la causa dell'arresto è la mancanza di ossigeno: per questo si cominciano con 5 ventilazioni iniziali e poi si prosegue con 30:2.", "fonte": "AI", "stato": "da verificare"},
+   "domanda": {"valore": "Con che cosa si inizia la rianimazione di un annegato?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Con 5 ventilazioni iniziali", "Con la manovra di Heimlich", "Con 100 compressioni senza fermarsi mai", "Con il massaggio delle gambe", "Facendogli sputare l'acqua a testa in giù"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Annegamento: ipossia, 5 ventilazioni iniziali.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.rianimazione.09", "sat": "mcb-igi-rianimazione", "passo": 1, "dati": {
+   "concetto": {"valore": "Nel bambino il torace si comprime per circa un terzo della sua profondità; chi è addestrato fa 5 ventilazioni iniziali e poi 15 compressioni e 2 ventilazioni.", "fonte": "AI", "stato": "da verificare"},
+   "domanda": {"valore": "Quanto si comprime il torace di un bambino?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Circa un terzo della sua profondità", "Il più possibile", "Mezzo centimetro", "Metà della profondità", "Non si comprime mai"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Un terzo del diametro antero-posteriore.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.rianimazione.10", "sat": "mcb-igi-rianimazione", "passo": 1, "dati": {
+   "concetto": {"valore": "In Italia la legge 116 del 2021 permette anche a chi non è sanitario né formato di usare il DAE e fare la rianimazione in caso di arresto cardiaco, senza rischiare conseguenze per averlo fatto in buona fede.", "fonte": "AI", "stato": "da verificare"},
+   "domanda": {"valore": "Chi può usare un DAE in Italia secondo la legge del 2021?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Chiunque, anche senza formazione, in caso di arresto cardiaco", "Solo i medici", "Solo gli infermieri", "Solo i vigili del fuoco", "Nessuno senza patente"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Legge 116/2021.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.rianimazione.11", "sat": "mcb-igi-rianimazione", "passo": 2, "dati": {
+   "domanda": {"valore": "Fai le compressioni da 2 minuti e sei stanco; c'è un collega addestrato. Che cosa fate?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Vi date il cambio riducendo al minimo la pausa", "Vi fermate per 5 minuti", "Smettete", "Lo fa lui solo con una mano", "Aspettate l'ambulanza senza fare nulla"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Cambio ogni 2 minuti, pause minime.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.rianimazione.12", "sat": "mcb-igi-rianimazione", "passo": 2, "dati": {
+   "domanda": {"valore": "Arriva il DAE mentre fai le compressioni. Che cosa fai?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Lo accendi e segui le istruzioni a voce, continuando le compressioni mentre attacchi le piastre se c'è un aiutante", "Lo lasci spento", "Lo usi solo dopo 10 minuti", "Lo dai all'ambulanza", "Lo metti sotto la testa"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Accendere subito.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.rianimazione.13", "sat": "mcb-igi-rianimazione", "passo": 2, "dati": {
+   "domanda": {"valore": "Il torace di un bagnante tirato fuori dall'acqua è bagnato. Che cosa fai prima di attaccare le piastre?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Asciughi il torace", "Attacchi le piastre sull'acqua", "Metti le piastre sulla schiena bagnata", "Aspetti che si asciughi da solo", "Non usi il DAE"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Torace asciutto.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.rianimazione.14", "sat": "mcb-igi-rianimazione", "passo": 2, "dati": {
+   "domanda": {"valore": "Il DAE dice «scarica consigliata». Che cosa fai?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Fai allontanare tutti e premi il pulsante", "Tieni la mano della persona", "Continui a comprimere durante la scarica", "Spegni il DAE", "Aspetti il medico"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Nessun contatto, poi scarica.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.rianimazione.15", "sat": "mcb-igi-rianimazione", "passo": 2, "dati": {
+   "domanda": {"valore": "Dopo la scarica il DAE dice di riprendere la rianimazione. Che cosa fai?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Riprendi subito le compressioni", "Controlli il polso per un minuto", "Aspetti", "Togli le piastre", "Metti la persona seduta"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Riprendere subito la RCP.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.rianimazione.16", "sat": "mcb-igi-rianimazione", "passo": 2, "dati": {
+   "domanda": {"valore": "Un ragazzo è stato tirato fuori dall'acqua, non respira. Che cosa fai per primo dopo aver fatto chiamare il 112?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["5 ventilazioni, poi 30 compressioni e 2 ventilazioni", "Lo metti a testa in giù per far uscire l'acqua", "Lo metti in posizione laterale", "Gli dai da bere", "Aspetti che tossisca"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Annegamento: 5 ventilazioni iniziali.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.rianimazione.17", "sat": "mcb-igi-rianimazione", "passo": 2, "dati": {
+   "domanda": {"valore": "Non sei sicuro di saper fare le ventilazioni. Che cosa fai a un adulto in arresto?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Fai solo compressioni continue", "Non fai nulla", "Fai solo ventilazioni", "Lo metti in posizione laterale", "Gli alzi le gambe e basta"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Solo compressioni è meglio di niente.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.rianimazione.18", "sat": "mcb-igi-rianimazione", "passo": 2, "dati": {
+   "domanda": {"valore": "Un bambino di 6 anni è in arresto cardiaco. Quanto premi?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Circa un terzo della profondità del torace", "Il più forte possibile", "Come un adulto, 8 cm", "1 cm", "Non premi"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Un terzo della profondità.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.rianimazione.19", "sat": "mcb-igi-rianimazione", "passo": 2, "dati": {
+   "domanda": {"valore": "Una persona in arresto ha un dispositivo sotto la pelle sotto la clavicola destra (pacemaker). Dove attacchi la piastra?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Un po' lontano dal dispositivo, non sopra", "Esattamente sopra il dispositivo", "Sulla pancia", "Non usi il DAE", "Sul collo"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Evitare di mettere la piastra sopra il dispositivo.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.rianimazione.20", "sat": "mcb-igi-rianimazione", "passo": 2, "dati": {
+   "domanda": {"valore": "Un passante ha paura di usare il DAE «per non sbagliare». Che cosa gli dici?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Che la legge permette a chiunque di usarlo e che il DAE dà la scarica solo se serve", "Che è vietato", "Che serve una laurea", "Che può farlo solo un medico", "Che il DAE è pericoloso per chi lo usa sempre"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Legge 116/2021, DAE automatico.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.rianimazione.21", "sat": "mcb-igi-rianimazione", "passo": 3, "dati": {
+   "domanda": {"valore": "La frequenza delle compressioni nell'adulto è:", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["100–120 al minuto", "60 al minuto", "40 al minuto", "150–180 al minuto", "20 al minuto"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "100–120/min.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.rianimazione.22", "sat": "mcb-igi-rianimazione", "passo": 3, "dati": {
+   "domanda": {"valore": "La profondità delle compressioni nell'adulto è:", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["5–6 cm", "2–3 cm", "8–10 cm", "1 cm", "12 cm"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "5–6 cm.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.rianimazione.23", "sat": "mcb-igi-rianimazione", "passo": 3, "dati": {
+   "domanda": {"valore": "Il rapporto compressioni-ventilazioni nell'adulto è:", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["30:2", "15:2", "5:1", "10:1", "3:1"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "30:2.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.rianimazione.24", "sat": "mcb-igi-rianimazione", "passo": 3, "dati": {
+   "domanda": {"valore": "Le mani per le compressioni vanno:", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Sulla metà inferiore dello sterno", "Sull'addome", "Sul lato sinistro del torace", "Sotto la gola", "Sulla schiena"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Metà inferiore dello sterno.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.rianimazione.25", "sat": "mcb-igi-rianimazione", "passo": 3, "dati": {
+   "domanda": {"valore": "Il DAE:", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Analizza il ritmo e dà la scarica solo se serve", "Dà sempre la scarica", "Misura la pressione", "Fa le ventilazioni", "Si usa solo in ospedale"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Analisi automatica.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.rianimazione.26", "sat": "mcb-igi-rianimazione", "passo": 3, "dati": {
+   "domanda": {"valore": "Durante la scarica del DAE:", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Nessuno deve toccare la persona", "Si continua a comprimere", "Si tiene la testa", "Si bagna il torace", "Si danno ventilazioni"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Nessun contatto.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.rianimazione.27", "sat": "mcb-igi-rianimazione", "passo": 3, "dati": {
+   "domanda": {"valore": "Nell'annegato la rianimazione inizia con:", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["5 ventilazioni", "30 compressioni senza ventilazioni", "La manovra di Heimlich", "Il DAE prima di tutto, sempre", "La posizione laterale"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "5 ventilazioni.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.rianimazione.28", "sat": "mcb-igi-rianimazione", "passo": 3, "dati": {
+   "domanda": {"valore": "Nel bambino, chi è addestrato usa il rapporto:", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["15:2 dopo 5 ventilazioni iniziali", "30:2 senza ventilazioni iniziali", "5:1", "50:2", "1:1"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "15:2.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.rianimazione.29", "sat": "mcb-igi-rianimazione", "passo": 3, "dati": {
+   "domanda": {"valore": "La legge 116/2021 riguarda:", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["L'uso del defibrillatore anche da parte di non sanitari", "La privacy dei clienti", "La pulizia delle piscine", "I farmaci da banco", "Le ferie dei lavoratori"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "DAE e soccorritori non sanitari.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.rianimazione.30", "sat": "mcb-igi-rianimazione", "passo": 3, "dati": {
+   "domanda": {"valore": "Chi non è addestrato alle ventilazioni deve:", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Fare solo compressioni continue", "Non fare nulla", "Mettere la persona seduta", "Fare solo ventilazioni", "Aspettare l'ambulanza"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Compressioni continue.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.emergenze.01", "sat": "mcb-igi-emergenze", "passo": 1, "dati": {
+   "concetto": {"valore": "Soffocamento da corpo estraneo: se la persona tossisce, la si incoraggia a tossire. Se non riesce più a tossire, parlare o respirare, si danno 5 colpi tra le scapole e poi 5 compressioni addominali (manovra di Heimlich), alternandoli.", "fonte": "AI", "stato": "da verificare"},
+   "domanda": {"valore": "Un adulto soffoca e non riesce più a tossire. Che cosa fai per primo?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["5 colpi tra le scapole, poi 5 compressioni addominali", "Gli dai da bere", "Lo fai sdraiare e aspetti", "Gli infili le dita in gola alla cieca", "Lo incoraggi solo a parlare"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Colpi interscapolari e compressioni addominali alternati.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.emergenze.02", "sat": "mcb-igi-emergenze", "passo": 1, "lezione": "Patologia/MCB - Malattie Cardio Vascolari.pdf, p. 67", "dati": {
+   "concetto": {"valore": "Nell'infarto del miocardio le cellule del cuore muoiono perché un'arteria coronaria si chiude all'improvviso e il sangue non arriva più.", "fonte": "lezione", "stato": "da verificare"},
+   "domanda": {"valore": "Che cosa succede nell'infarto secondo la lezione?", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["Muoiono cellule del cuore per la chiusura di una coronaria", "Si rompe una costa", "Si infiamma lo stomaco", "Si blocca un bronco", "Si abbassa la glicemia"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Necrosi miocardica da occlusione coronarica.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.emergenze.03", "sat": "mcb-igi-emergenze", "passo": 1, "dati": {
+   "concetto": {"valore": "Segni tipici dell'infarto: dolore o peso al centro del petto che dura più di qualche minuto, a volte esteso a braccio sinistro, mandibola o schiena, con sudore freddo, nausea e affanno. Si chiama subito il 112 e si fa stare la persona a riposo.", "fonte": "AI", "stato": "da verificare"},
+   "domanda": {"valore": "Che cosa fai se un cliente ha un forte peso al petto con sudore freddo?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Lo fai stare a riposo e chiami subito il 112", "Gli massaggi il petto", "Lo fai camminare", "Gli dici di guidare fino al pronto soccorso", "Aspetti un'ora"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Sospetto infarto: riposo e 112.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.emergenze.04", "sat": "mcb-igi-emergenze", "passo": 1, "dati": {
+   "concetto": {"valore": "Ictus: un'area del cervello resta senza sangue. Si riconosce con il test FAST: Faccia storta, Arto che cade (braccio debole), Linguaggio confuso, e Tempo: chiamare subito il 112 e annotare l'ora di inizio.", "fonte": "AI", "stato": "da verificare"},
+   "domanda": {"valore": "Che cosa indica la «F» del test FAST per l'ictus?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Faccia storta", "Febbre", "Fame", "Frattura", "Freddo"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Faccia asimmetrica.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.emergenze.05", "sat": "mcb-igi-emergenze", "passo": 1, "dati": {
+   "concetto": {"valore": "Durante una crisi convulsiva non si blocca la persona e non le si mette nulla in bocca: si allontanano gli oggetti pericolosi, si protegge la testa e si guarda l'orologio. Finita la crisi, se respira, posizione laterale di sicurezza.", "fonte": "AI", "stato": "da verificare"},
+   "domanda": {"valore": "Che cosa NON si fa durante una crisi convulsiva?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Mettere qualcosa in bocca alla persona", "Proteggere la testa", "Allontanare gli oggetti", "Guardare quanto dura", "Mettere in posizione laterale dopo la crisi"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Niente in bocca e niente blocchi.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.emergenze.06", "sat": "mcb-igi-emergenze", "passo": 1, "lezione": "Patologia/MCB - Apparato respiratorio.pdf, p. 83", "dati": {
+   "concetto": {"valore": "L'asma è una malattia infiammatoria cronica delle vie aeree con episodi di affanno, fischi al respiro, tosse e senso di costrizione al torace, per un restringimento dei bronchi di solito reversibile.", "fonte": "lezione", "stato": "da verificare"},
+   "domanda": {"valore": "Quali sono i sintomi tipici di una crisi d'asma?", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["Affanno, respiro sibilante, tosse e torace stretto", "Febbre alta e brividi", "Dolore al ginocchio", "Prurito al piede", "Mal di denti"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Dispnea, sibili, tosse, costrizione toracica.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.emergenze.07", "sat": "mcb-igi-emergenze", "passo": 1, "lezione": "fisiologia/MCB - il sistema endocrino.pdf, p. 144", "dati": {
+   "concetto": {"valore": "La glicemia normale a digiuno sta tra 70 e 100 mg/dl. Sotto questi valori si parla di ipoglicemia: sudore, tremore, fame, palpitazioni, confusione, fino alla perdita di coscienza.", "fonte": "lezione", "stato": "da verificare"},
+   "domanda": {"valore": "Quale di questi è un segno di ipoglicemia?", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["Sudore, tremore e confusione", "Pelle secca e calda con sete", "Tosse con catarro", "Dolore al tallone", "Prurito agli occhi"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Sintomi adrenergici e neurologici.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.emergenze.08", "sat": "mcb-igi-emergenze", "passo": 1, "dati": {
+   "concetto": {"valore": "Ipoglicemia: se la persona è cosciente e riesce a deglutire si danno zuccheri semplici (circa 15–20 g: zollette, succo, bevanda zuccherata); se è incosciente niente per bocca, posizione laterale e 112.", "fonte": "AI", "stato": "da verificare"},
+   "domanda": {"valore": "Una persona diabetica è confusa ma cosciente e deglutisce. Che cosa le dai?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Zucchero o una bevanda zuccherata", "Insulina", "Niente, aspetti", "Un caffè amaro", "Acqua frizzante senza zucchero"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Zuccheri semplici se può deglutire.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.emergenze.09", "sat": "mcb-igi-emergenze", "passo": 1, "dati": {
+   "concetto": {"valore": "Emorragia esterna: si preme direttamente sulla ferita con un panno pulito o una garza, con forza e senza togliere la garza se si impregna (se ne aggiunge un'altra sopra); se è grave si chiama il 112.", "fonte": "AI", "stato": "da verificare"},
+   "domanda": {"valore": "Come si ferma un'emorragia da una ferita al braccio?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Premendo direttamente sulla ferita con una garza", "Lavando con acqua calda e lasciando sanguinare", "Togliendo la garza ogni minuto per controllare", "Massaggiando il braccio", "Alzando la voce"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Compressione diretta.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.emergenze.10", "sat": "mcb-igi-emergenze", "passo": 1, "dati": {
+   "concetto": {"valore": "Ustione: si raffredda subito la zona con acqua corrente fresca (non ghiacciata) per 10–20 minuti, si tolgono anelli e oggetti stretti, non si bucano le bolle e non si mettono creme casalinghe o olio.", "fonte": "AI", "stato": "da verificare"},
+   "domanda": {"valore": "Che cosa si fa subito su una piccola ustione?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Acqua corrente fresca per 10–20 minuti", "Ghiaccio diretto", "Olio o burro", "Bucare le bolle", "Coprire con cotone"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Raffreddare con acqua corrente.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.emergenze.11", "sat": "mcb-igi-emergenze", "passo": 2, "dati": {
+   "domanda": {"valore": "Un bambino si porta le mani alla gola, non tossisce e diventa viola. Che cosa fai?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Colpi tra le scapole e compressioni addominali, e fai chiamare il 112", "Gli dai acqua", "Lo metti a letto", "Aspetti che passi", "Gli guardi in bocca e basta"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Ostruzione completa: manovre di disostruzione.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.emergenze.12", "sat": "mcb-igi-emergenze", "passo": 2, "lezione": "Patologia/MCB - Malattie Cardio Vascolari.pdf, p. 65", "dati": {
+   "domanda": {"valore": "Un cliente con angina dice di avere con sé la nitroglicerina e sente dolore al petto. Che cosa fai?", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["Lo fai sedere, lo aiuti a prendere il suo farmaco e chiami il 112 se il dolore non passa", "Gli fai fare esercizio", "Gli massaggi il torace con forza", "Gli dai un tuo farmaco", "Lo fai entrare in vasca calda"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Riposo, il suo farmaco prescritto e 112 se non passa.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.emergenze.13", "sat": "mcb-igi-emergenze", "passo": 2, "dati": {
+   "domanda": {"valore": "Una signora parla in modo confuso e ha la bocca storta da 10 minuti. Che cosa fai?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Chiami subito il 112 e annoti l'ora di inizio", "Le dai un'aspirina e aspetti", "La fai dormire", "Le offri da bere", "Aspetti domani"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Sospetto ictus: il tempo conta.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.emergenze.14", "sat": "mcb-igi-emergenze", "passo": 2, "dati": {
+   "domanda": {"valore": "Un bagnante ha una crisi convulsiva in acqua. Che cosa fai?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Gli tieni la testa fuori dall'acqua, lo porti a riva appena possibile e chiami il 112", "Lo lasci in acqua finché finisce", "Gli metti un oggetto tra i denti", "Lo blocchi con forza", "Lo fai bere"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Proteggere le vie aeree dall'acqua.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.emergenze.15", "sat": "mcb-igi-emergenze", "passo": 2, "lezione": "Patologia/MCB - Apparato respiratorio.pdf, p. 83", "dati": {
+   "domanda": {"valore": "Un ragazzo asmatico ha una crisi dopo una nuotata. Che cosa fai?", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["Lo fai sedere un po' in avanti, lo aiuti a usare il suo inalatore e chiami il 112 se non migliora", "Lo fai sdraiare a pancia in giù", "Lo fai correre", "Gli dai un antibiotico", "Lo fai entrare in sauna"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Posizione seduta, il suo farmaco, 112 se peggiora.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.emergenze.16", "sat": "mcb-igi-emergenze", "passo": 2, "dati": {
+   "domanda": {"valore": "Dopo una puntura d'ape una cliente ha gonfiore di labbra e lingua e respira male. Che cosa sospetti?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Una reazione allergica grave (anafilassi): 112 e, se ce l'ha, il suo autoiniettore di adrenalina", "Una semplice scottatura", "Un crampo", "Un'insolazione", "Niente di grave"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Anafilassi: emergenza.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.emergenze.17", "sat": "mcb-igi-emergenze", "passo": 2, "dati": {
+   "domanda": {"valore": "Un bagnante ha un crampo al polpaccio mentre nuota. Che cosa gli consigli?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Restare a galla e allungare il polpaccio tirando la punta del piede verso di sé", "Nuotare più forte", "Andare sott'acqua", "Massaggiarsi il braccio", "Bere acqua di mare"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Allungamento del muscolo e galleggiamento.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.emergenze.18", "sat": "mcb-igi-emergenze", "passo": 2, "dati": {
+   "domanda": {"valore": "Un collega si scotta la mano con l'acqua bollente del termoforo. Che cosa fai?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Raffreddi sotto acqua corrente fresca per 10–20 minuti e togli gli anelli", "Metti ghiaccio direttamente", "Spalmi olio da massaggio", "Bucheresti le bolle", "Copri con un panno di lana"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Acqua corrente fresca.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.emergenze.19", "sat": "mcb-igi-emergenze", "passo": 2, "lezione": "fisiologia/MCB - il sistema endocrino.pdf, p. 143", "dati": {
+   "domanda": {"valore": "Un nuotatore diabetico, dopo un allenamento lungo a digiuno, perde coscienza. Che cosa fai?", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["Niente per bocca: posizione laterale se respira e 112", "Gli versi zucchero in bocca", "Gli dai insulina", "Gli fai bere succo", "Lo lasci dormire"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Incosciente: niente per bocca.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.emergenze.20", "sat": "mcb-igi-emergenze", "passo": 2, "dati": {
+   "domanda": {"valore": "Una garza sulla ferita si impregna di sangue. Che cosa fai?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Ne aggiungi un'altra sopra e continui a premere", "Togli la garza per guardare", "Smetti di premere", "Lavi con acqua calda", "Togli tutto e lasci all'aria"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Non togliere la garza: aggiungere e premere.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.emergenze.21", "sat": "mcb-igi-emergenze", "passo": 3, "dati": {
+   "domanda": {"valore": "Nell'ostruzione completa delle vie aeree dell'adulto si fanno:", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["5 colpi interscapolari e 5 compressioni addominali", "Ventilazioni bocca a bocca subito", "Massaggio della schiena dolce", "Bevande calde", "Niente"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Colpi e compressioni addominali.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.emergenze.22", "sat": "mcb-igi-emergenze", "passo": 3, "lezione": "Patologia/MCB - Malattie Cardio Vascolari.pdf, p. 67", "dati": {
+   "domanda": {"valore": "L'infarto del miocardio è dovuto a:", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["Ostruzione acuta di una coronaria", "Infezione dei polmoni", "Frattura dello sterno", "Mancanza di vitamina C", "Eccesso di calcio nelle ossa"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Occlusione coronarica.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.emergenze.23", "sat": "mcb-igi-emergenze", "passo": 3, "dati": {
+   "domanda": {"valore": "Il test FAST serve a riconoscere:", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["L'ictus", "L'infarto", "L'asma", "Il diabete", "La frattura"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "L'ictus.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.emergenze.24", "sat": "mcb-igi-emergenze", "passo": 3, "dati": {
+   "domanda": {"valore": "Durante una crisi convulsiva:", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Si protegge la testa e non si mette nulla in bocca", "Si blocca la persona", "Si dà da bere", "Si mette un fazzoletto tra i denti", "Si fa camminare"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Proteggere senza bloccare.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.emergenze.25", "sat": "mcb-igi-emergenze", "passo": 3, "lezione": "Patologia/MCB - Apparato respiratorio.pdf, p. 83", "dati": {
+   "domanda": {"valore": "Nell'asma l'ostruzione bronchiale è di solito:", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["Reversibile", "Permanente fin dall'inizio", "Assente", "Dovuta a una frattura", "Causata dal sole"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Reversibile.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.emergenze.26", "sat": "mcb-igi-emergenze", "passo": 3, "lezione": "fisiologia/MCB - il sistema endocrino.pdf, p. 144", "dati": {
+   "domanda": {"valore": "La glicemia normale a digiuno è:", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["70–100 mg/dl", "20–40 mg/dl", "200–300 mg/dl", "500 mg/dl", "0 mg/dl"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "70–100 mg/dl.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.emergenze.27", "sat": "mcb-igi-emergenze", "passo": 3, "dati": {
+   "domanda": {"valore": "A una persona con ipoglicemia incosciente:", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Non si dà nulla per bocca", "Si dà zucchero in bocca", "Si fa bere succo", "Si fa una iniezione di insulina", "Si dà un panino"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Niente per bocca.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.emergenze.28", "sat": "mcb-igi-emergenze", "passo": 3, "dati": {
+   "domanda": {"valore": "Su un'ustione si usa subito:", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Acqua corrente fresca", "Ghiaccio", "Olio", "Dentifricio", "Alcol"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Acqua corrente fresca.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.emergenze.29", "sat": "mcb-igi-emergenze", "passo": 3, "dati": {
+   "domanda": {"valore": "Un'emorragia esterna si controlla con:", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Compressione diretta", "Massaggio", "Acqua calda", "Movimento dell'arto", "Calore"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Compressione diretta.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.emergenze.30", "sat": "mcb-igi-emergenze", "passo": 3, "dati": {
+   "domanda": {"valore": "Nell'anafilassi il farmaco salvavita è:", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["L'adrenalina", "L'antibiotico", "Il paracetamolo", "L'insulina", "Il cortisone in crema"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Adrenalina (autoiniettore).", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.diritto.01", "sat": "mcb-igi-diritto", "passo": 1, "lezione": "Diritto/Lezione 1 Introduzione al Diritto.pdf, p. 2", "dati": {
+   "concetto": {"valore": "Il diritto è un insieme di regole di condotta (norme) generali e astratte: generali perché valgono per tutti, astratte perché descrivono un comportamento tipo. Serve a garantire l'ordine sociale.", "fonte": "lezione", "stato": "da verificare"},
+   "domanda": {"valore": "Perché le norme del diritto si dicono «generali»?", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["Perché valgono per tutti i soggetti, non solo per alcuni", "Perché le scrivono i generali", "Perché sono vaghe", "Perché valgono solo per i medici", "Perché cambiano ogni giorno"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Generali = riguardano tutti.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.diritto.02", "sat": "mcb-igi-diritto", "passo": 1, "lezione": "Diritto/Lezione 1 Introduzione al Diritto.pdf, p. 2", "dati": {
+   "concetto": {"valore": "Le fonti del diritto formano una piramide: in cima la Costituzione e le leggi costituzionali, poi le fonti di grado più basso. Per il criterio gerarchico la fonte superiore prevale su quella inferiore.", "fonte": "lezione", "stato": "da verificare"},
+   "domanda": {"valore": "Che cosa sta al vertice della piramide delle fonti?", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["La Costituzione", "I regolamenti comunali", "I contratti tra privati", "Le circolari", "Le abitudini"], "fonte": "lezione", "stato": "da verificare"},
+   "scritta": {"valore": ["Costituzione", "la Costituzione"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Costituzione e leggi costituzionali.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.diritto.03", "sat": "mcb-igi-diritto", "passo": 1, "lezione": "Diritto/Lezione 1 Introduzione al Diritto.pdf, p. 3", "dati": {
+   "concetto": {"valore": "Tra due norme dello stesso tipo entrate in vigore in momenti diversi vale il criterio cronologico: prevale la più recente. La riserva di legge (art. 25 della Costituzione) vuole che certe materie siano regolate da una legge.", "fonte": "lezione", "stato": "da verificare"},
+   "domanda": {"valore": "Due leggi dello stesso grado dicono cose diverse. Quale prevale per il criterio cronologico?", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["La più recente", "La più vecchia", "La più lunga", "Quella scelta dal cittadino", "Nessuna delle due"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Criterio cronologico.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.diritto.04", "sat": "mcb-igi-diritto", "passo": 1, "lezione": "Diritto/Lezione 1 Introduzione al Diritto.pdf, p. 4", "dati": {
+   "concetto": {"valore": "L'MCB è un operatore tecnico-sanitario qualificato, riconosciuto dal Ministero della Salute e abilitato a lavorare anche in Europa. Non fa diagnosi e non prescrive cure: applica terapie manuali e strumentali su prescrizione medica.", "fonte": "lezione", "stato": "da verificare"},
+   "domanda": {"valore": "Che cosa NON può fare l'MCB?", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["Fare diagnosi e prescrivere cure", "Applicare terapie manuali su prescrizione medica", "Applicare terapie strumentali su prescrizione", "Prestare assistenza in emergenza", "Lavorare nello sport e nel benessere"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Niente diagnosi né prescrizioni.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.diritto.05", "sat": "mcb-igi-diritto", "passo": 1, "lezione": "Diritto/Lezione 1 Introduzione al Diritto.pdf, p. 5", "dati": {
+   "concetto": {"valore": "L'MCB può avere responsabilità civile contrattuale (verso il cliente, in base al contratto) ed extracontrattuale (art. 2043 c.c.: chi con dolo o colpa causa ad altri un danno ingiusto deve risarcirlo).", "fonte": "lezione", "stato": "da verificare"},
+   "domanda": {"valore": "Che cosa dice l'art. 2043 del codice civile?", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["Chi con dolo o colpa causa un danno ingiusto deve risarcirlo", "Che il cliente paga sempre", "Che l'MCB può fare diagnosi", "Che la privacy non conta", "Che la Costituzione si può cambiare da soli"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Norma cardine della responsabilità extracontrattuale.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.diritto.06", "sat": "mcb-igi-diritto", "passo": 1, "lezione": "Diritto/Lezione 2 La responsabilità in genreale e la responsabilità dell'MCB.pdf, p. 2", "dati": {
+   "concetto": {"valore": "Secondo l'art. 27 della Costituzione la responsabilità penale è personale. L'art. 42 del codice penale dice che si è puniti solo per un'azione o omissione commessa con coscienza e volontà.", "fonte": "lezione", "stato": "da verificare"},
+   "domanda": {"valore": "Che cosa vuol dire che la responsabilità penale è personale?", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["Che si risponde solo dei propri fatti", "Che risponde sempre il datore di lavoro", "Che risponde la famiglia", "Che nessuno risponde", "Che risponde l'assicurazione in carcere"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Art. 27 della Costituzione.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.diritto.07", "sat": "mcb-igi-diritto", "passo": 1, "lezione": "Diritto/Lezione 2 La responsabilità in genreale e la responsabilità dell'MCB.pdf, p. 8", "dati": {
+   "concetto": {"valore": "L'art. 43 del codice penale distingue: delitto doloso (evento previsto e voluto), preterintenzionale (evento più grave di quello voluto) e colposo (evento non voluto, per negligenza, imprudenza, imperizia o inosservanza di regole).", "fonte": "lezione", "stato": "da verificare"},
+   "domanda": {"valore": "Quando un delitto è colposo?", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["Quando l'evento non è voluto e avviene per negligenza, imprudenza o imperizia", "Quando l'evento è previsto e voluto", "Quando l'evento è più grave del voluto", "Quando nessuno si fa male", "Quando lo decide il cliente"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Colpa = evento non voluto.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.diritto.08", "sat": "mcb-igi-diritto", "passo": 1, "lezione": "Diritto/Lezione 2 La responsabilità in genreale e la responsabilità dell'MCB.pdf, p. 7", "dati": {
+   "concetto": {"valore": "Per l'art. 40, secondo comma, del codice penale «non impedire un evento che si ha l'obbligo giuridico di impedire equivale a cagionarlo»: è la posizione di garanzia di chi cura gli altri.", "fonte": "lezione", "stato": "da verificare"},
+   "domanda": {"valore": "Che cosa dice l'art. 40, secondo comma, del codice penale?", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["Non impedire un evento che si ha l'obbligo di impedire equivale a causarlo", "Che chi osserva non ha mai colpa", "Che solo i medici rispondono", "Che le omissioni non contano", "Che l'MCB non ha obblighi"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Posizione di garanzia.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.diritto.09", "sat": "mcb-igi-diritto", "passo": 1, "lezione": "Diritto/Lezione 2 La responsabilità in genreale e la responsabilità dell'MCB.pdf, p. 16", "dati": {
+   "concetto": {"valore": "L'obbligazione di mezzi impegna a fare il massimo sforzo senza garantire il risultato; l'obbligazione di risultato garantisce il risultato. La colpa lieve è la violazione della diligenza ordinaria, la colpa grave di quella minima.", "fonte": "lezione", "stato": "da verificare"},
+   "domanda": {"valore": "Che cos'è un'obbligazione di mezzi?", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["L'impegno a fare il massimo sforzo senza garantire il risultato", "La promessa di guarire sicuramente", "Un contratto senza pagamento", "Un obbligo di comprare macchinari", "Un'assicurazione"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Massimo impegno, risultato non garantito.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.diritto.10", "sat": "mcb-igi-diritto", "passo": 1, "lezione": "Diritto/Lezione 2 La responsabilità in genreale e la responsabilità dell'MCB.pdf, p. 19", "dati": {
+   "concetto": {"valore": "Per l'MCB non esiste un Albo professionale nazionale: le polizze offerte non sono di responsabilità professionale ma di responsabilità civile (RCT/RCO), che coprono danni a terzi dell'attività.", "fonte": "lezione", "stato": "da verificare"},
+   "domanda": {"valore": "Perché le polizze dell'MCB sono di tipo RCT/RCO e non professionali?", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["Perché per l'MCB non esiste un Albo professionale nazionale", "Perché costano meno", "Perché l'MCB non lavora mai con clienti", "Perché lo vieta la Costituzione", "Perché coprono anche il dolo"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Assenza di un Albo nazionale.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.diritto.11", "sat": "mcb-igi-diritto", "passo": 2, "lezione": "Diritto/Lezione 1 Introduzione al Diritto.pdf, p. 4", "dati": {
+   "domanda": {"valore": "Un cliente chiede all'MCB: «Che cos'ho al ginocchio? Che farmaco prendo?». Che cosa fa l'MCB?", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["Lo indirizza al medico: diagnosi e prescrizioni non sono sue", "Gli fa la diagnosi", "Gli consiglia un antinfiammatorio", "Gli prescrive una risonanza", "Gli dice che non è niente"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Limiti delle competenze.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.diritto.12", "sat": "mcb-igi-diritto", "passo": 2, "lezione": "Diritto/Lezione 1 Introduzione al Diritto.pdf, p. 5", "dati": {
+   "domanda": {"valore": "Un accompagnatore scivola sul pavimento bagnato dello studio e si rompe un polso. Che tipo di responsabilità può avere l'MCB?", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["Extracontrattuale (art. 2043 c.c.)", "Contrattuale verso l'accompagnatore", "Nessuna", "Solo deontologica", "Solo amministrativa"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Non c'è contratto con l'accompagnatore: art. 2043.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.diritto.13", "sat": "mcb-igi-diritto", "passo": 2, "lezione": "Diritto/Lezione 1 Introduzione al Diritto.pdf, p. 5", "dati": {
+   "domanda": {"valore": "Quali elementi servono perché ci sia l'obbligo di risarcire secondo l'art. 2043?", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["Comportamento doloso o colposo, danno ingiusto e nesso causale", "Solo il danno", "Solo la colpa", "La firma del cliente", "Una denuncia scritta"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Tre elementi.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.diritto.14", "sat": "mcb-igi-diritto", "passo": 2, "lezione": "Diritto/Lezione 2 La responsabilità in genreale e la responsabilità dell'MCB.pdf, p. 8", "dati": {
+   "domanda": {"valore": "Un MCB vuole solo spaventare un collega con una spinta, ma il collega cade e si ferisce gravemente. Come si chiama questo elemento soggettivo?", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["Preterintenzione", "Dolo", "Colpa", "Caso fortuito", "Legittima difesa"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Evento più grave del voluto.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.diritto.15", "sat": "mcb-igi-diritto", "passo": 2, "lezione": "Diritto/Lezione 2 La responsabilità in genreale e la responsabilità dell'MCB.pdf, p. 4", "dati": {
+   "domanda": {"valore": "Un MCB dimentica di controllare la temperatura dell'acqua e il cliente si scotta. Di che tipo di colpa si tratta?", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["Negligenza", "Dolo", "Preterintenzione", "Nessuna colpa", "Forza maggiore"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Disattenzione, trascuratezza.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.diritto.16", "sat": "mcb-igi-diritto", "passo": 2, "lezione": "Diritto/Lezione 2 La responsabilità in genreale e la responsabilità dell'MCB.pdf, p. 4", "dati": {
+   "domanda": {"valore": "Un MCB usa una tecnica che non conosce bene e provoca un danno. È soprattutto:", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["Imperizia", "Dolo", "Caso fortuito", "Preterintenzione", "Diligenza"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Mancanza di capacità tecnica.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.diritto.17", "sat": "mcb-igi-diritto", "passo": 2, "lezione": "Diritto/Lezione 2 La responsabilità in genreale e la responsabilità dell'MCB.pdf, p. 14", "dati": {
+   "domanda": {"valore": "Un cliente vuole chiedere i danni per un trattamento eseguito male (responsabilità contrattuale). Entro quanto si prescrive il diritto?", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["10 anni", "5 anni", "1 anno", "6 mesi", "Mai"], "fonte": "lezione", "stato": "da verificare"},
+   "scritta": {"valore": ["10", "10 anni", "dieci anni"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Prescrizione ordinaria decennale.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.diritto.18", "sat": "mcb-igi-diritto", "passo": 2, "lezione": "Diritto/Lezione 2 La responsabilità in genreale e la responsabilità dell'MCB.pdf, p. 17", "dati": {
+   "domanda": {"valore": "Un cliente deve pagare di nuovo un trattamento rovinato e perde giorni di lavoro. Come si chiamano le due voci di danno?", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["Danno emergente e lucro cessante", "Dolo e colpa", "Mezzi e risultato", "RCT e RCO", "Gerarchia e cronologia"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Spese sostenute e mancato guadagno.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.diritto.19", "sat": "mcb-igi-diritto", "passo": 2, "lezione": "Diritto/Lezione 2 La responsabilità in genreale e la responsabilità dell'MCB.pdf, p. 19", "dati": {
+   "domanda": {"valore": "Dopo un trattamento eseguito bene compare una complicanza che era scritta nell'informativa firmata. Il danno va risarcito?", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["No, se la complicanza era nell'informativa", "Sì, sempre", "Sì, il doppio", "Solo se il cliente lo chiede a voce", "Solo dopo 10 anni"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Complicanza informata: non si risarcisce.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.diritto.20", "sat": "mcb-igi-diritto", "passo": 2, "lezione": "Diritto/Lezione 2 La responsabilità in genreale e la responsabilità dell'MCB.pdf, p. 18", "dati": {
+   "domanda": {"valore": "Un MCB provoca un danno con dolo. L'assicurazione di responsabilità civile lo copre?", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["No, l'assicuratore non risponde dei fatti dolosi", "Sì, sempre", "Sì, ma solo a metà", "Sì, se paga un supplemento in quel momento", "Solo se è il primo danno"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Art. 1917 c.c.: niente copertura del dolo.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.diritto.21", "sat": "mcb-igi-diritto", "passo": 3, "lezione": "Diritto/Lezione 1 Introduzione al Diritto.pdf, p. 2", "dati": {
+   "domanda": {"valore": "Le norme giuridiche sono:", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["Generali e astratte", "Particolari e concrete", "Valide solo per i giudici", "Facoltative", "Scritte dai cittadini"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Generali e astratte.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.diritto.22", "sat": "mcb-igi-diritto", "passo": 3, "lezione": "Diritto/Lezione 1 Introduzione al Diritto.pdf, p. 2", "dati": {
+   "domanda": {"valore": "Per il criterio gerarchico:", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["La fonte superiore prevale su quella inferiore", "Prevale sempre la più recente", "Prevale la più breve", "Prevale quella scelta dal giudice a caso", "Le fonti valgono tutte uguale"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Gerarchia delle fonti.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.diritto.23", "sat": "mcb-igi-diritto", "passo": 3, "lezione": "Diritto/Lezione 1 Introduzione al Diritto.pdf, p. 3", "dati": {
+   "domanda": {"valore": "La riserva di legge è prevista dall'art.:", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["25 della Costituzione", "2043 del codice civile", "40 del codice penale", "1917 del codice civile", "1 della Costituzione"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Art. 25 Cost.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.diritto.24", "sat": "mcb-igi-diritto", "passo": 3, "lezione": "Diritto/Lezione 1 Introduzione al Diritto.pdf, p. 4", "dati": {
+   "domanda": {"valore": "L'MCB applica terapie manuali e strumentali:", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["Su prescrizione medica", "Su propria diagnosi", "Solo se il cliente paga in contanti", "Senza nessun limite", "Solo in Europa"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Previa prescrizione medica.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.diritto.25", "sat": "mcb-igi-diritto", "passo": 3, "lezione": "Diritto/Lezione 2 La responsabilità in genreale e la responsabilità dell'MCB.pdf, p. 2", "dati": {
+   "domanda": {"valore": "Secondo l'art. 42 del codice penale si è puniti solo per azioni commesse con:", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["Coscienza e volontà", "Fretta", "Gentilezza", "Il consenso del giudice", "Un contratto"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Coscienza e volontà.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.diritto.26", "sat": "mcb-igi-diritto", "passo": 3, "lezione": "Diritto/Lezione 2 La responsabilità in genreale e la responsabilità dell'MCB.pdf, p. 8", "dati": {
+   "domanda": {"valore": "Il delitto è doloso quando l'evento è:", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["Previsto e voluto", "Non voluto", "Più grave del voluto", "Causato da forza maggiore", "Causato da un terzo"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Art. 43 c.p.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.diritto.27", "sat": "mcb-igi-diritto", "passo": 3, "lezione": "Diritto/Lezione 2 La responsabilità in genreale e la responsabilità dell'MCB.pdf, p. 5", "dati": {
+   "domanda": {"valore": "L'art. 2236 c.c., per problemi tecnici di speciale difficoltà, limita la responsabilità del professionista ai casi di:", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["Dolo e colpa grave", "Colpa lieve", "Ogni errore", "Solo caso fortuito", "Nessun caso"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Solo dolo e colpa grave.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.diritto.28", "sat": "mcb-igi-diritto", "passo": 3, "lezione": "Diritto/Lezione 2 La responsabilità in genreale e la responsabilità dell'MCB.pdf, p. 14", "dati": {
+   "domanda": {"valore": "Il diritto al risarcimento per responsabilità extracontrattuale si prescrive di regola in:", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["5 anni", "10 anni", "1 anno", "20 anni", "3 mesi"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Cinque anni.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.diritto.29", "sat": "mcb-igi-diritto", "passo": 3, "lezione": "Diritto/Lezione 2 La responsabilità in genreale e la responsabilità dell'MCB.pdf, p. 14", "dati": {
+   "domanda": {"valore": "Il danno biologico si quantifica in base alle tabelle del:", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["Tribunale di Milano", "Ministero della Salute", "Comune di residenza", "Codice deontologico", "Medico di famiglia"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Tabelle del Tribunale di Milano.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.diritto.30", "sat": "mcb-igi-diritto", "passo": 3, "lezione": "Diritto/Lezione 2 La responsabilità in genreale e la responsabilità dell'MCB.pdf, p. 19", "dati": {
+   "domanda": {"valore": "Il consenso informato è:", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["Presupposto per la legittimità dell'attività sanitaria", "Facoltativo", "Utile solo per le assicurazioni", "Una formalità senza effetti", "Vietato per l'MCB"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Senza consenso: responsabilità civile o penale.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.deontologia.01", "sat": "mcb-igi-deontologia", "passo": 1, "lezione": "Diritto/Lezione 1 Introduzione al Diritto.pdf, p. 4", "dati": {
+   "concetto": {"valore": "Tra gli obblighi dell'MCB ci sono il rispetto del codice deontologico, la corretta applicazione delle tecniche su prescrizione medica, l'assistenza in caso di emergenza e il rispetto delle norme amministrative per aprire uno studio.", "fonte": "lezione", "stato": "da verificare"},
+   "domanda": {"valore": "Quale di questi è un obbligo dell'MCB secondo la lezione?", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["Rispettare il codice deontologico", "Fare diagnosi", "Prescrivere farmaci", "Rifiutare l'assistenza in emergenza", "Lavorare senza autorizzazioni"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Codice deontologico tra gli obblighi.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.deontologia.02", "sat": "mcb-igi-deontologia", "passo": 1, "dati": {
+   "concetto": {"valore": "La deontologia è l'insieme delle regole di comportamento di una professione: rispetto del cliente, onestà, lavoro entro le proprie competenze, aggiornamento, rapporti corretti con medici e colleghi.", "fonte": "AI", "stato": "da verificare"},
+   "domanda": {"valore": "Che cos'è la deontologia professionale?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["L'insieme delle regole di comportamento di una professione", "Un tipo di massaggio", "Una legge sulle tasse", "Una malattia della pelle", "Un'assicurazione"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Regole etiche della professione.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.deontologia.03", "sat": "mcb-igi-deontologia", "passo": 1, "lezione": "Diritto/Lezione 1 Introduzione al Diritto.pdf, p. 5", "dati": {
+   "concetto": {"valore": "La violazione delle regole sulla privacy ha conseguenze sia civili sia penali; la mancanza del consenso informato porta a conseguenze civili, penali e disciplinari.", "fonte": "lezione", "stato": "da verificare"},
+   "domanda": {"valore": "Che conseguenze può avere la violazione della privacy secondo la lezione?", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["Civili e penali", "Nessuna", "Solo una multa del Comune", "Solo un richiamo verbale", "Solo la perdita del cliente"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Civili e penali.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.deontologia.04", "sat": "mcb-igi-deontologia", "passo": 1, "dati": {
+   "concetto": {"valore": "Le informazioni sulla salute del cliente sono dati particolari (sensibili) per il Regolamento europeo sulla privacy (GDPR): si raccolgono solo se servono, si conservano al sicuro e non si comunicano ad altri senza il consenso del cliente.", "fonte": "AI", "stato": "da verificare"},
+   "domanda": {"valore": "Come considera il GDPR i dati sulla salute?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Dati particolari da proteggere di più", "Dati pubblici", "Dati senza valore", "Dati da pubblicare sui social", "Dati che appartengono all'MCB"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Categorie particolari di dati.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.deontologia.05", "sat": "mcb-igi-deontologia", "passo": 1, "dati": {
+   "concetto": {"valore": "Prima di raccogliere i dati si dà al cliente un'informativa: chi tratta i dati, perché, per quanto tempo li conserva e quali diritti ha (vedere, correggere, cancellare i dati).", "fonte": "AI", "stato": "da verificare"},
+   "domanda": {"valore": "Che cosa contiene l'informativa sulla privacy?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Chi tratta i dati, perché, per quanto tempo e i diritti del cliente", "Il prezzo del massaggio", "La diagnosi", "La password dello studio", "L'orario di chiusura e basta"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Contenuti dell'informativa.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.deontologia.06", "sat": "mcb-igi-deontologia", "passo": 1, "dati": {
+   "concetto": {"valore": "Il segreto professionale vieta di rivelare ciò che si è saputo dal cliente durante il lavoro (per esempio malattie, terapie, fatti personali), anche ad amici e familiari.", "fonte": "AI", "stato": "da verificare"},
+   "domanda": {"valore": "Che cosa vieta il segreto professionale?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Raccontare ad altri ciò che si sa del cliente", "Parlare con il cliente", "Scrivere la scheda", "Chiedere informazioni sulla salute", "Lavorare in équipe con il medico"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Riservatezza.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.deontologia.07", "sat": "mcb-igi-deontologia", "passo": 1, "dati": {
+   "concetto": {"valore": "Il consenso informato vuol dire che il cliente, prima del trattamento, sa in che cosa consiste, che benefici e rischi ha, e accetta liberamente; può ritirarlo in ogni momento.", "fonte": "AI", "stato": "da verificare"},
+   "domanda": {"valore": "Il cliente può ritirare il consenso a metà trattamento?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Sì, in ogni momento", "No, mai", "Solo pagando una penale", "Solo con un avvocato", "Solo il giorno dopo"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Il consenso è revocabile.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.deontologia.08", "sat": "mcb-igi-deontologia", "passo": 1, "dati": {
+   "concetto": {"valore": "Per un minorenne il consenso lo danno i genitori o chi ne ha la responsabilità; il minore va comunque informato con parole adatte alla sua età.", "fonte": "AI", "stato": "da verificare"},
+   "domanda": {"valore": "Chi dà il consenso al trattamento di un ragazzo di 14 anni?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["I genitori o chi ne ha la responsabilità", "Il ragazzo da solo", "L'allenatore", "L'MCB", "Un compagno di squadra"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Per i minori: chi esercita la responsabilità genitoriale.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.deontologia.09", "sat": "mcb-igi-deontologia", "passo": 1, "dati": {
+   "concetto": {"valore": "Il rispetto del cliente vuol dire anche tutela del pudore: si scopre solo la zona da trattare, si usano teli, si spiega che cosa si sta per fare e si chiede se va bene.", "fonte": "AI", "stato": "da verificare"},
+   "domanda": {"valore": "Come si tutela il pudore del cliente durante il massaggio?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Si scopre solo la zona da trattare e si usano teli", "Si lascia il cliente scoperto", "Si lavora con la porta aperta", "Si fanno commenti sul corpo", "Non serve pensarci"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Rispetto e dignità.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.deontologia.10", "sat": "mcb-igi-deontologia", "passo": 1, "dati": {
+   "concetto": {"valore": "L'MCB collabora con il medico e gli altri professionisti: segnala ciò che nota (un neo che cambia, un gonfiore nuovo) e invita il cliente dal medico, senza fare diagnosi.", "fonte": "AI", "stato": "da verificare"},
+   "domanda": {"valore": "Durante il massaggio noti un gonfiore nuovo al polpaccio. Che cosa fai?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Lo fai notare al cliente e lo inviti dal medico", "Fai una diagnosi", "Massaggi forte lì", "Non dici niente", "Gli prescrivi un farmaco"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Segnalare e inviare al medico.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.deontologia.11", "sat": "mcb-igi-deontologia", "passo": 2, "dati": {
+   "domanda": {"valore": "Un amico ti chiede di quale malattia soffre un tuo cliente famoso. Che cosa fai?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Non lo dici: è segreto professionale", "Glielo racconti", "Lo pubblichi sui social", "Lo dici solo agli amici stretti", "Glielo scrivi in un messaggio"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Segreto professionale.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.deontologia.12", "sat": "mcb-igi-deontologia", "passo": 2, "dati": {
+   "domanda": {"valore": "Vuoi pubblicare sui social la foto di un cliente durante il trattamento. Che cosa serve?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Il suo consenso scritto e specifico", "Niente, è il tuo studio", "Basta coprire il viso con un'emoji", "Il permesso di un collega", "Basta non scrivere il nome"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Immagine = dato personale.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.deontologia.13", "sat": "mcb-igi-deontologia", "passo": 2, "dati": {
+   "domanda": {"valore": "Le schede dei clienti con le informazioni sulla salute dove le tieni?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["In un armadio chiuso o in un archivio protetto da password", "Sul bancone della reception", "In una cartella aperta sul lettino", "In auto", "In un gruppo di messaggi"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Conservazione sicura.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.deontologia.14", "sat": "mcb-igi-deontologia", "passo": 2, "dati": {
+   "domanda": {"valore": "Un cliente chiede di vedere che dati hai su di lui. Che cosa fai?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Glieli mostri: è un suo diritto", "Rifiuti", "Gli chiedi un pagamento extra", "Gli dici che non esistono", "Li cancelli di nascosto"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Diritto di accesso.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.deontologia.15", "sat": "mcb-igi-deontologia", "passo": 2, "lezione": "Diritto/Lezione 1 Introduzione al Diritto.pdf, p. 5", "dati": {
+   "domanda": {"valore": "Inizi un trattamento senza spiegare nulla e senza il consenso del cliente. Che cosa rischi?", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["Conseguenze civili, penali e disciplinari", "Nulla", "Solo una lamentela", "Un premio", "Solo un voto basso online"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Mancanza del consenso informato.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.deontologia.16", "sat": "mcb-igi-deontologia", "passo": 2, "dati": {
+   "domanda": {"valore": "Un ragazzo di 15 anni arriva da solo e vuole un massaggio sportivo. Che cosa fai?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Serve il consenso di un genitore", "Lo tratti subito", "Lo fai firmare da un amico", "Lo fai firmare lui", "Gli chiedi di mentire sull'età"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Consenso dei genitori per i minori.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.deontologia.17", "sat": "mcb-igi-deontologia", "passo": 2, "dati": {
+   "domanda": {"valore": "Durante il massaggio il cliente dice che si sente a disagio. Che cosa fai?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Ti fermi, chiedi e rispetti la sua scelta", "Continui come prima", "Ridi", "Lo ignori", "Vai più veloce"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Rispetto del consenso e della persona.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.deontologia.18", "sat": "mcb-igi-deontologia", "passo": 2, "dati": {
+   "domanda": {"valore": "Un collega critica davanti ai clienti il lavoro di un altro professionista. È corretto?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["No, i rapporti tra colleghi devono essere corretti", "Sì, è pubblicità", "Sì, se è vero", "Sì, se il cliente ride", "Non ha importanza"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Correttezza tra colleghi.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.deontologia.19", "sat": "mcb-igi-deontologia", "passo": 2, "dati": {
+   "domanda": {"valore": "Ti chiedono di trattare una patologia che non conosci. Che cosa fai?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Rifiuti o indirizzi a chi è competente", "Improvvisi", "Cerchi un video e provi", "Dici di essere esperto", "Lo tratti gratis per provare"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Lavorare entro le proprie competenze.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.deontologia.20", "sat": "mcb-igi-deontologia", "passo": 2, "dati": {
+   "domanda": {"valore": "Il cliente ti telefona: una persona che dice di essere sua sorella chiede gli orari dei suoi appuntamenti. Che cosa fai?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Non dai informazioni senza il consenso del cliente", "Le dai tutti gli orari", "Le mandi la scheda", "Le racconti i problemi di salute", "Le dai l'indirizzo"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Riservatezza dei dati.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.deontologia.21", "sat": "mcb-igi-deontologia", "passo": 3, "lezione": "Diritto/Lezione 1 Introduzione al Diritto.pdf, p. 4", "dati": {
+   "domanda": {"valore": "Tra gli obblighi dell'MCB c'è:", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["Il rispetto del codice deontologico", "La diagnosi delle malattie", "La prescrizione di farmaci", "La pubblicità ingannevole", "Il segreto sul prezzo"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Codice deontologico.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.deontologia.22", "sat": "mcb-igi-deontologia", "passo": 3, "lezione": "Diritto/Lezione 1 Introduzione al Diritto.pdf, p. 5", "dati": {
+   "domanda": {"valore": "La violazione della normativa sulla privacy ha conseguenze:", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["Civili e penali", "Solo morali", "Nessuna", "Solo fiscali", "Solo sportive"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Civili e penali.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.deontologia.23", "sat": "mcb-igi-deontologia", "passo": 3, "dati": {
+   "domanda": {"valore": "Il regolamento europeo sulla privacy si chiama:", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["GDPR", "DAE", "RCT", "INAIL", "OMS"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Regolamento (UE) 2016/679.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.deontologia.24", "sat": "mcb-igi-deontologia", "passo": 3, "dati": {
+   "domanda": {"valore": "I dati sulla salute sono per il GDPR:", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Categorie particolari di dati", "Dati pubblici", "Dati anonimi", "Dati commerciali", "Dati senza tutela"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Dati particolari.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.deontologia.25", "sat": "mcb-igi-deontologia", "passo": 3, "dati": {
+   "domanda": {"valore": "Il consenso informato:", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Si può ritirare in ogni momento", "È per sempre", "Lo dà il professionista", "Non serve per i trattamenti manuali", "Si dà dopo il trattamento"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Revocabile.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.deontologia.26", "sat": "mcb-igi-deontologia", "passo": 3, "dati": {
+   "domanda": {"valore": "Per un minorenne il consenso lo danno:", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["I genitori o chi ne ha la responsabilità", "Gli insegnanti", "Il minore da solo", "Gli amici", "L'MCB"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Responsabilità genitoriale.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.deontologia.27", "sat": "mcb-igi-deontologia", "passo": 3, "dati": {
+   "domanda": {"valore": "Il segreto professionale riguarda:", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Ciò che si sa del cliente grazie al lavoro", "Solo i prezzi", "Solo le tecniche di massaggio", "Gli orari dello studio", "Nulla"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Riservatezza.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.deontologia.28", "sat": "mcb-igi-deontologia", "passo": 3, "dati": {
+   "domanda": {"valore": "L'informativa privacy deve dire:", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Perché si trattano i dati e quali diritti ha il cliente", "Il prezzo del trattamento", "Il nome del medico di famiglia", "La diagnosi", "L'età dell'MCB"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Finalità e diritti.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.deontologia.29", "sat": "mcb-igi-deontologia", "passo": 3, "dati": {
+   "domanda": {"valore": "Se l'MCB nota un segno sospetto sulla pelle del cliente:", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Lo segnala e invita il cliente dal medico", "Fa la diagnosi", "Lo tratta con creme sue", "Non dice niente", "Lo pubblica"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Segnalare, non diagnosticare.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.deontologia.30", "sat": "mcb-igi-deontologia", "passo": 3, "dati": {
+   "domanda": {"valore": "La tutela del pudore prevede di:", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Scoprire solo la zona da trattare", "Lavorare con la porta aperta", "Lasciare il cliente scoperto", "Fare foto", "Non usare teli"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Teli e rispetto.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.psicologia.01", "sat": "mcb-igi-psicologia", "passo": 1, "lezione": "Psicologia/Ansia-ATM Benevento.pptx, diapositiva 2", "dati": {
+   "concetto": {"valore": "L'ansia è un'apprensione verso un possibile pericolo futuro. Ha la stessa base biologica della paura e, in sé, non è una malattia: è utile perché prepara il corpo ad affrontare o fuggire il pericolo (risposta «combatti o fuggi»).", "fonte": "lezione", "stato": "da verificare"},
+   "domanda": {"valore": "Perché l'ansia, in sé, è utile?", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["Prepara il corpo ad affrontare o fuggire un pericolo", "Fa dormire meglio", "Abbassa sempre la pressione", "Non è mai utile", "Fa digerire"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Valore adattivo: fight or flight.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.psicologia.02", "sat": "mcb-igi-psicologia", "passo": 1, "lezione": "Psicologia/Ansia-ATM Benevento.pptx, diapositiva 2", "dati": {
+   "concetto": {"valore": "Per la curva di Yerkes-Dodson un livello medio di attivazione (arousal) dà la prestazione migliore: troppo poca o troppa attivazione la peggiorano.", "fonte": "lezione", "stato": "da verificare"},
+   "domanda": {"valore": "Che cosa dice la curva di Yerkes-Dodson?", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["Un'attivazione media dà la prestazione migliore", "Più ansia c'è, meglio si lavora sempre", "L'ansia non cambia la prestazione", "Solo la calma totale dà la prestazione migliore", "La prestazione dipende solo dal sonno"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Arousal ottimale intermedio.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.psicologia.03", "sat": "mcb-igi-psicologia", "passo": 1, "lezione": "Psicologia/Ansia-ATM Benevento.pptx, diapositiva 3", "dati": {
+   "concetto": {"valore": "L'ansia diventa un problema quando è troppo intensa, non passa e non è legata a una situazione reale: le risorse si esauriscono e la persona comincia a evitare le situazioni. Il sistema simpatico prevale sul parasimpatico e compaiono i sintomi fisici.", "fonte": "lezione", "stato": "da verificare"},
+   "domanda": {"valore": "Quando l'ansia diventa disadattiva?", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["Quando è troppo intensa e non passa, fino all'evitamento", "Quando dura pochi minuti prima di un esame", "Quando aiuta a concentrarsi", "Quando si dorme bene", "Mai"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Intensità eccessiva, assenza di transitorietà.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.psicologia.04", "sat": "mcb-igi-psicologia", "passo": 1, "lezione": "Psicologia/Ansia-ATM Benevento.pptx, diapositiva 4", "dati": {
+   "concetto": {"valore": "I disturbi d'ansia sono il gruppo di disturbi psichici più diffuso al mondo: colpiscono nella vita il 30–35% delle persone, iniziano presto e sono più frequenti nelle donne.", "fonte": "lezione", "stato": "da verificare"},
+   "domanda": {"valore": "Quanto sono diffusi i disturbi d'ansia nel corso della vita, secondo la lezione?", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["30–35% delle persone", "1 persona su 1000", "Il 90% delle persone", "Solo gli anziani", "Solo gli atleti"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Prevalenza lifetime 30–35%.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.psicologia.05", "sat": "mcb-igi-psicologia", "passo": 1, "lezione": "Psicologia/Ansia-ATM Benevento.pptx, diapositiva 7", "dati": {
+   "concetto": {"valore": "L'attacco di panico è una forte paura senza un pericolo esterno, con almeno 4 sintomi (batticuore, fame d'aria, sudore, tremore…), che dura di solito 2–30 minuti.", "fonte": "lezione", "stato": "da verificare"},
+   "domanda": {"valore": "Quanto dura di solito un attacco di panico?", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["2–30 minuti", "Diversi giorni", "Pochi secondi soltanto", "Mesi", "Tutta la notte sempre"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Durata breve, 2–30 minuti.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.psicologia.06", "sat": "mcb-igi-psicologia", "passo": 1, "lezione": "Psicologia/Ansia-ATM Benevento.pptx, diapositiva 5", "dati": {
+   "concetto": {"valore": "Il DSM-5 elenca tra i disturbi d'ansia: disturbo d'ansia generalizzato, disturbo di panico, fobia specifica, fobia sociale e agorafobia.", "fonte": "lezione", "stato": "da verificare"},
+   "domanda": {"valore": "Quale di questi è un disturbo d'ansia del DSM-5?", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["Agorafobia", "Artrosi", "Asma", "Anemia", "Appendicite"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Agorafobia.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.psicologia.07", "sat": "mcb-igi-psicologia", "passo": 1, "lezione": "Psicologia/Ansia-ATM Benevento.pptx, diapositiva 19", "dati": {
+   "concetto": {"valore": "Secondo Beck (cognitivismo) non conta tanto l'evento in sé, ma come lo interpretiamo: i pensieri influenzano emozioni e comportamenti.", "fonte": "lezione", "stato": "da verificare"},
+   "domanda": {"valore": "Che cosa conta di più per il cognitivismo di Beck?", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["L'interpretazione degli eventi", "Solo l'evento oggettivo", "Il segno zodiacale", "Il peso corporeo", "La musica di sottofondo"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "L'interpretazione.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.psicologia.08", "sat": "mcb-igi-psicologia", "passo": 1, "dati": {
+   "concetto": {"valore": "Comunicare bene con il cliente vuol dire ascoltare con attenzione, fare domande aperte, usare parole semplici, spiegare che cosa si sta per fare e controllare che abbia capito.", "fonte": "AI", "stato": "da verificare"},
+   "domanda": {"valore": "Che cosa aiuta a comunicare bene con il cliente?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Ascoltare e spiegare con parole semplici", "Usare solo termini tecnici", "Interrompere spesso", "Parlare al telefono durante il massaggio", "Non spiegare nulla"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Ascolto attivo e chiarezza.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.psicologia.09", "sat": "mcb-igi-psicologia", "passo": 1, "dati": {
+   "concetto": {"valore": "La comunicazione non è solo parole: tono di voce, espressione del viso, postura e il modo di toccare dicono molto. Nel massaggio il tocco stesso comunica sicurezza o tensione.", "fonte": "AI", "stato": "da verificare"},
+   "domanda": {"valore": "Che cosa fa parte della comunicazione non verbale?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Tono di voce, espressione e modo di toccare", "Solo le parole scritte", "Solo la ricevuta", "Il prezzo", "Il colore dell'asciugamano soltanto"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Non verbale.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.psicologia.10", "sat": "mcb-igi-psicologia", "passo": 1, "dati": {
+   "concetto": {"valore": "Con un cliente ansioso aiuta un ambiente tranquillo, spiegare ogni passaggio, invitarlo a respirare lentamente e lasciargli la possibilità di fermare il trattamento quando vuole.", "fonte": "AI", "stato": "da verificare"},
+   "domanda": {"valore": "Come aiuti un cliente agitato prima del trattamento?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Spieghi ogni passaggio e lo inviti a respirare lentamente", "Gli dici di calmarsi e basta", "Accendi musica ad alto volume", "Ti sbrighi", "Lo ignori"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Rassicurazione e controllo condiviso.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.psicologia.11", "sat": "mcb-igi-psicologia", "passo": 2, "lezione": "Psicologia/Ansia-ATM Benevento.pptx, diapositiva 7", "dati": {
+   "domanda": {"valore": "Un cliente all'improvviso ha batticuore, fame d'aria e paura di morire, senza un motivo. Gli esami del cuore erano normali. Che cosa può essere?", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["Un attacco di panico", "Una frattura", "Un crampo", "Un'infezione", "Un'allergia alla crema"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Paura intensa senza pericolo esterno.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.psicologia.12", "sat": "mcb-igi-psicologia", "passo": 2, "dati": {
+   "domanda": {"valore": "Durante un attacco di panico di un cliente che cosa fai?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Resti calmo, gli parli piano e lo aiuti a respirare lentamente; se hai dubbi sul cuore chiami il 112", "Gli dici che esagera", "Lo lasci da solo", "Gli fai una battuta", "Continui il massaggio come se niente fosse"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Calma e respiro; nel dubbio 112.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.psicologia.13", "sat": "mcb-igi-psicologia", "passo": 2, "lezione": "Psicologia/Ansia-ATM Benevento.pptx, diapositiva 2", "dati": {
+   "domanda": {"valore": "Prima di una gara un nuotatore è un po' teso ma concentrato. Che cosa dice la curva di Yerkes-Dodson?", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["Un livello medio di attivazione può migliorare la prestazione", "Deve eliminare ogni tensione", "Andrà sicuramente male", "Non conta nulla", "Deve preoccuparsi di più"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Arousal ottimale.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.psicologia.14", "sat": "mcb-igi-psicologia", "passo": 2, "lezione": "Psicologia/Ansia-ATM Benevento.pptx, diapositiva 8", "dati": {
+   "domanda": {"valore": "Una cliente evita i luoghi affollati e i mezzi pubblici per paura di non poter scappare o avere aiuto. A che cosa fa pensare?", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["Agorafobia", "Fobia dei ragni", "Asma", "Artrosi", "Insonnia da caffè"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Ansia dove la fuga è difficile.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.psicologia.15", "sat": "mcb-igi-psicologia", "passo": 2, "lezione": "Psicologia/Ansia-ATM Benevento.pptx, diapositiva 16", "dati": {
+   "domanda": {"valore": "Un cliente prende da mesi una benzodiazepina per l'ansia. Quale limite di questi farmaci indica la lezione?", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["Tolleranza e dipendenza", "Nessun effetto collaterale", "Effetto solo dopo un anno", "Fanno crescere i muscoli", "Curano le infezioni"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Limiti delle BDZ.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.psicologia.16", "sat": "mcb-igi-psicologia", "passo": 2, "lezione": "Psicologia/Ansia-ATM Benevento.pptx, diapositiva 18", "dati": {
+   "domanda": {"valore": "Un cliente ha iniziato un SSRI per l'ansia da una settimana e dice che non funziona. Che cosa dice la lezione?", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["Gli effetti si vedono di solito dopo 3–4 settimane", "Funzionano dopo un'ora", "Non funzionano mai sull'ansia", "Deve smettere subito da solo", "Deve raddoppiare la dose da solo"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Latenza di 3–4 settimane.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.psicologia.17", "sat": "mcb-igi-psicologia", "passo": 2, "lezione": "Psicologia/Ansia-ATM Benevento.pptx, diapositiva 22", "dati": {
+   "domanda": {"valore": "Un cliente dice: «Se il dolore non passa vuol dire che non guarirò mai». Quale distorsione è?", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["Catastrofizzazione", "Personalizzazione positiva", "Ascolto attivo", "Rilassamento", "Diligenza"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Pensare sempre al peggio.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.psicologia.18", "sat": "mcb-igi-psicologia", "passo": 2, "dati": {
+   "domanda": {"valore": "Il cliente ti fa una domanda su una diagnosi che ha avuto e non capisce. Che cosa fai?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Lo ascolti e gli consigli di chiedere chiarimenti al suo medico", "Gli dai tu una nuova diagnosi", "Gli dici che il medico ha sbagliato", "Cambi discorso", "Ridi"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Ascolto e invio al medico.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.psicologia.19", "sat": "mcb-igi-psicologia", "passo": 2, "dati": {
+   "domanda": {"valore": "Durante il massaggio il cliente si irrigidisce quando tocchi il collo. Che cosa fai?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Ti fermi, chiedi come sta e adatti il tocco", "Premi di più", "Continui in silenzio", "Lo rimproveri", "Finisci prima e lo fai pagare"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Attenzione ai segnali non verbali.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.psicologia.20", "sat": "mcb-igi-psicologia", "passo": 2, "dati": {
+   "domanda": {"valore": "Un cliente arrabbiato si lamenta ad alta voce del ritardo. Come reagisci?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Ascolti con calma, ti scusi e spieghi senza alzare la voce", "Gli rispondi urlando", "Lo cacci", "Fingi di non sentire", "Gli dici che è colpa sua"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Gestione calma del conflitto.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.psicologia.21", "sat": "mcb-igi-psicologia", "passo": 3, "lezione": "Psicologia/Ansia-ATM Benevento.pptx, diapositiva 2", "dati": {
+   "domanda": {"valore": "L'ansia fisiologica:", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["Ha valore adattivo", "È sempre una malattia", "Non ha basi biologiche", "Abbassa sempre la prestazione", "Riguarda solo i bambini"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Valore adattivo.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.psicologia.22", "sat": "mcb-igi-psicologia", "passo": 3, "lezione": "Psicologia/Ansia-ATM Benevento.pptx, diapositiva 2", "dati": {
+   "domanda": {"valore": "La risposta «fight or flight» prepara a:", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["Combattere o fuggire", "Dormire", "Digerire", "Mangiare", "Ridere"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Combattere o fuggire.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.psicologia.23", "sat": "mcb-igi-psicologia", "passo": 3, "lezione": "Psicologia/Ansia-ATM Benevento.pptx, diapositiva 3", "dati": {
+   "domanda": {"valore": "Nell'ansia patologica prevale l'attività del sistema:", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["Simpatico", "Parasimpatico", "Digestivo", "Linfatico", "Scheletrico"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Iperattività simpatica.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.psicologia.24", "sat": "mcb-igi-psicologia", "passo": 3, "lezione": "Psicologia/Ansia-ATM Benevento.pptx, diapositiva 4", "dati": {
+   "domanda": {"valore": "I disturbi d'ansia sono più frequenti:", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["Nelle donne", "Negli uomini anziani soltanto", "Solo nei bambini", "Solo negli atleti", "In nessun gruppo particolare"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Più frequenti nelle donne.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.psicologia.25", "sat": "mcb-igi-psicologia", "passo": 3, "lezione": "Psicologia/Ansia-ATM Benevento.pptx, diapositiva 6", "dati": {
+   "domanda": {"valore": "Nel disturbo d'ansia generalizzato le preoccupazioni eccessive durano almeno:", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["6 mesi", "1 giorno", "1 settimana", "10 anni", "1 ora"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Almeno 6 mesi.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.psicologia.26", "sat": "mcb-igi-psicologia", "passo": 3, "lezione": "Psicologia/Ansia-ATM Benevento.pptx, diapositiva 7", "dati": {
+   "domanda": {"valore": "Per l'attacco di panico servono almeno:", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["4 sintomi", "1 sintomo", "10 sintomi", "20 sintomi", "Nessun sintomo"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Almeno 4 sintomi.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.psicologia.27", "sat": "mcb-igi-psicologia", "passo": 3, "lezione": "Psicologia/Ansia-ATM Benevento.pptx, diapositiva 15", "dati": {
+   "domanda": {"valore": "Le benzodiazepine agiscono facilitando il legame del GABA con il recettore:", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["GABA-A", "Dell'insulina", "Della vitamina D", "Del cortisolo", "Dell'adrenalina"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "GABA-A.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.psicologia.28", "sat": "mcb-igi-psicologia", "passo": 3, "lezione": "Psicologia/Ansia-ATM Benevento.pptx, diapositiva 17", "dati": {
+   "domanda": {"valore": "Gli SSRI inibiscono la ricaptazione di:", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["Serotonina", "Glucosio", "Calcio", "Ossigeno", "Colesterolo"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "5-HT.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.psicologia.29", "sat": "mcb-igi-psicologia", "passo": 3, "lezione": "Psicologia/Ansia-ATM Benevento.pptx, diapositiva 21", "dati": {
+   "domanda": {"valore": "Nella terapia cognitivo-comportamentale il livello di pensiero più profondo è:", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["Gli schemi cognitivi (core beliefs)", "I pensieri automatici", "Le parole dette", "I sogni", "I ricordi d'infanzia soltanto"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Core beliefs.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.psicologia.30", "sat": "mcb-igi-psicologia", "passo": 3, "dati": {
+   "domanda": {"valore": "Nella comunicazione con il cliente l'ascolto attivo vuol dire:", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Ascoltare con attenzione e verificare di aver capito", "Parlare sempre noi", "Interrompere", "Guardare il telefono", "Rispondere a monosillabi"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Ascolto attivo.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.sicurezza.01", "sat": "mcb-igi-sicurezza", "passo": 1, "dati": {
+   "concetto": {"valore": "In Italia la legge principale sulla salute e sicurezza nei luoghi di lavoro è il Decreto legislativo 81 del 2008 (Testo unico sulla sicurezza).", "fonte": "AI", "stato": "da verificare"},
+   "domanda": {"valore": "Qual è la legge principale sulla sicurezza sul lavoro in Italia?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Il Decreto legislativo 81/2008", "La legge 116/2021", "Il GDPR", "L'art. 2043 del codice civile", "Il codice della strada"], "fonte": "AI", "stato": "da verificare"},
+   "scritta": {"valore": ["81/2008", "D.Lgs. 81/2008", "decreto legislativo 81/2008", "81 del 2008"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "D.Lgs. 81/2008.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.sicurezza.02", "sat": "mcb-igi-sicurezza", "passo": 1, "dati": {
+   "concetto": {"valore": "Il datore di lavoro valuta tutti i rischi e li scrive nel Documento di valutazione dei rischi (DVR), con le misure per ridurli. È un obbligo che non può delegare.", "fonte": "AI", "stato": "da verificare"},
+   "domanda": {"valore": "Che cos'è il DVR?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Il documento che valuta i rischi del luogo di lavoro e le misure per ridurli", "Un tipo di defibrillatore", "Un contratto di assunzione", "Un certificato medico", "Un'assicurazione privata"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Documento di valutazione dei rischi.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.sicurezza.03", "sat": "mcb-igi-sicurezza", "passo": 1, "dati": {
+   "concetto": {"valore": "Nella sicurezza aziendale ci sono figure precise: il datore di lavoro, l'RSPP (responsabile del servizio di prevenzione e protezione), il medico competente, il rappresentante dei lavoratori per la sicurezza (RLS), e gli addetti al primo soccorso e all'antincendio.", "fonte": "AI", "stato": "da verificare"},
+   "domanda": {"valore": "Chi rappresenta i lavoratori sui temi della sicurezza?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["L'RLS", "Il cliente", "Il commercialista", "Il fornitore di olio", "Il vigile urbano"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Rappresentante dei lavoratori per la sicurezza.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.sicurezza.04", "sat": "mcb-igi-sicurezza", "passo": 1, "dati": {
+   "concetto": {"valore": "I dispositivi di protezione individuale (DPI) proteggono chi lavora: guanti, calzature antiscivolo, occhiali, mascherine. Il datore li fornisce, il lavoratore li usa correttamente.", "fonte": "AI", "stato": "da verificare"},
+   "domanda": {"valore": "Quale di questi è un dispositivo di protezione individuale?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["I guanti", "Il lettino", "La radio", "Il calendario", "La pianta in reception"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "DPI.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.sicurezza.05", "sat": "mcb-igi-sicurezza", "passo": 1, "dati": {
+   "concetto": {"valore": "Il massaggiatore sovraccarica polsi, pollici, spalle e schiena. Per proteggersi regola il lettino a un'altezza comoda (di solito circa all'altezza dei polsi con le braccia lungo i fianchi), tiene i polsi in linea, usa il peso del corpo e non solo la forza delle braccia, e alterna le tecniche.", "fonte": "AI", "stato": "da verificare"},
+   "domanda": {"valore": "Come si usa la forza nel massaggio senza sovraccaricare le braccia?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Usando il peso del corpo, con polsi in linea e lettino all'altezza giusta", "Spingendo solo con i pollici", "Tenendo il lettino bassissimo", "Piegando molto i polsi", "Lavorando senza pause"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Ergonomia del massaggiatore.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.sicurezza.06", "sat": "mcb-igi-sicurezza", "passo": 1, "lezione": "Anatomia Topografica/Con meno sforzo si ottiene di più.pdf, p. 3", "dati": {
+   "concetto": {"valore": "Per sentire meglio le strutture non serve premere sempre più forte: un contatto delicato rende le mani più sensibili, una pressione eccessiva fa l'effetto opposto e dà fastidio al paziente.", "fonte": "lezione", "stato": "da verificare"},
+   "domanda": {"valore": "Che cosa succede se si preme troppo forte durante la palpazione, secondo la lezione?", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["Le mani diventano meno sensibili e il paziente sente fastidio", "Si sente tutto meglio", "Si fa meno fatica", "Il paziente si rilassa di più", "Non cambia nulla"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Con meno sforzo si ottiene di più.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.sicurezza.07", "sat": "mcb-igi-sicurezza", "passo": 1, "lezione": "Anatomia Topografica/Con meno sforzo si ottiene di più.pdf, p. 5", "dati": {
+   "concetto": {"valore": "Mettendo una mano sopra l'altra, quella sopra spinge e decide la profondità, quella sotto resta rilassata e sente: si guadagna sensibilità e stabilità con meno fatica.", "fonte": "lezione", "stato": "da verificare"},
+   "domanda": {"valore": "Nella tecnica «una mano sopra l'altra», che cosa fa la mano inferiore?", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["Resta rilassata e sente", "Spinge con tutta la forza", "Tiene il telefono", "Resta sollevata", "Picchietta"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "La mano inferiore è ricettiva.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.sicurezza.08", "sat": "mcb-igi-sicurezza", "passo": 1, "dati": {
+   "concetto": {"valore": "Negli stabilimenti termali e nelle piscine i rischi principali sono pavimenti bagnati (scivolamenti), apparecchi elettrici vicino all'acqua, prodotti chimici (cloro) e calore e umidità.", "fonte": "AI", "stato": "da verificare"},
+   "domanda": {"valore": "Qual è un rischio tipico dei centri idroterapici?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Scivolare sui pavimenti bagnati", "Le radiazioni ionizzanti", "Il rumore di un cantiere", "Le altezze dei ponteggi", "Le polveri di cemento"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Pavimenti bagnati.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.sicurezza.09", "sat": "mcb-igi-sicurezza", "passo": 1, "dati": {
+   "concetto": {"valore": "I prodotti chimici si conservano nei contenitori originali con l'etichetta, lontano da fonti di calore; la scheda di sicurezza spiega rischi, protezioni e cosa fare in caso di contatto.", "fonte": "AI", "stato": "da verificare"},
+   "domanda": {"valore": "Dove si trovano le informazioni su rischi e protezioni di un prodotto chimico?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Nella scheda di sicurezza", "Sul calendario", "Nella ricevuta", "Nel codice deontologico", "Sul sito di una palestra"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Scheda di dati di sicurezza.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.sicurezza.10", "sat": "mcb-igi-sicurezza", "passo": 1, "dati": {
+   "concetto": {"valore": "In caso di incendio si seguono le vie di fuga segnalate (cartelli verdi), non si usano gli ascensori e si usa l'estintore solo se si è formati e il fuoco è piccolo. Le uscite di emergenza non si bloccano mai.", "fonte": "AI", "stato": "da verificare"},
+   "domanda": {"valore": "Che cosa NON si fa in caso di incendio?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Usare l'ascensore", "Seguire i cartelli verdi delle vie di fuga", "Chiamare i soccorsi", "Allontanarsi dal fumo", "Raggiungere il punto di raccolta"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Niente ascensori.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.sicurezza.11", "sat": "mcb-igi-sicurezza", "passo": 2, "dati": {
+   "domanda": {"valore": "Dopo una giornata di massaggi hai spesso dolore ai pollici. Che cosa cambi?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Alterni le tecniche, usi anche palmi e avambracci e tieni i polsi in linea", "Usi solo i pollici con più forza", "Abbassi il lettino al massimo", "Lavori senza pause", "Prendi antidolorifici e continui uguale"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Ergonomia e varietà delle tecniche.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.sicurezza.12", "sat": "mcb-igi-sicurezza", "passo": 2, "dati": {
+   "domanda": {"valore": "Il lettino è troppo basso e lavori piegato in avanti. Che rischio corri?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Mal di schiena", "Un'infezione", "Un'allergia", "Un'ustione", "Nessuno"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Postura scorretta.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.sicurezza.13", "sat": "mcb-igi-sicurezza", "passo": 2, "dati": {
+   "domanda": {"valore": "Il pavimento del reparto bagni è bagnato e passa un cliente anziano. Che cosa fai?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Segnali il pericolo, fai asciugare e lo accompagni", "Lo lasci passare da solo", "Gli dici di correre", "Spegni le luci", "Non fai nulla"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Prevenzione delle cadute.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.sicurezza.14", "sat": "mcb-igi-sicurezza", "passo": 2, "dati": {
+   "domanda": {"valore": "Una prolunga elettrica passa vicino alla vasca. Che cosa fai?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["La sposti lontano dall'acqua e segnali il problema", "La lasci", "La copri con un asciugamano bagnato", "La metti in acqua", "Aggiungi un'altra prolunga"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Elettricità e acqua.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.sicurezza.15", "sat": "mcb-igi-sicurezza", "passo": 2, "dati": {
+   "domanda": {"valore": "Il datore ti dà guanti e scarpe antiscivolo. Che cosa devi fare?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Usarli correttamente e segnalare se si rompono", "Lasciarli nell'armadietto", "Prestarli ai clienti", "Usarli solo il lunedì", "Rivenderli"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Obbligo di usare i DPI.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.sicurezza.16", "sat": "mcb-igi-sicurezza", "passo": 2, "dati": {
+   "domanda": {"valore": "Durante il travaso del cloro ti schizza negli occhi. Che cosa fai?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Lavi subito a lungo con acqua corrente e chiedi aiuto medico", "Ti strofini gli occhi", "Aspetti che passi", "Metti un collirio qualsiasi e continui", "Ti asciughi e torni al lavoro"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Lavaggio oculare prolungato.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.sicurezza.17", "sat": "mcb-igi-sicurezza", "passo": 2, "dati": {
+   "domanda": {"valore": "Un'uscita di emergenza è bloccata da teli e lettini. Che cosa fai?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["La liberi e lo segnali al responsabile", "La lasci così", "Ci metti altri lettini", "La chiudi a chiave", "Ci metti un cartello «non entrare»"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Vie di fuga sempre libere.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.sicurezza.18", "sat": "mcb-igi-sicurezza", "passo": 2, "lezione": "Anatomia Topografica/Con meno sforzo si ottiene di più.pdf, p. 3", "dati": {
+   "domanda": {"valore": "Non trovi una struttura con la palpazione e sei tentato di premere più forte. Che cosa consiglia la lezione?", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["Usare un contatto più delicato e lento", "Premere ancora di più", "Usare un attrezzo", "Smettere subito", "Chiedere al paziente di contrarsi forte"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Più profondità = palpazione più lenta e delicata.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.sicurezza.19", "sat": "mcb-igi-sicurezza", "passo": 2, "dati": {
+   "domanda": {"valore": "Ti fai male a una spalla sollevando un cliente. Che cosa fai?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Lo segnali al datore di lavoro per la denuncia di infortunio e vai dal medico", "Non dici nulla", "Continui a lavorare con dolore", "Lo nascondi per non disturbare", "Ti curi da solo per mesi"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Segnalare l'infortunio (INAIL).", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.sicurezza.20", "sat": "mcb-igi-sicurezza", "passo": 2, "dati": {
+   "domanda": {"valore": "Devi aiutare un cliente a uscire dalla vasca. Come proteggi la schiena?", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Gambe piegate, schiena dritta, carico vicino al corpo, e chiedi aiuto se serve", "Schiena curva e gambe tese", "Lo tiri per le braccia con uno strappo", "Lo sollevi da solo con una mano", "Ruoti il busto mentre sollevi"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Movimentazione corretta dei carichi.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.sicurezza.21", "sat": "mcb-igi-sicurezza", "passo": 3, "dati": {
+   "domanda": {"valore": "Il Testo unico sulla sicurezza sul lavoro è il:", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["D.Lgs. 81/2008", "D.Lgs. 196/2003", "GDPR 2016/679", "Legge 116/2021", "Codice civile art. 2043"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "D.Lgs. 81/2008.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.sicurezza.22", "sat": "mcb-igi-sicurezza", "passo": 3, "dati": {
+   "domanda": {"valore": "Il DVR è redatto da:", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Il datore di lavoro", "Il cliente", "Il medico di famiglia del lavoratore", "Il comune", "L'assicurazione"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Obbligo non delegabile del datore.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.sicurezza.23", "sat": "mcb-igi-sicurezza", "passo": 3, "dati": {
+   "domanda": {"valore": "L'RSPP è:", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Il responsabile del servizio di prevenzione e protezione", "Un tipo di DPI", "Un farmaco", "Un massaggio", "Un'assicurazione"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "RSPP.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.sicurezza.24", "sat": "mcb-igi-sicurezza", "passo": 3, "dati": {
+   "domanda": {"valore": "Sono DPI:", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Guanti e calzature antiscivolo", "Lettino e cuscini", "Olio e crema", "Musica e luci", "Teli e lenzuola"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Dispositivi di protezione individuale.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.sicurezza.25", "sat": "mcb-igi-sicurezza", "passo": 3, "dati": {
+   "domanda": {"valore": "Per ridurre il carico sulle braccia il massaggiatore:", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Usa il peso del corpo", "Usa solo i pollici", "Tiene i polsi piegati", "Abbassa molto il lettino", "Non fa pause"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Peso del corpo.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.sicurezza.26", "sat": "mcb-igi-sicurezza", "passo": 3, "lezione": "Anatomia Topografica/Con meno sforzo si ottiene di più.pdf, p. 3", "dati": {
+   "domanda": {"valore": "Secondo la lezione, le strutture profonde si raggiungono meglio con:", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["Una pressione leggera e lenta", "Una pressione fortissima", "Movimenti rapidi", "Il gomito", "Gli strumenti"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Pressione leggera.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.sicurezza.27", "sat": "mcb-igi-sicurezza", "passo": 3, "lezione": "Anatomia Topografica/Con meno sforzo si ottiene di più.pdf, p. 5", "dati": {
+   "domanda": {"valore": "Nella palpazione con una mano sopra l'altra, la mano superiore:", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["Spinge e decide la profondità", "Resta rilassata e sente", "Tiene il lenzuolo", "Picchietta", "Resta ferma in aria"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Dirige il movimento.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.sicurezza.28", "sat": "mcb-igi-sicurezza", "passo": 3, "dati": {
+   "domanda": {"valore": "Nei centri idroterapici un rischio tipico è:", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Lo scivolamento su pavimenti bagnati", "La caduta di massi", "Il rumore delle presse", "Le radiazioni", "Gli animali selvatici"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Pavimenti bagnati.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.sicurezza.29", "sat": "mcb-igi-sicurezza", "passo": 3, "dati": {
+   "domanda": {"valore": "Le informazioni sui rischi di un prodotto chimico sono nella:", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Scheda di sicurezza", "Fattura", "Carta d'identità", "Ricetta medica", "Brochure dello studio"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Scheda di sicurezza.", "fonte": "AI", "stato": "da verificare"}
+  }},
+  {"id": "mcb.igi.sicurezza.30", "sat": "mcb-igi-sicurezza", "passo": 3, "dati": {
+   "domanda": {"valore": "In caso di incendio:", "fonte": "AI", "stato": "da verificare"},
+   "opzioni": {"valore": ["Si seguono le vie di fuga e non si usa l'ascensore", "Si usa l'ascensore", "Si apre tutto per far entrare aria", "Si torna a prendere le proprie cose", "Si resta fermi"], "fonte": "AI", "stato": "da verificare"},
+   "spiegazione": {"valore": "Vie di fuga, niente ascensori.", "fonte": "AI", "stato": "da verificare"}
+  }}
+ ]
+}

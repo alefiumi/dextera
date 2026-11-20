@@ -51,7 +51,8 @@ Dove questo file e la specifica differiscono, vale la specifica.
 - Percorso MCB: Cuore e vasi e Respiratorio interi (solo contenuti, `mcb.json` v3, contenuti 36), dopo l'unione con il programma della scuola dell'autore (specifica, sezione 2). Online il 20/11/2026.
 - Percorso MCB: Patologia e clinica unita al programma della scuola, 6 pianeti e 26 satelliti (solo contenuti, `mcb.json` v4, `mappa.json` v7, contenuti 37). Online il 20/11/2026.
 - Percorso MCB, rilascio 3: Terapie fisiche e rieducazione, corso a quiz (solo contenuti, `mcb.json` v5, `mappa.json` v8, contenuti 38).
-- Percorso MCB, rilascio 4: Scienze di base e fisiologia, corso a quiz (solo contenuti, `mcb.json` v6, `mappa.json` v9, contenuti 40). Non ancora online.
+- Percorso MCB, rilascio 4: Scienze di base e fisiologia, corso a quiz (solo contenuti, `mcb.json` v6, `mappa.json` v9, contenuti 40).
+- Percorso MCB, rilascio 5: Igiene, sicurezza e professione, corso a quiz (solo contenuti, `mcb.json` v7, `mappa.json` v10, contenuti 42). Non ancora online.
 - Corso di neurologia: contenuti (primo rilascio) e corso giocabile (v0.81.0, vedi «Corso di neurologia giocabile»), Palestra sul cervello (v0.82.0), gioco 3D (v0.83.0).
 - GitHub Pages attivo (ramo `main`, cartella radice): online su `alefiumi.github.io/dextera`.
 
@@ -940,13 +941,16 @@ con gli stessi nodi del percorso completo e meno satelliti o passi (maestria e p
 - **Rilascio 4 (contenuti 40): Scienze di base e fisiologia**, corso a quiz `mcb-scienze` (settimo corso di MCB): 3 pianeti (Biologia di base,
   Fisica per l'MCB, Fisiologia), 15 satelliti `mcb-sci-<argomento>`, 450 quesiti in `testi/mcb-scienze.json` (id `mcb.sci.<argomento>.<nn>`,
   dai PDF delle lezioni e dall'AI: da verificare), stessi passi; `mcb.json` v6, `mappa.json` v9.
-- Gli altri corsi a quiz (Igiene, sicurezza e professione, Altri apparati) non ci sono ancora:
+- **Rilascio 5 (contenuti 42): Igiene, sicurezza e professione**, corso a quiz `mcb-igiene` (ottavo corso di MCB): 3 pianeti (Igiene,
+  Primo soccorso, Professione), 10 satelliti `mcb-igi-<argomento>`, 300 quesiti in `testi/mcb-igiene.json` (id `mcb.igi.<argomento>.<nn>`,
+  110 dalle lezioni e 190 dall'AI: da verificare), stessi passi; `mcb.json` v7, `mappa.json` v10.
+- L'ultimo corso a quiz (Altri apparati) non c'è ancora:
   per ognuno servono `testi/mcb-<corso>.json`, il corso con `quiz` in `mappa.json` e i nodi in `mcb.json`.
 - Unione con il programma della scuola dell'autore (specifica, sezione 2, 20/11/2026; PDF delle lezioni in `~/Desktop/mcb`): altri satelliti
   in Terapie fisiche e rieducazione e negli altri corsi, corso Altri apparati; aspettano i quesiti della chat dei contenuti.
-- Prova: `mcb.mjs` (49 controlli, con Patologia e clinica, Terapie e Scienze) nella cartella delle note di questa sessione; passano anche `fase6d.mjs` (71, la riga
+- Prova: `mcb.mjs` (53 controlli, con Patologia e clinica, Terapie, Scienze e Igiene) nella cartella delle note di questa sessione; passano anche `fase6d.mjs` (71, la riga
   di MCB aggiornata), `percorsi.mjs` (39) e `osp/prova.mjs` (13). `fase6c.mjs` ha 3 errori attesi (MCB non più «in arrivo» e i due controlli
-  della v0.91); `ucbm-fis/prova.mjs` ha 1 errore atteso (conta tutti i quesiti di `app.UCBM`, ora 2460 con quelli MCB).
+  della v0.91); `ucbm-fis/prova.mjs` ha 1 errore atteso (conta tutti i quesiti di `app.UCBM`, ora 2760 con quelli MCB).
 
 ## Mappa del percorso (`content/mappa.json`)
 Corso → 4 pianeti → 17 satelliti (con `ordine` della specifica) → 6 passi (`ossa`, `reperi`, `muscoli`, `connessioni`, `funzione`,

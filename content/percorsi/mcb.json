@@ -1,7 +1,7 @@
 {
- "version": 2,
+ "version": 3,
  "formato": 1,
- "nota": "Bozza del percorso MCB (Massaggiatore e Capo Bagnino), sezione 2 «Percorso MCB» della specifica, decisa il 20/11/2026. Rilascio 1: solo i 4 corsi che esistono già, con gli stessi nodi del percorso completo e meno satelliti o passi (maestria e progressi in comune). Apparato muscolo-scheletrico: tutti i 17 satelliti con i 6 passi. Neurologia: Basi e Midollo e sistema periferico interi; Encefalo e Corteccia solo con i passi Le strutture, Dove si trova e La funzione (niente Se si danneggia né caso clinico). Cuore e vasi: tutti i satelliti tranne Coronarie e vene del cuore. Apparato respiratorio: Lobi dei polmoni e Trachea e bronchi. Nei satelliti con meno passi e nei pianeti con meno satelliti vale la regola dei percorsi parziali (satellite acceso ed esame del pianeta contano solo in questo percorso). Rilascio 2: Patologia e clinica, corso a quiz (5 pianeti, 16 satelliti, 3 passi da 10 quesiti: Concetti, Applicazione, Quesiti d'esame; quesiti in testi/mcb-patologia.json, scritti dall'AI a memoria e da verificare). Gli altri corsi a quiz (Idroterapia e terapie fisiche, Scienze di base e fisiologia, Igiene, sicurezza e professione) arrivano nei rilasci successivi.",
+ "nota": "Bozza del percorso MCB (Massaggiatore e Capo Bagnino), sezione 2 «Percorso MCB» della specifica, decisa il 20/11/2026. Rilascio 1: solo i 4 corsi che esistono già, con gli stessi nodi del percorso completo e meno satelliti o passi (maestria e progressi in comune). Apparato muscolo-scheletrico: tutti i 17 satelliti con i 6 passi. Neurologia: Basi e Midollo e sistema periferico interi; Encefalo e Corteccia solo con i passi Le strutture, Dove si trova e La funzione (niente Se si danneggia né caso clinico). Cuore e vasi e Apparato respiratorio: interi, come nel percorso completo (unione con il programma della scuola dell'autore, 20/11/2026). Nei satelliti con meno passi e nei pianeti con meno satelliti vale la regola dei percorsi parziali (satellite acceso ed esame del pianeta contano solo in questo percorso). Rilascio 2: Patologia e clinica, corso a quiz (5 pianeti, 16 satelliti, 3 passi da 10 quesiti: Concetti, Applicazione, Quesiti d'esame; quesiti in testi/mcb-patologia.json, scritti dall'AI a memoria e da verificare). Gli altri corsi a quiz (Idroterapia e terapie fisiche, Scienze di base e fisiologia, Igiene, sicurezza e professione) arrivano nei rilasci successivi.",
  "id": "mcb",
  "nome": "MCB",
  "bozza": true,
@@ -634,6 +634,18 @@
    "caso": "t7"
   },
   {
+   "id": "cv-coronarie",
+   "tipo": "satellite",
+   "genitore": "cv-cuore",
+   "ordine": 2,
+   "passi": [
+    "cv-coronarie.1",
+    "cv-coronarie.2",
+    "cv-coronarie.3"
+   ],
+   "caso": "t1"
+  },
+  {
    "id": "cv-grandi-vasi",
    "tipo": "pianeta",
    "genitore": "cuore-vasi",
@@ -646,7 +658,7 @@
    "id": "cv-aorta",
    "tipo": "satellite",
    "genitore": "cv-grandi-vasi",
-   "ordine": 1,
+   "ordine": 3,
    "passi": [
     "cv-aorta.1",
     "cv-aorta.2",
@@ -658,7 +670,7 @@
    "id": "cv-vene-cave",
    "tipo": "satellite",
    "genitore": "cv-grandi-vasi",
-   "ordine": 2,
+   "ordine": 4,
    "passi": [
     "cv-vene-cave.1",
     "cv-vene-cave.2",
@@ -670,7 +682,7 @@
    "id": "cv-circolo-polmonare",
    "tipo": "satellite",
    "genitore": "cv-grandi-vasi",
-   "ordine": 3,
+   "ordine": 5,
    "passi": [
     "cv-circolo-polmonare.1",
     "cv-circolo-polmonare.2",
@@ -691,7 +703,7 @@
    "id": "cv-vasi-testa",
    "tipo": "satellite",
    "genitore": "cv-vasi-corpo",
-   "ordine": 1,
+   "ordine": 6,
    "passi": [
     "cv-vasi-testa.1",
     "cv-vasi-testa.2",
@@ -703,7 +715,7 @@
    "id": "cv-vasi-arto-sup",
    "tipo": "satellite",
    "genitore": "cv-vasi-corpo",
-   "ordine": 2,
+   "ordine": 7,
    "passi": [
     "cv-vasi-arto-sup.1",
     "cv-vasi-arto-sup.2",
@@ -715,7 +727,7 @@
    "id": "cv-vasi-tronco",
    "tipo": "satellite",
    "genitore": "cv-vasi-corpo",
-   "ordine": 3,
+   "ordine": 8,
    "passi": [
     "cv-vasi-tronco.1",
     "cv-vasi-tronco.2",
@@ -727,7 +739,7 @@
    "id": "cv-vasi-arto-inf",
    "tipo": "satellite",
    "genitore": "cv-vasi-corpo",
-   "ordine": 4,
+   "ordine": 9,
    "passi": [
     "cv-vasi-arto-inf.1",
     "cv-vasi-arto-inf.2",
@@ -775,13 +787,70 @@
    "id": "re-bronchi",
    "tipo": "satellite",
    "genitore": "re-vie-aeree",
-   "ordine": 1,
+   "ordine": 2,
    "passi": [
     "re-bronchi.1",
     "re-bronchi.2",
     "re-bronchi.3"
    ],
    "caso": "t2"
+  },
+  {
+   "id": "re-segmentari-dx",
+   "tipo": "satellite",
+   "genitore": "re-vie-aeree",
+   "ordine": 3,
+   "passi": [
+    "re-segmentari-dx.1",
+    "re-segmentari-dx.2",
+    "re-segmentari-dx.3"
+   ],
+   "caso": "t9"
+  },
+  {
+   "id": "re-segmentari-sx",
+   "tipo": "satellite",
+   "genitore": "re-vie-aeree",
+   "ordine": 4,
+   "passi": [
+    "re-segmentari-sx.1",
+    "re-segmentari-sx.2",
+    "re-segmentari-sx.3"
+   ],
+   "caso": null
+  },
+  {
+   "id": "re-vasi",
+   "tipo": "pianeta",
+   "genitore": "respiratorio",
+   "ordine": 3,
+   "esame": {
+    "caso": null
+   }
+  },
+  {
+   "id": "re-arterie",
+   "tipo": "satellite",
+   "genitore": "re-vasi",
+   "ordine": 5,
+   "passi": [
+    "re-arterie.1",
+    "re-arterie.2",
+    "re-arterie.3"
+   ],
+   "caso": null
+  },
+  {
+   "id": "re-vene",
+   "tipo": "satellite",
+   "genitore": "re-vasi",
+   "ordine": 6,
+   "passi": [
+    "re-vene.1",
+    "re-vene.2",
+    "re-vene.3"
+   ],
+   "caso": null
   },
   {
    "id": "mcb-patologia",

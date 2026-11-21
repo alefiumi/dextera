@@ -1,0 +1,835 @@
+{
+ "version": 1,
+ "tipo": "mcb-apparati",
+ "nota": "Percorso MCB, corso Altri apparati (sezione 2 della specifica): 2 pianeti (Digestione ed escrezione; Riproduzione, ormoni e difese), 5 satelliti (digerente, urinario, genitale, endocrino, immunitario), 3 passi da 10 quesiti come Patologia e clinica: passo 1 Concetti (con il concetto da presentare prima della domanda), 2 Applicazione (casi pratici), 3 Quesiti d'esame (solo scelta). opzioni: 5, la prima è quella giusta (nell'app si mescolano); scritta: risposte scritte accettate, solo dove la risposta è breve. Scritti il 20/11/2026, tutti dalle lezioni di Anatomia dei sistemi della scuola dell'autore (6 Apparato digerente, 7 Apparato urinario, 8 Apparato genitale, 9 Apparato endocrino, 10 Sistema immunitario): fonte «lezione» e nella voce il campo «lezione» con file e pagina. Il corso non ha figure per il gioco (il 3D ha i visceri): solo quesiti. Il satellite endocrino guarda soprattutto l'anatomia delle ghiandole; la fisiologia degli ormoni è anche nel corso Scienze di base e fisiologia. Errori delle lezioni non ripresi: l'esofago «dalla faringe all'esofago» (Apparato digerente p15, è allo stomaco); il pancreas tra gli organi intraperitoneali (p69, è quasi tutto retroperitoneale); «riassorbimento 80%» del filtrato (Apparato urinario p25: con 180 litri filtrati e 1,5 di urina si riassorbe circa il 99%); CD8 dei linfociti «suppressor» (Sistema immunitario p38: sono i citotossici). Tutto «da verificare» finché il docente non lo segna.",
+ "campi": {"concetto": "Concetto (spiegazione prima della domanda)", "domanda": "Domanda", "opzioni": "Opzioni (la prima è quella giusta)", "scritta": "Risposte scritte accettate", "spiegazione": "Spiegazione"},
+ "satelliti": [{"id": "mcb-app-digerente", "nome": "Apparato digerente", "pianeta": "Digestione ed escrezione"}, {"id": "mcb-app-urinario", "nome": "Apparato urinario", "pianeta": "Digestione ed escrezione"}, {"id": "mcb-app-genitale", "nome": "Apparato genitale", "pianeta": "Riproduzione, ormoni e difese"}, {"id": "mcb-app-endocrino", "nome": "Apparato endocrino", "pianeta": "Riproduzione, ormoni e difese"}, {"id": "mcb-app-immunitario", "nome": "Sistema immunitario", "pianeta": "Riproduzione, ormoni e difese"}],
+ "voci": [
+  {"id": "mcb.app.digerente.01", "sat": "mcb-app-digerente", "passo": 1, "lezione": "Anatomia dei sistemi/6 - Apparato Digerente.pdf, p. 2", "dati": {
+   "concetto": {"valore": "L'apparato digerente lavora come una catena di smontaggio: ingestione (si prende il cibo e lo si mastica), digestione (il cibo è spezzato in modo meccanico e chimico), assorbimento dei nutrienti nel sangue, compattazione delle feci e defecazione.", "fonte": "lezione", "stato": "da verificare"},
+   "domanda": {"valore": "In quale fase i nutrienti passano nel sangue?", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["Assorbimento", "Ingestione", "Defecazione", "Compattazione", "Masticazione"], "fonte": "lezione", "stato": "da verificare"},
+   "scritta": {"valore": ["assorbimento", "l'assorbimento"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Assorbimento.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.app.digerente.02", "sat": "mcb-app-digerente", "passo": 1, "lezione": "Anatomia dei sistemi/6 - Apparato Digerente.pdf, p. 5", "dati": {
+   "concetto": {"valore": "Il canale alimentare è un tubo di organi cavi lungo circa 9 metri, dalla bocca all'ano: bocca, faringe, esofago, stomaco, intestino tenue e intestino crasso. Ghiandole annesse: salivari, fegato, cistifellea e pancreas.", "fonte": "lezione", "stato": "da verificare"},
+   "domanda": {"valore": "Quale di questi organi è una ghiandola annessa e non fa parte del canale alimentare?", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["Il fegato", "L'esofago", "Lo stomaco", "L'intestino tenue", "La faringe"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Fegato, cistifellea, pancreas e salivari sono annessi.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.app.digerente.03", "sat": "mcb-app-digerente", "passo": 1, "lezione": "Anatomia dei sistemi/6 - Apparato Digerente.pdf, p. 7", "dati": {
+   "concetto": {"valore": "Nell'adulto i denti sono 32 (28 più i 4 «del giudizio»): tagliano, strappano e triturano il cibo. Ogni dente ha corona e radice; i tessuti sono smalto, dentina e cemento.", "fonte": "lezione", "stato": "da verificare"},
+   "domanda": {"valore": "Quanti sono i denti dell'adulto, compresi quelli del giudizio?", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["32", "20", "28", "36", "24"], "fonte": "lezione", "stato": "da verificare"},
+   "scritta": {"valore": ["32", "trentadue"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "32.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.app.digerente.04", "sat": "mcb-app-digerente", "passo": 1, "lezione": "Anatomia dei sistemi/6 - Apparato Digerente.pdf, p. 10", "dati": {
+   "concetto": {"valore": "Le ghiandole salivari maggiori sono parotidi, sottomandibolari e sottolinguali. La saliva contiene acqua, bicarbonato, enzimi (ptialina, che inizia a digerire l'amido), anticorpi IgA e lisozima.", "fonte": "lezione", "stato": "da verificare"},
+   "domanda": {"valore": "Quale di queste è una ghiandola salivare maggiore?", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["La parotide", "La tiroide", "Il pancreas", "Il timo", "Il surrene"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Parotidi, sottomandibolari, sottolinguali.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.app.digerente.05", "sat": "mcb-app-digerente", "passo": 1, "lezione": "Anatomia dei sistemi/6 - Apparato Digerente.pdf, p. 15", "dati": {
+   "concetto": {"valore": "L'esofago porta il cibo dalla faringe allo stomaco, dietro la trachea. Attraversa collo, mediastino e diaframma; dove passa nel diaframma si forma lo sfintere esofageo inferiore, che impedisce al succo gastrico di risalire.", "fonte": "lezione", "stato": "da verificare"},
+   "domanda": {"valore": "Che cosa impedisce lo sfintere esofageo inferiore?", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["Il reflusso del succo gastrico nell'esofago", "Il passaggio dell'aria nei polmoni", "L'uscita della bile", "La masticazione", "Il passaggio delle feci"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Impedisce il reflusso.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.app.digerente.06", "sat": "mcb-app-digerente", "passo": 1, "lezione": "Anatomia dei sistemi/6 - Apparato Digerente.pdf, p. 26", "dati": {
+   "concetto": {"valore": "Lo stomaco ha quattro regioni: cardias (sotto l'esofago), fondo (a cupola), corpo e piloro (con lo sfintere che comunica con il duodeno). Il suo muscolo ha tre strati: longitudinale, circolare e obliquo.", "fonte": "lezione", "stato": "da verificare"},
+   "domanda": {"valore": "Quale parte dello stomaco comunica con il duodeno?", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["Il piloro", "Il cardias", "Il fondo", "L'esofago", "Il colon"], "fonte": "lezione", "stato": "da verificare"},
+   "scritta": {"valore": ["piloro", "il piloro"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Piloro.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.app.digerente.07", "sat": "mcb-app-digerente", "passo": 1, "lezione": "Anatomia dei sistemi/6 - Apparato Digerente.pdf, p. 25", "dati": {
+   "concetto": {"valore": "Lo stomaco accumula il cibo: il suo volume va da circa 50 ml da vuoto a 4 litri dopo un pasto abbondante. Tritura il cibo, inizia la digestione di proteine e grassi e produce il chimo, che passa nel duodeno.", "fonte": "lezione", "stato": "da verificare"},
+   "domanda": {"valore": "Come si chiama il prodotto che passa dallo stomaco al duodeno?", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["Chimo", "Bile", "Saliva", "Feci", "Linfa"], "fonte": "lezione", "stato": "da verificare"},
+   "scritta": {"valore": ["chimo", "il chimo"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Il chimo.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.app.digerente.08", "sat": "mcb-app-digerente", "passo": 1, "lezione": "Anatomia dei sistemi/6 - Apparato Digerente.pdf, p. 31", "dati": {
+   "concetto": {"valore": "Nell'intestino tenue avviene quasi tutta la digestione chimica e l'assorbimento, grazie a pieghe e villi che aumentano la superficie. È lungo circa 7 metri ed è fatto di duodeno, digiuno e ileo.", "fonte": "lezione", "stato": "da verificare"},
+   "domanda": {"valore": "Dove avviene quasi tutto l'assorbimento dei nutrienti?", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["Nell'intestino tenue", "Nello stomaco", "Nell'esofago", "Nel colon", "Nella bocca"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Intestino tenue, grazie a pieghe e villi.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.app.digerente.09", "sat": "mcb-app-digerente", "passo": 1, "lezione": "Anatomia dei sistemi/6 - Apparato Digerente.pdf, p. 43", "dati": {
+   "concetto": {"valore": "Il fegato produce la bile, depura il sangue, produce proteine del plasma (albumine, globuline, fibrinogeno per la coagulazione) ed elimina farmaci, tossine e ormoni. Nel feto produce anche cellule del sangue.", "fonte": "lezione", "stato": "da verificare"},
+   "domanda": {"valore": "Quale di queste è una funzione del fegato?", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["Produrre la bile", "Produrre l'insulina", "Filtrare l'urina", "Produrre la saliva", "Scambiare l'ossigeno"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Secrezione della bile.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.app.digerente.10", "sat": "mcb-app-digerente", "passo": 1, "lezione": "Anatomia dei sistemi/6 - Apparato Digerente.pdf, p. 84", "dati": {
+   "concetto": {"valore": "Il pancreas ha una parte esocrina, che produce il succo pancreatico con gli enzimi digestivi e lo versa nel duodeno, e una parte endocrina (isole di Langerhans) che versa nel sangue insulina (cellule beta) e glucagone (cellule alfa).", "fonte": "lezione", "stato": "da verificare"},
+   "domanda": {"valore": "Quali cellule del pancreas producono l'insulina?", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["Le cellule beta delle isole di Langerhans", "Le cellule alfa", "Le cellule acinose", "Gli epatociti", "I globuli rossi"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Cellule beta.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.app.digerente.11", "sat": "mcb-app-digerente", "passo": 2, "lezione": "Anatomia dei sistemi/6 - Apparato Digerente.pdf, p. 17", "dati": {
+   "domanda": {"valore": "Un cliente indica un dolore nella zona sotto l'ombelico, a destra. In quale quadrante si trova?", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["Quadrante inferiore destro", "Quadrante superiore sinistro", "Quadrante superiore destro", "Quadrante inferiore sinistro", "Al centro del torace"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "I quadranti sono divisi da due linee che si incrociano all'ombelico.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.app.digerente.12", "sat": "mcb-app-digerente", "passo": 2, "lezione": "Anatomia dei sistemi/6 - Apparato Digerente.pdf, p. 38", "dati": {
+   "domanda": {"valore": "In quale quadrante dell'addome si trovano il cieco e l'appendice?", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["Inferiore destro", "Superiore sinistro", "Superiore destro", "Inferiore sinistro", "Nel torace"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Quadrante inferiore destro.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.app.digerente.13", "sat": "mcb-app-digerente", "passo": 2, "lezione": "Anatomia dei sistemi/6 - Apparato Digerente.pdf, p. 19", "dati": {
+   "domanda": {"valore": "Durante un massaggio addominale, sotto le coste di sinistra e nell'epigastrio, quale organo si trova soprattutto?", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["Lo stomaco", "Il cieco", "La vescica", "Il colon sigmoideo", "Il fegato"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Stomaco in ipocondrio sinistro ed epigastrio.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.app.digerente.14", "sat": "mcb-app-digerente", "passo": 2, "lezione": "Anatomia dei sistemi/6 - Apparato Digerente.pdf, p. 37", "dati": {
+   "domanda": {"valore": "Nel massaggio dell'addome per la stitichezza si segue il colon. In che ordine si susseguono le sue parti?", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["Ascendente, trasverso, discendente, sigmoideo", "Discendente, trasverso, ascendente, sigmoideo", "Sigmoideo, ascendente, trasverso, discendente", "Trasverso, sigmoideo, ascendente, discendente", "Retto, cieco, trasverso, ascendente"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Il percorso va in senso orario visto da davanti.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.app.digerente.15", "sat": "mcb-app-digerente", "passo": 2, "lezione": "Anatomia dei sistemi/6 - Apparato Digerente.pdf, p. 41", "dati": {
+   "domanda": {"valore": "Un cliente ha feci molto liquide dopo un'infezione intestinale. Quale tratto non sta riassorbendo bene l'acqua?", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["Il colon", "L'esofago", "La faringe", "La cistifellea", "La bocca"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Il colon riassorbe acqua ed elettroliti.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.app.digerente.16", "sat": "mcb-app-digerente", "passo": 2, "lezione": "Anatomia dei sistemi/6 - Apparato Digerente.pdf, p. 48", "dati": {
+   "domanda": {"valore": "Da quali vasi arriva il sangue al fegato?", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["Dalla vena porta (circa 70%) e dall'arteria epatica (circa 30%)", "Solo dall'aorta", "Dalle vene polmonari", "Dalla vena cava superiore", "Dalle arterie renali"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Doppia afferenza: vena porta e arteria epatica.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.app.digerente.17", "sat": "mcb-app-digerente", "passo": 2, "lezione": "Anatomia dei sistemi/6 - Apparato Digerente.pdf, p. 49", "dati": {
+   "domanda": {"valore": "Perché il sangue dell'intestino passa prima dal fegato attraverso la vena porta?", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["Perché il fegato lavora i nutrienti assorbiti e depura il sangue", "Per raffreddarlo", "Per caricarlo di ossigeno", "Per farlo diventare urina", "Senza un motivo"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "La vena porta porta al fegato il sangue di intestino, milza e pancreas.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.app.digerente.18", "sat": "mcb-app-digerente", "passo": 2, "lezione": "Anatomia dei sistemi/6 - Apparato Digerente.pdf, p. 78", "dati": {
+   "domanda": {"valore": "Dopo un pasto molto grasso un cliente ha dolore sotto le coste a destra. Quale organo si contrae di più dopo i pasti grassi?", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["La cistifellea", "La milza", "Il rene", "La vescica", "Il timo"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "La colecistochinina fa contrarre la cistifellea, soprattutto con i grassi.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.app.digerente.19", "sat": "mcb-app-digerente", "passo": 2, "lezione": "Anatomia dei sistemi/6 - Apparato Digerente.pdf, p. 83", "dati": {
+   "domanda": {"valore": "Quale enzima del succo pancreatico digerisce i grassi?", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["La lipasi", "L'amilasi", "La tripsina", "La ribonucleasi", "La ptialina"], "fonte": "lezione", "stato": "da verificare"},
+   "scritta": {"valore": ["lipasi", "la lipasi"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "La lipasi scinde i trigliceridi, aiutata dalla bile.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.app.digerente.20", "sat": "mcb-app-digerente", "passo": 2, "lezione": "Anatomia dei sistemi/6 - Apparato Digerente.pdf, p. 70", "dati": {
+   "domanda": {"valore": "Durante il massaggio dell'addome senti una «tenda» di grasso e peritoneo davanti all'intestino. Come si chiama la piega che pende dallo stomaco sull'intestino?", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["Grande omento", "Piccolo omento", "Legamento falciforme", "Diaframma", "Mesocolon sigmoideo"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Il grande omento pende come un grembiule.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.app.digerente.21", "sat": "mcb-app-digerente", "passo": 3, "lezione": "Anatomia dei sistemi/6 - Apparato Digerente.pdf, p. 5", "dati": {
+   "domanda": {"valore": "Il canale alimentare è lungo circa:", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["9 metri", "1 metro", "30 metri", "50 centimetri", "3 metri"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Circa 9 metri.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.app.digerente.22", "sat": "mcb-app-digerente", "passo": 3, "lezione": "Anatomia dei sistemi/6 - Apparato Digerente.pdf, p. 13", "dati": {
+   "domanda": {"valore": "La faringe si divide in:", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["Rinofaringe, orofaringe e ipofaringe", "Cardias, fondo e corpo", "Duodeno, digiuno e ileo", "Cieco, colon e retto", "Testa, corpo e coda"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Tre parti.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.app.digerente.23", "sat": "mcb-app-digerente", "passo": 3, "lezione": "Anatomia dei sistemi/6 - Apparato Digerente.pdf, p. 26", "dati": {
+   "domanda": {"valore": "La tonaca muscolare dello stomaco ha:", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["Tre strati: longitudinale, circolare e obliquo", "Un solo strato", "Due strati di cartilagine", "Solo muscolo striato volontario", "Nessuno strato muscolare"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Tre strati.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.app.digerente.24", "sat": "mcb-app-digerente", "passo": 3, "lezione": "Anatomia dei sistemi/6 - Apparato Digerente.pdf, p. 32", "dati": {
+   "domanda": {"valore": "L'intestino tenue è formato da:", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["Duodeno, digiuno e ileo", "Cieco, colon e retto", "Esofago e stomaco", "Faringe e laringe", "Fegato e pancreas"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Duodeno, digiuno, ileo.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.app.digerente.25", "sat": "mcb-app-digerente", "passo": 3, "lezione": "Anatomia dei sistemi/6 - Apparato Digerente.pdf, p. 33", "dati": {
+   "domanda": {"valore": "Nella curva a C del duodeno si trova:", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["La testa del pancreas", "Il fegato", "La milza", "Il rene destro", "L'appendice"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Testa del pancreas.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.app.digerente.26", "sat": "mcb-app-digerente", "passo": 3, "lezione": "Anatomia dei sistemi/6 - Apparato Digerente.pdf, p. 38", "dati": {
+   "domanda": {"valore": "L'appendice vermiforme è ricca di:", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["Linfociti e cellule immunitarie", "Cellule muscolari striate", "Cellule nervose", "Globuli rossi", "Cellule ossee"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Tessuto linfatico.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.app.digerente.27", "sat": "mcb-app-digerente", "passo": 3, "lezione": "Anatomia dei sistemi/6 - Apparato Digerente.pdf, p. 51", "dati": {
+   "domanda": {"valore": "L'unità morfofunzionale del fegato è:", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["Il lobulo epatico", "Il nefrone", "L'alveolo", "Il villo", "L'acino salivare"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Lobulo epatico.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.app.digerente.28", "sat": "mcb-app-digerente", "passo": 3, "lezione": "Anatomia dei sistemi/6 - Apparato Digerente.pdf, p. 74", "dati": {
+   "domanda": {"valore": "La cistifellea serve a:", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["Accumulare e concentrare la bile", "Produrre insulina", "Produrre la bile", "Filtrare il sangue", "Assorbire i nutrienti"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "La bile la produce il fegato; la cistifellea la accumula.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.app.digerente.29", "sat": "mcb-app-digerente", "passo": 3, "lezione": "Anatomia dei sistemi/6 - Apparato Digerente.pdf, p. 69", "dati": {
+   "domanda": {"valore": "Sono organi retroperitoneali:", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["Reni e ureteri", "Stomaco e digiuno", "Fegato e milza", "Ileo e colon trasverso", "Stomaco e fegato"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Reni, ureteri, aorta addominale, vena cava inferiore.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.app.digerente.30", "sat": "mcb-app-digerente", "passo": 3, "lezione": "Anatomia dei sistemi/6 - Apparato Digerente.pdf, p. 83", "dati": {
+   "domanda": {"valore": "Il bicarbonato del succo pancreatico serve a:", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["Tamponare l'acidità del chimo", "Digerire le proteine", "Produrre la bile", "Coagulare il sangue", "Contrarre lo stomaco"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Ambiente leggermente alcalino nel duodeno.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.app.urinario.01", "sat": "mcb-app-urinario", "passo": 1, "lezione": "Anatomia dei sistemi/7 - Apparato Urinario.pdf, p. 2", "dati": {
+   "concetto": {"valore": "L'apparato urinario elimina dal sangue le scorie del metabolismo (urea, acido urico, creatinina) e le sostanze estranee, regola acqua ed elettroliti, il pH del sangue e la pressione arteriosa.", "fonte": "lezione", "stato": "da verificare"},
+   "domanda": {"valore": "Quale di queste è una scoria eliminata con l'urina?", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["L'urea", "L'ossigeno", "L'insulina", "Il glucosio in condizioni normali", "L'emoglobina dei globuli rossi sani"], "fonte": "lezione", "stato": "da verificare"},
+   "scritta": {"valore": ["urea", "l'urea"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Urea, acido urico, creatinina.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.app.urinario.02", "sat": "mcb-app-urinario", "passo": 1, "lezione": "Anatomia dei sistemi/7 - Apparato Urinario.pdf, p. 3", "dati": {
+   "concetto": {"valore": "L'apparato urinario è formato dai reni e dalle vie urinarie: calici minori e maggiori, pelvi (bacinetto), ureteri, vescica e uretra.", "fonte": "lezione", "stato": "da verificare"},
+   "domanda": {"valore": "Quale condotto porta l'urina dal rene alla vescica?", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["L'uretere", "L'uretra", "L'esofago", "Il coledoco", "L'aorta"], "fonte": "lezione", "stato": "da verificare"},
+   "scritta": {"valore": ["uretere", "l'uretere"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Uretere.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.app.urinario.03", "sat": "mcb-app-urinario", "passo": 1, "lezione": "Anatomia dei sistemi/7 - Apparato Urinario.pdf, p. 5", "dati": {
+   "concetto": {"valore": "I reni sono a forma di fagiolo, lunghi circa 12 cm, ai lati della colonna, nella parte alta e posteriore dell'addome, dietro il peritoneo (retroperitoneali). Oltre all'urina producono ormoni come renina ed eritropoietina.", "fonte": "lezione", "stato": "da verificare"},
+   "domanda": {"valore": "Dove si trovano i reni?", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["Ai lati della colonna, in alto e dietro, fuori dal peritoneo", "Davanti all'intestino, sotto l'ombelico", "Nel torace accanto al cuore", "Nella pelvi davanti alla vescica", "Sotto lo sterno"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Posizione retroperitoneale.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.app.urinario.04", "sat": "mcb-app-urinario", "passo": 1, "lezione": "Anatomia dei sistemi/7 - Apparato Urinario.pdf, p. 7", "dati": {
+   "concetto": {"valore": "I reni vanno circa dall'undicesima vertebra toracica alla terza lombare. Il rene destro è più basso del sinistro di circa 2 cm, perché sopra c'è il fegato. Con l'inspirazione si abbassano di 2–3 cm.", "fonte": "lezione", "stato": "da verificare"},
+   "domanda": {"valore": "Perché il rene destro è più basso del sinistro?", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["Per il rapporto con il fegato che sta sopra", "Perché è più pesante il doppio", "Per la presenza del cuore", "Perché c'è lo stomaco", "Non è vero, sono alla stessa altezza"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Il fegato lo spinge in basso.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.app.urinario.05", "sat": "mcb-app-urinario", "passo": 1, "lezione": "Anatomia dei sistemi/7 - Apparato Urinario.pdf, p. 13", "dati": {
+   "concetto": {"valore": "Il nefrone è l'unità funzionale del rene: ce ne sono circa un milione per rene. È fatto dal corpuscolo renale (glomerulo e capsula di Bowman) e dal tubulo (prossimale, ansa di Henle, distale), che sbocca nel dotto collettore.", "fonte": "lezione", "stato": "da verificare"},
+   "domanda": {"valore": "Come si chiama l'unità funzionale del rene?", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["Il nefrone", "L'alveolo", "Il lobulo epatico", "Il villo", "L'acino"], "fonte": "lezione", "stato": "da verificare"},
+   "scritta": {"valore": ["nefrone", "il nefrone"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Nefrone.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.app.urinario.06", "sat": "mcb-app-urinario", "passo": 1, "lezione": "Anatomia dei sistemi/7 - Apparato Urinario.pdf, p. 19", "dati": {
+   "concetto": {"valore": "L'urina si forma in tre fasi: filtrazione glomerulare (acqua e piccoli soluti passano dal sangue al nefrone, senza proteine e cellule), riassorbimento tubulare (le sostanze utili tornano nel sangue) e secrezione tubulare (altre sostanze passano dal sangue all'urina).", "fonte": "lezione", "stato": "da verificare"},
+   "domanda": {"valore": "In quale fase le sostanze utili tornano dal filtrato al sangue?", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["Riassorbimento tubulare", "Filtrazione glomerulare", "Secrezione tubulare", "Minzione", "Digestione"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Riassorbimento.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.app.urinario.07", "sat": "mcb-app-urinario", "passo": 1, "lezione": "Anatomia dei sistemi/7 - Apparato Urinario.pdf, p. 21", "dati": {
+   "concetto": {"valore": "I due reni filtrano circa 125 ml di plasma al minuto, cioè circa 180 litri al giorno; ma di urina se ne producono solo 1,5 litri circa: quasi tutto il filtrato viene riassorbito.", "fonte": "lezione", "stato": "da verificare"},
+   "domanda": {"valore": "Quanti litri di filtrato producono i reni in un giorno?", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["Circa 180", "Circa 1,5", "Circa 18", "Circa 5", "Circa 1000"], "fonte": "lezione", "stato": "da verificare"},
+   "scritta": {"valore": ["180", "180 litri", "180 l"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "180 litri al giorno (125 ml/min).", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.app.urinario.08", "sat": "mcb-app-urinario", "passo": 1, "lezione": "Anatomia dei sistemi/7 - Apparato Urinario.pdf, p. 46", "dati": {
+   "concetto": {"valore": "Il rene produce ormoni: renina (pressione arteriosa), eritropoietina (fa produrre i globuli rossi) e calcitriolo, la forma attiva della vitamina D, che regola il calcio.", "fonte": "lezione", "stato": "da verificare"},
+   "domanda": {"valore": "Quale ormone prodotto dal rene stimola la produzione dei globuli rossi?", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["L'eritropoietina", "L'insulina", "Il cortisolo", "Il glucagone", "La tiroxina"], "fonte": "lezione", "stato": "da verificare"},
+   "scritta": {"valore": ["eritropoietina", "EPO"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Eritropoietina (EPO).", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.app.urinario.09", "sat": "mcb-app-urinario", "passo": 1, "lezione": "Anatomia dei sistemi/7 - Apparato Urinario.pdf, p. 61", "dati": {
+   "concetto": {"valore": "La vescica è il serbatoio dell'urina: contiene di solito circa 300 ml, ma la parete molto elastica può arrivare a 2–3 litri in condizioni patologiche. Ha tre strati di muscolo liscio involontario.", "fonte": "lezione", "stato": "da verificare"},
+   "domanda": {"valore": "Che tipo di muscolo ha la parete della vescica?", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["Muscolo liscio involontario", "Muscolo striato volontario", "Muscolo cardiaco", "Solo cartilagine", "Nessun muscolo"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Tre strati di muscolatura liscia.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.app.urinario.10", "sat": "mcb-app-urinario", "passo": 1, "lezione": "Anatomia dei sistemi/7 - Apparato Urinario.pdf, p. 64", "dati": {
+   "concetto": {"valore": "L'uretra porta l'urina fuori dal corpo. Nell'uomo è lunga circa 20 cm e attraversa prostata e pene; nella donna è lunga circa 4 cm e si apre nel vestibolo della vagina.", "fonte": "lezione", "stato": "da verificare"},
+   "domanda": {"valore": "Quanto è lunga circa l'uretra femminile?", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["4 cm", "20 cm", "1 metro", "40 cm", "1 mm"], "fonte": "lezione", "stato": "da verificare"},
+   "scritta": {"valore": ["4", "4 cm", "quattro centimetri"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Circa 4 cm: per questo le infezioni urinarie sono più frequenti nelle donne.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.app.urinario.11", "sat": "mcb-app-urinario", "passo": 2, "lezione": "Anatomia dei sistemi/7 - Apparato Urinario.pdf, p. 8", "dati": {
+   "domanda": {"valore": "Durante l'inspirazione profonda, che cosa fanno i reni?", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["Si abbassano di 2–3 cm", "Salgono nel torace", "Restano del tutto fermi", "Ruotano di 180 gradi", "Si gonfiano del doppio"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Mobilità respiratoria dei reni.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.app.urinario.12", "sat": "mcb-app-urinario", "passo": 2, "lezione": "Anatomia dei sistemi/7 - Apparato Urinario.pdf, p. 21", "dati": {
+   "domanda": {"valore": "Un nuotatore beve molto e produce più urina. Quale fattore cambia la quantità di urina?", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["L'acqua introdotta e quella persa con sudore e respiro", "Il colore del costume", "La lunghezza dell'uretra", "Il numero di denti", "Il tipo di musica"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "La quantità di urina dipende da entrate e uscite di acqua.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.app.urinario.13", "sat": "mcb-app-urinario", "passo": 2, "lezione": "Anatomia dei sistemi/7 - Apparato Urinario.pdf, p. 27", "dati": {
+   "domanda": {"valore": "Nelle analisi delle urine di una persona sana, quale sostanza NON dovrebbe comparire?", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["Il glucosio", "L'urea", "La creatinina", "Il sodio", "L'acqua"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Il glucosio è riassorbito del tutto; compare solo se la glicemia è molto alta.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.app.urinario.14", "sat": "mcb-app-urinario", "passo": 2, "lezione": "Anatomia dei sistemi/7 - Apparato Urinario.pdf, p. 58", "dati": {
+   "domanda": {"valore": "Un cliente diabetico con la glicemia molto alta urina spesso e ha sete. Perché?", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["Il glucosio passa nelle urine e richiama acqua", "Ha mangiato troppo sale", "Ha la vescica troppo piccola", "Ha bevuto poco", "Perché il rene non filtra più nulla"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Glicosuria: richiamo di acqua, disidratazione.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.app.urinario.15", "sat": "mcb-app-urinario", "passo": 2, "lezione": "Anatomia dei sistemi/7 - Apparato Urinario.pdf, p. 33", "dati": {
+   "domanda": {"valore": "Perché la creatinina nel sangue sale nell'insufficienza renale?", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["Perché la elimina il rene e, se il rene lavora male, si accumula", "Perché la produce il fegato in eccesso", "Perché si beve troppo", "Perché la producono i polmoni", "Perché scende la pressione"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "La creatinina si usa per valutare la funzione renale (clearance).", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.app.urinario.16", "sat": "mcb-app-urinario", "passo": 2, "lezione": "Anatomia dei sistemi/7 - Apparato Urinario.pdf, p. 47", "dati": {
+   "domanda": {"valore": "Un cliente perde molto sangue e la pressione scende. Che cosa fa il rene?", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["Libera renina per far risalire la pressione", "Smette di produrre urina per sempre", "Libera insulina", "Produce più bile", "Libera glucagone"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Renina stimolata da calo di pressione e volume.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.app.urinario.17", "sat": "mcb-app-urinario", "passo": 2, "lezione": "Anatomia dei sistemi/7 - Apparato Urinario.pdf, p. 54", "dati": {
+   "domanda": {"valore": "Una persona con insufficienza renale grave è spesso anemica. Perché?", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["Il rene produce meno eritropoietina", "Perde sangue dalle urine sempre", "Beve troppa acqua", "Il fegato smette di lavorare", "Mangia troppo ferro"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Insufficienza renale → anemia.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.app.urinario.18", "sat": "mcb-app-urinario", "passo": 2, "lezione": "Anatomia dei sistemi/7 - Apparato Urinario.pdf, p. 60", "dati": {
+   "domanda": {"valore": "Nel massaggio addominale profondo vicino allo psoas, quale struttura urinaria scorre davanti a questo muscolo?", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["L'uretere", "L'uretra", "La vescica", "Il rene sinistro intero", "La prostata"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "La porzione addominale dell'uretere poggia sul muscolo psoas.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.app.urinario.19", "sat": "mcb-app-urinario", "passo": 2, "lezione": "Anatomia dei sistemi/7 - Apparato Urinario.pdf, p. 57", "dati": {
+   "domanda": {"valore": "Un cliente dice di avere un solo rene dopo una donazione. È compatibile con una vita normale?", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["Sì, si può vivere con un solo rene", "No, servono sempre due reni", "Solo con la dialisi", "Solo per un anno", "Solo da sdraiati"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Si vive anche con un solo rene.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.app.urinario.20", "sat": "mcb-app-urinario", "passo": 2, "lezione": "Anatomia dei sistemi/7 - Apparato Urinario.pdf, p. 66", "dati": {
+   "domanda": {"valore": "Un adulto produce 300 ml di urina in un giorno. Come si chiama questa condizione?", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["Oliguria", "Poliuria", "Glicosuria", "Normalità", "Ematuria"], "fonte": "lezione", "stato": "da verificare"},
+   "scritta": {"valore": ["oliguria"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Sotto i 500 ml al giorno si parla di oliguria.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.app.urinario.21", "sat": "mcb-app-urinario", "passo": 3, "lezione": "Anatomia dei sistemi/7 - Apparato Urinario.pdf, p. 5", "dati": {
+   "domanda": {"valore": "I reni sono organi:", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["Retroperitoneali", "Intraperitoneali come lo stomaco", "Del torace", "Della pelvi davanti alla vescica", "Del collo"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Retroperitoneali.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.app.urinario.22", "sat": "mcb-app-urinario", "passo": 3, "lezione": "Anatomia dei sistemi/7 - Apparato Urinario.pdf, p. 13", "dati": {
+   "domanda": {"valore": "Ogni rene contiene circa:", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["1 milione di nefroni", "100 nefroni", "10 miliardi di nefroni", "Un solo nefrone", "1000 nefroni"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Circa un milione.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.app.urinario.23", "sat": "mcb-app-urinario", "passo": 3, "lezione": "Anatomia dei sistemi/7 - Apparato Urinario.pdf, p. 14", "dati": {
+   "domanda": {"valore": "Il filtrato glomerulare si raccoglie nella:", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["Capsula di Bowman", "Vescica direttamente", "Ansa di Henle per primo", "Pelvi renale", "Uretra"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Capsula di Bowman.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.app.urinario.24", "sat": "mcb-app-urinario", "passo": 3, "lezione": "Anatomia dei sistemi/7 - Apparato Urinario.pdf, p. 21", "dati": {
+   "domanda": {"valore": "La velocità di filtrazione glomerulare normale è circa:", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["125 ml/min", "5 ml/min", "1 litro/min", "1250 ml/min", "12 ml/min"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "125 ml/min.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.app.urinario.25", "sat": "mcb-app-urinario", "passo": 3, "lezione": "Anatomia dei sistemi/7 - Apparato Urinario.pdf, p. 11", "dati": {
+   "domanda": {"valore": "Ai reni arriva circa il:", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["20% della gittata cardiaca", "1% della gittata cardiaca", "80% della gittata cardiaca", "50% della gittata cardiaca", "100% della gittata cardiaca"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Circa 1 litro di sangue al minuto.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.app.urinario.26", "sat": "mcb-app-urinario", "passo": 3, "lezione": "Anatomia dei sistemi/7 - Apparato Urinario.pdf, p. 28", "dati": {
+   "domanda": {"valore": "Nel tubulo prossimale si riassorbe:", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["Tutto il glucosio e gran parte di acqua e sodio", "Solo l'urea", "Nulla", "Solo le proteine", "Solo i globuli rossi"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "80–90% di acqua e sodio, tutto il glucosio.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.app.urinario.27", "sat": "mcb-app-urinario", "passo": 3, "lezione": "Anatomia dei sistemi/7 - Apparato Urinario.pdf, p. 36", "dati": {
+   "domanda": {"valore": "La renina è prodotta dalle cellule:", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["Iuxtaglomerulari", "Beta del pancreas", "Della tiroide", "Del fegato", "Della vescica"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Apparato iuxtaglomerulare.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.app.urinario.28", "sat": "mcb-app-urinario", "passo": 3, "lezione": "Anatomia dei sistemi/7 - Apparato Urinario.pdf, p. 52", "dati": {
+   "domanda": {"valore": "Il peptide natriuretico atriale, prodotto dal cuore:", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["Fa eliminare sodio e acqua con le urine", "Trattiene sodio e acqua", "Produce globuli rossi", "Fa salire la glicemia", "Contrae la vescica"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Effetto opposto all'aldosterone.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.app.urinario.29", "sat": "mcb-app-urinario", "passo": 3, "lezione": "Anatomia dei sistemi/7 - Apparato Urinario.pdf, p. 64", "dati": {
+   "domanda": {"valore": "L'uretra maschile è lunga circa:", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["20 cm", "4 cm", "1 metro", "2 mm", "50 cm"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Circa 20 cm.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.app.urinario.30", "sat": "mcb-app-urinario", "passo": 3, "lezione": "Anatomia dei sistemi/7 - Apparato Urinario.pdf, p. 66", "dati": {
+   "domanda": {"valore": "Un adulto produce in media al giorno tra:", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["500 e 2500 ml di urina", "10 e 50 ml", "10 e 20 litri", "5 e 10 litri", "100 e 200 litri"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "500–2500 ml.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.app.genitale.01", "sat": "mcb-app-genitale", "passo": 1, "lezione": "Anatomia dei sistemi/8 - Apparato Genitale.pdf, p. 3", "dati": {
+   "concetto": {"valore": "I testicoli, nella borsa scrotale, hanno due funzioni: producono gli spermatozoi e secernono gli ormoni sessuali maschili (androgeni, soprattutto testosterone).", "fonte": "lezione", "stato": "da verificare"},
+   "domanda": {"valore": "Quali sono le due funzioni dei testicoli?", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["Produrre spermatozoi e ormoni maschili", "Produrre urina e bile", "Produrre insulina e saliva", "Filtrare il sangue e produrre linfa", "Produrre globuli rossi e piastrine"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Funzione germinale ed endocrina.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.app.genitale.02", "sat": "mcb-app-genitale", "passo": 1, "lezione": "Anatomia dei sistemi/8 - Apparato Genitale.pdf, p. 5", "dati": {
+   "concetto": {"valore": "Gli spermatozoi si formano nei tubuli seminiferi del testicolo. Le cellule del Sertoli sostengono e nutrono le cellule germinali; le cellule interstiziali del Leydig producono il testosterone.", "fonte": "lezione", "stato": "da verificare"},
+   "domanda": {"valore": "Quali cellule del testicolo producono il testosterone?", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["Le cellule del Leydig", "Le cellule del Sertoli", "Le cellule beta", "Gli epatociti", "I linfociti"], "fonte": "lezione", "stato": "da verificare"},
+   "scritta": {"valore": ["Leydig", "cellule del Leydig", "cellule di Leydig"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Cellule interstiziali del Leydig.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.app.genitale.03", "sat": "mcb-app-genitale", "passo": 1, "lezione": "Anatomia dei sistemi/8 - Apparato Genitale.pdf, p. 12", "dati": {
+   "concetto": {"valore": "Le vie spermatiche portano gli spermatozoi all'esterno: tubuli retti, rete testis, condottini efferenti, epididimo, dotto deferente, condotto eiaculatore e uretra.", "fonte": "lezione", "stato": "da verificare"},
+   "domanda": {"valore": "Che cosa fa l'epididimo?", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["Raccoglie e conserva gli spermatozoi", "Produce l'urina", "Produce il latte", "Produce l'insulina", "Filtra il sangue"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Serbatoio delle cellule germinali.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.app.genitale.04", "sat": "mcb-app-genitale", "passo": 1, "lezione": "Anatomia dei sistemi/8 - Apparato Genitale.pdf, p. 17", "dati": {
+   "concetto": {"valore": "Il dotto deferente, lungo circa 45 cm, sale dall'epididimo attraverso il canale inguinale fino alla pelvi, dentro il funicolo spermatico.", "fonte": "lezione", "stato": "da verificare"},
+   "domanda": {"valore": "Attraverso quale canale passa il dotto deferente?", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["Il canale inguinale", "Il canale vertebrale", "Il canale carpale", "Il canale uditivo", "Il canale cervicale dell'utero"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Canale inguinale.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.app.genitale.05", "sat": "mcb-app-genitale", "passo": 1, "lezione": "Anatomia dei sistemi/8 - Apparato Genitale.pdf, p. 21", "dati": {
+   "concetto": {"valore": "Le ghiandole annesse (vescichette seminali, prostata e ghiandole bulbouretrali) producono la maggior parte del liquido seminale: le vescichette circa il 60%, la prostata circa un terzo.", "fonte": "lezione", "stato": "da verificare"},
+   "domanda": {"valore": "Quale ghiandola produce circa il 60% del liquido seminale?", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["Le vescichette seminali", "La prostata", "Le ghiandole bulbouretrali", "Il testicolo", "La tiroide"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Vescichette seminali.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.app.genitale.06", "sat": "mcb-app-genitale", "passo": 1, "lezione": "Anatomia dei sistemi/8 - Apparato Genitale.pdf, p. 25", "dati": {
+   "concetto": {"valore": "La prostata è una ghiandola impari sotto la vescica, attorno all'uretra, dietro la sinfisi pubica e davanti al retto. Il suo secreto nutre e attiva gli spermatozoi.", "fonte": "lezione", "stato": "da verificare"},
+   "domanda": {"valore": "Dove si trova la prostata?", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["Sotto la vescica, attorno all'uretra", "Sopra i reni", "Nel collo", "Dietro lo stomaco", "Nel canale inguinale"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Sotto la vescica, attorno all'uretra.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.app.genitale.07", "sat": "mcb-app-genitale", "passo": 1, "lezione": "Anatomia dei sistemi/8 - Apparato Genitale.pdf, p. 29", "dati": {
+   "concetto": {"valore": "Il perineo è il pavimento muscolare della pelvi, a forma di losanga tra sinfisi pubica, coccige e tuberosità ischiatiche. Tra i suoi muscoli: ischiocavernoso, bulbospongioso e trasverso superficiale del perineo.", "fonte": "lezione", "stato": "da verificare"},
+   "domanda": {"valore": "Tra quali ossa è teso il perineo?", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["Sinfisi pubica, coccige e tuberosità ischiatiche", "Clavicole e sterno", "Femore e tibia", "Atlante ed epistrofeo", "Scapola e omero"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Losanga tra pube, coccige e ischi.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.app.genitale.08", "sat": "mcb-app-genitale", "passo": 1, "lezione": "Anatomia dei sistemi/8 - Apparato Genitale.pdf, p. 43", "dati": {
+   "concetto": {"valore": "Le ovaie, gonadi femminili, producono gli ovociti e gli ormoni sessuali femminili (estrogeni e progesterone, con piccole quantità di androgeni). Funzionano dalla pubertà alla menopausa.", "fonte": "lezione", "stato": "da verificare"},
+   "domanda": {"valore": "Quali ormoni producono le ovaie?", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["Estrogeni e progesterone", "Insulina e glucagone", "Tiroxina e calcitonina", "Adrenalina e cortisolo", "Renina ed eritropoietina"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Estrogeni e progesterone.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.app.genitale.09", "sat": "mcb-app-genitale", "passo": 1, "lezione": "Anatomia dei sistemi/8 - Apparato Genitale.pdf, p. 53", "dati": {
+   "concetto": {"valore": "L'ovulo è fecondato nella tuba uterina, nella sua parte chiamata ampolla, e arriva all'utero solo dopo le prime divisioni. Le ciglia e il muscolo della tuba lo spingono verso l'utero.", "fonte": "lezione", "stato": "da verificare"},
+   "domanda": {"valore": "Dove avviene di solito la fecondazione?", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["Nella tuba uterina (ampolla)", "Nell'utero", "Nell'ovaio", "Nella vagina", "Nella vescica"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Ampolla della tuba.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.app.genitale.10", "sat": "mcb-app-genitale", "passo": 1, "lezione": "Anatomia dei sistemi/8 - Apparato Genitale.pdf, p. 55", "dati": {
+   "concetto": {"valore": "L'utero è un organo cavo a forma di pera capovolta, lungo circa 7,5 cm e pesante circa 90 g, di solito piegato in avanti (antiverso e antiflesso), tra la vescica davanti e il retto dietro. La parete ha tre strati: endometrio, miometrio e perimetrio.", "fonte": "lezione", "stato": "da verificare"},
+   "domanda": {"valore": "Quale strato dell'utero è fatto di muscolo liscio?", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["Il miometrio", "L'endometrio", "Il perimetrio", "L'epidermide", "Il periostio"], "fonte": "lezione", "stato": "da verificare"},
+   "scritta": {"valore": ["miometrio", "il miometrio"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Miometrio.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.app.genitale.11", "sat": "mcb-app-genitale", "passo": 2, "lezione": "Anatomia dei sistemi/8 - Apparato Genitale.pdf, p. 34", "dati": {
+   "domanda": {"valore": "Quale ormone dell'ipofisi stimola le cellule del Leydig a produrre testosterone?", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["LH", "Insulina", "TSH", "Prolattina", "ADH"], "fonte": "lezione", "stato": "da verificare"},
+   "scritta": {"valore": ["LH", "ormone luteinizzante"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Il testosterone è prodotto sotto lo stimolo dell'LH.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.app.genitale.12", "sat": "mcb-app-genitale", "passo": 2, "lezione": "Anatomia dei sistemi/8 - Apparato Genitale.pdf, p. 34", "dati": {
+   "domanda": {"valore": "Un cliente chiede se la sauna molto calda e frequente può ridurre la produzione di spermatozoi. Che cosa dice la lezione?", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["Sì, una temperatura elevata può bloccare la spermatogenesi", "No, il calore la aumenta", "La temperatura non conta", "Solo il freddo la blocca", "Solo l'acqua salata la blocca"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Tra i fattori che bloccano la spermatogenesi c'è la temperatura elevata.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.app.genitale.13", "sat": "mcb-app-genitale", "passo": 2, "lezione": "Anatomia dei sistemi/8 - Apparato Genitale.pdf, p. 4", "dati": {
+   "domanda": {"valore": "Il testicolo sale e scende in base alla temperatura. Quale muscolo lo solleva?", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["Il cremastere", "Il bicipite", "Il trapezio", "Il diaframma", "Lo psoas"], "fonte": "lezione", "stato": "da verificare"},
+   "scritta": {"valore": ["cremastere", "il cremastere"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Muscolo cremastere.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.app.genitale.14", "sat": "mcb-app-genitale", "passo": 2, "lezione": "Anatomia dei sistemi/8 - Apparato Genitale.pdf, p. 39", "dati": {
+   "domanda": {"valore": "Quanti cromosomi contiene uno spermatozoo?", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["23", "46", "92", "12", "44"], "fonte": "lezione", "stato": "da verificare"},
+   "scritta": {"valore": ["23", "ventitré", "ventitre"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Gamete aploide: 23 cromosomi.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.app.genitale.15", "sat": "mcb-app-genitale", "passo": 2, "lezione": "Anatomia dei sistemi/8 - Apparato Genitale.pdf, p. 59", "dati": {
+   "domanda": {"valore": "In fondo al peritoneo, tra utero e retto, c'è uno spazio dove si raccolgono i liquidi. Come si chiama?", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["Cavo di Douglas (retto-uterino)", "Canale inguinale", "Seno renale", "Fossa iliaca", "Mediastino"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Cavo retto-uterino o di Douglas.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.app.genitale.16", "sat": "mcb-app-genitale", "passo": 2, "lezione": "Anatomia dei sistemi/8 - Apparato Genitale.pdf, p. 62", "dati": {
+   "domanda": {"valore": "Prima di un massaggio addominale a una cliente perché è meglio farle svuotare la vescica?", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["Una vescica piena cambia la posizione dell'utero e rende fastidioso il massaggio", "Perché il massaggio blocca i reni", "Perché la vescica produce ormoni", "Non serve mai", "Per farla dimagrire"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "La posizione dell'utero cambia con la vescica piena o vuota.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.app.genitale.17", "sat": "mcb-app-genitale", "passo": 2, "lezione": "Anatomia dei sistemi/8 - Apparato Genitale.pdf, p. 57", "dati": {
+   "domanda": {"valore": "Quale strato dell'utero cambia ogni mese con gli ormoni ovarici e si sfalda con la mestruazione?", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["L'endometrio", "Il miometrio", "Il perimetrio", "La cervice ossea", "Il legamento rotondo"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Strato funzionale dell'endometrio.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.app.genitale.18", "sat": "mcb-app-genitale", "passo": 2, "lezione": "Anatomia dei sistemi/8 - Apparato Genitale.pdf, p. 46", "dati": {
+   "domanda": {"valore": "Se l'ovulo è fecondato, che cosa fa il corpo luteo?", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["Continua a produrre progesterone nei primi mesi", "Scompare subito", "Produce insulina", "Produce testosterone in grande quantità", "Diventa un follicolo nuovo"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Il corpo luteo sostiene la gravidanza fino al terzo mese circa.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.app.genitale.19", "sat": "mcb-app-genitale", "passo": 2, "lezione": "Anatomia dei sistemi/8 - Apparato Genitale.pdf, p. 67", "dati": {
+   "domanda": {"valore": "Tra quali coste si trova di solito la mammella?", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["Tra la terza e la settima costa", "Tra la prima e la seconda", "Tra la nona e la dodicesima", "Sopra la clavicola", "Sotto l'ombelico"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Dalla III alla VII costa.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.app.genitale.20", "sat": "mcb-app-genitale", "passo": 2, "lezione": "Anatomia dei sistemi/8 - Apparato Genitale.pdf, p. 29", "dati": {
+   "domanda": {"valore": "Una neomamma chiede a che cosa servono gli esercizi per il pavimento pelvico. Quale struttura rinforzano?", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["Il perineo, i muscoli del pavimento della pelvi", "Il diaframma toracico", "I muscoli del collo", "Il cuore", "Il muscolo cremastere"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Il perineo è il pavimento della cavità pelvica.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.app.genitale.21", "sat": "mcb-app-genitale", "passo": 3, "lezione": "Anatomia dei sistemi/8 - Apparato Genitale.pdf, p. 8", "dati": {
+   "domanda": {"valore": "Il testicolo è avvolto da:", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["Tunica vaginale e tunica albuginea", "Pleura e pericardio", "Dura madre e aracnoide", "Periostio e cartilagine", "Peritoneo viscerale soltanto"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Due tuniche.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.app.genitale.22", "sat": "mcb-app-genitale", "passo": 3, "lezione": "Anatomia dei sistemi/8 - Apparato Genitale.pdf, p. 15", "dati": {
+   "domanda": {"valore": "L'epididimo disteso misura circa:", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["6 metri", "6 centimetri", "60 metri", "6 millimetri", "1 metro"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Un condotto tortuoso di circa 6 metri.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.app.genitale.23", "sat": "mcb-app-genitale", "passo": 3, "lezione": "Anatomia dei sistemi/8 - Apparato Genitale.pdf, p. 18", "dati": {
+   "domanda": {"valore": "Il condotto eiaculatore si forma dall'unione di:", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["Dotto deferente e vescichetta seminale", "Uretere e vescica", "Tuba e utero", "Epididimo e uretra", "Prostata e retto"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Deferente + vescichetta seminale.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.app.genitale.24", "sat": "mcb-app-genitale", "passo": 3, "lezione": "Anatomia dei sistemi/8 - Apparato Genitale.pdf, p. 31", "dati": {
+   "domanda": {"valore": "Le tre parti dell'uretra maschile sono:", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["Prostatica, membranosa e cavernosa", "Cervicale, toracica e addominale", "Duodeno, digiuno e ileo", "Ascendente, trasversa e discendente", "Corpo, istmo e collo"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Prostatica, membranosa, cavernosa.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.app.genitale.25", "sat": "mcb-app-genitale", "passo": 3, "lezione": "Anatomia dei sistemi/8 - Apparato Genitale.pdf, p. 34", "dati": {
+   "domanda": {"valore": "Nello sperma ci sono circa:", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["100 milioni di spermatozoi per ml", "100 spermatozoi per ml", "1 miliardo per goccia", "10 per ml", "Nessuno spermatozoo"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Circa 100 milioni/ml.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.app.genitale.26", "sat": "mcb-app-genitale", "passo": 3, "lezione": "Anatomia dei sistemi/8 - Apparato Genitale.pdf, p. 37", "dati": {
+   "domanda": {"valore": "La parte intermedia dello spermatozoo è ricca di:", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["Mitocondri", "Ossa", "Globuli rossi", "Ciglia", "Grasso"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Mitocondri per l'energia della coda.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.app.genitale.27", "sat": "mcb-app-genitale", "passo": 3, "lezione": "Anatomia dei sistemi/8 - Apparato Genitale.pdf, p. 41", "dati": {
+   "domanda": {"valore": "Sono organi genitali interni femminili:", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["Ovaie, tube, utero e vagina", "Grandi e piccole labbra", "Clitoride e bulbi del vestibolo", "Mammelle", "Monte di Venere"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Organi interni.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.app.genitale.28", "sat": "mcb-app-genitale", "passo": 3, "lezione": "Anatomia dei sistemi/8 - Apparato Genitale.pdf, p. 44", "dati": {
+   "domanda": {"valore": "La maturazione del follicolo ovarico è stimolata soprattutto da:", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["FSH dell'ipofisi", "Insulina", "Calcitonina", "Adrenalina", "Glucagone"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "FSH; l'LH determina l'ovulazione e il corpo luteo.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.app.genitale.29", "sat": "mcb-app-genitale", "passo": 3, "lezione": "Anatomia dei sistemi/8 - Apparato Genitale.pdf, p. 48", "dati": {
+   "domanda": {"valore": "Il rapporto tra ovaio e tuba è:", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["Di vicinanza, non sono collegati direttamente", "Una continuità diretta del canale", "Un'unione tramite la vescica", "Un'unione tramite l'uretere", "Nessuno"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Solo un rapporto di prossimità.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.app.genitale.30", "sat": "mcb-app-genitale", "passo": 3, "lezione": "Anatomia dei sistemi/8 - Apparato Genitale.pdf, p. 56", "dati": {
+   "domanda": {"valore": "La parte del collo dell'utero che sporge nella vagina si chiama:", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["Muso di tinca", "Fondo", "Ampolla", "Infundibolo", "Fornice"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Porzione intravaginale del collo.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.app.endocrino.01", "sat": "mcb-app-endocrino", "passo": 1, "lezione": "Anatomia dei sistemi/9 - Apparato Endocrino.pdf, p. 2", "dati": {
+   "concetto": {"valore": "Le ghiandole endocrine non hanno dotti: versano gli ormoni nel sangue e ogni ormone agisce su organi bersaglio precisi. È un sistema di comunicazione chimica più lento di quello nervoso.", "fonte": "lezione", "stato": "da verificare"},
+   "domanda": {"valore": "Che cosa distingue una ghiandola endocrina?", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["Non ha dotti e versa gli ormoni nel sangue", "Versa il secreto nell'intestino con un dotto", "Produce sudore sulla pelle", "Produce saliva", "Non produce nulla"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Ghiandole senza dotti escretori.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.app.endocrino.02", "sat": "mcb-app-endocrino", "passo": 1, "lezione": "Anatomia dei sistemi/9 - Apparato Endocrino.pdf, p. 3", "dati": {
+   "concetto": {"valore": "Le principali ghiandole endocrine sono ipotalamo, ipofisi, epifisi, tiroide, paratiroidi, surreni, pancreas endocrino, testicoli e ovaie.", "fonte": "lezione", "stato": "da verificare"},
+   "domanda": {"valore": "Quale di queste è una ghiandola endocrina?", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["La tiroide", "La parotide", "Il fegato come ghiandola della bile", "La ghiandola sudoripara", "La ghiandola lacrimale"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Tiroide.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.app.endocrino.03", "sat": "mcb-app-endocrino", "passo": 1, "lezione": "Anatomia dei sistemi/9 - Apparato Endocrino.pdf, p. 11", "dati": {
+   "concetto": {"valore": "L'ipofisi è il punto d'incontro tra sistema nervoso ed endocrino. Si trova al centro della base del cranio, nella sella turcica dell'osso sfenoide, ed è divisa in adenoipofisi (anteriore) e neuroipofisi (posteriore).", "fonte": "lezione", "stato": "da verificare"},
+   "domanda": {"valore": "In quale osso si trova la sella turcica che accoglie l'ipofisi?", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["Sfenoide", "Occipitale", "Frontale", "Temporale", "Mandibola"], "fonte": "lezione", "stato": "da verificare"},
+   "scritta": {"valore": ["sfenoide", "lo sfenoide"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Sella turcica dello sfenoide.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.app.endocrino.04", "sat": "mcb-app-endocrino", "passo": 1, "lezione": "Anatomia dei sistemi/9 - Apparato Endocrino.pdf, p. 20", "dati": {
+   "concetto": {"valore": "L'ipotalamo comanda l'adenoipofisi con fattori di rilascio (RH) e di inibizione (IH), portati da un sistema di capillari detto sistema portale ipotalamo-ipofisario.", "fonte": "lezione", "stato": "da verificare"},
+   "domanda": {"valore": "Come comunica l'ipotalamo con l'adenoipofisi?", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["Con fattori di rilascio e inibizione nel sistema portale ipotalamo-ipofisario", "Con la saliva", "Con i nervi del braccio", "Con la linfa del dotto toracico", "Non comunicano"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Sistema portale ipotalamo-ipofisario.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.app.endocrino.05", "sat": "mcb-app-endocrino", "passo": 1, "lezione": "Anatomia dei sistemi/9 - Apparato Endocrino.pdf, p. 16", "dati": {
+   "concetto": {"valore": "La neuroipofisi libera due ormoni prodotti dall'ipotalamo: la vasopressina (ADH), che fa riassorbire acqua al rene e alza la pressione, e l'ossitocina, che fa contrarre l'utero nel parto e fa uscire il latte.", "fonte": "lezione", "stato": "da verificare"},
+   "domanda": {"valore": "Quali due ormoni libera la neuroipofisi?", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["Vasopressina (ADH) e ossitocina", "Insulina e glucagone", "T3 e T4", "Cortisolo e aldosterone", "FSH e LH"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "ADH e ossitocina.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.app.endocrino.06", "sat": "mcb-app-endocrino", "passo": 1, "lezione": "Anatomia dei sistemi/9 - Apparato Endocrino.pdf, p. 25", "dati": {
+   "concetto": {"valore": "L'epifisi (ghiandola pineale) sporge dietro il terzo ventricolo del cervello e produce melatonina seguendo un ritmo circadiano, cioè legato al giorno e alla notte.", "fonte": "lezione", "stato": "da verificare"},
+   "domanda": {"valore": "Quale ormone produce l'epifisi?", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["La melatonina", "L'insulina", "Il cortisolo", "La calcitonina", "Il testosterone"], "fonte": "lezione", "stato": "da verificare"},
+   "scritta": {"valore": ["melatonina", "la melatonina"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Melatonina.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.app.endocrino.07", "sat": "mcb-app-endocrino", "passo": 1, "lezione": "Anatomia dei sistemi/9 - Apparato Endocrino.pdf, p. 26", "dati": {
+   "concetto": {"valore": "La tiroide sta davanti al collo, davanti e ai lati della laringe e dei primi anelli della trachea; ha due lobi uniti da un istmo. I follicoli producono T3 e T4 (metabolismo e temperatura); le cellule C producono la calcitonina, che abbassa il calcio nel sangue.", "fonte": "lezione", "stato": "da verificare"},
+   "domanda": {"valore": "Che cosa unisce i due lobi della tiroide?", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["L'istmo", "Il piloro", "L'ilo", "Il funicolo", "Il fornice"], "fonte": "lezione", "stato": "da verificare"},
+   "scritta": {"valore": ["istmo", "l'istmo"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Istmo.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.app.endocrino.08", "sat": "mcb-app-endocrino", "passo": 1, "lezione": "Anatomia dei sistemi/9 - Apparato Endocrino.pdf, p. 33", "dati": {
+   "concetto": {"valore": "Le paratiroidi sono quattro piccole ghiandole appoggiate dietro la tiroide. Producono il paratormone (PTH), che alza il calcio nel sangue, liberandolo dalle ossa. Non dipendono dall'ipofisi ma dal calcio del sangue.", "fonte": "lezione", "stato": "da verificare"},
+   "domanda": {"valore": "Che cosa fa il paratormone?", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["Alza il calcio nel sangue", "Abbassa il calcio nel sangue", "Abbassa la glicemia", "Produce melatonina", "Fa crescere i capelli"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Ormone ipercalcemizzante.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.app.endocrino.09", "sat": "mcb-app-endocrino", "passo": 1, "lezione": "Anatomia dei sistemi/9 - Apparato Endocrino.pdf, p. 38", "dati": {
+   "concetto": {"valore": "I surreni stanno sopra il polo superiore di ciascun rene. La corticale produce ormoni steroidei: zona glomerulare (aldosterone, sali e acqua), fascicolata (cortisolo) e reticolare (androgeni); la midollare produce adrenalina e noradrenalina.", "fonte": "lezione", "stato": "da verificare"},
+   "domanda": {"valore": "Quale zona del surrene produce il cortisolo?", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["La zona fascicolata", "La zona glomerulare", "La zona reticolare", "La midollare", "Il polo inferiore del rene"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Glomerulare: aldosterone; fascicolata: cortisolo; reticolare: androgeni.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.app.endocrino.10", "sat": "mcb-app-endocrino", "passo": 1, "lezione": "Anatomia dei sistemi/9 - Apparato Endocrino.pdf, p. 47", "dati": {
+   "concetto": {"valore": "La midollare del surrene, comandata dal sistema simpatico, libera adrenalina e noradrenalina nelle emergenze: battito più veloce, bronchi dilatati, zuccheri e grassi mobilitati, sangue spostato verso muscoli e organi vitali (risposta «attacca o fuggi»).", "fonte": "lezione", "stato": "da verificare"},
+   "domanda": {"valore": "Quale effetto ha l'adrenalina sui bronchi?", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["Li dilata", "Li chiude", "Li riempie di muco", "Nessun effetto", "Li fa sanguinare"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Rilasciamento della muscolatura bronchiale.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.app.endocrino.11", "sat": "mcb-app-endocrino", "passo": 2, "lezione": "Anatomia dei sistemi/9 - Apparato Endocrino.pdf, p. 23", "dati": {
+   "domanda": {"valore": "Un ragazzo produce troppo ormone della crescita prima della fine dello sviluppo. Che cosa può succedere?", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["Gigantismo", "Nanismo", "Diabete insipido", "Ipotiroidismo", "Calcoli renali"], "fonte": "lezione", "stato": "da verificare"},
+   "scritta": {"valore": ["gigantismo"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "L'eccesso di GH durante lo sviluppo porta al gigantismo.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.app.endocrino.12", "sat": "mcb-app-endocrino", "passo": 2, "lezione": "Anatomia dei sistemi/9 - Apparato Endocrino.pdf, p. 24", "dati": {
+   "domanda": {"valore": "Perché si può dire che anche il fegato ha una funzione endocrina?", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["Produce le somatomedine sotto lo stimolo del GH", "Produce la bile", "Produce la saliva", "Produce l'urina", "Produce l'ossitocina"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Le somatomedine mediano l'allungamento delle ossa.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.app.endocrino.13", "sat": "mcb-app-endocrino", "passo": 2, "lezione": "Anatomia dei sistemi/9 - Apparato Endocrino.pdf, p. 31", "dati": {
+   "domanda": {"valore": "Una cliente ha sempre freddo, è stanca, rallentata e ha un gozzo. A quale disturbo fa pensare?", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["Ipotiroidismo", "Ipertiroidismo", "Gigantismo", "Iperparatiroidismo", "Anafilassi"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Intolleranza al freddo, debolezza, letargia.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.app.endocrino.14", "sat": "mcb-app-endocrino", "passo": 2, "lezione": "Anatomia dei sistemi/9 - Apparato Endocrino.pdf, p. 31", "dati": {
+   "domanda": {"valore": "Un cliente è dimagrito, ha il battito veloce, non sopporta il caldo e dorme male. A che cosa fa pensare?", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["Ipertiroidismo", "Ipotiroidismo", "Diabete", "Anemia", "Asma"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Tachicardia, intolleranza al caldo, perdita di peso.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.app.endocrino.15", "sat": "mcb-app-endocrino", "passo": 2, "lezione": "Anatomia dei sistemi/9 - Apparato Endocrino.pdf, p. 32", "dati": {
+   "domanda": {"valore": "Durante un intervento alla tiroide, quali ghiandole bisogna stare attenti a non togliere?", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["Le paratiroidi, dietro la tiroide", "I surreni", "L'epifisi", "Le ovaie", "Le parotidi"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Le paratiroidi stanno sulla faccia posteriore dei lobi.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.app.endocrino.16", "sat": "mcb-app-endocrino", "passo": 2, "lezione": "Anatomia dei sistemi/9 - Apparato Endocrino.pdf, p. 34", "dati": {
+   "domanda": {"valore": "Il calcio nel sangue scende. Che cosa fanno le paratiroidi?", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["Aumentano il paratormone", "Smettono di lavorare", "Producono insulina", "Producono melatonina", "Producono calcitonina"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Calcemia bassa → PTH alto.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.app.endocrino.17", "sat": "mcb-app-endocrino", "passo": 2, "lezione": "Anatomia dei sistemi/9 - Apparato Endocrino.pdf, p. 14", "dati": {
+   "domanda": {"valore": "A che ora del giorno l'ACTH, e quindi il cortisolo, raggiunge di solito il picco?", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["Nelle prime ore del mattino", "A mezzanotte", "Dopo pranzo", "Sempre allo stesso livello", "Al tramonto"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Picchi nelle prime ore del mattino.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.app.endocrino.18", "sat": "mcb-app-endocrino", "passo": 2, "lezione": "Anatomia dei sistemi/9 - Apparato Endocrino.pdf, p. 45", "dati": {
+   "domanda": {"valore": "Un cliente sotto stress da mesi si ammala spesso. Quale ormone, se resta alto a lungo, può deprimere le difese immunitarie?", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["Il cortisolo", "L'insulina", "La melatonina", "La calcitonina", "L'ossitocina"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "A lungo andare il cortisolo deprime il sistema immunitario.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.app.endocrino.19", "sat": "mcb-app-endocrino", "passo": 2, "lezione": "Anatomia dei sistemi/9 - Apparato Endocrino.pdf, p. 46", "dati": {
+   "domanda": {"valore": "Da che cosa dipende soprattutto la secrezione di aldosterone?", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["Dal sistema renina, più che dall'ipotalamo", "Dalla luce del giorno", "Dalla glicemia", "Dal calcio nel sangue", "Dal TSH"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Aldosterone controllato dal sistema renina-angiotensina.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.app.endocrino.20", "sat": "mcb-app-endocrino", "passo": 2, "lezione": "Anatomia dei sistemi/9 - Apparato Endocrino.pdf, p. 48", "dati": {
+   "domanda": {"valore": "Un bagnante sta per buttarsi a salvare una persona: il cuore batte forte e il respiro accelera. Quale ormone agisce soprattutto?", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["L'adrenalina", "La melatonina", "L'insulina", "Il paratormone", "La prolattina"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Stress acuto: adrenalina dalla midollare del surrene.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.app.endocrino.21", "sat": "mcb-app-endocrino", "passo": 3, "lezione": "Anatomia dei sistemi/9 - Apparato Endocrino.pdf, p. 11", "dati": {
+   "domanda": {"valore": "L'ipofisi si divide in:", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["Adenoipofisi e neuroipofisi", "Corticale e midollare", "Testa, corpo e coda", "Lobo destro e sinistro con istmo", "Glomerulare e fascicolata"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Adenoipofisi e neuroipofisi.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.app.endocrino.22", "sat": "mcb-app-endocrino", "passo": 3, "lezione": "Anatomia dei sistemi/9 - Apparato Endocrino.pdf, p. 14", "dati": {
+   "domanda": {"valore": "La prolattina (PRL):", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["Stimola la ghiandola mammaria e la produzione di latte", "Abbassa la glicemia", "Alza il calcio", "Produce melatonina", "Contrae la vescica"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Proliferazione mammaria e secrezione lattea.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.app.endocrino.23", "sat": "mcb-app-endocrino", "passo": 3, "lezione": "Anatomia dei sistemi/9 - Apparato Endocrino.pdf, p. 15", "dati": {
+   "domanda": {"valore": "Nell'uomo l'FSH agisce su:", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["I tubuli seminiferi per la spermatogenesi", "La tiroide", "Il pancreas", "Il fegato", "I surreni"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Spermatogenesi.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.app.endocrino.24", "sat": "mcb-app-endocrino", "passo": 3, "lezione": "Anatomia dei sistemi/9 - Apparato Endocrino.pdf, p. 16", "dati": {
+   "domanda": {"valore": "La vasopressina (ADH):", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["Fa riassorbire acqua al rene", "Fa perdere acqua", "Abbassa la pressione", "Produce latte", "Abbassa il calcio"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Ormone antidiuretico.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.app.endocrino.25", "sat": "mcb-app-endocrino", "passo": 3, "lezione": "Anatomia dei sistemi/9 - Apparato Endocrino.pdf, p. 27", "dati": {
+   "domanda": {"valore": "Gli ormoni tiroidei regolano:", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["Il metabolismo basale e la temperatura", "Solo il colore degli occhi", "La coagulazione del sangue", "La produzione di urina", "La digestione dei grassi"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Metabolismo basale e temperatura.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.app.endocrino.26", "sat": "mcb-app-endocrino", "passo": 3, "lezione": "Anatomia dei sistemi/9 - Apparato Endocrino.pdf, p. 28", "dati": {
+   "domanda": {"valore": "Per produrre T3 e T4 la tiroide ha bisogno di:", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["Iodio", "Ferro", "Calcio", "Zolfo", "Fluoro"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Iodio incorporato nella tireoglobulina.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.app.endocrino.27", "sat": "mcb-app-endocrino", "passo": 3, "lezione": "Anatomia dei sistemi/9 - Apparato Endocrino.pdf, p. 33", "dati": {
+   "domanda": {"valore": "Le paratiroidi sono:", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["Quattro, dietro la tiroide", "Due, sopra i reni", "Una, nel cranio", "Sei, nel torace", "Due, nel pancreas"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Quattro ghiandole.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.app.endocrino.28", "sat": "mcb-app-endocrino", "passo": 3, "lezione": "Anatomia dei sistemi/9 - Apparato Endocrino.pdf, p. 38", "dati": {
+   "domanda": {"valore": "I surreni si trovano:", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["Sopra il polo superiore dei reni", "Nel collo", "Nella sella turcica", "Nel pancreas", "Nella pelvi"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Polo superiore del rene.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.app.endocrino.29", "sat": "mcb-app-endocrino", "passo": 3, "lezione": "Anatomia dei sistemi/9 - Apparato Endocrino.pdf, p. 43", "dati": {
+   "domanda": {"valore": "Gli ormoni della corticale del surrene derivano da:", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["Colesterolo", "Glucosio", "Iodio", "Calcio", "Ferro"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Ormoni steroidei.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.app.endocrino.30", "sat": "mcb-app-endocrino", "passo": 3, "lezione": "Anatomia dei sistemi/9 - Apparato Endocrino.pdf, p. 55", "dati": {
+   "domanda": {"valore": "Il testosterone nel sangue raggiunge il picco:", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["Nelle prime ore del mattino", "A mezzanotte", "Nel pomeriggio", "Mai", "Dopo cena"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Ritmo circadiano.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.app.immunitario.01", "sat": "mcb-app-immunitario", "passo": 1, "lezione": "Anatomia dei sistemi/10 - Sistema Immunitario.pdf, p. 4", "dati": {
+   "concetto": {"valore": "Il sistema immunitario difende dalle infezioni, sorveglia la comparsa di tumori, rigetta i trapianti non compatibili e aiuta a mantenere l'equilibrio dell'organismo.", "fonte": "lezione", "stato": "da verificare"},
+   "domanda": {"valore": "Quale di queste è una funzione del sistema immunitario?", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["Difendere dalle infezioni", "Digerire i grassi", "Produrre l'urina", "Muovere le articolazioni", "Produrre la bile"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Difesa, sorveglianza dei tumori, rigetto dei trapianti.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.app.immunitario.02", "sat": "mcb-app-immunitario", "passo": 1, "lezione": "Anatomia dei sistemi/10 - Sistema Immunitario.pdf, p. 6", "dati": {
+   "concetto": {"valore": "Gli organi linfoidi primari, dove nascono e maturano i linfociti, sono il midollo osseo e il timo. Quelli secondari, dove i linfociti incontrano gli antigeni, sono milza, linfonodi e tessuto linfoide delle mucose.", "fonte": "lezione", "stato": "da verificare"},
+   "domanda": {"valore": "Quali sono gli organi linfoidi primari?", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["Midollo osseo e timo", "Milza e linfonodi", "Tonsille e appendice", "Fegato e pancreas", "Cuore e polmoni"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Midollo osseo e timo.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.app.immunitario.03", "sat": "mcb-app-immunitario", "passo": 1, "lezione": "Anatomia dei sistemi/10 - Sistema Immunitario.pdf, p. 8", "dati": {
+   "concetto": {"valore": "Nell'adulto il midollo osseo produce tutte le cellule del sangue a partire da una cellula staminale comune: è l'emopoiesi. Nel feto avviene prima nel sacco vitellino, poi in fegato e milza.", "fonte": "lezione", "stato": "da verificare"},
+   "domanda": {"valore": "Come si chiama la produzione delle cellule del sangue nel midollo osseo?", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["Emopoiesi", "Digestione", "Spermatogenesi", "Filtrazione", "Fagocitosi"], "fonte": "lezione", "stato": "da verificare"},
+   "scritta": {"valore": ["emopoiesi", "ematopoiesi"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Emopoiesi.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.app.immunitario.04", "sat": "mcb-app-immunitario", "passo": 1, "lezione": "Anatomia dei sistemi/10 - Sistema Immunitario.pdf, p. 11", "dati": {
+   "concetto": {"valore": "Il timo è un organo con due lobi nel mediastino anteriore, dietro lo sterno. I linfociti T nascono nel midollo osseo e completano la maturazione nel timo.", "fonte": "lezione", "stato": "da verificare"},
+   "domanda": {"valore": "Dove completano la maturazione i linfociti T?", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["Nel timo", "Nella milza", "Nel fegato", "Nei reni", "Nello stomaco"], "fonte": "lezione", "stato": "da verificare"},
+   "scritta": {"valore": ["timo", "nel timo"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Timo (la T viene da lì).", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.app.immunitario.05", "sat": "mcb-app-immunitario", "passo": 1, "lezione": "Anatomia dei sistemi/10 - Sistema Immunitario.pdf, p. 13", "dati": {
+   "concetto": {"valore": "I linfonodi sono piccoli noduli di tessuto linfoide posti lungo i vasi linfatici, sotto la pelle e le mucose: filtrano la linfa e lì i linfociti incontrano gli antigeni.", "fonte": "lezione", "stato": "da verificare"},
+   "domanda": {"valore": "Che cosa filtrano i linfonodi?", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["La linfa", "L'urina", "La bile", "L'aria", "La saliva"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "La linfa.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.app.immunitario.06", "sat": "mcb-app-immunitario", "passo": 1, "lezione": "Anatomia dei sistemi/10 - Sistema Immunitario.pdf, p. 16", "dati": {
+   "concetto": {"valore": "La milza ha una funzione immunitaria verso gli antigeni presenti nel sangue e una funzione di filtro: i suoi macrofagi eliminano sostanze estranee e globuli rossi invecchiati. Ha polpa bianca (linfociti) e polpa rossa.", "fonte": "lezione", "stato": "da verificare"},
+   "domanda": {"valore": "Quale cellula del sangue elimina la milza quando è vecchia?", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["Il globulo rosso", "Lo spermatozoo", "Il neurone", "L'epatocita", "L'osteocita"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Filtro dei globuli rossi senescenti.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.app.immunitario.07", "sat": "mcb-app-immunitario", "passo": 1, "lezione": "Anatomia dei sistemi/10 - Sistema Immunitario.pdf, p. 20", "dati": {
+   "concetto": {"valore": "L'immunità innata è la prima difesa: non è specifica e risponde subito, nello stesso modo, a molti stimoli. L'immunità acquisita (adattativa) è specifica per ogni antigene e ha memoria.", "fonte": "lezione", "stato": "da verificare"},
+   "domanda": {"valore": "Che cosa distingue l'immunità acquisita da quella innata?", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["È specifica e ha memoria", "È più rapida e non specifica", "Non usa cellule", "Esiste solo nei bambini", "Agisce solo sulla pelle"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Specificità e memoria.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.app.immunitario.08", "sat": "mcb-app-immunitario", "passo": 1, "lezione": "Anatomia dei sistemi/10 - Sistema Immunitario.pdf, p. 21", "dati": {
+   "concetto": {"valore": "Le prime barriere dell'immunità innata sono la pelle, le mucose e il muco. Ci sono anche sostanze che uccidono i microbi, come il lisozima nelle lacrime e nella saliva, e il sistema del complemento.", "fonte": "lezione", "stato": "da verificare"},
+   "domanda": {"valore": "Dove si trova il lisozima?", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["Nelle lacrime e nella saliva", "Nelle ossa", "Nei capelli", "Nella bile", "Nell'urina della vescica soltanto"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Secrezioni mucose, lacrime e saliva.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.app.immunitario.09", "sat": "mcb-app-immunitario", "passo": 1, "lezione": "Anatomia dei sistemi/10 - Sistema Immunitario.pdf, p. 40", "dati": {
+   "concetto": {"valore": "I linfociti B, quando incontrano il loro antigene, diventano plasmacellule che producono anticorpi (immunoglobuline). Un anticorpo è fatto di due catene pesanti e due catene leggere.", "fonte": "lezione", "stato": "da verificare"},
+   "domanda": {"valore": "Quali cellule producono gli anticorpi?", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["Le plasmacellule, cioè linfociti B attivati", "I globuli rossi", "Le piastrine", "I linfociti T citotossici", "Gli osteoblasti"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Plasmacellule.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.app.immunitario.10", "sat": "mcb-app-immunitario", "passo": 1, "lezione": "Anatomia dei sistemi/10 - Sistema Immunitario.pdf, p. 35", "dati": {
+   "concetto": {"valore": "I linfociti attivati diventano cellule effettrici e cellule della memoria. Le cellule della memoria vivono a lungo: per questo di solito non ci si ammala due volte della stessa malattia, ed è il principio dei vaccini.", "fonte": "lezione", "stato": "da verificare"},
+   "domanda": {"valore": "Perché di solito non ci si ammala due volte della stessa malattia infettiva?", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["Per le cellule della memoria", "Perché i batteri muoiono tutti", "Perché la pelle diventa più spessa", "Perché si beve di più", "Per caso"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Memoria immunologica.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.app.immunitario.11", "sat": "mcb-app-immunitario", "passo": 2, "lezione": "Anatomia dei sistemi/10 - Sistema Immunitario.pdf, p. 25", "dati": {
+   "domanda": {"valore": "Come si chiamano i macrofagi che si trovano nel fegato?", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["Cellule di Kupffer", "Cellule di Leydig", "Cellule di Sertoli", "Cellule beta", "Pinealociti"], "fonte": "lezione", "stato": "da verificare"},
+   "scritta": {"valore": ["Kupffer", "cellule di Kupffer"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Kupffer nel fegato, alveolari nei polmoni, mesangiali nel rene.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.app.immunitario.12", "sat": "mcb-app-immunitario", "passo": 2, "lezione": "Anatomia dei sistemi/10 - Sistema Immunitario.pdf, p. 26", "dati": {
+   "domanda": {"valore": "In un'infezione batterica acuta, quali globuli bianchi arrivano per primi e più numerosi nel sito dell'infezione?", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["I granulociti neutrofili", "I globuli rossi", "Le piastrine", "Le plasmacellule", "Gli eosinofili soltanto"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "I neutrofili migrano subito nel sito d'infezione.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.app.immunitario.13", "sat": "mcb-app-immunitario", "passo": 2, "lezione": "Anatomia dei sistemi/10 - Sistema Immunitario.pdf, p. 27", "dati": {
+   "domanda": {"valore": "Quali cellule riconoscono e distruggono soprattutto cellule tumorali e cellule infettate da virus, senza bisogno di un contatto precedente?", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["Le cellule natural killer", "I globuli rossi", "Gli osteociti", "Le cellule di Schwann", "Le cellule caliciformi"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Linfociti NK.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.app.immunitario.14", "sat": "mcb-app-immunitario", "passo": 2, "lezione": "Anatomia dei sistemi/10 - Sistema Immunitario.pdf, p. 31", "dati": {
+   "domanda": {"valore": "Dopo una contusione la zona è rossa, calda e gonfia. Quale sostanza, liberata per prima, dilata i capillari e li rende più permeabili?", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["L'istamina", "L'insulina", "La melatonina", "Il paratormone", "La bile"], "fonte": "lezione", "stato": "da verificare"},
+   "scritta": {"valore": ["istamina", "l'istamina"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Mediatori vasoattivi: istamina e chinine.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.app.immunitario.15", "sat": "mcb-app-immunitario", "passo": 2, "lezione": "Anatomia dei sistemi/10 - Sistema Immunitario.pdf, p. 32", "dati": {
+   "domanda": {"valore": "Nelle analisi del sangue di un cliente con un'infiammazione è alta la proteina C reattiva (PCR). Quale organo la produce?", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["Il fegato", "La milza", "Il timo", "Il rene", "La tiroide"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Il fegato sintetizza la proteina C reattiva.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.app.immunitario.16", "sat": "mcb-app-immunitario", "passo": 2, "lezione": "Anatomia dei sistemi/10 - Sistema Immunitario.pdf, p. 13", "dati": {
+   "domanda": {"valore": "Durante il linfodrenaggio senti un nodulo gonfio e dolente nel collo di un cliente con mal di gola. Che cosa può essere?", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["Un linfonodo reattivo all'infezione: non lo massaggi e lo fai vedere al medico", "Un muscolo contratto da massaggiare forte", "Una costa rotta", "Un tendine", "Grasso da sciogliere"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "I linfonodi si ingrossano quando lavorano contro un'infezione.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.app.immunitario.17", "sat": "mcb-app-immunitario", "passo": 2, "lezione": "Anatomia dei sistemi/10 - Sistema Immunitario.pdf, p. 18", "dati": {
+   "domanda": {"valore": "Le placche di Peyer sono tessuto linfoide associato alle mucose. Dove si trovano?", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["Nell'intestino tenue", "Nel cervello", "Nelle ossa lunghe", "Nella vescica", "Nella pelle del piede"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "MALT: placche di Peyer, appendice, tonsille.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.app.immunitario.18", "sat": "mcb-app-immunitario", "passo": 2, "lezione": "Anatomia dei sistemi/10 - Sistema Immunitario.pdf, p. 38", "dati": {
+   "domanda": {"valore": "Quali linfociti portano la proteina CD4 e coordinano la risposta immunitaria?", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["I linfociti T helper", "I linfociti T citotossici", "I linfociti B", "Le cellule NK", "I neutrofili"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "CD4 sui T helper, CD8 sui citotossici.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.app.immunitario.19", "sat": "mcb-app-immunitario", "passo": 2, "lezione": "Anatomia dei sistemi/10 - Sistema Immunitario.pdf, p. 62", "dati": {
+   "domanda": {"valore": "Al primo contatto con un antigene, quale classe di anticorpi compare per prima?", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["IgM", "IgG", "IgE", "IgA", "IgD"], "fonte": "lezione", "stato": "da verificare"},
+   "scritta": {"valore": ["IgM"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Prima le IgM, nei contatti successivi rapidamente le IgG.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.app.immunitario.20", "sat": "mcb-app-immunitario", "passo": 2, "lezione": "Anatomia dei sistemi/10 - Sistema Immunitario.pdf, p. 64", "dati": {
+   "domanda": {"valore": "Quando il sistema immunitario non distingue più il proprio dall'estraneo e attacca i tessuti del corpo, si parla di:", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["Malattia autoimmune", "Infezione batterica", "Frattura", "Allergia al sole", "Ipoglicemia"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Incapacità di discriminare self da non self.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.app.immunitario.21", "sat": "mcb-app-immunitario", "passo": 3, "lezione": "Anatomia dei sistemi/10 - Sistema Immunitario.pdf, p. 2", "dati": {
+   "domanda": {"valore": "Il primo vaccino fu fatto da Edward Jenner contro:", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["Il vaiolo", "La rabbia", "La poliomielite", "L'influenza", "Il tetano"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Jenner, 1798: vaiolo vaccino.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.app.immunitario.22", "sat": "mcb-app-immunitario", "passo": 3, "lezione": "Anatomia dei sistemi/10 - Sistema Immunitario.pdf, p. 5", "dati": {
+   "domanda": {"valore": "I linfociti B, attivati da un antigene, producono:", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["Anticorpi", "Insulina", "Bile", "Globuli rossi", "Ormoni tiroidei"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Anticorpi.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.app.immunitario.23", "sat": "mcb-app-immunitario", "passo": 3, "lezione": "Anatomia dei sistemi/10 - Sistema Immunitario.pdf, p. 11", "dati": {
+   "domanda": {"valore": "Il timo si trova:", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["Nel mediastino anteriore", "Nel cranio", "Nell'addome sotto il fegato", "Nella pelvi", "Nel collo dietro la tiroide"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Mediastino anteriore.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.app.immunitario.24", "sat": "mcb-app-immunitario", "passo": 3, "lezione": "Anatomia dei sistemi/10 - Sistema Immunitario.pdf, p. 15", "dati": {
+   "domanda": {"valore": "Nella milza la polpa bianca contiene soprattutto:", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["Linfociti", "Grasso", "Cartilagine", "Muscolo striato", "Bile"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Aree ad alta densità di linfociti.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.app.immunitario.25", "sat": "mcb-app-immunitario", "passo": 3, "lezione": "Anatomia dei sistemi/10 - Sistema Immunitario.pdf, p. 14", "dati": {
+   "domanda": {"valore": "Il flusso di sangue nella milza è circa:", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["300 ml al minuto", "3 ml al minuto", "3 litri al minuto", "30 litri al minuto", "Nessun flusso"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Circa 300 ml/min.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.app.immunitario.26", "sat": "mcb-app-immunitario", "passo": 3, "lezione": "Anatomia dei sistemi/10 - Sistema Immunitario.pdf, p. 21", "dati": {
+   "domanda": {"valore": "Sono barriere anatomiche dell'immunità innata:", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["Cute, mucose e muco", "Anticorpi e linfociti T", "Vaccini", "Cellule della memoria", "Linfonodi soltanto"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Cute, mucose, muco.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.app.immunitario.27", "sat": "mcb-app-immunitario", "passo": 3, "lezione": "Anatomia dei sistemi/10 - Sistema Immunitario.pdf, p. 23", "dati": {
+   "domanda": {"valore": "Una proteina antivirale dell'immunità innata è:", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["L'interferone", "L'insulina", "Il glucagone", "L'emoglobina", "La cheratina"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Interferone.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.app.immunitario.28", "sat": "mcb-app-immunitario", "passo": 3, "lezione": "Anatomia dei sistemi/10 - Sistema Immunitario.pdf, p. 25", "dati": {
+   "domanda": {"valore": "I monociti, quando entrano nei tessuti, diventano:", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["Macrofagi", "Globuli rossi", "Piastrine", "Neuroni", "Fibre muscolari"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Macrofagi.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.app.immunitario.29", "sat": "mcb-app-immunitario", "passo": 3, "lezione": "Anatomia dei sistemi/10 - Sistema Immunitario.pdf, p. 52", "dati": {
+   "domanda": {"valore": "Nell'uomo il sistema MHC si chiama:", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["HLA", "DNA", "ADH", "PCR", "ACTH"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Human leucocyte antigen, sul cromosoma 6.", "fonte": "lezione", "stato": "da verificare"}
+  }},
+  {"id": "mcb.app.immunitario.30", "sat": "mcb-app-immunitario", "passo": 3, "lezione": "Anatomia dei sistemi/10 - Sistema Immunitario.pdf, p. 59", "dati": {
+   "domanda": {"valore": "Sono classi di anticorpi:", "fonte": "lezione", "stato": "da verificare"},
+   "opzioni": {"valore": ["IgM, IgG, IgA, IgE, IgD", "T3 e T4", "FSH e LH", "CD4 e CD8", "HLA e MHC"], "fonte": "lezione", "stato": "da verificare"},
+   "spiegazione": {"valore": "Cinque classi di immunoglobuline.", "fonte": "lezione", "stato": "da verificare"}
+  }}
+ ]
+}

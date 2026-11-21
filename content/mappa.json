@@ -1,5 +1,5 @@
 {
- "version": 10,
+ "version": 11,
  "nota": "Mappa delle competenze di Dextera (sezione 2 della specifica). Id delle strutture: ossa e muscoli come in content/corpo.json, reperi 'r.' + nome inglese di atlante/dati.json (lm) in minuscolo con i trattini. I reperi sono quelli visibili da fuori nel 3D (atlante/build/visibili.json); sulle ossa condivise tra più satelliti la divisione per posizione è in divisione_reperi, confermata dall'autore. Corso «neurologia» (dal corso del Dott. Benevento): strutture con id n.<voce di testi/neuro.json>; passi strutture, dove, funzione, lesione, connessioni e progetto (casi di testi/casi.json, modulo neuro).",
  "divisione_reperi": {
   "stato": "confermato",
@@ -1422,6 +1422,33 @@
       {"id": "mcb-igi-deontologia", "nome": "Deontologia e privacy", "ordine": 8, "passi": []},
       {"id": "mcb-igi-psicologia", "nome": "Psicologia, comunicazione e ansia", "ordine": 9, "passi": []},
       {"id": "mcb-igi-sicurezza", "nome": "Sicurezza sul lavoro", "ordine": 10, "passi": []}
+     ]
+    }
+   ]
+  },
+  {
+   "id": "mcb-apparati",
+   "nome": "Altri apparati",
+   "modulo": null,
+   "in_arrivo": true,
+   "quiz": "mcb-apparati.json",
+   "nota": "Percorso MCB, rilascio 6 (sezione 2 della specifica, con l'unione al programma della scuola dell'autore): corso a quiz con 3 passi da 10 quesiti (Concetti, Applicazione, Quesiti d'esame). I passi arrivano da content/mcb-apparati.json, generato da testi.py da testi/mcb-apparati.json (quesiti dai PDF delle lezioni dell'autore: da verificare).",
+   "pianeti": [
+    {
+     "id": "mcb-app-nutrizione",
+     "nome": "Digestione ed escrezione",
+     "satelliti": [
+      {"id": "mcb-app-digerente", "nome": "Apparato digerente", "ordine": 1, "passi": []},
+      {"id": "mcb-app-urinario", "nome": "Apparato urinario", "ordine": 2, "passi": []}
+     ]
+    },
+    {
+     "id": "mcb-app-regolazione",
+     "nome": "Riproduzione, ormoni e difese",
+     "satelliti": [
+      {"id": "mcb-app-genitale", "nome": "Apparato genitale", "ordine": 3, "passi": []},
+      {"id": "mcb-app-endocrino", "nome": "Apparato endocrino", "ordine": 4, "passi": []},
+      {"id": "mcb-app-immunitario", "nome": "Sistema immunitario", "ordine": 5, "passi": []}
      ]
     }
    ]

@@ -1,5 +1,5 @@
 {
- "version": 7,
+ "version": 8,
  "formato": 1,
  "nota": "Bozza del percorso MCB (Massaggiatore e Capo Bagnino), sezione 2 «Percorso MCB» della specifica, decisa il 20/11/2026. Rilascio 1: solo i 4 corsi che esistono già, con gli stessi nodi del percorso completo e meno satelliti o passi (maestria e progressi in comune). Apparato muscolo-scheletrico: tutti i 17 satelliti con i 6 passi. Neurologia: Basi e Midollo e sistema periferico interi; Encefalo e Corteccia solo con i passi Le strutture, Dove si trova e La funzione (niente Se si danneggia né caso clinico). Cuore e vasi e Apparato respiratorio: interi, come nel percorso completo (unione con il programma della scuola dell'autore, 20/11/2026). Nei satelliti con meno passi e nei pianeti con meno satelliti vale la regola dei percorsi parziali (satellite acceso ed esame del pianeta contano solo in questo percorso). Rilascio 2: Patologia e clinica, corso a quiz (dal rilascio 3, unione con il programma della scuola dell'autore: 6 pianeti, 26 satelliti, con Patologia degli organi; 3 passi da 10 quesiti: Concetti, Applicazione, Quesiti d'esame; quesiti in testi/mcb-patologia.json, da verificare, i nuovi scritti dai PDF delle lezioni dell'autore). Gli altri corsi a quiz (Idroterapia e terapie fisiche, Scienze di base e fisiologia, Igiene, sicurezza e professione) arrivano nei rilasci successivi. Rilascio 3 della specifica: Terapie fisiche e rieducazione, corso a quiz (3 pianeti: Rieducazione, Terapie fisiche, Acqua e terme; 15 satelliti; quesiti in testi/mcb-terapie.json, da verificare).",
  "id": "mcb",
@@ -11,9 +11,9 @@
   "version": 8
  },
  "rilascio": {
-  "numero": 6,
+  "numero": 7,
   "pubblicato_il": "2026-11-20",
-  "da": "a mano (bozza): aggiunto il corso a quiz Igiene, sicurezza e professione (3 pianeti, 10 satelliti)"
+  "da": "a mano (bozza): aggiunto il corso a quiz Altri apparati (2 pianeti, 5 satelliti)"
  },
  "nodi": [
   {
@@ -1361,6 +1361,54 @@
    "tipo": "satellite",
    "genitore": "mcb-igi-professione",
    "ordine": 4
+  },
+  {
+   "id": "mcb-apparati",
+   "tipo": "corso",
+   "genitore": null,
+   "ordine": 9
+  },
+  {
+   "id": "mcb-app-nutrizione",
+   "tipo": "pianeta",
+   "genitore": "mcb-apparati",
+   "ordine": 1
+  },
+  {
+   "id": "mcb-app-regolazione",
+   "tipo": "pianeta",
+   "genitore": "mcb-apparati",
+   "ordine": 2
+  },
+  {
+   "id": "mcb-app-digerente",
+   "tipo": "satellite",
+   "genitore": "mcb-app-nutrizione",
+   "ordine": 1
+  },
+  {
+   "id": "mcb-app-urinario",
+   "tipo": "satellite",
+   "genitore": "mcb-app-nutrizione",
+   "ordine": 2
+  },
+  {
+   "id": "mcb-app-genitale",
+   "tipo": "satellite",
+   "genitore": "mcb-app-regolazione",
+   "ordine": 1
+  },
+  {
+   "id": "mcb-app-endocrino",
+   "tipo": "satellite",
+   "genitore": "mcb-app-regolazione",
+   "ordine": 2
+  },
+  {
+   "id": "mcb-app-immunitario",
+   "tipo": "satellite",
+   "genitore": "mcb-app-regolazione",
+   "ordine": 3
   }
  ]
 }

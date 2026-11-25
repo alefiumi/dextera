@@ -190,9 +190,10 @@ export async function myData(){
   const dc=await sb.from('dextera_casate').select('ambito,constellation_id,precedente,cambiata_il,entrata_il').eq('user_id',uid); // casate su due livelli
   const gr=await sb.rpc('dextera_miei_gruppi'); // v0.94.0: voti, eletti, annunci, banner caricati, segnalazioni fatte (senza il file: errore, campo vuoto)
   const ci=await sb.from('dextera_profili').select('copertina_img').eq('user_id',uid).maybeSingle();
+  const az=await sb.from('dextera_azzeramenti').select('ambito,creato_il').eq('user_id',uid); // gestionale: azzeramenti fatti dall'amministratore
   out.account={email:A.user.email,registrato_il:A.user.created_at,ultimo_accesso:A.user.last_sign_in_at,consenso_privacy:A.user.user_metadata||{},
    profilo:p.data,partite:g.data,maestria:m.data,badge:b.data,amicizie:f.data,percorso:pp.data,impostazioni:ds.data,segnalazioni:er.data,ripasso:rv.data,
-   flotta:{casata:cm.data,casata_grande_e_altri_percorsi:dc.data,giorni:fd.data,contributi_equipaggi:cw.data,risposte_sfide:ca.data},copertina_e_titolo:dp.data,foto_di_copertina:ci.error?null:ci.data?.copertina_img||null,gruppi:gr.error?null:gr.data,cosa_studi:st.data,xp_per_percorso:xp.data};
+   flotta:{casata:cm.data,casata_grande_e_altri_percorsi:dc.data,giorni:fd.data,contributi_equipaggi:cw.data,risposte_sfide:ca.data},copertina_e_titolo:dp.data,foto_di_copertina:ci.error?null:ci.data?.copertina_img||null,gruppi:gr.error?null:gr.data,cosa_studi:st.data,xp_per_percorso:xp.data,azzeramenti:az.error?null:az.data};
  }else if(A.user)out.account={email:A.user.email,nota:'Senza connessione: qui ci sono solo i dati del dispositivo.'};
  return out;
 }
@@ -249,8 +250,10 @@ export async function sync(full){
  if(!navigator.onLine&&!await checkNet()){onChange();return;}
  A.syncing=true;onChange();
  try{
-  const sb=A.sb,uid=A.user.id;
-  if(full||!A.profile){
+  const sb=A.sb,uid=A.user.id,fullRun=full||!A.profile;
+  // progressi azzerati dall'amministratore (gestionale): prima di inviare qualcosa si cancella la stessa parte da qui
+  if(!fullRun)await checkResets(sb,uid);
+  if(fullRun){
    // Progressi di un altro account su questo dispositivo: non si uniscono da soli, si chiede (schermata in gate.js).
    // fresh = questo account parte dai suoi dati sul server; merge = si uniscono i progressi del dispositivo.
    const own=S.owner;
@@ -259,6 +262,7 @@ export async function sync(full){
     if(A.choice==='fresh')resetLocal();
    }
    A.choice=null;A.conflict=null;A.prevDirty=false;
+   await checkResets(sb,uid);
    const px=await probePx(sb,true).catch(()=>false);
    const [{data:p,error:e1},{data:ms,error:e2},{data:bs},xr]=await Promise.all([ownProfile(sb,uid),
     sb.from('mastery').select('item_id,level'),sb.from('badge_assertions').select('badge_id,issued_at').eq('user_id',uid),
@@ -338,6 +342,47 @@ export async function sync(full){
   A.lastSync=new Date();A.err='';markDirty(false);
  }catch(e){A.err='Sincronizzazione non riuscita: riprovo più tardi. ('+(e.message||e)+')';}
  A.syncing=false;onChange();
+}
+
+// Azzeramenti dei progressi fatti dall'amministratore nella pagina admin/ (fase 3): il server cancella i suoi dati e scrive un segno in
+// dextera_azzeramenti {id, ambito: 'tutto' o id del percorso, creato_il}. Qui, a ogni sincronizzazione e prima di inviare, si leggono i
+// segni più recenti dell'ultimo visto (S.azz {uid, t}) e si cancella la stessa parte dal telefono; altrimenti l'unione (vince il valore
+// più alto) rimanderebbe tutto al server. Progressi da ospite o di un altro account (S.owner diverso) non si toccano: si segna solo la data.
+// Senza il file SQL del gestionale la tabella non c'è e non succede niente.
+export const ADMIN_SQL='supabase/migrations/20261130090000_dextera_gestionale.sql';
+async function checkResets(sb,uid){
+ const z=S.azz&&S.azz.uid===uid?S.azz:null;
+ let q=sb.from('dextera_azzeramenti').select('id,ambito,creato_il').eq('user_id',uid);
+ if(z&&z.t)q=q.gt('creato_il',z.t);
+ const {data,error}=await q.order('creato_il',{ascending:true}).limit(50);
+ if(error)return;
+ const rows=(data||[]).filter(r=>r&&(r.ambito==='tutto'||/^[a-z0-9-]{1,40}$/.test(r.ambito||''))&&r.creato_il);
+ const mine=!!(S.owner&&S.owner.uid===uid);
+ if(mine)for(const r of rows)clearPart(r.ambito);
+ const t=rows.length?rows[rows.length-1].creato_il:(z&&z.t)||'';
+ if(!z||z.t!==t||mine&&rows.length){
+  S.azz={uid,t};
+  if(mine&&rows.length){A.azzMsg=rows.some(r=>r.ambito==='tutto')?'Su richiesta, l\'amministratore ha azzerato i tuoi progressi: ripartono da zero anche su questo telefono.'
+   :'Su richiesta, l\'amministratore ha azzerato i progressi di un percorso: sono stati tolti anche da questo telefono.';head();}
+  try{localStorage.setItem('dextera-v1',JSON.stringify(S));}catch(e){}
+ }
+}
+// cancella da qui la parte azzerata: 'tutto' (restano profilo, account, impostazioni, «Cosa studi?», scudi, casate ed equipaggi)
+// oppure un percorso (satelliti accesi ed esami del percorso, XP del percorso tolti anche dal totale; nel percorso base anche i passi)
+export function clearPart(a){
+ if(a==='tutto'){
+  const keep={prof:S.prof||{},owner:S.owner,set:S.set,studio:S.studio,shields:S.shields,fix89:S.fix89,azz:S.azz},f=S.fleet;
+  for(const k of Object.keys(S))delete S[k];
+  Object.assign(S,{xp:0,streak:0,last:'',mastery:{},ok:0,ko:0,stats:{games:0,perfect:0,modes:{},mods:{}},badges:{},lastXp:0,xpBy:{}});
+  for(const [k,v] of Object.entries(keep))if(v!==undefined)S[k]=v;
+  if(f){const {days,wk,wkp,vinte,...rest}=f;S.fleet={...rest,days:{}};}
+  queue.set([]);sentBadges.clear();
+  return;
+ }
+ const by=S.xpBy||(S.xpBy={base:S.lastXp??S.xp}),x=by[a]||0;
+ delete by[a];S.xp=Math.max(0,S.xp-x);S.lastXp=S.xp;
+ const P=S.path;
+ if(P){if(P.pp)delete P.pp[a];if(a==='base')P.nodes={};}
 }
 
 // Copertina, badge in vetrina e titolo scelto (fase 5) in dextera_profili: si leggono da sé e dagli amici accettati.
@@ -495,7 +540,7 @@ export const esc=t=>String(t??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;'
 const hm=d=>d.toLocaleTimeString('it',{hour:'2-digit',minute:'2-digit'});
 export function accountHtml(){
  if(!configured)return '';
- const note=(A.err?`<p class="err">${esc(A.err)}</p>`:'')+(A.msg?`<p class="okm">${esc(A.msg)}</p>`:'')+(A.warn?`<p class="note">${esc(A.warn)}</p>`:'')+(A.studioMissing&&A.studioMissing!==A.warn?`<p class="note">${esc(A.studioMissing)}</p>`:'')+(A.pxMissing&&A.pxMissing!==A.warn?`<p class="note">${esc(A.pxMissing)}</p>`:'');
+ const note=(A.err?`<p class="err">${esc(A.err)}</p>`:'')+(A.msg?`<p class="okm">${esc(A.msg)}</p>`:'')+(A.azzMsg?`<p class="note">${esc(A.azzMsg)}</p>`:'')+(A.warn?`<p class="note">${esc(A.warn)}</p>`:'')+(A.studioMissing&&A.studioMissing!==A.warn?`<p class="note">${esc(A.studioMissing)}</p>`:'')+(A.pxMissing&&A.pxMissing!==A.warn?`<p class="note">${esc(A.pxMissing)}</p>`:'');
  const last=lastAccount();
  if(A.user){
   const pend=queue.all().length,dirty=last&&last.dirty;

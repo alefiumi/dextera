@@ -55,6 +55,8 @@ Dove questo file e la specifica differiscono, vale la specifica.
 - Percorso MCB, rilascio 5: Igiene, sicurezza e professione, corso a quiz (solo contenuti, `mcb.json` v7, `mappa.json` v10, contenuti 42).
 - Percorso MCB, rilascio 6: Altri apparati, corso a quiz (solo contenuti, `mcb.json` v8, `mappa.json` v11, contenuti 44). Non ancora online.
 - Corso di neurologia: contenuti (primo rilascio) e corso giocabile (v0.81.0, vedi «Corso di neurologia giocabile»), Palestra sul cervello (v0.82.0), gioco 3D (v0.83.0).
+- Fase 3 – Gestionale, in 5 rilasci scelti dall'autore il 25/11/2026 (specifica, sezione 11). Rilascio 1, utenti e segnalazioni (SQL: staff_role,
+  dextera_admin_note, dextera_azzeramenti): v0.96.0, vedi «Gestionale». File SQL da applicare dall'autore dopo aver pubblicato l'app.
 - GitHub Pages attivo (ramo `main`, cartella radice): online su `alefiumi.github.io/dextera`.
 
 ## Situazione al 20/11/2026
@@ -954,6 +956,41 @@ con gli stessi nodi del percorso completo e meno satelliti o passi (maestria e p
 - Prova: `mcb.mjs` (57 controlli, con tutti i corsi a quiz) nella cartella delle note di questa sessione; passano anche `fase6d.mjs` (71, la riga
   di MCB aggiornata), `percorsi.mjs` (39) e `osp/prova.mjs` (13). `fase6c.mjs` ha 3 errori attesi (MCB non più «in arrivo» e i due controlli
   della v0.91); `ucbm-fis/prova.mjs` ha 1 errore atteso (conta tutti i quesiti di `app.UCBM`, ora 2910 con quelli MCB).
+
+## Gestionale (fase 3, rilascio 1, v0.96.0, file SQL `20261130090000_dextera_gestionale.sql`)
+Rilascio 1 dei 5 della sezione 11 della specifica: pagina `admin/` (`index.html` e `admin.js`, pagina a sé come `revisione/`, non è nella copia
+offline né in `APP_FILES`) con **Utenti** e **Segnalazioni**, solo per gli amministratori. Usa la sessione dell'app (`dextera-auth`, stessa origine):
+chi ha fatto l'accesso nell'app entra subito; altrimenti email e password (con Google: si accede dall'app e si torna). «Esci» esce anche dall'app.
+- **Protezione sul server**: tutte le funzioni `dextera_admin_*` (security definer) chiamano `private.solo_admin()` (`private.e_admin()`, cioè
+  `dextera_admin`); un utente normale o un revisore riceve l'errore con hint `dextera_admin` e nessun dato. La pagina chiede prima `dextera_staff()`
+  (il mio ruolo o null) e senza ruolo admin mostra solo «Accesso non consentito». Tabelle nuove con RLS e nessun permesso diretto, salvo leggere
+  i propri azzeramenti (`id, user_id, ambito, creato_il`).
+- **`staff_role`** (user_id, ruolo `admin` o `revisore`, nome, area): parte da `dextera_admin`, che resta (la usano Flotta e gruppi); due trigger le
+  tengono allineate in tutte e due le direzioni (`admin.aggiungi_admin('email')` funziona come prima). Il revisore arriva nel rilascio 2: oggi la
+  pagina gli dice che la sua area non c'è ancora.
+- **Utenti**: `dextera_admin_cerca(q)` (nome utente, email o id, almeno 2 caratteri, al massimo 30; `%` e `_` contano come lettere),
+  `dextera_admin_utente(id)` (profilo, per ogni percorso XP, passi fatti, satelliti accesi ed esami, ultimo progresso; in comune maestria, ripasso,
+  partite, badge, punti Flotta, segnalazioni; storico degli azzeramenti). Nomi dei percorsi da `content/index.json`.
+- **Azzeramento** (scelta dell'autore del 25/11/2026, strada A): `dextera_admin_azzera(id, ambito, 'AZZERA')`; la pagina fa scrivere AZZERA in una
+  finestra di conferma. Un percorso: `path_progress` e `dextera_percorsi_xp` di quel percorso, XP tolti anche da `profiles.xp` (per `base` senza
+  riga: il totale meno gli altri percorsi, come l'app). Tutto: XP, giuste, sbagliate e serie in `profiles`; `mastery`, `review_items`, `path_progress`,
+  `dextera_percorsi_xp`, `fleet_days`, `game_results`, `badge_assertions`, vetrina. Restano account, nome, foto, amici, casate, equipaggi, impostazioni.
+  `profiles`, `mastery`, `game_results` e `badge_assertions` sono in comune con BodyMania: «tutto» azzera anche lì (la conferma lo dice).
+  Il server scrive il segno in `dextera_azzeramenti`; l'app (`checkResets()` in `account.js`, a ogni sincronizzazione prima di inviare) legge i
+  segni dopo l'ultimo visto (`S.azz {uid, t}`) e cancella la stessa parte dal telefono (`clearPart()`), con un avviso nel riquadro Account
+  (`A.azzMsg`). Progressi da ospite o di un altro account non si toccano (si segna solo la data). Maestria e ripasso sono in comune: dopo
+  l'azzeramento di un percorso i passi possono tornare fatti da soli. Un'app più vecchia della 0.96.0 non vede il segno e rimanderebbe i dati.
+  «Scarica i miei dati» ha `azzeramenti`; `privacy.html` una riga nuova.
+- **Segnalazioni**: `dextera_admin_segnalazioni(stato)` (`aperta`, `risolta`, `scartata`, `tutte`; al massimo 300 per tipo) con gli errori
+  (`error_reports`: aperta = `aperta`, risolta = `corretta`, scartata = `respinta`, valori salvati invariati) e i gruppi (`dextera_moderazione`:
+  aperta = `segnalato`/`nascosto`, risolta = `rimosso`, scartata = `approvato`), più i conteggi delle aperte. `dextera_admin_segnalazione(tipo, id,
+  stato, nota, stesso_dato)`: errori in ogni stato (anche riaperti), con «anche le altre aperte sullo stesso dato»; gruppi con `private.modera()`
+  della v0.94 (rimuovi o approva, per sempre, con conferma nella pagina). Nota dell'admin in `dextera_admin_note` (vuota = tolta; si cancella con la
+  segnalazione). Scheda e filtro scelti in `dextera-admin` (solo comodità).
+- Prove (cartella delle note di questa sessione): `gestionale_rls.mjs` (PGlite, 65: ruoli, rifiuti per utente normale, revisore e anon, ricerca,
+  progressi, azzeramenti, segnalazioni, RLS, nessun update senza where) e `gestionale.mjs` (Chrome headless con un finto Supabase, 58: accesso,
+  utente normale e revisore senza dati, file SQL mancante, ricerca, scheda, conferma dell'azzeramento, segnalazioni, tema scuro, niente scorrimento
+  di lato a 375 px, azzeramento sul telefono per percorso e tutto, ospite, dati e cache di BodyMania intatti).
 
 ## Mappa del percorso (`content/mappa.json`)
 Corso → 4 pianeti → 17 satelliti (con `ordine` della specifica) → 6 passi (`ossa`, `reperi`, `muscoli`, `connessioni`, `funzione`,

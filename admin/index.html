@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<!-- Content-Security-Policy: solo script di Dextera (niente script in linea né esterni), dati solo verso Supabase -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self' https://zxtamxgmvtgvpgngecyz.supabase.co; object-src 'none'; base-uri 'self'; form-action 'none'">
+<meta name="robots" content="noindex">
+<title>Dextera – Gestionale</title>
+<meta name="theme-color" content="#312e81">
+<link rel="icon" href="../icons/icon-192.png" type="image/png">
+<script src="../js/tema.js"></script>
+<style>
+/* Stessi colori della pagina di revisione e dell'app */
+:root{--bg:#f6f4ef;--card:#fff;--ink:#1f2a30;--mut:#5f6b73;--acc:#0f766e;--on-acc:#fff;--ok:#15803d;--bad:#b91c1c;--warn:#92400e;--line:#d9d3c5;--chip:#efece4}
+@media(prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#12181b;--card:#1b2428;--ink:#e8eef0;--mut:#9fadb4;--acc:#2dd4bf;--on-acc:#062b27;--ok:#4ade80;--bad:#f87171;--warn:#fbbf24;--line:#33434a;--chip:#243034;color-scheme:dark}}
+:root[data-theme=dark]{--bg:#12181b;--card:#1b2428;--ink:#e8eef0;--mut:#9fadb4;--acc:#2dd4bf;--on-acc:#062b27;--ok:#4ade80;--bad:#f87171;--warn:#fbbf24;--line:#33434a;--chip:#243034;color-scheme:dark}
+*{box-sizing:border-box}
+body{margin:0;font:16px/1.45 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--ink);
+ padding:max(12px,env(safe-area-inset-top)) max(16px,env(safe-area-inset-right)) 48px max(16px,env(safe-area-inset-left))}
+main{max-width:56rem;margin:0 auto;display:flex;flex-direction:column;gap:14px}
+h1{font-size:1.4rem;margin:0}
+h2{font-size:1.15rem;margin:0}
+h3{font-size:1rem;margin:0}
+p{margin:0}.mut{color:var(--mut)}.small{font-size:.875rem}
+a{color:var(--acc)}
+button,select,input,textarea{font:inherit;color:inherit}
+button{cursor:pointer}
+:focus-visible{outline:3px solid var(--acc);outline-offset:2px}
+.top{display:flex;flex-wrap:wrap;gap:6px 12px;align-items:baseline;justify-content:space-between}
+.box{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px;display:flex;flex-direction:column;gap:10px;min-width:0}
+.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.btn{min-height:44px;border:1px solid var(--line);background:var(--card);border-radius:10px;padding:8px 14px;font-weight:600}
+.btn.acc{background:var(--acc);border-color:var(--acc);color:var(--on-acc)}
+.btn.bad{background:var(--bad);border-color:var(--bad);color:#fff}
+.btn:disabled{opacity:.55;cursor:not-allowed}
+label.f{display:flex;flex-direction:column;gap:4px;font-size:.875rem;color:var(--mut);flex:1 1 12rem;min-width:0}
+.box>label.f,.item>label.f,dialog label.f{flex:none} /* in colonna la base di 12rem diventerebbe un'altezza */
+input[type=text],input[type=search],input[type=email],input[type=password],select,textarea{min-height:44px;padding:8px 10px;border:1px solid var(--line);border-radius:9px;background:var(--bg);width:100%;color:var(--ink)}
+textarea{min-height:4.5em;resize:vertical}
+label.ck{display:flex;gap:8px;align-items:center;font-size:.95rem;min-height:44px}
+label.ck input{width:20px;height:20px}
+.seg{display:flex;border:1px solid var(--line);border-radius:12px;overflow:hidden;background:var(--card)}
+.seg button{flex:1;min-height:44px;border:0;background:none;padding:8px 6px;font-weight:600;color:var(--mut)}
+.seg button+button{border-left:1px solid var(--line)}
+.seg button[aria-pressed=true]{background:var(--acc);color:var(--on-acc)}
+.num{font-variant-numeric:tabular-nums}
+.pill{display:inline-block;min-width:1.6em;padding:0 6px;border-radius:9px;background:var(--chip);color:var(--ink);font-size:.8rem;text-align:center}
+.seg button[aria-pressed=true] .pill{background:var(--on-acc);color:var(--acc)}
+.list{display:flex;flex-direction:column;gap:6px;margin:0;padding:0;list-style:none}
+.list button{width:100%;text-align:left;min-height:44px;border:1px solid var(--line);border-radius:10px;background:var(--bg);padding:8px 12px;display:flex;flex-wrap:wrap;gap:2px 10px;justify-content:space-between}
+.list button[aria-current=true]{border-color:var(--acc);box-shadow:inset 3px 0 var(--acc)}
+.kv{display:grid;grid-template-columns:auto 1fr;gap:4px 14px;margin:0}
+.kv dt{color:var(--mut);font-size:.9rem}.kv dd{margin:0;min-width:0;overflow-wrap:anywhere}
+.tw{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:.92rem}
+th,td{text-align:left;padding:6px 8px;border-bottom:1px solid var(--line);vertical-align:top}
+th{color:var(--mut);font-weight:600}
+td.n,th.n{text-align:right;font-variant-numeric:tabular-nums}
+.item{border:1px solid var(--line);border-radius:12px;background:var(--card);padding:12px 14px;display:flex;flex-direction:column;gap:8px;min-width:0}
+.item header{display:flex;flex-wrap:wrap;gap:4px 10px;align-items:baseline;justify-content:space-between}
+.item code{font-size:.82rem;overflow-wrap:anywhere}
+.quote{border-left:3px solid var(--line);padding-left:10px;white-space:pre-wrap;overflow-wrap:anywhere}
+.quote img{max-width:100%;border-radius:8px;display:block}
+.tag{font-size:.78rem;padding:1px 8px;border-radius:9px;background:var(--chip);font-weight:600}
+.tag.aperta{color:var(--warn)}.tag.risolta{color:var(--ok)}.tag.scartata{color:var(--mut)}
+.msg{padding:10px 12px;border-radius:10px;border:1px solid var(--line);background:var(--card)}
+.msg.err{border-color:var(--bad);color:var(--bad)}.msg.ok{border-color:var(--ok)}
+.warnbox{border:2px solid var(--bad);border-radius:12px;padding:12px;display:flex;flex-direction:column;gap:10px}
+.warnbox ul{margin:0;padding-left:1.2em}
+dialog{border:1px solid var(--line);border-radius:14px;background:var(--card);color:var(--ink);padding:16px;max-width:min(32rem,calc(100vw - 32px));width:100%}
+dialog::backdrop{background:rgb(0 0 0 / .5)}
+dialog form{display:flex;flex-direction:column;gap:12px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+[hidden]{display:none!important}
+@media(min-width:900px){.cols{display:grid;grid-template-columns:minmax(16rem,22rem) 1fr;gap:14px;align-items:start}}
+</style>
+</head>
+<body>
+<main>
+ <div class="top">
+  <h1>Gestionale di Dextera</h1>
+  <a class="small" href="../">Apri l'app</a>
+ </div>
+ <p id="stato" class="mut" role="status" aria-live="polite">Controllo l'accesso…</p>
+ <div id="vista"></div>
+</main>
+<dialog id="conferma" aria-labelledby="conf-t"></dialog>
+<script src="../vendor/supabase.js"></script>
+<script type="module" src="admin.js"></script>
+</body>
+</html>
